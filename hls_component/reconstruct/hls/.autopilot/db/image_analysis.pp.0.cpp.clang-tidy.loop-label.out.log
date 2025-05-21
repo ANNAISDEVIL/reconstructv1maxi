@@ -1,0 +1,15 @@
+F:\LMU\quantumMA\opimization\reconstructv1maxi\hls_component\reconstruct\hls\.autopilot\db\image_analysis.pp.0.cpp:27926:5: warning: Added loop label VITIS_LOOP_72_1:   [xilinx-label-all-loops]
+    for(int i = 0; i < atomLocationsSize; i++){
+    ^~~
+    VITIS_LOOP_72_1: 
+F:\LMU\quantumMA\opimization\reconstructv1maxi\hls_component\reconstruct\hls\.autopilot\db\image_analysis.pp.0.cpp:27926:5: note: FIX-IT applied suggested code changes
+F:\LMU\quantumMA\opimization\reconstructv1maxi\hls_component\reconstruct\hls\.autopilot\db\image_analysis.pp.0.cpp:27945:9: warning: Added loop label VITIS_LOOP_91_2:   [xilinx-label-all-loops]
+        for(; row <= localImage.Y_max && row < fullImage_rows; row++){
+        ^~~
+        VITIS_LOOP_91_2: 
+F:\LMU\quantumMA\opimization\reconstructv1maxi\hls_component\reconstruct\hls\.autopilot\db\image_analysis.pp.0.cpp:27945:9: note: FIX-IT applied suggested code changes
+F:\LMU\quantumMA\opimization\reconstructv1maxi\hls_component\reconstruct\hls\.autopilot\db\image_analysis.pp.0.cpp:27952:13: warning: Added loop label VITIS_LOOP_98_3:   [xilinx-label-all-loops]
+            for(; col <= localImage.X_max && col < fullImage_cols; col++){
+            ^~~
+            VITIS_LOOP_98_3: 
+F:\LMU\quantumMA\opimization\reconstructv1maxi\hls_component\reconstruct\hls\.autopilot\db\image_analysis.pp.0.cpp:27952:13: note: FIX-IT applied suggested code changes

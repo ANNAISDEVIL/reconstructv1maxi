@@ -1,0 +1,22 @@
+[
+    {
+        "action": "merge",
+        "srcTask": "3",
+        "targetTask": "4"
+    },
+    {
+        "action": "merge",
+        "srcTask": "4",
+        "targetTask": "3"
+    },
+    {
+        "action": "inline",
+        "task": "3",
+        "inlineRegion": "2"
+    },
+    {
+        "action": "inline",
+        "task": "4",
+        "inlineRegion": "2"
+    }
+]

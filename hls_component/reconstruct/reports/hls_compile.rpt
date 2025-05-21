@@ -1,0 +1,409 @@
+
+
+================================================================
+== Synthesis Summary Report of 'reconstruct'
+================================================================
++ General Information: 
+    * Date:           Wed May 21 17:37:32 2025
+    * Version:        2024.2 (Build 5238294 on Nov  8 2024)
+    * Project:        reconstruct
+    * Solution:       hls (Vivado IP Flow Target)
+    * Product family: zynq
+    * Target device:  xc7z020-clg400-1
+    
+
++ Performance & Resource Estimates: 
+    
+    PS: '+' for module; 'o' for loop; '*' for dataflow
+    +------------------------------------------+------+------+---------+--------+----------+---------+------+----------+----------+----------+-------------+-------------+-----+
+    |                  Modules                 | Issue|      | Latency | Latency| Iteration|         | Trip |          |          |          |             |             |     |
+    |                  & Loops                 | Type | Slack| (cycles)|  (ns)  |  Latency | Interval| Count| Pipelined|   BRAM   |    DSP   |      FF     |     LUT     | URAM|
+    +------------------------------------------+------+------+---------+--------+----------+---------+------+----------+----------+----------+-------------+-------------+-----+
+    |+ reconstruct*                            |     -|  0.00|        -|       -|         -|        -|     -|  dataflow|  30 (10%)|  55 (25%)|  32656 (30%)|  26146 (49%)|    -|
+    | + getLocalImages                         |     -|  0.00|        -|       -|         -|        -|     -|        no|   12 (4%)|  28 (12%)|  17546 (16%)|  10430 (19%)|    -|
+    |  + getLocalImages_Pipeline_copy_loop     |     -|  1.57|        -|       -|         -|        -|     -|        no|         -|         -|  12817 (12%)|     91 (~0%)|    -|
+    |   o copy_loop                            |     -|  7.30|        -|       -|         2|        1|     -|       yes|         -|         -|            -|            -|    -|
+    |  + getLocalImages_Pipeline_process_loop  |     -|  0.00|        -|       -|         -|        -|     -|        no|   12 (4%)|  28 (12%)|    4496 (4%)|  10036 (18%)|    -|
+    |   o process_loop                         |     -|  7.30|        -|       -|        31|        1|     -|       yes|         -|         -|            -|            -|    -|
+    | + applyProjectors                        |     -|  0.00|        -|       -|         -|        -|     -|        no|         -|  27 (12%)|  10724 (10%)|  10368 (19%)|    -|
+    |  o VITIS_LOOP_72_1                       |     -|  7.30|        -|       -|         -|        -|     -|        no|         -|         -|            -|            -|    -|
+    |   o VITIS_LOOP_91_2                      |     -|  7.30|        -|       -|         -|        -|     -|        no|         -|         -|            -|            -|    -|
+    |    o VITIS_LOOP_98_3                     |     -|  7.30|        -|       -|        24|        -|     -|        no|         -|         -|            -|            -|    -|
+    +------------------------------------------+------+------+---------+--------+----------+---------+------+----------+----------+----------+-------------+-------------+-----+
+
+
+================================================================
+== HW Interfaces
+================================================================
+* M_AXI
++-----------------------------+------------+------------+---------------+---------+--------+----------+-----------+--------------+--------------+-------------+-------------+-------------------+
+| Interface                   | Read/Write | Data Width | Address Width | Latency | Offset | Register | Max Widen | Max Read     | Max Write    | Num Read    | Num Write   | Resource Estimate |
+|                             |            | (SW->HW)   |               |         |        |          | Bitwidth  | Burst Length | Burst Length | Outstanding | Outstanding |                   |
++-----------------------------+------------+------------+---------------+---------+--------+----------+-----------+--------------+--------------+-------------+-------------+-------------------+
+| m_axi_emissions             | WRITE_ONLY | 64 -> 64   | 64            | 0       | slave  | 0        | 0         | 16           | 16           | 16          | 16          | BRAM=4            |
+| m_axi_fullImage             | READ_ONLY  | 64 -> 64   | 64            | 0       | slave  | 0        | 0         | 16           | 16           | 16          | 16          | BRAM=4            |
+| m_axi_imageProjs            | READ_ONLY  | 64 -> 64   | 64            | 0       | slave  | 0        | 0         | 16           | 16           | 16          | 16          | BRAM=4            |
+| m_axi_imageProjs_local      | READ_ONLY  | 64 -> 64   | 64            | 0       | slave  | 0        | 0         | 16           | 16           | 16          | 16          | BRAM=4            |
+| m_axi_imageProjs_local_size | READ_WRITE |            | 64            |         |        |          |           | 16           | 16           | 2           | 2           | BRAM=2            |
++-----------------------------+------------+------------+---------------+---------+--------+----------+-----------+--------------+--------------+-------------+-------------+-------------------+
+
+* S_AXILITE Interfaces
++-------------------+------------+---------------+--------+----------+
+| Interface         | Data Width | Address Width | Offset | Register |
++-------------------+------------+---------------+--------+----------+
+| s_axi_control     | 32         | 7             | 16     | 0        |
+| s_axi_scalar_data | 32         | 7             | 16     | 0        |
++-------------------+------------+---------------+--------+----------+
+
+* S_AXILITE Registers
++-------------------+--------------------------------+--------+-------+--------+---------------------------------------------+----------------------------------------------------------------------+
+| Interface         | Register                       | Offset | Width | Access | Description                                 | Bit Fields                                                           |
++-------------------+--------------------------------+--------+-------+--------+---------------------------------------------+----------------------------------------------------------------------+
+| s_axi_control     | CTRL                           | 0x00   | 32    | RW     | Control signals                             | 0=AP_START 1=AP_DONE 2=AP_IDLE 3=AP_READY 7=AUTO_RESTART 9=INTERRUPT |
+| s_axi_control     | GIER                           | 0x04   | 32    | RW     | Global Interrupt Enable Register            | 0=Enable                                                             |
+| s_axi_control     | IP_IER                         | 0x08   | 32    | RW     | IP Interrupt Enable Register                | 0=CHAN0_INT_EN 1=CHAN1_INT_EN                                        |
+| s_axi_control     | IP_ISR                         | 0x0c   | 32    | RW     | IP Interrupt Status Register                | 0=CHAN0_INT_ST 1=CHAN1_INT_ST                                        |
+| s_axi_control     | imageProjs_local_offset_1      | 0x10   | 32    | W      | Data signal of imageProjs_local_offset      |                                                                      |
+| s_axi_control     | imageProjs_local_offset_2      | 0x14   | 32    | W      | Data signal of imageProjs_local_offset      |                                                                      |
+| s_axi_control     | imageProjs_offset_1            | 0x1c   | 32    | W      | Data signal of imageProjs_offset            |                                                                      |
+| s_axi_control     | imageProjs_offset_2            | 0x20   | 32    | W      | Data signal of imageProjs_offset            |                                                                      |
+| s_axi_control     | imageProjs_local_size_offset_1 | 0x28   | 32    | W      | Data signal of imageProjs_local_size_offset |                                                                      |
+| s_axi_control     | imageProjs_local_size_offset_2 | 0x2c   | 32    | W      | Data signal of imageProjs_local_size_offset |                                                                      |
+| s_axi_control     | fullImage_offset_1             | 0x34   | 32    | W      | Data signal of fullImage_offset             |                                                                      |
+| s_axi_control     | fullImage_offset_2             | 0x38   | 32    | W      | Data signal of fullImage_offset             |                                                                      |
+| s_axi_control     | emissions_offset_1             | 0x40   | 32    | W      | Data signal of emissions_offset             |                                                                      |
+| s_axi_control     | emissions_offset_2             | 0x44   | 32    | W      | Data signal of emissions_offset             |                                                                      |
+| s_axi_scalar_data | atomLocationsSize              | 0x10   | 32    | W      | Data signal of atomLocationsSize            |                                                                      |
+| s_axi_scalar_data | projShape0                     | 0x18   | 32    | W      | Data signal of projShape0                   |                                                                      |
+| s_axi_scalar_data | projShape1                     | 0x20   | 32    | W      | Data signal of projShape1                   |                                                                      |
+| s_axi_scalar_data | psfSupersample                 | 0x28   | 32    | W      | Data signal of psfSupersample               |                                                                      |
+| s_axi_scalar_data | imageProjectionSize            | 0x30   | 32    | W      | Data signal of imageProjectionSize          |                                                                      |
+| s_axi_scalar_data | fullImage_rows                 | 0x38   | 32    | W      | Data signal of fullImage_rows               |                                                                      |
+| s_axi_scalar_data | fullImage_cols                 | 0x40   | 32    | W      | Data signal of fullImage_cols               |                                                                      |
+| s_axi_scalar_data | emission_cnt                   | 0x48   | 32    | R      | Data signal of emission_cnt                 |                                                                      |
+| s_axi_scalar_data | emission_cnt_ctrl              | 0x4c   | 32    | R      | Control signal of emission_cnt              | 0=emission_cnt_ap_vld                                                |
++-------------------+--------------------------------+--------+-------+--------+---------------------------------------------+----------------------------------------------------------------------+
+
+* AP_MEMORY
++------------------------+-----------+----------+
+| Port                   | Direction | Bitwidth |
++------------------------+-----------+----------+
+| atomLocations_address0 | out       | 7        |
+| atomLocations_address1 | out       | 7        |
+| atomLocations_d0       | out       | 128      |
+| atomLocations_d1       | out       | 128      |
+| atomLocations_q0       | in        | 128      |
+| atomLocations_q1       | in        | 128      |
++------------------------+-----------+----------+
+
+* TOP LEVEL CONTROL
++-----------+------------+-----------+
+| Interface | Type       | Ports     |
++-----------+------------+-----------+
+| ap_clk    | clock      | ap_clk    |
+| ap_rst_n  | reset      | ap_rst_n  |
+| interrupt | interrupt  | interrupt |
+| ap_ctrl   | ap_ctrl_hs |           |
++-----------+------------+-----------+
+
+
+================================================================
+== SW I/O Information
+================================================================
+* Top Function Arguments
++-----------------------+-----------+---------------+
+| Argument              | Direction | Datatype      |
++-----------------------+-----------+---------------+
+| atomLocationsSize     | in        | int           |
+| projShape0            | in        | int           |
+| projShape1            | in        | int           |
+| atomLocations         | in        | pointer       |
+| psfSupersample        | in        | int           |
+| imageProjectionSize   | in        | int           |
+| imageProjs_local      | in        | double*       |
+| imageProjs            | in        | double*       |
+| imageProjs_local_size | in        | int*          |
+| fullImage             | in        | double*       |
+| fullImage_rows        | in        | int           |
+| fullImage_cols        | in        | int           |
+| emissions             | out       | double*       |
+| emission_cnt          | out       | unsigned int& |
++-----------------------+-----------+---------------+
+
+* SW-to-HW Mapping
++-----------------------+------------------------+-----------+----------+-----------------------------------------------+
+| Argument              | HW Interface           | HW Type   | HW Usage | HW Info                                       |
++-----------------------+------------------------+-----------+----------+-----------------------------------------------+
+| atomLocationsSize     | s_axi_scalar_data      | register  |          | name=atomLocationsSize offset=0x10 range=32   |
+| projShape0            | s_axi_scalar_data      | register  |          | name=projShape0 offset=0x18 range=32          |
+| projShape1            | s_axi_scalar_data      | register  |          | name=projShape1 offset=0x20 range=32          |
+| atomLocations         | atomLocations_address0 | port      | offset   |                                               |
+| atomLocations         | atomLocations_ce0      | port      |          |                                               |
+| atomLocations         | atomLocations_d0       | port      |          |                                               |
+| atomLocations         | atomLocations_q0       | port      |          |                                               |
+| atomLocations         | atomLocations_we0      | port      |          |                                               |
+| atomLocations         | atomLocations_address1 | port      | offset   |                                               |
+| atomLocations         | atomLocations_ce1      | port      |          |                                               |
+| atomLocations         | atomLocations_d1       | port      |          |                                               |
+| atomLocations         | atomLocations_q1       | port      |          |                                               |
+| atomLocations         | atomLocations_we1      | port      |          |                                               |
+| psfSupersample        | s_axi_scalar_data      | register  |          | name=psfSupersample offset=0x28 range=32      |
+| imageProjectionSize   | s_axi_scalar_data      | register  |          | name=imageProjectionSize offset=0x30 range=32 |
+| imageProjs_local      | m_axi_imageProjs_local | interface |          | channel=0                                     |
+| imageProjs_local      | s_axi_control          | interface | offset   |                                               |
+| imageProjs            | m_axi_imageProjs       | interface |          | channel=0                                     |
+| imageProjs            | s_axi_control          | interface | offset   |                                               |
+| imageProjs_local_size | s_axi_control          | interface | offset   |                                               |
+| fullImage             | m_axi_fullImage        | interface |          | channel=0                                     |
+| fullImage             | s_axi_control          | interface | offset   |                                               |
+| fullImage_rows        | s_axi_scalar_data      | register  |          | name=fullImage_rows offset=0x38 range=32      |
+| fullImage_cols        | s_axi_scalar_data      | register  |          | name=fullImage_cols offset=0x40 range=32      |
+| emissions             | m_axi_emissions        | interface |          | channel=0                                     |
+| emissions             | s_axi_control          | interface | offset   |                                               |
+| emission_cnt          | s_axi_scalar_data      | register  |          | name=emission_cnt offset=0x48 range=32        |
+| emission_cnt          | s_axi_scalar_data      | register  |          | name=emission_cnt_ctrl offset=0x4c range=32   |
++-----------------------+------------------------+-----------+----------+-----------------------------------------------+
+
+
+================================================================
+== M_AXI Burst Information
+================================================================
+ Note: All burst requests might be further partitioned into multiple requests during RTL generation based on max_read_burst_length or max_write_burst_length settings.
+
+* All M_AXI Variable Accesses
++-----------------------------+-----------------------+------------------------------+-----------+--------------+-----------------+-----------------------------+------------+-------------------------------------------+
+| HW Interface                | Variable              | Access Location              | Direction | Burst Status | Loop            | Loop Location               | Resolution | Problem                                   |
++-----------------------------+-----------------------+------------------------------+-----------+--------------+-----------------+-----------------------------+------------+-------------------------------------------+
+| m_axi_emissions             | emissions             | ../image_analysis.cpp:107:37 | write     | Fail         | VITIS_LOOP_72_1 | ../image_analysis.cpp:72:22 | 214-232    | Access store is in the conditional branch |
+| m_axi_emissions             | emissions             | ../image_analysis.cpp:111:37 | write     | Fail         | VITIS_LOOP_72_1 | ../image_analysis.cpp:72:22 | 214-232    | Access store is in the conditional branch |
+| m_axi_imageProjs            | imageProjs            | ../image_analysis.cpp:107:46 | read      | Fail         | VITIS_LOOP_72_1 | ../image_analysis.cpp:72:22 | 214-232    | Access load is in the conditional branch  |
+| m_axi_imageProjs_local_size | imageProjs_local_size | ../image_analysis.cpp:85:75  | read      | Fail         | VITIS_LOOP_72_1 | ../image_analysis.cpp:72:22 | 214-232    | Access load is in the conditional branch  |
++-----------------------------+-----------------------+------------------------------+-----------+--------------+-----------------+-----------------------------+------------+-------------------------------------------+
+
+    * Resolution URL: docs.xilinx.com/access/sources/dita/topic?Doc_Version=2024.2%20English&url=ug1448-hls-guidance&resourceid=XXX-YYY.html (replace XXX-YYY with column value)
+
+================================================================
+== Bind Op Report
+================================================================
++------------------------------------------+-----+--------+-----------------+-----------+--------------------------+---------+
+| Name                                     | DSP | Pragma | Variable        | Op        | Impl                     | Latency |
++------------------------------------------+-----+--------+-----------------+-----------+--------------------------+---------+
+| + reconstruct                            | 55  |        |                 |           |                          |         |
+|  + getLocalImages                        | 28  |        |                 |           |                          |         |
+|    p_neg3_fu_1308_p2                     |     |        | p_neg3          | sub       | fabric                   | 0       |
+|    p_neg_t5_fu_1324_p2                   |     |        | p_neg_t5        | sub       | fabric                   | 0       |
+|    div_fu_1340_p3                        |     |        | div             | select    | auto_sel                 | 0       |
+|    p_neg_fu_1356_p2                      |     |        | p_neg           | sub       | fabric                   | 0       |
+|    p_neg_t_fu_1372_p2                    |     |        | p_neg_t         | sub       | fabric                   | 0       |
+|    div11_fu_1388_p3                      |     |        | div11           | select    | auto_sel                 | 0       |
+|    sitodp_32ns_64_6_no_dsp_1_U429        |     |        | conv            | sitodp    | auto                     | 5       |
+|   + getLocalImages_Pipeline_copy_loop    | 0   |        |                 |           |                          |         |
+|     icmp_ln13_fu_2867_p2                 |     |        | icmp_ln13       | setlt     | auto                     | 0       |
+|     add_ln13_fu_2873_p2                  |     |        | add_ln13        | add       | fabric                   | 0       |
+|   + getLocalImages_Pipeline_process_loop | 28  |        |                 |           |                          |         |
+|     icmp_ln19_fu_2095_p2                 |     |        | icmp_ln19       | setlt     | auto                     | 0       |
+|     add_ln19_fu_2101_p2                  |     |        | add_ln19        | add       | fabric                   | 0       |
+|     sparsemux_201_7_64_1_1_U209          |     |        | coord_x         | sparsemux | compactencoding_dontcare | 0       |
+|     sparsemux_201_7_64_1_1_U210          |     |        | coord_y         | sparsemux | compactencoding_dontcare | 0       |
+|     icmp_ln167_fu_2939_p2                |     |        | icmp_ln167      | setlt     | auto                     | 0       |
+|     icmp_ln170_fu_2953_p2                |     |        | icmp_ln170      | setgt     | auto                     | 0       |
+|     data_2_fu_3036_p2                    |     |        | data_2          | add       | fabric                   | 0       |
+|     xor_ln184_fu_3045_p2                 |     |        | xor_ln184       | xor       | auto                     | 0       |
+|     xs_sig_fu_3050_p2                    |     |        | xs_sig          | and       | auto                     | 0       |
+|     xor_ln167_fu_3078_p2                 |     |        | xor_ln167       | xor       | auto                     | 0       |
+|     and_ln170_fu_3083_p2                 |     |        | and_ln170       | and       | auto                     | 0       |
+|     sparsemux_7_2_64_1_1_U211            |     |        | dc_1            | sparsemux | onehotencoding_realdef   | 0       |
+|     add_ln486_fu_3247_p2                 |     |        | add_ln486       | add       | fabric                   | 0       |
+|     sub_ln18_fu_3261_p2                  |     |        | sub_ln18        | sub       | fabric                   | 0       |
+|     select_ln18_fu_3271_p3               |     |        | select_ln18     | select    | auto_sel                 | 0       |
+|     lshr_ln18_fu_3287_p2                 |     |        | lshr_ln18       | lshr      | auto_pipe                | 0       |
+|     shl_ln18_fu_3293_p2                  |     |        | shl_ln18        | shl       | auto_pipe                | 0       |
+|     val_fu_3432_p3                       |     |        | val             | select    | auto_sel                 | 0       |
+|     result_2_fu_3437_p2                  |     |        | result_2        | sub       | fabric                   | 0       |
+|     result_12_fu_3443_p3                 |     |        | result_12       | select    | auto_sel                 | 0       |
+|     icmp_ln167_1_fu_2986_p2              |     |        | icmp_ln167_1    | setlt     | auto                     | 0       |
+|     icmp_ln170_1_fu_3000_p2              |     |        | icmp_ln170_1    | setgt     | auto                     | 0       |
+|     data_4_fu_3128_p2                    |     |        | data_4          | add       | fabric                   | 0       |
+|     xor_ln184_1_fu_3137_p2               |     |        | xor_ln184_1     | xor       | auto                     | 0       |
+|     xs_sig_1_fu_3142_p2                  |     |        | xs_sig_1        | and       | auto                     | 0       |
+|     xor_ln167_1_fu_3170_p2               |     |        | xor_ln167_1     | xor       | auto                     | 0       |
+|     and_ln170_1_fu_3175_p2               |     |        | and_ln170_1     | and       | auto                     | 0       |
+|     sparsemux_7_2_64_1_1_U212            |     |        | dc_4            | sparsemux | onehotencoding_realdef   | 0       |
+|     add_ln486_1_fu_3360_p2               |     |        | add_ln486_1     | add       | fabric                   | 0       |
+|     sub_ln18_1_fu_3374_p2                |     |        | sub_ln18_1      | sub       | fabric                   | 0       |
+|     select_ln18_2_fu_3384_p3             |     |        | select_ln18_2   | select    | auto_sel                 | 0       |
+|     lshr_ln18_1_fu_3400_p2               |     |        | lshr_ln18_1     | lshr      | auto_pipe                | 0       |
+|     shl_ln18_1_fu_3406_p2                |     |        | shl_ln18_1      | shl       | auto_pipe                | 0       |
+|     val_1_fu_3450_p3                     |     |        | val_1           | select    | auto_sel                 | 0       |
+|     result_5_fu_3455_p2                  |     |        | result_5        | sub       | fabric                   | 0       |
+|     result_13_fu_3461_p3                 |     |        | result_13       | select    | auto_sel                 | 0       |
+|     info_Y_min_fu_3864_p2                |     |        | info_Y_min      | sub       | fabric                   | 0       |
+|     info_X_min_fu_3868_p2                |     |        | info_X_min      | sub       | fabric                   | 0       |
+|     dsub_64ns_64ns_64_7_full_dsp_1_U203  | 3   |        | sub             | dsub      | fulldsp                  | 6       |
+|     dmul_64ns_64ns_64_7_max_dsp_1_U205   | 11  |        | dc_6            | dmul      | maxdsp                   | 6       |
+|     icmp_ln167_2_fu_3479_p2              |     |        | icmp_ln167_2    | setlt     | auto                     | 0       |
+|     icmp_ln170_2_fu_3493_p2              |     |        | icmp_ln170_2    | setgt     | auto                     | 0       |
+|     data_7_fu_3566_p2                    |     |        | data_7          | add       | fabric                   | 0       |
+|     xor_ln184_2_fu_3614_p2               |     |        | xor_ln184_2     | xor       | auto                     | 0       |
+|     xs_sig_2_fu_3619_p2                  |     |        | xs_sig_2        | and       | auto                     | 0       |
+|     xor_ln167_2_fu_3636_p2               |     |        | xor_ln167_2     | xor       | auto                     | 0       |
+|     and_ln170_2_fu_3641_p2               |     |        | and_ln170_2     | and       | auto                     | 0       |
+|     sparsemux_7_2_64_1_1_U213            |     |        | dc_7            | sparsemux | onehotencoding_realdef   | 0       |
+|     add_ln486_2_fu_3700_p2               |     |        | add_ln486_2     | add       | fabric                   | 0       |
+|     sub_ln18_2_fu_3714_p2                |     |        | sub_ln18_2      | sub       | fabric                   | 0       |
+|     select_ln18_4_fu_3724_p3             |     |        | select_ln18_4   | select    | auto_sel                 | 0       |
+|     lshr_ln18_2_fu_3914_p2               |     |        | lshr_ln18_2     | lshr      | auto_pipe                | 0       |
+|     shl_ln18_2_fu_3920_p2                |     |        | shl_ln18_2      | shl       | auto_pipe                | 0       |
+|     val_2_fu_3946_p3                     |     |        | val_2           | select    | auto_sel                 | 0       |
+|     result_9_fu_4012_p2                  |     |        | result_9        | sub       | fabric                   | 0       |
+|     result_14_fu_4017_p3                 |     |        | result_14       | select    | auto_sel                 | 0       |
+|     sitodp_32ns_64_6_no_dsp_1_U208       |     |        | conv2           | sitodp    | auto                     | 5       |
+|     dsub_64ns_64ns_64_7_full_dsp_1_U204  | 3   |        | sub1            | dsub      | fulldsp                  | 6       |
+|     dmul_64ns_64ns_64_7_max_dsp_1_U206   | 11  |        | dc_9            | dmul      | maxdsp                   | 6       |
+|     icmp_ln167_3_fu_3526_p2              |     |        | icmp_ln167_3    | setlt     | auto                     | 0       |
+|     icmp_ln170_3_fu_3540_p2              |     |        | icmp_ln170_3    | setgt     | auto                     | 0       |
+|     data_10_fu_3585_p2                   |     |        | data_10         | add       | fabric                   | 0       |
+|     xor_ln184_3_fu_3746_p2               |     |        | xor_ln184_3     | xor       | auto                     | 0       |
+|     xs_sig_3_fu_3751_p2                  |     |        | xs_sig_3        | and       | auto                     | 0       |
+|     xor_ln167_3_fu_3768_p2               |     |        | xor_ln167_3     | xor       | auto                     | 0       |
+|     and_ln170_3_fu_3773_p2               |     |        | and_ln170_3     | and       | auto                     | 0       |
+|     sparsemux_7_2_64_1_1_U214            |     |        | dc_10           | sparsemux | onehotencoding_realdef   | 0       |
+|     add_ln486_3_fu_3832_p2               |     |        | add_ln486_3     | add       | fabric                   | 0       |
+|     sub_ln18_3_fu_3846_p2                |     |        | sub_ln18_3      | sub       | fabric                   | 0       |
+|     select_ln18_6_fu_3856_p3             |     |        | select_ln18_6   | select    | auto_sel                 | 0       |
+|     lshr_ln18_3_fu_3973_p2               |     |        | lshr_ln18_3     | lshr      | auto_pipe                | 0       |
+|     shl_ln18_3_fu_3979_p2                |     |        | shl_ln18_3      | shl       | auto_pipe                | 0       |
+|     val_3_fu_4005_p3                     |     |        | val_3           | select    | auto_sel                 | 0       |
+|     result_10_fu_4023_p2                 |     |        | result_10       | sub       | fabric                   | 0       |
+|     result_fu_4028_p3                    |     |        | result          | select    | auto_sel                 | 0       |
+|  + applyProjectors                       | 27  |        |                 |           |                          |         |
+|    icmp_ln72_fu_538_p2                   |     |        | icmp_ln72       | setlt     | auto                     | 0       |
+|    add_ln72_fu_543_p2                    |     |        | add_ln72        | add       | fabric                   | 0       |
+|    grp_fu_633_p0                         |     |        | add_ln75        | add       | fabric                   | 0       |
+|    srem_32ns_32s_32_36_1_U444            |     |        | xidx            | srem      | auto                     | 35      |
+|    grp_fu_642_p0                         |     |        | add_ln76        | add       | fabric                   | 0       |
+|    srem_32ns_32s_32_36_1_U445            |     |        | yidx            | srem      | auto                     | 35      |
+|    mul_32s_32s_32_2_1_U442               | 3   |        | mul_ln77        | mul       | auto                     | 1       |
+|    proj_offset_fu_647_p2                 |     |        | proj_offset     | add       | fabric                   | 0       |
+|    icmp_ln79_fu_652_p2                   |     |        | icmp_ln79       | setlt     | auto                     | 0       |
+|    mul_32s_32s_32_2_1_U442               | 3   |        | mul_ln85        | mul       | auto                     | 1       |
+|    add_ln85_1_fu_669_p2                  |     |        | add_ln85_1      | add       | fabric                   | 0       |
+|    icmp_ln85_fu_714_p2                   |     |        | icmp_ln85       | setgt     | auto                     | 0       |
+|    icmp_ln88_fu_719_p2                   |     |        | icmp_ln88       | setgt     | auto                     | 0       |
+|    row_1_fu_724_p3                       |     |        | row_1           | select    | auto_sel                 | 0       |
+|    icmp_ln91_fu_768_p2                   |     |        | icmp_ln91       | setlt     | auto                     | 0       |
+|    xor_ln91_2_fu_773_p2                  |     |        | xor_ln91_2      | xor       | auto                     | 0       |
+|    icmp_ln91_1_fu_779_p2                 |     |        | icmp_ln91_1     | setlt     | auto                     | 0       |
+|    and_ln91_fu_784_p2                    |     |        | and_ln91        | and       | auto                     | 0       |
+|    col_1_fu_790_p3                       |     |        | col_1           | select    | auto_sel                 | 0       |
+|    slt52_fu_800_p2                       |     |        | slt52           | setlt     | auto                     | 0       |
+|    rev53_fu_805_p2                       |     |        | rev53           | xor       | auto                     | 0       |
+|    cmp3318_fu_811_p2                     |     |        | cmp3318         | setlt     | auto                     | 0       |
+|    spec_select1619_fu_816_p2             |     |        | spec_select1619 | and       | auto                     | 0       |
+|    empty_47_fu_825_p2                    |     |        | empty_47        | setgt     | auto                     | 0       |
+|    smax_fu_830_p3                        |     |        | smax            | select    | auto_sel                 | 0       |
+|    sub_ln91_fu_841_p2                    |     |        | sub_ln91        | sub       | fabric                   | 0       |
+|    xor_ln91_fu_846_p2                    |     |        | xor_ln91        | xor       | auto                     | 0       |
+|    add_ln91_fu_855_p2                    |     |        | add_ln91        | add       | fabric                   | 0       |
+|    empty_48_fu_887_p2                    |     |        | empty_48        | setgt     | auto                     | 0       |
+|    umax_fu_891_p3                        |     |        | umax            | select    | auto_sel                 | 0       |
+|    sub_ln91_1_fu_897_p2                  |     |        | sub_ln91_1      | sub       | fabric                   | 0       |
+|    sub_ln91_2_fu_861_p2                  |     |        | sub_ln91_2      | sub       | fabric                   | 0       |
+|    xor_ln91_1_fu_866_p2                  |     |        | xor_ln91_1      | xor       | auto                     | 0       |
+|    add_ln91_1_fu_875_p2                  |     |        | add_ln91_1      | add       | fabric                   | 0       |
+|    empty_49_fu_909_p2                    |     |        | empty_49        | setgt     | auto                     | 0       |
+|    umax2_fu_914_p3                       |     |        | umax2           | select    | auto_sel                 | 0       |
+|    sub_ln91_3_fu_921_p2                  |     |        | sub_ln91_3      | sub       | fabric                   | 0       |
+|    sub_ln92_fu_935_p2                    |     |        | sub_ln92        | sub       | fabric                   | 0       |
+|    mul_32s_32s_32_2_1_U442               | 3   |        | p               | mul       | auto                     | 1       |
+|    sub_ln95_fu_949_p2                    |     |        | sub_ln95        | sub       | fabric                   | 0       |
+|    sub_ln94_fu_944_p2                    |     |        | sub_ln94        | sub       | fabric                   | 0       |
+|    mul_32s_32s_32_2_1_U442               | 3   |        | mul_ln94        | mul       | auto                     | 1       |
+|    p_1_fu_954_p3                         |     |        | p_1             | select    | auto_sel                 | 0       |
+|    mul_61s_32s_61_5_1_U443               | 7   |        | empty_50        | mul       | auto                     | 4       |
+|    add_ln99_fu_965_p2                    |     |        | add_ln99        | add       | fabric                   | 0       |
+|    add_ln99_1_fu_978_p2                  |     |        | add_ln99_1      | add       | fabric                   | 0       |
+|    add_ln99_2_fu_993_p2                  |     |        | add_ln99_2      | add       | fabric                   | 0       |
+|    add_ln99_3_fu_1010_p2                 |     |        | add_ln99_3      | add       | fabric                   | 0       |
+|    dmul_64ns_64ns_64_7_max_dsp_1_U439    | 11  |        | mul             | dmul      | maxdsp                   | 6       |
+|    dadd_64ns_64ns_64_7_full_dsp_1_U437   | 3   |        | sum_2           | dadd      | fulldsp                  | 6       |
+|    dadd_64ns_64ns_64_7_full_dsp_1_U438   | 3   |        | projSumUsed_2   | dadd      | fulldsp                  | 6       |
+|    p_3_fu_1025_p2                        |     |        | p_3             | add       | fabric                   | 0       |
+|    add_ln98_fu_1031_p2                   |     |        | add_ln98        | add       | fabric                   | 0       |
+|    icmp_ln98_fu_1037_p2                  |     |        | icmp_ln98       | seteq     | auto                     | 0       |
+|    add_ln91_2_fu_1070_p2                 |     |        | add_ln91_2      | add       | fabric                   | 0       |
+|    row_3_fu_1076_p2                      |     |        | row_3           | add       | fabric                   | 0       |
+|    icmp_ln91_2_fu_1082_p2                |     |        | icmp_ln91_2     | seteq     | auto                     | 0       |
+|    icmp_ln104_fu_1143_p2                 |     |        | icmp_ln104      | setne     | auto                     | 0       |
+|    icmp_ln104_1_fu_1149_p2               |     |        | icmp_ln104_1    | seteq     | auto                     | 0       |
+|    or_ln104_fu_1155_p2                   |     |        | or_ln104        | or        | auto                     | 0       |
+|    dcmp_64ns_64ns_1_2_no_dsp_1_U441      |     |        | tmp_1           | dcmp      | auto                     | 1       |
+|    and_ln104_fu_1161_p2                  |     |        | and_ln104       | and       | auto                     | 0       |
+|    add_ln107_fu_1099_p2                  |     |        | add_ln107       | add       | fabric                   | 0       |
+|    emission_ptr_1_fu_1104_p2             |     |        | emission_ptr_1  | add       | fabric                   | 0       |
+|    add_ln107_1_fu_1187_p2                |     |        | add_ln107_1     | add       | fabric                   | 0       |
+|    ddiv_64ns_64ns_64_59_no_dsp_1_U440    |     |        | div             | ddiv      | fabric                   | 58      |
+|    dmul_64ns_64ns_64_7_max_dsp_1_U439    | 11  |        | mul1            | dmul      | maxdsp                   | 6       |
++------------------------------------------+-----+--------+-----------------+-----------+--------------------------+---------+
+
+
+================================================================
+== Storage Report
+================================================================
++------------------------------------------+--------------+-----------+------+------+--------+----------------+------+---------+------------------+
+| Name                                     | Usage        | Type      | BRAM | URAM | Pragma | Variable       | Impl | Latency | Bitwidth, Depth, |
+|                                          |              |           |      |      |        |                |      |         | Banks            |
++------------------------------------------+--------------+-----------+------+------+--------+----------------+------+---------+------------------+
+| + reconstruct                            |              |           | 30   | 0    |        |                |      |         |                  |
+|   control_s_axi_U                        | interface    | s_axilite |      |      |        |                |      |         |                  |
+|   scalar_data_s_axi_U                    | interface    | s_axilite |      |      |        |                |      |         |                  |
+|   emissions_m_axi_U                      | interface    | m_axi     | 4    |      |        |                |      |         |                  |
+|   fullImage_m_axi_U                      | interface    | m_axi     | 4    |      |        |                |      |         |                  |
+|   imageProjs_m_axi_U                     | interface    | m_axi     | 4    |      |        |                |      |         |                  |
+|   imageProjs_local_m_axi_U               | interface    | m_axi     | 4    |      |        |                |      |         |                  |
+|   imageProjs_local_size_m_axi_U          | interface    | m_axi     | 2    |      |        |                |      |         |                  |
+|   localImages_U                          | fifo channel | stream    |      |      |        | localImages    | srl  | 0       | 256, 2, 1        |
+|  + getLocalImages                        |              |           | 12   | 0    |        |                |      |         |                  |
+|   + getLocalImages_Pipeline_process_loop |              |           | 12   | 0    |        |                |      |         |                  |
+|     mask_table_U                         | rom_np       |           | 6    |      |        | mask_table     | auto | 1       | 52, 64, 1        |
+|     one_half_table_U                     | rom_np       |           | 6    |      |        | one_half_table | auto | 1       | 53, 64, 1        |
++------------------------------------------+--------------+-----------+------+------+--------+----------------+------+---------+------------------+
+
+
+================================================================
+== Pragma Report
+================================================================
+* Ignored Pragmas
++-----------+-----------------------------------------------------------------------------------+---------------------------------------------------------+--------------------------------------------+
+| Type      | Options                                                                           | Location                                                | Messages                                   |
++-----------+-----------------------------------------------------------------------------------+---------------------------------------------------------+--------------------------------------------+
+| interface | port=atomLocations mode=m_axi bundle=atomLocations depth=1000 storage_type=RAM_2P | ../image_analysis.cpp:136 in reconstruct, atomLocations | unexpected pragma parameter 'storage_type' |
++-----------+-----------------------------------------------------------------------------------+---------------------------------------------------------+--------------------------------------------+
+
+* Valid Pragma Syntax
++-----------------+--------------------------------------------------------------------+-----------------------------------------------------------------+
+| Type            | Options                                                            | Location                                                        |
++-----------------+--------------------------------------------------------------------+-----------------------------------------------------------------+
+| pipeline        |                                                                    | ../image_analysis.cpp:9 in getlocalimages                       |
+| array_partition | variable=local_atomLocations complete dim=1                        | ../image_analysis.cpp:11 in getlocalimages, local_atomLocations |
+| pipeline        | II=1                                                               | ../image_analysis.cpp:14 in getlocalimages                      |
+| pipeline        | II=1                                                               | ../image_analysis.cpp:20 in getlocalimages                      |
+| pipeline        | II=1                                                               | ../image_analysis.cpp:73 in applyprojectors                     |
+| interface       | port=return mode=s_axilite bundle=control                          | ../image_analysis.cpp:130 in reconstruct, return                |
+| interface       | port=atomLocationsSize mode=s_axilite bundle=scalar_data           | ../image_analysis.cpp:132 in reconstruct, atomLocationsSize     |
+| interface       | port=projShape0 mode=s_axilite bundle=scalar_data                  | ../image_analysis.cpp:133 in reconstruct, projShape0            |
+| interface       | port=projShape1 mode=s_axilite bundle=scalar_data                  | ../image_analysis.cpp:134 in reconstruct, projShape1            |
+| interface       | port=psfSupersample mode=s_axilite bundle=scalar_data              | ../image_analysis.cpp:138 in reconstruct, psfSupersample        |
+| interface       | port=imageProjectionSize mode=s_axilite bundle=scalar_data         | ../image_analysis.cpp:139 in reconstruct, imageProjectionSize   |
+| interface       | port=imageProjs_local mode=m_axi bundle=imageProjs_local           | ../image_analysis.cpp:141 in reconstruct, imageProjs_local      |
+| interface       | port=imageProjs mode=m_axi bundle=imageProjs                       | ../image_analysis.cpp:142 in reconstruct, imageProjs            |
+| interface       | port=imageProjs_local_size mode=m_axi bundle=imageProjs_local_size | ../image_analysis.cpp:143 in reconstruct, imageProjs_local_size |
+| interface       | port=fullImage mode=m_axi bundle=fullImage                         | ../image_analysis.cpp:145 in reconstruct, fullImage             |
+| interface       | port=fullImage_rows mode=s_axilite bundle=scalar_data              | ../image_analysis.cpp:147 in reconstruct, fullImage_rows        |
+| interface       | port=fullImage_cols mode=s_axilite bundle=scalar_data              | ../image_analysis.cpp:148 in reconstruct, fullImage_cols        |
+| interface       | port=emissions mode=m_axi bundle=emissions depth=1000              | ../image_analysis.cpp:150 in reconstruct, emissions             |
+| interface       | port=emission_cnt mode=s_axilite bundle=scalar_data                | ../image_analysis.cpp:151 in reconstruct, emission_cnt          |
+| dataflow        |                                                                    | ../image_analysis.cpp:156 in reconstruct                        |
++-----------------+--------------------------------------------------------------------+-----------------------------------------------------------------+
+
+

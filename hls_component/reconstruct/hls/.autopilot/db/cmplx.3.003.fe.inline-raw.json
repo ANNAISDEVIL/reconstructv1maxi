@@ -1,0 +1,72 @@
+{
+  "0": {
+    "basicblocks": 1,
+    "calls": "4 2",
+    "file": "image_analysis.cpp",
+    "fileloc": 120,
+    "instructions": 24,
+    "name": "reconstruct",
+    "total_instructions": 977
+  },
+  "1": {
+    "basicblocks": 1,
+    "calls": "",
+    "file": "lib_floatconversion.cpp",
+    "fileloc": 55,
+    "instructions": 52,
+    "loads": {
+      "L": 4
+    },
+    "name": "__hls_fptosi_double_i32",
+    "stores": {
+      "L": 4
+    },
+    "total_instructions": 52
+  },
+  "2": {
+    "basicblocks": 18,
+    "calls": "",
+    "file": "image_analysis.cpp",
+    "fileloc": 63,
+    "instructions": 122,
+    "loads": {
+      "L": 4
+    },
+    "name": "applyProjectors",
+    "stores": {
+      "L": 3
+    },
+    "total_instructions": 122
+  },
+  "3": {
+    "basicblocks": 5,
+    "calls": "",
+    "file": "hls_round.h",
+    "fileloc": 159,
+    "instructions": 139,
+    "loads": {
+      "G": 2,
+      "L": 17
+    },
+    "name": "generic_round<double>",
+    "stores": {
+      "L": 19
+    },
+    "total_instructions": 139
+  },
+  "4": {
+    "basicblocks": 9,
+    "calls": "3 1 3 1 3 1 3 1",
+    "file": "image_analysis.cpp",
+    "fileloc": 7,
+    "instructions": 67,
+    "loads": {
+      "L": 4
+    },
+    "name": "getLocalImages",
+    "stores": {
+      "L": 2
+    },
+    "total_instructions": 831
+  }
+}

@@ -1,0 +1,4 @@
+../image_analysis.cpp:136:98: warning: unexpected pragma parameter 'storage_type' [-Winvalid-hls-pragmas]
+#pragma HLS INTERFACE port=atomLocations mode=m_axi bundle=atomLocations depth=1000 storage_type=RAM_2P
+                                                                                                 ^
+1 warning generated.

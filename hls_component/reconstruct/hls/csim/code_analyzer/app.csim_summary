@@ -1,0 +1,80 @@
+<ENTRY>
+{
+ "thisFile": "F:/LMU\\quantumMA\\opimization\\reconstructv1maxi\\hls_component\\reconstruct\\hls\\csim\\code_analyzer\\app.csim_summary",
+ "connectId": "",
+ "serverToken": "",
+ "timestamp": "0"
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_FlowMetaData",
+ "dateTimestamp": "Wed May 21 23:40:32 2025",
+ "timestampMillis": "1747863632609",
+ "buildSummary": {
+  "hardwarePlatform": "",
+  "hardwareDsa": "",
+  "platformDirectory": "",
+  "runtime": "",
+  "systemConfig": "",
+  "flow": "BF_RUN",
+  "target": "TT_HLS_C_SIM",
+  "kernels": [],
+  "toolVersion": ""
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_CmdStep",
+ "dateTimestamp": "Wed May 21 23:40:32 2025",
+ "timestampMillis": "1747863632610",
+ "buildStep": {
+  "cmdId": "38e14b68-368c-11f0-9568-60f262b6a6ba",
+  "name": "vitis_c++",
+  "logFile": "",
+  "commandLine": "vitis_c++ code_analyzer",
+  "args": [
+   "code_analyzer"
+  ],
+  "iniFiles": [],
+  "cwd": ""
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Status",
+ "dateTimestamp": "Wed May 21 23:40:32 2025",
+ "timestampMillis": "1747863632611",
+ "status": {
+  "cmdId": "38e14b68-368c-11f0-9568-60f262b6a6ba",
+  "state": "CS_RUNNING"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Status",
+ "dateTimestamp": "Wed May 21 23:40:43 2025",
+ "timestampMillis": "1747863643631",
+ "status": {
+  "cmdId": "38e14b68-368c-11f0-9568-60f262b6a6ba",
+  "state": "CS_PASSED"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "Wed May 21 23:40:43 2025",
+ "timestampMillis": "1747863643632",
+ "report": {
+  "path": "F:\\LMU\\quantumMA\\opimization\\reconstructv1maxi\\hls_component",
+  "name": "",
+  "fileType": "DIR",
+  "reportType": "VCXX_CODE_ANALYZER",
+  "cmdId": "38e14b68-368c-11f0-9568-60f262b6a6ba"
+ }
+}
+</ENTRY>

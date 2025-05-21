@@ -1,0 +1,9 @@
+parallelismSelector::WARNG: WARNING: [HLS 211-200] Code Analyzer will not display the impact of 'pipeline' (F:\LMU\quantumMA\opimization\reconstructv1maxi\image_analysis.cpp:9:5) as the pipelined function is not the top-level hardware function
+parallelismSelector::WARNG: WARNING: [HLS 211-200] Invalid pragma detected: Code Analyzer will not display the impact of 'pipeline' (F:\LMU\quantumMA\opimization\reconstructv1maxi\image_analysis.cpp:73:1) as loop pipeline pragma is only valid if:
+                            - All the subloops of the loop to be pipelined can be fully unrolled
+                            - All the subloops are perfectly nested in the loop to be pipelined.
+parallelismSelector::WARNG: WARNING: [SIM 211-200] F:/LMU/quantumMA/opimization/reconstructv1maxi/hls_component\../image_analysis.cpp:13:16: the dynamic loop had a trip count of min=100 max=100 during C simulation. (#pragma HLS loop_tripcount min=100 max=100)
+parallelismSelector::WARNG: WARNING: [SIM 211-200] F:/LMU/quantumMA/opimization/reconstructv1maxi/hls_component\../image_analysis.cpp:19:19: the dynamic loop had a trip count of min=100 max=100 during C simulation. (#pragma HLS loop_tripcount min=100 max=100)
+parallelismSelector::WARNG: WARNING: [SIM 211-200] F:/LMU/quantumMA/opimization/reconstructv1maxi/hls_component\../image_analysis.cpp:72:5: the dynamic loop had a trip count of min=100 max=100 during C simulation. (#pragma HLS loop_tripcount min=100 max=100)
+parallelismSelector::WARNG: WARNING: [SIM 211-200] F:/LMU/quantumMA/opimization/reconstructv1maxi/hls_component\../image_analysis.cpp:91:9: the dynamic loop had a trip count of min=31 max=31 during C simulation. (#pragma HLS loop_tripcount min=31 max=31)
+parallelismSelector::WARNG: WARNING: [SIM 211-200] F:/LMU/quantumMA/opimization/reconstructv1maxi/hls_component\../image_analysis.cpp:98:13: the dynamic loop had a trip count of min=31 max=31 during C simulation. (#pragma HLS loop_tripcount min=31 max=31)

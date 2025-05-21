@@ -1,0 +1,1079 @@
+[
+    {
+        "name": "_Z11reconstructiiiP13atom_locationiiPdS1_PiS1_iiS1_Rj",
+        "df_function": "%F353",
+        "df_type": "Function",
+        "project": "SLX",
+        "processes": {
+            "1": {
+                "id": "1",
+                "name": "Artificial<Start>",
+                "src_range": {
+                    "start_loc": {
+                        "file": "F:\\LMU\\quantumMA\\opimization\\reconstructv1maxi\\image_analysis.cpp",
+                        "line": 120,
+                        "column": 1
+                    },
+                    "end_loc": {
+                        "file": "F:\\LMU\\quantumMA\\opimization\\reconstructv1maxi\\image_analysis.cpp",
+                        "line": 161,
+                        "column": 1
+                    }
+                },
+                "display_name": "<START>",
+                "kind": "start"
+            },
+            "2": {
+                "id": "2",
+                "name": "Artificial<End>",
+                "src_range": {
+                    "start_loc": {
+                        "file": "F:\\LMU\\quantumMA\\opimization\\reconstructv1maxi\\image_analysis.cpp",
+                        "line": 120,
+                        "column": 1
+                    },
+                    "end_loc": {
+                        "file": "F:\\LMU\\quantumMA\\opimization\\reconstructv1maxi\\image_analysis.cpp",
+                        "line": 161,
+                        "column": 1
+                    }
+                },
+                "display_name": "<END>",
+                "kind": "end"
+            },
+            "3": {
+                "id": "3",
+                "name": "Region<OutlineCall(R2 reconstruct) BB 'codeRepl' [Call] 'Outline_T3_F353_R2_Call'>",
+                "src_range": {
+                    "start_loc": {
+                        "file": "F:\\LMU\\quantumMA\\opimization\\reconstructv1maxi\\image_analysis.cpp",
+                        "line": 159,
+                        "column": 9
+                    },
+                    "end_loc": {
+                        "file": "F:\\LMU\\quantumMA\\opimization\\reconstructv1maxi\\image_analysis.cpp",
+                        "line": 159,
+                        "column": 109
+                    }
+                },
+                "display_name": "getLocalImages()",
+                "io_signatures": {
+                    "has_unresolved_accesses": false,
+                    "accesses": [
+                        {
+                            "variable": {
+                                "location": {
+                                    "file": "F:\\LMU\\quantumMA\\opimization\\reconstructv1maxi\\image_analysis.cpp",
+                                    "line": 120,
+                                    "column": 0
+                                },
+                                "id": "VId_434_[?(?,128)]dc",
+                                "name": "atomLocations[*]",
+                                "display_name": "atom_location atomLocations[100]"
+                            },
+                            "reads": [
+                                {
+                                    "access_kind": "Ptr",
+                                    "range": {
+                                        "is_exact": false,
+                                        "is_empty": false
+                                    },
+                                    "instr": "load",
+                                    "src_loc": {
+                                        "file": "F:\\LMU\\quantumMA\\opimization\\reconstructv1maxi\\image_analysis.cpp",
+                                        "line": 15,
+                                        "column": 32
+                                    },
+                                    "access_type": "%struct.atom_location",
+                                    "access_bit_width": 128,
+                                    "exec_count": 100
+                                }
+                            ],
+                            "writes": [],
+                            "kind": "Ptr",
+                            "has_alias": false,
+                            "arg_idx": 3
+                        },
+                        {
+                            "variable": {
+                                "location": {
+                                    "file": "F:\\LMU\\quantumMA\\opimization\\reconstructv1maxi\\image_analysis.cpp",
+                                    "line": 157,
+                                    "column": 39
+                                },
+                                "id": "VId_445_!c?(?,?)",
+                                "name": "localImages",
+                                "display_name": "hls::stream<local_image_info, 0> localImages"
+                            },
+                            "reads": [],
+                            "writes": [
+                                {
+                                    "access_kind": "Fifo",
+                                    "range": {
+                                        "is_exact": false,
+                                        "is_empty": false
+                                    },
+                                    "instr": "call",
+                                    "src_loc": {
+                                        "file": "F:\\LMU\\quantumMA\\opimization\\reconstructv1maxi\\image_analysis.cpp",
+                                        "line": 37,
+                                        "column": 21
+                                    },
+                                    "access_type": "%struct.local_image_info",
+                                    "access_bit_width": 256,
+                                    "exec_count": 100
+                                }
+                            ],
+                            "kind": "Fifo",
+                            "has_alias": false
+                        },
+                        {
+                            "variable": {
+                                "location": {
+                                    "file": "F:\\LMU\\quantumMA\\opimization\\reconstructv1maxi\\image_analysis.cpp",
+                                    "line": 120,
+                                    "column": 0
+                                },
+                                "id": "VId_431_!c?(?,?)",
+                                "name": "atomLocationsSize",
+                                "display_name": "int atomLocationsSize"
+                            },
+                            "reads": [
+                                {
+                                    "access_kind": "SSA",
+                                    "range": {
+                                        "is_exact": true,
+                                        "is_empty": false
+                                    },
+                                    "instr": "call",
+                                    "src_loc": {
+                                        "file": "F:\\LMU\\quantumMA\\opimization\\reconstructv1maxi\\image_analysis.cpp",
+                                        "line": 4294967295,
+                                        "column": 0
+                                    },
+                                    "exec_count": 1
+                                }
+                            ],
+                            "writes": [],
+                            "kind": "SSA",
+                            "has_alias": false,
+                            "arg_idx": 0
+                        },
+                        {
+                            "variable": {
+                                "location": {
+                                    "file": "F:\\LMU\\quantumMA\\opimization\\reconstructv1maxi\\image_analysis.cpp",
+                                    "line": 121,
+                                    "column": 0
+                                },
+                                "id": "VId_435_!c?(?,?)",
+                                "name": "psfSupersample",
+                                "display_name": "int psfSupersample"
+                            },
+                            "reads": [
+                                {
+                                    "access_kind": "SSA",
+                                    "range": {
+                                        "is_exact": true,
+                                        "is_empty": false
+                                    },
+                                    "instr": "call",
+                                    "src_loc": {
+                                        "file": "F:\\LMU\\quantumMA\\opimization\\reconstructv1maxi\\image_analysis.cpp",
+                                        "line": 4294967295,
+                                        "column": 0
+                                    },
+                                    "exec_count": 1
+                                }
+                            ],
+                            "writes": [],
+                            "kind": "SSA",
+                            "has_alias": false,
+                            "arg_idx": 4
+                        },
+                        {
+                            "variable": {
+                                "location": {
+                                    "file": "F:\\LMU\\quantumMA\\opimization\\reconstructv1maxi\\image_analysis.cpp",
+                                    "line": 120,
+                                    "column": 0
+                                },
+                                "id": "VId_432_!c?(?,?)",
+                                "name": "projShape0",
+                                "display_name": "int projShape0"
+                            },
+                            "reads": [
+                                {
+                                    "access_kind": "SSA",
+                                    "range": {
+                                        "is_exact": true,
+                                        "is_empty": false
+                                    },
+                                    "instr": "call",
+                                    "src_loc": {
+                                        "file": "F:\\LMU\\quantumMA\\opimization\\reconstructv1maxi\\image_analysis.cpp",
+                                        "line": 4294967295,
+                                        "column": 0
+                                    },
+                                    "exec_count": 1
+                                }
+                            ],
+                            "writes": [],
+                            "kind": "SSA",
+                            "has_alias": false,
+                            "arg_idx": 1
+                        },
+                        {
+                            "variable": {
+                                "location": {
+                                    "file": "F:\\LMU\\quantumMA\\opimization\\reconstructv1maxi\\image_analysis.cpp",
+                                    "line": 120,
+                                    "column": 0
+                                },
+                                "id": "VId_433_!c?(?,?)",
+                                "name": "projShape1",
+                                "display_name": "int projShape1"
+                            },
+                            "reads": [
+                                {
+                                    "access_kind": "SSA",
+                                    "range": {
+                                        "is_exact": true,
+                                        "is_empty": false
+                                    },
+                                    "instr": "call",
+                                    "src_loc": {
+                                        "file": "F:\\LMU\\quantumMA\\opimization\\reconstructv1maxi\\image_analysis.cpp",
+                                        "line": 4294967295,
+                                        "column": 0
+                                    },
+                                    "exec_count": 1
+                                }
+                            ],
+                            "writes": [],
+                            "kind": "SSA",
+                            "has_alias": false,
+                            "arg_idx": 2
+                        }
+                    ]
+                },
+                "subregions": [
+                    {
+                        "id": "%F356_R2",
+                        "description": "<call 'getLocalImages'>",
+                        "src_range": {
+                            "start_loc": {
+                                "file": "F:\\LMU\\quantumMA\\opimization\\reconstructv1maxi\\image_analysis.cpp",
+                                "line": 159,
+                                "column": 9
+                            },
+                            "end_loc": {
+                                "file": "F:\\LMU\\quantumMA\\opimization\\reconstructv1maxi\\image_analysis.cpp",
+                                "line": 159,
+                                "column": 109
+                            }
+                        }
+                    }
+                ],
+                "subdataflow": [
+                    {
+                        "id": "%F354",
+                        "region_type": "Function",
+                        "src_range": {
+                            "start_loc": {
+                                "file": "F:\\LMU\\quantumMA\\opimization\\reconstructv1maxi\\image_analysis.cpp",
+                                "line": 159,
+                                "column": 9
+                            },
+                            "end_loc": {
+                                "file": "F:\\LMU\\quantumMA\\opimization\\reconstructv1maxi\\image_analysis.cpp",
+                                "line": 159,
+                                "column": 109
+                            }
+                        }
+                    }
+                ]
+            },
+            "4": {
+                "id": "4",
+                "name": "Region<OutlineCall(R3 reconstruct) BB 'codeRepl1' [Call] 'Outline_T4_F353_R3_Call'>",
+                "src_range": {
+                    "start_loc": {
+                        "file": "F:\\LMU\\quantumMA\\opimization\\reconstructv1maxi\\image_analysis.cpp",
+                        "line": 160,
+                        "column": 9
+                    },
+                    "end_loc": {
+                        "file": "F:\\LMU\\quantumMA\\opimization\\reconstructv1maxi\\image_analysis.cpp",
+                        "line": 160,
+                        "column": 213
+                    }
+                },
+                "display_name": "applyProjectors()",
+                "io_signatures": {
+                    "has_unresolved_accesses": false,
+                    "accesses": [
+                        {
+                            "variable": {
+                                "location": {
+                                    "file": "F:\\LMU\\quantumMA\\opimization\\reconstructv1maxi\\image_analysis.cpp",
+                                    "line": 123,
+                                    "column": 0
+                                },
+                                "id": "VId_437_[?(?,64)]dc",
+                                "name": "imageProjs_local[*]",
+                                "display_name": "double imageProjs_local[100000]"
+                            },
+                            "reads": [
+                                {
+                                    "access_kind": "Ptr",
+                                    "range": {
+                                        "is_exact": false,
+                                        "is_empty": false
+                                    },
+                                    "instr": "load",
+                                    "src_loc": {
+                                        "file": "F:\\LMU\\quantumMA\\opimization\\reconstructv1maxi\\image_analysis.cpp",
+                                        "line": 99,
+                                        "column": 63
+                                    },
+                                    "access_type": "double",
+                                    "access_bit_width": 64,
+                                    "exec_count": 96100
+                                },
+                                {
+                                    "access_kind": "Ptr",
+                                    "range": {
+                                        "is_exact": false,
+                                        "is_empty": false
+                                    },
+                                    "instr": "load",
+                                    "src_loc": {
+                                        "file": "F:\\LMU\\quantumMA\\opimization\\reconstructv1maxi\\image_analysis.cpp",
+                                        "line": 100,
+                                        "column": 32
+                                    },
+                                    "access_type": "double",
+                                    "access_bit_width": 64,
+                                    "exec_count": 96100
+                                }
+                            ],
+                            "writes": [],
+                            "kind": "Ptr",
+                            "has_alias": false,
+                            "arg_idx": 6
+                        },
+                        {
+                            "variable": {
+                                "location": {
+                                    "file": "F:\\LMU\\quantumMA\\opimization\\reconstructv1maxi\\image_analysis.cpp",
+                                    "line": 124,
+                                    "column": 0
+                                },
+                                "id": "VId_438_[?(?,64)]dc",
+                                "name": "imageProjs[*]",
+                                "display_name": "double imageProjs[100]"
+                            },
+                            "reads": [
+                                {
+                                    "access_kind": "Ptr",
+                                    "range": {
+                                        "is_exact": false,
+                                        "is_empty": false
+                                    },
+                                    "instr": "load",
+                                    "src_loc": {
+                                        "file": "F:\\LMU\\quantumMA\\opimization\\reconstructv1maxi\\image_analysis.cpp",
+                                        "line": 107,
+                                        "column": 46
+                                    },
+                                    "access_type": "double",
+                                    "access_bit_width": 64,
+                                    "exec_count": 100
+                                }
+                            ],
+                            "writes": [],
+                            "kind": "Ptr",
+                            "has_alias": false,
+                            "arg_idx": 7
+                        },
+                        {
+                            "variable": {
+                                "location": {
+                                    "file": "F:\\LMU\\quantumMA\\opimization\\reconstructv1maxi\\image_analysis.cpp",
+                                    "line": 125,
+                                    "column": 0
+                                },
+                                "id": "VId_439_[?(?,32)]dc",
+                                "name": "imageProjs_local_size[*]",
+                                "display_name": "int imageProjs_local_size[100]"
+                            },
+                            "reads": [
+                                {
+                                    "access_kind": "Ptr",
+                                    "range": {
+                                        "is_exact": false,
+                                        "is_empty": false
+                                    },
+                                    "instr": "load",
+                                    "src_loc": {
+                                        "file": "F:\\LMU\\quantumMA\\opimization\\reconstructv1maxi\\image_analysis.cpp",
+                                        "line": 85,
+                                        "column": 75
+                                    },
+                                    "access_type": "i32",
+                                    "access_bit_width": 32,
+                                    "exec_count": 100
+                                }
+                            ],
+                            "writes": [],
+                            "kind": "Ptr",
+                            "has_alias": false,
+                            "arg_idx": 8
+                        },
+                        {
+                            "variable": {
+                                "location": {
+                                    "file": "F:\\LMU\\quantumMA\\opimization\\reconstructv1maxi\\image_analysis.cpp",
+                                    "line": 126,
+                                    "column": 0
+                                },
+                                "id": "VId_440_[?(?,64)]dc",
+                                "name": "fullImage[*]",
+                                "display_name": "double fullImage[65536]"
+                            },
+                            "reads": [
+                                {
+                                    "access_kind": "Ptr",
+                                    "range": {
+                                        "is_exact": false,
+                                        "is_empty": false
+                                    },
+                                    "instr": "load",
+                                    "src_loc": {
+                                        "file": "F:\\LMU\\quantumMA\\opimization\\reconstructv1maxi\\image_analysis.cpp",
+                                        "line": 99,
+                                        "column": 24
+                                    },
+                                    "access_type": "double",
+                                    "access_bit_width": 64,
+                                    "exec_count": 96100
+                                }
+                            ],
+                            "writes": [],
+                            "kind": "Ptr",
+                            "has_alias": false,
+                            "arg_idx": 9
+                        },
+                        {
+                            "variable": {
+                                "location": {
+                                    "file": "F:\\LMU\\quantumMA\\opimization\\reconstructv1maxi\\image_analysis.cpp",
+                                    "line": 157,
+                                    "column": 39
+                                },
+                                "id": "VId_445_!c?(?,?)",
+                                "name": "localImages",
+                                "display_name": "hls::stream<local_image_info, 0> localImages"
+                            },
+                            "reads": [
+                                {
+                                    "access_kind": "Fifo",
+                                    "range": {
+                                        "is_exact": false,
+                                        "is_empty": false
+                                    },
+                                    "instr": "call",
+                                    "src_loc": {
+                                        "file": "F:\\LMU\\quantumMA\\opimization\\reconstructv1maxi\\image_analysis.cpp",
+                                        "line": 74,
+                                        "column": 39
+                                    },
+                                    "access_type": "%struct.local_image_info",
+                                    "access_bit_width": 256,
+                                    "exec_count": 100
+                                }
+                            ],
+                            "writes": [],
+                            "kind": "Fifo",
+                            "has_alias": false
+                        },
+                        {
+                            "variable": {
+                                "location": {
+                                    "file": "F:\\LMU\\quantumMA\\opimization\\reconstructv1maxi\\image_analysis.cpp",
+                                    "line": 127,
+                                    "column": 0
+                                },
+                                "id": "VId_443_*0(0,64)arg+?(?,64)",
+                                "name": "(*emissions)",
+                                "display_name": "double *emissions"
+                            },
+                            "reads": [],
+                            "writes": [
+                                {
+                                    "access_kind": "Ptr",
+                                    "range": {
+                                        "is_exact": false,
+                                        "is_empty": false
+                                    },
+                                    "instr": "store",
+                                    "src_loc": {
+                                        "file": "F:\\LMU\\quantumMA\\opimization\\reconstructv1maxi\\image_analysis.cpp",
+                                        "line": 107,
+                                        "column": 37
+                                    },
+                                    "access_type": "double",
+                                    "access_bit_width": 64,
+                                    "exec_count": 100
+                                },
+                                {
+                                    "access_kind": "Ptr",
+                                    "range": {
+                                        "is_exact": false,
+                                        "is_empty": false
+                                    },
+                                    "instr": "store",
+                                    "src_loc": {
+                                        "file": "F:\\LMU\\quantumMA\\opimization\\reconstructv1maxi\\image_analysis.cpp",
+                                        "line": 111,
+                                        "column": 37
+                                    },
+                                    "access_type": "double",
+                                    "access_bit_width": 64,
+                                    "exec_count": 100
+                                }
+                            ],
+                            "kind": "Ptr",
+                            "has_alias": false,
+                            "arg_idx": 12
+                        },
+                        {
+                            "variable": {
+                                "location": {
+                                    "file": "F:\\LMU\\quantumMA\\opimization\\reconstructv1maxi\\image_analysis.cpp",
+                                    "line": 127,
+                                    "column": 0
+                                },
+                                "id": "VId_444_*0(0,32)arg",
+                                "name": "emission_cnt",
+                                "display_name": "unsigned int &emission_cnt"
+                            },
+                            "reads": [],
+                            "writes": [
+                                {
+                                    "access_kind": "Ptr",
+                                    "range": {
+                                        "ranges": [
+                                            {
+                                                "start": 0,
+                                                "end": 4,
+                                                "is_exact": true
+                                            }
+                                        ]
+                                    },
+                                    "instr": "store",
+                                    "src_loc": {
+                                        "file": "F:\\LMU\\quantumMA\\opimization\\reconstructv1maxi\\image_analysis.cpp",
+                                        "line": 116,
+                                        "column": 18
+                                    },
+                                    "access_type": "i32",
+                                    "access_bit_width": 32,
+                                    "exec_count": 1
+                                }
+                            ],
+                            "kind": "Ptr",
+                            "has_alias": false,
+                            "arg_idx": 13
+                        },
+                        {
+                            "variable": {
+                                "location": {
+                                    "file": "F:\\LMU\\quantumMA\\opimization\\reconstructv1maxi\\image_analysis.cpp",
+                                    "line": 120,
+                                    "column": 0
+                                },
+                                "id": "VId_431_!c?(?,?)",
+                                "name": "atomLocationsSize",
+                                "display_name": "int atomLocationsSize"
+                            },
+                            "reads": [
+                                {
+                                    "access_kind": "SSA",
+                                    "range": {
+                                        "is_exact": true,
+                                        "is_empty": false
+                                    },
+                                    "instr": "call",
+                                    "src_loc": {
+                                        "file": "F:\\LMU\\quantumMA\\opimization\\reconstructv1maxi\\image_analysis.cpp",
+                                        "line": 4294967295,
+                                        "column": 0
+                                    },
+                                    "exec_count": 1
+                                }
+                            ],
+                            "writes": [],
+                            "kind": "SSA",
+                            "has_alias": false,
+                            "arg_idx": 0
+                        },
+                        {
+                            "variable": {
+                                "location": {
+                                    "file": "F:\\LMU\\quantumMA\\opimization\\reconstructv1maxi\\image_analysis.cpp",
+                                    "line": 121,
+                                    "column": 0
+                                },
+                                "id": "VId_435_!c?(?,?)",
+                                "name": "psfSupersample",
+                                "display_name": "int psfSupersample"
+                            },
+                            "reads": [
+                                {
+                                    "access_kind": "SSA",
+                                    "range": {
+                                        "is_exact": true,
+                                        "is_empty": false
+                                    },
+                                    "instr": "call",
+                                    "src_loc": {
+                                        "file": "F:\\LMU\\quantumMA\\opimization\\reconstructv1maxi\\image_analysis.cpp",
+                                        "line": 4294967295,
+                                        "column": 0
+                                    },
+                                    "exec_count": 1
+                                }
+                            ],
+                            "writes": [],
+                            "kind": "SSA",
+                            "has_alias": false,
+                            "arg_idx": 4
+                        },
+                        {
+                            "variable": {
+                                "location": {
+                                    "file": "F:\\LMU\\quantumMA\\opimization\\reconstructv1maxi\\image_analysis.cpp",
+                                    "line": 122,
+                                    "column": 0
+                                },
+                                "id": "VId_436_!c?(?,?)",
+                                "name": "imageProjectionSize",
+                                "display_name": "int imageProjectionSize"
+                            },
+                            "reads": [
+                                {
+                                    "access_kind": "SSA",
+                                    "range": {
+                                        "is_exact": true,
+                                        "is_empty": false
+                                    },
+                                    "instr": "call",
+                                    "src_loc": {
+                                        "file": "F:\\LMU\\quantumMA\\opimization\\reconstructv1maxi\\image_analysis.cpp",
+                                        "line": 4294967295,
+                                        "column": 0
+                                    },
+                                    "exec_count": 1
+                                }
+                            ],
+                            "writes": [],
+                            "kind": "SSA",
+                            "has_alias": false,
+                            "arg_idx": 5
+                        },
+                        {
+                            "variable": {
+                                "location": {
+                                    "file": "F:\\LMU\\quantumMA\\opimization\\reconstructv1maxi\\image_analysis.cpp",
+                                    "line": 127,
+                                    "column": 0
+                                },
+                                "id": "VId_441_!c?(?,?)",
+                                "name": "fullImage_rows",
+                                "display_name": "int fullImage_rows"
+                            },
+                            "reads": [
+                                {
+                                    "access_kind": "SSA",
+                                    "range": {
+                                        "is_exact": true,
+                                        "is_empty": false
+                                    },
+                                    "instr": "call",
+                                    "src_loc": {
+                                        "file": "F:\\LMU\\quantumMA\\opimization\\reconstructv1maxi\\image_analysis.cpp",
+                                        "line": 4294967295,
+                                        "column": 0
+                                    },
+                                    "exec_count": 1
+                                }
+                            ],
+                            "writes": [],
+                            "kind": "SSA",
+                            "has_alias": false,
+                            "arg_idx": 10
+                        },
+                        {
+                            "variable": {
+                                "location": {
+                                    "file": "F:\\LMU\\quantumMA\\opimization\\reconstructv1maxi\\image_analysis.cpp",
+                                    "line": 127,
+                                    "column": 0
+                                },
+                                "id": "VId_442_!c?(?,?)",
+                                "name": "fullImage_cols",
+                                "display_name": "int fullImage_cols"
+                            },
+                            "reads": [
+                                {
+                                    "access_kind": "SSA",
+                                    "range": {
+                                        "is_exact": true,
+                                        "is_empty": false
+                                    },
+                                    "instr": "call",
+                                    "src_loc": {
+                                        "file": "F:\\LMU\\quantumMA\\opimization\\reconstructv1maxi\\image_analysis.cpp",
+                                        "line": 4294967295,
+                                        "column": 0
+                                    },
+                                    "exec_count": 1
+                                }
+                            ],
+                            "writes": [],
+                            "kind": "SSA",
+                            "has_alias": false,
+                            "arg_idx": 11
+                        }
+                    ]
+                },
+                "subregions": [
+                    {
+                        "id": "%F357_R2",
+                        "description": "<call 'applyProjectors'>",
+                        "src_range": {
+                            "start_loc": {
+                                "file": "F:\\LMU\\quantumMA\\opimization\\reconstructv1maxi\\image_analysis.cpp",
+                                "line": 160,
+                                "column": 9
+                            },
+                            "end_loc": {
+                                "file": "F:\\LMU\\quantumMA\\opimization\\reconstructv1maxi\\image_analysis.cpp",
+                                "line": 160,
+                                "column": 213
+                            }
+                        }
+                    }
+                ],
+                "subdataflow": [
+                    {
+                        "id": "%F355",
+                        "region_type": "Function",
+                        "src_range": {
+                            "start_loc": {
+                                "file": "F:\\LMU\\quantumMA\\opimization\\reconstructv1maxi\\image_analysis.cpp",
+                                "line": 160,
+                                "column": 9
+                            },
+                            "end_loc": {
+                                "file": "F:\\LMU\\quantumMA\\opimization\\reconstructv1maxi\\image_analysis.cpp",
+                                "line": 160,
+                                "column": 213
+                            }
+                        }
+                    }
+                ]
+            }
+        },
+        "channels": {
+            "atomLocationsSize_RAW_1_3_#0": {
+                "name": "atomLocationsSize_RAW_1_3_#0",
+                "variable_id": "VId_431_!c?(?,?)",
+                "variable_name": "atomLocationsSize",
+                "declaration": "int atomLocationsSize",
+                "kind": "SSA",
+                "dependence": "RAW",
+                "channel_width": 0,
+                "src_loc": {
+                    "file": "F:\\LMU\\quantumMA\\opimization\\reconstructv1maxi\\image_analysis.cpp",
+                    "line": 120,
+                    "column": 0
+                },
+                "source": "1",
+                "sink": "3"
+            },
+            "projShape0_RAW_1_3_#1": {
+                "name": "projShape0_RAW_1_3_#1",
+                "variable_id": "VId_432_!c?(?,?)",
+                "variable_name": "projShape0",
+                "declaration": "int projShape0",
+                "kind": "SSA",
+                "dependence": "RAW",
+                "channel_width": 0,
+                "src_loc": {
+                    "file": "F:\\LMU\\quantumMA\\opimization\\reconstructv1maxi\\image_analysis.cpp",
+                    "line": 120,
+                    "column": 0
+                },
+                "source": "1",
+                "sink": "3"
+            },
+            "projShape1_RAW_1_3_#2": {
+                "name": "projShape1_RAW_1_3_#2",
+                "variable_id": "VId_433_!c?(?,?)",
+                "variable_name": "projShape1",
+                "declaration": "int projShape1",
+                "kind": "SSA",
+                "dependence": "RAW",
+                "channel_width": 0,
+                "src_loc": {
+                    "file": "F:\\LMU\\quantumMA\\opimization\\reconstructv1maxi\\image_analysis.cpp",
+                    "line": 120,
+                    "column": 0
+                },
+                "source": "1",
+                "sink": "3"
+            },
+            "atomLocations[*]_RAW_1_3_#3": {
+                "name": "atomLocations[*]_RAW_1_3_#3",
+                "variable_id": "VId_434_[?(?,128)]dc",
+                "variable_name": "atomLocations[*]",
+                "declaration": "atom_location atomLocations[100]",
+                "kind": "Ptr",
+                "dependence": "RAW",
+                "channel_width": 0,
+                "src_loc": {
+                    "file": "F:\\LMU\\quantumMA\\opimization\\reconstructv1maxi\\image_analysis.cpp",
+                    "line": 120,
+                    "column": 0
+                },
+                "source": "1",
+                "sink": "3"
+            },
+            "psfSupersample_RAW_1_3_#4": {
+                "name": "psfSupersample_RAW_1_3_#4",
+                "variable_id": "VId_435_!c?(?,?)",
+                "variable_name": "psfSupersample",
+                "declaration": "int psfSupersample",
+                "kind": "SSA",
+                "dependence": "RAW",
+                "channel_width": 0,
+                "src_loc": {
+                    "file": "F:\\LMU\\quantumMA\\opimization\\reconstructv1maxi\\image_analysis.cpp",
+                    "line": 121,
+                    "column": 0
+                },
+                "source": "1",
+                "sink": "3"
+            },
+            "imageProjectionSize_RAW_1_4_#5": {
+                "name": "imageProjectionSize_RAW_1_4_#5",
+                "variable_id": "VId_436_!c?(?,?)",
+                "variable_name": "imageProjectionSize",
+                "declaration": "int imageProjectionSize",
+                "kind": "SSA",
+                "dependence": "RAW",
+                "channel_width": 0,
+                "src_loc": {
+                    "file": "F:\\LMU\\quantumMA\\opimization\\reconstructv1maxi\\image_analysis.cpp",
+                    "line": 122,
+                    "column": 0
+                },
+                "source": "1",
+                "sink": "4"
+            },
+            "imageProjs_local[*]_RAW_1_4_#6": {
+                "name": "imageProjs_local[*]_RAW_1_4_#6",
+                "variable_id": "VId_437_[?(?,64)]dc",
+                "variable_name": "imageProjs_local[*]",
+                "declaration": "double imageProjs_local[100000]",
+                "kind": "Ptr",
+                "dependence": "RAW",
+                "channel_width": 0,
+                "src_loc": {
+                    "file": "F:\\LMU\\quantumMA\\opimization\\reconstructv1maxi\\image_analysis.cpp",
+                    "line": 123,
+                    "column": 0
+                },
+                "source": "1",
+                "sink": "4"
+            },
+            "imageProjs[*]_RAW_1_4_#7": {
+                "name": "imageProjs[*]_RAW_1_4_#7",
+                "variable_id": "VId_438_[?(?,64)]dc",
+                "variable_name": "imageProjs[*]",
+                "declaration": "double imageProjs[100]",
+                "kind": "Ptr",
+                "dependence": "RAW",
+                "channel_width": 0,
+                "src_loc": {
+                    "file": "F:\\LMU\\quantumMA\\opimization\\reconstructv1maxi\\image_analysis.cpp",
+                    "line": 124,
+                    "column": 0
+                },
+                "source": "1",
+                "sink": "4"
+            },
+            "imageProjs_local_size[*]_RAW_1_4_#8": {
+                "name": "imageProjs_local_size[*]_RAW_1_4_#8",
+                "variable_id": "VId_439_[?(?,32)]dc",
+                "variable_name": "imageProjs_local_size[*]",
+                "declaration": "int imageProjs_local_size[100]",
+                "kind": "Ptr",
+                "dependence": "RAW",
+                "channel_width": 0,
+                "src_loc": {
+                    "file": "F:\\LMU\\quantumMA\\opimization\\reconstructv1maxi\\image_analysis.cpp",
+                    "line": 125,
+                    "column": 0
+                },
+                "source": "1",
+                "sink": "4"
+            },
+            "fullImage[*]_RAW_1_4_#9": {
+                "name": "fullImage[*]_RAW_1_4_#9",
+                "variable_id": "VId_440_[?(?,64)]dc",
+                "variable_name": "fullImage[*]",
+                "declaration": "double fullImage[65536]",
+                "kind": "Ptr",
+                "dependence": "RAW",
+                "channel_width": 0,
+                "src_loc": {
+                    "file": "F:\\LMU\\quantumMA\\opimization\\reconstructv1maxi\\image_analysis.cpp",
+                    "line": 126,
+                    "column": 0
+                },
+                "source": "1",
+                "sink": "4"
+            },
+            "fullImage_rows_RAW_1_4_#10": {
+                "name": "fullImage_rows_RAW_1_4_#10",
+                "variable_id": "VId_441_!c?(?,?)",
+                "variable_name": "fullImage_rows",
+                "declaration": "int fullImage_rows",
+                "kind": "SSA",
+                "dependence": "RAW",
+                "channel_width": 0,
+                "src_loc": {
+                    "file": "F:\\LMU\\quantumMA\\opimization\\reconstructv1maxi\\image_analysis.cpp",
+                    "line": 127,
+                    "column": 0
+                },
+                "source": "1",
+                "sink": "4"
+            },
+            "fullImage_cols_RAW_1_4_#11": {
+                "name": "fullImage_cols_RAW_1_4_#11",
+                "variable_id": "VId_442_!c?(?,?)",
+                "variable_name": "fullImage_cols",
+                "declaration": "int fullImage_cols",
+                "kind": "SSA",
+                "dependence": "RAW",
+                "channel_width": 0,
+                "src_loc": {
+                    "file": "F:\\LMU\\quantumMA\\opimization\\reconstructv1maxi\\image_analysis.cpp",
+                    "line": 127,
+                    "column": 0
+                },
+                "source": "1",
+                "sink": "4"
+            },
+            "localImages_RAW_3_4_#12": {
+                "name": "localImages_RAW_3_4_#12",
+                "variable_id": "VId_445_!c?(?,?)",
+                "variable_name": "localImages",
+                "declaration": "hls::stream<local_image_info, 0> localImages",
+                "kind": "Fifo",
+                "dependence": "RAW",
+                "channel_width": 0,
+                "src_loc": {
+                    "file": "F:\\LMU\\quantumMA\\opimization\\reconstructv1maxi\\image_analysis.cpp",
+                    "line": 157,
+                    "column": 39
+                },
+                "source": "3",
+                "sink": "4"
+            },
+            "atomLocationsSize_RAR_3_4_#13": {
+                "name": "atomLocationsSize_RAR_3_4_#13",
+                "variable_id": "VId_431_!c?(?,?)",
+                "variable_name": "atomLocationsSize",
+                "declaration": "int atomLocationsSize",
+                "kind": "SSA",
+                "dependence": "RAR",
+                "channel_width": 0,
+                "src_loc": {
+                    "file": "F:\\LMU\\quantumMA\\opimization\\reconstructv1maxi\\image_analysis.cpp",
+                    "line": 120,
+                    "column": 0
+                },
+                "source": "3",
+                "sink": "4"
+            },
+            "psfSupersample_RAR_3_4_#14": {
+                "name": "psfSupersample_RAR_3_4_#14",
+                "variable_id": "VId_435_!c?(?,?)",
+                "variable_name": "psfSupersample",
+                "declaration": "int psfSupersample",
+                "kind": "SSA",
+                "dependence": "RAR",
+                "channel_width": 0,
+                "src_loc": {
+                    "file": "F:\\LMU\\quantumMA\\opimization\\reconstructv1maxi\\image_analysis.cpp",
+                    "line": 121,
+                    "column": 0
+                },
+                "source": "3",
+                "sink": "4"
+            },
+            "(*emissions)_RAW_4_2_#15": {
+                "name": "(*emissions)_RAW_4_2_#15",
+                "variable_id": "VId_443_*0(0,64)arg+?(?,64)",
+                "variable_name": "(*emissions)",
+                "declaration": "double *emissions",
+                "kind": "Ptr",
+                "dependence": "RAW",
+                "channel_width": 0,
+                "src_loc": {
+                    "file": "F:\\LMU\\quantumMA\\opimization\\reconstructv1maxi\\image_analysis.cpp",
+                    "line": 127,
+                    "column": 0
+                },
+                "source": "4",
+                "sink": "2"
+            },
+            "emission_cnt_RAW_4_2_#16": {
+                "name": "emission_cnt_RAW_4_2_#16",
+                "variable_id": "VId_444_*0(0,32)arg",
+                "variable_name": "emission_cnt",
+                "declaration": "unsigned int &emission_cnt",
+                "kind": "Ptr",
+                "dependence": "RAW",
+                "channel_width": 0,
+                "src_loc": {
+                    "file": "F:\\LMU\\quantumMA\\opimization\\reconstructv1maxi\\image_analysis.cpp",
+                    "line": 127,
+                    "column": 0
+                },
+                "source": "4",
+                "sink": "2"
+            }
+        },
+        "control": [
+            {
+                "source": "3",
+                "sink": "4"
+            },
+            {
+                "source": "1",
+                "sink": "3"
+            },
+            {
+                "source": "4",
+                "sink": "2"
+            }
+        ]
+    }
+]

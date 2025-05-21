@@ -1,0 +1,201 @@
+{
+    "top_level_hw_fn_id": 353,
+    "functions": {
+        "200": {
+            "fn_id": 200,
+            "mangled_name": "_GLOBAL__sub_I_test.cpp",
+            "fully_qualified_name": "_GLOBAL__sub_I_test",
+            "is_sys": true,
+            "is_declaration": false,
+            "supports_dataflow": false,
+            "src_loc": {
+                "file": "F:\\LMU\\quantumMA\\opimization\\reconstructv1maxi\\test.cpp",
+                "line": 0,
+                "column": 0
+            }
+        },
+        "201": {
+            "fn_id": 201,
+            "mangled_name": "__cxx_global_var_init",
+            "fully_qualified_name": "__cxx_global_var_init",
+            "is_sys": true,
+            "is_declaration": false,
+            "supports_dataflow": false,
+            "src_loc": {
+                "file": "F:\\LMU\\quantumMA\\opimization\\reconstructv1maxi\\test.cpp",
+                "line": 0,
+                "column": 0
+            }
+        },
+        "203": {
+            "fn_id": 203,
+            "mangled_name": "__dtor__ZStL8__ioinit",
+            "fully_qualified_name": "__dtor__ZStL8__ioinit",
+            "is_sys": true,
+            "is_declaration": false,
+            "supports_dataflow": false,
+            "src_loc": {
+                "file": "F:\\Vitis\\2024.2\\tps\\mingw\\10.0.0\\win64.o\\nt\\include\\c++\\9.5.0\\iostream",
+                "line": 74,
+                "column": 0
+            }
+        },
+        "343": {
+            "fn_id": 343,
+            "mangled_name": "_GLOBAL__sub_I_image_analysis.cpp",
+            "fully_qualified_name": "_GLOBAL__sub_I_image_analysis",
+            "is_sys": true,
+            "is_declaration": false,
+            "supports_dataflow": false,
+            "src_loc": {
+                "file": "F:\\LMU\\quantumMA\\opimization\\reconstructv1maxi\\image_analysis.cpp",
+                "line": 0,
+                "column": 0
+            }
+        },
+        "344": {
+            "fn_id": 344,
+            "mangled_name": "__cxx_global_var_init.2",
+            "fully_qualified_name": "__cxx_global_var_init",
+            "is_sys": true,
+            "is_declaration": false,
+            "supports_dataflow": false,
+            "src_loc": {
+                "file": "F:\\LMU\\quantumMA\\opimization\\reconstructv1maxi\\image_analysis.cpp",
+                "line": 0,
+                "column": 0
+            }
+        },
+        "345": {
+            "fn_id": 345,
+            "mangled_name": "__dtor__ZStL8__ioinit.4",
+            "fully_qualified_name": "__dtor__ZStL8__ioinit",
+            "is_sys": true,
+            "is_declaration": false,
+            "supports_dataflow": false,
+            "src_loc": {
+                "file": "F:\\Vitis\\2024.2\\tps\\mingw\\10.0.0\\win64.o\\nt\\include\\c++\\9.5.0\\iostream",
+                "line": 74,
+                "column": 0
+            }
+        },
+        "21": {
+            "fn_id": 21,
+            "mangled_name": "llvm.fpga.fifo.push.s_struct.local_image_infos.p0s_struct.local_image_infos",
+            "fully_qualified_name": "llvm.fpga.fifo.push.s_struct.local_image_infos.p0s_struct.local_image_infos",
+            "is_sys": true,
+            "is_declaration": true,
+            "supports_dataflow": false
+        },
+        "20": {
+            "fn_id": 20,
+            "mangled_name": "llvm.fpga.fifo.pop.s_struct.local_image_infos.p0s_struct.local_image_infos",
+            "fully_qualified_name": "llvm.fpga.fifo.pop.s_struct.local_image_infos.p0s_struct.local_image_infos",
+            "is_sys": true,
+            "is_declaration": true,
+            "supports_dataflow": false
+        },
+        "350": {
+            "fn_id": 350,
+            "mangled_name": "_GLOBAL__sub_I_image_analysis.cpp.25",
+            "fully_qualified_name": "_GLOBAL__sub_I_image_analysis",
+            "is_sys": true,
+            "is_declaration": false,
+            "supports_dataflow": false,
+            "src_loc": {
+                "file": "F:\\LMU\\quantumMA\\opimization\\reconstructv1maxi\\image_analysis.cpp",
+                "line": 0,
+                "column": 0
+            }
+        },
+        "351": {
+            "fn_id": 351,
+            "mangled_name": "__cxx_global_var_init.26",
+            "fully_qualified_name": "__cxx_global_var_init",
+            "is_sys": true,
+            "is_declaration": false,
+            "supports_dataflow": false,
+            "src_loc": {
+                "file": "F:\\LMU\\quantumMA\\opimization\\reconstructv1maxi\\image_analysis.cpp",
+                "line": 0,
+                "column": 0
+            }
+        },
+        "352": {
+            "fn_id": 352,
+            "mangled_name": "__dtor__ZStL8__ioinit.28",
+            "fully_qualified_name": "__dtor__ZStL8__ioinit",
+            "is_sys": true,
+            "is_declaration": false,
+            "supports_dataflow": false,
+            "src_loc": {
+                "file": "F:\\Vitis\\2024.2\\tps\\mingw\\10.0.0\\win64.o\\nt\\include\\c++\\9.5.0\\iostream",
+                "line": 74,
+                "column": 0
+            }
+        },
+        "353": {
+            "fn_id": 353,
+            "mangled_name": "_Z11reconstructiiiP13atom_locationiiPdS1_PiS1_iiS1_Rj",
+            "fully_qualified_name": "reconstruct",
+            "is_sys": false,
+            "is_declaration": false,
+            "supports_dataflow": true,
+            "src_loc": {
+                "file": "F:\\LMU\\quantumMA\\opimization\\reconstructv1maxi\\image_analysis.cpp",
+                "line": 120,
+                "column": 1
+            }
+        },
+        "354": {
+            "fn_id": 354,
+            "mangled_name": "_Z14getLocalImagesiiiiP13atom_locationRN3hls6streamI16local_image_infoLi0EEE",
+            "fully_qualified_name": "getLocalImages",
+            "is_sys": false,
+            "is_declaration": false,
+            "supports_dataflow": true,
+            "src_loc": {
+                "file": "F:\\LMU\\quantumMA\\opimization\\reconstructv1maxi\\image_analysis.cpp",
+                "line": 7,
+                "column": 1
+            }
+        },
+        "355": {
+            "fn_id": 355,
+            "mangled_name": "_Z15applyProjectorsiiiPdS_PiS_iiRN3hls6streamI16local_image_infoLi0EEES_Rj",
+            "fully_qualified_name": "applyProjectors",
+            "is_sys": false,
+            "is_declaration": false,
+            "supports_dataflow": true,
+            "src_loc": {
+                "file": "F:\\LMU\\quantumMA\\opimization\\reconstructv1maxi\\image_analysis.cpp",
+                "line": 63,
+                "column": 1
+            }
+        }
+    },
+    "loops": {
+        "17": {
+            "fn_id": 354,
+            "lp_id": 17,
+            "label": "process_loop"
+        },
+        "18": {
+            "fn_id": 354,
+            "lp_id": 18,
+            "label": "copy_loop"
+        },
+        "19": {
+            "fn_id": 355,
+            "lp_id": 19
+        },
+        "20": {
+            "fn_id": 355,
+            "lp_id": 20
+        },
+        "21": {
+            "fn_id": 355,
+            "lp_id": 21
+        }
+    }
+}

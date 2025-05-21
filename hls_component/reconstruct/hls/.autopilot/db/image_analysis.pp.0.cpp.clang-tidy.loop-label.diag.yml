@@ -1,0 +1,31 @@
+---
+MainSourceFile:  'F:/LMU/quantumMA/opimization/reconstructv1maxi/hls_component/reconstruct/hls/.autopilot/db/image_analysis.pp.0.cpp'
+Diagnostics:     
+  - DiagnosticName:  xilinx-label-all-loops
+    Message:         'Added loop label VITIS_LOOP_72_1:  '
+    FileOffset:      72
+    FilePath:        'F:\LMU\quantumMA\opimization\reconstructv1maxi\image_analysis.cpp'
+    Replacements:    
+      - FilePath:        'F:\LMU\quantumMA\opimization\reconstructv1maxi\hls_component\reconstruct\hls\.autopilot\db\image_analysis.pp.0.cpp'
+        Offset:          799244
+        Length:          0
+        ReplacementText: 'VITIS_LOOP_72_1: '
+  - DiagnosticName:  xilinx-label-all-loops
+    Message:         'Added loop label VITIS_LOOP_91_2:  '
+    FileOffset:      91
+    FilePath:        'F:\LMU\quantumMA\opimization\reconstructv1maxi\image_analysis.cpp'
+    Replacements:    
+      - FilePath:        'F:\LMU\quantumMA\opimization\reconstructv1maxi\hls_component\reconstruct\hls\.autopilot\db\image_analysis.pp.0.cpp'
+        Offset:          799980
+        Length:          0
+        ReplacementText: 'VITIS_LOOP_91_2: '
+  - DiagnosticName:  xilinx-label-all-loops
+    Message:         'Added loop label VITIS_LOOP_98_3:  '
+    FileOffset:      98
+    FilePath:        'F:\LMU\quantumMA\opimization\reconstructv1maxi\image_analysis.cpp'
+    Replacements:    
+      - FilePath:        'F:\LMU\quantumMA\opimization\reconstructv1maxi\hls_component\reconstruct\hls\.autopilot\db\image_analysis.pp.0.cpp'
+        Offset:          800239
+        Length:          0
+        ReplacementText: 'VITIS_LOOP_98_3: '
+...
