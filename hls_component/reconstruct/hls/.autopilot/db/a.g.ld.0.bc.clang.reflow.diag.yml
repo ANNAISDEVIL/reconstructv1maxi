@@ -2,32 +2,32 @@
 Pass:            inline
 Name:            NeverInline
 DebugLoc:        { File: 'C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib/src/hls\utils/x_hls_utils.h', 
-                   Line: 496, Column: 17 }
-Function:        _ZNK9fp_structIdE9to_doubleEv
+                   Line: 326, Column: 17 }
+Function:        _ZNK9fp_structIfE8to_floatEv
 Args:            
-  - Callee:          'fp_struct<double>::data() const'
+  - Callee:          'fp_struct<float>::data() const'
     DebugLoc:        { File: 'C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib/src/hls\utils/x_hls_utils.h', 
-                       Line: 475, Column: 0 }
+                       Line: 309, Column: 0 }
   - String:          ' not inlined into '
-  - Caller:          'fp_struct<double>::to_double() const'
+  - Caller:          'fp_struct<float>::to_float() const'
     DebugLoc:        { File: 'C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib/src/hls\utils/x_hls_utils.h', 
-                       Line: 494, Column: 0 }
+                       Line: 322, Column: 0 }
   - String:          ' because it should never be inlined (cost=never)'
 ...
 --- !Missed
 Pass:            inline
 Name:            NeverInline
 DebugLoc:        { File: 'C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib/src/hls\utils/x_hls_utils.h', 
-                   Line: 510, Column: 16 }
-Function:        _ZNK9fp_structIdE7to_ieeeEv
+                   Line: 347, Column: 16 }
+Function:        _ZNK9fp_structIfE7to_ieeeEv
 Args:            
-  - Callee:          'fp_struct<double>::to_double() const'
+  - Callee:          'fp_struct<float>::to_float() const'
     DebugLoc:        { File: 'C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib/src/hls\utils/x_hls_utils.h', 
-                       Line: 494, Column: 0 }
+                       Line: 322, Column: 0 }
   - String:          ' not inlined into '
-  - Caller:          'fp_struct<double>::to_ieee() const'
+  - Caller:          'fp_struct<float>::to_ieee() const'
     DebugLoc:        { File: 'C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib/src/hls\utils/x_hls_utils.h', 
-                       Line: 509, Column: 0 }
+                       Line: 346, Column: 0 }
   - String:          ' because it should never be inlined (cost=never)'
 ...
 --- !Missed
@@ -35,13 +35,13 @@ Pass:            inline
 Name:            NeverInline
 DebugLoc:        { File: 'C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib/hlsmath/include/FloatingPoint/hls_copysign.h', 
                    Line: 12, Column: 16 }
-Function:        _Z16generic_copysignIdET_S0_S0_
+Function:        _Z16generic_copysignIfET_S0_S0_
 Args:            
-  - Callee:          'fp_struct<double>::fp_struct(double)'
+  - Callee:          'fp_struct<float>::fp_struct(float)'
     DebugLoc:        { File: 'C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib/src/hls\utils/x_hls_utils.h', 
-                       Line: 456, Column: 0 }
+                       Line: 283, Column: 0 }
   - String:          ' not inlined into '
-  - Caller:          'double generic_copysign<double>(double, double)'
+  - Caller:          'float generic_copysign<float>(float, float)'
     DebugLoc:        { File: 'C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib/hlsmath/include/FloatingPoint/hls_copysign.h', 
                        Line: 10, Column: 0 }
   - String:          ' because it should never be inlined (cost=never)'
@@ -51,13 +51,13 @@ Pass:            inline
 Name:            NeverInline
 DebugLoc:        { File: 'C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib/hlsmath/include/FloatingPoint/hls_copysign.h', 
                    Line: 14, Column: 13 }
-Function:        _Z16generic_copysignIdET_S0_S0_
+Function:        _Z16generic_copysignIfET_S0_S0_
 Args:            
-  - Callee:          'fp_struct<double>::to_ieee() const'
+  - Callee:          'fp_struct<float>::to_ieee() const'
     DebugLoc:        { File: 'C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib/src/hls\utils/x_hls_utils.h', 
-                       Line: 509, Column: 0 }
+                       Line: 346, Column: 0 }
   - String:          ' not inlined into '
-  - Caller:          'double generic_copysign<double>(double, double)'
+  - Caller:          'float generic_copysign<float>(float, float)'
     DebugLoc:        { File: 'C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib/hlsmath/include/FloatingPoint/hls_copysign.h', 
                        Line: 10, Column: 0 }
   - String:          ' because it should never be inlined (cost=never)'
@@ -67,13 +67,13 @@ Pass:            inline
 Name:            NeverInline
 DebugLoc:        { File: 'C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib/hlsmath/include/FloatingPoint\hls_round.h', 
                    Line: 162, Column: 3 }
-Function:        _Z13generic_roundIdET_S0_
+Function:        _Z13generic_roundIfET_S0_
 Args:            
-  - Callee:          'void init_mask_table<double>(fp_struct<double>::inttype*)'
-    DebugLoc:        { File: 'C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib/hlsmath/include/FloatingPoint\hls_round.h', 
+  - Callee:          'void init_mask_table<float>(fp_struct<float>::inttype*)'
+    DebugLoc:        { File: 'C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib/hlsmath/include/FloatingPoint/hls_round.h', 
                        Line: 20, Column: 0 }
   - String:          ' not inlined into '
-  - Caller:          'double generic_round<double>(double)'
+  - Caller:          'float generic_round<float>(float)'
     DebugLoc:        { File: 'C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib/hlsmath/include/FloatingPoint\hls_round.h', 
                        Line: 160, Column: 0 }
   - String:          ' because it should never be inlined (cost=never)'
@@ -83,13 +83,13 @@ Pass:            inline
 Name:            NeverInline
 DebugLoc:        { File: 'C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib/hlsmath/include/FloatingPoint\hls_round.h', 
                    Line: 164, Column: 3 }
-Function:        _Z13generic_roundIdET_S0_
+Function:        _Z13generic_roundIfET_S0_
 Args:            
-  - Callee:          'void init_one_half_table<double>(fp_struct<double>::inttype*)'
+  - Callee:          'void init_one_half_table<float>(fp_struct<float>::inttype*)'
     DebugLoc:        { File: 'C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib/hlsmath/include/FloatingPoint\hls_round.h', 
                        Line: 32, Column: 0 }
   - String:          ' not inlined into '
-  - Caller:          'double generic_round<double>(double)'
+  - Caller:          'float generic_round<float>(float)'
     DebugLoc:        { File: 'C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib/hlsmath/include/FloatingPoint\hls_round.h', 
                        Line: 160, Column: 0 }
   - String:          ' because it should never be inlined (cost=never)'
@@ -99,13 +99,13 @@ Pass:            inline
 Name:            NeverInline
 DebugLoc:        { File: 'C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib/hlsmath/include/FloatingPoint\hls_round.h', 
                    Line: 165, Column: 16 }
-Function:        _Z13generic_roundIdET_S0_
+Function:        _Z13generic_roundIfET_S0_
 Args:            
-  - Callee:          'fp_struct<double>::fp_struct(double)'
+  - Callee:          'fp_struct<float>::fp_struct(float)'
     DebugLoc:        { File: 'C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib/src/hls\utils/x_hls_utils.h', 
-                       Line: 456, Column: 0 }
+                       Line: 283, Column: 0 }
   - String:          ' not inlined into '
-  - Caller:          'double generic_round<double>(double)'
+  - Caller:          'float generic_round<float>(float)'
     DebugLoc:        { File: 'C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib/hlsmath/include/FloatingPoint\hls_round.h', 
                        Line: 160, Column: 0 }
   - String:          ' because it should never be inlined (cost=never)'
@@ -115,13 +115,13 @@ Pass:            inline
 Name:            NeverInline
 DebugLoc:        { File: 'C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib/hlsmath/include/FloatingPoint\hls_round.h', 
                    Line: 185, Column: 15 }
-Function:        _Z13generic_roundIdET_S0_
+Function:        _Z13generic_roundIfET_S0_
 Args:            
-  - Callee:          'fp_struct<double>::to_ieee() const'
+  - Callee:          'fp_struct<float>::to_ieee() const'
     DebugLoc:        { File: 'C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib/src/hls\utils/x_hls_utils.h', 
-                       Line: 509, Column: 0 }
+                       Line: 346, Column: 0 }
   - String:          ' not inlined into '
-  - Caller:          'double generic_round<double>(double)'
+  - Caller:          'float generic_round<float>(float)'
     DebugLoc:        { File: 'C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib/hlsmath/include/FloatingPoint\hls_round.h', 
                        Line: 160, Column: 0 }
   - String:          ' because it should never be inlined (cost=never)'
@@ -131,13 +131,13 @@ Pass:            inline
 Name:            NeverInline
 DebugLoc:        { File: 'C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib/hlsmath/include/FloatingPoint\hls_round.h', 
                    Line: 169, Column: 12 }
-Function:        _Z13generic_roundIdET_S0_
+Function:        _Z13generic_roundIfET_S0_
 Args:            
-  - Callee:          'double generic_copysign<double>(double, double)'
+  - Callee:          'float generic_copysign<float>(float, float)'
     DebugLoc:        { File: 'C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib/hlsmath/include/FloatingPoint/hls_copysign.h', 
                        Line: 10, Column: 0 }
   - String:          ' not inlined into '
-  - Caller:          'double generic_round<double>(double)'
+  - Caller:          'float generic_round<float>(float)'
     DebugLoc:        { File: 'C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib/hlsmath/include/FloatingPoint\hls_round.h', 
                        Line: 160, Column: 0 }
   - String:          ' because it should never be inlined (cost=never)'
@@ -147,13 +147,13 @@ Pass:            inline
 Name:            NeverInline
 DebugLoc:        { File: 'C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib/hlsmath/include/FloatingPoint\hls_round.h', 
                    Line: 182, Column: 10 }
-Function:        _Z13generic_roundIdET_S0_
+Function:        _Z13generic_roundIfET_S0_
 Args:            
-  - Callee:          'fp_struct<double>::fp_struct(ap_uint<64>)'
+  - Callee:          'fp_struct<float>::fp_struct(ap_uint<32>)'
     DebugLoc:        { File: 'C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib/src/hls\utils/x_hls_utils.h', 
-                       Line: 464, Column: 0 }
+                       Line: 298, Column: 0 }
   - String:          ' not inlined into '
-  - Caller:          'double generic_round<double>(double)'
+  - Caller:          'float generic_round<float>(float)'
     DebugLoc:        { File: 'C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib/hlsmath/include/FloatingPoint\hls_round.h', 
                        Line: 160, Column: 0 }
   - String:          ' because it should never be inlined (cost=never)'
@@ -163,13 +163,13 @@ Pass:            inline
 Name:            NeverInline
 DebugLoc:        { File: 'C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib/hlsmath/include/FloatingPoint\hls_round.h', 
                    Line: 182, Column: 46 }
-Function:        _Z13generic_roundIdET_S0_
+Function:        _Z13generic_roundIfET_S0_
 Args:            
-  - Callee:          'fp_struct<double>::data() const'
+  - Callee:          'fp_struct<float>::data() const'
     DebugLoc:        { File: 'C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib/src/hls\utils/x_hls_utils.h', 
-                       Line: 475, Column: 0 }
+                       Line: 309, Column: 0 }
   - String:          ' not inlined into '
-  - Caller:          'double generic_round<double>(double)'
+  - Caller:          'float generic_round<float>(float)'
     DebugLoc:        { File: 'C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib/hlsmath/include/FloatingPoint\hls_round.h', 
                        Line: 160, Column: 0 }
   - String:          ' because it should never be inlined (cost=never)'
@@ -177,17 +177,33 @@ Args:
 --- !Missed
 Pass:            inline
 Name:            NeverInline
-DebugLoc:        { File: 'C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib\hlsmath\src\c\rounddouble.cpp', 
+DebugLoc:        { File: 'C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib\hlsmath\src\c\roundfloat.cpp', 
                    Line: 7, Column: 12 }
-Function:        round
+Function:        roundf
 Args:            
-  - Callee:          'double generic_round<double>(double)'
+  - Callee:          'float generic_round<float>(float)'
     DebugLoc:        { File: 'C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib/hlsmath/include/FloatingPoint\hls_round.h', 
                        Line: 160, Column: 0 }
   - String:          ' not inlined into '
-  - Caller:          round
-    DebugLoc:        { File: 'C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib\hlsmath\src\c\rounddouble.cpp', 
+  - Caller:          roundf
+    DebugLoc:        { File: 'C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib\hlsmath\src\c\roundfloat.cpp', 
                        Line: 6, Column: 0 }
+  - String:          ' because it should never be inlined (cost=never)'
+...
+--- !Missed
+Pass:            inline
+Name:            NeverInline
+DebugLoc:        { File: 'F:/Vitis/2024.2/tps/mingw/8.3.0/win64.o/nt\lib\gcc\x86_64-w64-mingw32\8.3.0\include\c++\cmath', 
+                   Line: 1757, Column: 12 }
+Function:        _ZSt5roundf
+Args:            
+  - Callee:          roundf
+    DebugLoc:        { File: 'C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib\hlsmath\src\c\roundfloat.cpp', 
+                       Line: 6, Column: 0 }
+  - String:          ' not inlined into '
+  - Caller:          'std::round(float)'
+    DebugLoc:        { File: 'F:/Vitis/2024.2/tps/mingw/8.3.0/win64.o/nt\lib\gcc\x86_64-w64-mingw32\8.3.0\include\c++\cmath', 
+                       Line: 1757, Column: 0 }
   - String:          ' because it should never be inlined (cost=never)'
 ...
 --- !Missed
@@ -195,13 +211,13 @@ Pass:            inline
 Name:            NeverInline
 DebugLoc:        { File: 'C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib/hlsmath/include/FloatingPoint\hls_case_IEEE754.h', 
                    Line: 13, Column: 17 }
-Function:        _Z20generic_cast_IEEE754IiL9ap_q_mode6EdET_T1_bN3hls9enable_ifIXsr3std14numeric_limitsIS1_EE9is_signedEbE4typeE
+Function:        _Z20generic_cast_IEEE754IiL9ap_q_mode6EfET_T1_bN3hls9enable_ifIXsr3std14numeric_limitsIS1_EE9is_signedEbE4typeE
 Args:            
-  - Callee:          'fp_struct<double>::fp_struct(double)'
+  - Callee:          'fp_struct<float>::fp_struct(float)'
     DebugLoc:        { File: 'C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib/src/hls\utils/x_hls_utils.h', 
-                       Line: 456, Column: 0 }
+                       Line: 283, Column: 0 }
   - String:          ' not inlined into '
-  - Caller:          'int generic_cast_IEEE754<int, (ap_q_mode)6, double>(double, bool, hls::enable_if<std::numeric_limits<int>::is_signed, bool>::type)'
+  - Caller:          'int generic_cast_IEEE754<int, (ap_q_mode)6, float>(float, bool, hls::enable_if<std::numeric_limits<int>::is_signed, bool>::type)'
     DebugLoc:        { File: 'C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib/hlsmath/include/FloatingPoint\hls_case_IEEE754.h', 
                        Line: 12, Column: 0 }
   - String:          ' because it should never be inlined (cost=never)'
@@ -211,13 +227,13 @@ Pass:            inline
 Name:            NeverInline
 DebugLoc:        { File: 'C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib/hlsmath/include/FloatingPoint\hls_case_IEEE754.h', 
                    Line: 15, Column: 57 }
-Function:        _Z20generic_cast_IEEE754IiL9ap_q_mode6EdET_T1_bN3hls9enable_ifIXsr3std14numeric_limitsIS1_EE9is_signedEbE4typeE
+Function:        _Z20generic_cast_IEEE754IiL9ap_q_mode6EfET_T1_bN3hls9enable_ifIXsr3std14numeric_limitsIS1_EE9is_signedEbE4typeE
 Args:            
-  - Callee:          'fp_struct<double>::mantissa() const'
+  - Callee:          'fp_struct<float>::mantissa() const'
     DebugLoc:        { File: 'C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib/src/hls\utils/x_hls_utils.h', 
-                       Line: 503, Column: 0 }
+                       Line: 340, Column: 0 }
   - String:          ' not inlined into '
-  - Caller:          'int generic_cast_IEEE754<int, (ap_q_mode)6, double>(double, bool, hls::enable_if<std::numeric_limits<int>::is_signed, bool>::type)'
+  - Caller:          'int generic_cast_IEEE754<int, (ap_q_mode)6, float>(float, bool, hls::enable_if<std::numeric_limits<int>::is_signed, bool>::type)'
     DebugLoc:        { File: 'C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib/hlsmath/include/FloatingPoint\hls_case_IEEE754.h', 
                        Line: 12, Column: 0 }
   - String:          ' because it should never be inlined (cost=never)'
@@ -227,13 +243,13 @@ Pass:            inline
 Name:            NeverInline
 DebugLoc:        { File: 'C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib/hlsmath/include/FloatingPoint\hls_case_IEEE754.h', 
                    Line: 59, Column: 8 }
-Function:        _Z20generic_cast_IEEE754IiL9ap_q_mode6EdET_T1_bN3hls9enable_ifIXsr3std14numeric_limitsIS1_EE9is_signedEbE4typeE
+Function:        _Z20generic_cast_IEEE754IiL9ap_q_mode6EfET_T1_bN3hls9enable_ifIXsr3std14numeric_limitsIS1_EE9is_signedEbE4typeE
 Args:            
-  - Callee:          'fp_struct<double>::__signbit() const'
+  - Callee:          'fp_struct<float>::__signbit() const'
     DebugLoc:        { File: 'C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib/src/hls\utils/x_hls_utils.h', 
-                       Line: 512, Column: 0 }
+                       Line: 349, Column: 0 }
   - String:          ' not inlined into '
-  - Caller:          'int generic_cast_IEEE754<int, (ap_q_mode)6, double>(double, bool, hls::enable_if<std::numeric_limits<int>::is_signed, bool>::type)'
+  - Caller:          'int generic_cast_IEEE754<int, (ap_q_mode)6, float>(float, bool, hls::enable_if<std::numeric_limits<int>::is_signed, bool>::type)'
     DebugLoc:        { File: 'C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib/hlsmath/include/FloatingPoint\hls_case_IEEE754.h', 
                        Line: 12, Column: 0 }
   - String:          ' because it should never be inlined (cost=never)'
@@ -243,13 +259,13 @@ Pass:            inline
 Name:            NeverInline
 DebugLoc:        { File: 'C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib/hlsmath/include/FloatingPoint\hls_case_IEEE754.h', 
                    Line: 18, Column: 79 }
-Function:        _Z20generic_cast_IEEE754IiL9ap_q_mode6EdET_T1_bN3hls9enable_ifIXsr3std14numeric_limitsIS1_EE9is_signedEbE4typeE
+Function:        _Z20generic_cast_IEEE754IiL9ap_q_mode6EfET_T1_bN3hls9enable_ifIXsr3std14numeric_limitsIS1_EE9is_signedEbE4typeE
 Args:            
-  - Callee:          'fp_struct<double>::expv() const'
+  - Callee:          'fp_struct<float>::expv() const'
     DebugLoc:        { File: 'C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib/src/hls\utils/x_hls_utils.h', 
-                       Line: 485, Column: 0 }
+                       Line: 316, Column: 0 }
   - String:          ' not inlined into '
-  - Caller:          'int generic_cast_IEEE754<int, (ap_q_mode)6, double>(double, bool, hls::enable_if<std::numeric_limits<int>::is_signed, bool>::type)'
+  - Caller:          'int generic_cast_IEEE754<int, (ap_q_mode)6, float>(float, bool, hls::enable_if<std::numeric_limits<int>::is_signed, bool>::type)'
     DebugLoc:        { File: 'C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib/hlsmath/include/FloatingPoint\hls_case_IEEE754.h', 
                        Line: 12, Column: 0 }
   - String:          ' because it should never be inlined (cost=never)'
@@ -259,13 +275,13 @@ Pass:            inline
 Name:            NeverInline
 DebugLoc:        { File: 'C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib/hlsmath/include/FloatingPoint\hls_case_IEEE754.h', 
                    Line: 117, Column: 10 }
-Function:        _Z20generic_cast_IEEE754IidET_T0_b
+Function:        _Z20generic_cast_IEEE754IifET_T0_b
 Args:            
-  - Callee:          'int generic_cast_IEEE754<int, (ap_q_mode)6, double>(double, bool, hls::enable_if<std::numeric_limits<int>::is_signed, bool>::type)'
+  - Callee:          'int generic_cast_IEEE754<int, (ap_q_mode)6, float>(float, bool, hls::enable_if<std::numeric_limits<int>::is_signed, bool>::type)'
     DebugLoc:        { File: 'C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib/hlsmath/include/FloatingPoint\hls_case_IEEE754.h', 
                        Line: 12, Column: 0 }
   - String:          ' not inlined into '
-  - Caller:          'int generic_cast_IEEE754<int, double>(double, bool)'
+  - Caller:          'int generic_cast_IEEE754<int, float>(float, bool)'
     DebugLoc:        { File: 'C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib/hlsmath/include/FloatingPoint\hls_case_IEEE754.h', 
                        Line: 116, Column: 0 }
   - String:          ' because it should never be inlined (cost=never)'
@@ -274,142 +290,144 @@ Args:
 Pass:            inline
 Name:            NeverInline
 DebugLoc:        { File: 'C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib\hlsmath\src\lib_floatconversion.cpp', 
-                   Line: 55, Column: 56 }
-Function:        __hls_fptosi_double_i32
+                   Line: 51, Column: 54 }
+Function:        __hls_fptosi_float_i32
 Args:            
-  - Callee:          'int generic_cast_IEEE754<int, double>(double, bool)'
+  - Callee:          'int generic_cast_IEEE754<int, float>(float, bool)'
     DebugLoc:        { File: 'C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib/hlsmath/include/FloatingPoint\hls_case_IEEE754.h', 
                        Line: 116, Column: 0 }
   - String:          ' not inlined into '
-  - Caller:          __hls_fptosi_double_i32
+  - Caller:          __hls_fptosi_float_i32
     DebugLoc:        { File: 'C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib\hlsmath\src\lib_floatconversion.cpp', 
-                       Line: 55, Column: 0 }
+                       Line: 51, Column: 0 }
   - String:          ' because it should never be inlined (cost=never)'
 ...
 --- !Missed
 Pass:            inline
 Name:            NeverInline
-DebugLoc:        { File: ../image_analysis.cpp, Line: 25, Column: 26 }
-Function:        _Z14getLocalImagesiiiiP13atom_locationRN3hls6streamI16local_image_infoLi0EEE
+DebugLoc:        { File: ../image_analysis.cpp, Line: 11, Column: 22 }
+Function:        _Z21getLocalImages_singleiiiiP13atom_locationRN3hls6streamI16local_image_infoLi0EEE
 Args:            
-  - Callee:          round
-    DebugLoc:        { File: 'C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib\hlsmath\src\c\rounddouble.cpp', 
-                       Line: 6, Column: 0 }
+  - Callee:          'std::round(float)'
+    DebugLoc:        { File: 'F:/Vitis/2024.2/tps/mingw/8.3.0/win64.o/nt\lib\gcc\x86_64-w64-mingw32\8.3.0\include\c++\cmath', 
+                       Line: 1757, Column: 0 }
   - String:          ' not inlined into '
-  - Caller:          'getLocalImages(int, int, int, int, atom_location*, hls::stream<local_image_info, 0>&)'
-    DebugLoc:        { File: ../image_analysis.cpp, Line: 8, Column: 0 }
+  - Caller:          'getLocalImages_single(int, int, int, int, atom_location*, hls::stream<local_image_info, 0>&)'
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 7, Column: 0 }
   - String:          ' because it should never be inlined (cost=never)'
 ...
 --- !Missed
 Pass:            inline
 Name:            NeverInline
-DebugLoc:        { File: ../image_analysis.cpp, Line: 25, Column: 26 }
-Function:        _Z14getLocalImagesiiiiP13atom_locationRN3hls6streamI16local_image_infoLi0EEE
+DebugLoc:        { File: ../image_analysis.cpp, Line: 11, Column: 22 }
+Function:        _Z21getLocalImages_singleiiiiP13atom_locationRN3hls6streamI16local_image_infoLi0EEE
 Args:            
-  - Callee:          __hls_fptosi_double_i32
+  - Callee:          __hls_fptosi_float_i32
     DebugLoc:        { File: 'C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib\hlsmath\src\lib_floatconversion.cpp', 
-                       Line: 55, Column: 0 }
+                       Line: 51, Column: 0 }
   - String:          ' not inlined into '
-  - Caller:          'getLocalImages(int, int, int, int, atom_location*, hls::stream<local_image_info, 0>&)'
-    DebugLoc:        { File: ../image_analysis.cpp, Line: 8, Column: 0 }
+  - Caller:          'getLocalImages_single(int, int, int, int, atom_location*, hls::stream<local_image_info, 0>&)'
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 7, Column: 0 }
   - String:          ' because it should never be inlined (cost=never)'
 ...
 --- !Missed
 Pass:            inline
 Name:            NeverInline
-DebugLoc:        { File: ../image_analysis.cpp, Line: 159, Column: 9 }
-Function:        _Z11reconstructiiiP13atom_locationiiPdS1_PiS1_iiS1_Rj
+DebugLoc:        { File: ../image_analysis.cpp, Line: 169, Column: 9 }
+Function:        _Z11reconstructiiiP13atom_locationiiPfS1_PiS1_iiS1_
 Args:            
-  - Callee:          'getLocalImages(int, int, int, int, atom_location*, hls::stream<local_image_info, 0>&)'
-    DebugLoc:        { File: ../image_analysis.cpp, Line: 8, Column: 0 }
+  - Callee:          'post_process(float, float, float, float&)'
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 112, Column: 0 }
   - String:          ' not inlined into '
-  - Caller:          'reconstruct(int, int, int, atom_location*, int, int, double*, double*, int*, double*, int, int, double*, unsigned int&)'
-    DebugLoc:        { File: ../image_analysis.cpp, Line: 127, Column: 0 }
+  - Caller:          'reconstruct(int, int, int, atom_location*, int, int, float*, float*, int*, float*, int, int, float*)'
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 123, Column: 0 }
   - String:          ' because it should never be inlined (cost=never)'
 ...
 --- !Missed
 Pass:            inline
 Name:            NeverInline
-DebugLoc:        { File: ../image_analysis.cpp, Line: 160, Column: 9 }
-Function:        _Z11reconstructiiiP13atom_locationiiPdS1_PiS1_iiS1_Rj
+DebugLoc:        { File: ../image_analysis.cpp, Line: 165, Column: 2 }
+Function:        _Z11reconstructiiiP13atom_locationiiPfS1_PiS1_iiS1_
 Args:            
-  - Callee:          'applyProjectors(int, int, int, double*, double*, int*, double*, int, int, hls::stream<local_image_info, 0>&, double*, unsigned int&)'
-    DebugLoc:        { File: ../image_analysis.cpp, Line: 70, Column: 0 }
+  - Callee:          'getLocalImages_single(int, int, int, int, atom_location*, hls::stream<local_image_info, 0>&)'
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 7, Column: 0 }
   - String:          ' not inlined into '
-  - Caller:          'reconstruct(int, int, int, atom_location*, int, int, double*, double*, int*, double*, int, int, double*, unsigned int&)'
-    DebugLoc:        { File: ../image_analysis.cpp, Line: 127, Column: 0 }
+  - Caller:          'reconstruct(int, int, int, atom_location*, int, int, float*, float*, int*, float*, int, int, float*)'
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 123, Column: 0 }
+  - String:          ' because it should never be inlined (cost=never)'
+...
+--- !Missed
+Pass:            inline
+Name:            NeverInline
+DebugLoc:        { File: ../image_analysis.cpp, Line: 166, Column: 9 }
+Function:        _Z11reconstructiiiP13atom_locationiiPfS1_PiS1_iiS1_
+Args:            
+  - Callee:          'Image_extract(int, hls::stream<local_image_info, 0>&, float*, float (*) [31], float*, float (*) [31], float*, float&)'
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 69, Column: 0 }
+  - String:          ' not inlined into '
+  - Caller:          'reconstruct(int, int, int, atom_location*, int, int, float*, float*, int*, float*, int, int, float*)'
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 123, Column: 0 }
+  - String:          ' because it should never be inlined (cost=never)'
+...
+--- !Missed
+Pass:            inline
+Name:            NeverInline
+DebugLoc:        { File: ../image_analysis.cpp, Line: 168, Column: 9 }
+Function:        _Z11reconstructiiiP13atom_locationiiPfS1_PiS1_iiS1_
+Args:            
+  - Callee:          'conv_kernel(float (*) [31], float (*) [31], float&, float&)'
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 98, Column: 0 }
+  - String:          ' not inlined into '
+  - Caller:          'reconstruct(int, int, int, atom_location*, int, int, float*, float*, int*, float*, int, int, float*)'
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 123, Column: 0 }
   - String:          ' because it should never be inlined (cost=never)'
 ...
 --- !Passed
-Pass:            reflow-infer-unroll
-Name:            ImplicitUnroll
-DebugLoc:        { File: ../image_analysis.cpp, Line: 91, Column: 26 }
-Function:        _Z15applyProjectorsiiiPdS_PiS_iiRN3hls6streamI16local_image_infoLi0EEES_Rj
+Pass:            reflow-pragma-loop-unroll
+Name:            PragmaFullyUnroll
+DebugLoc:        { File: ../image_analysis.cpp, Line: 98, Column: 0 }
+Function:        _Z11conv_kernelPA31_fS0_RfS1_
 Args:            
-  - String:          'Loop '''
-  - LoopName:        VITIS_LOOP_91_2
-  - String:          ''' is marked as complete unroll implied by the pipeline pragma'
-...
---- !Passed
-Pass:            reflow-infer-unroll
-Name:            ImplicitUnroll
-DebugLoc:        { File: ../image_analysis.cpp, Line: 98, Column: 30 }
-Function:        _Z15applyProjectorsiiiPdS_PiS_iiRN3hls6streamI16local_image_infoLi0EEES_Rj
-Args:            
-  - String:          'Loop '''
-  - LoopName:        VITIS_LOOP_98_3
-  - String:          ''' is marked as complete unroll implied by the pipeline pragma'
-...
---- !Passed
-Pass:            reflow-infer-unroll
-Name:            ImplicitUnroll
-DebugLoc:        { File: ../image_analysis.cpp, Line: 19, Column: 19 }
-Function:        _Z14getLocalImagesiiiiP13atom_locationRN3hls6streamI16local_image_infoLi0EEE
-Args:            
-  - String:          'Loop '''
-  - LoopName:        process_loop
-  - String:          ''' is marked as complete unroll implied by the pipeline pragma'
-...
---- !Passed
-Pass:            reflow-infer-unroll
-Name:            ImplicitUnroll
-DebugLoc:        { File: ../image_analysis.cpp, Line: 13, Column: 13 }
-Function:        _Z14getLocalImagesiiiiP13atom_locationRN3hls6streamI16local_image_infoLi0EEE
-Args:            
-  - String:          'Loop '''
-  - LoopName:        copy_loop
-  - String:          ''' is marked as complete unroll implied by the pipeline pragma'
+  - String:          'Unrolling loop '''
+  - LoopName:        VITIS_LOOP_102_2
+  - String:          ''' ('
+  - LoopLoc:         '../image_analysis.cpp:102:27'
+  - String:          ') '
+  - String:          'in function '''
+  - String:          conv_kernel
+  - String:          ''' completely with a factor of '
+  - Factor:          '31'
 ...
 --- !Missed
 Pass:            inline
 Name:            NeverInline
 DebugLoc:        { File: 'C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib/src/hls\utils/x_hls_utils.h', 
-                   Line: 496, Column: 17 }
-Function:        _ZNK9fp_structIdE9to_doubleEv.25.35.44.55
+                   Line: 326, Column: 17 }
+Function:        _ZNK9fp_structIfE8to_floatEv.25.35.44.55
 Args:            
-  - Callee:          'fp_struct<double>::data() const (.7.28.38.47.58)'
+  - Callee:          'fp_struct<float>::data() const (.7.28.38.47.58)'
     DebugLoc:        { File: 'C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib/src/hls\utils/x_hls_utils.h', 
-                       Line: 475, Column: 0 }
+                       Line: 309, Column: 0 }
   - String:          ' not inlined into '
-  - Caller:          'fp_struct<double>::to_double() const (.25.35.44.55)'
+  - Caller:          'fp_struct<float>::to_float() const (.25.35.44.55)'
     DebugLoc:        { File: 'C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib/src/hls\utils/x_hls_utils.h', 
-                       Line: 494, Column: 0 }
+                       Line: 322, Column: 0 }
   - String:          ' because it should never be inlined (cost=never)'
 ...
 --- !Missed
 Pass:            inline
 Name:            NeverInline
 DebugLoc:        { File: 'C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib/src/hls\utils/x_hls_utils.h', 
-                   Line: 510, Column: 16 }
-Function:        _ZNK9fp_structIdE7to_ieeeEv
+                   Line: 347, Column: 16 }
+Function:        _ZNK9fp_structIfE7to_ieeeEv
 Args:            
-  - Callee:          'fp_struct<double>::to_double() const (.25.35.44.55)'
+  - Callee:          'fp_struct<float>::to_float() const (.25.35.44.55)'
     DebugLoc:        { File: 'C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib/src/hls\utils/x_hls_utils.h', 
-                       Line: 494, Column: 0 }
+                       Line: 322, Column: 0 }
   - String:          ' not inlined into '
-  - Caller:          'fp_struct<double>::to_ieee() const'
+  - Caller:          'fp_struct<float>::to_ieee() const'
     DebugLoc:        { File: 'C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib/src/hls\utils/x_hls_utils.h', 
-                       Line: 509, Column: 0 }
+                       Line: 346, Column: 0 }
   - String:          ' because it should never be inlined (cost=never)'
 ...
 --- !Missed
@@ -417,13 +435,13 @@ Pass:            inline
 Name:            NeverInline
 DebugLoc:        { File: 'C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib/hlsmath/include/FloatingPoint/hls_copysign.h', 
                    Line: 12, Column: 16 }
-Function:        _Z16generic_copysignIdET_S0_S0_
+Function:        _Z16generic_copysignIfET_S0_S0_
 Args:            
-  - Callee:          'fp_struct<double>::fp_struct(double)'
+  - Callee:          'fp_struct<float>::fp_struct(float)'
     DebugLoc:        { File: 'C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib/src/hls\utils/x_hls_utils.h', 
-                       Line: 456, Column: 0 }
+                       Line: 283, Column: 0 }
   - String:          ' not inlined into '
-  - Caller:          'double generic_copysign<double>(double, double)'
+  - Caller:          'float generic_copysign<float>(float, float)'
     DebugLoc:        { File: 'C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib/hlsmath/include/FloatingPoint/hls_copysign.h', 
                        Line: 10, Column: 0 }
   - String:          ' because it should never be inlined (cost=never)'
@@ -433,13 +451,13 @@ Pass:            inline
 Name:            NeverInline
 DebugLoc:        { File: 'C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib/hlsmath/include/FloatingPoint/hls_copysign.h', 
                    Line: 14, Column: 13 }
-Function:        _Z16generic_copysignIdET_S0_S0_
+Function:        _Z16generic_copysignIfET_S0_S0_
 Args:            
-  - Callee:          'fp_struct<double>::to_ieee() const'
+  - Callee:          'fp_struct<float>::to_ieee() const'
     DebugLoc:        { File: 'C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib/src/hls\utils/x_hls_utils.h', 
-                       Line: 509, Column: 0 }
+                       Line: 346, Column: 0 }
   - String:          ' not inlined into '
-  - Caller:          'double generic_copysign<double>(double, double)'
+  - Caller:          'float generic_copysign<float>(float, float)'
     DebugLoc:        { File: 'C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib/hlsmath/include/FloatingPoint/hls_copysign.h', 
                        Line: 10, Column: 0 }
   - String:          ' because it should never be inlined (cost=never)'
@@ -449,13 +467,13 @@ Pass:            inline
 Name:            NeverInline
 DebugLoc:        { File: 'C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib/hlsmath/include/FloatingPoint\hls_round.h', 
                    Line: 165, Column: 16 }
-Function:        _Z13generic_roundIdET_S0_
+Function:        _Z13generic_roundIfET_S0_
 Args:            
-  - Callee:          'fp_struct<double>::fp_struct(double)'
+  - Callee:          'fp_struct<float>::fp_struct(float)'
     DebugLoc:        { File: 'C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib/src/hls\utils/x_hls_utils.h', 
-                       Line: 456, Column: 0 }
+                       Line: 283, Column: 0 }
   - String:          ' not inlined into '
-  - Caller:          'double generic_round<double>(double)'
+  - Caller:          'float generic_round<float>(float)'
     DebugLoc:        { File: 'C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib/hlsmath/include/FloatingPoint\hls_round.h', 
                        Line: 160, Column: 0 }
   - String:          ' because it should never be inlined (cost=never)'
@@ -465,13 +483,13 @@ Pass:            inline
 Name:            NeverInline
 DebugLoc:        { File: 'C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib/hlsmath/include/FloatingPoint\hls_round.h', 
                    Line: 169, Column: 12 }
-Function:        _Z13generic_roundIdET_S0_
+Function:        _Z13generic_roundIfET_S0_
 Args:            
-  - Callee:          'double generic_copysign<double>(double, double)'
+  - Callee:          'float generic_copysign<float>(float, float)'
     DebugLoc:        { File: 'C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib/hlsmath/include/FloatingPoint/hls_copysign.h', 
                        Line: 10, Column: 0 }
   - String:          ' not inlined into '
-  - Caller:          'double generic_round<double>(double)'
+  - Caller:          'float generic_round<float>(float)'
     DebugLoc:        { File: 'C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib/hlsmath/include/FloatingPoint\hls_round.h', 
                        Line: 160, Column: 0 }
   - String:          ' because it should never be inlined (cost=never)'
@@ -481,13 +499,13 @@ Pass:            inline
 Name:            NeverInline
 DebugLoc:        { File: 'C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib/hlsmath/include/FloatingPoint\hls_round.h', 
                    Line: 182, Column: 46 }
-Function:        _Z13generic_roundIdET_S0_
+Function:        _Z13generic_roundIfET_S0_
 Args:            
-  - Callee:          'fp_struct<double>::data() const (.7.28.38.47.58)'
+  - Callee:          'fp_struct<float>::data() const (.7.28.38.47.58)'
     DebugLoc:        { File: 'C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib/src/hls\utils/x_hls_utils.h', 
-                       Line: 475, Column: 0 }
+                       Line: 309, Column: 0 }
   - String:          ' not inlined into '
-  - Caller:          'double generic_round<double>(double)'
+  - Caller:          'float generic_round<float>(float)'
     DebugLoc:        { File: 'C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib/hlsmath/include/FloatingPoint\hls_round.h', 
                        Line: 160, Column: 0 }
   - String:          ' because it should never be inlined (cost=never)'
@@ -497,13 +515,13 @@ Pass:            inline
 Name:            NeverInline
 DebugLoc:        { File: 'C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib/hlsmath/include/FloatingPoint\hls_round.h', 
                    Line: 182, Column: 10 }
-Function:        _Z13generic_roundIdET_S0_
+Function:        _Z13generic_roundIfET_S0_
 Args:            
-  - Callee:          'fp_struct<double>::fp_struct(ap_uint<64>)'
+  - Callee:          'fp_struct<float>::fp_struct(ap_uint<32>)'
     DebugLoc:        { File: 'C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib/src/hls\utils/x_hls_utils.h', 
-                       Line: 464, Column: 0 }
+                       Line: 298, Column: 0 }
   - String:          ' not inlined into '
-  - Caller:          'double generic_round<double>(double)'
+  - Caller:          'float generic_round<float>(float)'
     DebugLoc:        { File: 'C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib/hlsmath/include/FloatingPoint\hls_round.h', 
                        Line: 160, Column: 0 }
   - String:          ' because it should never be inlined (cost=never)'
@@ -513,13 +531,13 @@ Pass:            inline
 Name:            NeverInline
 DebugLoc:        { File: 'C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib/hlsmath/include/FloatingPoint\hls_round.h', 
                    Line: 185, Column: 15 }
-Function:        _Z13generic_roundIdET_S0_
+Function:        _Z13generic_roundIfET_S0_
 Args:            
-  - Callee:          'fp_struct<double>::to_ieee() const'
+  - Callee:          'fp_struct<float>::to_ieee() const'
     DebugLoc:        { File: 'C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib/src/hls\utils/x_hls_utils.h', 
-                       Line: 509, Column: 0 }
+                       Line: 346, Column: 0 }
   - String:          ' not inlined into '
-  - Caller:          'double generic_round<double>(double)'
+  - Caller:          'float generic_round<float>(float)'
     DebugLoc:        { File: 'C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib/hlsmath/include/FloatingPoint\hls_round.h', 
                        Line: 160, Column: 0 }
   - String:          ' because it should never be inlined (cost=never)'
@@ -527,17 +545,33 @@ Args:
 --- !Missed
 Pass:            inline
 Name:            NeverInline
-DebugLoc:        { File: 'C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib\hlsmath\src\c\rounddouble.cpp', 
+DebugLoc:        { File: 'C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib\hlsmath\src\c\roundfloat.cpp', 
                    Line: 7, Column: 12 }
-Function:        round
+Function:        roundf
 Args:            
-  - Callee:          'double generic_round<double>(double)'
+  - Callee:          'float generic_round<float>(float)'
     DebugLoc:        { File: 'C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib/hlsmath/include/FloatingPoint\hls_round.h', 
                        Line: 160, Column: 0 }
   - String:          ' not inlined into '
-  - Caller:          round
-    DebugLoc:        { File: 'C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib\hlsmath\src\c\rounddouble.cpp', 
+  - Caller:          roundf
+    DebugLoc:        { File: 'C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib\hlsmath\src\c\roundfloat.cpp', 
                        Line: 6, Column: 0 }
+  - String:          ' because it should never be inlined (cost=never)'
+...
+--- !Missed
+Pass:            inline
+Name:            NeverInline
+DebugLoc:        { File: 'F:/Vitis/2024.2/tps/mingw/8.3.0/win64.o/nt\lib\gcc\x86_64-w64-mingw32\8.3.0\include\c++\cmath', 
+                   Line: 1757, Column: 12 }
+Function:        _ZSt5roundf
+Args:            
+  - Callee:          roundf
+    DebugLoc:        { File: 'C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib\hlsmath\src\c\roundfloat.cpp', 
+                       Line: 6, Column: 0 }
+  - String:          ' not inlined into '
+  - Caller:          'std::round(float)'
+    DebugLoc:        { File: 'F:/Vitis/2024.2/tps/mingw/8.3.0/win64.o/nt\lib\gcc\x86_64-w64-mingw32\8.3.0\include\c++\cmath', 
+                       Line: 1757, Column: 0 }
   - String:          ' because it should never be inlined (cost=never)'
 ...
 --- !Missed
@@ -545,13 +579,13 @@ Pass:            inline
 Name:            NeverInline
 DebugLoc:        { File: 'C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib/hlsmath/include/FloatingPoint\hls_case_IEEE754.h', 
                    Line: 13, Column: 17 }
-Function:        _Z20generic_cast_IEEE754IiL9ap_q_mode6EdET_T1_bN3hls9enable_ifIXsr3std14numeric_limitsIS1_EE9is_signedEbE4typeE
+Function:        _Z20generic_cast_IEEE754IiL9ap_q_mode6EfET_T1_bN3hls9enable_ifIXsr3std14numeric_limitsIS1_EE9is_signedEbE4typeE
 Args:            
-  - Callee:          'fp_struct<double>::fp_struct(double)'
+  - Callee:          'fp_struct<float>::fp_struct(float)'
     DebugLoc:        { File: 'C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib/src/hls\utils/x_hls_utils.h', 
-                       Line: 456, Column: 0 }
+                       Line: 283, Column: 0 }
   - String:          ' not inlined into '
-  - Caller:          'int generic_cast_IEEE754<int, (ap_q_mode)6, double>(double, bool, hls::enable_if<std::numeric_limits<int>::is_signed, bool>::type)'
+  - Caller:          'int generic_cast_IEEE754<int, (ap_q_mode)6, float>(float, bool, hls::enable_if<std::numeric_limits<int>::is_signed, bool>::type)'
     DebugLoc:        { File: 'C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib/hlsmath/include/FloatingPoint\hls_case_IEEE754.h', 
                        Line: 12, Column: 0 }
   - String:          ' because it should never be inlined (cost=never)'
@@ -561,13 +595,13 @@ Pass:            inline
 Name:            NeverInline
 DebugLoc:        { File: 'C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib/hlsmath/include/FloatingPoint\hls_case_IEEE754.h', 
                    Line: 15, Column: 57 }
-Function:        _Z20generic_cast_IEEE754IiL9ap_q_mode6EdET_T1_bN3hls9enable_ifIXsr3std14numeric_limitsIS1_EE9is_signedEbE4typeE
+Function:        _Z20generic_cast_IEEE754IiL9ap_q_mode6EfET_T1_bN3hls9enable_ifIXsr3std14numeric_limitsIS1_EE9is_signedEbE4typeE
 Args:            
-  - Callee:          'fp_struct<double>::mantissa() const'
+  - Callee:          'fp_struct<float>::mantissa() const'
     DebugLoc:        { File: 'C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib/src/hls\utils/x_hls_utils.h', 
-                       Line: 503, Column: 0 }
+                       Line: 340, Column: 0 }
   - String:          ' not inlined into '
-  - Caller:          'int generic_cast_IEEE754<int, (ap_q_mode)6, double>(double, bool, hls::enable_if<std::numeric_limits<int>::is_signed, bool>::type)'
+  - Caller:          'int generic_cast_IEEE754<int, (ap_q_mode)6, float>(float, bool, hls::enable_if<std::numeric_limits<int>::is_signed, bool>::type)'
     DebugLoc:        { File: 'C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib/hlsmath/include/FloatingPoint\hls_case_IEEE754.h', 
                        Line: 12, Column: 0 }
   - String:          ' because it should never be inlined (cost=never)'
@@ -577,13 +611,13 @@ Pass:            inline
 Name:            NeverInline
 DebugLoc:        { File: 'C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib/hlsmath/include/FloatingPoint\hls_case_IEEE754.h', 
                    Line: 18, Column: 79 }
-Function:        _Z20generic_cast_IEEE754IiL9ap_q_mode6EdET_T1_bN3hls9enable_ifIXsr3std14numeric_limitsIS1_EE9is_signedEbE4typeE
+Function:        _Z20generic_cast_IEEE754IiL9ap_q_mode6EfET_T1_bN3hls9enable_ifIXsr3std14numeric_limitsIS1_EE9is_signedEbE4typeE
 Args:            
-  - Callee:          'fp_struct<double>::expv() const'
+  - Callee:          'fp_struct<float>::expv() const'
     DebugLoc:        { File: 'C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib/src/hls\utils/x_hls_utils.h', 
-                       Line: 485, Column: 0 }
+                       Line: 316, Column: 0 }
   - String:          ' not inlined into '
-  - Caller:          'int generic_cast_IEEE754<int, (ap_q_mode)6, double>(double, bool, hls::enable_if<std::numeric_limits<int>::is_signed, bool>::type)'
+  - Caller:          'int generic_cast_IEEE754<int, (ap_q_mode)6, float>(float, bool, hls::enable_if<std::numeric_limits<int>::is_signed, bool>::type)'
     DebugLoc:        { File: 'C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib/hlsmath/include/FloatingPoint\hls_case_IEEE754.h', 
                        Line: 12, Column: 0 }
   - String:          ' because it should never be inlined (cost=never)'
@@ -593,13 +627,13 @@ Pass:            inline
 Name:            NeverInline
 DebugLoc:        { File: 'C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib/hlsmath/include/FloatingPoint\hls_case_IEEE754.h', 
                    Line: 59, Column: 8 }
-Function:        _Z20generic_cast_IEEE754IiL9ap_q_mode6EdET_T1_bN3hls9enable_ifIXsr3std14numeric_limitsIS1_EE9is_signedEbE4typeE
+Function:        _Z20generic_cast_IEEE754IiL9ap_q_mode6EfET_T1_bN3hls9enable_ifIXsr3std14numeric_limitsIS1_EE9is_signedEbE4typeE
 Args:            
-  - Callee:          'fp_struct<double>::__signbit() const'
+  - Callee:          'fp_struct<float>::__signbit() const'
     DebugLoc:        { File: 'C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib/src/hls\utils/x_hls_utils.h', 
-                       Line: 512, Column: 0 }
+                       Line: 349, Column: 0 }
   - String:          ' not inlined into '
-  - Caller:          'int generic_cast_IEEE754<int, (ap_q_mode)6, double>(double, bool, hls::enable_if<std::numeric_limits<int>::is_signed, bool>::type)'
+  - Caller:          'int generic_cast_IEEE754<int, (ap_q_mode)6, float>(float, bool, hls::enable_if<std::numeric_limits<int>::is_signed, bool>::type)'
     DebugLoc:        { File: 'C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib/hlsmath/include/FloatingPoint\hls_case_IEEE754.h', 
                        Line: 12, Column: 0 }
   - String:          ' because it should never be inlined (cost=never)'
@@ -609,13 +643,13 @@ Pass:            inline
 Name:            NeverInline
 DebugLoc:        { File: 'C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib/hlsmath/include/FloatingPoint\hls_case_IEEE754.h', 
                    Line: 117, Column: 10 }
-Function:        _Z20generic_cast_IEEE754IidET_T0_b
+Function:        _Z20generic_cast_IEEE754IifET_T0_b
 Args:            
-  - Callee:          'int generic_cast_IEEE754<int, (ap_q_mode)6, double>(double, bool, hls::enable_if<std::numeric_limits<int>::is_signed, bool>::type)'
+  - Callee:          'int generic_cast_IEEE754<int, (ap_q_mode)6, float>(float, bool, hls::enable_if<std::numeric_limits<int>::is_signed, bool>::type)'
     DebugLoc:        { File: 'C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib/hlsmath/include/FloatingPoint\hls_case_IEEE754.h', 
                        Line: 12, Column: 0 }
   - String:          ' not inlined into '
-  - Caller:          'int generic_cast_IEEE754<int, double>(double, bool)'
+  - Caller:          'int generic_cast_IEEE754<int, float>(float, bool)'
     DebugLoc:        { File: 'C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib/hlsmath/include/FloatingPoint\hls_case_IEEE754.h', 
                        Line: 116, Column: 0 }
   - String:          ' because it should never be inlined (cost=never)'
@@ -624,70 +658,96 @@ Args:
 Pass:            inline
 Name:            NeverInline
 DebugLoc:        { File: 'C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib\hlsmath\src\lib_floatconversion.cpp', 
-                   Line: 55, Column: 56 }
-Function:        __hls_fptosi_double_i32
+                   Line: 51, Column: 54 }
+Function:        __hls_fptosi_float_i32
 Args:            
-  - Callee:          'int generic_cast_IEEE754<int, double>(double, bool)'
+  - Callee:          'int generic_cast_IEEE754<int, float>(float, bool)'
     DebugLoc:        { File: 'C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib/hlsmath/include/FloatingPoint\hls_case_IEEE754.h', 
                        Line: 116, Column: 0 }
   - String:          ' not inlined into '
-  - Caller:          __hls_fptosi_double_i32
+  - Caller:          __hls_fptosi_float_i32
     DebugLoc:        { File: 'C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib\hlsmath\src\lib_floatconversion.cpp', 
-                       Line: 55, Column: 0 }
+                       Line: 51, Column: 0 }
   - String:          ' because it should never be inlined (cost=never)'
 ...
 --- !Missed
 Pass:            inline
 Name:            NeverInline
-DebugLoc:        { File: ../image_analysis.cpp, Line: 25, Column: 26 }
-Function:        _Z14getLocalImagesiiiiP13atom_locationRN3hls6streamI16local_image_infoLi0EEE
+DebugLoc:        { File: ../image_analysis.cpp, Line: 11, Column: 22 }
+Function:        _Z21getLocalImages_singleiiiiP13atom_locationRN3hls6streamI16local_image_infoLi0EEE
 Args:            
-  - Callee:          round
-    DebugLoc:        { File: 'C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib\hlsmath\src\c\rounddouble.cpp', 
-                       Line: 6, Column: 0 }
+  - Callee:          'std::round(float)'
+    DebugLoc:        { File: 'F:/Vitis/2024.2/tps/mingw/8.3.0/win64.o/nt\lib\gcc\x86_64-w64-mingw32\8.3.0\include\c++\cmath', 
+                       Line: 1757, Column: 0 }
   - String:          ' not inlined into '
-  - Caller:          'getLocalImages(int, int, int, int, atom_location*, hls::stream<local_image_info, 0>&)'
-    DebugLoc:        { File: ../image_analysis.cpp, Line: 8, Column: 0 }
+  - Caller:          'getLocalImages_single(int, int, int, int, atom_location*, hls::stream<local_image_info, 0>&)'
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 7, Column: 0 }
   - String:          ' because it should never be inlined (cost=never)'
 ...
 --- !Missed
 Pass:            inline
 Name:            NeverInline
-DebugLoc:        { File: ../image_analysis.cpp, Line: 25, Column: 26 }
-Function:        _Z14getLocalImagesiiiiP13atom_locationRN3hls6streamI16local_image_infoLi0EEE
+DebugLoc:        { File: ../image_analysis.cpp, Line: 11, Column: 22 }
+Function:        _Z21getLocalImages_singleiiiiP13atom_locationRN3hls6streamI16local_image_infoLi0EEE
 Args:            
-  - Callee:          __hls_fptosi_double_i32
+  - Callee:          __hls_fptosi_float_i32
     DebugLoc:        { File: 'C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib\hlsmath\src\lib_floatconversion.cpp', 
-                       Line: 55, Column: 0 }
+                       Line: 51, Column: 0 }
   - String:          ' not inlined into '
-  - Caller:          'getLocalImages(int, int, int, int, atom_location*, hls::stream<local_image_info, 0>&)'
-    DebugLoc:        { File: ../image_analysis.cpp, Line: 8, Column: 0 }
+  - Caller:          'getLocalImages_single(int, int, int, int, atom_location*, hls::stream<local_image_info, 0>&)'
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 7, Column: 0 }
   - String:          ' because it should never be inlined (cost=never)'
 ...
 --- !Missed
 Pass:            inline
 Name:            NeverInline
-DebugLoc:        { File: ../image_analysis.cpp, Line: 159, Column: 9 }
-Function:        _Z11reconstructiiiP13atom_locationiiPdS1_PiS1_iiS1_Rj
+DebugLoc:        { File: ../image_analysis.cpp, Line: 165, Column: 2 }
+Function:        _Z11reconstructiiiP13atom_locationiiPfS1_PiS1_iiS1_
 Args:            
-  - Callee:          'getLocalImages(int, int, int, int, atom_location*, hls::stream<local_image_info, 0>&)'
-    DebugLoc:        { File: ../image_analysis.cpp, Line: 8, Column: 0 }
+  - Callee:          'getLocalImages_single(int, int, int, int, atom_location*, hls::stream<local_image_info, 0>&)'
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 7, Column: 0 }
   - String:          ' not inlined into '
-  - Caller:          'reconstruct(int, int, int, atom_location*, int, int, double*, double*, int*, double*, int, int, double*, unsigned int&)'
-    DebugLoc:        { File: ../image_analysis.cpp, Line: 127, Column: 0 }
+  - Caller:          'reconstruct(int, int, int, atom_location*, int, int, float*, float*, int*, float*, int, int, float*)'
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 123, Column: 0 }
   - String:          ' because it should never be inlined (cost=never)'
 ...
 --- !Missed
 Pass:            inline
 Name:            NeverInline
-DebugLoc:        { File: ../image_analysis.cpp, Line: 160, Column: 9 }
-Function:        _Z11reconstructiiiP13atom_locationiiPdS1_PiS1_iiS1_Rj
+DebugLoc:        { File: ../image_analysis.cpp, Line: 166, Column: 9 }
+Function:        _Z11reconstructiiiP13atom_locationiiPfS1_PiS1_iiS1_
 Args:            
-  - Callee:          'applyProjectors(int, int, int, double*, double*, int*, double*, int, int, hls::stream<local_image_info, 0>&, double*, unsigned int&)'
-    DebugLoc:        { File: ../image_analysis.cpp, Line: 70, Column: 0 }
+  - Callee:          'Image_extract(int, hls::stream<local_image_info, 0>&, float*, float (*) [31], float*, float (*) [31], float*, float&)'
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 69, Column: 0 }
   - String:          ' not inlined into '
-  - Caller:          'reconstruct(int, int, int, atom_location*, int, int, double*, double*, int*, double*, int, int, double*, unsigned int&)'
-    DebugLoc:        { File: ../image_analysis.cpp, Line: 127, Column: 0 }
+  - Caller:          'reconstruct(int, int, int, atom_location*, int, int, float*, float*, int*, float*, int, int, float*)'
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 123, Column: 0 }
+  - String:          ' because it should never be inlined (cost=never)'
+...
+--- !Missed
+Pass:            inline
+Name:            NeverInline
+DebugLoc:        { File: ../image_analysis.cpp, Line: 168, Column: 9 }
+Function:        _Z11reconstructiiiP13atom_locationiiPfS1_PiS1_iiS1_
+Args:            
+  - Callee:          'conv_kernel(float (*) [31], float (*) [31], float&, float&)'
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 98, Column: 0 }
+  - String:          ' not inlined into '
+  - Caller:          'reconstruct(int, int, int, atom_location*, int, int, float*, float*, int*, float*, int, int, float*)'
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 123, Column: 0 }
+  - String:          ' because it should never be inlined (cost=never)'
+...
+--- !Missed
+Pass:            inline
+Name:            NeverInline
+DebugLoc:        { File: ../image_analysis.cpp, Line: 169, Column: 9 }
+Function:        _Z11reconstructiiiP13atom_locationiiPfS1_PiS1_iiS1_
+Args:            
+  - Callee:          'post_process(float, float, float, float&)'
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 112, Column: 0 }
+  - String:          ' not inlined into '
+  - Caller:          'reconstruct(int, int, int, atom_location*, int, int, float*, float*, int*, float*, int, int, float*)'
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 123, Column: 0 }
   - String:          ' because it should never be inlined (cost=never)'
 ...
 --- !Missed
@@ -695,8 +755,8 @@ Pass:            inline
 Name:            NeverInline
 Function:        apatb_reconstruct_ir
 Args:            
-  - Callee:          'reconstruct(int, int, int, atom_location*, int, int, double*, double*, int*, double*, int, int, double*, unsigned int&)'
-    DebugLoc:        { File: ../image_analysis.cpp, Line: 127, Column: 0 }
+  - Callee:          'reconstruct(int, int, int, atom_location*, int, int, float*, float*, int*, float*, int, int, float*)'
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 123, Column: 0 }
   - String:          ' not inlined into '
   - Caller:          apatb_reconstruct_ir
   - String:          ' because it should never be inlined (cost=never)'
@@ -705,34 +765,34 @@ Args:
 Pass:            reflow-inliner
 Name:            Inline
 DebugLoc:        { File: 'C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib/src/hls\utils/x_hls_utils.h', 
-                   Line: 494, Column: 0 }
-Function:        _ZNK9fp_structIdE9to_doubleEv.25.35.44.55
+                   Line: 322, Column: 0 }
+Function:        _ZNK9fp_structIfE8to_floatEv.25.35.44.55
 Args:            
   - String:          'Inlining function '''
-  - Callee:          'fp_struct<double>::data() const (.7.28.38.47.58)'
+  - Callee:          'fp_struct<float>::data() const (.7.28.38.47.58)'
     DebugLoc:        { File: 'C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib/src/hls\utils/x_hls_utils.h', 
-                       Line: 475, Column: 0 }
+                       Line: 309, Column: 0 }
   - String:          ''' into '''
-  - Caller:          'fp_struct<double>::to_double() const (.25.35.44.55)'
+  - Caller:          'fp_struct<float>::to_float() const (.25.35.44.55)'
     DebugLoc:        { File: 'C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib/src/hls\utils/x_hls_utils.h', 
-                       Line: 494, Column: 0 }
+                       Line: 322, Column: 0 }
   - String:          ''''
 ...
 --- !Passed
 Pass:            reflow-inliner
 Name:            Inline
 DebugLoc:        { File: 'C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib/src/hls\utils/x_hls_utils.h', 
-                   Line: 509, Column: 0 }
-Function:        _ZNK9fp_structIdE7to_ieeeEv
+                   Line: 346, Column: 0 }
+Function:        _ZNK9fp_structIfE7to_ieeeEv
 Args:            
   - String:          'Inlining function '''
-  - Callee:          'fp_struct<double>::to_double() const (.25.35.44.55)'
+  - Callee:          'fp_struct<float>::to_float() const (.25.35.44.55)'
     DebugLoc:        { File: 'C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib/src/hls\utils/x_hls_utils.h', 
-                       Line: 494, Column: 0 }
+                       Line: 322, Column: 0 }
   - String:          ''' into '''
-  - Caller:          'fp_struct<double>::to_ieee() const'
+  - Caller:          'fp_struct<float>::to_ieee() const'
     DebugLoc:        { File: 'C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib/src/hls\utils/x_hls_utils.h', 
-                       Line: 509, Column: 0 }
+                       Line: 346, Column: 0 }
   - String:          ''''
 ...
 --- !Passed
@@ -740,14 +800,14 @@ Pass:            reflow-inliner
 Name:            Inline
 DebugLoc:        { File: 'C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib/hlsmath/include/FloatingPoint/hls_copysign.h', 
                    Line: 10, Column: 0 }
-Function:        _Z16generic_copysignIdET_S0_S0_
+Function:        _Z16generic_copysignIfET_S0_S0_
 Args:            
   - String:          'Inlining function '''
-  - Callee:          'fp_struct<double>::fp_struct(double)'
+  - Callee:          'fp_struct<float>::fp_struct(float)'
     DebugLoc:        { File: 'C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib/src/hls\utils/x_hls_utils.h', 
-                       Line: 456, Column: 0 }
+                       Line: 283, Column: 0 }
   - String:          ''' into '''
-  - Caller:          'double generic_copysign<double>(double, double)'
+  - Caller:          'float generic_copysign<float>(float, float)'
     DebugLoc:        { File: 'C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib/hlsmath/include/FloatingPoint/hls_copysign.h', 
                        Line: 10, Column: 0 }
   - String:          ''''
@@ -757,14 +817,14 @@ Pass:            reflow-inliner
 Name:            Inline
 DebugLoc:        { File: 'C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib/hlsmath/include/FloatingPoint/hls_copysign.h', 
                    Line: 10, Column: 0 }
-Function:        _Z16generic_copysignIdET_S0_S0_
+Function:        _Z16generic_copysignIfET_S0_S0_
 Args:            
   - String:          'Inlining function '''
-  - Callee:          'fp_struct<double>::to_ieee() const'
+  - Callee:          'fp_struct<float>::to_ieee() const'
     DebugLoc:        { File: 'C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib/src/hls\utils/x_hls_utils.h', 
-                       Line: 509, Column: 0 }
+                       Line: 346, Column: 0 }
   - String:          ''' into '''
-  - Caller:          'double generic_copysign<double>(double, double)'
+  - Caller:          'float generic_copysign<float>(float, float)'
     DebugLoc:        { File: 'C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib/hlsmath/include/FloatingPoint/hls_copysign.h', 
                        Line: 10, Column: 0 }
   - String:          ''''
@@ -774,14 +834,14 @@ Pass:            reflow-inliner
 Name:            Inline
 DebugLoc:        { File: 'C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib/hlsmath/include/FloatingPoint\hls_round.h', 
                    Line: 160, Column: 0 }
-Function:        _Z13generic_roundIdET_S0_
+Function:        _Z13generic_roundIfET_S0_
 Args:            
   - String:          'Inlining function '''
-  - Callee:          'fp_struct<double>::fp_struct(double)'
+  - Callee:          'fp_struct<float>::fp_struct(float)'
     DebugLoc:        { File: 'C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib/src/hls\utils/x_hls_utils.h', 
-                       Line: 456, Column: 0 }
+                       Line: 283, Column: 0 }
   - String:          ''' into '''
-  - Caller:          'double generic_round<double>(double)'
+  - Caller:          'float generic_round<float>(float)'
     DebugLoc:        { File: 'C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib/hlsmath/include/FloatingPoint\hls_round.h', 
                        Line: 160, Column: 0 }
   - String:          ''''
@@ -791,14 +851,14 @@ Pass:            reflow-inliner
 Name:            Inline
 DebugLoc:        { File: 'C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib/hlsmath/include/FloatingPoint\hls_round.h', 
                    Line: 160, Column: 0 }
-Function:        _Z13generic_roundIdET_S0_
+Function:        _Z13generic_roundIfET_S0_
 Args:            
   - String:          'Inlining function '''
-  - Callee:          'double generic_copysign<double>(double, double)'
+  - Callee:          'float generic_copysign<float>(float, float)'
     DebugLoc:        { File: 'C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib/hlsmath/include/FloatingPoint/hls_copysign.h', 
                        Line: 10, Column: 0 }
   - String:          ''' into '''
-  - Caller:          'double generic_round<double>(double)'
+  - Caller:          'float generic_round<float>(float)'
     DebugLoc:        { File: 'C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib/hlsmath/include/FloatingPoint\hls_round.h', 
                        Line: 160, Column: 0 }
   - String:          ''''
@@ -808,14 +868,14 @@ Pass:            reflow-inliner
 Name:            Inline
 DebugLoc:        { File: 'C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib/hlsmath/include/FloatingPoint\hls_round.h', 
                    Line: 160, Column: 0 }
-Function:        _Z13generic_roundIdET_S0_
+Function:        _Z13generic_roundIfET_S0_
 Args:            
   - String:          'Inlining function '''
-  - Callee:          'fp_struct<double>::data() const (.7.28.38.47.58)'
+  - Callee:          'fp_struct<float>::data() const (.7.28.38.47.58)'
     DebugLoc:        { File: 'C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib/src/hls\utils/x_hls_utils.h', 
-                       Line: 475, Column: 0 }
+                       Line: 309, Column: 0 }
   - String:          ''' into '''
-  - Caller:          'double generic_round<double>(double)'
+  - Caller:          'float generic_round<float>(float)'
     DebugLoc:        { File: 'C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib/hlsmath/include/FloatingPoint\hls_round.h', 
                        Line: 160, Column: 0 }
   - String:          ''''
@@ -825,14 +885,14 @@ Pass:            reflow-inliner
 Name:            Inline
 DebugLoc:        { File: 'C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib/hlsmath/include/FloatingPoint\hls_round.h', 
                    Line: 160, Column: 0 }
-Function:        _Z13generic_roundIdET_S0_
+Function:        _Z13generic_roundIfET_S0_
 Args:            
   - String:          'Inlining function '''
-  - Callee:          'fp_struct<double>::fp_struct(ap_uint<64>)'
+  - Callee:          'fp_struct<float>::fp_struct(ap_uint<32>)'
     DebugLoc:        { File: 'C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib/src/hls\utils/x_hls_utils.h', 
-                       Line: 464, Column: 0 }
+                       Line: 298, Column: 0 }
   - String:          ''' into '''
-  - Caller:          'double generic_round<double>(double)'
+  - Caller:          'float generic_round<float>(float)'
     DebugLoc:        { File: 'C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib/hlsmath/include/FloatingPoint\hls_round.h', 
                        Line: 160, Column: 0 }
   - String:          ''''
@@ -842,14 +902,14 @@ Pass:            reflow-inliner
 Name:            Inline
 DebugLoc:        { File: 'C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib/hlsmath/include/FloatingPoint\hls_round.h', 
                    Line: 160, Column: 0 }
-Function:        _Z13generic_roundIdET_S0_
+Function:        _Z13generic_roundIfET_S0_
 Args:            
   - String:          'Inlining function '''
-  - Callee:          'fp_struct<double>::to_ieee() const'
+  - Callee:          'fp_struct<float>::to_ieee() const'
     DebugLoc:        { File: 'C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib/src/hls\utils/x_hls_utils.h', 
-                       Line: 509, Column: 0 }
+                       Line: 346, Column: 0 }
   - String:          ''' into '''
-  - Caller:          'double generic_round<double>(double)'
+  - Caller:          'float generic_round<float>(float)'
     DebugLoc:        { File: 'C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib/hlsmath/include/FloatingPoint\hls_round.h', 
                        Line: 160, Column: 0 }
   - String:          ''''
@@ -857,16 +917,33 @@ Args:
 --- !Passed
 Pass:            reflow-inliner
 Name:            Inline
-DebugLoc:        { File: 'C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib/hlsmath/include/FloatingPoint\hls_case_IEEE754.h', 
-                   Line: 12, Column: 0 }
-Function:        _Z20generic_cast_IEEE754IiL9ap_q_mode6EdET_T1_bN3hls9enable_ifIXsr3std14numeric_limitsIS1_EE9is_signedEbE4typeE
+DebugLoc:        { File: 'F:/Vitis/2024.2/tps/mingw/8.3.0/win64.o/nt\lib\gcc\x86_64-w64-mingw32\8.3.0\include\c++\cmath', 
+                   Line: 1757, Column: 0 }
+Function:        _ZSt5roundf
 Args:            
   - String:          'Inlining function '''
-  - Callee:          'fp_struct<double>::fp_struct(double)'
-    DebugLoc:        { File: 'C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib/src/hls\utils/x_hls_utils.h', 
-                       Line: 456, Column: 0 }
+  - Callee:          roundf
+    DebugLoc:        { File: 'C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib\hlsmath\src\c\roundfloat.cpp', 
+                       Line: 6, Column: 0 }
   - String:          ''' into '''
-  - Caller:          'int generic_cast_IEEE754<int, (ap_q_mode)6, double>(double, bool, hls::enable_if<std::numeric_limits<int>::is_signed, bool>::type)'
+  - Caller:          'std::round(float)'
+    DebugLoc:        { File: 'F:/Vitis/2024.2/tps/mingw/8.3.0/win64.o/nt\lib\gcc\x86_64-w64-mingw32\8.3.0\include\c++\cmath', 
+                       Line: 1757, Column: 0 }
+  - String:          ''''
+...
+--- !Passed
+Pass:            reflow-inliner
+Name:            Inline
+DebugLoc:        { File: 'C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib/hlsmath/include/FloatingPoint\hls_case_IEEE754.h', 
+                   Line: 12, Column: 0 }
+Function:        _Z20generic_cast_IEEE754IiL9ap_q_mode6EfET_T1_bN3hls9enable_ifIXsr3std14numeric_limitsIS1_EE9is_signedEbE4typeE
+Args:            
+  - String:          'Inlining function '''
+  - Callee:          'fp_struct<float>::fp_struct(float)'
+    DebugLoc:        { File: 'C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib/src/hls\utils/x_hls_utils.h', 
+                       Line: 283, Column: 0 }
+  - String:          ''' into '''
+  - Caller:          'int generic_cast_IEEE754<int, (ap_q_mode)6, float>(float, bool, hls::enable_if<std::numeric_limits<int>::is_signed, bool>::type)'
     DebugLoc:        { File: 'C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib/hlsmath/include/FloatingPoint\hls_case_IEEE754.h', 
                        Line: 12, Column: 0 }
   - String:          ''''
@@ -876,14 +953,14 @@ Pass:            reflow-inliner
 Name:            Inline
 DebugLoc:        { File: 'C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib/hlsmath/include/FloatingPoint\hls_case_IEEE754.h', 
                    Line: 12, Column: 0 }
-Function:        _Z20generic_cast_IEEE754IiL9ap_q_mode6EdET_T1_bN3hls9enable_ifIXsr3std14numeric_limitsIS1_EE9is_signedEbE4typeE
+Function:        _Z20generic_cast_IEEE754IiL9ap_q_mode6EfET_T1_bN3hls9enable_ifIXsr3std14numeric_limitsIS1_EE9is_signedEbE4typeE
 Args:            
   - String:          'Inlining function '''
-  - Callee:          'fp_struct<double>::mantissa() const'
+  - Callee:          'fp_struct<float>::mantissa() const'
     DebugLoc:        { File: 'C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib/src/hls\utils/x_hls_utils.h', 
-                       Line: 503, Column: 0 }
+                       Line: 340, Column: 0 }
   - String:          ''' into '''
-  - Caller:          'int generic_cast_IEEE754<int, (ap_q_mode)6, double>(double, bool, hls::enable_if<std::numeric_limits<int>::is_signed, bool>::type)'
+  - Caller:          'int generic_cast_IEEE754<int, (ap_q_mode)6, float>(float, bool, hls::enable_if<std::numeric_limits<int>::is_signed, bool>::type)'
     DebugLoc:        { File: 'C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib/hlsmath/include/FloatingPoint\hls_case_IEEE754.h', 
                        Line: 12, Column: 0 }
   - String:          ''''
@@ -893,14 +970,14 @@ Pass:            reflow-inliner
 Name:            Inline
 DebugLoc:        { File: 'C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib/hlsmath/include/FloatingPoint\hls_case_IEEE754.h', 
                    Line: 12, Column: 0 }
-Function:        _Z20generic_cast_IEEE754IiL9ap_q_mode6EdET_T1_bN3hls9enable_ifIXsr3std14numeric_limitsIS1_EE9is_signedEbE4typeE
+Function:        _Z20generic_cast_IEEE754IiL9ap_q_mode6EfET_T1_bN3hls9enable_ifIXsr3std14numeric_limitsIS1_EE9is_signedEbE4typeE
 Args:            
   - String:          'Inlining function '''
-  - Callee:          'fp_struct<double>::expv() const'
+  - Callee:          'fp_struct<float>::expv() const'
     DebugLoc:        { File: 'C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib/src/hls\utils/x_hls_utils.h', 
-                       Line: 485, Column: 0 }
+                       Line: 316, Column: 0 }
   - String:          ''' into '''
-  - Caller:          'int generic_cast_IEEE754<int, (ap_q_mode)6, double>(double, bool, hls::enable_if<std::numeric_limits<int>::is_signed, bool>::type)'
+  - Caller:          'int generic_cast_IEEE754<int, (ap_q_mode)6, float>(float, bool, hls::enable_if<std::numeric_limits<int>::is_signed, bool>::type)'
     DebugLoc:        { File: 'C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib/hlsmath/include/FloatingPoint\hls_case_IEEE754.h', 
                        Line: 12, Column: 0 }
   - String:          ''''
@@ -910,14 +987,14 @@ Pass:            reflow-inliner
 Name:            Inline
 DebugLoc:        { File: 'C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib/hlsmath/include/FloatingPoint\hls_case_IEEE754.h', 
                    Line: 12, Column: 0 }
-Function:        _Z20generic_cast_IEEE754IiL9ap_q_mode6EdET_T1_bN3hls9enable_ifIXsr3std14numeric_limitsIS1_EE9is_signedEbE4typeE
+Function:        _Z20generic_cast_IEEE754IiL9ap_q_mode6EfET_T1_bN3hls9enable_ifIXsr3std14numeric_limitsIS1_EE9is_signedEbE4typeE
 Args:            
   - String:          'Inlining function '''
-  - Callee:          'fp_struct<double>::__signbit() const'
+  - Callee:          'fp_struct<float>::__signbit() const'
     DebugLoc:        { File: 'C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib/src/hls\utils/x_hls_utils.h', 
-                       Line: 512, Column: 0 }
+                       Line: 349, Column: 0 }
   - String:          ''' into '''
-  - Caller:          'int generic_cast_IEEE754<int, (ap_q_mode)6, double>(double, bool, hls::enable_if<std::numeric_limits<int>::is_signed, bool>::type)'
+  - Caller:          'int generic_cast_IEEE754<int, (ap_q_mode)6, float>(float, bool, hls::enable_if<std::numeric_limits<int>::is_signed, bool>::type)'
     DebugLoc:        { File: 'C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib/hlsmath/include/FloatingPoint\hls_case_IEEE754.h', 
                        Line: 12, Column: 0 }
   - String:          ''''
@@ -927,14 +1004,14 @@ Pass:            reflow-inliner
 Name:            Inline
 DebugLoc:        { File: 'C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib/hlsmath/include/FloatingPoint\hls_case_IEEE754.h', 
                    Line: 116, Column: 0 }
-Function:        _Z20generic_cast_IEEE754IidET_T0_b
+Function:        _Z20generic_cast_IEEE754IifET_T0_b
 Args:            
   - String:          'Inlining function '''
-  - Callee:          'int generic_cast_IEEE754<int, (ap_q_mode)6, double>(double, bool, hls::enable_if<std::numeric_limits<int>::is_signed, bool>::type)'
+  - Callee:          'int generic_cast_IEEE754<int, (ap_q_mode)6, float>(float, bool, hls::enable_if<std::numeric_limits<int>::is_signed, bool>::type)'
     DebugLoc:        { File: 'C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib/hlsmath/include/FloatingPoint\hls_case_IEEE754.h', 
                        Line: 12, Column: 0 }
   - String:          ''' into '''
-  - Caller:          'int generic_cast_IEEE754<int, double>(double, bool)'
+  - Caller:          'int generic_cast_IEEE754<int, float>(float, bool)'
     DebugLoc:        { File: 'C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib/hlsmath/include/FloatingPoint\hls_case_IEEE754.h', 
                        Line: 116, Column: 0 }
   - String:          ''''
@@ -943,44 +1020,44 @@ Args:
 Pass:            reflow-inliner
 Name:            Inline
 DebugLoc:        { File: 'C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib\hlsmath\src\lib_floatconversion.cpp', 
-                   Line: 55, Column: 0 }
-Function:        __hls_fptosi_double_i32
+                   Line: 51, Column: 0 }
+Function:        __hls_fptosi_float_i32
 Args:            
   - String:          'Inlining function '''
-  - Callee:          'int generic_cast_IEEE754<int, double>(double, bool)'
+  - Callee:          'int generic_cast_IEEE754<int, float>(float, bool)'
     DebugLoc:        { File: 'C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib/hlsmath/include/FloatingPoint\hls_case_IEEE754.h', 
                        Line: 116, Column: 0 }
   - String:          ''' into '''
-  - Caller:          __hls_fptosi_double_i32
+  - Caller:          __hls_fptosi_float_i32
     DebugLoc:        { File: 'C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib\hlsmath\src\lib_floatconversion.cpp', 
-                       Line: 55, Column: 0 }
+                       Line: 51, Column: 0 }
   - String:          ''''
 ...
 --- !Passed
 Pass:            reflow-inliner
 Name:            Inline
-DebugLoc:        { File: ../image_analysis.cpp, Line: 8, Column: 0 }
-Function:        _Z14getLocalImagesiiiiP13atom_locationRN3hls6streamI16local_image_infoLi0EEE
+DebugLoc:        { File: ../image_analysis.cpp, Line: 7, Column: 0 }
+Function:        _Z21getLocalImages_singleiiiiP13atom_locationRN3hls6streamI16local_image_infoLi0EEE
 Args:            
   - String:          'Inlining function '''
-  - Callee:          round
-    DebugLoc:        { File: 'C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib\hlsmath\src\c\rounddouble.cpp', 
-                       Line: 6, Column: 0 }
+  - Callee:          'std::round(float)'
+    DebugLoc:        { File: 'F:/Vitis/2024.2/tps/mingw/8.3.0/win64.o/nt\lib\gcc\x86_64-w64-mingw32\8.3.0\include\c++\cmath', 
+                       Line: 1757, Column: 0 }
   - String:          ''' into '''
-  - Caller:          'getLocalImages(int, int, int, int, atom_location*, hls::stream<local_image_info, 0>&)'
-    DebugLoc:        { File: ../image_analysis.cpp, Line: 8, Column: 0 }
+  - Caller:          'getLocalImages_single(int, int, int, int, atom_location*, hls::stream<local_image_info, 0>&)'
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 7, Column: 0 }
   - String:          ''''
 ...
 --- !Passed
 Pass:            reflow-array-partition
 Name:            ArrayXform
-DebugLoc:        { File: ../image_analysis.cpp, Line: 10, Column: 16 }
-Function:        _Z14getLocalImagesiiiiP13atom_locationRN3hls6streamI16local_image_infoLi0EEE
+DebugLoc:        { File: ../image_analysis.cpp, Line: 153, Column: 15 }
+Function:        _Z11reconstructiiiP13atom_locationiiPfS1_PiS1_iiS1_
 Args:            
   - String:          'Applying '
   - String:          array_partition
   - String:          ' to '''
-  - UOName:          local_atomLocations.x
+  - UOName:          curr_fullImage
   - String:          ''':'
   - String:          ' '
   - Mode:            Complete
@@ -992,13 +1069,13 @@ Args:
 --- !Passed
 Pass:            reflow-array-partition
 Name:            ArrayXform
-DebugLoc:        { File: ../image_analysis.cpp, Line: 10, Column: 16 }
-Function:        _Z14getLocalImagesiiiiP13atom_locationRN3hls6streamI16local_image_infoLi0EEE
+DebugLoc:        { File: ../image_analysis.cpp, Line: 154, Column: 15 }
+Function:        _Z11reconstructiiiP13atom_locationiiPfS1_PiS1_iiS1_
 Args:            
   - String:          'Applying '
   - String:          array_partition
   - String:          ' to '''
-  - UOName:          local_atomLocations.y
+  - UOName:          curr_localImage
   - String:          ''':'
   - String:          ' '
   - Mode:            Complete
@@ -1010,8 +1087,8 @@ Args:
 --- !Passed
 Pass:            reflow-aggr
 Name:            AggrSucc
-DebugLoc:        { File: ../image_analysis.cpp, Line: 157, Column: 32 }
-Function:        _Z11reconstructiiiP13atom_locationiiPdS1_PiS1_iiS1_Rj
+DebugLoc:        { File: ../image_analysis.cpp, Line: 152, Column: 34 }
+Function:        _Z11reconstructiiiP13atom_locationiiPfS1_PiS1_iiS1_
 Args:            
   - String:          'Aggregating '
   - HwTyName:        'fifo (hls::stream)'
@@ -1023,418 +1100,389 @@ Args:
   - Bitwidth:        '256'
   - String:          '-bits'
 ...
---- !Passed
-Pass:            reflow-aggr
-Name:            AggrSucc
-DebugLoc:        { File: ../image_analysis.cpp, Line: 127, Column: 0 }
-Function:        _Z11reconstructiiiP13atom_locationiiPdS1_PiS1_iiS1_Rj
-Args:            
-  - String:          'Aggregating '
-  - HwTyName:        bram
-  - String:          ' variable '''
-  - Name:            atomLocations
-  - String:          ''' with '
-  - AggregateTypeName: 'compact=bit'
-  - String:          ' mode in '
-  - Bitwidth:        '128'
-  - String:          '-bits'
-...
 --- !Missed
 Pass:            reflow-burst-inference
-Name:            CouldNotAnalyzeBoundsPattern
-DebugLoc:        { File: ../image_analysis.cpp, Line: 98, Column: 30 }
-Function:        _Z15applyProjectorsiiiPdS_PiS_iiRN3hls6streamI16local_image_infoLi0EEES_Rj
+Name:            UnsupportedAccessType
+DebugLoc:        { File: ../image_analysis.cpp, Line: 8, Column: 17 }
+Function:        _Z21getLocalImages_singleiiiiP13atom_locationRN3hls6streamI16local_image_infoLi0EEE
 Args:            
-  - String:          Could not analyze the loop bounds
-  - String:          ' _XLX_SEP_ '
-  - LoopName:        VITIS_LOOP_98_3
-  - String:          ' '
-  - LoopLoc:         '../image_analysis.cpp:98:30'
-  - String:          ' '
-  - Function:        'applyProjectors(int, int, int, double*, double*, int*, double*, int, int, hls::stream<local_image_info, 0>&, double*, unsigned int&)'
-    DebugLoc:        { File: ../image_analysis.cpp, Line: 70, Column: 0 }
-  - String:          ' '
-...
---- !Missed
-Pass:            reflow-burst-inference
-Name:            CouldNotAnalyzeBoundsPattern
-DebugLoc:        { File: ../image_analysis.cpp, Line: 91, Column: 26 }
-Function:        _Z15applyProjectorsiiiPdS_PiS_iiRN3hls6streamI16local_image_infoLi0EEES_Rj
-Args:            
-  - String:          Could not analyze the loop bounds
-  - String:          ' _XLX_SEP_ '
-  - LoopName:        VITIS_LOOP_91_2
-  - String:          ' '
-  - LoopLoc:         '../image_analysis.cpp:91:26'
-  - String:          ' '
-  - Function:        'applyProjectors(int, int, int, double*, double*, int*, double*, int, int, hls::stream<local_image_info, 0>&, double*, unsigned int&)'
-    DebugLoc:        { File: ../image_analysis.cpp, Line: 70, Column: 0 }
-  - String:          ' '
-...
---- !Missed
-Pass:            reflow-burst-inference
-Name:            AccessInCondBranch
-DebugLoc:        { File: ../image_analysis.cpp, Line: 85, Column: 75 }
-Function:        _Z15applyProjectorsiiiPdS_PiS_iiRN3hls6streamI16local_image_infoLi0EEES_Rj
-Args:            
-  - String:          'Access '
-  - Access:          load
-    DebugLoc:        { File: ../image_analysis.cpp, Line: 85, Column: 75 }
-  - String:          ' is in the conditional branch'
+  - String:          'Unsupported access data type. Expected integer or floating point type but received '
+  - DataType:        '%struct.atom_location = type { float, float }'
   - String:          ' _XLX_SEP_ '
   - OrigAccess:      load
-    DebugLoc:        { File: ../image_analysis.cpp, Line: 85, Column: 75 }
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 8, Column: 17 }
   - OrigDirection:   read
-  - OrigID:          if.end.load.8
-  - ArrayName:       imageProjs_local_size
+  - OrigID:          entry.load.7
+  - ArrayName:       atomLocations
   - String:          ' '
-  - BundleName:      imageProjs_local_size
+  - BundleName:      atomLocations
   - String:          ' '
-  - LoopName:        VITIS_LOOP_72_1
-  - String:          ' '
-  - LoopLoc:         '../image_analysis.cpp:72:22'
-  - String:          ' '
-  - Function:        'applyProjectors(int, int, int, double*, double*, int*, double*, int, int, hls::stream<local_image_info, 0>&, double*, unsigned int&)'
-    DebugLoc:        { File: ../image_analysis.cpp, Line: 70, Column: 0 }
+  - Function:        'getLocalImages_single(int, int, int, int, atom_location*, hls::stream<local_image_info, 0>&)'
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 7, Column: 0 }
   - String:          ' '
 ...
---- !Missed
+--- !Passed
 Pass:            reflow-burst-inference
-Name:            AccessInCondBranch
-DebugLoc:        { File: ../image_analysis.cpp, Line: 107, Column: 46 }
-Function:        _Z15applyProjectorsiiiPdS_PiS_iiRN3hls6streamI16local_image_infoLi0EEES_Rj
+Name:            BurstInferred
+DebugLoc:        { File: ../image_analysis.cpp, Line: 77, Column: 22 }
+Function:        _Z13Image_extractiRN3hls6streamI16local_image_infoLi0EEEPfPA31_fS4_S6_S4_Rf
 Args:            
-  - String:          'Access '
-  - Access:          load
-    DebugLoc:        { File: ../image_analysis.cpp, Line: 107, Column: 46 }
-  - String:          ' is in the conditional branch'
+  - String:          'Sequential '
+  - Direction:       read
+  - String:          ' of length '
+  - Length:          '961'
+  - String:          ' has been inferred'
+  - String:          ' _XLX_SEP_ '
+  - AccessID:        imageProjs_local3seq
+  - ArrayName:       imageProjs_local
+  - String:          ' '
+  - BundleName:      imageProjs_local
+  - String:          ' '
+  - LoopName:        VITIS_LOOP_77_1
+  - String:          ' '
+  - LoopLoc:         '../image_analysis.cpp:77:22'
+  - String:          ' '
+  - Function:        'Image_extract(int, hls::stream<local_image_info, 0>&, float*, float (*) [31], float*, float (*) [31], float*, float&)'
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 69, Column: 0 }
+  - String:          ' '
   - String:          ' _XLX_SEP_ '
   - OrigAccess:      load
-    DebugLoc:        { File: ../image_analysis.cpp, Line: 107, Column: 46 }
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 80, Column: 37 }
   - OrigDirection:   read
-  - OrigID:          if.then56.load.1
-  - ArrayName:       imageProjs
+  - OrigID:          for.body14.load.70
+...
+--- !Passed
+Pass:            reflow-burst-inference
+Name:            BurstInferred
+DebugLoc:        { File: ../image_analysis.cpp, Line: 78, Column: 26 }
+Function:        _Z13Image_extractiRN3hls6streamI16local_image_infoLi0EEEPfPA31_fS4_S6_S4_Rf
+Args:            
+  - String:          'Sequential '
+  - Direction:       read
+  - String:          ' of length '
+  - Length:          '31'
+  - String:          ' has been inferred'
+  - String:          ' _XLX_SEP_ '
+  - AccessID:        scevgepseq
+  - ArrayName:       fullImage
   - String:          ' '
-  - BundleName:      imageProjs
+  - BundleName:      fullImage
   - String:          ' '
-  - LoopName:        VITIS_LOOP_72_1
+  - LoopName:        VITIS_LOOP_78_2
   - String:          ' '
-  - LoopLoc:         '../image_analysis.cpp:72:22'
+  - LoopLoc:         '../image_analysis.cpp:78:26'
   - String:          ' '
-  - Function:        'applyProjectors(int, int, int, double*, double*, int*, double*, int, int, hls::stream<local_image_info, 0>&, double*, unsigned int&)'
-    DebugLoc:        { File: ../image_analysis.cpp, Line: 70, Column: 0 }
+  - Function:        'Image_extract(int, hls::stream<local_image_info, 0>&, float*, float (*) [31], float*, float (*) [31], float*, float&)'
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 69, Column: 0 }
   - String:          ' '
+  - String:          ' _XLX_SEP_ '
+  - OrigAccess:      load
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 81, Column: 36 }
+  - OrigDirection:   read
+  - OrigID:          for.body14.load.107
 ...
 --- !Missed
 Pass:            reflow-burst-inference
-Name:            AccessInCondBranch
-DebugLoc:        { File: ../image_analysis.cpp, Line: 111, Column: 37 }
-Function:        _Z15applyProjectorsiiiPdS_PiS_iiRN3hls6streamI16local_image_infoLi0EEES_Rj
+Name:            IncompatibleStride
+DebugLoc:        { File: ../image_analysis.cpp, Line: 78, Column: 26 }
+Function:        _Z13Image_extractiRN3hls6streamI16local_image_infoLi0EEEPfPA31_fS4_S6_S4_Rf
 Args:            
-  - String:          'Access '
-  - Access:          store
-    DebugLoc:        { File: ../image_analysis.cpp, Line: 111, Column: 37 }
-  - String:          ' is in the conditional branch'
+  - String:          Stride is incompatible
   - String:          ' _XLX_SEP_ '
-  - OrigAccess:      store
-    DebugLoc:        { File: ../image_analysis.cpp, Line: 111, Column: 37 }
-  - OrigDirection:   write
-  - OrigID:          if.else.store.0
-  - ArrayName:       emissions
+  - OrigAccess:      call
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 78, Column: 26 }
+  - OrigDirection:   read
+  - OrigID:          scevgepseq
+  - ArrayName:       fullImage
   - String:          ' '
-  - BundleName:      emissions
+  - BundleName:      fullImage
   - String:          ' '
-  - LoopName:        VITIS_LOOP_72_1
+  - LoopName:        VITIS_LOOP_77_1
   - String:          ' '
-  - LoopLoc:         '../image_analysis.cpp:72:22'
+  - LoopLoc:         '../image_analysis.cpp:77:22'
   - String:          ' '
-  - Function:        'applyProjectors(int, int, int, double*, double*, int*, double*, int, int, hls::stream<local_image_info, 0>&, double*, unsigned int&)'
-    DebugLoc:        { File: ../image_analysis.cpp, Line: 70, Column: 0 }
+  - Function:        'Image_extract(int, hls::stream<local_image_info, 0>&, float*, float (*) [31], float*, float (*) [31], float*, float&)'
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 69, Column: 0 }
   - String:          ' '
 ...
 --- !Missed
-Pass:            reflow-burst-inference
-Name:            AccessInCondBranch
-DebugLoc:        { File: ../image_analysis.cpp, Line: 107, Column: 37 }
-Function:        _Z15applyProjectorsiiiPdS_PiS_iiRN3hls6streamI16local_image_infoLi0EEES_Rj
+Pass:            reflow-burst-widen
+Name:            GreaterOrEqualThreshold
+DebugLoc:        { File: ../image_analysis.cpp, Line: 77, Column: 22 }
+Function:        _Z13Image_extractiRN3hls6streamI16local_image_infoLi0EEEPfPA31_fS4_S6_S4_Rf
 Args:            
-  - String:          'Access '
-  - Access:          store
-    DebugLoc:        { File: ../image_analysis.cpp, Line: 107, Column: 37 }
-  - String:          ' is in the conditional branch'
+  - String:          'Could not widen since type '
+  - Type:            float
+  - String:          ' size is greater than or equal to the max_widen_bitwidth threshold of '
+  - Threshold:       '0'
   - String:          ' _XLX_SEP_ '
-  - OrigAccess:      store
-    DebugLoc:        { File: ../image_analysis.cpp, Line: 107, Column: 37 }
-  - OrigDirection:   write
-  - OrigID:          if.then56.store.4
-  - ArrayName:       emissions
+  - OrigAccess:      call
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 77, Column: 22 }
+  - OrigDirection:   read
+  - OrigID:          imageProjs_local3seq
+  - ArrayName:       imageProjs_local
   - String:          ' '
-  - BundleName:      emissions
+  - BundleName:      imageProjs_local
   - String:          ' '
-  - LoopName:        VITIS_LOOP_72_1
+  - LoopName:        VITIS_LOOP_78_2
   - String:          ' '
-  - LoopLoc:         '../image_analysis.cpp:72:22'
+  - LoopLoc:         '../image_analysis.cpp:78:26'
   - String:          ' '
-  - Function:        'applyProjectors(int, int, int, double*, double*, int*, double*, int, int, hls::stream<local_image_info, 0>&, double*, unsigned int&)'
-    DebugLoc:        { File: ../image_analysis.cpp, Line: 70, Column: 0 }
+  - Function:        'Image_extract(int, hls::stream<local_image_info, 0>&, float*, float (*) [31], float*, float (*) [31], float*, float&)'
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 69, Column: 0 }
   - String:          ' '
 ...
---- !Failure
-Pass:            reflow-occurrence-inference
-Name:            NonComputableLoopForm
-DebugLoc:        { File: ../image_analysis.cpp, Line: 98, Column: 30 }
-Function:        _Z15applyProjectorsiiiPdS_PiS_iiRN3hls6streamI16local_image_infoLi0EEES_Rj
+--- !Missed
+Pass:            reflow-burst-widen
+Name:            GreaterOrEqualThreshold
+DebugLoc:        { File: ../image_analysis.cpp, Line: 78, Column: 26 }
+Function:        _Z13Image_extractiRN3hls6streamI16local_image_infoLi0EEEPfPA31_fS4_S6_S4_Rf
 Args:            
-  - String:          'Could not analyze occurrence information within '''
-  - LoopName:        VITIS_LOOP_98_3
+  - String:          'Could not widen since type '
+  - Type:            float
+  - String:          ' size is greater than or equal to the max_widen_bitwidth threshold of '
+  - Threshold:       '0'
+  - String:          ' _XLX_SEP_ '
+  - OrigAccess:      call
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 78, Column: 26 }
+  - OrigDirection:   read
+  - OrigID:          scevgepseq
+  - ArrayName:       fullImage
+  - String:          ' '
+  - BundleName:      fullImage
+  - String:          ' '
+  - LoopName:        VITIS_LOOP_78_2
+  - String:          ' '
+  - LoopLoc:         '../image_analysis.cpp:78:26'
+  - String:          ' '
+  - Function:        'Image_extract(int, hls::stream<local_image_info, 0>&, float*, float (*) [31], float*, float (*) [31], float*, float&)'
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 69, Column: 0 }
+  - String:          ' '
+...
+--- !HLSReportInfo
+Pass:            auto-loop-pipeline
+Name:            AutoLoopPipeline
+Args:            
+  - String:          'automatically set the pipeline for Loop< '
+  - LoopName:        VITIS_LOOP_101_1
+  - String:          '> at '
+  - LoopLoc:         '../image_analysis.cpp:101:23'
+  - String:          ' '
+...
+--- !HLSReportInfo
+Pass:            auto-loop-pipeline
+Name:            AutoLoopPipeline
+Args:            
+  - String:          'automatically set the pipeline for Loop< '
+  - LoopName:        VITIS_LOOP_78_2
+  - String:          '> at '
+  - LoopLoc:         '../image_analysis.cpp:78:26'
+  - String:          ' '
+...
+--- !Passed
+Pass:            reflow-burst-summary
+Name:            BurstInferredVerboseSummary
+DebugLoc:        { File: ../image_analysis.cpp, Line: 77, Column: 22 }
+Function:        _Z13Image_extractiRN3hls6streamI16local_image_infoLi0EEEPfPA31_fS4_S6_S4_Rf.1
+Args:            
+  - String:          'Multiple burst '
+  - Direction:       reads
+  - String:          ' of length '
+  - Length:          '961'
+  - String:          ' and bit width '
+  - Width:           '32'
+  - String:          ' has been inferred.'
+  - String:          ' These burst requests might be further partitioned into multiple requests during RTL generation, based on max_read_burst_length or max_write_burst_length settings.'
+  - String:          ' _XLX_SEP_ '
+  - AccessID:        seq
+  - ArrayName:       ''
+  - String:          ' '
+  - BundleName:      imageProjs_local
+  - String:          ' '
+  - LoopName:        VITIS_LOOP_77_1
+  - String:          ' '
+  - LoopLoc:         '../image_analysis.cpp:77:22'
+  - String:          ' '
+  - Function:        'Image_extract(int, hls::stream<local_image_info, 0>&, float*, float (*) [31], float*, float (*) [31], float*, float&) (.1)'
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 69, Column: 0 }
+  - String:          ' '
+...
+--- !Passed
+Pass:            reflow-burst-summary
+Name:            BurstInferredSummary
+DebugLoc:        { File: ../image_analysis.cpp, Line: 77, Column: 22 }
+Function:        _Z13Image_extractiRN3hls6streamI16local_image_infoLi0EEEPfPA31_fS4_S6_S4_Rf.1
+Args:            
+  - String:          'Multiple burst '
+  - Direction:       reads
+  - String:          ' of length '
+  - Length:          '961'
+  - String:          ' and bit width '
+  - Width:           '32'
+  - String:          ' in loop '''
+  - LoopName:        VITIS_LOOP_77_1
   - String:          '''('
-  - LoopLoc:         '../image_analysis.cpp:98:30'
-  - String:          ') . Requires loop in simplify form and with single exit.'
+  - LoopLoc:         '../image_analysis.cpp:77:22'
+  - String:          ')'
+  - String:          ' has been inferred on bundle '''
+  - BundleName:      imageProjs_local
+  - String:          '''.'
+  - String:          ' These burst requests might be further partitioned into multiple requests during RTL generation, based on max_read_burst_length or max_write_burst_length settings.'
 ...
---- !Failure
-Pass:            reflow-occurrence-inference
-Name:            NonComputableLoopForm
-DebugLoc:        { File: ../image_analysis.cpp, Line: 91, Column: 26 }
-Function:        _Z15applyProjectorsiiiPdS_PiS_iiRN3hls6streamI16local_image_infoLi0EEES_Rj
+--- !Passed
+Pass:            reflow-burst-summary
+Name:            BurstInferredVerboseSummary
+DebugLoc:        { File: ../image_analysis.cpp, Line: 78, Column: 26 }
+Function:        _Z13Image_extractiRN3hls6streamI16local_image_infoLi0EEEPfPA31_fS4_S6_S4_Rf.1
 Args:            
-  - String:          'Could not analyze occurrence information within '''
-  - LoopName:        VITIS_LOOP_91_2
+  - String:          'Multiple burst '
+  - Direction:       reads
+  - String:          ' of length '
+  - Length:          '31'
+  - String:          ' and bit width '
+  - Width:           '32'
+  - String:          ' has been inferred.'
+  - String:          ' These burst requests might be further partitioned into multiple requests during RTL generation, based on max_read_burst_length or max_write_burst_length settings.'
+  - String:          ' _XLX_SEP_ '
+  - AccessID:        seq3
+  - ArrayName:       ''
+  - String:          ' '
+  - BundleName:      fullImage
+  - String:          ' '
+  - LoopName:        VITIS_LOOP_78_2
+  - String:          ' '
+  - LoopLoc:         '../image_analysis.cpp:78:26'
+  - String:          ' '
+  - Function:        'Image_extract(int, hls::stream<local_image_info, 0>&, float*, float (*) [31], float*, float (*) [31], float*, float&) (.1)'
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 69, Column: 0 }
+  - String:          ' '
+...
+--- !Passed
+Pass:            reflow-burst-summary
+Name:            BurstInferredSummary
+DebugLoc:        { File: ../image_analysis.cpp, Line: 78, Column: 26 }
+Function:        _Z13Image_extractiRN3hls6streamI16local_image_infoLi0EEEPfPA31_fS4_S6_S4_Rf.1
+Args:            
+  - String:          'Multiple burst '
+  - Direction:       reads
+  - String:          ' of length '
+  - Length:          '31'
+  - String:          ' and bit width '
+  - Width:           '32'
+  - String:          ' in loop '''
+  - LoopName:        VITIS_LOOP_78_2
   - String:          '''('
-  - LoopLoc:         '../image_analysis.cpp:91:26'
-  - String:          ') . Requires loop in simplify form and with single exit.'
-...
---- !Passed
-Pass:            reflow-infer-unroll
-Name:            ImplicitUnroll
-DebugLoc:        { File: ../image_analysis.cpp, Line: 91, Column: 26 }
-Function:        _Z15applyProjectorsiiiPdS_PiS_iiRN3hls6streamI16local_image_infoLi0EEES_Rj
-Args:            
-  - String:          'Loop '''
-  - LoopName:        VITIS_LOOP_91_2
-  - String:          ''' is marked as complete unroll implied by the pipeline pragma'
-...
---- !Passed
-Pass:            reflow-infer-unroll
-Name:            ImplicitUnroll
-DebugLoc:        { File: ../image_analysis.cpp, Line: 98, Column: 30 }
-Function:        _Z15applyProjectorsiiiPdS_PiS_iiRN3hls6streamI16local_image_infoLi0EEES_Rj
-Args:            
-  - String:          'Loop '''
-  - LoopName:        VITIS_LOOP_98_3
-  - String:          ''' is marked as complete unroll implied by the pipeline pragma'
-...
---- !Passed
-Pass:            reflow-infer-unroll
-Name:            ImplicitUnroll
-DebugLoc:        { File: ../image_analysis.cpp, Line: 19, Column: 19 }
-Function:        _Z14getLocalImagesiiiiP13atom_locationRN3hls6streamI16local_image_infoLi0EEE
-Args:            
-  - String:          'Loop '''
-  - LoopName:        process_loop
-  - String:          ''' is marked as complete unroll implied by the pipeline pragma'
-...
---- !Passed
-Pass:            reflow-infer-unroll
-Name:            ImplicitUnroll
-DebugLoc:        { File: ../image_analysis.cpp, Line: 13, Column: 13 }
-Function:        _Z14getLocalImagesiiiiP13atom_locationRN3hls6streamI16local_image_infoLi0EEE
-Args:            
-  - String:          'Loop '''
-  - LoopName:        copy_loop
-  - String:          ''' is marked as complete unroll implied by the pipeline pragma'
-...
---- !Passed
-Pass:            reflow-infer-unroll
-Name:            ImplicitUnroll
-DebugLoc:        { File: ../image_analysis.cpp, Line: 91, Column: 26 }
-Function:        _Z15applyProjectorsiiiPdS_PiS_iiRN3hls6streamI16local_image_infoLi0EEES_Rj
-Args:            
-  - String:          'Loop '''
-  - LoopName:        VITIS_LOOP_91_2
-  - String:          ''' is marked as complete unroll implied by the pipeline pragma'
-...
---- !Passed
-Pass:            reflow-infer-unroll
-Name:            ImplicitUnroll
-DebugLoc:        { File: ../image_analysis.cpp, Line: 98, Column: 30 }
-Function:        _Z15applyProjectorsiiiPdS_PiS_iiRN3hls6streamI16local_image_infoLi0EEES_Rj
-Args:            
-  - String:          'Loop '''
-  - LoopName:        VITIS_LOOP_98_3
-  - String:          ''' is marked as complete unroll implied by the pipeline pragma'
-...
---- !Passed
-Pass:            reflow-infer-unroll
-Name:            ImplicitUnroll
-DebugLoc:        { File: ../image_analysis.cpp, Line: 19, Column: 19 }
-Function:        _Z14getLocalImagesiiiiP13atom_locationRN3hls6streamI16local_image_infoLi0EEE
-Args:            
-  - String:          'Loop '''
-  - LoopName:        process_loop
-  - String:          ''' is marked as complete unroll implied by the pipeline pragma'
-...
---- !Passed
-Pass:            reflow-infer-unroll
-Name:            ImplicitUnroll
-DebugLoc:        { File: ../image_analysis.cpp, Line: 13, Column: 13 }
-Function:        _Z14getLocalImagesiiiiP13atom_locationRN3hls6streamI16local_image_infoLi0EEE
-Args:            
-  - String:          'Loop '''
-  - LoopName:        copy_loop
-  - String:          ''' is marked as complete unroll implied by the pipeline pragma'
-...
---- !Passed
-Pass:            reflow-infer-unroll
-Name:            ImplicitUnroll
-DebugLoc:        { File: ../image_analysis.cpp, Line: 91, Column: 26 }
-Function:        _Z15applyProjectorsiiiPdS_PiS_iiRN3hls6streamI16local_image_infoLi0EEES_Rj.1
-Args:            
-  - String:          'Loop '''
-  - LoopName:        VITIS_LOOP_91_2
-  - String:          ''' is marked as complete unroll implied by the pipeline pragma'
-...
---- !Passed
-Pass:            reflow-infer-unroll
-Name:            ImplicitUnroll
-DebugLoc:        { File: ../image_analysis.cpp, Line: 98, Column: 30 }
-Function:        _Z15applyProjectorsiiiPdS_PiS_iiRN3hls6streamI16local_image_infoLi0EEES_Rj.1
-Args:            
-  - String:          'Loop '''
-  - LoopName:        VITIS_LOOP_98_3
-  - String:          ''' is marked as complete unroll implied by the pipeline pragma'
-...
---- !Passed
-Pass:            reflow-infer-unroll
-Name:            ImplicitUnroll
-DebugLoc:        { File: ../image_analysis.cpp, Line: 19, Column: 19 }
-Function:        _Z14getLocalImagesiiiiP13atom_locationRN3hls6streamI16local_image_infoLi0EEE
-Args:            
-  - String:          'Loop '''
-  - LoopName:        process_loop
-  - String:          ''' is marked as complete unroll implied by the pipeline pragma'
-...
---- !Passed
-Pass:            reflow-infer-unroll
-Name:            ImplicitUnroll
-DebugLoc:        { File: ../image_analysis.cpp, Line: 13, Column: 13 }
-Function:        _Z14getLocalImagesiiiiP13atom_locationRN3hls6streamI16local_image_infoLi0EEE
-Args:            
-  - String:          'Loop '''
-  - LoopName:        copy_loop
-  - String:          ''' is marked as complete unroll implied by the pipeline pragma'
-...
---- !Missed
-Pass:            reflow-pragma-loop-unroll
-Name:            PragmaFailFullyUnroll
-DebugLoc:        { File: ../image_analysis.cpp, Line: 91, Column: 26 }
-Function:        _Z15applyProjectorsiiiPdS_PiS_iiRN3hls6streamI16local_image_infoLi0EEES_Rj.1
-Args:            
-  - String:          'Cannot unroll loop '''
-  - LoopName:        VITIS_LOOP_91_2
-  - String:          ''' ('
-  - LoopLoc:         '../image_analysis.cpp:91:26'
-  - String:          ') '
-  - String:          'in function '''
-  - String:          applyProjectors
-  - String:          ''' as it has a variable trip count'
-...
---- !Missed
-Pass:            reflow-pragma-loop-unroll
-Name:            PragmaFailFullyUnroll
-DebugLoc:        { File: ../image_analysis.cpp, Line: 98, Column: 30 }
-Function:        _Z15applyProjectorsiiiPdS_PiS_iiRN3hls6streamI16local_image_infoLi0EEES_Rj.1
-Args:            
-  - String:          'Cannot unroll loop '''
-  - LoopName:        VITIS_LOOP_98_3
-  - String:          ''' ('
-  - LoopLoc:         '../image_analysis.cpp:98:30'
-  - String:          ') '
-  - String:          'in function '''
-  - String:          applyProjectors
-  - String:          ''' as it has a variable trip count'
-...
---- !Missed
-Pass:            reflow-pragma-loop-unroll
-Name:            PragmaFailFullyUnroll
-DebugLoc:        { File: ../image_analysis.cpp, Line: 19, Column: 19 }
-Function:        _Z14getLocalImagesiiiiP13atom_locationRN3hls6streamI16local_image_infoLi0EEE
-Args:            
-  - String:          'Cannot unroll loop '''
-  - LoopName:        process_loop
-  - String:          ''' ('
-  - LoopLoc:         '../image_analysis.cpp:19:19'
-  - String:          ') '
-  - String:          'in function '''
-  - String:          getLocalImages
-  - String:          ''' as it has a variable trip count'
-...
---- !Missed
-Pass:            reflow-pragma-loop-unroll
-Name:            PragmaFailFullyUnroll
-DebugLoc:        { File: ../image_analysis.cpp, Line: 13, Column: 13 }
-Function:        _Z14getLocalImagesiiiiP13atom_locationRN3hls6streamI16local_image_infoLi0EEE
-Args:            
-  - String:          'Cannot unroll loop '''
-  - LoopName:        copy_loop
-  - String:          ''' ('
-  - LoopLoc:         '../image_analysis.cpp:13:13'
-  - String:          ') '
-  - String:          'in function '''
-  - String:          getLocalImages
-  - String:          ''' as it has a variable trip count'
+  - LoopLoc:         '../image_analysis.cpp:78:26'
+  - String:          ')'
+  - String:          ' has been inferred on bundle '''
+  - BundleName:      fullImage
+  - String:          '''.'
+  - String:          ' These burst requests might be further partitioned into multiple requests during RTL generation, based on max_read_burst_length or max_write_burst_length settings.'
 ...
 --- !Missed
 Pass:            inline
 Name:            NeverInline
-DebugLoc:        { File: 'C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib\hlsmath\src\c\rounddouble.cpp', 
+DebugLoc:        { File: 'C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib\hlsmath\src\c\roundfloat.cpp', 
                    Line: 7, Column: 12 }
-Function:        _Z14getLocalImagesiiiiP13atom_locationRN3hls6streamI16local_image_infoLi0EEE
+Function:        _Z21getLocalImages_singleiiiiP13atom_locationRN3hls6streamI16local_image_infoLi0EEE.1
 Args:            
-  - Callee:          'double generic_round<double>(double)'
+  - Callee:          'float generic_round<float>(float)'
     DebugLoc:        { File: 'C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib/hlsmath/include/FloatingPoint\hls_round.h', 
                        Line: 160, Column: 0 }
   - String:          ' not inlined into '
-  - Caller:          'getLocalImages(int, int, int, int, atom_location*, hls::stream<local_image_info, 0>&)'
-    DebugLoc:        { File: ../image_analysis.cpp, Line: 8, Column: 0 }
+  - Caller:          'getLocalImages_single(int, int, int, int, atom_location*, hls::stream<local_image_info, 0>&) (.1)'
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 7, Column: 0 }
   - String:          ' because it should never be inlined (cost=never)'
 ...
 --- !Missed
 Pass:            inline
 Name:            NeverInline
-DebugLoc:        { File: ../image_analysis.cpp, Line: 25, Column: 26 }
-Function:        _Z14getLocalImagesiiiiP13atom_locationRN3hls6streamI16local_image_infoLi0EEE
+DebugLoc:        { File: ../image_analysis.cpp, Line: 11, Column: 22 }
+Function:        _Z21getLocalImages_singleiiiiP13atom_locationRN3hls6streamI16local_image_infoLi0EEE.1
 Args:            
-  - Callee:          __hls_fptosi_double_i32
+  - Callee:          __hls_fptosi_float_i32
     DebugLoc:        { File: 'C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib\hlsmath\src\lib_floatconversion.cpp', 
-                       Line: 55, Column: 0 }
+                       Line: 51, Column: 0 }
   - String:          ' not inlined into '
-  - Caller:          'getLocalImages(int, int, int, int, atom_location*, hls::stream<local_image_info, 0>&)'
-    DebugLoc:        { File: ../image_analysis.cpp, Line: 8, Column: 0 }
+  - Caller:          'getLocalImages_single(int, int, int, int, atom_location*, hls::stream<local_image_info, 0>&) (.1)'
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 7, Column: 0 }
   - String:          ' because it should never be inlined (cost=never)'
 ...
 --- !Missed
 Pass:            inline
 Name:            NeverInline
-DebugLoc:        { File: ../image_analysis.cpp, Line: 159, Column: 9 }
-Function:        _Z11reconstructiiiP13atom_locationiiPdS1_PiS1_iiS1_Rj
+DebugLoc:        { File: ../image_analysis.cpp, Line: 169, Column: 57 }
+Function:        dataflow_in_loop_VITIS_LOOP_149_1.1
 Args:            
-  - Callee:          'getLocalImages(int, int, int, int, atom_location*, hls::stream<local_image_info, 0>&)'
-    DebugLoc:        { File: ../image_analysis.cpp, Line: 8, Column: 0 }
+  - Callee:          dataflow_in_loop_VITIS_LOOP_149_1.1_Block_newFuncRoot_proc
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 0, Column: 0 }
   - String:          ' not inlined into '
-  - Caller:          'reconstruct(int, int, int, atom_location*, int, int, double*, double*, int*, double*, int, int, double*, unsigned int&)'
-    DebugLoc:        { File: ../image_analysis.cpp, Line: 127, Column: 0 }
+  - Caller:          dataflow_in_loop_VITIS_LOOP_149_1.1
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 0, Column: 0 }
   - String:          ' because it should never be inlined (cost=never)'
 ...
 --- !Missed
 Pass:            inline
 Name:            NeverInline
-DebugLoc:        { File: ../image_analysis.cpp, Line: 160, Column: 9 }
-Function:        _Z11reconstructiiiP13atom_locationiiPdS1_PiS1_iiS1_Rj
+DebugLoc:        { File: ../image_analysis.cpp, Line: 165, Column: 2 }
+Function:        dataflow_in_loop_VITIS_LOOP_149_1.1
 Args:            
-  - Callee:          'applyProjectors(int, int, int, double*, double*, int*, double*, int, int, hls::stream<local_image_info, 0>&, double*, unsigned int&) (.1)'
-    DebugLoc:        { File: ../image_analysis.cpp, Line: 70, Column: 0 }
+  - Callee:          'getLocalImages_single(int, int, int, int, atom_location*, hls::stream<local_image_info, 0>&) (.1)'
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 7, Column: 0 }
   - String:          ' not inlined into '
-  - Caller:          'reconstruct(int, int, int, atom_location*, int, int, double*, double*, int*, double*, int, int, double*, unsigned int&)'
-    DebugLoc:        { File: ../image_analysis.cpp, Line: 127, Column: 0 }
+  - Caller:          dataflow_in_loop_VITIS_LOOP_149_1.1
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 0, Column: 0 }
+  - String:          ' because it should never be inlined (cost=never)'
+...
+--- !Missed
+Pass:            inline
+Name:            NeverInline
+DebugLoc:        { File: ../image_analysis.cpp, Line: 166, Column: 9 }
+Function:        dataflow_in_loop_VITIS_LOOP_149_1.1
+Args:            
+  - Callee:          'Image_extract(int, hls::stream<local_image_info, 0>&, float*, float (*) [31], float*, float (*) [31], float*, float&) (.1)'
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 69, Column: 0 }
+  - String:          ' not inlined into '
+  - Caller:          dataflow_in_loop_VITIS_LOOP_149_1.1
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 0, Column: 0 }
+  - String:          ' because it should never be inlined (cost=never)'
+...
+--- !Missed
+Pass:            inline
+Name:            NeverInline
+DebugLoc:        { File: ../image_analysis.cpp, Line: 168, Column: 9 }
+Function:        dataflow_in_loop_VITIS_LOOP_149_1.1
+Args:            
+  - Callee:          'conv_kernel(float (*) [31], float (*) [31], float&, float&)'
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 98, Column: 0 }
+  - String:          ' not inlined into '
+  - Caller:          dataflow_in_loop_VITIS_LOOP_149_1.1
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 0, Column: 0 }
+  - String:          ' because it should never be inlined (cost=never)'
+...
+--- !Missed
+Pass:            inline
+Name:            NeverInline
+DebugLoc:        { File: ../image_analysis.cpp, Line: 169, Column: 9 }
+Function:        dataflow_in_loop_VITIS_LOOP_149_1.1
+Args:            
+  - Callee:          'post_process(float, float, float, float&) (.1)'
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 112, Column: 0 }
+  - String:          ' not inlined into '
+  - Caller:          dataflow_in_loop_VITIS_LOOP_149_1.1
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 0, Column: 0 }
+  - String:          ' because it should never be inlined (cost=never)'
+...
+--- !Missed
+Pass:            inline
+Name:            NeverInline
+DebugLoc:        { File: ../image_analysis.cpp, Line: 158, Column: 15 }
+Function:        _Z11reconstructiiiP13atom_locationiiPfS1_PiS1_iiS1_
+Args:            
+  - Callee:          dataflow_in_loop_VITIS_LOOP_149_1.1
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 0, Column: 0 }
+  - String:          ' not inlined into '
+  - Caller:          'reconstruct(int, int, int, atom_location*, int, int, float*, float*, int*, float*, int, int, float*)'
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 123, Column: 0 }
   - String:          ' because it should never be inlined (cost=never)'
 ...

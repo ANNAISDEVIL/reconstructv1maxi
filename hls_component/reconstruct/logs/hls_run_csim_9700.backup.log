@@ -1,0 +1,155 @@
+  **** HLS Build v2024.2 5238294
+INFO: [HLS 200-2005] Using work_dir F:/LMU/quantumMA/opimization/reconstructv1maxi/hls_component/reconstruct 
+INFO: [HLS 200-1505] Using default flow_target 'vivado'
+Resolution: For help on HLS 200-1505 see docs.xilinx.com/access/sources/dita/topic?Doc_Version=2024.2%20English&url=ug1448-hls-guidance&resourceid=200-1505.html
+INFO: [HLS 200-1465] Applying ini 'syn.file=F:/LMU/quantumMA/opimization/reconstructv1maxi/image_analysis.cpp' from F:/LMU/quantumMA/opimization/reconstructv1maxi/hls_component/hls_config.cfg(13)
+INFO: [HLS 200-10] Adding design file 'F:/LMU/quantumMA/opimization/reconstructv1maxi/image_analysis.cpp' to the project
+INFO: [HLS 200-1465] Applying ini 'syn.file=F:/LMU/quantumMA/opimization/reconstructv1maxi/image_analysis.hpp' from F:/LMU/quantumMA/opimization/reconstructv1maxi/hls_component/hls_config.cfg(14)
+INFO: [HLS 200-10] Adding design file 'F:/LMU/quantumMA/opimization/reconstructv1maxi/image_analysis.hpp' to the project
+INFO: [HLS 200-1465] Applying ini 'tb.file=F:/LMU/quantumMA/naia/reconstructv1/imagTransform/restoutput.txt' from F:/LMU/quantumMA/opimization/reconstructv1maxi/hls_component/hls_config.cfg(8)
+INFO: [HLS 200-10] Adding test bench file 'F:/LMU/quantumMA/naia/reconstructv1/imagTransform/restoutput.txt' to the project
+INFO: [HLS 200-1465] Applying ini 'tb.file=F:/LMU/quantumMA/naia/reconstructv1/imagTransform/fullImage_output.txt' from F:/LMU/quantumMA/opimization/reconstructv1maxi/hls_component/hls_config.cfg(9)
+INFO: [HLS 200-10] Adding test bench file 'F:/LMU/quantumMA/naia/reconstructv1/imagTransform/fullImage_output.txt' to the project
+INFO: [HLS 200-1465] Applying ini 'tb.file=F:/LMU/quantumMA/opimization/reconstructv1maxi/test.cpp' from F:/LMU/quantumMA/opimization/reconstructv1maxi/hls_component/hls_config.cfg(10)
+INFO: [HLS 200-10] Adding test bench file 'F:/LMU/quantumMA/opimization/reconstructv1maxi/test.cpp' to the project
+INFO: [HLS 200-1465] Applying ini 'syn.top=reconstruct' from F:/LMU/quantumMA/opimization/reconstructv1maxi/hls_component/hls_config.cfg(7)
+INFO: [HLS 200-1465] Applying ini 'flow_target=vivado' from F:/LMU/quantumMA/opimization/reconstructv1maxi/hls_component/hls_config.cfg(4)
+INFO: [HLS 200-1505] Using flow_target 'vivado'
+Resolution: For help on HLS 200-1505 see docs.xilinx.com/access/sources/dita/topic?Doc_Version=2024.2%20English&url=ug1448-hls-guidance&resourceid=200-1505.html
+INFO: [HLS 200-1465] Applying ini 'part=xc7z020clg400-1' from F:/LMU/quantumMA/opimization/reconstructv1maxi/hls_component/hls_config.cfg(1)
+INFO: [HLS 200-1611] Setting target device to 'xc7z020-clg400-1'
+INFO: [HLS 200-1465] Applying ini 'csim.clean=1' from F:/LMU/quantumMA/opimization/reconstructv1maxi/hls_component/hls_config.cfg(11)
+INFO: [HLS 200-1465] Applying ini 'csim.code_analyzer=1' from F:/LMU/quantumMA/opimization/reconstructv1maxi/hls_component/hls_config.cfg(12)
+INFO: [HLS 200-1465] Applying ini 'package.output.format=ip_catalog' from F:/LMU/quantumMA/opimization/reconstructv1maxi/hls_component/hls_config.cfg(5)
+INFO: [SIM 211-200] Executing Code Analyzer instead of classic HLS C simulation
+INFO: [SIM 211-200] Cleaning
+slxcmd:0:0: info: [ Cleaned build and execution files ]
+INFO: [HLS 211-200] Compiling source code ../image_analysis.cpp as hardware code with instrumentation
+INFO: [HLS 211-200] Compiling source code F:/LMU/quantumMA/opimization/reconstructv1maxi/test.cpp as test bench code with instrumentation
+INFO: [HLS 211-200] Compiling source code ../image_analysis.cpp as test bench code with instrumentation
+../image_analysis.cpp:148:98: warning: unexpected pragma parameter 'storage_type' [-Winvalid-hls-pragmas]
+#pragma HLS INTERFACE port=atomLocations mode=m_axi bundle=atomLocations depth=1000 storage_type=RAM_2P // 
+                                                                                                 ^
+1 warning generated.
+../image_analysis.cpp:148:98: warning: unexpected pragma parameter 'storage_type' [-Winvalid-hls-pragmas]
+#pragma HLS INTERFACE port=atomLocations mode=m_axi bundle=atomLocations depth=1000 storage_type=RAM_2P // 
+                                                                                                 ^
+1 warning generated.
+INFO: [HLS 211-200] Linking hardware code
+INFO: [HLS 211-200] Transforming hardware bitcode
+INFO: [HLS 211-200] Linking executable
+INFO: [HLS 211-200] Computing HLS IR Information
+INFO: [HLS 211-200] Determining source code dependencies
+INFO: [SIM 211-200] Running executable
+sum 22412.6 imageProjs 112.119 projSumUsed 112.119
+sum 23723.3 imageProjs 112.119 projSumUsed 112.119
+sum 23655.2 imageProjs 112.119 projSumUsed 112.119
+sum 22505 imageProjs 112.119 projSumUsed 112.119
+sum 22475.2 imageProjs 112.119 projSumUsed 112.119
+sum 23620.4 imageProjs 112.119 projSumUsed 112.119
+sum 24036 imageProjs 112.119 projSumUsed 112.119
+sum 22500.6 imageProjs 112.119 projSumUsed 112.119
+sum 23844.3 imageProjs 112.119 projSumUsed 112.119
+sum 22389.7 imageProjs 112.119 projSumUsed 112.119
+sum 23729.2 imageProjs 112.119 projSumUsed 112.119
+sum 22538.5 imageProjs 112.119 projSumUsed 112.119
+sum 22511.8 imageProjs 112.119 projSumUsed 112.119
+sum 23726.1 imageProjs 112.119 projSumUsed 112.119
+sum 22535.4 imageProjs 112.119 projSumUsed 112.119
+sum 22506.3 imageProjs 112.119 projSumUsed 112.119
+sum 22618.2 imageProjs 112.119 projSumUsed 112.119
+sum 23830.8 imageProjs 112.119 projSumUsed 112.119
+sum 22542 imageProjs 112.119 projSumUsed 112.119
+sum 23485.7 imageProjs 112.119 projSumUsed 112.119
+sum 23887.4 imageProjs 112.119 projSumUsed 112.119
+sum 22479 imageProjs 112.119 projSumUsed 112.119
+sum 22601.9 imageProjs 112.119 projSumUsed 112.119
+sum 23802.4 imageProjs 112.119 projSumUsed 112.119
+sum 22513.5 imageProjs 112.119 projSumUsed 112.119
+sum 22438.9 imageProjs 112.119 projSumUsed 112.119
+sum 22508.8 imageProjs 112.119 projSumUsed 112.119
+sum 23985 imageProjs 112.119 projSumUsed 112.119
+sum 23749.4 imageProjs 112.119 projSumUsed 112.119
+sum 24145.9 imageProjs 112.119 projSumUsed 112.119
+sum 22507.7 imageProjs 112.119 projSumUsed 112.119
+sum 23786.7 imageProjs 112.119 projSumUsed 112.119
+sum 23870.3 imageProjs 112.119 projSumUsed 112.119
+sum 23508.4 imageProjs 112.119 projSumUsed 112.119
+sum 23894.8 imageProjs 112.119 projSumUsed 112.119
+sum 22542.4 imageProjs 112.119 projSumUsed 112.119
+sum 23740.4 imageProjs 112.119 projSumUsed 112.119
+sum 22609.3 imageProjs 112.119 projSumUsed 112.119
+sum 23763.4 imageProjs 112.119 projSumUsed 112.119
+sum 22619.6 imageProjs 112.119 projSumUsed 112.119
+sum 22471.3 imageProjs 112.119 projSumUsed 112.119
+sum 22564.9 imageProjs 112.119 projSumUsed 112.119
+sum 23694.3 imageProjs 112.119 projSumUsed 112.119
+sum 22635.3 imageProjs 112.119 projSumUsed 112.119
+sum 23486.5 imageProjs 112.119 projSumUsed 112.119
+sum 22538.6 imageProjs 112.119 projSumUsed 112.119
+sum 23859.1 imageProjs 112.119 projSumUsed 112.119
+sum 22587.6 imageProjs 112.119 projSumUsed 112.119
+sum 23648.5 imageProjs 112.119 projSumUsed 112.119
+sum 23826.5 imageProjs 112.119 projSumUsed 112.119
+sum 22507.8 imageProjs 112.119 projSumUsed 112.119
+sum 23772.4 imageProjs 112.119 projSumUsed 112.119
+sum 23535.8 imageProjs 112.119 projSumUsed 112.119
+sum 23998.5 imageProjs 112.119 projSumUsed 112.119
+sum 23787.1 imageProjs 112.119 projSumUsed 112.119
+sum 23663.9 imageProjs 112.119 projSumUsed 112.119
+sum 22544.5 imageProjs 112.119 projSumUsed 112.119
+sum 24008.7 imageProjs 112.119 projSumUsed 112.119
+sum 22513.7 imageProjs 112.119 projSumUsed 112.119
+sum 22490.9 imageProjs 112.119 projSumUsed 112.119
+sum 23785.6 imageProjs 112.119 projSumUsed 112.119
+sum 22628.8 imageProjs 112.119 projSumUsed 112.119
+sum 24016.2 imageProjs 112.119 projSumUsed 112.119
+sum 24043.9 imageProjs 112.119 projSumUsed 112.119
+sum 23727 imageProjs 112.119 projSumUsed 112.119
+sum 22671 imageProjs 112.119 projSumUsed 112.119
+sum 23893.7 imageProjs 112.119 projSumUsed 112.119
+sum 22482.3 imageProjs 112.119 projSumUsed 112.119
+sum 23806.4 imageProjs 112.119 projSumUsed 112.119
+sum 23932.3 imageProjs 112.119 projSumUsed 112.119
+sum 23883.8 imageProjs 112.119 projSumUsed 112.119
+sum 22566.8 imageProjs 112.119 projSumUsed 112.119
+sum 23864.3 imageProjs 112.119 projSumUsed 112.119
+sum 23954.7 imageProjs 112.119 projSumUsed 112.119
+sum 23666.5 imageProjs 112.119 projSumUsed 112.119
+sum 23731.3 imageProjs 112.119 projSumUsed 112.119
+sum 22471.8 imageProjs 112.119 projSumUsed 112.119
+sum 22512.8 imageProjs 112.119 projSumUsed 112.119
+sum 23659.3 imageProjs 112.119 projSumUsed 112.119
+sum 23742 imageProjs 112.119 projSumUsed 112.119
+sum 22430.6 imageProjs 112.119 projSumUsed 112.119
+sum 22507 imageProjs 112.119 projSumUsed 112.119
+sum 22531.5 imageProjs 112.119 projSumUsed 112.119
+sum 23747.8 imageProjs 112.119 projSumUsed 112.119
+sum 22572.4 imageProjs 112.119 projSumUsed 112.119
+sum 22505.7 imageProjs 112.119 projSumUsed 112.119
+sum 23920.6 imageProjs 112.119 projSumUsed 112.119
+sum 23634.6 imageProjs 112.119 projSumUsed 112.119
+sum 22479.7 imageProjs 112.119 projSumUsed 112.119
+sum 22367.8 imageProjs 112.119 projSumUsed 112.119
+sum 24044.8 imageProjs 112.119 projSumUsed 112.119
+sum 23735.5 imageProjs 112.119 projSumUsed 112.119
+sum 22464.5 imageProjs 112.119 projSumUsed 112.119
+sum 22476.8 imageProjs 112.119 projSumUsed 112.119
+sum 23903.6 imageProjs 112.119 projSumUsed 112.119
+sum 23616.5 imageProjs 112.119 projSumUsed 112.119
+sum 23743.9 imageProjs 112.119 projSumUsed 112.119
+sum 22570.8 imageProjs 112.119 projSumUsed 112.119
+sum 23468.5 imageProjs 112.119 projSumUsed 112.119
+sum 22435.2 imageProjs 112.119 projSumUsed 112.119
+emissions: 22412.6|23723.3|23655.3|22505.1|22475.3|23620.5|24036.1|22500.7|23844.4|22389.7|23729.3|22538.6|22511.9|23726.1|22535.5|22506.3|22618.2|23830.8|22542|23485.8|23887.5|22479|22601.9|23802.4|22513.5|22439|22508.8|23985.1|23749.4|24145.9|22507.8|23786.8|23870.3|23508.4|23894.9|22542.5|23740.5|22609.4|23763.4|22619.6|22471.4|22565|23694.3|22635.4|23486.5|22538.7|23859.1|22587.7|23648.5|23826.5|22507.8|23772.5|23535.9|23998.6|23787.2|23663.9|22544.5|24008.8|22513.8|22490.9|23785.7|22628.9|24016.3|24044|23727.1|22671.1|23893.7|22482.3|23806.5|23932.4|23883.9|22566.8|23864.4|23954.7|23666.6|23731.4|22471.9|22512.8|23659.4|23742.1|22430.7|22507.1|22531.6|23747.8|22572.5|22505.7|23920.7|23634.6|22479.8|22367.9|24044.9|23735.6|22464.6|22476.8|23903.7|23616.6|23744|22570.8|23468.5|22435.2|
+INFO: [SIM 211-200] Analyzing trace data
+INFO: [SIM 211-208] Running Code Analyzer
+WARNING: [HLS 211-200] Invalid pragma detected: Code Analyzer will not display the impact of 'pipeline' (F:\LMU\quantumMA\opimization\reconstructv1maxi\image_analysis.cpp:85:1) as loop pipeline pragma is only valid if:
+- All the subloops of the loop to be pipelined can be fully unrolled
+- All the subloops are perfectly nested in the loop to be pipelined.
+WARNING: [SIM 211-200] F:/LMU/quantumMA/opimization/reconstructv1maxi/hls_component\../image_analysis.cpp:84:5: the dynamic loop had a trip count of min=100 max=100 during C simulation. (#pragma HLS loop_tripcount min=100 max=100)
+WARNING: [SIM 211-200] F:/LMU/quantumMA/opimization/reconstructv1maxi/hls_component\../image_analysis.cpp:103:9: the dynamic loop had a trip count of min=31 max=31 during C simulation. (#pragma HLS loop_tripcount min=31 max=31)
+WARNING: [SIM 211-200] F:/LMU/quantumMA/opimization/reconstructv1maxi/hls_component\../image_analysis.cpp:110:13: the dynamic loop had a trip count of min=31 max=31 during C simulation. (#pragma HLS loop_tripcount min=31 max=31)
+INFO: [SIM 211-210] Code Analyzer finished
+INFO: [HLS 200-112] Total CPU user time: 7 seconds. Total CPU system time: 2 seconds. Total elapsed time: 24.171 seconds; peak allocated memory: 619.262 MB.
+INFO: [vitis-run 60-791] Total elapsed time: 0h 0m 32s

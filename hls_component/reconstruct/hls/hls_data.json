@@ -8,10 +8,10 @@
   "FunctionProtocol": "ap_ctrl_hs",
   "ResetStyle": "control",
   "Target": {
-    "Family": "zynq",
-    "Device": "xc7z020",
-    "Package": "-clg400",
-    "Speed": "-1",
+    "Family": "zynquplus",
+    "Device": "xczu49dr",
+    "Package": "-ffvf1760",
+    "Speed": "-2-e",
     "Triple": "fpga64-xilinx-none"
   },
   "Args": {
@@ -58,77 +58,21 @@
       "index": "3",
       "direction": "in",
       "srcType": "*",
-      "srcSize": "128",
+      "srcSize": "64",
       "hwRefs": [
         {
-          "type": "port",
-          "interface": "atomLocations_address0",
-          "name": "atomLocations_address0",
-          "usage": "address",
-          "direction": "out"
-        },
-        {
-          "type": "port",
-          "interface": "atomLocations_ce0",
-          "name": "atomLocations_ce0",
-          "usage": "control",
-          "direction": "out"
-        },
-        {
-          "type": "port",
-          "interface": "atomLocations_d0",
-          "name": "atomLocations_d0",
-          "usage": "data",
-          "direction": "out"
-        },
-        {
-          "type": "port",
-          "interface": "atomLocations_q0",
-          "name": "atomLocations_q0",
+          "type": "interface",
+          "interface": "m_axi_atomLocations",
+          "name": "",
           "usage": "data",
           "direction": "in"
         },
         {
-          "type": "port",
-          "interface": "atomLocations_we0",
-          "name": "atomLocations_we0",
-          "usage": "control",
-          "direction": "out"
-        },
-        {
-          "type": "port",
-          "interface": "atomLocations_address1",
-          "name": "atomLocations_address1",
+          "type": "interface",
+          "interface": "s_axi_control",
+          "name": "",
           "usage": "address",
-          "direction": "out"
-        },
-        {
-          "type": "port",
-          "interface": "atomLocations_ce1",
-          "name": "atomLocations_ce1",
-          "usage": "control",
-          "direction": "out"
-        },
-        {
-          "type": "port",
-          "interface": "atomLocations_d1",
-          "name": "atomLocations_d1",
-          "usage": "data",
-          "direction": "out"
-        },
-        {
-          "type": "port",
-          "interface": "atomLocations_q1",
-          "name": "atomLocations_q1",
-          "usage": "data",
           "direction": "in"
-        },
-        {
-          "type": "port",
-          "interface": "atomLocations_we1",
-          "name": "atomLocations_we1",
-          "usage": "control",
-          "direction": "out"
         }
       ]
     },
@@ -161,8 +105,8 @@
     "imageProjs_local": {
       "index": "6",
       "direction": "in",
-      "srcType": "double*",
-      "srcSize": "64",
+      "srcType": "float*",
+      "srcSize": "32",
       "hwRefs": [
         {
           "type": "interface",
@@ -183,8 +127,8 @@
     "imageProjs": {
       "index": "7",
       "direction": "in",
-      "srcType": "double*",
-      "srcSize": "64",
+      "srcType": "float*",
+      "srcSize": "32",
       "hwRefs": [
         {
           "type": "interface",
@@ -204,7 +148,7 @@
     },
     "imageProjs_local_size": {
       "index": "8",
-      "direction": "in",
+      "direction": "unused",
       "srcType": "int*",
       "srcSize": "32",
       "hwRefs": [{
@@ -212,14 +156,14 @@
           "interface": "s_axi_control",
           "name": "",
           "usage": "address",
-          "direction": "in"
+          "direction": "unused"
         }]
     },
     "fullImage": {
       "index": "9",
       "direction": "in",
-      "srcType": "double*",
-      "srcSize": "64",
+      "srcType": "float*",
+      "srcSize": "32",
       "hwRefs": [
         {
           "type": "interface",
@@ -266,8 +210,8 @@
     "emissions": {
       "index": "12",
       "direction": "out",
-      "srcType": "double*",
-      "srcSize": "64",
+      "srcType": "float*",
+      "srcSize": "32",
       "hwRefs": [
         {
           "type": "interface",
@@ -281,28 +225,6 @@
           "interface": "s_axi_control",
           "name": "",
           "usage": "address",
-          "direction": "out"
-        }
-      ]
-    },
-    "emission_cnt": {
-      "index": "13",
-      "direction": "out",
-      "srcType": "unsigned int&",
-      "srcSize": "32",
-      "hwRefs": [
-        {
-          "type": "register",
-          "interface": "s_axi_scalar_data",
-          "name": "emission_cnt",
-          "usage": "data",
-          "direction": "out"
-        },
-        {
-          "type": "register",
-          "interface": "s_axi_scalar_data",
-          "name": "emission_cnt_ctrl",
-          "usage": "control",
           "direction": "out"
         }
       ]
@@ -324,8 +246,8 @@
     "ClockPeriod": "10",
     "Uncertainty": "2.7",
     "IsCombinational": "0",
-    "II": "undef",
-    "Latency": "undef"
+    "II": "3961856",
+    "Latency": "3961855"
   },
   "Xdc": {"OocClocks": ["create_clock -name ap_clk -period 10.000 [get_ports ap_clk]"]},
   "Ipx": {
@@ -334,7 +256,7 @@
     "Name": "reconstruct",
     "Version": "1.0",
     "DisplayName": "Reconstruct",
-    "Revision": "2114093197",
+    "Revision": "2114150246",
     "Description": "An IP generated by Vitis HLS",
     "Taxonomy": "\/VITIS_HLS_IP",
     "AutoFamilySupport": "",
@@ -346,68 +268,80 @@
       "..\/..\/..\/image_analysis.hpp"
     ],
     "TestBench": [
-      "..\/..\/..\/..\/..\/naia\/reconstructv1\/imagTransform\/restoutput.txt",
-      "..\/..\/..\/..\/..\/naia\/reconstructv1\/imagTransform\/fullImage_output.txt",
-      "..\/..\/..\/test.cpp"
+      "..\/..\/..\/test.cpp",
+      "..\/..\/..\/fullImage_output.txt",
+      "..\/..\/..\/restoutput.txt"
     ],
     "Vhdl": [
-      "impl\/vhdl\/reconstruct_applyProjectors.vhd",
+      "impl\/vhdl\/reconstruct_ap_bound.vhd",
+      "impl\/vhdl\/reconstruct_atomLocations_m_axi.vhd",
       "impl\/vhdl\/reconstruct_control_s_axi.vhd",
-      "impl\/vhdl\/reconstruct_dadd_64ns_64ns_64_7_full_dsp_1.vhd",
-      "impl\/vhdl\/reconstruct_dcmp_64ns_64ns_1_2_no_dsp_1.vhd",
-      "impl\/vhdl\/reconstruct_ddiv_64ns_64ns_64_59_no_dsp_1.vhd",
-      "impl\/vhdl\/reconstruct_dmul_64ns_64ns_64_7_max_dsp_1.vhd",
-      "impl\/vhdl\/reconstruct_dsub_64ns_64ns_64_7_full_dsp_1.vhd",
+      "impl\/vhdl\/reconstruct_conv_kernel.vhd",
+      "impl\/vhdl\/reconstruct_conv_kernel_Pipeline_VITIS_LOOP_101_1.vhd",
+      "impl\/vhdl\/reconstruct_dataflow_in_loop_VITIS_LOOP_149_1_1.vhd",
+      "impl\/vhdl\/reconstruct_dataflow_in_loop_VITIS_LOOP_149_1_1_Block_newFuncRoot_proc.vhd",
+      "impl\/vhdl\/reconstruct_dataflow_in_loop_VITIS_LOOP_149_1_1_curr_localImage_RAM_AUTO_1R1W.vhd",
+      "impl\/vhdl\/reconstruct_dataflow_in_loop_VITIS_LOOP_149_1_1_curr_localImage_RAM_AUTO_1R1W_memcore.vhd",
       "impl\/vhdl\/reconstruct_emissions_m_axi.vhd",
-      "impl\/vhdl\/reconstruct_fifo_w256_d2_S.vhd",
+      "impl\/vhdl\/reconstruct_fadd_32ns_32ns_32_4_full_dsp_1.vhd",
+      "impl\/vhdl\/reconstruct_fdiv_32ns_32ns_32_9_no_dsp_1.vhd",
+      "impl\/vhdl\/reconstruct_fifo_w32_d2_S.vhd",
+      "impl\/vhdl\/reconstruct_fifo_w32_d3_S.vhd",
+      "impl\/vhdl\/reconstruct_fifo_w64_d4_S.vhd",
+      "impl\/vhdl\/reconstruct_fifo_w256_d4_S.vhd",
       "impl\/vhdl\/reconstruct_flow_control_loop_pipe_sequential_init.vhd",
+      "impl\/vhdl\/reconstruct_fmul_32ns_32ns_32_3_max_dsp_1.vhd",
+      "impl\/vhdl\/reconstruct_fsub_32ns_32ns_32_4_full_dsp_1.vhd",
       "impl\/vhdl\/reconstruct_fullImage_m_axi.vhd",
-      "impl\/vhdl\/reconstruct_getLocalImages.vhd",
-      "impl\/vhdl\/reconstruct_getLocalImages_Pipeline_copy_loop.vhd",
-      "impl\/vhdl\/reconstruct_getLocalImages_Pipeline_process_loop.vhd",
-      "impl\/vhdl\/reconstruct_getLocalImages_Pipeline_process_loop_mask_table_ROM_AUTO_1R.vhd",
-      "impl\/vhdl\/reconstruct_getLocalImages_Pipeline_process_loop_one_half_table_ROM_AUTO_1R.vhd",
+      "impl\/vhdl\/reconstruct_getLocalImages_single.vhd",
+      "impl\/vhdl\/reconstruct_getLocalImages_single_mask_table_ROM_AUTO_1R.vhd",
+      "impl\/vhdl\/reconstruct_getLocalImages_single_one_half_table_ROM_AUTO_1R.vhd",
+      "impl\/vhdl\/reconstruct_Image_extract.vhd",
+      "impl\/vhdl\/reconstruct_Image_extract_Pipeline_VITIS_LOOP_77_1_VITIS_LOOP_78_2.vhd",
       "impl\/vhdl\/reconstruct_imageProjs_local_m_axi.vhd",
-      "impl\/vhdl\/reconstruct_imageProjs_local_size_m_axi.vhd",
       "impl\/vhdl\/reconstruct_imageProjs_m_axi.vhd",
-      "impl\/vhdl\/reconstruct_mul_32s_32s_32_2_1.vhd",
-      "impl\/vhdl\/reconstruct_mul_61s_32s_61_5_1.vhd",
+      "impl\/vhdl\/reconstruct_post_process.vhd",
       "impl\/vhdl\/reconstruct_scalar_data_s_axi.vhd",
-      "impl\/vhdl\/reconstruct_sitodp_32ns_64_6_no_dsp_1.vhd",
-      "impl\/vhdl\/reconstruct_sparsemux_7_2_64_1_1.vhd",
-      "impl\/vhdl\/reconstruct_sparsemux_201_7_64_1_1.vhd",
-      "impl\/vhdl\/reconstruct_srem_32ns_32s_32_36_1.vhd",
+      "impl\/vhdl\/reconstruct_sitofp_32ns_32_4_no_dsp_1.vhd",
+      "impl\/vhdl\/reconstruct_sparsemux_7_2_32_1_1.vhd",
+      "impl\/vhdl\/reconstruct_sparsemux_63_5_32_1_1.vhd",
       "impl\/vhdl\/reconstruct.vhd"
     ],
     "Verilog": [
-      "impl\/verilog\/reconstruct_applyProjectors.v",
+      "impl\/verilog\/reconstruct_ap_bound.v",
+      "impl\/verilog\/reconstruct_atomLocations_m_axi.v",
       "impl\/verilog\/reconstruct_control_s_axi.v",
-      "impl\/verilog\/reconstruct_dadd_64ns_64ns_64_7_full_dsp_1.v",
-      "impl\/verilog\/reconstruct_dcmp_64ns_64ns_1_2_no_dsp_1.v",
-      "impl\/verilog\/reconstruct_ddiv_64ns_64ns_64_59_no_dsp_1.v",
-      "impl\/verilog\/reconstruct_dmul_64ns_64ns_64_7_max_dsp_1.v",
-      "impl\/verilog\/reconstruct_dsub_64ns_64ns_64_7_full_dsp_1.v",
+      "impl\/verilog\/reconstruct_conv_kernel.v",
+      "impl\/verilog\/reconstruct_conv_kernel_Pipeline_VITIS_LOOP_101_1.v",
+      "impl\/verilog\/reconstruct_dataflow_in_loop_VITIS_LOOP_149_1_1.v",
+      "impl\/verilog\/reconstruct_dataflow_in_loop_VITIS_LOOP_149_1_1_Block_newFuncRoot_proc.v",
+      "impl\/verilog\/reconstruct_dataflow_in_loop_VITIS_LOOP_149_1_1_curr_localImage_RAM_AUTO_1R1W.v",
+      "impl\/verilog\/reconstruct_dataflow_in_loop_VITIS_LOOP_149_1_1_curr_localImage_RAM_AUTO_1R1W_memcore.v",
       "impl\/verilog\/reconstruct_emissions_m_axi.v",
-      "impl\/verilog\/reconstruct_fifo_w256_d2_S.v",
+      "impl\/verilog\/reconstruct_fadd_32ns_32ns_32_4_full_dsp_1.v",
+      "impl\/verilog\/reconstruct_fdiv_32ns_32ns_32_9_no_dsp_1.v",
+      "impl\/verilog\/reconstruct_fifo_w32_d2_S.v",
+      "impl\/verilog\/reconstruct_fifo_w32_d3_S.v",
+      "impl\/verilog\/reconstruct_fifo_w64_d4_S.v",
+      "impl\/verilog\/reconstruct_fifo_w256_d4_S.v",
       "impl\/verilog\/reconstruct_flow_control_loop_pipe_sequential_init.v",
+      "impl\/verilog\/reconstruct_fmul_32ns_32ns_32_3_max_dsp_1.v",
+      "impl\/verilog\/reconstruct_fsub_32ns_32ns_32_4_full_dsp_1.v",
       "impl\/verilog\/reconstruct_fullImage_m_axi.v",
-      "impl\/verilog\/reconstruct_getLocalImages.v",
-      "impl\/verilog\/reconstruct_getLocalImages_Pipeline_copy_loop.v",
-      "impl\/verilog\/reconstruct_getLocalImages_Pipeline_process_loop.v",
-      "impl\/verilog\/reconstruct_getLocalImages_Pipeline_process_loop_mask_table_ROM_AUTO_1R.dat",
-      "impl\/verilog\/reconstruct_getLocalImages_Pipeline_process_loop_mask_table_ROM_AUTO_1R.v",
-      "impl\/verilog\/reconstruct_getLocalImages_Pipeline_process_loop_one_half_table_ROM_AUTO_1R.dat",
-      "impl\/verilog\/reconstruct_getLocalImages_Pipeline_process_loop_one_half_table_ROM_AUTO_1R.v",
+      "impl\/verilog\/reconstruct_getLocalImages_single.v",
+      "impl\/verilog\/reconstruct_getLocalImages_single_mask_table_ROM_AUTO_1R.dat",
+      "impl\/verilog\/reconstruct_getLocalImages_single_mask_table_ROM_AUTO_1R.v",
+      "impl\/verilog\/reconstruct_getLocalImages_single_one_half_table_ROM_AUTO_1R.dat",
+      "impl\/verilog\/reconstruct_getLocalImages_single_one_half_table_ROM_AUTO_1R.v",
+      "impl\/verilog\/reconstruct_Image_extract.v",
+      "impl\/verilog\/reconstruct_Image_extract_Pipeline_VITIS_LOOP_77_1_VITIS_LOOP_78_2.v",
       "impl\/verilog\/reconstruct_imageProjs_local_m_axi.v",
-      "impl\/verilog\/reconstruct_imageProjs_local_size_m_axi.v",
       "impl\/verilog\/reconstruct_imageProjs_m_axi.v",
-      "impl\/verilog\/reconstruct_mul_32s_32s_32_2_1.v",
-      "impl\/verilog\/reconstruct_mul_61s_32s_61_5_1.v",
+      "impl\/verilog\/reconstruct_post_process.v",
       "impl\/verilog\/reconstruct_scalar_data_s_axi.v",
-      "impl\/verilog\/reconstruct_sitodp_32ns_64_6_no_dsp_1.v",
-      "impl\/verilog\/reconstruct_sparsemux_7_2_64_1_1.v",
-      "impl\/verilog\/reconstruct_sparsemux_201_7_64_1_1.v",
-      "impl\/verilog\/reconstruct_srem_32ns_32s_32_36_1.v",
+      "impl\/verilog\/reconstruct_sitofp_32ns_32_4_no_dsp_1.v",
+      "impl\/verilog\/reconstruct_sparsemux_7_2_32_1_1.v",
+      "impl\/verilog\/reconstruct_sparsemux_63_5_32_1_1.v",
       "impl\/verilog\/reconstruct.v"
     ],
     "SwDriver": [
@@ -424,12 +358,11 @@
     ],
     "IpMisc": ["impl\/misc\/logo.png"],
     "Subcore": [
-      "impl\/misc\/reconstruct_dadd_64ns_64ns_64_7_full_dsp_1_ip.tcl",
-      "impl\/misc\/reconstruct_dcmp_64ns_64ns_1_2_no_dsp_1_ip.tcl",
-      "impl\/misc\/reconstruct_ddiv_64ns_64ns_64_59_no_dsp_1_ip.tcl",
-      "impl\/misc\/reconstruct_dmul_64ns_64ns_64_7_max_dsp_1_ip.tcl",
-      "impl\/misc\/reconstruct_dsub_64ns_64ns_64_7_full_dsp_1_ip.tcl",
-      "impl\/misc\/reconstruct_sitodp_32ns_64_6_no_dsp_1_ip.tcl"
+      "impl\/misc\/reconstruct_fadd_32ns_32ns_32_4_full_dsp_1_ip.tcl",
+      "impl\/misc\/reconstruct_fdiv_32ns_32ns_32_9_no_dsp_1_ip.tcl",
+      "impl\/misc\/reconstruct_fmul_32ns_32ns_32_3_max_dsp_1_ip.tcl",
+      "impl\/misc\/reconstruct_fsub_32ns_32ns_32_4_full_dsp_1_ip.tcl",
+      "impl\/misc\/reconstruct_sitofp_32ns_32_4_no_dsp_1_ip.tcl"
     ],
     "CsynthXml": "syn\/report\/csynth.xml",
     "DebugDir": ".debug",
@@ -443,34 +376,29 @@
     "HasClockedDsp": false,
     "Ip": [
       {
-        "Name": "reconstruct_dadd_64ns_64ns_64_7_full_dsp_1_ip",
+        "Name": "reconstruct_fadd_32ns_32ns_32_4_full_dsp_1_ip",
         "Vlnv": "xilinx.com:ip:floating_point:7.1",
-        "Params": "CONFIG.a_precision_type Double CONFIG.a_tuser_width 1 CONFIG.add_sub_value Add CONFIG.b_tuser_width 1 CONFIG.c_a_exponent_width 11 CONFIG.c_a_fraction_width 53 CONFIG.c_compare_operation Programmable CONFIG.c_has_divide_by_zero false CONFIG.c_has_invalid_op false CONFIG.c_has_overflow false CONFIG.c_has_underflow false CONFIG.c_latency 5 CONFIG.c_mult_usage Full_Usage CONFIG.c_optimization Speed_Optimized CONFIG.c_rate 1 CONFIG.c_result_exponent_width 11 CONFIG.c_result_fraction_width 53 CONFIG.component_name reconstruct_dadd_64ns_64ns_64_7_full_dsp_1_ip CONFIG.flow_control NonBlocking CONFIG.has_a_tlast false CONFIG.has_a_tuser false CONFIG.has_aclken true CONFIG.has_aresetn false CONFIG.has_b_tlast false CONFIG.has_b_tuser false CONFIG.has_operation_tlast false CONFIG.has_operation_tuser false CONFIG.has_result_tready false CONFIG.maximum_latency false CONFIG.operation_tuser_width 1 CONFIG.operation_type Add_Subtract CONFIG.result_precision_type Double CONFIG.result_tlast_behv Null"
+        "Params": "CONFIG.a_precision_type Single CONFIG.a_tuser_width 1 CONFIG.add_sub_value Add CONFIG.b_tuser_width 1 CONFIG.c_a_exponent_width 8 CONFIG.c_a_fraction_width 24 CONFIG.c_compare_operation Programmable CONFIG.c_has_divide_by_zero false CONFIG.c_has_invalid_op false CONFIG.c_has_overflow false CONFIG.c_has_underflow false CONFIG.c_latency 2 CONFIG.c_mult_usage Full_Usage CONFIG.c_optimization Speed_Optimized CONFIG.c_rate 1 CONFIG.c_result_exponent_width 8 CONFIG.c_result_fraction_width 24 CONFIG.component_name reconstruct_fadd_32ns_32ns_32_4_full_dsp_1_ip CONFIG.flow_control NonBlocking CONFIG.has_a_tlast false CONFIG.has_a_tuser false CONFIG.has_aclken true CONFIG.has_aresetn false CONFIG.has_b_tlast false CONFIG.has_b_tuser false CONFIG.has_operation_tlast false CONFIG.has_operation_tuser false CONFIG.has_result_tready false CONFIG.maximum_latency false CONFIG.operation_tuser_width 1 CONFIG.operation_type Add_Subtract CONFIG.result_precision_type Single CONFIG.result_tlast_behv Null"
       },
       {
-        "Name": "reconstruct_dcmp_64ns_64ns_1_2_no_dsp_1_ip",
+        "Name": "reconstruct_fdiv_32ns_32ns_32_9_no_dsp_1_ip",
         "Vlnv": "xilinx.com:ip:floating_point:7.1",
-        "Params": "CONFIG.a_precision_type Double CONFIG.a_tuser_width 1 CONFIG.add_sub_value Both CONFIG.b_tuser_width 1 CONFIG.c_a_exponent_width 11 CONFIG.c_a_fraction_width 53 CONFIG.c_compare_operation Programmable CONFIG.c_has_divide_by_zero false CONFIG.c_has_invalid_op false CONFIG.c_has_overflow false CONFIG.c_has_underflow false CONFIG.c_latency 0 CONFIG.c_mult_usage No_Usage CONFIG.c_optimization Speed_Optimized CONFIG.c_rate 1 CONFIG.c_result_exponent_width 1 CONFIG.c_result_fraction_width 0 CONFIG.component_name reconstruct_dcmp_64ns_64ns_1_2_no_dsp_1_ip CONFIG.flow_control NonBlocking CONFIG.has_a_tlast false CONFIG.has_a_tuser false CONFIG.has_aclken false CONFIG.has_aresetn false CONFIG.has_b_tlast false CONFIG.has_b_tuser false CONFIG.has_operation_tlast false CONFIG.has_operation_tuser false CONFIG.has_result_tready false CONFIG.maximum_latency false CONFIG.operation_tuser_width 1 CONFIG.operation_type Compare CONFIG.result_precision_type Double CONFIG.result_tlast_behv Null"
+        "Params": "CONFIG.a_precision_type Single CONFIG.a_tuser_width 1 CONFIG.add_sub_value Both CONFIG.b_tuser_width 1 CONFIG.c_a_exponent_width 8 CONFIG.c_a_fraction_width 24 CONFIG.c_compare_operation Programmable CONFIG.c_has_divide_by_zero false CONFIG.c_has_invalid_op false CONFIG.c_has_overflow false CONFIG.c_has_underflow false CONFIG.c_latency 7 CONFIG.c_mult_usage No_Usage CONFIG.c_optimization Speed_Optimized CONFIG.c_rate 1 CONFIG.c_result_exponent_width 8 CONFIG.c_result_fraction_width 24 CONFIG.component_name reconstruct_fdiv_32ns_32ns_32_9_no_dsp_1_ip CONFIG.flow_control NonBlocking CONFIG.has_a_tlast false CONFIG.has_a_tuser false CONFIG.has_aclken true CONFIG.has_aresetn false CONFIG.has_b_tlast false CONFIG.has_b_tuser false CONFIG.has_operation_tlast false CONFIG.has_operation_tuser false CONFIG.has_result_tready false CONFIG.maximum_latency false CONFIG.operation_tuser_width 1 CONFIG.operation_type Divide CONFIG.result_precision_type Single CONFIG.result_tlast_behv Null"
       },
       {
-        "Name": "reconstruct_ddiv_64ns_64ns_64_59_no_dsp_1_ip",
+        "Name": "reconstruct_fmul_32ns_32ns_32_3_max_dsp_1_ip",
         "Vlnv": "xilinx.com:ip:floating_point:7.1",
-        "Params": "CONFIG.a_precision_type Double CONFIG.a_tuser_width 1 CONFIG.add_sub_value Both CONFIG.b_tuser_width 1 CONFIG.c_a_exponent_width 11 CONFIG.c_a_fraction_width 53 CONFIG.c_compare_operation Programmable CONFIG.c_has_divide_by_zero false CONFIG.c_has_invalid_op false CONFIG.c_has_overflow false CONFIG.c_has_underflow false CONFIG.c_latency 57 CONFIG.c_mult_usage No_Usage CONFIG.c_optimization Speed_Optimized CONFIG.c_rate 1 CONFIG.c_result_exponent_width 11 CONFIG.c_result_fraction_width 53 CONFIG.component_name reconstruct_ddiv_64ns_64ns_64_59_no_dsp_1_ip CONFIG.flow_control NonBlocking CONFIG.has_a_tlast false CONFIG.has_a_tuser false CONFIG.has_aclken true CONFIG.has_aresetn false CONFIG.has_b_tlast false CONFIG.has_b_tuser false CONFIG.has_operation_tlast false CONFIG.has_operation_tuser false CONFIG.has_result_tready false CONFIG.maximum_latency false CONFIG.operation_tuser_width 1 CONFIG.operation_type Divide CONFIG.result_precision_type Double CONFIG.result_tlast_behv Null"
+        "Params": "CONFIG.a_precision_type Single CONFIG.a_tuser_width 1 CONFIG.add_sub_value Both CONFIG.b_tuser_width 1 CONFIG.c_a_exponent_width 8 CONFIG.c_a_fraction_width 24 CONFIG.c_compare_operation Programmable CONFIG.c_has_divide_by_zero false CONFIG.c_has_invalid_op false CONFIG.c_has_overflow false CONFIG.c_has_underflow false CONFIG.c_latency 1 CONFIG.c_mult_usage Max_Usage CONFIG.c_optimization Speed_Optimized CONFIG.c_rate 1 CONFIG.c_result_exponent_width 8 CONFIG.c_result_fraction_width 24 CONFIG.component_name reconstruct_fmul_32ns_32ns_32_3_max_dsp_1_ip CONFIG.flow_control NonBlocking CONFIG.has_a_tlast false CONFIG.has_a_tuser false CONFIG.has_aclken true CONFIG.has_aresetn false CONFIG.has_b_tlast false CONFIG.has_b_tuser false CONFIG.has_operation_tlast false CONFIG.has_operation_tuser false CONFIG.has_result_tready false CONFIG.maximum_latency false CONFIG.operation_tuser_width 1 CONFIG.operation_type Multiply CONFIG.result_precision_type Single CONFIG.result_tlast_behv Null"
       },
       {
-        "Name": "reconstruct_dmul_64ns_64ns_64_7_max_dsp_1_ip",
+        "Name": "reconstruct_fsub_32ns_32ns_32_4_full_dsp_1_ip",
         "Vlnv": "xilinx.com:ip:floating_point:7.1",
-        "Params": "CONFIG.a_precision_type Double CONFIG.a_tuser_width 1 CONFIG.add_sub_value Both CONFIG.b_tuser_width 1 CONFIG.c_a_exponent_width 11 CONFIG.c_a_fraction_width 53 CONFIG.c_compare_operation Programmable CONFIG.c_has_divide_by_zero false CONFIG.c_has_invalid_op false CONFIG.c_has_overflow false CONFIG.c_has_underflow false CONFIG.c_latency 5 CONFIG.c_mult_usage Max_Usage CONFIG.c_optimization Speed_Optimized CONFIG.c_rate 1 CONFIG.c_result_exponent_width 11 CONFIG.c_result_fraction_width 53 CONFIG.component_name reconstruct_dmul_64ns_64ns_64_7_max_dsp_1_ip CONFIG.flow_control NonBlocking CONFIG.has_a_tlast false CONFIG.has_a_tuser false CONFIG.has_aclken true CONFIG.has_aresetn false CONFIG.has_b_tlast false CONFIG.has_b_tuser false CONFIG.has_operation_tlast false CONFIG.has_operation_tuser false CONFIG.has_result_tready false CONFIG.maximum_latency false CONFIG.operation_tuser_width 1 CONFIG.operation_type Multiply CONFIG.result_precision_type Double CONFIG.result_tlast_behv Null"
+        "Params": "CONFIG.a_precision_type Single CONFIG.a_tuser_width 1 CONFIG.add_sub_value Subtract CONFIG.b_tuser_width 1 CONFIG.c_a_exponent_width 8 CONFIG.c_a_fraction_width 24 CONFIG.c_compare_operation Programmable CONFIG.c_has_divide_by_zero false CONFIG.c_has_invalid_op false CONFIG.c_has_overflow false CONFIG.c_has_underflow false CONFIG.c_latency 2 CONFIG.c_mult_usage Full_Usage CONFIG.c_optimization Speed_Optimized CONFIG.c_rate 1 CONFIG.c_result_exponent_width 8 CONFIG.c_result_fraction_width 24 CONFIG.component_name reconstruct_fsub_32ns_32ns_32_4_full_dsp_1_ip CONFIG.flow_control NonBlocking CONFIG.has_a_tlast false CONFIG.has_a_tuser false CONFIG.has_aclken true CONFIG.has_aresetn false CONFIG.has_b_tlast false CONFIG.has_b_tuser false CONFIG.has_operation_tlast false CONFIG.has_operation_tuser false CONFIG.has_result_tready false CONFIG.maximum_latency false CONFIG.operation_tuser_width 1 CONFIG.operation_type Add_Subtract CONFIG.result_precision_type Single CONFIG.result_tlast_behv Null"
       },
       {
-        "Name": "reconstruct_dsub_64ns_64ns_64_7_full_dsp_1_ip",
+        "Name": "reconstruct_sitofp_32ns_32_4_no_dsp_1_ip",
         "Vlnv": "xilinx.com:ip:floating_point:7.1",
-        "Params": "CONFIG.a_precision_type Double CONFIG.a_tuser_width 1 CONFIG.add_sub_value Subtract CONFIG.b_tuser_width 1 CONFIG.c_a_exponent_width 11 CONFIG.c_a_fraction_width 53 CONFIG.c_compare_operation Programmable CONFIG.c_has_divide_by_zero false CONFIG.c_has_invalid_op false CONFIG.c_has_overflow false CONFIG.c_has_underflow false CONFIG.c_latency 5 CONFIG.c_mult_usage Full_Usage CONFIG.c_optimization Speed_Optimized CONFIG.c_rate 1 CONFIG.c_result_exponent_width 11 CONFIG.c_result_fraction_width 53 CONFIG.component_name reconstruct_dsub_64ns_64ns_64_7_full_dsp_1_ip CONFIG.flow_control NonBlocking CONFIG.has_a_tlast false CONFIG.has_a_tuser false CONFIG.has_aclken true CONFIG.has_aresetn false CONFIG.has_b_tlast false CONFIG.has_b_tuser false CONFIG.has_operation_tlast false CONFIG.has_operation_tuser false CONFIG.has_result_tready false CONFIG.maximum_latency false CONFIG.operation_tuser_width 1 CONFIG.operation_type Add_Subtract CONFIG.result_precision_type Double CONFIG.result_tlast_behv Null"
-      },
-      {
-        "Name": "reconstruct_sitodp_32ns_64_6_no_dsp_1_ip",
-        "Vlnv": "xilinx.com:ip:floating_point:7.1",
-        "Params": "CONFIG.a_precision_type Custom CONFIG.a_tuser_width 1 CONFIG.add_sub_value Both CONFIG.b_tuser_width 1 CONFIG.c_a_exponent_width 32 CONFIG.c_a_fraction_width 0 CONFIG.c_compare_operation Programmable CONFIG.c_has_divide_by_zero false CONFIG.c_has_invalid_op false CONFIG.c_has_overflow false CONFIG.c_has_underflow false CONFIG.c_latency 4 CONFIG.c_mult_usage No_Usage CONFIG.c_optimization Speed_Optimized CONFIG.c_rate 1 CONFIG.c_result_exponent_width 11 CONFIG.c_result_fraction_width 53 CONFIG.component_name reconstruct_sitodp_32ns_64_6_no_dsp_1_ip CONFIG.flow_control NonBlocking CONFIG.has_a_tlast false CONFIG.has_a_tuser false CONFIG.has_aclken true CONFIG.has_aresetn false CONFIG.has_b_tlast false CONFIG.has_b_tuser false CONFIG.has_operation_tlast false CONFIG.has_operation_tuser false CONFIG.has_result_tready false CONFIG.maximum_latency false CONFIG.operation_tuser_width 1 CONFIG.operation_type Fixed_to_Float CONFIG.result_precision_type Double CONFIG.result_tlast_behv Null"
+        "Params": "CONFIG.a_precision_type Custom CONFIG.a_tuser_width 1 CONFIG.add_sub_value Both CONFIG.b_tuser_width 1 CONFIG.c_a_exponent_width 32 CONFIG.c_a_fraction_width 0 CONFIG.c_compare_operation Programmable CONFIG.c_has_divide_by_zero false CONFIG.c_has_invalid_op false CONFIG.c_has_overflow false CONFIG.c_has_underflow false CONFIG.c_latency 2 CONFIG.c_mult_usage No_Usage CONFIG.c_optimization Speed_Optimized CONFIG.c_rate 1 CONFIG.c_result_exponent_width 8 CONFIG.c_result_fraction_width 24 CONFIG.component_name reconstruct_sitofp_32ns_32_4_no_dsp_1_ip CONFIG.flow_control NonBlocking CONFIG.has_a_tlast false CONFIG.has_a_tuser false CONFIG.has_aclken true CONFIG.has_aresetn false CONFIG.has_b_tlast false CONFIG.has_b_tuser false CONFIG.has_operation_tlast false CONFIG.has_operation_tuser false CONFIG.has_result_tready false CONFIG.maximum_latency false CONFIG.operation_tuser_width 1 CONFIG.operation_type Fixed_to_Float CONFIG.result_precision_type Single CONFIG.result_tlast_behv Null"
       }
     ]
   },
@@ -660,6 +588,34 @@
         },
         {
           "offset": "0x10",
+          "name": "atomLocations_offset_1",
+          "access": "W",
+          "description": "Data signal of atomLocations_offset",
+          "range": "32",
+          "fields": [{
+              "offset": "0",
+              "width": "32",
+              "name": "atomLocations_offset",
+              "access": "W",
+              "description": "Bit 31 to 0 of atomLocations_offset"
+            }]
+        },
+        {
+          "offset": "0x14",
+          "name": "atomLocations_offset_2",
+          "access": "W",
+          "description": "Data signal of atomLocations_offset",
+          "range": "32",
+          "fields": [{
+              "offset": "0",
+              "width": "32",
+              "name": "atomLocations_offset",
+              "access": "W",
+              "description": "Bit 63 to 32 of atomLocations_offset"
+            }]
+        },
+        {
+          "offset": "0x1c",
           "name": "imageProjs_local_offset_1",
           "access": "W",
           "description": "Data signal of imageProjs_local_offset",
@@ -673,7 +629,7 @@
             }]
         },
         {
-          "offset": "0x14",
+          "offset": "0x20",
           "name": "imageProjs_local_offset_2",
           "access": "W",
           "description": "Data signal of imageProjs_local_offset",
@@ -687,7 +643,7 @@
             }]
         },
         {
-          "offset": "0x1c",
+          "offset": "0x28",
           "name": "imageProjs_offset_1",
           "access": "W",
           "description": "Data signal of imageProjs_offset",
@@ -701,7 +657,7 @@
             }]
         },
         {
-          "offset": "0x20",
+          "offset": "0x2c",
           "name": "imageProjs_offset_2",
           "access": "W",
           "description": "Data signal of imageProjs_offset",
@@ -715,7 +671,7 @@
             }]
         },
         {
-          "offset": "0x28",
+          "offset": "0x34",
           "name": "imageProjs_local_size_offset_1",
           "access": "W",
           "description": "Data signal of imageProjs_local_size_offset",
@@ -729,7 +685,7 @@
             }]
         },
         {
-          "offset": "0x2c",
+          "offset": "0x38",
           "name": "imageProjs_local_size_offset_2",
           "access": "W",
           "description": "Data signal of imageProjs_local_size_offset",
@@ -743,7 +699,7 @@
             }]
         },
         {
-          "offset": "0x34",
+          "offset": "0x40",
           "name": "fullImage_offset_1",
           "access": "W",
           "description": "Data signal of fullImage_offset",
@@ -757,7 +713,7 @@
             }]
         },
         {
-          "offset": "0x38",
+          "offset": "0x44",
           "name": "fullImage_offset_2",
           "access": "W",
           "description": "Data signal of fullImage_offset",
@@ -771,7 +727,7 @@
             }]
         },
         {
-          "offset": "0x40",
+          "offset": "0x4c",
           "name": "emissions_offset_1",
           "access": "W",
           "description": "Data signal of emissions_offset",
@@ -785,7 +741,7 @@
             }]
         },
         {
-          "offset": "0x44",
+          "offset": "0x50",
           "name": "emissions_offset_2",
           "access": "W",
           "description": "Data signal of emissions_offset",
@@ -805,34 +761,41 @@
           "mode": "s_axilite",
           "register_option": "0",
           "offset": "16",
-          "argName": "imageProjs_local"
+          "argName": "atomLocations"
         },
         {
           "constraint_type": "pragma interface",
           "mode": "s_axilite",
           "register_option": "0",
           "offset": "28",
-          "argName": "imageProjs"
+          "argName": "imageProjs_local"
         },
         {
           "constraint_type": "pragma interface",
           "mode": "s_axilite",
           "register_option": "0",
           "offset": "40",
-          "argName": "imageProjs_local_size"
+          "argName": "imageProjs"
         },
         {
           "constraint_type": "pragma interface",
           "mode": "s_axilite",
           "register_option": "0",
           "offset": "52",
-          "argName": "fullImage"
+          "argName": "imageProjs_local_size"
         },
         {
           "constraint_type": "pragma interface",
           "mode": "s_axilite",
           "register_option": "0",
           "offset": "64",
+          "argName": "fullImage"
+        },
+        {
+          "constraint_type": "pragma interface",
+          "mode": "s_axilite",
+          "register_option": "0",
+          "offset": "76",
           "argName": "emissions"
         }
       ]
@@ -962,43 +925,6 @@
               "access": "W",
               "description": "Bit 31 to 0 of fullImage_cols"
             }]
-        },
-        {
-          "offset": "0x48",
-          "name": "emission_cnt",
-          "access": "R",
-          "description": "Data signal of emission_cnt",
-          "range": "32",
-          "fields": [{
-              "offset": "0",
-              "width": "32",
-              "name": "emission_cnt",
-              "access": "R",
-              "description": "Bit 31 to 0 of emission_cnt"
-            }]
-        },
-        {
-          "offset": "0x4c",
-          "name": "emission_cnt_ctrl",
-          "access": "R",
-          "description": "Control signal of emission_cnt",
-          "range": "32",
-          "fields": [
-            {
-              "offset": "0",
-              "width": "1",
-              "name": "emission_cnt_ap_vld",
-              "access": "R",
-              "description": "Control signal emission_cnt_ap_vld"
-            },
-            {
-              "offset": "1",
-              "width": "31",
-              "name": "RESERVED",
-              "access": "R",
-              "description": "Reserved.  0s on read."
-            }
-          ]
         }
       ],
       "constraints": [
@@ -1050,13 +976,6 @@
           "register_option": "0",
           "offset": "64",
           "argName": "fullImage_cols"
-        },
-        {
-          "constraint_type": "pragma interface",
-          "mode": "s_axilite",
-          "register_option": "0",
-          "offset": "72",
-          "argName": "emission_cnt"
         }
       ]
     },
@@ -1065,7 +984,7 @@
       "busTypeName": "clock",
       "mode": "slave",
       "busParams": {
-        "ASSOCIATED_BUSIF": "s_axi_control:s_axi_scalar_data:m_axi_emissions:m_axi_fullImage:m_axi_imageProjs:m_axi_imageProjs_local:m_axi_imageProjs_local_size",
+        "ASSOCIATED_BUSIF": "s_axi_control:s_axi_scalar_data:m_axi_atomLocations:m_axi_emissions:m_axi_fullImage:m_axi_imageProjs:m_axi_imageProjs_local:m_axi_imageProjs_local_size",
         "ASSOCIATED_RESET": "ap_rst_n"
       },
       "portMap": {"ap_clk": "CLK"},
@@ -1088,11 +1007,101 @@
       "portMap": {"interrupt": "INTERRUPT"},
       "ports": ["interrupt"]
     },
-    "m_axi_emissions": {
+    "m_axi_atomLocations": {
       "type": "axi4full",
       "busTypeName": "aximm",
       "mode": "master",
       "dataWidth": "64",
+      "addrWidth": "64",
+      "portPrefix": "m_axi_atomLocations_",
+      "paramPrefix": "C_M_AXI_ATOMLOCATIONS_",
+      "preferredUsageValue": "MEMORY",
+      "busParams": {
+        "NUM_READ_OUTSTANDING": "16",
+        "NUM_WRITE_OUTSTANDING": "16",
+        "MAX_READ_BURST_LENGTH": "16",
+        "MAX_WRITE_BURST_LENGTH": "16",
+        "MAX_BURST_LENGTH": "256",
+        "PROTOCOL": "AXI4",
+        "READ_WRITE_MODE": "READ_ONLY",
+        "HAS_BURST": "0",
+        "SUPPORTS_NARROW_BURST": "0"
+      },
+      "ports": [
+        "m_axi_atomLocations_ARADDR",
+        "m_axi_atomLocations_ARBURST",
+        "m_axi_atomLocations_ARCACHE",
+        "m_axi_atomLocations_ARID",
+        "m_axi_atomLocations_ARLEN",
+        "m_axi_atomLocations_ARLOCK",
+        "m_axi_atomLocations_ARPROT",
+        "m_axi_atomLocations_ARQOS",
+        "m_axi_atomLocations_ARREADY",
+        "m_axi_atomLocations_ARREGION",
+        "m_axi_atomLocations_ARSIZE",
+        "m_axi_atomLocations_ARUSER",
+        "m_axi_atomLocations_ARVALID",
+        "m_axi_atomLocations_AWADDR",
+        "m_axi_atomLocations_AWBURST",
+        "m_axi_atomLocations_AWCACHE",
+        "m_axi_atomLocations_AWID",
+        "m_axi_atomLocations_AWLEN",
+        "m_axi_atomLocations_AWLOCK",
+        "m_axi_atomLocations_AWPROT",
+        "m_axi_atomLocations_AWQOS",
+        "m_axi_atomLocations_AWREADY",
+        "m_axi_atomLocations_AWREGION",
+        "m_axi_atomLocations_AWSIZE",
+        "m_axi_atomLocations_AWUSER",
+        "m_axi_atomLocations_AWVALID",
+        "m_axi_atomLocations_BID",
+        "m_axi_atomLocations_BREADY",
+        "m_axi_atomLocations_BRESP",
+        "m_axi_atomLocations_BUSER",
+        "m_axi_atomLocations_BVALID",
+        "m_axi_atomLocations_RDATA",
+        "m_axi_atomLocations_RID",
+        "m_axi_atomLocations_RLAST",
+        "m_axi_atomLocations_RREADY",
+        "m_axi_atomLocations_RRESP",
+        "m_axi_atomLocations_RUSER",
+        "m_axi_atomLocations_RVALID",
+        "m_axi_atomLocations_WDATA",
+        "m_axi_atomLocations_WID",
+        "m_axi_atomLocations_WLAST",
+        "m_axi_atomLocations_WREADY",
+        "m_axi_atomLocations_WSTRB",
+        "m_axi_atomLocations_WUSER",
+        "m_axi_atomLocations_WVALID"
+      ],
+      "constraints": [
+        {
+          "constraint_type": "pragma interface",
+          "mode": "m_axi",
+          "register_option": "0",
+          "offset": "slave",
+          "latency": "0",
+          "num_read_outstanding": "16",
+          "num_write_outstanding": "16",
+          "max_read_burst_length": "16",
+          "max_write_burst_length": "16",
+          "max_widen_bitwidth": "0",
+          "channel_id": "0",
+          "argName": "atomLocations"
+        },
+        {
+          "constraint_type": "bitwidth",
+          "orig_bitwidth": "64",
+          "final_bitwidth": "64",
+          "argName": "atomLocations"
+        }
+      ]
+    },
+    "m_axi_emissions": {
+      "type": "axi4full",
+      "busTypeName": "aximm",
+      "mode": "master",
+      "dataWidth": "32",
       "addrWidth": "64",
       "portPrefix": "m_axi_emissions_",
       "paramPrefix": "C_M_AXI_EMISSIONS_",
@@ -1172,8 +1181,8 @@
         },
         {
           "constraint_type": "bitwidth",
-          "orig_bitwidth": "64",
-          "final_bitwidth": "64",
+          "orig_bitwidth": "32",
+          "final_bitwidth": "32",
           "argName": "emissions"
         }
       ]
@@ -1182,7 +1191,7 @@
       "type": "axi4full",
       "busTypeName": "aximm",
       "mode": "master",
-      "dataWidth": "64",
+      "dataWidth": "32",
       "addrWidth": "64",
       "portPrefix": "m_axi_fullImage_",
       "paramPrefix": "C_M_AXI_FULLIMAGE_",
@@ -1262,8 +1271,8 @@
         },
         {
           "constraint_type": "bitwidth",
-          "orig_bitwidth": "64",
-          "final_bitwidth": "64",
+          "orig_bitwidth": "32",
+          "final_bitwidth": "32",
           "argName": "fullImage"
         }
       ]
@@ -1272,7 +1281,7 @@
       "type": "axi4full",
       "busTypeName": "aximm",
       "mode": "master",
-      "dataWidth": "64",
+      "dataWidth": "32",
       "addrWidth": "64",
       "portPrefix": "m_axi_imageProjs_",
       "paramPrefix": "C_M_AXI_IMAGEPROJS_",
@@ -1352,8 +1361,8 @@
         },
         {
           "constraint_type": "bitwidth",
-          "orig_bitwidth": "64",
-          "final_bitwidth": "64",
+          "orig_bitwidth": "32",
+          "final_bitwidth": "32",
           "argName": "imageProjs"
         }
       ]
@@ -1362,7 +1371,7 @@
       "type": "axi4full",
       "busTypeName": "aximm",
       "mode": "master",
-      "dataWidth": "64",
+      "dataWidth": "32",
       "addrWidth": "64",
       "portPrefix": "m_axi_imageProjs_local_",
       "paramPrefix": "C_M_AXI_IMAGEPROJS_LOCAL_",
@@ -1442,8 +1451,8 @@
         },
         {
           "constraint_type": "bitwidth",
-          "orig_bitwidth": "64",
-          "final_bitwidth": "64",
+          "orig_bitwidth": "32",
+          "final_bitwidth": "32",
           "argName": "imageProjs_local"
         }
       ]
@@ -1515,96 +1524,6 @@
         "m_axi_imageProjs_local_size_WUSER",
         "m_axi_imageProjs_local_size_WVALID"
       ]
-    },
-    "atomLocations_address0": {
-      "type": "data",
-      "busTypeName": "data",
-      "protocol": "ap_memory",
-      "mode": "master",
-      "dataWidth": "7",
-      "portMap": {"atomLocations_address0": "DATA"},
-      "ports": ["atomLocations_address0"],
-      "constraints": [{
-          "constraint_type": "pragma interface",
-          "mode": "ap_memory",
-          "register_option": "0",
-          "argName": "atomLocations"
-        }]
-    },
-    "atomLocations_d0": {
-      "type": "data",
-      "busTypeName": "data",
-      "protocol": "ap_memory",
-      "mode": "master",
-      "dataWidth": "128",
-      "portMap": {"atomLocations_d0": "DATA"},
-      "ports": ["atomLocations_d0"],
-      "constraints": [{
-          "constraint_type": "pragma interface",
-          "mode": "ap_memory",
-          "register_option": "0",
-          "argName": "atomLocations"
-        }]
-    },
-    "atomLocations_q0": {
-      "type": "data",
-      "busTypeName": "data",
-      "protocol": "ap_memory",
-      "mode": "slave",
-      "dataWidth": "128",
-      "portMap": {"atomLocations_q0": "DATA"},
-      "ports": ["atomLocations_q0"],
-      "constraints": [{
-          "constraint_type": "pragma interface",
-          "mode": "ap_memory",
-          "register_option": "0",
-          "argName": "atomLocations"
-        }]
-    },
-    "atomLocations_address1": {
-      "type": "data",
-      "busTypeName": "data",
-      "protocol": "ap_memory",
-      "mode": "master",
-      "dataWidth": "7",
-      "portMap": {"atomLocations_address1": "DATA"},
-      "ports": ["atomLocations_address1"],
-      "constraints": [{
-          "constraint_type": "pragma interface",
-          "mode": "ap_memory",
-          "register_option": "0",
-          "argName": "atomLocations"
-        }]
-    },
-    "atomLocations_d1": {
-      "type": "data",
-      "busTypeName": "data",
-      "protocol": "ap_memory",
-      "mode": "master",
-      "dataWidth": "128",
-      "portMap": {"atomLocations_d1": "DATA"},
-      "ports": ["atomLocations_d1"],
-      "constraints": [{
-          "constraint_type": "pragma interface",
-          "mode": "ap_memory",
-          "register_option": "0",
-          "argName": "atomLocations"
-        }]
-    },
-    "atomLocations_q1": {
-      "type": "data",
-      "busTypeName": "data",
-      "protocol": "ap_memory",
-      "mode": "slave",
-      "dataWidth": "128",
-      "portMap": {"atomLocations_q1": "DATA"},
-      "ports": ["atomLocations_q1"],
-      "constraints": [{
-          "constraint_type": "pragma interface",
-          "mode": "ap_memory",
-          "register_option": "0",
-          "argName": "atomLocations"
-        }]
     }
   },
   "RtlPorts": {
@@ -1756,6 +1675,196 @@
       "dir": "out",
       "width": "1"
     },
+    "m_axi_atomLocations_AWVALID": {
+      "dir": "out",
+      "width": "1"
+    },
+    "m_axi_atomLocations_AWREADY": {
+      "dir": "in",
+      "width": "1"
+    },
+    "m_axi_atomLocations_AWADDR": {
+      "dir": "out",
+      "width": "64"
+    },
+    "m_axi_atomLocations_AWID": {
+      "dir": "out",
+      "width": "1",
+      "isVector": "true"
+    },
+    "m_axi_atomLocations_AWLEN": {
+      "dir": "out",
+      "width": "8"
+    },
+    "m_axi_atomLocations_AWSIZE": {
+      "dir": "out",
+      "width": "3"
+    },
+    "m_axi_atomLocations_AWBURST": {
+      "dir": "out",
+      "width": "2"
+    },
+    "m_axi_atomLocations_AWLOCK": {
+      "dir": "out",
+      "width": "2"
+    },
+    "m_axi_atomLocations_AWCACHE": {
+      "dir": "out",
+      "width": "4"
+    },
+    "m_axi_atomLocations_AWPROT": {
+      "dir": "out",
+      "width": "3"
+    },
+    "m_axi_atomLocations_AWQOS": {
+      "dir": "out",
+      "width": "4"
+    },
+    "m_axi_atomLocations_AWREGION": {
+      "dir": "out",
+      "width": "4"
+    },
+    "m_axi_atomLocations_AWUSER": {
+      "dir": "out",
+      "width": "1",
+      "isVector": "true"
+    },
+    "m_axi_atomLocations_WVALID": {
+      "dir": "out",
+      "width": "1"
+    },
+    "m_axi_atomLocations_WREADY": {
+      "dir": "in",
+      "width": "1"
+    },
+    "m_axi_atomLocations_WDATA": {
+      "dir": "out",
+      "width": "64"
+    },
+    "m_axi_atomLocations_WSTRB": {
+      "dir": "out",
+      "width": "8"
+    },
+    "m_axi_atomLocations_WLAST": {
+      "dir": "out",
+      "width": "1"
+    },
+    "m_axi_atomLocations_WID": {
+      "dir": "out",
+      "width": "1",
+      "isVector": "true"
+    },
+    "m_axi_atomLocations_WUSER": {
+      "dir": "out",
+      "width": "1",
+      "isVector": "true"
+    },
+    "m_axi_atomLocations_ARVALID": {
+      "dir": "out",
+      "width": "1"
+    },
+    "m_axi_atomLocations_ARREADY": {
+      "dir": "in",
+      "width": "1"
+    },
+    "m_axi_atomLocations_ARADDR": {
+      "dir": "out",
+      "width": "64"
+    },
+    "m_axi_atomLocations_ARID": {
+      "dir": "out",
+      "width": "1",
+      "isVector": "true"
+    },
+    "m_axi_atomLocations_ARLEN": {
+      "dir": "out",
+      "width": "8"
+    },
+    "m_axi_atomLocations_ARSIZE": {
+      "dir": "out",
+      "width": "3"
+    },
+    "m_axi_atomLocations_ARBURST": {
+      "dir": "out",
+      "width": "2"
+    },
+    "m_axi_atomLocations_ARLOCK": {
+      "dir": "out",
+      "width": "2"
+    },
+    "m_axi_atomLocations_ARCACHE": {
+      "dir": "out",
+      "width": "4"
+    },
+    "m_axi_atomLocations_ARPROT": {
+      "dir": "out",
+      "width": "3"
+    },
+    "m_axi_atomLocations_ARQOS": {
+      "dir": "out",
+      "width": "4"
+    },
+    "m_axi_atomLocations_ARREGION": {
+      "dir": "out",
+      "width": "4"
+    },
+    "m_axi_atomLocations_ARUSER": {
+      "dir": "out",
+      "width": "1",
+      "isVector": "true"
+    },
+    "m_axi_atomLocations_RVALID": {
+      "dir": "in",
+      "width": "1"
+    },
+    "m_axi_atomLocations_RREADY": {
+      "dir": "out",
+      "width": "1"
+    },
+    "m_axi_atomLocations_RDATA": {
+      "dir": "in",
+      "width": "64"
+    },
+    "m_axi_atomLocations_RLAST": {
+      "dir": "in",
+      "width": "1"
+    },
+    "m_axi_atomLocations_RID": {
+      "dir": "in",
+      "width": "1",
+      "isVector": "true"
+    },
+    "m_axi_atomLocations_RUSER": {
+      "dir": "in",
+      "width": "1",
+      "isVector": "true"
+    },
+    "m_axi_atomLocations_RRESP": {
+      "dir": "in",
+      "width": "2"
+    },
+    "m_axi_atomLocations_BVALID": {
+      "dir": "in",
+      "width": "1"
+    },
+    "m_axi_atomLocations_BREADY": {
+      "dir": "out",
+      "width": "1"
+    },
+    "m_axi_atomLocations_BRESP": {
+      "dir": "in",
+      "width": "2"
+    },
+    "m_axi_atomLocations_BID": {
+      "dir": "in",
+      "width": "1",
+      "isVector": "true"
+    },
+    "m_axi_atomLocations_BUSER": {
+      "dir": "in",
+      "width": "1",
+      "isVector": "true"
+    },
     "m_axi_emissions_AWVALID": {
       "dir": "out",
       "width": "1"
@@ -1820,11 +1929,11 @@
     },
     "m_axi_emissions_WDATA": {
       "dir": "out",
-      "width": "64"
+      "width": "32"
     },
     "m_axi_emissions_WSTRB": {
       "dir": "out",
-      "width": "8"
+      "width": "4"
     },
     "m_axi_emissions_WLAST": {
       "dir": "out",
@@ -1904,7 +2013,7 @@
     },
     "m_axi_emissions_RDATA": {
       "dir": "in",
-      "width": "64"
+      "width": "32"
     },
     "m_axi_emissions_RLAST": {
       "dir": "in",
@@ -2010,11 +2119,11 @@
     },
     "m_axi_fullImage_WDATA": {
       "dir": "out",
-      "width": "64"
+      "width": "32"
     },
     "m_axi_fullImage_WSTRB": {
       "dir": "out",
-      "width": "8"
+      "width": "4"
     },
     "m_axi_fullImage_WLAST": {
       "dir": "out",
@@ -2094,7 +2203,7 @@
     },
     "m_axi_fullImage_RDATA": {
       "dir": "in",
-      "width": "64"
+      "width": "32"
     },
     "m_axi_fullImage_RLAST": {
       "dir": "in",
@@ -2200,11 +2309,11 @@
     },
     "m_axi_imageProjs_WDATA": {
       "dir": "out",
-      "width": "64"
+      "width": "32"
     },
     "m_axi_imageProjs_WSTRB": {
       "dir": "out",
-      "width": "8"
+      "width": "4"
     },
     "m_axi_imageProjs_WLAST": {
       "dir": "out",
@@ -2284,7 +2393,7 @@
     },
     "m_axi_imageProjs_RDATA": {
       "dir": "in",
-      "width": "64"
+      "width": "32"
     },
     "m_axi_imageProjs_RLAST": {
       "dir": "in",
@@ -2390,11 +2499,11 @@
     },
     "m_axi_imageProjs_local_WDATA": {
       "dir": "out",
-      "width": "64"
+      "width": "32"
     },
     "m_axi_imageProjs_local_WSTRB": {
       "dir": "out",
-      "width": "8"
+      "width": "4"
     },
     "m_axi_imageProjs_local_WLAST": {
       "dir": "out",
@@ -2474,7 +2583,7 @@
     },
     "m_axi_imageProjs_local_RDATA": {
       "dir": "in",
-      "width": "64"
+      "width": "32"
     },
     "m_axi_imageProjs_local_RLAST": {
       "dir": "in",
@@ -2705,103 +2814,107 @@
       "dir": "in",
       "width": "1",
       "isVector": "true"
-    },
-    "atomLocations_address0": {
-      "dir": "out",
-      "width": "7"
-    },
-    "atomLocations_ce0": {
-      "dir": "out",
-      "width": "1"
-    },
-    "atomLocations_d0": {
-      "dir": "out",
-      "width": "128"
-    },
-    "atomLocations_q0": {
-      "dir": "in",
-      "width": "128"
-    },
-    "atomLocations_we0": {
-      "dir": "out",
-      "width": "1"
-    },
-    "atomLocations_address1": {
-      "dir": "out",
-      "width": "7"
-    },
-    "atomLocations_ce1": {
-      "dir": "out",
-      "width": "1"
-    },
-    "atomLocations_d1": {
-      "dir": "out",
-      "width": "128"
-    },
-    "atomLocations_q1": {
-      "dir": "in",
-      "width": "128"
-    },
-    "atomLocations_we1": {
-      "dir": "out",
-      "width": "1"
     }
   },
   "ModuleInfo": {
     "Hierarchy": {
       "ModuleName": "reconstruct",
-      "BindInstances": "localImages_U control_s_axi_U scalar_data_s_axi_U emissions_m_axi_U fullImage_m_axi_U imageProjs_m_axi_U imageProjs_local_m_axi_U imageProjs_local_size_m_axi_U",
-      "Instances": [
-        {
-          "ModuleName": "getLocalImages",
-          "InstanceName": "getLocalImages_U0",
-          "BindInstances": "p_neg3_fu_1308_p2 p_neg_t5_fu_1324_p2 div_fu_1340_p3 p_neg_fu_1356_p2 p_neg_t_fu_1372_p2 div11_fu_1388_p3 sitodp_32ns_64_6_no_dsp_1_U429",
+      "BindInstances": "control_s_axi_U scalar_data_s_axi_U atomLocations_m_axi_U emissions_m_axi_U fullImage_m_axi_U imageProjs_m_axi_U imageProjs_local_m_axi_U",
+      "Instances": [{
+          "ModuleName": "dataflow_in_loop_VITIS_LOOP_149_1_1",
+          "InstanceName": "dataflow_in_loop_VITIS_LOOP_149_1_1_U0",
+          "BindInstances": "call_ret_U localImages_U curr_fullImage_16_U curr_fullImage_1_U curr_fullImage_2_U curr_fullImage_3_U curr_fullImage_4_U curr_fullImage_5_U curr_fullImage_6_U curr_fullImage_7_U curr_fullImage_8_U curr_fullImage_9_U curr_fullImage_10_U curr_fullImage_11_U curr_fullImage_12_U curr_fullImage_13_U curr_fullImage_14_U curr_fullImage_15_U curr_fullImage_14_126_U curr_fullImage_13_125_U curr_fullImage_12_124_U curr_fullImage_11_123_U curr_fullImage_10_122_U curr_fullImage_9_121_U curr_fullImage_8_120_U curr_fullImage_7_119_U curr_fullImage_6_118_U curr_fullImage_5_117_U curr_fullImage_4_116_U curr_fullImage_3_115_U curr_fullImage_2_114_U curr_fullImage_1_113_U curr_fullImage_U curr_localImage_16_U curr_localImage_1_U curr_localImage_2_U curr_localImage_3_U curr_localImage_4_U curr_localImage_5_U curr_localImage_6_U curr_localImage_7_U curr_localImage_8_U curr_localImage_9_U curr_localImage_10_U curr_localImage_11_U curr_localImage_12_U curr_localImage_13_U curr_localImage_14_U curr_localImage_15_U curr_localImage_14_112_U curr_localImage_13_111_U curr_localImage_12_110_U curr_localImage_11_109_U curr_localImage_10_108_U curr_localImage_9_107_U curr_localImage_8_106_U curr_localImage_7_105_U curr_localImage_6_104_U curr_localImage_5_103_U curr_localImage_4_102_U curr_localImage_3_101_U curr_localImage_2_100_U curr_localImage_1_99_U curr_localImage_U curr_imageProjs_U projSumUsed_U sum_U",
           "Instances": [
             {
-              "ModuleName": "getLocalImages_Pipeline_copy_loop",
-              "InstanceName": "grp_getLocalImages_Pipeline_copy_loop_fu_872",
-              "BindInstances": "icmp_ln13_fu_2867_p2 add_ln13_fu_2873_p2"
+              "ModuleName": "getLocalImages_single",
+              "InstanceName": "getLocalImages_single_U0",
+              "BindInstances": "add_ln8_fu_334_p2 icmp_ln8_fu_344_p2 select_ln8_fu_350_p3 lshr_ln8_fu_400_p2 icmp_ln167_fu_430_p2 icmp_ln170_fu_444_p2 data_2_fu_533_p2 xor_ln184_fu_542_p2 xs_sig_fu_548_p2 xor_ln167_fu_576_p2 and_ln170_fu_581_p2 sparsemux_7_2_32_1_1_U9 add_ln317_fu_655_p2 sub_ln18_fu_669_p2 select_ln18_fu_679_p3 lshr_ln18_fu_695_p2 shl_ln18_fu_701_p2 val_fu_727_p3 result_2_fu_735_p2 result_12_fu_741_p3 icmp_ln167_1_fu_476_p2 icmp_ln170_1_fu_490_p2 data_4_fu_764_p2 xor_ln184_1_fu_773_p2 xs_sig_1_fu_779_p2 xor_ln167_1_fu_807_p2 and_ln170_1_fu_812_p2 sparsemux_7_2_32_1_1_U10 add_ln317_1_fu_886_p2 sub_ln18_1_fu_900_p2 select_ln18_2_fu_910_p3 lshr_ln18_1_fu_926_p2 shl_ln18_1_fu_932_p2 val_1_fu_958_p3 result_5_fu_966_p2 result_13_fu_972_p3 sub_ln15_fu_1269_p2 sub_ln15_1_fu_1284_p2 select_ln15_fu_1299_p3 info_Y_min_fu_1311_p2 sub_ln16_fu_1323_p2 sub_ln16_1_fu_1338_p2 select_ln16_fu_1353_p3 info_X_min_fu_1365_p2 sitofp_32ns_32_4_no_dsp_1_U7 fsub_32ns_32ns_32_4_full_dsp_1_U3 sitofp_32ns_32_4_no_dsp_1_U7 fmul_32ns_32ns_32_3_max_dsp_1_U5 icmp_ln167_2_fu_991_p2 icmp_ln170_2_fu_1005_p2 data_7_fu_1089_p2 xor_ln184_2_fu_1098_p2 xs_sig_2_fu_1104_p2 xor_ln167_2_fu_1132_p2 and_ln170_2_fu_1137_p2 sparsemux_7_2_32_1_1_U11 add_ln317_2_fu_1433_p2 sub_ln18_2_fu_1447_p2 select_ln18_4_fu_1457_p3 lshr_ln18_2_fu_1473_p2 shl_ln18_2_fu_1479_p2 val_2_fu_1505_p3 result_9_fu_1513_p2 result_14_fu_1519_p3 sitofp_32ns_32_4_no_dsp_1_U8 fsub_32ns_32ns_32_4_full_dsp_1_U4 fmul_32ns_32ns_32_3_max_dsp_1_U6 icmp_ln167_3_fu_1038_p2 icmp_ln170_3_fu_1052_p2 data_10_fu_1183_p2 xor_ln184_3_fu_1192_p2 xs_sig_3_fu_1198_p2 xor_ln167_3_fu_1226_p2 and_ln170_3_fu_1231_p2 sparsemux_7_2_32_1_1_U12 add_ln317_3_fu_1568_p2 sub_ln18_3_fu_1582_p2 select_ln18_6_fu_1592_p3 lshr_ln18_3_fu_1608_p2 shl_ln18_3_fu_1614_p2 val_3_fu_1640_p3 result_10_fu_1648_p2 result_fu_1654_p3 mask_table_U one_half_table_U"
             },
             {
-              "ModuleName": "getLocalImages_Pipeline_process_loop",
-              "InstanceName": "grp_getLocalImages_Pipeline_process_loop_fu_1080",
-              "BindInstances": "icmp_ln19_fu_2095_p2 add_ln19_fu_2101_p2 sparsemux_201_7_64_1_1_U209 sparsemux_201_7_64_1_1_U210 icmp_ln167_fu_2939_p2 icmp_ln170_fu_2953_p2 data_2_fu_3036_p2 xor_ln184_fu_3045_p2 xs_sig_fu_3050_p2 xor_ln167_fu_3078_p2 and_ln170_fu_3083_p2 sparsemux_7_2_64_1_1_U211 add_ln486_fu_3247_p2 sub_ln18_fu_3261_p2 select_ln18_fu_3271_p3 lshr_ln18_fu_3287_p2 shl_ln18_fu_3293_p2 val_fu_3432_p3 result_2_fu_3437_p2 result_12_fu_3443_p3 icmp_ln167_1_fu_2986_p2 icmp_ln170_1_fu_3000_p2 data_4_fu_3128_p2 xor_ln184_1_fu_3137_p2 xs_sig_1_fu_3142_p2 xor_ln167_1_fu_3170_p2 and_ln170_1_fu_3175_p2 sparsemux_7_2_64_1_1_U212 add_ln486_1_fu_3360_p2 sub_ln18_1_fu_3374_p2 select_ln18_2_fu_3384_p3 lshr_ln18_1_fu_3400_p2 shl_ln18_1_fu_3406_p2 val_1_fu_3450_p3 result_5_fu_3455_p2 result_13_fu_3461_p3 info_Y_min_fu_3864_p2 info_X_min_fu_3868_p2 dsub_64ns_64ns_64_7_full_dsp_1_U203 dmul_64ns_64ns_64_7_max_dsp_1_U205 icmp_ln167_2_fu_3479_p2 icmp_ln170_2_fu_3493_p2 data_7_fu_3566_p2 xor_ln184_2_fu_3614_p2 xs_sig_2_fu_3619_p2 xor_ln167_2_fu_3636_p2 and_ln170_2_fu_3641_p2 sparsemux_7_2_64_1_1_U213 add_ln486_2_fu_3700_p2 sub_ln18_2_fu_3714_p2 select_ln18_4_fu_3724_p3 lshr_ln18_2_fu_3914_p2 shl_ln18_2_fu_3920_p2 val_2_fu_3946_p3 result_9_fu_4012_p2 result_14_fu_4017_p3 sitodp_32ns_64_6_no_dsp_1_U208 dsub_64ns_64ns_64_7_full_dsp_1_U204 dmul_64ns_64ns_64_7_max_dsp_1_U206 icmp_ln167_3_fu_3526_p2 icmp_ln170_3_fu_3540_p2 data_10_fu_3585_p2 xor_ln184_3_fu_3746_p2 xs_sig_3_fu_3751_p2 xor_ln167_3_fu_3768_p2 and_ln170_3_fu_3773_p2 sparsemux_7_2_64_1_1_U214 add_ln486_3_fu_3832_p2 sub_ln18_3_fu_3846_p2 select_ln18_6_fu_3856_p3 lshr_ln18_3_fu_3973_p2 shl_ln18_3_fu_3979_p2 val_3_fu_4005_p3 result_10_fu_4023_p2 result_fu_4028_p3 mask_table_U one_half_table_U"
+              "ModuleName": "Image_extract",
+              "InstanceName": "Image_extract_U0",
+              "Instances": [{
+                  "ModuleName": "Image_extract_Pipeline_VITIS_LOOP_77_1_VITIS_LOOP_78_2",
+                  "InstanceName": "grp_Image_extract_Pipeline_VITIS_LOOP_77_1_VITIS_LOOP_78_2_fu_239",
+                  "BindInstances": "select_ln77_fu_1184_p3 i_fu_1192_p3 first_iter_0_fu_1200_p2 tmp2_i_fu_1210_p2 add_ln77_fu_1224_p2 add_ln77_1_fu_1242_p2 add_ln77_3_fu_1268_p2 j_fu_1278_p2 icmp_ln78_fu_1284_p2 add_ln77_2_fu_1290_p2 icmp_ln77_fu_1296_p2"
+                }]
+            },
+            {
+              "ModuleName": "conv_kernel",
+              "InstanceName": "conv_kernel_U0",
+              "Instances": [{
+                  "ModuleName": "conv_kernel_Pipeline_VITIS_LOOP_101_1",
+                  "InstanceName": "grp_conv_kernel_Pipeline_VITIS_LOOP_101_1_fu_18054",
+                  "BindInstances": "sparsemux_63_5_32_1_1_U165 sparsemux_63_5_32_1_1_U166 fmul_32ns_32ns_32_3_max_dsp_1_U164 fadd_32ns_32ns_32_4_full_dsp_1_U163 fadd_32ns_32ns_32_4_full_dsp_1_U163 sparsemux_63_5_32_1_1_U167 sparsemux_63_5_32_1_1_U168 fmul_32ns_32ns_32_3_max_dsp_1_U164 fadd_32ns_32ns_32_4_full_dsp_1_U163 fadd_32ns_32ns_32_4_full_dsp_1_U163 sparsemux_63_5_32_1_1_U169 sparsemux_63_5_32_1_1_U170 fmul_32ns_32ns_32_3_max_dsp_1_U164 fadd_32ns_32ns_32_4_full_dsp_1_U163 fadd_32ns_32ns_32_4_full_dsp_1_U163 sparsemux_63_5_32_1_1_U171 sparsemux_63_5_32_1_1_U172 fmul_32ns_32ns_32_3_max_dsp_1_U164 fadd_32ns_32ns_32_4_full_dsp_1_U163 fadd_32ns_32ns_32_4_full_dsp_1_U163 sparsemux_63_5_32_1_1_U173 sparsemux_63_5_32_1_1_U174 fmul_32ns_32ns_32_3_max_dsp_1_U164 fadd_32ns_32ns_32_4_full_dsp_1_U163 fadd_32ns_32ns_32_4_full_dsp_1_U163 sparsemux_63_5_32_1_1_U175 sparsemux_63_5_32_1_1_U176 fmul_32ns_32ns_32_3_max_dsp_1_U164 fadd_32ns_32ns_32_4_full_dsp_1_U163 fadd_32ns_32ns_32_4_full_dsp_1_U163 sparsemux_63_5_32_1_1_U177 sparsemux_63_5_32_1_1_U178 fmul_32ns_32ns_32_3_max_dsp_1_U164 fadd_32ns_32ns_32_4_full_dsp_1_U163 fadd_32ns_32ns_32_4_full_dsp_1_U163 sparsemux_63_5_32_1_1_U179 sparsemux_63_5_32_1_1_U180 fmul_32ns_32ns_32_3_max_dsp_1_U164 fadd_32ns_32ns_32_4_full_dsp_1_U163 fadd_32ns_32ns_32_4_full_dsp_1_U163 sparsemux_63_5_32_1_1_U181 sparsemux_63_5_32_1_1_U182 fmul_32ns_32ns_32_3_max_dsp_1_U164 fadd_32ns_32ns_32_4_full_dsp_1_U163 fadd_32ns_32ns_32_4_full_dsp_1_U163 sparsemux_63_5_32_1_1_U183 sparsemux_63_5_32_1_1_U184 fmul_32ns_32ns_32_3_max_dsp_1_U164 fadd_32ns_32ns_32_4_full_dsp_1_U163 fadd_32ns_32ns_32_4_full_dsp_1_U163 sparsemux_63_5_32_1_1_U185 sparsemux_63_5_32_1_1_U186 fmul_32ns_32ns_32_3_max_dsp_1_U164 fadd_32ns_32ns_32_4_full_dsp_1_U163 fadd_32ns_32ns_32_4_full_dsp_1_U163 sparsemux_63_5_32_1_1_U187 sparsemux_63_5_32_1_1_U188 fmul_32ns_32ns_32_3_max_dsp_1_U164 fadd_32ns_32ns_32_4_full_dsp_1_U163 fadd_32ns_32ns_32_4_full_dsp_1_U163 sparsemux_63_5_32_1_1_U189 sparsemux_63_5_32_1_1_U190 fmul_32ns_32ns_32_3_max_dsp_1_U164 fadd_32ns_32ns_32_4_full_dsp_1_U163 fadd_32ns_32ns_32_4_full_dsp_1_U163 sparsemux_63_5_32_1_1_U191 sparsemux_63_5_32_1_1_U192 fmul_32ns_32ns_32_3_max_dsp_1_U164 fadd_32ns_32ns_32_4_full_dsp_1_U163 fadd_32ns_32ns_32_4_full_dsp_1_U163 sparsemux_63_5_32_1_1_U193 sparsemux_63_5_32_1_1_U194 fmul_32ns_32ns_32_3_max_dsp_1_U164 fadd_32ns_32ns_32_4_full_dsp_1_U163 fadd_32ns_32ns_32_4_full_dsp_1_U163 sparsemux_63_5_32_1_1_U195 sparsemux_63_5_32_1_1_U196 fmul_32ns_32ns_32_3_max_dsp_1_U164 fadd_32ns_32ns_32_4_full_dsp_1_U163 fadd_32ns_32ns_32_4_full_dsp_1_U163 sparsemux_63_5_32_1_1_U197 sparsemux_63_5_32_1_1_U198 fmul_32ns_32ns_32_3_max_dsp_1_U164 fadd_32ns_32ns_32_4_full_dsp_1_U163 fadd_32ns_32ns_32_4_full_dsp_1_U163 sparsemux_63_5_32_1_1_U199 sparsemux_63_5_32_1_1_U200 fmul_32ns_32ns_32_3_max_dsp_1_U164 fadd_32ns_32ns_32_4_full_dsp_1_U163 fadd_32ns_32ns_32_4_full_dsp_1_U163 sparsemux_63_5_32_1_1_U201 sparsemux_63_5_32_1_1_U202 fmul_32ns_32ns_32_3_max_dsp_1_U164 fadd_32ns_32ns_32_4_full_dsp_1_U163 fadd_32ns_32ns_32_4_full_dsp_1_U163 sparsemux_63_5_32_1_1_U203 sparsemux_63_5_32_1_1_U204 fmul_32ns_32ns_32_3_max_dsp_1_U164 fadd_32ns_32ns_32_4_full_dsp_1_U163 fadd_32ns_32ns_32_4_full_dsp_1_U163 sparsemux_63_5_32_1_1_U205 sparsemux_63_5_32_1_1_U206 fmul_32ns_32ns_32_3_max_dsp_1_U164 fadd_32ns_32ns_32_4_full_dsp_1_U163 fadd_32ns_32ns_32_4_full_dsp_1_U163 sparsemux_63_5_32_1_1_U207 sparsemux_63_5_32_1_1_U208 fmul_32ns_32ns_32_3_max_dsp_1_U164 fadd_32ns_32ns_32_4_full_dsp_1_U163 fadd_32ns_32ns_32_4_full_dsp_1_U163 sparsemux_63_5_32_1_1_U209 sparsemux_63_5_32_1_1_U210 fmul_32ns_32ns_32_3_max_dsp_1_U164 fadd_32ns_32ns_32_4_full_dsp_1_U163 fadd_32ns_32ns_32_4_full_dsp_1_U163 sparsemux_63_5_32_1_1_U211 sparsemux_63_5_32_1_1_U212 fmul_32ns_32ns_32_3_max_dsp_1_U164 fadd_32ns_32ns_32_4_full_dsp_1_U163 fadd_32ns_32ns_32_4_full_dsp_1_U163 sparsemux_63_5_32_1_1_U213 sparsemux_63_5_32_1_1_U214 fmul_32ns_32ns_32_3_max_dsp_1_U164 fadd_32ns_32ns_32_4_full_dsp_1_U163 fadd_32ns_32ns_32_4_full_dsp_1_U163 sparsemux_63_5_32_1_1_U215 sparsemux_63_5_32_1_1_U216 fmul_32ns_32ns_32_3_max_dsp_1_U164 fadd_32ns_32ns_32_4_full_dsp_1_U163 fadd_32ns_32ns_32_4_full_dsp_1_U163 sparsemux_63_5_32_1_1_U217 sparsemux_63_5_32_1_1_U218 fmul_32ns_32ns_32_3_max_dsp_1_U164 fadd_32ns_32ns_32_4_full_dsp_1_U163 fadd_32ns_32ns_32_4_full_dsp_1_U163 sparsemux_63_5_32_1_1_U219 sparsemux_63_5_32_1_1_U220 fmul_32ns_32ns_32_3_max_dsp_1_U164 fadd_32ns_32ns_32_4_full_dsp_1_U163 fadd_32ns_32ns_32_4_full_dsp_1_U163 sparsemux_63_5_32_1_1_U221 sparsemux_63_5_32_1_1_U222 fmul_32ns_32ns_32_3_max_dsp_1_U164 fadd_32ns_32ns_32_4_full_dsp_1_U163 fadd_32ns_32ns_32_4_full_dsp_1_U163 sparsemux_63_5_32_1_1_U223 sparsemux_63_5_32_1_1_U224 fmul_32ns_32ns_32_3_max_dsp_1_U164 fadd_32ns_32ns_32_4_full_dsp_1_U163 fadd_32ns_32ns_32_4_full_dsp_1_U163 sparsemux_63_5_32_1_1_U225 sparsemux_63_5_32_1_1_U226 fmul_32ns_32ns_32_3_max_dsp_1_U164 fadd_32ns_32ns_32_4_full_dsp_1_U163 fadd_32ns_32ns_32_4_full_dsp_1_U163 i_fu_23762_p2 icmp_ln101_fu_23748_p2"
+                }]
+            },
+            {
+              "ModuleName": "dataflow_in_loop_VITIS_LOOP_149_1_1_Block_newFuncRoot_proc",
+              "InstanceName": "dataflow_in_loop_VITIS_LOOP_149_1_1_Block_newFuncRoot_proc_U0",
+              "BindInstances": "add_ln169_fu_36_p2"
+            },
+            {
+              "ModuleName": "post_process",
+              "InstanceName": "post_process_U0",
+              "BindInstances": "fdiv_32ns_32ns_32_9_no_dsp_1_U2216 fmul_32ns_32ns_32_3_max_dsp_1_U2215"
             }
           ]
-        },
-        {
-          "ModuleName": "applyProjectors",
-          "InstanceName": "applyProjectors_U0",
-          "BindInstances": "icmp_ln72_fu_538_p2 add_ln72_fu_543_p2 grp_fu_633_p0 srem_32ns_32s_32_36_1_U444 grp_fu_642_p0 srem_32ns_32s_32_36_1_U445 mul_32s_32s_32_2_1_U442 proj_offset_fu_647_p2 icmp_ln79_fu_652_p2 mul_32s_32s_32_2_1_U442 add_ln85_1_fu_669_p2 icmp_ln85_fu_714_p2 icmp_ln88_fu_719_p2 row_1_fu_724_p3 icmp_ln91_fu_768_p2 xor_ln91_2_fu_773_p2 icmp_ln91_1_fu_779_p2 and_ln91_fu_784_p2 col_1_fu_790_p3 slt52_fu_800_p2 rev53_fu_805_p2 cmp3318_fu_811_p2 spec_select1619_fu_816_p2 empty_47_fu_825_p2 smax_fu_830_p3 sub_ln91_fu_841_p2 xor_ln91_fu_846_p2 add_ln91_fu_855_p2 empty_48_fu_887_p2 umax_fu_891_p3 sub_ln91_1_fu_897_p2 sub_ln91_2_fu_861_p2 xor_ln91_1_fu_866_p2 add_ln91_1_fu_875_p2 empty_49_fu_909_p2 umax2_fu_914_p3 sub_ln91_3_fu_921_p2 sub_ln92_fu_935_p2 mul_32s_32s_32_2_1_U442 sub_ln95_fu_949_p2 sub_ln94_fu_944_p2 mul_32s_32s_32_2_1_U442 p_1_fu_954_p3 mul_61s_32s_61_5_1_U443 add_ln99_fu_965_p2 add_ln99_1_fu_978_p2 add_ln99_2_fu_993_p2 add_ln99_3_fu_1010_p2 dmul_64ns_64ns_64_7_max_dsp_1_U439 dadd_64ns_64ns_64_7_full_dsp_1_U437 dadd_64ns_64ns_64_7_full_dsp_1_U438 p_3_fu_1025_p2 add_ln98_fu_1031_p2 icmp_ln98_fu_1037_p2 add_ln91_2_fu_1070_p2 row_3_fu_1076_p2 icmp_ln91_2_fu_1082_p2 icmp_ln104_fu_1143_p2 icmp_ln104_1_fu_1149_p2 or_ln104_fu_1155_p2 dcmp_64ns_64ns_1_2_no_dsp_1_U441 and_ln104_fu_1161_p2 add_ln107_fu_1099_p2 emission_ptr_1_fu_1104_p2 add_ln107_1_fu_1187_p2 ddiv_64ns_64ns_64_59_no_dsp_1_U440 dmul_64ns_64ns_64_7_max_dsp_1_U439"
-        }
-      ]
+        }]
     },
     "Info": {
-      "getLocalImages_Pipeline_copy_loop": {
+      "dataflow_in_loop_VITIS_LOOP_149_1_1_Block_newFuncRoot_proc": {
         "FunctionProtocol": "ap_ctrl_hs",
         "isTaskLevelControl": "0",
-        "isPipelined": "1",
+        "isPipelined": "0",
         "isCombinational": "0",
-        "isOneStateSeq": "0"
+        "isOneStateSeq": "1"
       },
-      "getLocalImages_Pipeline_process_loop": {
-        "FunctionProtocol": "ap_ctrl_hs",
-        "isTaskLevelControl": "0",
-        "isPipelined": "1",
-        "isCombinational": "0",
-        "isOneStateSeq": "0"
-      },
-      "getLocalImages": {
+      "getLocalImages_single": {
         "FunctionProtocol": "ap_ctrl_hs",
         "isTaskLevelControl": "0",
         "isPipelined": "0",
         "isCombinational": "0",
         "isOneStateSeq": "0"
       },
-      "applyProjectors": {
+      "Image_extract_Pipeline_VITIS_LOOP_77_1_VITIS_LOOP_78_2": {
+        "FunctionProtocol": "ap_ctrl_hs",
+        "isTaskLevelControl": "0",
+        "isPipelined": "1",
+        "isCombinational": "0",
+        "isOneStateSeq": "0"
+      },
+      "Image_extract": {
         "FunctionProtocol": "ap_ctrl_hs",
         "isTaskLevelControl": "0",
         "isPipelined": "0",
+        "isCombinational": "0",
+        "isOneStateSeq": "0"
+      },
+      "conv_kernel_Pipeline_VITIS_LOOP_101_1": {
+        "FunctionProtocol": "ap_ctrl_hs",
+        "isTaskLevelControl": "0",
+        "isPipelined": "1",
+        "isCombinational": "0",
+        "isOneStateSeq": "0"
+      },
+      "conv_kernel": {
+        "FunctionProtocol": "ap_ctrl_hs",
+        "isTaskLevelControl": "0",
+        "isPipelined": "0",
+        "isCombinational": "0",
+        "isOneStateSeq": "0"
+      },
+      "post_process": {
+        "FunctionProtocol": "ap_ctrl_hs",
+        "isTaskLevelControl": "0",
+        "isPipelined": "0",
+        "isCombinational": "0",
+        "isOneStateSeq": "0"
+      },
+      "dataflow_in_loop_VITIS_LOOP_149_1_1": {
+        "FunctionProtocol": "ap_ctrl_hs",
+        "isTaskLevelControl": "0",
+        "isPipelined": "1",
         "isCombinational": "0",
         "isOneStateSeq": "0"
       },
@@ -2814,122 +2927,46 @@
       }
     },
     "Metrics": {
-      "getLocalImages_Pipeline_copy_loop": {
+      "dataflow_in_loop_VITIS_LOOP_149_1_1_Block_newFuncRoot_proc": {
         "Latency": {
-          "LatencyBest": "",
-          "LatencyAvg": "",
-          "LatencyWorst": "",
+          "LatencyBest": "0",
+          "LatencyAvg": "0",
+          "LatencyWorst": "0",
           "PipelineII": "0",
-          "PipelineDepth": "",
-          "PipelineType": "loop auto-rewind stp (delay=0 clock cycles(s))"
-        },
-        "Timing": {
-          "Target": "10.00",
-          "Uncertainty": "2.70",
-          "Estimate": "5.728"
-        },
-        "Loops": [{
-            "Name": "copy_loop",
-            "TripCount": "",
-            "Latency": "",
-            "PipelineII": "1",
-            "PipelineDepth": "2"
-          }],
-        "Area": {
-          "FF": "12817",
-          "AVAIL_FF": "106400",
-          "UTIL_FF": "12",
-          "LUT": "91",
-          "AVAIL_LUT": "53200",
-          "UTIL_LUT": "~0",
-          "BRAM_18K": "0",
-          "AVAIL_BRAM": "280",
-          "UTIL_BRAM": "0",
-          "DSP": "0",
-          "AVAIL_DSP": "220",
-          "UTIL_DSP": "0",
-          "URAM": "0",
-          "AVAIL_URAM": "0",
-          "UTIL_URAM": "0"
-        }
-      },
-      "getLocalImages_Pipeline_process_loop": {
-        "Latency": {
-          "LatencyBest": "",
-          "LatencyAvg": "",
-          "LatencyWorst": "",
-          "PipelineII": "0",
-          "PipelineDepth": "",
-          "PipelineType": "loop auto-rewind stp (delay=0 clock cycles(s))"
-        },
-        "Timing": {
-          "Target": "10.00",
-          "Uncertainty": "2.70",
-          "Estimate": "7.297"
-        },
-        "Loops": [{
-            "Name": "process_loop",
-            "TripCount": "",
-            "Latency": "",
-            "PipelineII": "1",
-            "PipelineDepth": "31"
-          }],
-        "Area": {
-          "BRAM_18K": "12",
-          "AVAIL_BRAM": "280",
-          "UTIL_BRAM": "4",
-          "DSP": "28",
-          "AVAIL_DSP": "220",
-          "UTIL_DSP": "12",
-          "FF": "4496",
-          "AVAIL_FF": "106400",
-          "UTIL_FF": "4",
-          "LUT": "10036",
-          "AVAIL_LUT": "53200",
-          "UTIL_LUT": "18",
-          "URAM": "0",
-          "AVAIL_URAM": "0",
-          "UTIL_URAM": "0"
-        }
-      },
-      "getLocalImages": {
-        "Latency": {
-          "LatencyBest": "",
-          "LatencyAvg": "",
-          "LatencyWorst": "",
-          "PipelineII": "",
           "PipelineDepth": "",
           "PipelineType": "no"
         },
         "Timing": {
           "Target": "10.00",
           "Uncertainty": "2.70",
-          "Estimate": "7.297"
+          "Estimate": "1.085"
         },
         "Area": {
-          "BRAM_18K": "12",
-          "AVAIL_BRAM": "280",
-          "UTIL_BRAM": "4",
-          "DSP": "28",
-          "AVAIL_DSP": "220",
-          "UTIL_DSP": "12",
-          "FF": "17546",
-          "AVAIL_FF": "106400",
-          "UTIL_FF": "16",
-          "LUT": "10430",
-          "AVAIL_LUT": "53200",
-          "UTIL_LUT": "19",
+          "FF": "66",
+          "AVAIL_FF": "850560",
+          "UTIL_FF": "~0",
+          "LUT": "91",
+          "AVAIL_LUT": "425280",
+          "UTIL_LUT": "~0",
+          "BRAM_18K": "0",
+          "AVAIL_BRAM": "2160",
+          "UTIL_BRAM": "0",
+          "DSP": "0",
+          "AVAIL_DSP": "4272",
+          "UTIL_DSP": "0",
           "URAM": "0",
-          "AVAIL_URAM": "0",
+          "AVAIL_URAM": "80",
           "UTIL_URAM": "0"
         }
       },
-      "applyProjectors": {
+      "getLocalImages_single": {
         "Latency": {
-          "LatencyBest": "",
-          "LatencyAvg": "",
-          "LatencyWorst": "",
-          "PipelineII": "",
+          "LatencyBest": "25",
+          "LatencyAvg": "26",
+          "LatencyWorst": "26",
+          "PipelineIIMin": "25",
+          "PipelineIIMax": "26",
+          "PipelineII": "25 ~ 26",
           "PipelineDepth": "",
           "PipelineType": "no"
         },
@@ -2938,74 +2975,266 @@
           "Uncertainty": "2.70",
           "Estimate": "7.300"
         },
-        "Loops": [{
-            "Name": "VITIS_LOOP_72_1",
-            "TripCount": "",
-            "Latency": "",
-            "PipelineII": "",
-            "PipelineDepth": "",
-            "Loops": [{
-                "Name": "VITIS_LOOP_91_2",
-                "TripCount": "",
-                "Latency": "",
-                "PipelineII": "",
-                "PipelineDepth": "",
-                "Loops": [{
-                    "Name": "VITIS_LOOP_98_3",
-                    "TripCount": "",
-                    "Latency": "",
-                    "PipelineII": "",
-                    "PipelineDepth": "24"
-                  }]
-              }]
-          }],
         "Area": {
-          "DSP": "27",
-          "AVAIL_DSP": "220",
-          "UTIL_DSP": "12",
-          "FF": "10724",
-          "AVAIL_FF": "106400",
-          "UTIL_FF": "10",
-          "LUT": "10368",
-          "AVAIL_LUT": "53200",
-          "UTIL_LUT": "19",
           "BRAM_18K": "0",
-          "AVAIL_BRAM": "280",
+          "AVAIL_BRAM": "2160",
           "UTIL_BRAM": "0",
+          "DSP": "10",
+          "AVAIL_DSP": "4272",
+          "UTIL_DSP": "~0",
+          "FF": "1639",
+          "AVAIL_FF": "850560",
+          "UTIL_FF": "~0",
+          "LUT": "4874",
+          "AVAIL_LUT": "425280",
+          "UTIL_LUT": "1",
           "URAM": "0",
-          "AVAIL_URAM": "0",
+          "AVAIL_URAM": "80",
           "UTIL_URAM": "0"
         }
       },
-      "reconstruct": {
+      "Image_extract_Pipeline_VITIS_LOOP_77_1_VITIS_LOOP_78_2": {
         "Latency": {
-          "LatencyBest": "",
-          "LatencyAvg": "",
-          "LatencyWorst": "",
-          "PipelineII": "",
+          "LatencyBest": "972",
+          "LatencyAvg": "972",
+          "LatencyWorst": "972",
+          "PipelineII": "961",
+          "PipelineDepth": "",
+          "PipelineType": "loop auto-rewind stp (delay=0 clock cycles(s))"
+        },
+        "Timing": {
+          "Target": "10.00",
+          "Uncertainty": "2.70",
+          "Estimate": "7.300"
+        },
+        "Loops": [{
+            "Name": "VITIS_LOOP_77_1_VITIS_LOOP_78_2",
+            "TripCount": "961",
+            "Latency": "970",
+            "PipelineII": "1",
+            "PipelineDepth": "11"
+          }],
+        "Area": {
+          "FF": "354",
+          "AVAIL_FF": "850560",
+          "UTIL_FF": "~0",
+          "LUT": "437",
+          "AVAIL_LUT": "425280",
+          "UTIL_LUT": "~0",
+          "BRAM_18K": "0",
+          "AVAIL_BRAM": "2160",
+          "UTIL_BRAM": "0",
+          "DSP": "0",
+          "AVAIL_DSP": "4272",
+          "UTIL_DSP": "0",
+          "URAM": "0",
+          "AVAIL_URAM": "80",
+          "UTIL_URAM": "0"
+        }
+      },
+      "Image_extract": {
+        "Latency": {
+          "LatencyBest": "982",
+          "LatencyAvg": "982",
+          "LatencyWorst": "982",
+          "PipelineII": "982",
+          "PipelineDepth": "",
+          "PipelineType": "no"
+        },
+        "Timing": {
+          "Target": "10.00",
+          "Uncertainty": "2.70",
+          "Estimate": "7.300"
+        },
+        "Area": {
+          "FF": "581",
+          "AVAIL_FF": "850560",
+          "UTIL_FF": "~0",
+          "LUT": "685",
+          "AVAIL_LUT": "425280",
+          "UTIL_LUT": "~0",
+          "BRAM_18K": "0",
+          "AVAIL_BRAM": "2160",
+          "UTIL_BRAM": "0",
+          "DSP": "0",
+          "AVAIL_DSP": "4272",
+          "UTIL_DSP": "0",
+          "URAM": "0",
+          "AVAIL_URAM": "80",
+          "UTIL_URAM": "0"
+        }
+      },
+      "conv_kernel_Pipeline_VITIS_LOOP_101_1": {
+        "Latency": {
+          "LatencyBest": "3849",
+          "LatencyAvg": "3849",
+          "LatencyWorst": "3849",
+          "PipelineII": "3844",
+          "PipelineDepth": "",
+          "PipelineType": "loop auto-rewind stp (delay=0 clock cycles(s))"
+        },
+        "Timing": {
+          "Target": "10.00",
+          "Uncertainty": "2.70",
+          "Estimate": "7.705"
+        },
+        "Loops": [{
+            "Name": "VITIS_LOOP_101_1",
+            "TripCount": "31",
+            "Latency": "3847",
+            "PipelineII": "124",
+            "PipelineDepth": "128"
+          }],
+        "Area": {
+          "DSP": "5",
+          "AVAIL_DSP": "4272",
+          "UTIL_DSP": "~0",
+          "FF": "3375",
+          "AVAIL_FF": "850560",
+          "UTIL_FF": "~0",
+          "LUT": "10658",
+          "AVAIL_LUT": "425280",
+          "UTIL_LUT": "2",
+          "BRAM_18K": "0",
+          "AVAIL_BRAM": "2160",
+          "UTIL_BRAM": "0",
+          "URAM": "0",
+          "AVAIL_URAM": "80",
+          "UTIL_URAM": "0"
+        }
+      },
+      "conv_kernel": {
+        "Latency": {
+          "LatencyBest": "3867",
+          "LatencyAvg": "3867",
+          "LatencyWorst": "3867",
+          "PipelineII": "3867",
+          "PipelineDepth": "",
+          "PipelineType": "no"
+        },
+        "Timing": {
+          "Target": "10.00",
+          "Uncertainty": "2.70",
+          "Estimate": "7.705"
+        },
+        "Area": {
+          "DSP": "5",
+          "AVAIL_DSP": "4272",
+          "UTIL_DSP": "~0",
+          "FF": "64932",
+          "AVAIL_FF": "850560",
+          "UTIL_FF": "7",
+          "LUT": "19822",
+          "AVAIL_LUT": "425280",
+          "UTIL_LUT": "4",
+          "BRAM_18K": "0",
+          "AVAIL_BRAM": "2160",
+          "UTIL_BRAM": "0",
+          "URAM": "0",
+          "AVAIL_URAM": "80",
+          "UTIL_URAM": "0"
+        }
+      },
+      "post_process": {
+        "Latency": {
+          "LatencyBest": "18",
+          "LatencyAvg": "18",
+          "LatencyWorst": "18",
+          "PipelineII": "18",
+          "PipelineDepth": "",
+          "PipelineType": "no"
+        },
+        "Timing": {
+          "Target": "10.00",
+          "Uncertainty": "2.70",
+          "Estimate": "7.300"
+        },
+        "Area": {
+          "DSP": "3",
+          "AVAIL_DSP": "4272",
+          "UTIL_DSP": "~0",
+          "FF": "372",
+          "AVAIL_FF": "850560",
+          "UTIL_FF": "~0",
+          "LUT": "274",
+          "AVAIL_LUT": "425280",
+          "UTIL_LUT": "~0",
+          "BRAM_18K": "0",
+          "AVAIL_BRAM": "2160",
+          "UTIL_BRAM": "0",
+          "URAM": "0",
+          "AVAIL_URAM": "80",
+          "UTIL_URAM": "0"
+        }
+      },
+      "dataflow_in_loop_VITIS_LOOP_149_1_1": {
+        "Latency": {
+          "LatencyBest": "4888",
+          "LatencyAvg": "4888",
+          "LatencyWorst": "4888",
+          "PipelineII": "3868",
           "PipelineDepth": "",
           "PipelineType": "dataflow"
         },
         "Timing": {
           "Target": "10.00",
           "Uncertainty": "2.70",
-          "Estimate": "7.300"
+          "Estimate": "7.705"
         },
         "Area": {
-          "BRAM_18K": "30",
-          "AVAIL_BRAM": "280",
-          "UTIL_BRAM": "10",
-          "DSP": "55",
-          "AVAIL_DSP": "220",
-          "UTIL_DSP": "25",
-          "FF": "32656",
-          "AVAIL_FF": "106400",
-          "UTIL_FF": "30",
-          "LUT": "26146",
-          "AVAIL_LUT": "53200",
-          "UTIL_LUT": "49",
+          "BRAM_18K": "0",
+          "AVAIL_BRAM": "2160",
+          "UTIL_BRAM": "0",
+          "DSP": "18",
+          "AVAIL_DSP": "4272",
+          "UTIL_DSP": "~0",
+          "FF": "76027",
+          "AVAIL_FF": "850560",
+          "UTIL_FF": "8",
+          "LUT": "28151",
+          "AVAIL_LUT": "425280",
+          "UTIL_LUT": "6",
           "URAM": "0",
-          "AVAIL_URAM": "0",
+          "AVAIL_URAM": "80",
+          "UTIL_URAM": "0"
+        }
+      },
+      "reconstruct": {
+        "Latency": {
+          "LatencyBest": "3961855",
+          "LatencyAvg": "3961855",
+          "LatencyWorst": "3961855",
+          "PipelineII": "3961856",
+          "PipelineDepth": "",
+          "PipelineType": "no"
+        },
+        "Timing": {
+          "Target": "10.00",
+          "Uncertainty": "2.70",
+          "Estimate": "7.705"
+        },
+        "Loops": [{
+            "Name": "VITIS_LOOP_149_1",
+            "TripCount": "1024",
+            "Latency": "3961854",
+            "PipelineII": "",
+            "PipelineDepth": "3961854"
+          }],
+        "Area": {
+          "BRAM_18K": "12",
+          "AVAIL_BRAM": "2160",
+          "UTIL_BRAM": "~0",
+          "DSP": "18",
+          "AVAIL_DSP": "4272",
+          "UTIL_DSP": "~0",
+          "FF": "80247",
+          "AVAIL_FF": "850560",
+          "UTIL_FF": "9",
+          "LUT": "32993",
+          "AVAIL_LUT": "425280",
+          "UTIL_LUT": "7",
+          "URAM": "0",
+          "AVAIL_URAM": "80",
           "UTIL_URAM": "0"
         }
       }
@@ -3014,7 +3243,7 @@
   "GenerateBdFiles": "0",
   "GenData": {
     "DataVersion": "0.2",
-    "Time": "2025-05-21 17:37:34 +0200",
+    "Time": "2025-06-30 08:26:22 +0200",
     "ToolName": "vitis_hls",
     "ToolVersion": "2024.2"
   }

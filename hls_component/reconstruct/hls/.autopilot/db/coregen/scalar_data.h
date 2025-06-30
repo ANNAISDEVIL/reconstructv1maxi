@@ -23,11 +23,6 @@
 // 0x40 : Data signal of fullImage_cols
 //        bit 31~0 - fullImage_cols[31:0] (Read/Write)
 // 0x44 : reserved
-// 0x48 : Data signal of emission_cnt
-//        bit 31~0 - emission_cnt[31:0] (Read)
-// 0x4c : Control signal of emission_cnt
-//        bit 0  - emission_cnt_ap_vld (Read/COR)
-//        others - reserved
 // (SC = Self Clear, COR = Clear on Read, TOW = Toggle on Write, COH = Clear on Handshake)
 
 #define SCALAR_DATA_ADDR_ATOMLOCATIONSSIZE_DATA   0x10
@@ -44,6 +39,3 @@
 #define SCALAR_DATA_BITS_FULLIMAGE_ROWS_DATA      32
 #define SCALAR_DATA_ADDR_FULLIMAGE_COLS_DATA      0x40
 #define SCALAR_DATA_BITS_FULLIMAGE_COLS_DATA      32
-#define SCALAR_DATA_ADDR_EMISSION_CNT_DATA        0x48
-#define SCALAR_DATA_BITS_EMISSION_CNT_DATA        32
-#define SCALAR_DATA_ADDR_EMISSION_CNT_CTRL        0x4c

@@ -1,0 +1,66 @@
+  **** HLS Build v2024.2 5238294
+INFO: [HLS 200-2005] Using work_dir F:/LMU/quantumMA/opimization/reconstructv1maxi/hls_component/reconstruct 
+INFO: [HLS 200-1505] Using default flow_target 'vivado'
+Resolution: For help on HLS 200-1505 see docs.xilinx.com/access/sources/dita/topic?Doc_Version=2024.2%20English&url=ug1448-hls-guidance&resourceid=200-1505.html
+INFO: [HLS 200-1465] Applying ini 'syn.file=F:/LMU/quantumMA/opimization/reconstructv1maxi/image_analysis.cpp' from F:/LMU/quantumMA/opimization/reconstructv1maxi/hls_component/hls_config.cfg(13)
+INFO: [HLS 200-10] Adding design file 'F:/LMU/quantumMA/opimization/reconstructv1maxi/image_analysis.cpp' to the project
+INFO: [HLS 200-1465] Applying ini 'syn.file=F:/LMU/quantumMA/opimization/reconstructv1maxi/image_analysis.hpp' from F:/LMU/quantumMA/opimization/reconstructv1maxi/hls_component/hls_config.cfg(14)
+INFO: [HLS 200-10] Adding design file 'F:/LMU/quantumMA/opimization/reconstructv1maxi/image_analysis.hpp' to the project
+INFO: [HLS 200-1465] Applying ini 'tb.file=F:/LMU/quantumMA/naia/reconstructv1/imagTransform/restoutput.txt' from F:/LMU/quantumMA/opimization/reconstructv1maxi/hls_component/hls_config.cfg(8)
+INFO: [HLS 200-10] Adding test bench file 'F:/LMU/quantumMA/naia/reconstructv1/imagTransform/restoutput.txt' to the project
+INFO: [HLS 200-1465] Applying ini 'tb.file=F:/LMU/quantumMA/naia/reconstructv1/imagTransform/fullImage_output.txt' from F:/LMU/quantumMA/opimization/reconstructv1maxi/hls_component/hls_config.cfg(9)
+INFO: [HLS 200-10] Adding test bench file 'F:/LMU/quantumMA/naia/reconstructv1/imagTransform/fullImage_output.txt' to the project
+INFO: [HLS 200-1465] Applying ini 'tb.file=F:/LMU/quantumMA/opimization/reconstructv1maxi/test.cpp' from F:/LMU/quantumMA/opimization/reconstructv1maxi/hls_component/hls_config.cfg(10)
+INFO: [HLS 200-10] Adding test bench file 'F:/LMU/quantumMA/opimization/reconstructv1maxi/test.cpp' to the project
+INFO: [HLS 200-1465] Applying ini 'syn.top=reconstruct' from F:/LMU/quantumMA/opimization/reconstructv1maxi/hls_component/hls_config.cfg(7)
+INFO: [HLS 200-1465] Applying ini 'flow_target=vivado' from F:/LMU/quantumMA/opimization/reconstructv1maxi/hls_component/hls_config.cfg(4)
+INFO: [HLS 200-1505] Using flow_target 'vivado'
+Resolution: For help on HLS 200-1505 see docs.xilinx.com/access/sources/dita/topic?Doc_Version=2024.2%20English&url=ug1448-hls-guidance&resourceid=200-1505.html
+INFO: [HLS 200-1465] Applying ini 'part=xczu7ev-ffvc1156-2-e' from F:/LMU/quantumMA/opimization/reconstructv1maxi/hls_component/hls_config.cfg(1)
+INFO: [HLS 200-1611] Setting target device to 'xczu7ev-ffvc1156-2-e'
+INFO: [HLS 200-1465] Applying ini 'csim.clean=1' from F:/LMU/quantumMA/opimization/reconstructv1maxi/hls_component/hls_config.cfg(11)
+INFO: [HLS 200-1465] Applying ini 'csim.code_analyzer=1' from F:/LMU/quantumMA/opimization/reconstructv1maxi/hls_component/hls_config.cfg(12)
+INFO: [HLS 200-1465] Applying ini 'package.output.format=ip_catalog' from F:/LMU/quantumMA/opimization/reconstructv1maxi/hls_component/hls_config.cfg(5)
+INFO: [HLS 200-111] Finished File checks and directory preparation: CPU user time: 7 seconds. CPU system time: 2 seconds. Elapsed time: 8.644 seconds; current allocated memory: 618.758 MB.
+INFO: [HLS 200-10] Analyzing design file '../image_analysis.cpp' ... 
+WARNING: [HLS 207-5589] '#pragma HLS unroll' can only be applied inside loop body (../image_analysis.cpp:301:9)
+WARNING: [HLS 207-5589] '#pragma HLS unroll' can only be applied inside loop body (../image_analysis.cpp:344:9)
+WARNING: [HLS 207-5569] unexpected pragma parameter 'storage_type' (../image_analysis.cpp:433:98)
+INFO: [HLS 200-111] Finished Source Code Analysis and Preprocessing: CPU user time: 0 seconds. CPU system time: 0 seconds. Elapsed time: 5.582 seconds; current allocated memory: 621.887 MB.
+INFO: [HLS 200-777] Using interface defaults for 'Vivado' flow target.
+INFO: [HLS 200-1995] There were 19,488 instructions in the design after the 'Compile/Link' phase of compilation. See the Design Size Report for more details: F:/LMU/quantumMA/opimization/reconstructv1maxi/hls_component/reconstruct/hls/syn/report/csynth_design_size.rpt
+INFO: [HLS 200-1995] There were 14,559 instructions in the design after the 'Unroll/Inline (step 1)' phase of compilation. See the Design Size Report for more details: F:/LMU/quantumMA/opimization/reconstructv1maxi/hls_component/reconstruct/hls/syn/report/csynth_design_size.rpt
+INFO: [HLS 200-1995] There were 13,973 instructions in the design after the 'Unroll/Inline (step 2)' phase of compilation. See the Design Size Report for more details: F:/LMU/quantumMA/opimization/reconstructv1maxi/hls_component/reconstruct/hls/syn/report/csynth_design_size.rpt
+INFO: [HLS 200-1995] There were 13,919 instructions in the design after the 'Unroll/Inline (step 3)' phase of compilation. See the Design Size Report for more details: F:/LMU/quantumMA/opimization/reconstructv1maxi/hls_component/reconstruct/hls/syn/report/csynth_design_size.rpt
+INFO: [HLS 200-1995] There were 13,393 instructions in the design after the 'Unroll/Inline (step 4)' phase of compilation. See the Design Size Report for more details: F:/LMU/quantumMA/opimization/reconstructv1maxi/hls_component/reconstruct/hls/syn/report/csynth_design_size.rpt
+INFO: [HLS 200-1995] There were 14,165 instructions in the design after the 'Array/Struct' phase of compilation. See the Design Size Report for more details: F:/LMU/quantumMA/opimization/reconstructv1maxi/hls_component/reconstruct/hls/syn/report/csynth_design_size.rpt
+INFO: [HLS 200-1995] There were 14,061 instructions in the design after the 'Array/Struct (step 2)' phase of compilation. See the Design Size Report for more details: F:/LMU/quantumMA/opimization/reconstructv1maxi/hls_component/reconstruct/hls/syn/report/csynth_design_size.rpt
+INFO: [HLS 214-291] Loop 'VITIS_LOOP_241_1' is marked as complete unroll implied by the pipeline pragma (../image_analysis.cpp:241:20)
+INFO: [HLS 214-186] Unrolling loop 'VITIS_LOOP_302_2' (../image_analysis.cpp:302:20) in function 'stage2_process' completely with a factor of 31 (../image_analysis.cpp:279:0)
+INFO: [HLS 214-178] Inlining function 'fp_struct<float>::data() const (.7.28.38.47.58)' into 'fp_struct<float>::to_float() const (.25.35.44.55)' (C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib/src/hls\utils/x_hls_utils.h:322:0)
+INFO: [HLS 214-178] Inlining function 'fp_struct<float>::to_float() const (.25.35.44.55)' into 'fp_struct<float>::to_ieee() const' (C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib/src/hls\utils/x_hls_utils.h:346:0)
+INFO: [HLS 214-178] Inlining function 'fp_struct<float>::fp_struct(float)' into 'float generic_copysign<float>(float, float)' (C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib/hlsmath/include/FloatingPoint/hls_copysign.h:10:0)
+INFO: [HLS 214-178] Inlining function 'fp_struct<float>::to_ieee() const' into 'float generic_copysign<float>(float, float)' (C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib/hlsmath/include/FloatingPoint/hls_copysign.h:10:0)
+INFO: [HLS 214-178] Inlining function 'fp_struct<float>::fp_struct(float)' into 'float generic_round<float>(float)' (C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib/hlsmath/include/FloatingPoint\hls_round.h:160:0)
+INFO: [HLS 214-178] Inlining function 'float generic_copysign<float>(float, float)' into 'float generic_round<float>(float)' (C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib/hlsmath/include/FloatingPoint\hls_round.h:160:0)
+INFO: [HLS 214-178] Inlining function 'fp_struct<float>::data() const (.7.28.38.47.58)' into 'float generic_round<float>(float)' (C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib/hlsmath/include/FloatingPoint\hls_round.h:160:0)
+INFO: [HLS 214-178] Inlining function 'fp_struct<float>::fp_struct(ap_uint<32>)' into 'float generic_round<float>(float)' (C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib/hlsmath/include/FloatingPoint\hls_round.h:160:0)
+INFO: [HLS 214-178] Inlining function 'fp_struct<float>::to_ieee() const' into 'float generic_round<float>(float)' (C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib/hlsmath/include/FloatingPoint\hls_round.h:160:0)
+INFO: [HLS 214-178] Inlining function 'roundf' into 'std::round(float)' (F:/Vitis/2024.2/tps/mingw/8.3.0/win64.o/nt\lib\gcc\x86_64-w64-mingw32\8.3.0\include\c++\cmath:1757:0)
+INFO: [HLS 214-178] Inlining function 'fp_struct<float>::fp_struct(float)' into 'int generic_cast_IEEE754<int, (ap_q_mode)6, float>(float, bool, hls::enable_if<std::numeric_limits<int>::is_signed, bool>::type)' (C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib/hlsmath/include/FloatingPoint\hls_case_IEEE754.h:12:0)
+INFO: [HLS 214-178] Inlining function 'fp_struct<float>::mantissa() const' into 'int generic_cast_IEEE754<int, (ap_q_mode)6, float>(float, bool, hls::enable_if<std::numeric_limits<int>::is_signed, bool>::type)' (C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib/hlsmath/include/FloatingPoint\hls_case_IEEE754.h:12:0)
+INFO: [HLS 214-178] Inlining function 'fp_struct<float>::expv() const' into 'int generic_cast_IEEE754<int, (ap_q_mode)6, float>(float, bool, hls::enable_if<std::numeric_limits<int>::is_signed, bool>::type)' (C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib/hlsmath/include/FloatingPoint\hls_case_IEEE754.h:12:0)
+INFO: [HLS 214-178] Inlining function 'fp_struct<float>::__signbit() const' into 'int generic_cast_IEEE754<int, (ap_q_mode)6, float>(float, bool, hls::enable_if<std::numeric_limits<int>::is_signed, bool>::type)' (C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib/hlsmath/include/FloatingPoint\hls_case_IEEE754.h:12:0)
+INFO: [HLS 214-178] Inlining function 'int generic_cast_IEEE754<int, (ap_q_mode)6, float>(float, bool, hls::enable_if<std::numeric_limits<int>::is_signed, bool>::type)' into 'int generic_cast_IEEE754<int, float>(float, bool)' (C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib/hlsmath/include/FloatingPoint\hls_case_IEEE754.h:116:0)
+INFO: [HLS 214-178] Inlining function 'int generic_cast_IEEE754<int, float>(float, bool)' into '__hls_fptosi_float_i32' (C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib\hlsmath\src\lib_floatconversion.cpp:51:0)
+INFO: [HLS 214-178] Inlining function 'std::round(float)' into 'getLocalImages(int, int, int, int, atom_location*, hls::stream<local_image_info, 0>&)' (../image_analysis.cpp:8:0)
+INFO: [HLS 214-248] Applying array_partition to 'local_atomLocations.x': Complete partitioning on dimension 1. (../image_analysis.cpp:10:19)
+INFO: [HLS 214-248] Applying array_partition to 'local_atomLocations.y': Complete partitioning on dimension 1. (../image_analysis.cpp:10:19)
+INFO: [HLS 214-241] Aggregating fifo (hls::stream) variable 'localImages' with compact=bit mode in 256-bits (../image_analysis.cpp:454:32)
+INFO: [HLS 214-241] Aggregating fifo (hls::stream) variable 's1_to_s2' with compact=bit mode in 353-bits (../image_analysis.cpp:394:27)
+ERROR: [HLS 214-256] in function 'applyProjectors(int, int, int, float*, float*, int*, float*, int, int, hls::stream<local_image_info, 0>&, float*, unsigned int&)': Unsupported aggregate pragma/directive on variable 's2_to_s3' as the bit-width after aggregation (61569) is larger than 4096 (../image_analysis.cpp:395:30)
+INFO: [HLS 214-241] Aggregating fifo (hls::stream) variable 's3_to_s4' with compact=bit mode in 33-bits (../image_analysis.cpp:396:30)
+INFO: [HLS 214-241] Aggregating bram variable 'atomLocations' with compact=bit mode in 64-bits (../image_analysis.cpp:424:0)
+ERROR: [HLS 200-1715] Encountered problem during source synthesis
+ERROR: Pre-synthesis failed.
+INFO: [HLS 200-112] Total CPU user time: 8 seconds. Total CPU system time: 2 seconds. Total elapsed time: 69.581 seconds; peak allocated memory: 623.574 MB.

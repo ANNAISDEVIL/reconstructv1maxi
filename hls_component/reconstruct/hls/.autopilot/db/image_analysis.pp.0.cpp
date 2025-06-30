@@ -284,16 +284,10 @@ class stream : public stream<__STREAM_T__, 0> {
 # 13 "F:/Vitis/2024.2/common/technology/autopilot\\hls_stream.h" 2
 # 2 "../image_analysis.cpp" 2
 # 1 "../image_analysis.hpp" 1
-
-
-
-
-
-
-
+# 11 "../image_analysis.hpp"
 typedef struct {
-    double x;
-    double y;
+    float x;
+    float y;
 } atom_location;
 
 typedef struct {
@@ -307,17 +301,14 @@ typedef struct {
     int dy;
 } local_image_info;
 
-__attribute__((sdx_kernel("reconstruct", 0))) void reconstruct(int atomLocationsSize,int projShape0, int projShape1, atom_location atomLocations[100],
+__attribute__((sdx_kernel("reconstruct", 0))) void reconstruct(int atomLocationsSize,int projShape0, int projShape1, atom_location atomLocations[1024],
     int psfSupersample,
     int imageProjectionSize,
-    double imageProjs_local[1000 * 100],
-    double imageProjs[100],
-    int imageProjs_local_size[100],
-    double fullImage[256*256],
-    int fullImage_rows, int fullImage_cols, double* emissions, unsigned int& emission_cnt);
-
-
-void reconstruct_top();
+    float imageProjs_local[1024 * 1024],
+    float imageProjs[1024],
+    int imageProjs_local_size[1024],
+    float fullImage[768*768],
+    int fullImage_rows, int fullImage_cols, float* emissions);
 # 3 "../image_analysis.cpp" 2
 # 1 "F:/Vitis/2024.2/tps/mingw/8.3.0/win64.o/nt\\lib\\gcc\\x86_64-w64-mingw32\\8.3.0\\include\\c++\\cmath" 1 3
 # 40 "F:/Vitis/2024.2/tps/mingw/8.3.0/win64.o/nt\\lib\\gcc\\x86_64-w64-mingw32\\8.3.0\\include\\c++\\cmath" 3
@@ -27880,108 +27871,85 @@ namespace std
 }
 # 6 "../image_analysis.cpp" 2
 
-void getLocalImages(int atomLocationsSize, int psfSupersample, int projShape0, int projShape1,
-                    atom_location* atomLocations, hls::stream<local_image_info>& localImages) {
-#pragma HLS PIPELINE
- atom_location local_atomLocations[100];
-#pragma HLS ARRAY_PARTITION variable=local_atomLocations complete dim=1
+void getLocalImages_single(int curr_idx,int psfSupersample, int projShape0, int projShape1, atom_location* atomLocations, hls::stream<local_image_info>& localImages){
+    auto coord= atomLocations[curr_idx];
+    local_image_info info;
 
- copy_loop: for (int i = 0; i < atomLocationsSize; i++) {
-#pragma HLS PIPELINE II=1
- local_atomLocations[i] = atomLocations[i];
-    }
-
-
-    process_loop: for (int i = 0; i < atomLocationsSize; i++) {
-#pragma HLS PIPELINE II=1
-
- auto coord = local_atomLocations[i];
-        local_image_info info;
-
-        int y_int = (int)std::round(coord.y);
-        int x_int = (int)std::round(coord.x);
-
-        info.X_int = x_int;
-        info.Y_int = y_int;
-        info.Y_min = y_int - projShape0 / 2;
-        info.X_min = x_int - projShape1 / 2;
-        info.Y_max = info.Y_min + projShape0 - 1;
-        info.X_max = info.X_min + projShape1 - 1;
-        info.dx = (int)(std::round((coord.x - x_int) * psfSupersample));
-        info.dy = (int)(std::round((coord.y - y_int) * psfSupersample));
-
-        localImages.write(info);
-    }
+    int y_int = (int)std::round(coord.y);
+    int x_int = (int)std::round(coord.x);
+    info.X_int = x_int;
+    info.Y_int = y_int;
+    info.Y_min = y_int - projShape0 / 2;
+    info.X_min = x_int - projShape1 / 2;
+    info.Y_max = (info.Y_min + projShape0) - 1;
+    info.X_max = (info.X_min + projShape1) - 1;
+    info.dx = (int)(std::round((coord.x - x_int) * psfSupersample));
+    info.dy = (int)(std::round((coord.y - y_int) * psfSupersample));
+    std::cout << "#1 x_int " << x_int << " x_min " << info.X_min << " x_max " << info.X_max << " y_int " << y_int << " y_min " << info.Y_min << " y_max " << info.Y_max << std::endl;
+    localImages.write(info);
 }
-# 63 "../image_analysis.cpp"
-void applyProjectors(int atomLocationsSize, int psfSupersample,
-    int imageProjectionSize,
-    double imageProjs_local[1000 * 100],
-    double imageProjs[100],
-    int imageProjs_local_size[100],
-    double fullImage[256*256],
-    int fullImage_rows, int fullImage_cols,
-    hls::stream<local_image_info>& localImages, double* emissions, unsigned int& emission_cnt) {
-    unsigned int emission_ptr = 0;
-    VITIS_LOOP_72_1: for(int i = 0; i < atomLocationsSize; i++){
-#pragma HLS PIPELINE II=1
- auto localImage = localImages.read();
-        int xidx = (localImage.dx + psfSupersample) % psfSupersample;
-        int yidx = (localImage.dy + psfSupersample) % psfSupersample;
-        unsigned int proj_offset = yidx * psfSupersample + xidx;
+# 66 "../image_analysis.cpp"
+void Image_extract(int curr_idx, hls::stream<local_image_info>& localImages,
+    float fullImage[768*768], float curr_fullImage[31][31],
+    float imageProjs_local[1024 * 1024], float curr_localImage[31][31],
+    float imageProjs[1024], float& curr_imageProjs) {
+    local_image_info curr_info = localImages.read();
+    unsigned int xmin = curr_info.X_min;
+    unsigned int ymin = curr_info.Y_min;
+    int xidx = (curr_info.dx + 1) % 1;
+    int yidx = (curr_info.dy + 1) % 1;
+    std::cout << "  -- curr idx " << curr_idx << " xmin " << xmin << " ymin " << ymin << std::endl;
+    unsigned int proj_offset = yidx * 1 + xidx;
+    VITIS_LOOP_77_1: for(unsigned char i = 0; i < 31; i++){
+        VITIS_LOOP_78_2: for(unsigned char j = 0; j < 31; j++){
 
-        if((unsigned int)(proj_offset) >= imageProjectionSize)
-            continue;
+            curr_localImage[i][j] = imageProjs_local[proj_offset * 1024 + i*31+j];
+            curr_fullImage[i][j] = fullImage[xmin + j + (ymin+i) * 256];
 
-        double projSumUsed = 0;
-        double sum = 0;
-        int cols = localImage.X_max - localImage.X_min + 1;
-        if((unsigned)(cols * (localImage.Y_max - localImage.Y_min + 1)) > imageProjs_local_size[proj_offset])
-            continue;
-        int row = localImage.Y_min;
-        if(row <= 0)
-            row = 0;
-
-        VITIS_LOOP_91_2: for(; row <= localImage.Y_max && row < fullImage_rows; row++){
-            int p = (row - localImage.Y_min) * cols;
-            int col = localImage.X_min;
-            if(col < 0) {
-                p -= col;
-                col = 0;
-            }
-            VITIS_LOOP_98_3: for(; col <= localImage.X_max && col < fullImage_cols; col++){
-                sum += fullImage[row* fullImage_cols + col] * imageProjs_local[1000 * proj_offset + p];
-                projSumUsed += imageProjs_local[1000 * proj_offset + p];
-                p++;
-            }
-        }
-        if(projSumUsed > 0){
-            std::cout << "sum " << sum << " imageProjs " << imageProjs[proj_offset] << " projSumUsed " << projSumUsed << std::endl;
-
-            emissions[emission_ptr] = sum * (imageProjs[proj_offset] / projSumUsed);
-            emission_ptr++;
-        }
-        else {
-            emissions[emission_ptr] = 0;
-            emission_ptr++;
+            if(curr_idx <= 1 && i == 6)
+                    std::cout << "  ---- proj_offset " << proj_offset << " idx " << i*31+j
+                        << " xmin " << xmin << " ymin " << ymin
+                        << " i " << (unsigned int)i << " j " << (unsigned int)j
+                        << " imageProjs_local " << curr_localImage[i][j]
+                        << " fullImage " << curr_fullImage[i][j]
+                        << std::endl;
 
         }
     }
-    emission_cnt = emission_ptr;
+    std::cout << "#2 idx " << curr_idx << " curr_localImage " << curr_localImage[0][0] << " curr_fullImage " << curr_fullImage[0][0] << std::endl;
+    curr_imageProjs = imageProjs[proj_offset];
 }
 
 
-__attribute__((sdx_kernel("reconstruct", 0))) void reconstruct(int atomLocationsSize,int projShape0, int projShape1, atom_location atomLocations[100],
+void conv_kernel(float curr_fullImage[31][31], float curr_localImage[31][31], float& projSumUsed, float& sum) {
+
+
+    VITIS_LOOP_101_1: for(unsigned char i = 0; i < 31; i++){
+        VITIS_LOOP_102_2: for(unsigned char j = 0; j < 31; j++){
+#pragma HLS UNROLL
+ sum += curr_fullImage[i][j] * curr_localImage[i][j];
+            projSumUsed += curr_localImage[i][j];
+        }
+    }
+    std::cout << "#3 sum " << sum << " curr_localImage " << curr_localImage[0][0] << " projSumUsed " << projSumUsed << std::endl;
+}
+
+
+void post_process(float projSumUsed, float sum, float curr_imageProjs, float& dout){
+    dout = sum * (curr_imageProjs / projSumUsed);
+}
+
+__attribute__((sdx_kernel("reconstruct", 0))) void reconstruct(int atomLocationsSize,int projShape0, int projShape1, atom_location atomLocations[1024],
     int psfSupersample,
     int imageProjectionSize,
-    double imageProjs_local[1000 * 100],
-    double imageProjs[100],
-    int imageProjs_local_size[100],
-    double fullImage[256*256],
-    int fullImage_rows, int fullImage_cols, double* emissions, unsigned int& emission_cnt){
+    float imageProjs_local[1024 * 1024],
+    float imageProjs[1024],
+    int imageProjs_local_size[1024],
+    float fullImage[768*768],
+    int fullImage_rows, int fullImage_cols, float* emissions){
 #line 1 "directive"
 #pragma HLSDIRECTIVE TOP name=reconstruct
-# 127 "../image_analysis.cpp"
+# 123 "../image_analysis.cpp"
 
 
 
@@ -27991,7 +27959,7 @@ __attribute__((sdx_kernel("reconstruct", 0))) void reconstruct(int atomLocations
 #pragma HLS INTERFACE port=projShape0 mode=s_axilite bundle=scalar_data
 #pragma HLS INTERFACE port=projShape1 mode=s_axilite bundle=scalar_data
 
-#pragma HLS INTERFACE port=atomLocations mode=m_axi bundle=atomLocations depth=1000 storage_type=RAM_2P
+#pragma HLS INTERFACE port=atomLocations mode=m_axi bundle=atomLocations depth=1024
 
 #pragma HLS INTERFACE port=psfSupersample mode=s_axilite bundle=scalar_data
 #pragma HLS INTERFACE port=imageProjectionSize mode=s_axilite bundle=scalar_data
@@ -28000,20 +27968,34 @@ __attribute__((sdx_kernel("reconstruct", 0))) void reconstruct(int atomLocations
 #pragma HLS INTERFACE port=imageProjs mode=m_axi bundle=imageProjs
 #pragma HLS INTERFACE port=imageProjs_local_size mode=m_axi bundle=imageProjs_local_size
 
-#pragma HLS INTERFACE port=fullImage mode=m_axi bundle=fullImage
+#pragma HLS INTERFACE port=fullImage mode=m_axi bundle=fullImage depth=768*768
 
 #pragma HLS INTERFACE port=fullImage_rows mode=s_axilite bundle=scalar_data
 #pragma HLS INTERFACE port=fullImage_cols mode=s_axilite bundle=scalar_data
 
-#pragma HLS INTERFACE port=emissions mode=m_axi bundle=emissions depth=1000
-#pragma HLS INTERFACE port=emission_cnt mode=s_axilite bundle=scalar_data
+#pragma HLS INTERFACE port=emissions mode=m_axi bundle=emissions depth=1024
 
 
-
-
+ VITIS_LOOP_149_1: for(unsigned short idx = 0; idx < atomLocationsSize; idx++){
 #pragma HLS DATAFLOW
- hls::stream<local_image_info> localImages;
+#pragma HLS LOOP_TRIPCOUNT max=1024 min=1024 avg=1024
+ hls::stream<local_image_info,4> localImages;
+        float curr_fullImage[31][31];
+        float curr_localImage[31][31];
+        float curr_imageProjs;
+        float curr_emissions;
+        float projSumUsed = 0;
+        float sum = 0;
 
-        getLocalImages(atomLocationsSize, psfSupersample, projShape0, projShape1, atomLocations, localImages);
-        applyProjectors(atomLocationsSize, psfSupersample, imageProjectionSize, imageProjs_local, imageProjs, imageProjs_local_size, fullImage, fullImage_rows, fullImage_cols, localImages, emissions, emission_cnt);
+
+
+#pragma HLS ARRAY_PARTITION variable=curr_fullImage type=complete
+#pragma HLS ARRAY_PARTITION variable=curr_localImage type=complete
+
+ getLocalImages_single(idx, psfSupersample, projShape0, projShape1, atomLocations, localImages);
+        Image_extract(idx, localImages, fullImage, curr_fullImage,
+            imageProjs_local, curr_localImage, imageProjs, curr_imageProjs);
+        conv_kernel(curr_fullImage, curr_localImage, projSumUsed, sum);
+        post_process(projSumUsed, sum, curr_imageProjs, emissions[idx]);
+    }
 }

@@ -1,0 +1,41 @@
+  **** HLS Build v2024.2 5238294
+INFO: [HLS 200-2005] Using work_dir F:/LMU/quantumMA/opimization/reconstructv1maxi/hls_component/reconstruct 
+INFO: [HLS 200-1505] Using default flow_target 'vivado'
+Resolution: For help on HLS 200-1505 see docs.xilinx.com/access/sources/dita/topic?Doc_Version=2024.2%20English&url=ug1448-hls-guidance&resourceid=200-1505.html
+INFO: [HLS 200-1465] Applying ini 'syn.file=F:/LMU/quantumMA/opimization/reconstructv1maxi/image_analysis.cpp' from F:/LMU/quantumMA/opimization/reconstructv1maxi/hls_component/hls_config.cfg(13)
+INFO: [HLS 200-10] Adding design file 'F:/LMU/quantumMA/opimization/reconstructv1maxi/image_analysis.cpp' to the project
+INFO: [HLS 200-1465] Applying ini 'syn.file=F:/LMU/quantumMA/opimization/reconstructv1maxi/image_analysis.hpp' from F:/LMU/quantumMA/opimization/reconstructv1maxi/hls_component/hls_config.cfg(14)
+INFO: [HLS 200-10] Adding design file 'F:/LMU/quantumMA/opimization/reconstructv1maxi/image_analysis.hpp' to the project
+INFO: [HLS 200-1465] Applying ini 'tb.file=F:/LMU/quantumMA/naia/reconstructv1/imagTransform/restoutput.txt' from F:/LMU/quantumMA/opimization/reconstructv1maxi/hls_component/hls_config.cfg(8)
+INFO: [HLS 200-10] Adding test bench file 'F:/LMU/quantumMA/naia/reconstructv1/imagTransform/restoutput.txt' to the project
+INFO: [HLS 200-1465] Applying ini 'tb.file=F:/LMU/quantumMA/naia/reconstructv1/imagTransform/fullImage_output.txt' from F:/LMU/quantumMA/opimization/reconstructv1maxi/hls_component/hls_config.cfg(9)
+INFO: [HLS 200-10] Adding test bench file 'F:/LMU/quantumMA/naia/reconstructv1/imagTransform/fullImage_output.txt' to the project
+INFO: [HLS 200-1465] Applying ini 'tb.file=F:/LMU/quantumMA/opimization/reconstructv1maxi/test.cpp' from F:/LMU/quantumMA/opimization/reconstructv1maxi/hls_component/hls_config.cfg(10)
+INFO: [HLS 200-10] Adding test bench file 'F:/LMU/quantumMA/opimization/reconstructv1maxi/test.cpp' to the project
+INFO: [HLS 200-1465] Applying ini 'syn.top=reconstruct' from F:/LMU/quantumMA/opimization/reconstructv1maxi/hls_component/hls_config.cfg(7)
+INFO: [HLS 200-1465] Applying ini 'flow_target=vivado' from F:/LMU/quantumMA/opimization/reconstructv1maxi/hls_component/hls_config.cfg(4)
+INFO: [HLS 200-1505] Using flow_target 'vivado'
+Resolution: For help on HLS 200-1505 see docs.xilinx.com/access/sources/dita/topic?Doc_Version=2024.2%20English&url=ug1448-hls-guidance&resourceid=200-1505.html
+INFO: [HLS 200-1465] Applying ini 'part=xczu7ev-ffvc1156-2-e' from F:/LMU/quantumMA/opimization/reconstructv1maxi/hls_component/hls_config.cfg(1)
+INFO: [HLS 200-1611] Setting target device to 'xczu7ev-ffvc1156-2-e'
+INFO: [HLS 200-1465] Applying ini 'csim.clean=1' from F:/LMU/quantumMA/opimization/reconstructv1maxi/hls_component/hls_config.cfg(11)
+INFO: [HLS 200-1465] Applying ini 'csim.code_analyzer=1' from F:/LMU/quantumMA/opimization/reconstructv1maxi/hls_component/hls_config.cfg(12)
+INFO: [HLS 200-1465] Applying ini 'package.output.format=ip_catalog' from F:/LMU/quantumMA/opimization/reconstructv1maxi/hls_component/hls_config.cfg(5)
+INFO: [HLS 200-111] Finished File checks and directory preparation: CPU user time: 8 seconds. CPU system time: 3 seconds. Elapsed time: 11.414 seconds; current allocated memory: 619.504 MB.
+INFO: [HLS 200-10] Analyzing design file '../image_analysis.cpp' ... 
+WARNING: [HLS 207-5569] unexpected pragma parameter 'storage_type' (../image_analysis.cpp:453:98)
+WARNING: [HLS 214-111] Static scalars and arrays declared inside a dataflow region will be treated like local variables (../image_analysis.cpp:415:15)
+Resolution: For help on HLS 214-111 see docs.xilinx.com/access/sources/dita/topic?Doc_Version=2024.2%20English&url=ug1448-hls-guidance&resourceid=214-111.html
+WARNING: [HLS 214-111] Static scalars and arrays declared inside a dataflow region will be treated like local variables (../image_analysis.cpp:416:18)
+Resolution: For help on HLS 214-111 see docs.xilinx.com/access/sources/dita/topic?Doc_Version=2024.2%20English&url=ug1448-hls-guidance&resourceid=214-111.html
+WARNING: [HLS 214-111] Static scalars and arrays declared inside a dataflow region will be treated like local variables (../image_analysis.cpp:417:16)
+Resolution: For help on HLS 214-111 see docs.xilinx.com/access/sources/dita/topic?Doc_Version=2024.2%20English&url=ug1448-hls-guidance&resourceid=214-111.html
+WARNING: [HLS 214-111] Static scalars and arrays declared inside a dataflow region will be treated like local variables (../image_analysis.cpp:418:18)
+Resolution: For help on HLS 214-111 see docs.xilinx.com/access/sources/dita/topic?Doc_Version=2024.2%20English&url=ug1448-hls-guidance&resourceid=214-111.html
+WARNING: [HLS 200-471] Dataflow form checks found 4 issue(s) in file ../image_analysis.cpp
+Resolution: For help on HLS 200-471 see docs.xilinx.com/access/sources/dita/topic?Doc_Version=2024.2%20English&url=ug1448-hls-guidance&resourceid=200-471.html
+INFO: [HLS 200-111] Finished Source Code Analysis and Preprocessing: CPU user time: 1 seconds. CPU system time: 0 seconds. Elapsed time: 6.371 seconds; current allocated memory: 622.816 MB.
+INFO: [HLS 200-777] Using interface defaults for 'Vivado' flow target.
+INFO: [HLS 200-1995] There were 19,501 instructions in the design after the 'Compile/Link' phase of compilation. See the Design Size Report for more details: F:/LMU/quantumMA/opimization/reconstructv1maxi/hls_component/reconstruct/hls/syn/report/csynth_design_size.rpt
+INFO: [HLS 200-1995] There were 55,881 instructions in the design after the 'Unroll/Inline' phase of compilation. See the Design Size Report for more details: F:/LMU/quantumMA/opimization/reconstructv1maxi/hls_component/reconstruct/hls/syn/report/csynth_design_size.rpt
+INFO: [HLS 200-1995] There were 33,389 instructions in the design after the 'Unroll/Inline (step 2)' phase of compilation. See the Design Size Report for more details: F:/LMU/quantumMA/opimization/reconstructv1maxi/hls_component/reconstruct/hls/syn/report/csynth_design_size.rpt

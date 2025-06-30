@@ -128,7 +128,7 @@ dfgPass::VERBO:     +0 is not a loop
 dfgPass::VERBO:       - BEFORE BREAK
 dfgPass::VERBO:       - while.cond
 dfgPass::VERBO:         - memlocal of :emission_ptr:0
-dfgPass::VERBO:         - memlocal may be aliased :emission_cnt
+dfgPass::VERBO:         - memlocal may be aliased :atomLocationsSize
 dfgPass::VERBO:       - AFTER BREAK
 dfgPass::VERBO:       - while.body
 dfgPass::VERBO:         - memlocal of :emission_ptr:0
@@ -138,64 +138,69 @@ dfgPass::VERBO:     +0 is not a loop
 dfgPass::VERBO:     +0 is not a loop
 dfgPass::VERBO:     +0 is not a loop
 dfgPass::VERBO:     +0 is not a loop
+dfgPass::VERBO:     +0 is not a loop
+dfgPass::VERBO:     +0 is not a loop
+dfgPass::VERBO:     +0 is not a loop
+dfgPass::VERBO:     +1 is not an innermost loop
+dfgPass::VERBO:     +2 fails R.hasBlockSchema
+dfgPass::VERBO:     +0 is not a loop
+dfgPass::VERBO:     +0 is not a loop
+dfgPass::VERBO:     +1 is not an innermost loop
 dfgPass::VERBO:       - BEFORE BREAK
-dfgPass::VERBO:       - for.cond4
-dfgPass::VERBO:         - memlocal of :i:0
-dfgPass::VERBO:         - memlocal of :atomLocationsSize:0
+dfgPass::VERBO:       - for.cond1
+dfgPass::VERBO:         - memlocal of :j:0
+dfgPass::VERBO:         - LCV conditional branch 6:48
 dfgPass::VERBO:       - AFTER BREAK
-dfgPass::VERBO:       - for.body6
+dfgPass::VERBO:       - for.body4
+dfgPass::VERBO:         - memlocal of :curr_fullImage:0
 dfgPass::VERBO:         - memlocal of :i:0
+dfgPass::VERBO:         - memlocal of :j:0
+dfgPass::VERBO:         - memlocal of :curr_localImage:0
+dfgPass::VERBO:         - memlocal of :i:0
+dfgPass::VERBO:         - memlocal of :j:0
+dfgPass::VERBO:         - memlocal of :sum:0
 dfgPass::VERBO:         - invalid TR:4:0
+dfgPass::VERBO:     +0 is not a loop
+dfgPass::VERBO:     +0 is not a loop
+dfgPass::VERBO:     +0 is not a loop
+dfgPass::VERBO:     +0 is not a loop
+dfgPass::VERBO:     +0 is not a loop
 dfgPass::VERBO:       - BEFORE BREAK
 dfgPass::VERBO:       - for.cond
-dfgPass::VERBO:         - memlocal of :i:0
+dfgPass::VERBO:         - memlocal of :idx:0
 dfgPass::VERBO:         - memlocal of :atomLocationsSize:0
 dfgPass::VERBO:       - AFTER BREAK
 dfgPass::VERBO:       - for.body
-dfgPass::VERBO:         - memlocal of :atomLocations:0
-dfgPass::VERBO:         - memlocal of :i:0
-dfgPass::VERBO:         - memlocal of :i:0
 dfgPass::VERBO:         - invalid TR:4:0
 dfgPass::VERBO:     +0 is not a loop
 dfgPass::VERBO:     +0 is not a loop
 dfgPass::VERBO:     +1 is not an innermost loop
-dfgPass::VERBO:     +2 is not an innermost loop
-dfgPass::VERBO:     +3 fails R.hasBlockSchema
+dfgPass::VERBO:     +2 fails R.hasBlockSchema
 dfgPass::VERBO:     +0 is not a loop
-dfgPass::VERBO:     +0 is not a loop
-dfgPass::VERBO:     +0 is not a loop
-dfgPass::VERBO:     +0 is not a loop
-dfgPass::VERBO:     +0 is not a loop
-dfgPass::VERBO:     +0 is not a loop
+dfgPass::VERBO:     +1 is not an innermost loop
 dfgPass::VERBO:       - BEFORE BREAK
-dfgPass::VERBO:       - for.cond4
-dfgPass::VERBO:         - memlocal of :i:0
-dfgPass::VERBO:         - memlocal of :atomLocationsSize:0
+dfgPass::VERBO:       - for.cond1
+dfgPass::VERBO:         - memlocal of :j:0
+dfgPass::VERBO:         - LCV conditional branch 6:48
 dfgPass::VERBO:       - AFTER BREAK
-dfgPass::VERBO:       - for.body6
+dfgPass::VERBO:       - for.body4
+dfgPass::VERBO:         - memlocal of :curr_fullImage:0
 dfgPass::VERBO:         - memlocal of :i:0
-dfgPass::VERBO:         - memlocal offset is invalid:0:4
-dfgPass::VERBO:         - memlocal of :coord:1
-dfgPass::VERBO:         - memlocal of :coord:0
-dfgPass::VERBO:         - invalid TR:4:0
-dfgPass::VERBO:       - BEFORE BREAK
-dfgPass::VERBO:       - for.cond
+dfgPass::VERBO:         - memlocal of :j:0
+dfgPass::VERBO:         - memlocal of :curr_localImage:0
 dfgPass::VERBO:         - memlocal of :i:0
-dfgPass::VERBO:         - memlocal of :atomLocationsSize:0
-dfgPass::VERBO:       - AFTER BREAK
-dfgPass::VERBO:       - for.body
-dfgPass::VERBO:         - memlocal of :atomLocations:0
+dfgPass::VERBO:         - memlocal of :j:0
+dfgPass::VERBO:         - memlocal of :sum:0
+dfgPass::VERBO:         - memlocal of :curr_localImage:0
 dfgPass::VERBO:         - memlocal of :i:0
-dfgPass::VERBO:         - memlocal of :i:0
-dfgPass::VERBO:         - memlocal offset is invalid:0:4
+dfgPass::VERBO:         - memlocal of :j:0
+dfgPass::VERBO:         - memlocal of :projSumUsed:0
 dfgPass::VERBO:       - AFTER BREAK
 dfgPass::VERBO:       - for.inc
-dfgPass::VERBO:         - memlocal of :i:0
-dfgPass::VERBO:         - memlocal of :i:1
+dfgPass::VERBO:         - memlocal of :j:0
+dfgPass::VERBO:         - memlocal of :j:1
 dfgPass::VERBO:       - AFTER BREAK
 dfgPass::VERBO:     +0 is not a loop
-dfgPass::VERBO:     +1 is not an innermost loop
-dfgPass::VERBO:     +2 is not an innermost loop
-dfgPass::VERBO:     +3 fails R.hasBlockSchema
+dfgPass::VERBO:     +0 is not a loop
 dfgPass::INFOR:     Parsing trace...
 dfgPass::INFOR:     End of the trace parse

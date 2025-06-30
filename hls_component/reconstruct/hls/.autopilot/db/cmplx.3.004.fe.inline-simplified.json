@@ -1,38 +1,83 @@
 {
   "0": {
-    "basicblocks": 1,
-    "calls": "4 2",
+    "basicblocks": 4,
+    "calls": "2 3 4 5",
     "file": "image_analysis.cpp",
-    "fileloc": 120,
-    "instructions": 24,
+    "fileloc": 116,
+    "instructions": 69,
+    "loads": {
+      "L": 3
+    },
     "name": "reconstruct",
-    "total_instructions": 456
+    "stores": {
+      "L": 2
+    },
+    "total_instructions": 624
   },
   "1": {
     "basicblocks": 1,
     "calls": "",
     "file": "lib_floatconversion.cpp",
-    "fileloc": 55,
+    "fileloc": 51,
     "instructions": 24,
-    "name": "__hls_fptosi_double_i32",
+    "name": "__hls_fptosi_float_i32",
     "total_instructions": 24
   },
   "2": {
-    "basicblocks": 18,
+    "basicblocks": 1,
+    "calls": "6 1 6 1 6 1 6 1",
+    "file": "image_analysis.cpp",
+    "fileloc": 7,
+    "instructions": 39,
+    "loads": {
+      "L": 1
+    },
+    "name": "getLocalImages_single",
+    "total_instructions": 287
+  },
+  "3": {
+    "basicblocks": 5,
     "calls": "",
     "file": "image_analysis.cpp",
-    "fileloc": 63,
-    "instructions": 117,
+    "fileloc": 66,
+    "instructions": 35,
     "loads": {
-      "L": 4
+      "L": 3
     },
-    "name": "applyProjectors",
+    "name": "Image_extract",
     "stores": {
       "L": 3
     },
-    "total_instructions": 117
+    "total_instructions": 35
   },
-  "3": {
+  "4": {
+    "basicblocks": 3,
+    "calls": "",
+    "file": "image_analysis.cpp",
+    "fileloc": 98,
+    "instructions": 229,
+    "loads": {
+      "L": 64
+    },
+    "name": "conv_kernel",
+    "stores": {
+      "L": 2
+    },
+    "total_instructions": 229
+  },
+  "5": {
+    "basicblocks": 1,
+    "calls": "",
+    "file": "image_analysis.cpp",
+    "fileloc": 112,
+    "instructions": 4,
+    "name": "post_process",
+    "stores": {
+      "L": 1
+    },
+    "total_instructions": 4
+  },
+  "6": {
     "basicblocks": 5,
     "calls": "",
     "file": "hls_round.h",
@@ -41,22 +86,7 @@
     "loads": {
       "G": 2
     },
-    "name": "generic_round<double>",
+    "name": "generic_round<float>",
     "total_instructions": 38
-  },
-  "4": {
-    "basicblocks": 9,
-    "calls": "3 1 3 1 3 1 3 1",
-    "file": "image_analysis.cpp",
-    "fileloc": 7,
-    "instructions": 67,
-    "loads": {
-      "L": 4
-    },
-    "name": "getLocalImages",
-    "stores": {
-      "L": 2
-    },
-    "total_instructions": 315
   }
 }

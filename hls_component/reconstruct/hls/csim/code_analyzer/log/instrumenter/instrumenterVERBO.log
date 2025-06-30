@@ -1,6 +1,8 @@
 instrumenter::INFOR: [Instrumenter - Initialization] Checking for the existence of the required environment variables
 instrumenter::INFOR: [Instrumenter - Initialization] Loading the supported wrappers for standard library functions
 instrumenter::INFOR: [Instrumenter - Initialization] Adding static information
+instrumenter::VERBO: [Instrumenter - INFO] Local variable was optimized away by the compiler, skipping instrumentation...
+instrumenter::VERBO: [Instrumenter - INFO] Local variable was optimized away by the compiler, skipping instrumentation...
 instrumenter::VERBO: [Instrumenter - IRBuilder] Instruction has no debug information, defaulting to function/basic block info
 instrumenter::VERBO: [Instrumenter - IRBuilder] Instruction has no debug information, defaulting to function/basic block info
 instrumenter::VERBO: [Instrumenter - IRBuilder] Instruction has no debug information, defaulting to function/basic block info
@@ -44,6 +46,18 @@ instrumenter::VERBO: [Instrumenter - IRBuilder] Instruction has no debug informa
 instrumenter::VERBO: spec:0:0: warning: [IRBuilder] Function/Basic Block for the instruction has no debug information, recompile and retry (13)
 instrumenter::VERBO: [Instrumenter - IRBuilder] Instruction has no debug information, defaulting to function/basic block info
 instrumenter::VERBO: spec:0:0: warning: [IRBuilder] Function/Basic Block for the instruction has no debug information, recompile and retry (13)
+instrumenter::VERBO: [Instrumenter - IRBuilder] Instruction has no debug information, defaulting to function/basic block info
+instrumenter::VERBO: [Instrumenter - IRBuilder] Instruction has no debug information, defaulting to function/basic block info
+instrumenter::VERBO: [Instrumenter - IRBuilder] Instruction has no debug information, defaulting to function/basic block info
+instrumenter::VERBO: [Instrumenter - IRBuilder] Instruction has no debug information, defaulting to function/basic block info
+instrumenter::VERBO: [Instrumenter - IRBuilder] Instruction has no debug information, defaulting to function/basic block info
+instrumenter::VERBO: [Instrumenter - IRBuilder] Instruction has no debug information, defaulting to function/basic block info
+instrumenter::VERBO: [Instrumenter - IRBuilder] Instruction has no debug information, defaulting to function/basic block info
+instrumenter::VERBO: [Instrumenter - IRBuilder] Instruction has no debug information, defaulting to function/basic block info
+instrumenter::VERBO: [Instrumenter - IRBuilder] Instruction has no debug information, defaulting to function/basic block info
+instrumenter::VERBO: [Instrumenter - IRBuilder] Instruction has no debug information, defaulting to function/basic block info
+instrumenter::VERBO: [Instrumenter - IRBuilder] Instruction has no debug information, defaulting to function/basic block info
+instrumenter::VERBO: [Instrumenter - IRBuilder] Instruction has no debug information, defaulting to function/basic block info
 instrumenter::VERBO: [Instrumenter - IRBuilder] Instruction has no debug information, defaulting to function/basic block info
 instrumenter::VERBO: [Instrumenter - IRBuilder] Instruction has no debug information, defaulting to function/basic block info
 instrumenter::VERBO: [Instrumenter - IRBuilder] Instruction has no debug information, defaulting to function/basic block info
@@ -580,9 +594,26 @@ instrumenter::VERBO: [Instrumenter - WARNING] Global value .str.17 is not instru
 instrumenter::VERBO: [Instrumenter - WARNING] Global value .str.18 is not instrumentable
 instrumenter::VERBO: [Instrumenter - WARNING] Global value .str.19 is not instrumentable
 instrumenter::VERBO: [Instrumenter - WARNING] Global value .str.20 is not instrumentable
-instrumenter::VERBO: [Instrumenter - WARNING] Global value .str.34 is not instrumentable
-instrumenter::VERBO: [Instrumenter - WARNING] Global value .str.1.35 is not instrumentable
-instrumenter::VERBO: [Instrumenter - WARNING] Global value .str.2.36 is not instrumentable
+instrumenter::VERBO: [Instrumenter - WARNING] Global value .str.68 is not instrumentable
+instrumenter::VERBO: [Instrumenter - WARNING] Global value .str.1.69 is not instrumentable
+instrumenter::VERBO: [Instrumenter - WARNING] Global value .str.2.70 is not instrumentable
+instrumenter::VERBO: [Instrumenter - WARNING] Global value .str.3.71 is not instrumentable
+instrumenter::VERBO: [Instrumenter - WARNING] Global value .str.4.72 is not instrumentable
+instrumenter::VERBO: [Instrumenter - WARNING] Global value .str.5.73 is not instrumentable
+instrumenter::VERBO: [Instrumenter - WARNING] Global value .str.6.56 is not instrumentable
+instrumenter::VERBO: [Instrumenter - WARNING] Global value .str.7.57 is not instrumentable
+instrumenter::VERBO: [Instrumenter - WARNING] Global value .str.8.58 is not instrumentable
+instrumenter::VERBO: [Instrumenter - WARNING] Global value .str.9.59 is not instrumentable
+instrumenter::VERBO: [Instrumenter - WARNING] Global value .str.10.60 is not instrumentable
+instrumenter::VERBO: [Instrumenter - WARNING] Global value .str.11.61 is not instrumentable
+instrumenter::VERBO: [Instrumenter - WARNING] Global value .str.12.62 is not instrumentable
+instrumenter::VERBO: [Instrumenter - WARNING] Global value .str.13.63 is not instrumentable
+instrumenter::VERBO: [Instrumenter - WARNING] Global value .str.14.64 is not instrumentable
+instrumenter::VERBO: [Instrumenter - WARNING] Global value .str.15.65 is not instrumentable
+instrumenter::VERBO: [Instrumenter - WARNING] Global value .str.16.53 is not instrumentable
+instrumenter::VERBO: [Instrumenter - WARNING] Global value .str.17.66 is not instrumentable
+instrumenter::VERBO: [Instrumenter - WARNING] Global value .str.18.52 is not instrumentable
+instrumenter::VERBO: [Instrumenter - WARNING] Global value .str.19.54 is not instrumentable
 instrumenter::VERBO: [Instrumenter - WARNING] Global value __PRETTY_FUNCTION__._ZN3hls6streamI16local_image_infoLi0EEC2Ev is not instrumentable
 instrumenter::VERBO: spec:0:0: note: [Instrumenter - FN/BB] Function/BasicBlock profiling
 instrumenter::VERBO: [Instrumenter - FN/BB] Inserting profiling calls for function/basic-blocks
@@ -675,7 +706,7 @@ instrumenter::VERBO: [Instrumenter - BB] Instrumenting the function: _ZNSt12_Vec
 instrumenter::VERBO: [Instrumenter - BB] Instrumenting the function: _ZNSaINSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEEEC2Ev
 instrumenter::VERBO: [Instrumenter - BB] Instrumenting the function: _ZNSt12_Vector_baseINSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEESaIS5_EE17_Vector_impl_dataC2Ev
 instrumenter::VERBO: [Instrumenter - BB] Instrumenting the function: _ZN9__gnu_cxx13new_allocatorINSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEEEC2Ev
-instrumenter::VERBO: [Instrumenter - BB] Instrumenting the function: _Z16parse_input_fileRKNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEEP13atom_locationRiS9_S9_S9_S9_PdSA_PiS9_S9_
+instrumenter::VERBO: [Instrumenter - BB] Instrumenting the function: _Z16parse_input_fileRKNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEEP13atom_locationRiS9_S9_S9_S9_PfSA_PiS9_S9_
 instrumenter::VERBO: [Instrumenter - BB] Instrumenting the function: _ZNSt14basic_ifstreamIcSt11char_traitsIcEEC1ERKNSt7__cxx1112basic_stringIcS1_SaIcEEESt13_Ios_Openmode
 instrumenter::VERBO: [Instrumenter - BB] Instrumenting the function: _ZNSt14basic_ifstreamIcSt11char_traitsIcEE7is_openEv
 instrumenter::VERBO: [Instrumenter - BB] Instrumenting the function: _ZNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEC1Ev
@@ -715,9 +746,9 @@ instrumenter::VERBO: [Instrumenter - BB] Instrumenting the function: _ZZN9__gnu_
 instrumenter::VERBO: [Instrumenter - BB] Instrumenting the function: _ZZN9__gnu_cxx6__stoaIlicJiEEET0_PFT_PKT1_PPS3_DpT2_EPKcS5_PyS9_EN11_Save_errnoD2Ev
 instrumenter::VERBO: [Instrumenter - BB] Instrumenting the function: _ZZN9__gnu_cxx6__stoaIlicJiEEET0_PFT_PKT1_PPS3_DpT2_EPKcS5_PyS9_EN11_Save_errnoC2Ev
 instrumenter::VERBO: [Instrumenter - BB] Instrumenting the function: _ZNKSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEE7compareEPKc
-instrumenter::VERBO: [Instrumenter - BB] Instrumenting the function: _Z15parse_fullImageRKNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEEPd
+instrumenter::VERBO: [Instrumenter - BB] Instrumenting the function: _Z15parse_fullImageRKNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEEPf
 instrumenter::VERBO: [Instrumenter - BB] Instrumenting the function: llvm.memset.p0i8.i64
-instrumenter::VERBO: [Instrumenter - BB] Instrumenting the function: _ZZ15parse_fullImageRKNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEEPdENK3$_0clB5cxx11ES6_c
+instrumenter::VERBO: [Instrumenter - BB] Instrumenting the function: _ZZ15parse_fullImageRKNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEEPfENK3$_0clB5cxx11ES6_c
 instrumenter::VERBO: [Instrumenter - BB] Instrumenting the function: _ZStlsISt11char_traitsIcEERSt13basic_ostreamIcT_ES5_PKc
 instrumenter::VERBO: [Instrumenter - BB] Instrumenting the function: _ZSt4endlIcSt11char_traitsIcEERSt13basic_ostreamIT_T0_ES6_
 instrumenter::VERBO: [Instrumenter - BB] Instrumenting the function: _ZNSolsEPFRSoS_E
@@ -733,27 +764,34 @@ instrumenter::VERBO: [Instrumenter - BB] Instrumenting the function: __cxa_rethr
 instrumenter::VERBO: [Instrumenter - BB] Instrumenting the function: _ZN9__gnu_cxx13new_allocatorINSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEEE9constructIS6_JRKS6_EEEvPT_DpOT0_
 instrumenter::VERBO: [Instrumenter - BB] Instrumenting the function: _ZNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEC1ERKS4_
 instrumenter::VERBO: [Instrumenter - BB] Instrumenting the function: main
-instrumenter::VERBO: [Instrumenter - BB] Instrumenting the function: _ZNSolsEd
+instrumenter::VERBO: [Instrumenter - BB] Instrumenting the function: _ZNSolsEf
 instrumenter::VERBO: [Instrumenter - BB] Instrumenting the function: _GLOBAL__sub_I_image_analysis.cpp
 instrumenter::VERBO: [Instrumenter - BB] Instrumenting the function: __cxx_global_var_init.2
 instrumenter::VERBO: [Instrumenter - BB] Instrumenting the function: __dtor__ZStL8__ioinit.4
-instrumenter::VERBO: [Instrumenter - BB] Instrumenting the function: _Z14getLocalImagesiiiiP13atom_locationRN3hls6streamI16local_image_infoLi0EEE
-instrumenter::VERBO: [Instrumenter - BB] Skipping Function llvm.dbg.label
-instrumenter::VERBO: [Instrumenter - BB] Instrumenting the function: llvm.round.f64
+instrumenter::VERBO: [Instrumenter - BB] Instrumenting the function: _Z21getLocalImages_singleiiiiP13atom_locationRN3hls6streamI16local_image_infoLi0EEE
+instrumenter::VERBO: [Instrumenter - BB] Instrumenting the function: _ZSt5roundf
+instrumenter::VERBO: [Instrumenter - BB] Instrumenting the function: _ZNSolsEi
 instrumenter::VERBO: [Instrumenter - BB] Instrumenting the function: _ZN3hls6streamI16local_image_infoLi0EE5writeERKS1_
 instrumenter::VERBO: [Instrumenter - BB] Instrumenting the function: llvm.fpga.fifo.push.s_struct.local_image_infos.p0s_struct.local_image_infos
-instrumenter::VERBO: [Instrumenter - BB] Instrumenting the function: _Z15applyProjectorsiiiPdS_PiS_iiRN3hls6streamI16local_image_infoLi0EEES_Rj
+instrumenter::VERBO: [Instrumenter - BB] Instrumenting the function: llvm.round.f32
+instrumenter::VERBO: [Instrumenter - BB] Instrumenting the function: _Z13Image_extractiRN3hls6streamI16local_image_infoLi0EEEPfPA31_fS4_S6_S4_Rf
 instrumenter::VERBO: [Instrumenter - BB] Instrumenting the function: _ZN3hls6streamI16local_image_infoLi0EE4readEv
-instrumenter::VERBO: [Instrumenter - BB] Instrumenting the function: llvm.fmuladd.f64
+instrumenter::VERBO: [Instrumenter - BB] Instrumenting the function: _ZNSolsEj
 instrumenter::VERBO: [Instrumenter - BB] Instrumenting the function: llvm.fpga.fifo.pop.s_struct.local_image_infos.p0s_struct.local_image_infos
-instrumenter::VERBO: [Instrumenter - BB] Instrumenting the function: _GLOBAL__sub_I_image_analysis.cpp.25
-instrumenter::VERBO: [Instrumenter - BB] Instrumenting the function: __cxx_global_var_init.26
-instrumenter::VERBO: [Instrumenter - BB] Instrumenting the function: __dtor__ZStL8__ioinit.28
-instrumenter::VERBO: [Instrumenter - BB] Instrumenting the function: _Z11reconstructiiiP13atom_locationiiPdS1_PiS1_iiS1_Rj
+instrumenter::VERBO: [Instrumenter - BB] Instrumenting the function: _Z11conv_kernelPA31_fS0_RfS1_
+instrumenter::VERBO: [Instrumenter - BB] Instrumenting the function: llvm.fmuladd.f32
+instrumenter::VERBO: [Instrumenter - BB] Instrumenting the function: _Z12post_processfffRf
+instrumenter::VERBO: [Instrumenter - BB] Instrumenting the function: _GLOBAL__sub_I_image_analysis.cpp.42
+instrumenter::VERBO: [Instrumenter - BB] Instrumenting the function: __cxx_global_var_init.43
+instrumenter::VERBO: [Instrumenter - BB] Instrumenting the function: __dtor__ZStL8__ioinit.45
+instrumenter::VERBO: [Instrumenter - BB] Instrumenting the function: _Z11reconstructiiiP13atom_locationiiPfS1_PiS1_iiS1_
 instrumenter::VERBO: [Instrumenter - BB] Instrumenting the function: llvm.sideeffect
-instrumenter::VERBO: [Instrumenter - BB] Instrumenting the function: _Z14getLocalImagesiiiiP13atom_locationRN3hls6streamI16local_image_infoLi0EEE.31
-instrumenter::VERBO: [Instrumenter - BB] Instrumenting the function: _Z15applyProjectorsiiiPdS_PiS_iiRN3hls6streamI16local_image_infoLi0EEES_Rj.32
+instrumenter::VERBO: [Instrumenter - BB] Instrumenting the function: _Z21getLocalImages_singleiiiiP13atom_locationRN3hls6streamI16local_image_infoLi0EEE.48
+instrumenter::VERBO: [Instrumenter - BB] Instrumenting the function: _Z13Image_extractiRN3hls6streamI16local_image_infoLi0EEEPfPA31_fS4_S6_S4_Rf.49
+instrumenter::VERBO: [Instrumenter - BB] Instrumenting the function: _Z11conv_kernelPA31_fS0_RfS1_.50
+instrumenter::VERBO: [Instrumenter - BB] Instrumenting the function: _Z12post_processfffRf.51
 instrumenter::VERBO: [Instrumenter - BB] Instrumenting the function: slx_hls_stream_delete
+instrumenter::VERBO: [Instrumenter - BB] Instrumenting the function: _ZSt5roundf.67
 instrumenter::VERBO: [Instrumenter - BB] Instrumenting the function: slx_hls_stream_create
 instrumenter::VERBO: [Instrumenter - BB] Skipping Function llvm.dbg.value
 instrumenter::VERBO: [Instrumenter - Finalize] Adding extra setup and memory access calls

@@ -14,10 +14,18 @@ generic (
     C_S_AXI_CONTROL_DATA_WIDTH : INTEGER := 32;
     C_S_AXI_SCALAR_DATA_ADDR_WIDTH : INTEGER := 7;
     C_S_AXI_SCALAR_DATA_DATA_WIDTH : INTEGER := 32;
+    C_M_AXI_ATOMLOCATIONS_ADDR_WIDTH : INTEGER := 64;
+    C_M_AXI_ATOMLOCATIONS_ID_WIDTH : INTEGER := 1;
+    C_M_AXI_ATOMLOCATIONS_AWUSER_WIDTH : INTEGER := 1;
+    C_M_AXI_ATOMLOCATIONS_DATA_WIDTH : INTEGER := 64;
+    C_M_AXI_ATOMLOCATIONS_WUSER_WIDTH : INTEGER := 1;
+    C_M_AXI_ATOMLOCATIONS_ARUSER_WIDTH : INTEGER := 1;
+    C_M_AXI_ATOMLOCATIONS_RUSER_WIDTH : INTEGER := 1;
+    C_M_AXI_ATOMLOCATIONS_BUSER_WIDTH : INTEGER := 1;
     C_M_AXI_EMISSIONS_ADDR_WIDTH : INTEGER := 64;
     C_M_AXI_EMISSIONS_ID_WIDTH : INTEGER := 1;
     C_M_AXI_EMISSIONS_AWUSER_WIDTH : INTEGER := 1;
-    C_M_AXI_EMISSIONS_DATA_WIDTH : INTEGER := 64;
+    C_M_AXI_EMISSIONS_DATA_WIDTH : INTEGER := 32;
     C_M_AXI_EMISSIONS_WUSER_WIDTH : INTEGER := 1;
     C_M_AXI_EMISSIONS_ARUSER_WIDTH : INTEGER := 1;
     C_M_AXI_EMISSIONS_RUSER_WIDTH : INTEGER := 1;
@@ -25,7 +33,7 @@ generic (
     C_M_AXI_FULLIMAGE_ADDR_WIDTH : INTEGER := 64;
     C_M_AXI_FULLIMAGE_ID_WIDTH : INTEGER := 1;
     C_M_AXI_FULLIMAGE_AWUSER_WIDTH : INTEGER := 1;
-    C_M_AXI_FULLIMAGE_DATA_WIDTH : INTEGER := 64;
+    C_M_AXI_FULLIMAGE_DATA_WIDTH : INTEGER := 32;
     C_M_AXI_FULLIMAGE_WUSER_WIDTH : INTEGER := 1;
     C_M_AXI_FULLIMAGE_ARUSER_WIDTH : INTEGER := 1;
     C_M_AXI_FULLIMAGE_RUSER_WIDTH : INTEGER := 1;
@@ -33,7 +41,7 @@ generic (
     C_M_AXI_IMAGEPROJS_ADDR_WIDTH : INTEGER := 64;
     C_M_AXI_IMAGEPROJS_ID_WIDTH : INTEGER := 1;
     C_M_AXI_IMAGEPROJS_AWUSER_WIDTH : INTEGER := 1;
-    C_M_AXI_IMAGEPROJS_DATA_WIDTH : INTEGER := 64;
+    C_M_AXI_IMAGEPROJS_DATA_WIDTH : INTEGER := 32;
     C_M_AXI_IMAGEPROJS_WUSER_WIDTH : INTEGER := 1;
     C_M_AXI_IMAGEPROJS_ARUSER_WIDTH : INTEGER := 1;
     C_M_AXI_IMAGEPROJS_RUSER_WIDTH : INTEGER := 1;
@@ -41,7 +49,7 @@ generic (
     C_M_AXI_IMAGEPROJS_LOCAL_ADDR_WIDTH : INTEGER := 64;
     C_M_AXI_IMAGEPROJS_LOCAL_ID_WIDTH : INTEGER := 1;
     C_M_AXI_IMAGEPROJS_LOCAL_AWUSER_WIDTH : INTEGER := 1;
-    C_M_AXI_IMAGEPROJS_LOCAL_DATA_WIDTH : INTEGER := 64;
+    C_M_AXI_IMAGEPROJS_LOCAL_DATA_WIDTH : INTEGER := 32;
     C_M_AXI_IMAGEPROJS_LOCAL_WUSER_WIDTH : INTEGER := 1;
     C_M_AXI_IMAGEPROJS_LOCAL_ARUSER_WIDTH : INTEGER := 1;
     C_M_AXI_IMAGEPROJS_LOCAL_RUSER_WIDTH : INTEGER := 1;
@@ -54,6 +62,9 @@ generic (
     C_M_AXI_IMAGEPROJS_LOCAL_SIZE_ARUSER_WIDTH : INTEGER := 1;
     C_M_AXI_IMAGEPROJS_LOCAL_SIZE_RUSER_WIDTH : INTEGER := 1;
     C_M_AXI_IMAGEPROJS_LOCAL_SIZE_BUSER_WIDTH : INTEGER := 1;
+    C_M_AXI_ATOMLOCATIONS_USER_VALUE : INTEGER := 0;
+    C_M_AXI_ATOMLOCATIONS_PROT_VALUE : INTEGER := 0;
+    C_M_AXI_ATOMLOCATIONS_CACHE_VALUE : INTEGER := 3;
     C_M_AXI_EMISSIONS_USER_VALUE : INTEGER := 0;
     C_M_AXI_EMISSIONS_PROT_VALUE : INTEGER := 0;
     C_M_AXI_EMISSIONS_CACHE_VALUE : INTEGER := 3;
@@ -65,10 +76,7 @@ generic (
     C_M_AXI_IMAGEPROJS_CACHE_VALUE : INTEGER := 3;
     C_M_AXI_IMAGEPROJS_LOCAL_USER_VALUE : INTEGER := 0;
     C_M_AXI_IMAGEPROJS_LOCAL_PROT_VALUE : INTEGER := 0;
-    C_M_AXI_IMAGEPROJS_LOCAL_CACHE_VALUE : INTEGER := 3;
-    C_M_AXI_IMAGEPROJS_LOCAL_SIZE_USER_VALUE : INTEGER := 0;
-    C_M_AXI_IMAGEPROJS_LOCAL_SIZE_PROT_VALUE : INTEGER := 0;
-    C_M_AXI_IMAGEPROJS_LOCAL_SIZE_CACHE_VALUE : INTEGER := 3 );
+    C_M_AXI_IMAGEPROJS_LOCAL_CACHE_VALUE : INTEGER := 3 );
 port (
     s_axi_control_AWVALID : IN STD_LOGIC;
     s_axi_control_AWREADY : OUT STD_LOGIC;
@@ -107,6 +115,51 @@ port (
     s_axi_scalar_data_BVALID : OUT STD_LOGIC;
     s_axi_scalar_data_BREADY : IN STD_LOGIC;
     s_axi_scalar_data_BRESP : OUT STD_LOGIC_VECTOR (1 downto 0);
+    m_axi_atomLocations_AWVALID : OUT STD_LOGIC;
+    m_axi_atomLocations_AWREADY : IN STD_LOGIC;
+    m_axi_atomLocations_AWADDR : OUT STD_LOGIC_VECTOR (C_M_AXI_ATOMLOCATIONS_ADDR_WIDTH-1 downto 0);
+    m_axi_atomLocations_AWID : OUT STD_LOGIC_VECTOR (C_M_AXI_ATOMLOCATIONS_ID_WIDTH-1 downto 0);
+    m_axi_atomLocations_AWLEN : OUT STD_LOGIC_VECTOR (7 downto 0);
+    m_axi_atomLocations_AWSIZE : OUT STD_LOGIC_VECTOR (2 downto 0);
+    m_axi_atomLocations_AWBURST : OUT STD_LOGIC_VECTOR (1 downto 0);
+    m_axi_atomLocations_AWLOCK : OUT STD_LOGIC_VECTOR (1 downto 0);
+    m_axi_atomLocations_AWCACHE : OUT STD_LOGIC_VECTOR (3 downto 0);
+    m_axi_atomLocations_AWPROT : OUT STD_LOGIC_VECTOR (2 downto 0);
+    m_axi_atomLocations_AWQOS : OUT STD_LOGIC_VECTOR (3 downto 0);
+    m_axi_atomLocations_AWREGION : OUT STD_LOGIC_VECTOR (3 downto 0);
+    m_axi_atomLocations_AWUSER : OUT STD_LOGIC_VECTOR (C_M_AXI_ATOMLOCATIONS_AWUSER_WIDTH-1 downto 0);
+    m_axi_atomLocations_WVALID : OUT STD_LOGIC;
+    m_axi_atomLocations_WREADY : IN STD_LOGIC;
+    m_axi_atomLocations_WDATA : OUT STD_LOGIC_VECTOR (C_M_AXI_ATOMLOCATIONS_DATA_WIDTH-1 downto 0);
+    m_axi_atomLocations_WSTRB : OUT STD_LOGIC_VECTOR (C_M_AXI_ATOMLOCATIONS_DATA_WIDTH/8-1 downto 0);
+    m_axi_atomLocations_WLAST : OUT STD_LOGIC;
+    m_axi_atomLocations_WID : OUT STD_LOGIC_VECTOR (C_M_AXI_ATOMLOCATIONS_ID_WIDTH-1 downto 0);
+    m_axi_atomLocations_WUSER : OUT STD_LOGIC_VECTOR (C_M_AXI_ATOMLOCATIONS_WUSER_WIDTH-1 downto 0);
+    m_axi_atomLocations_ARVALID : OUT STD_LOGIC;
+    m_axi_atomLocations_ARREADY : IN STD_LOGIC;
+    m_axi_atomLocations_ARADDR : OUT STD_LOGIC_VECTOR (C_M_AXI_ATOMLOCATIONS_ADDR_WIDTH-1 downto 0);
+    m_axi_atomLocations_ARID : OUT STD_LOGIC_VECTOR (C_M_AXI_ATOMLOCATIONS_ID_WIDTH-1 downto 0);
+    m_axi_atomLocations_ARLEN : OUT STD_LOGIC_VECTOR (7 downto 0);
+    m_axi_atomLocations_ARSIZE : OUT STD_LOGIC_VECTOR (2 downto 0);
+    m_axi_atomLocations_ARBURST : OUT STD_LOGIC_VECTOR (1 downto 0);
+    m_axi_atomLocations_ARLOCK : OUT STD_LOGIC_VECTOR (1 downto 0);
+    m_axi_atomLocations_ARCACHE : OUT STD_LOGIC_VECTOR (3 downto 0);
+    m_axi_atomLocations_ARPROT : OUT STD_LOGIC_VECTOR (2 downto 0);
+    m_axi_atomLocations_ARQOS : OUT STD_LOGIC_VECTOR (3 downto 0);
+    m_axi_atomLocations_ARREGION : OUT STD_LOGIC_VECTOR (3 downto 0);
+    m_axi_atomLocations_ARUSER : OUT STD_LOGIC_VECTOR (C_M_AXI_ATOMLOCATIONS_ARUSER_WIDTH-1 downto 0);
+    m_axi_atomLocations_RVALID : IN STD_LOGIC;
+    m_axi_atomLocations_RREADY : OUT STD_LOGIC;
+    m_axi_atomLocations_RDATA : IN STD_LOGIC_VECTOR (C_M_AXI_ATOMLOCATIONS_DATA_WIDTH-1 downto 0);
+    m_axi_atomLocations_RLAST : IN STD_LOGIC;
+    m_axi_atomLocations_RID : IN STD_LOGIC_VECTOR (C_M_AXI_ATOMLOCATIONS_ID_WIDTH-1 downto 0);
+    m_axi_atomLocations_RUSER : IN STD_LOGIC_VECTOR (C_M_AXI_ATOMLOCATIONS_RUSER_WIDTH-1 downto 0);
+    m_axi_atomLocations_RRESP : IN STD_LOGIC_VECTOR (1 downto 0);
+    m_axi_atomLocations_BVALID : IN STD_LOGIC;
+    m_axi_atomLocations_BREADY : OUT STD_LOGIC;
+    m_axi_atomLocations_BRESP : IN STD_LOGIC_VECTOR (1 downto 0);
+    m_axi_atomLocations_BID : IN STD_LOGIC_VECTOR (C_M_AXI_ATOMLOCATIONS_ID_WIDTH-1 downto 0);
+    m_axi_atomLocations_BUSER : IN STD_LOGIC_VECTOR (C_M_AXI_ATOMLOCATIONS_BUSER_WIDTH-1 downto 0);
     m_axi_emissions_AWVALID : OUT STD_LOGIC;
     m_axi_emissions_AWREADY : IN STD_LOGIC;
     m_axi_emissions_AWADDR : OUT STD_LOGIC_VECTOR (C_M_AXI_EMISSIONS_ADDR_WIDTH-1 downto 0);
@@ -331,40 +384,34 @@ port (
     m_axi_imageProjs_local_size_BREADY : OUT STD_LOGIC;
     m_axi_imageProjs_local_size_BRESP : IN STD_LOGIC_VECTOR (1 downto 0);
     m_axi_imageProjs_local_size_BID : IN STD_LOGIC_VECTOR (C_M_AXI_IMAGEPROJS_LOCAL_SIZE_ID_WIDTH-1 downto 0);
-    m_axi_imageProjs_local_size_BUSER : IN STD_LOGIC_VECTOR (C_M_AXI_IMAGEPROJS_LOCAL_SIZE_BUSER_WIDTH-1 downto 0);
-    atomLocations_address0 : OUT STD_LOGIC_VECTOR (6 downto 0);
-    atomLocations_ce0 : OUT STD_LOGIC;
-    atomLocations_d0 : OUT STD_LOGIC_VECTOR (127 downto 0);
-    atomLocations_q0 : IN STD_LOGIC_VECTOR (127 downto 0);
-    atomLocations_we0 : OUT STD_LOGIC;
-    atomLocations_address1 : OUT STD_LOGIC_VECTOR (6 downto 0);
-    atomLocations_ce1 : OUT STD_LOGIC;
-    atomLocations_d1 : OUT STD_LOGIC_VECTOR (127 downto 0);
-    atomLocations_q1 : IN STD_LOGIC_VECTOR (127 downto 0);
-    atomLocations_we1 : OUT STD_LOGIC );
+    m_axi_imageProjs_local_size_BUSER : IN STD_LOGIC_VECTOR (C_M_AXI_IMAGEPROJS_LOCAL_SIZE_BUSER_WIDTH-1 downto 0) );
 end;
 
 
 architecture behav of reconstruct is 
     attribute CORE_GENERATION_INFO : STRING;
     attribute CORE_GENERATION_INFO of behav : architecture is
-    "reconstruct_reconstruct,hls_ip_2024_2,{HLS_INPUT_TYPE=cxx,HLS_INPUT_FLOAT=0,HLS_INPUT_FIXED=0,HLS_INPUT_PART=xc7z020-clg400-1,HLS_INPUT_CLOCK=10.000000,HLS_INPUT_ARCH=dataflow,HLS_SYN_CLOCK=7.300000,HLS_SYN_LAT=-1,HLS_SYN_TPT=-1,HLS_SYN_MEM=30,HLS_SYN_DSP=0,HLS_SYN_FF=32656,HLS_SYN_LUT=26146,HLS_VERSION=2024_2}";
+    "reconstruct_reconstruct,hls_ip_2024_2,{HLS_INPUT_TYPE=cxx,HLS_INPUT_FLOAT=0,HLS_INPUT_FIXED=0,HLS_INPUT_PART=xczu49dr-ffvf1760-2-e,HLS_INPUT_CLOCK=10.000000,HLS_INPUT_ARCH=others,HLS_SYN_CLOCK=7.704800,HLS_SYN_LAT=3961855,HLS_SYN_TPT=none,HLS_SYN_MEM=12,HLS_SYN_DSP=0,HLS_SYN_FF=80247,HLS_SYN_LUT=32991,HLS_VERSION=2024_2}";
     constant C_S_AXI_DATA_WIDTH : INTEGER := 32;
     constant ap_const_logic_1 : STD_LOGIC := '1';
     constant C_M_AXI_DATA_WIDTH : INTEGER := 32;
-    constant ap_const_lv7_0 : STD_LOGIC_VECTOR (6 downto 0) := "0000000";
+    constant C_M_AXI_IMAGEPROJS_LOCAL_SIZE_USER_VALUE : INTEGER := 0;
+    constant C_M_AXI_IMAGEPROJS_LOCAL_SIZE_PROT_VALUE : INTEGER := 0;
+    constant C_M_AXI_IMAGEPROJS_LOCAL_SIZE_CACHE_VALUE : INTEGER := 3;
     constant ap_const_logic_0 : STD_LOGIC := '0';
-    constant ap_const_lv128_lc_1 : STD_LOGIC_VECTOR (127 downto 0) := "00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000";
+    constant ap_const_boolean_1 : BOOLEAN := true;
     constant ap_const_lv32_0 : STD_LOGIC_VECTOR (31 downto 0) := "00000000000000000000000000000000";
+    constant ap_const_lv32_1 : STD_LOGIC_VECTOR (31 downto 0) := "00000000000000000000000000000001";
     constant ap_const_lv64_0 : STD_LOGIC_VECTOR (63 downto 0) := "0000000000000000000000000000000000000000000000000000000000000000";
     constant ap_const_lv1_0 : STD_LOGIC_VECTOR (0 downto 0) := "0";
+    constant ap_const_lv3_0 : STD_LOGIC_VECTOR (2 downto 0) := "000";
     constant ap_const_lv2_0 : STD_LOGIC_VECTOR (1 downto 0) := "00";
     constant ap_const_lv4_0 : STD_LOGIC_VECTOR (3 downto 0) := "0000";
     constant ap_const_lv8_0 : STD_LOGIC_VECTOR (7 downto 0) := "00000000";
     constant ap_const_lv9_0 : STD_LOGIC_VECTOR (8 downto 0) := "000000000";
-    constant ap_const_boolean_1 : BOOLEAN := true;
 
     signal ap_rst_n_inv : STD_LOGIC;
+    signal atomLocations_offset : STD_LOGIC_VECTOR (63 downto 0);
     signal imageProjs_local_offset : STD_LOGIC_VECTOR (63 downto 0);
     signal imageProjs_offset : STD_LOGIC_VECTOR (63 downto 0);
     signal imageProjs_local_size_offset : STD_LOGIC_VECTOR (63 downto 0);
@@ -381,11 +428,22 @@ architecture behav of reconstruct is
     signal imageProjectionSize : STD_LOGIC_VECTOR (31 downto 0);
     signal fullImage_rows : STD_LOGIC_VECTOR (31 downto 0);
     signal fullImage_cols : STD_LOGIC_VECTOR (31 downto 0);
+    signal atomLocations_0_AWREADY : STD_LOGIC;
+    signal atomLocations_0_WREADY : STD_LOGIC;
+    signal atomLocations_0_ARREADY : STD_LOGIC;
+    signal atomLocations_0_RVALID : STD_LOGIC;
+    signal atomLocations_0_RDATA : STD_LOGIC_VECTOR (63 downto 0);
+    signal atomLocations_0_RLAST : STD_LOGIC;
+    signal atomLocations_0_RID : STD_LOGIC_VECTOR (0 downto 0);
+    signal atomLocations_0_RFIFONUM : STD_LOGIC_VECTOR (8 downto 0);
+    signal atomLocations_0_RUSER : STD_LOGIC_VECTOR (0 downto 0);
+    signal atomLocations_0_RRESP : STD_LOGIC_VECTOR (1 downto 0);
+    signal atomLocations_0_BVALID : STD_LOGIC;
     signal emissions_0_AWREADY : STD_LOGIC;
     signal emissions_0_WREADY : STD_LOGIC;
     signal emissions_0_ARREADY : STD_LOGIC;
     signal emissions_0_RVALID : STD_LOGIC;
-    signal emissions_0_RDATA : STD_LOGIC_VECTOR (63 downto 0);
+    signal emissions_0_RDATA : STD_LOGIC_VECTOR (31 downto 0);
     signal emissions_0_RFIFONUM : STD_LOGIC_VECTOR (8 downto 0);
     signal emissions_0_BVALID : STD_LOGIC;
     signal emissions_0_BRESP : STD_LOGIC_VECTOR (1 downto 0);
@@ -395,7 +453,7 @@ architecture behav of reconstruct is
     signal fullImage_0_WREADY : STD_LOGIC;
     signal fullImage_0_ARREADY : STD_LOGIC;
     signal fullImage_0_RVALID : STD_LOGIC;
-    signal fullImage_0_RDATA : STD_LOGIC_VECTOR (63 downto 0);
+    signal fullImage_0_RDATA : STD_LOGIC_VECTOR (31 downto 0);
     signal fullImage_0_RLAST : STD_LOGIC;
     signal fullImage_0_RID : STD_LOGIC_VECTOR (0 downto 0);
     signal fullImage_0_RFIFONUM : STD_LOGIC_VECTOR (8 downto 0);
@@ -406,7 +464,7 @@ architecture behav of reconstruct is
     signal imageProjs_0_WREADY : STD_LOGIC;
     signal imageProjs_0_ARREADY : STD_LOGIC;
     signal imageProjs_0_RVALID : STD_LOGIC;
-    signal imageProjs_0_RDATA : STD_LOGIC_VECTOR (63 downto 0);
+    signal imageProjs_0_RDATA : STD_LOGIC_VECTOR (31 downto 0);
     signal imageProjs_0_RLAST : STD_LOGIC;
     signal imageProjs_0_RID : STD_LOGIC_VECTOR (0 downto 0);
     signal imageProjs_0_RFIFONUM : STD_LOGIC_VECTOR (8 downto 0);
@@ -417,298 +475,252 @@ architecture behav of reconstruct is
     signal imageProjs_local_0_WREADY : STD_LOGIC;
     signal imageProjs_local_0_ARREADY : STD_LOGIC;
     signal imageProjs_local_0_RVALID : STD_LOGIC;
-    signal imageProjs_local_0_RDATA : STD_LOGIC_VECTOR (63 downto 0);
+    signal imageProjs_local_0_RDATA : STD_LOGIC_VECTOR (31 downto 0);
     signal imageProjs_local_0_RLAST : STD_LOGIC;
     signal imageProjs_local_0_RID : STD_LOGIC_VECTOR (0 downto 0);
     signal imageProjs_local_0_RFIFONUM : STD_LOGIC_VECTOR (8 downto 0);
     signal imageProjs_local_0_RUSER : STD_LOGIC_VECTOR (0 downto 0);
     signal imageProjs_local_0_RRESP : STD_LOGIC_VECTOR (1 downto 0);
     signal imageProjs_local_0_BVALID : STD_LOGIC;
-    signal imageProjs_local_size_r_0_AWREADY : STD_LOGIC;
-    signal imageProjs_local_size_r_0_WREADY : STD_LOGIC;
-    signal imageProjs_local_size_r_0_ARREADY : STD_LOGIC;
-    signal imageProjs_local_size_r_0_RVALID : STD_LOGIC;
-    signal imageProjs_local_size_r_0_RDATA : STD_LOGIC_VECTOR (31 downto 0);
-    signal imageProjs_local_size_r_0_RLAST : STD_LOGIC;
-    signal imageProjs_local_size_r_0_RID : STD_LOGIC_VECTOR (0 downto 0);
-    signal imageProjs_local_size_r_0_RFIFONUM : STD_LOGIC_VECTOR (8 downto 0);
-    signal imageProjs_local_size_r_0_RUSER : STD_LOGIC_VECTOR (0 downto 0);
-    signal imageProjs_local_size_r_0_RRESP : STD_LOGIC_VECTOR (1 downto 0);
-    signal imageProjs_local_size_r_0_BVALID : STD_LOGIC;
-    signal getLocalImages_U0_ap_start : STD_LOGIC;
-    signal getLocalImages_U0_ap_done : STD_LOGIC;
-    signal getLocalImages_U0_ap_continue : STD_LOGIC;
-    signal getLocalImages_U0_ap_idle : STD_LOGIC;
-    signal getLocalImages_U0_ap_ready : STD_LOGIC;
-    signal getLocalImages_U0_atomLocations_address0 : STD_LOGIC_VECTOR (6 downto 0);
-    signal getLocalImages_U0_atomLocations_ce0 : STD_LOGIC;
-    signal getLocalImages_U0_localImages_din : STD_LOGIC_VECTOR (255 downto 0);
-    signal getLocalImages_U0_localImages_write : STD_LOGIC;
-    signal getLocalImages_U0_localImages_num_data_valid : STD_LOGIC_VECTOR (31 downto 0);
-    signal getLocalImages_U0_localImages_fifo_cap : STD_LOGIC_VECTOR (31 downto 0);
-    signal applyProjectors_U0_ap_start : STD_LOGIC;
-    signal applyProjectors_U0_ap_done : STD_LOGIC;
-    signal applyProjectors_U0_ap_continue : STD_LOGIC;
-    signal applyProjectors_U0_ap_idle : STD_LOGIC;
-    signal applyProjectors_U0_ap_ready : STD_LOGIC;
-    signal applyProjectors_U0_m_axi_imageProjs_local_0_AWVALID : STD_LOGIC;
-    signal applyProjectors_U0_m_axi_imageProjs_local_0_AWADDR : STD_LOGIC_VECTOR (63 downto 0);
-    signal applyProjectors_U0_m_axi_imageProjs_local_0_AWID : STD_LOGIC_VECTOR (0 downto 0);
-    signal applyProjectors_U0_m_axi_imageProjs_local_0_AWLEN : STD_LOGIC_VECTOR (31 downto 0);
-    signal applyProjectors_U0_m_axi_imageProjs_local_0_AWSIZE : STD_LOGIC_VECTOR (2 downto 0);
-    signal applyProjectors_U0_m_axi_imageProjs_local_0_AWBURST : STD_LOGIC_VECTOR (1 downto 0);
-    signal applyProjectors_U0_m_axi_imageProjs_local_0_AWLOCK : STD_LOGIC_VECTOR (1 downto 0);
-    signal applyProjectors_U0_m_axi_imageProjs_local_0_AWCACHE : STD_LOGIC_VECTOR (3 downto 0);
-    signal applyProjectors_U0_m_axi_imageProjs_local_0_AWPROT : STD_LOGIC_VECTOR (2 downto 0);
-    signal applyProjectors_U0_m_axi_imageProjs_local_0_AWQOS : STD_LOGIC_VECTOR (3 downto 0);
-    signal applyProjectors_U0_m_axi_imageProjs_local_0_AWREGION : STD_LOGIC_VECTOR (3 downto 0);
-    signal applyProjectors_U0_m_axi_imageProjs_local_0_AWUSER : STD_LOGIC_VECTOR (0 downto 0);
-    signal applyProjectors_U0_m_axi_imageProjs_local_0_WVALID : STD_LOGIC;
-    signal applyProjectors_U0_m_axi_imageProjs_local_0_WDATA : STD_LOGIC_VECTOR (63 downto 0);
-    signal applyProjectors_U0_m_axi_imageProjs_local_0_WSTRB : STD_LOGIC_VECTOR (7 downto 0);
-    signal applyProjectors_U0_m_axi_imageProjs_local_0_WLAST : STD_LOGIC;
-    signal applyProjectors_U0_m_axi_imageProjs_local_0_WID : STD_LOGIC_VECTOR (0 downto 0);
-    signal applyProjectors_U0_m_axi_imageProjs_local_0_WUSER : STD_LOGIC_VECTOR (0 downto 0);
-    signal applyProjectors_U0_m_axi_imageProjs_local_0_ARVALID : STD_LOGIC;
-    signal applyProjectors_U0_m_axi_imageProjs_local_0_ARADDR : STD_LOGIC_VECTOR (63 downto 0);
-    signal applyProjectors_U0_m_axi_imageProjs_local_0_ARID : STD_LOGIC_VECTOR (0 downto 0);
-    signal applyProjectors_U0_m_axi_imageProjs_local_0_ARLEN : STD_LOGIC_VECTOR (31 downto 0);
-    signal applyProjectors_U0_m_axi_imageProjs_local_0_ARSIZE : STD_LOGIC_VECTOR (2 downto 0);
-    signal applyProjectors_U0_m_axi_imageProjs_local_0_ARBURST : STD_LOGIC_VECTOR (1 downto 0);
-    signal applyProjectors_U0_m_axi_imageProjs_local_0_ARLOCK : STD_LOGIC_VECTOR (1 downto 0);
-    signal applyProjectors_U0_m_axi_imageProjs_local_0_ARCACHE : STD_LOGIC_VECTOR (3 downto 0);
-    signal applyProjectors_U0_m_axi_imageProjs_local_0_ARPROT : STD_LOGIC_VECTOR (2 downto 0);
-    signal applyProjectors_U0_m_axi_imageProjs_local_0_ARQOS : STD_LOGIC_VECTOR (3 downto 0);
-    signal applyProjectors_U0_m_axi_imageProjs_local_0_ARREGION : STD_LOGIC_VECTOR (3 downto 0);
-    signal applyProjectors_U0_m_axi_imageProjs_local_0_ARUSER : STD_LOGIC_VECTOR (0 downto 0);
-    signal applyProjectors_U0_m_axi_imageProjs_local_0_RREADY : STD_LOGIC;
-    signal applyProjectors_U0_m_axi_imageProjs_local_0_BREADY : STD_LOGIC;
-    signal applyProjectors_U0_m_axi_imageProjs_0_AWVALID : STD_LOGIC;
-    signal applyProjectors_U0_m_axi_imageProjs_0_AWADDR : STD_LOGIC_VECTOR (63 downto 0);
-    signal applyProjectors_U0_m_axi_imageProjs_0_AWID : STD_LOGIC_VECTOR (0 downto 0);
-    signal applyProjectors_U0_m_axi_imageProjs_0_AWLEN : STD_LOGIC_VECTOR (31 downto 0);
-    signal applyProjectors_U0_m_axi_imageProjs_0_AWSIZE : STD_LOGIC_VECTOR (2 downto 0);
-    signal applyProjectors_U0_m_axi_imageProjs_0_AWBURST : STD_LOGIC_VECTOR (1 downto 0);
-    signal applyProjectors_U0_m_axi_imageProjs_0_AWLOCK : STD_LOGIC_VECTOR (1 downto 0);
-    signal applyProjectors_U0_m_axi_imageProjs_0_AWCACHE : STD_LOGIC_VECTOR (3 downto 0);
-    signal applyProjectors_U0_m_axi_imageProjs_0_AWPROT : STD_LOGIC_VECTOR (2 downto 0);
-    signal applyProjectors_U0_m_axi_imageProjs_0_AWQOS : STD_LOGIC_VECTOR (3 downto 0);
-    signal applyProjectors_U0_m_axi_imageProjs_0_AWREGION : STD_LOGIC_VECTOR (3 downto 0);
-    signal applyProjectors_U0_m_axi_imageProjs_0_AWUSER : STD_LOGIC_VECTOR (0 downto 0);
-    signal applyProjectors_U0_m_axi_imageProjs_0_WVALID : STD_LOGIC;
-    signal applyProjectors_U0_m_axi_imageProjs_0_WDATA : STD_LOGIC_VECTOR (63 downto 0);
-    signal applyProjectors_U0_m_axi_imageProjs_0_WSTRB : STD_LOGIC_VECTOR (7 downto 0);
-    signal applyProjectors_U0_m_axi_imageProjs_0_WLAST : STD_LOGIC;
-    signal applyProjectors_U0_m_axi_imageProjs_0_WID : STD_LOGIC_VECTOR (0 downto 0);
-    signal applyProjectors_U0_m_axi_imageProjs_0_WUSER : STD_LOGIC_VECTOR (0 downto 0);
-    signal applyProjectors_U0_m_axi_imageProjs_0_ARVALID : STD_LOGIC;
-    signal applyProjectors_U0_m_axi_imageProjs_0_ARADDR : STD_LOGIC_VECTOR (63 downto 0);
-    signal applyProjectors_U0_m_axi_imageProjs_0_ARID : STD_LOGIC_VECTOR (0 downto 0);
-    signal applyProjectors_U0_m_axi_imageProjs_0_ARLEN : STD_LOGIC_VECTOR (31 downto 0);
-    signal applyProjectors_U0_m_axi_imageProjs_0_ARSIZE : STD_LOGIC_VECTOR (2 downto 0);
-    signal applyProjectors_U0_m_axi_imageProjs_0_ARBURST : STD_LOGIC_VECTOR (1 downto 0);
-    signal applyProjectors_U0_m_axi_imageProjs_0_ARLOCK : STD_LOGIC_VECTOR (1 downto 0);
-    signal applyProjectors_U0_m_axi_imageProjs_0_ARCACHE : STD_LOGIC_VECTOR (3 downto 0);
-    signal applyProjectors_U0_m_axi_imageProjs_0_ARPROT : STD_LOGIC_VECTOR (2 downto 0);
-    signal applyProjectors_U0_m_axi_imageProjs_0_ARQOS : STD_LOGIC_VECTOR (3 downto 0);
-    signal applyProjectors_U0_m_axi_imageProjs_0_ARREGION : STD_LOGIC_VECTOR (3 downto 0);
-    signal applyProjectors_U0_m_axi_imageProjs_0_ARUSER : STD_LOGIC_VECTOR (0 downto 0);
-    signal applyProjectors_U0_m_axi_imageProjs_0_RREADY : STD_LOGIC;
-    signal applyProjectors_U0_m_axi_imageProjs_0_BREADY : STD_LOGIC;
-    signal applyProjectors_U0_m_axi_imageProjs_local_size_r_0_AWVALID : STD_LOGIC;
-    signal applyProjectors_U0_m_axi_imageProjs_local_size_r_0_AWADDR : STD_LOGIC_VECTOR (63 downto 0);
-    signal applyProjectors_U0_m_axi_imageProjs_local_size_r_0_AWID : STD_LOGIC_VECTOR (0 downto 0);
-    signal applyProjectors_U0_m_axi_imageProjs_local_size_r_0_AWLEN : STD_LOGIC_VECTOR (31 downto 0);
-    signal applyProjectors_U0_m_axi_imageProjs_local_size_r_0_AWSIZE : STD_LOGIC_VECTOR (2 downto 0);
-    signal applyProjectors_U0_m_axi_imageProjs_local_size_r_0_AWBURST : STD_LOGIC_VECTOR (1 downto 0);
-    signal applyProjectors_U0_m_axi_imageProjs_local_size_r_0_AWLOCK : STD_LOGIC_VECTOR (1 downto 0);
-    signal applyProjectors_U0_m_axi_imageProjs_local_size_r_0_AWCACHE : STD_LOGIC_VECTOR (3 downto 0);
-    signal applyProjectors_U0_m_axi_imageProjs_local_size_r_0_AWPROT : STD_LOGIC_VECTOR (2 downto 0);
-    signal applyProjectors_U0_m_axi_imageProjs_local_size_r_0_AWQOS : STD_LOGIC_VECTOR (3 downto 0);
-    signal applyProjectors_U0_m_axi_imageProjs_local_size_r_0_AWREGION : STD_LOGIC_VECTOR (3 downto 0);
-    signal applyProjectors_U0_m_axi_imageProjs_local_size_r_0_AWUSER : STD_LOGIC_VECTOR (0 downto 0);
-    signal applyProjectors_U0_m_axi_imageProjs_local_size_r_0_WVALID : STD_LOGIC;
-    signal applyProjectors_U0_m_axi_imageProjs_local_size_r_0_WDATA : STD_LOGIC_VECTOR (31 downto 0);
-    signal applyProjectors_U0_m_axi_imageProjs_local_size_r_0_WSTRB : STD_LOGIC_VECTOR (3 downto 0);
-    signal applyProjectors_U0_m_axi_imageProjs_local_size_r_0_WLAST : STD_LOGIC;
-    signal applyProjectors_U0_m_axi_imageProjs_local_size_r_0_WID : STD_LOGIC_VECTOR (0 downto 0);
-    signal applyProjectors_U0_m_axi_imageProjs_local_size_r_0_WUSER : STD_LOGIC_VECTOR (0 downto 0);
-    signal applyProjectors_U0_m_axi_imageProjs_local_size_r_0_ARVALID : STD_LOGIC;
-    signal applyProjectors_U0_m_axi_imageProjs_local_size_r_0_ARADDR : STD_LOGIC_VECTOR (63 downto 0);
-    signal applyProjectors_U0_m_axi_imageProjs_local_size_r_0_ARID : STD_LOGIC_VECTOR (0 downto 0);
-    signal applyProjectors_U0_m_axi_imageProjs_local_size_r_0_ARLEN : STD_LOGIC_VECTOR (31 downto 0);
-    signal applyProjectors_U0_m_axi_imageProjs_local_size_r_0_ARSIZE : STD_LOGIC_VECTOR (2 downto 0);
-    signal applyProjectors_U0_m_axi_imageProjs_local_size_r_0_ARBURST : STD_LOGIC_VECTOR (1 downto 0);
-    signal applyProjectors_U0_m_axi_imageProjs_local_size_r_0_ARLOCK : STD_LOGIC_VECTOR (1 downto 0);
-    signal applyProjectors_U0_m_axi_imageProjs_local_size_r_0_ARCACHE : STD_LOGIC_VECTOR (3 downto 0);
-    signal applyProjectors_U0_m_axi_imageProjs_local_size_r_0_ARPROT : STD_LOGIC_VECTOR (2 downto 0);
-    signal applyProjectors_U0_m_axi_imageProjs_local_size_r_0_ARQOS : STD_LOGIC_VECTOR (3 downto 0);
-    signal applyProjectors_U0_m_axi_imageProjs_local_size_r_0_ARREGION : STD_LOGIC_VECTOR (3 downto 0);
-    signal applyProjectors_U0_m_axi_imageProjs_local_size_r_0_ARUSER : STD_LOGIC_VECTOR (0 downto 0);
-    signal applyProjectors_U0_m_axi_imageProjs_local_size_r_0_RREADY : STD_LOGIC;
-    signal applyProjectors_U0_m_axi_imageProjs_local_size_r_0_BREADY : STD_LOGIC;
-    signal applyProjectors_U0_m_axi_fullImage_0_AWVALID : STD_LOGIC;
-    signal applyProjectors_U0_m_axi_fullImage_0_AWADDR : STD_LOGIC_VECTOR (63 downto 0);
-    signal applyProjectors_U0_m_axi_fullImage_0_AWID : STD_LOGIC_VECTOR (0 downto 0);
-    signal applyProjectors_U0_m_axi_fullImage_0_AWLEN : STD_LOGIC_VECTOR (31 downto 0);
-    signal applyProjectors_U0_m_axi_fullImage_0_AWSIZE : STD_LOGIC_VECTOR (2 downto 0);
-    signal applyProjectors_U0_m_axi_fullImage_0_AWBURST : STD_LOGIC_VECTOR (1 downto 0);
-    signal applyProjectors_U0_m_axi_fullImage_0_AWLOCK : STD_LOGIC_VECTOR (1 downto 0);
-    signal applyProjectors_U0_m_axi_fullImage_0_AWCACHE : STD_LOGIC_VECTOR (3 downto 0);
-    signal applyProjectors_U0_m_axi_fullImage_0_AWPROT : STD_LOGIC_VECTOR (2 downto 0);
-    signal applyProjectors_U0_m_axi_fullImage_0_AWQOS : STD_LOGIC_VECTOR (3 downto 0);
-    signal applyProjectors_U0_m_axi_fullImage_0_AWREGION : STD_LOGIC_VECTOR (3 downto 0);
-    signal applyProjectors_U0_m_axi_fullImage_0_AWUSER : STD_LOGIC_VECTOR (0 downto 0);
-    signal applyProjectors_U0_m_axi_fullImage_0_WVALID : STD_LOGIC;
-    signal applyProjectors_U0_m_axi_fullImage_0_WDATA : STD_LOGIC_VECTOR (63 downto 0);
-    signal applyProjectors_U0_m_axi_fullImage_0_WSTRB : STD_LOGIC_VECTOR (7 downto 0);
-    signal applyProjectors_U0_m_axi_fullImage_0_WLAST : STD_LOGIC;
-    signal applyProjectors_U0_m_axi_fullImage_0_WID : STD_LOGIC_VECTOR (0 downto 0);
-    signal applyProjectors_U0_m_axi_fullImage_0_WUSER : STD_LOGIC_VECTOR (0 downto 0);
-    signal applyProjectors_U0_m_axi_fullImage_0_ARVALID : STD_LOGIC;
-    signal applyProjectors_U0_m_axi_fullImage_0_ARADDR : STD_LOGIC_VECTOR (63 downto 0);
-    signal applyProjectors_U0_m_axi_fullImage_0_ARID : STD_LOGIC_VECTOR (0 downto 0);
-    signal applyProjectors_U0_m_axi_fullImage_0_ARLEN : STD_LOGIC_VECTOR (31 downto 0);
-    signal applyProjectors_U0_m_axi_fullImage_0_ARSIZE : STD_LOGIC_VECTOR (2 downto 0);
-    signal applyProjectors_U0_m_axi_fullImage_0_ARBURST : STD_LOGIC_VECTOR (1 downto 0);
-    signal applyProjectors_U0_m_axi_fullImage_0_ARLOCK : STD_LOGIC_VECTOR (1 downto 0);
-    signal applyProjectors_U0_m_axi_fullImage_0_ARCACHE : STD_LOGIC_VECTOR (3 downto 0);
-    signal applyProjectors_U0_m_axi_fullImage_0_ARPROT : STD_LOGIC_VECTOR (2 downto 0);
-    signal applyProjectors_U0_m_axi_fullImage_0_ARQOS : STD_LOGIC_VECTOR (3 downto 0);
-    signal applyProjectors_U0_m_axi_fullImage_0_ARREGION : STD_LOGIC_VECTOR (3 downto 0);
-    signal applyProjectors_U0_m_axi_fullImage_0_ARUSER : STD_LOGIC_VECTOR (0 downto 0);
-    signal applyProjectors_U0_m_axi_fullImage_0_RREADY : STD_LOGIC;
-    signal applyProjectors_U0_m_axi_fullImage_0_BREADY : STD_LOGIC;
-    signal applyProjectors_U0_localImages_read : STD_LOGIC;
-    signal applyProjectors_U0_m_axi_emissions_0_AWVALID : STD_LOGIC;
-    signal applyProjectors_U0_m_axi_emissions_0_AWADDR : STD_LOGIC_VECTOR (63 downto 0);
-    signal applyProjectors_U0_m_axi_emissions_0_AWID : STD_LOGIC_VECTOR (0 downto 0);
-    signal applyProjectors_U0_m_axi_emissions_0_AWLEN : STD_LOGIC_VECTOR (31 downto 0);
-    signal applyProjectors_U0_m_axi_emissions_0_AWSIZE : STD_LOGIC_VECTOR (2 downto 0);
-    signal applyProjectors_U0_m_axi_emissions_0_AWBURST : STD_LOGIC_VECTOR (1 downto 0);
-    signal applyProjectors_U0_m_axi_emissions_0_AWLOCK : STD_LOGIC_VECTOR (1 downto 0);
-    signal applyProjectors_U0_m_axi_emissions_0_AWCACHE : STD_LOGIC_VECTOR (3 downto 0);
-    signal applyProjectors_U0_m_axi_emissions_0_AWPROT : STD_LOGIC_VECTOR (2 downto 0);
-    signal applyProjectors_U0_m_axi_emissions_0_AWQOS : STD_LOGIC_VECTOR (3 downto 0);
-    signal applyProjectors_U0_m_axi_emissions_0_AWREGION : STD_LOGIC_VECTOR (3 downto 0);
-    signal applyProjectors_U0_m_axi_emissions_0_AWUSER : STD_LOGIC_VECTOR (0 downto 0);
-    signal applyProjectors_U0_m_axi_emissions_0_WVALID : STD_LOGIC;
-    signal applyProjectors_U0_m_axi_emissions_0_WDATA : STD_LOGIC_VECTOR (63 downto 0);
-    signal applyProjectors_U0_m_axi_emissions_0_WSTRB : STD_LOGIC_VECTOR (7 downto 0);
-    signal applyProjectors_U0_m_axi_emissions_0_WLAST : STD_LOGIC;
-    signal applyProjectors_U0_m_axi_emissions_0_WID : STD_LOGIC_VECTOR (0 downto 0);
-    signal applyProjectors_U0_m_axi_emissions_0_WUSER : STD_LOGIC_VECTOR (0 downto 0);
-    signal applyProjectors_U0_m_axi_emissions_0_ARVALID : STD_LOGIC;
-    signal applyProjectors_U0_m_axi_emissions_0_ARADDR : STD_LOGIC_VECTOR (63 downto 0);
-    signal applyProjectors_U0_m_axi_emissions_0_ARID : STD_LOGIC_VECTOR (0 downto 0);
-    signal applyProjectors_U0_m_axi_emissions_0_ARLEN : STD_LOGIC_VECTOR (31 downto 0);
-    signal applyProjectors_U0_m_axi_emissions_0_ARSIZE : STD_LOGIC_VECTOR (2 downto 0);
-    signal applyProjectors_U0_m_axi_emissions_0_ARBURST : STD_LOGIC_VECTOR (1 downto 0);
-    signal applyProjectors_U0_m_axi_emissions_0_ARLOCK : STD_LOGIC_VECTOR (1 downto 0);
-    signal applyProjectors_U0_m_axi_emissions_0_ARCACHE : STD_LOGIC_VECTOR (3 downto 0);
-    signal applyProjectors_U0_m_axi_emissions_0_ARPROT : STD_LOGIC_VECTOR (2 downto 0);
-    signal applyProjectors_U0_m_axi_emissions_0_ARQOS : STD_LOGIC_VECTOR (3 downto 0);
-    signal applyProjectors_U0_m_axi_emissions_0_ARREGION : STD_LOGIC_VECTOR (3 downto 0);
-    signal applyProjectors_U0_m_axi_emissions_0_ARUSER : STD_LOGIC_VECTOR (0 downto 0);
-    signal applyProjectors_U0_m_axi_emissions_0_RREADY : STD_LOGIC;
-    signal applyProjectors_U0_m_axi_emissions_0_BREADY : STD_LOGIC;
-    signal applyProjectors_U0_emission_cnt : STD_LOGIC_VECTOR (31 downto 0);
-    signal applyProjectors_U0_emission_cnt_ap_vld : STD_LOGIC;
-    signal localImages_full_n : STD_LOGIC;
-    signal localImages_dout : STD_LOGIC_VECTOR (255 downto 0);
-    signal localImages_empty_n : STD_LOGIC;
-    signal localImages_num_data_valid : STD_LOGIC_VECTOR (2 downto 0);
-    signal localImages_fifo_cap : STD_LOGIC_VECTOR (2 downto 0);
-    signal ap_sync_ready : STD_LOGIC;
-    signal ap_sync_reg_getLocalImages_U0_ap_ready : STD_LOGIC := '0';
-    signal ap_sync_getLocalImages_U0_ap_ready : STD_LOGIC;
-    signal ap_sync_reg_applyProjectors_U0_ap_ready : STD_LOGIC := '0';
-    signal ap_sync_applyProjectors_U0_ap_ready : STD_LOGIC;
+    signal dataflow_in_loop_VITIS_LOOP_149_1_1_U0_conv : STD_LOGIC_VECTOR (15 downto 0);
+    signal dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_atomLocations_0_AWVALID : STD_LOGIC;
+    signal dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_atomLocations_0_AWADDR : STD_LOGIC_VECTOR (63 downto 0);
+    signal dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_atomLocations_0_AWID : STD_LOGIC_VECTOR (0 downto 0);
+    signal dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_atomLocations_0_AWLEN : STD_LOGIC_VECTOR (31 downto 0);
+    signal dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_atomLocations_0_AWSIZE : STD_LOGIC_VECTOR (2 downto 0);
+    signal dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_atomLocations_0_AWBURST : STD_LOGIC_VECTOR (1 downto 0);
+    signal dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_atomLocations_0_AWLOCK : STD_LOGIC_VECTOR (1 downto 0);
+    signal dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_atomLocations_0_AWCACHE : STD_LOGIC_VECTOR (3 downto 0);
+    signal dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_atomLocations_0_AWPROT : STD_LOGIC_VECTOR (2 downto 0);
+    signal dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_atomLocations_0_AWQOS : STD_LOGIC_VECTOR (3 downto 0);
+    signal dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_atomLocations_0_AWREGION : STD_LOGIC_VECTOR (3 downto 0);
+    signal dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_atomLocations_0_AWUSER : STD_LOGIC_VECTOR (0 downto 0);
+    signal dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_atomLocations_0_WVALID : STD_LOGIC;
+    signal dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_atomLocations_0_WDATA : STD_LOGIC_VECTOR (63 downto 0);
+    signal dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_atomLocations_0_WSTRB : STD_LOGIC_VECTOR (7 downto 0);
+    signal dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_atomLocations_0_WLAST : STD_LOGIC;
+    signal dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_atomLocations_0_WID : STD_LOGIC_VECTOR (0 downto 0);
+    signal dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_atomLocations_0_WUSER : STD_LOGIC_VECTOR (0 downto 0);
+    signal dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_atomLocations_0_ARVALID : STD_LOGIC;
+    signal dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_atomLocations_0_ARADDR : STD_LOGIC_VECTOR (63 downto 0);
+    signal dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_atomLocations_0_ARID : STD_LOGIC_VECTOR (0 downto 0);
+    signal dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_atomLocations_0_ARLEN : STD_LOGIC_VECTOR (31 downto 0);
+    signal dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_atomLocations_0_ARSIZE : STD_LOGIC_VECTOR (2 downto 0);
+    signal dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_atomLocations_0_ARBURST : STD_LOGIC_VECTOR (1 downto 0);
+    signal dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_atomLocations_0_ARLOCK : STD_LOGIC_VECTOR (1 downto 0);
+    signal dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_atomLocations_0_ARCACHE : STD_LOGIC_VECTOR (3 downto 0);
+    signal dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_atomLocations_0_ARPROT : STD_LOGIC_VECTOR (2 downto 0);
+    signal dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_atomLocations_0_ARQOS : STD_LOGIC_VECTOR (3 downto 0);
+    signal dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_atomLocations_0_ARREGION : STD_LOGIC_VECTOR (3 downto 0);
+    signal dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_atomLocations_0_ARUSER : STD_LOGIC_VECTOR (0 downto 0);
+    signal dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_atomLocations_0_RREADY : STD_LOGIC;
+    signal dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_atomLocations_0_BREADY : STD_LOGIC;
+    signal dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_imageProjs_0_AWVALID : STD_LOGIC;
+    signal dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_imageProjs_0_AWADDR : STD_LOGIC_VECTOR (63 downto 0);
+    signal dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_imageProjs_0_AWID : STD_LOGIC_VECTOR (0 downto 0);
+    signal dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_imageProjs_0_AWLEN : STD_LOGIC_VECTOR (31 downto 0);
+    signal dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_imageProjs_0_AWSIZE : STD_LOGIC_VECTOR (2 downto 0);
+    signal dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_imageProjs_0_AWBURST : STD_LOGIC_VECTOR (1 downto 0);
+    signal dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_imageProjs_0_AWLOCK : STD_LOGIC_VECTOR (1 downto 0);
+    signal dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_imageProjs_0_AWCACHE : STD_LOGIC_VECTOR (3 downto 0);
+    signal dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_imageProjs_0_AWPROT : STD_LOGIC_VECTOR (2 downto 0);
+    signal dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_imageProjs_0_AWQOS : STD_LOGIC_VECTOR (3 downto 0);
+    signal dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_imageProjs_0_AWREGION : STD_LOGIC_VECTOR (3 downto 0);
+    signal dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_imageProjs_0_AWUSER : STD_LOGIC_VECTOR (0 downto 0);
+    signal dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_imageProjs_0_WVALID : STD_LOGIC;
+    signal dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_imageProjs_0_WDATA : STD_LOGIC_VECTOR (31 downto 0);
+    signal dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_imageProjs_0_WSTRB : STD_LOGIC_VECTOR (3 downto 0);
+    signal dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_imageProjs_0_WLAST : STD_LOGIC;
+    signal dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_imageProjs_0_WID : STD_LOGIC_VECTOR (0 downto 0);
+    signal dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_imageProjs_0_WUSER : STD_LOGIC_VECTOR (0 downto 0);
+    signal dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_imageProjs_0_ARVALID : STD_LOGIC;
+    signal dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_imageProjs_0_ARADDR : STD_LOGIC_VECTOR (63 downto 0);
+    signal dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_imageProjs_0_ARID : STD_LOGIC_VECTOR (0 downto 0);
+    signal dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_imageProjs_0_ARLEN : STD_LOGIC_VECTOR (31 downto 0);
+    signal dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_imageProjs_0_ARSIZE : STD_LOGIC_VECTOR (2 downto 0);
+    signal dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_imageProjs_0_ARBURST : STD_LOGIC_VECTOR (1 downto 0);
+    signal dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_imageProjs_0_ARLOCK : STD_LOGIC_VECTOR (1 downto 0);
+    signal dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_imageProjs_0_ARCACHE : STD_LOGIC_VECTOR (3 downto 0);
+    signal dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_imageProjs_0_ARPROT : STD_LOGIC_VECTOR (2 downto 0);
+    signal dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_imageProjs_0_ARQOS : STD_LOGIC_VECTOR (3 downto 0);
+    signal dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_imageProjs_0_ARREGION : STD_LOGIC_VECTOR (3 downto 0);
+    signal dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_imageProjs_0_ARUSER : STD_LOGIC_VECTOR (0 downto 0);
+    signal dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_imageProjs_0_RREADY : STD_LOGIC;
+    signal dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_imageProjs_0_BREADY : STD_LOGIC;
+    signal dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_fullImage_0_AWVALID : STD_LOGIC;
+    signal dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_fullImage_0_AWADDR : STD_LOGIC_VECTOR (63 downto 0);
+    signal dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_fullImage_0_AWID : STD_LOGIC_VECTOR (0 downto 0);
+    signal dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_fullImage_0_AWLEN : STD_LOGIC_VECTOR (31 downto 0);
+    signal dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_fullImage_0_AWSIZE : STD_LOGIC_VECTOR (2 downto 0);
+    signal dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_fullImage_0_AWBURST : STD_LOGIC_VECTOR (1 downto 0);
+    signal dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_fullImage_0_AWLOCK : STD_LOGIC_VECTOR (1 downto 0);
+    signal dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_fullImage_0_AWCACHE : STD_LOGIC_VECTOR (3 downto 0);
+    signal dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_fullImage_0_AWPROT : STD_LOGIC_VECTOR (2 downto 0);
+    signal dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_fullImage_0_AWQOS : STD_LOGIC_VECTOR (3 downto 0);
+    signal dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_fullImage_0_AWREGION : STD_LOGIC_VECTOR (3 downto 0);
+    signal dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_fullImage_0_AWUSER : STD_LOGIC_VECTOR (0 downto 0);
+    signal dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_fullImage_0_WVALID : STD_LOGIC;
+    signal dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_fullImage_0_WDATA : STD_LOGIC_VECTOR (31 downto 0);
+    signal dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_fullImage_0_WSTRB : STD_LOGIC_VECTOR (3 downto 0);
+    signal dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_fullImage_0_WLAST : STD_LOGIC;
+    signal dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_fullImage_0_WID : STD_LOGIC_VECTOR (0 downto 0);
+    signal dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_fullImage_0_WUSER : STD_LOGIC_VECTOR (0 downto 0);
+    signal dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_fullImage_0_ARVALID : STD_LOGIC;
+    signal dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_fullImage_0_ARADDR : STD_LOGIC_VECTOR (63 downto 0);
+    signal dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_fullImage_0_ARID : STD_LOGIC_VECTOR (0 downto 0);
+    signal dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_fullImage_0_ARLEN : STD_LOGIC_VECTOR (31 downto 0);
+    signal dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_fullImage_0_ARSIZE : STD_LOGIC_VECTOR (2 downto 0);
+    signal dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_fullImage_0_ARBURST : STD_LOGIC_VECTOR (1 downto 0);
+    signal dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_fullImage_0_ARLOCK : STD_LOGIC_VECTOR (1 downto 0);
+    signal dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_fullImage_0_ARCACHE : STD_LOGIC_VECTOR (3 downto 0);
+    signal dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_fullImage_0_ARPROT : STD_LOGIC_VECTOR (2 downto 0);
+    signal dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_fullImage_0_ARQOS : STD_LOGIC_VECTOR (3 downto 0);
+    signal dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_fullImage_0_ARREGION : STD_LOGIC_VECTOR (3 downto 0);
+    signal dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_fullImage_0_ARUSER : STD_LOGIC_VECTOR (0 downto 0);
+    signal dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_fullImage_0_RREADY : STD_LOGIC;
+    signal dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_fullImage_0_BREADY : STD_LOGIC;
+    signal dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_imageProjs_local_0_AWVALID : STD_LOGIC;
+    signal dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_imageProjs_local_0_AWADDR : STD_LOGIC_VECTOR (63 downto 0);
+    signal dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_imageProjs_local_0_AWID : STD_LOGIC_VECTOR (0 downto 0);
+    signal dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_imageProjs_local_0_AWLEN : STD_LOGIC_VECTOR (31 downto 0);
+    signal dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_imageProjs_local_0_AWSIZE : STD_LOGIC_VECTOR (2 downto 0);
+    signal dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_imageProjs_local_0_AWBURST : STD_LOGIC_VECTOR (1 downto 0);
+    signal dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_imageProjs_local_0_AWLOCK : STD_LOGIC_VECTOR (1 downto 0);
+    signal dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_imageProjs_local_0_AWCACHE : STD_LOGIC_VECTOR (3 downto 0);
+    signal dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_imageProjs_local_0_AWPROT : STD_LOGIC_VECTOR (2 downto 0);
+    signal dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_imageProjs_local_0_AWQOS : STD_LOGIC_VECTOR (3 downto 0);
+    signal dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_imageProjs_local_0_AWREGION : STD_LOGIC_VECTOR (3 downto 0);
+    signal dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_imageProjs_local_0_AWUSER : STD_LOGIC_VECTOR (0 downto 0);
+    signal dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_imageProjs_local_0_WVALID : STD_LOGIC;
+    signal dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_imageProjs_local_0_WDATA : STD_LOGIC_VECTOR (31 downto 0);
+    signal dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_imageProjs_local_0_WSTRB : STD_LOGIC_VECTOR (3 downto 0);
+    signal dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_imageProjs_local_0_WLAST : STD_LOGIC;
+    signal dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_imageProjs_local_0_WID : STD_LOGIC_VECTOR (0 downto 0);
+    signal dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_imageProjs_local_0_WUSER : STD_LOGIC_VECTOR (0 downto 0);
+    signal dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_imageProjs_local_0_ARVALID : STD_LOGIC;
+    signal dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_imageProjs_local_0_ARADDR : STD_LOGIC_VECTOR (63 downto 0);
+    signal dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_imageProjs_local_0_ARID : STD_LOGIC_VECTOR (0 downto 0);
+    signal dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_imageProjs_local_0_ARLEN : STD_LOGIC_VECTOR (31 downto 0);
+    signal dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_imageProjs_local_0_ARSIZE : STD_LOGIC_VECTOR (2 downto 0);
+    signal dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_imageProjs_local_0_ARBURST : STD_LOGIC_VECTOR (1 downto 0);
+    signal dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_imageProjs_local_0_ARLOCK : STD_LOGIC_VECTOR (1 downto 0);
+    signal dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_imageProjs_local_0_ARCACHE : STD_LOGIC_VECTOR (3 downto 0);
+    signal dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_imageProjs_local_0_ARPROT : STD_LOGIC_VECTOR (2 downto 0);
+    signal dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_imageProjs_local_0_ARQOS : STD_LOGIC_VECTOR (3 downto 0);
+    signal dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_imageProjs_local_0_ARREGION : STD_LOGIC_VECTOR (3 downto 0);
+    signal dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_imageProjs_local_0_ARUSER : STD_LOGIC_VECTOR (0 downto 0);
+    signal dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_imageProjs_local_0_RREADY : STD_LOGIC;
+    signal dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_imageProjs_local_0_BREADY : STD_LOGIC;
+    signal dataflow_in_loop_VITIS_LOOP_149_1_1_U0_idx_0 : STD_LOGIC_VECTOR (15 downto 0);
+    signal dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_emissions_0_AWVALID : STD_LOGIC;
+    signal dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_emissions_0_AWADDR : STD_LOGIC_VECTOR (63 downto 0);
+    signal dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_emissions_0_AWID : STD_LOGIC_VECTOR (0 downto 0);
+    signal dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_emissions_0_AWLEN : STD_LOGIC_VECTOR (31 downto 0);
+    signal dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_emissions_0_AWSIZE : STD_LOGIC_VECTOR (2 downto 0);
+    signal dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_emissions_0_AWBURST : STD_LOGIC_VECTOR (1 downto 0);
+    signal dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_emissions_0_AWLOCK : STD_LOGIC_VECTOR (1 downto 0);
+    signal dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_emissions_0_AWCACHE : STD_LOGIC_VECTOR (3 downto 0);
+    signal dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_emissions_0_AWPROT : STD_LOGIC_VECTOR (2 downto 0);
+    signal dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_emissions_0_AWQOS : STD_LOGIC_VECTOR (3 downto 0);
+    signal dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_emissions_0_AWREGION : STD_LOGIC_VECTOR (3 downto 0);
+    signal dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_emissions_0_AWUSER : STD_LOGIC_VECTOR (0 downto 0);
+    signal dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_emissions_0_WVALID : STD_LOGIC;
+    signal dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_emissions_0_WDATA : STD_LOGIC_VECTOR (31 downto 0);
+    signal dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_emissions_0_WSTRB : STD_LOGIC_VECTOR (3 downto 0);
+    signal dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_emissions_0_WLAST : STD_LOGIC;
+    signal dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_emissions_0_WID : STD_LOGIC_VECTOR (0 downto 0);
+    signal dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_emissions_0_WUSER : STD_LOGIC_VECTOR (0 downto 0);
+    signal dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_emissions_0_ARVALID : STD_LOGIC;
+    signal dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_emissions_0_ARADDR : STD_LOGIC_VECTOR (63 downto 0);
+    signal dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_emissions_0_ARID : STD_LOGIC_VECTOR (0 downto 0);
+    signal dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_emissions_0_ARLEN : STD_LOGIC_VECTOR (31 downto 0);
+    signal dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_emissions_0_ARSIZE : STD_LOGIC_VECTOR (2 downto 0);
+    signal dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_emissions_0_ARBURST : STD_LOGIC_VECTOR (1 downto 0);
+    signal dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_emissions_0_ARLOCK : STD_LOGIC_VECTOR (1 downto 0);
+    signal dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_emissions_0_ARCACHE : STD_LOGIC_VECTOR (3 downto 0);
+    signal dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_emissions_0_ARPROT : STD_LOGIC_VECTOR (2 downto 0);
+    signal dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_emissions_0_ARQOS : STD_LOGIC_VECTOR (3 downto 0);
+    signal dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_emissions_0_ARREGION : STD_LOGIC_VECTOR (3 downto 0);
+    signal dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_emissions_0_ARUSER : STD_LOGIC_VECTOR (0 downto 0);
+    signal dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_emissions_0_RREADY : STD_LOGIC;
+    signal dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_emissions_0_BREADY : STD_LOGIC;
+    signal dataflow_in_loop_VITIS_LOOP_149_1_1_U0_ap_start : STD_LOGIC;
+    signal dataflow_in_loop_VITIS_LOOP_149_1_1_U0_ap_done : STD_LOGIC;
+    signal dataflow_in_loop_VITIS_LOOP_149_1_1_U0_ap_ready : STD_LOGIC;
+    signal dataflow_in_loop_VITIS_LOOP_149_1_1_U0_ap_idle : STD_LOGIC;
+    signal dataflow_in_loop_VITIS_LOOP_149_1_1_U0_ap_continue : STD_LOGIC;
+    signal ap_bound_full_n : STD_LOGIC;
+    signal ap_bound_write : STD_LOGIC;
+    signal ap_bound_dout : STD_LOGIC_VECTOR (31 downto 0);
+    signal ap_bound_empty_n : STD_LOGIC;
+    signal ap_bound_read : STD_LOGIC;
+    signal ap_loop_dataflow_input_count : STD_LOGIC_VECTOR (31 downto 0) := "00000000000000000000000000000000";
+    signal ap_loop_dataflow_output_count : STD_LOGIC_VECTOR (31 downto 0) := "00000000000000000000000000000000";
+    signal ap_bound_minus_1 : STD_LOGIC_VECTOR (31 downto 0);
+    signal ap_bound_minus_1_output : STD_LOGIC_VECTOR (31 downto 0);
+    signal ap_real_start : STD_LOGIC;
+    signal ap_partial_ready : STD_LOGIC;
+    signal ap_internal_ready : STD_LOGIC;
+    signal ap_internal_done : STD_LOGIC;
+    signal ap_bound_ack : STD_LOGIC;
+    signal ap_bound_reg_ack : STD_LOGIC := '0';
     signal ap_ce_reg : STD_LOGIC;
 
-    component reconstruct_getLocalImages IS
+    component reconstruct_dataflow_in_loop_VITIS_LOOP_149_1_1 IS
     port (
         ap_clk : IN STD_LOGIC;
         ap_rst : IN STD_LOGIC;
-        ap_start : IN STD_LOGIC;
-        ap_done : OUT STD_LOGIC;
-        ap_continue : IN STD_LOGIC;
-        ap_idle : OUT STD_LOGIC;
-        ap_ready : OUT STD_LOGIC;
-        atomLocationsSize : IN STD_LOGIC_VECTOR (31 downto 0);
+        conv : IN STD_LOGIC_VECTOR (15 downto 0);
         psfSupersample : IN STD_LOGIC_VECTOR (31 downto 0);
         projShape0 : IN STD_LOGIC_VECTOR (31 downto 0);
         projShape1 : IN STD_LOGIC_VECTOR (31 downto 0);
-        atomLocations_address0 : OUT STD_LOGIC_VECTOR (6 downto 0);
-        atomLocations_ce0 : OUT STD_LOGIC;
-        atomLocations_q0 : IN STD_LOGIC_VECTOR (127 downto 0);
-        localImages_din : OUT STD_LOGIC_VECTOR (255 downto 0);
-        localImages_full_n : IN STD_LOGIC;
-        localImages_write : OUT STD_LOGIC;
-        localImages_num_data_valid : IN STD_LOGIC_VECTOR (31 downto 0);
-        localImages_fifo_cap : IN STD_LOGIC_VECTOR (31 downto 0) );
-    end component;
-
-
-    component reconstruct_applyProjectors IS
-    port (
-        ap_clk : IN STD_LOGIC;
-        ap_rst : IN STD_LOGIC;
-        ap_start : IN STD_LOGIC;
-        ap_done : OUT STD_LOGIC;
-        ap_continue : IN STD_LOGIC;
-        ap_idle : OUT STD_LOGIC;
-        ap_ready : OUT STD_LOGIC;
-        atomLocationsSize : IN STD_LOGIC_VECTOR (31 downto 0);
-        psfSupersample : IN STD_LOGIC_VECTOR (31 downto 0);
-        imageProjectionSize : IN STD_LOGIC_VECTOR (31 downto 0);
-        m_axi_imageProjs_local_0_AWVALID : OUT STD_LOGIC;
-        m_axi_imageProjs_local_0_AWREADY : IN STD_LOGIC;
-        m_axi_imageProjs_local_0_AWADDR : OUT STD_LOGIC_VECTOR (63 downto 0);
-        m_axi_imageProjs_local_0_AWID : OUT STD_LOGIC_VECTOR (0 downto 0);
-        m_axi_imageProjs_local_0_AWLEN : OUT STD_LOGIC_VECTOR (31 downto 0);
-        m_axi_imageProjs_local_0_AWSIZE : OUT STD_LOGIC_VECTOR (2 downto 0);
-        m_axi_imageProjs_local_0_AWBURST : OUT STD_LOGIC_VECTOR (1 downto 0);
-        m_axi_imageProjs_local_0_AWLOCK : OUT STD_LOGIC_VECTOR (1 downto 0);
-        m_axi_imageProjs_local_0_AWCACHE : OUT STD_LOGIC_VECTOR (3 downto 0);
-        m_axi_imageProjs_local_0_AWPROT : OUT STD_LOGIC_VECTOR (2 downto 0);
-        m_axi_imageProjs_local_0_AWQOS : OUT STD_LOGIC_VECTOR (3 downto 0);
-        m_axi_imageProjs_local_0_AWREGION : OUT STD_LOGIC_VECTOR (3 downto 0);
-        m_axi_imageProjs_local_0_AWUSER : OUT STD_LOGIC_VECTOR (0 downto 0);
-        m_axi_imageProjs_local_0_WVALID : OUT STD_LOGIC;
-        m_axi_imageProjs_local_0_WREADY : IN STD_LOGIC;
-        m_axi_imageProjs_local_0_WDATA : OUT STD_LOGIC_VECTOR (63 downto 0);
-        m_axi_imageProjs_local_0_WSTRB : OUT STD_LOGIC_VECTOR (7 downto 0);
-        m_axi_imageProjs_local_0_WLAST : OUT STD_LOGIC;
-        m_axi_imageProjs_local_0_WID : OUT STD_LOGIC_VECTOR (0 downto 0);
-        m_axi_imageProjs_local_0_WUSER : OUT STD_LOGIC_VECTOR (0 downto 0);
-        m_axi_imageProjs_local_0_ARVALID : OUT STD_LOGIC;
-        m_axi_imageProjs_local_0_ARREADY : IN STD_LOGIC;
-        m_axi_imageProjs_local_0_ARADDR : OUT STD_LOGIC_VECTOR (63 downto 0);
-        m_axi_imageProjs_local_0_ARID : OUT STD_LOGIC_VECTOR (0 downto 0);
-        m_axi_imageProjs_local_0_ARLEN : OUT STD_LOGIC_VECTOR (31 downto 0);
-        m_axi_imageProjs_local_0_ARSIZE : OUT STD_LOGIC_VECTOR (2 downto 0);
-        m_axi_imageProjs_local_0_ARBURST : OUT STD_LOGIC_VECTOR (1 downto 0);
-        m_axi_imageProjs_local_0_ARLOCK : OUT STD_LOGIC_VECTOR (1 downto 0);
-        m_axi_imageProjs_local_0_ARCACHE : OUT STD_LOGIC_VECTOR (3 downto 0);
-        m_axi_imageProjs_local_0_ARPROT : OUT STD_LOGIC_VECTOR (2 downto 0);
-        m_axi_imageProjs_local_0_ARQOS : OUT STD_LOGIC_VECTOR (3 downto 0);
-        m_axi_imageProjs_local_0_ARREGION : OUT STD_LOGIC_VECTOR (3 downto 0);
-        m_axi_imageProjs_local_0_ARUSER : OUT STD_LOGIC_VECTOR (0 downto 0);
-        m_axi_imageProjs_local_0_RVALID : IN STD_LOGIC;
-        m_axi_imageProjs_local_0_RREADY : OUT STD_LOGIC;
-        m_axi_imageProjs_local_0_RDATA : IN STD_LOGIC_VECTOR (63 downto 0);
-        m_axi_imageProjs_local_0_RLAST : IN STD_LOGIC;
-        m_axi_imageProjs_local_0_RID : IN STD_LOGIC_VECTOR (0 downto 0);
-        m_axi_imageProjs_local_0_RFIFONUM : IN STD_LOGIC_VECTOR (8 downto 0);
-        m_axi_imageProjs_local_0_RUSER : IN STD_LOGIC_VECTOR (0 downto 0);
-        m_axi_imageProjs_local_0_RRESP : IN STD_LOGIC_VECTOR (1 downto 0);
-        m_axi_imageProjs_local_0_BVALID : IN STD_LOGIC;
-        m_axi_imageProjs_local_0_BREADY : OUT STD_LOGIC;
-        m_axi_imageProjs_local_0_BRESP : IN STD_LOGIC_VECTOR (1 downto 0);
-        m_axi_imageProjs_local_0_BID : IN STD_LOGIC_VECTOR (0 downto 0);
-        m_axi_imageProjs_local_0_BUSER : IN STD_LOGIC_VECTOR (0 downto 0);
-        imageProjs_local1 : IN STD_LOGIC_VECTOR (63 downto 0);
+        m_axi_atomLocations_0_AWVALID : OUT STD_LOGIC;
+        m_axi_atomLocations_0_AWREADY : IN STD_LOGIC;
+        m_axi_atomLocations_0_AWADDR : OUT STD_LOGIC_VECTOR (63 downto 0);
+        m_axi_atomLocations_0_AWID : OUT STD_LOGIC_VECTOR (0 downto 0);
+        m_axi_atomLocations_0_AWLEN : OUT STD_LOGIC_VECTOR (31 downto 0);
+        m_axi_atomLocations_0_AWSIZE : OUT STD_LOGIC_VECTOR (2 downto 0);
+        m_axi_atomLocations_0_AWBURST : OUT STD_LOGIC_VECTOR (1 downto 0);
+        m_axi_atomLocations_0_AWLOCK : OUT STD_LOGIC_VECTOR (1 downto 0);
+        m_axi_atomLocations_0_AWCACHE : OUT STD_LOGIC_VECTOR (3 downto 0);
+        m_axi_atomLocations_0_AWPROT : OUT STD_LOGIC_VECTOR (2 downto 0);
+        m_axi_atomLocations_0_AWQOS : OUT STD_LOGIC_VECTOR (3 downto 0);
+        m_axi_atomLocations_0_AWREGION : OUT STD_LOGIC_VECTOR (3 downto 0);
+        m_axi_atomLocations_0_AWUSER : OUT STD_LOGIC_VECTOR (0 downto 0);
+        m_axi_atomLocations_0_WVALID : OUT STD_LOGIC;
+        m_axi_atomLocations_0_WREADY : IN STD_LOGIC;
+        m_axi_atomLocations_0_WDATA : OUT STD_LOGIC_VECTOR (63 downto 0);
+        m_axi_atomLocations_0_WSTRB : OUT STD_LOGIC_VECTOR (7 downto 0);
+        m_axi_atomLocations_0_WLAST : OUT STD_LOGIC;
+        m_axi_atomLocations_0_WID : OUT STD_LOGIC_VECTOR (0 downto 0);
+        m_axi_atomLocations_0_WUSER : OUT STD_LOGIC_VECTOR (0 downto 0);
+        m_axi_atomLocations_0_ARVALID : OUT STD_LOGIC;
+        m_axi_atomLocations_0_ARREADY : IN STD_LOGIC;
+        m_axi_atomLocations_0_ARADDR : OUT STD_LOGIC_VECTOR (63 downto 0);
+        m_axi_atomLocations_0_ARID : OUT STD_LOGIC_VECTOR (0 downto 0);
+        m_axi_atomLocations_0_ARLEN : OUT STD_LOGIC_VECTOR (31 downto 0);
+        m_axi_atomLocations_0_ARSIZE : OUT STD_LOGIC_VECTOR (2 downto 0);
+        m_axi_atomLocations_0_ARBURST : OUT STD_LOGIC_VECTOR (1 downto 0);
+        m_axi_atomLocations_0_ARLOCK : OUT STD_LOGIC_VECTOR (1 downto 0);
+        m_axi_atomLocations_0_ARCACHE : OUT STD_LOGIC_VECTOR (3 downto 0);
+        m_axi_atomLocations_0_ARPROT : OUT STD_LOGIC_VECTOR (2 downto 0);
+        m_axi_atomLocations_0_ARQOS : OUT STD_LOGIC_VECTOR (3 downto 0);
+        m_axi_atomLocations_0_ARREGION : OUT STD_LOGIC_VECTOR (3 downto 0);
+        m_axi_atomLocations_0_ARUSER : OUT STD_LOGIC_VECTOR (0 downto 0);
+        m_axi_atomLocations_0_RVALID : IN STD_LOGIC;
+        m_axi_atomLocations_0_RREADY : OUT STD_LOGIC;
+        m_axi_atomLocations_0_RDATA : IN STD_LOGIC_VECTOR (63 downto 0);
+        m_axi_atomLocations_0_RLAST : IN STD_LOGIC;
+        m_axi_atomLocations_0_RID : IN STD_LOGIC_VECTOR (0 downto 0);
+        m_axi_atomLocations_0_RFIFONUM : IN STD_LOGIC_VECTOR (8 downto 0);
+        m_axi_atomLocations_0_RUSER : IN STD_LOGIC_VECTOR (0 downto 0);
+        m_axi_atomLocations_0_RRESP : IN STD_LOGIC_VECTOR (1 downto 0);
+        m_axi_atomLocations_0_BVALID : IN STD_LOGIC;
+        m_axi_atomLocations_0_BREADY : OUT STD_LOGIC;
+        m_axi_atomLocations_0_BRESP : IN STD_LOGIC_VECTOR (1 downto 0);
+        m_axi_atomLocations_0_BID : IN STD_LOGIC_VECTOR (0 downto 0);
+        m_axi_atomLocations_0_BUSER : IN STD_LOGIC_VECTOR (0 downto 0);
+        atomLocations1 : IN STD_LOGIC_VECTOR (63 downto 0);
         m_axi_imageProjs_0_AWVALID : OUT STD_LOGIC;
         m_axi_imageProjs_0_AWREADY : IN STD_LOGIC;
         m_axi_imageProjs_0_AWADDR : OUT STD_LOGIC_VECTOR (63 downto 0);
@@ -724,8 +736,8 @@ architecture behav of reconstruct is
         m_axi_imageProjs_0_AWUSER : OUT STD_LOGIC_VECTOR (0 downto 0);
         m_axi_imageProjs_0_WVALID : OUT STD_LOGIC;
         m_axi_imageProjs_0_WREADY : IN STD_LOGIC;
-        m_axi_imageProjs_0_WDATA : OUT STD_LOGIC_VECTOR (63 downto 0);
-        m_axi_imageProjs_0_WSTRB : OUT STD_LOGIC_VECTOR (7 downto 0);
+        m_axi_imageProjs_0_WDATA : OUT STD_LOGIC_VECTOR (31 downto 0);
+        m_axi_imageProjs_0_WSTRB : OUT STD_LOGIC_VECTOR (3 downto 0);
         m_axi_imageProjs_0_WLAST : OUT STD_LOGIC;
         m_axi_imageProjs_0_WID : OUT STD_LOGIC_VECTOR (0 downto 0);
         m_axi_imageProjs_0_WUSER : OUT STD_LOGIC_VECTOR (0 downto 0);
@@ -744,7 +756,7 @@ architecture behav of reconstruct is
         m_axi_imageProjs_0_ARUSER : OUT STD_LOGIC_VECTOR (0 downto 0);
         m_axi_imageProjs_0_RVALID : IN STD_LOGIC;
         m_axi_imageProjs_0_RREADY : OUT STD_LOGIC;
-        m_axi_imageProjs_0_RDATA : IN STD_LOGIC_VECTOR (63 downto 0);
+        m_axi_imageProjs_0_RDATA : IN STD_LOGIC_VECTOR (31 downto 0);
         m_axi_imageProjs_0_RLAST : IN STD_LOGIC;
         m_axi_imageProjs_0_RID : IN STD_LOGIC_VECTOR (0 downto 0);
         m_axi_imageProjs_0_RFIFONUM : IN STD_LOGIC_VECTOR (8 downto 0);
@@ -755,54 +767,7 @@ architecture behav of reconstruct is
         m_axi_imageProjs_0_BRESP : IN STD_LOGIC_VECTOR (1 downto 0);
         m_axi_imageProjs_0_BID : IN STD_LOGIC_VECTOR (0 downto 0);
         m_axi_imageProjs_0_BUSER : IN STD_LOGIC_VECTOR (0 downto 0);
-        imageProjs2 : IN STD_LOGIC_VECTOR (63 downto 0);
-        m_axi_imageProjs_local_size_r_0_AWVALID : OUT STD_LOGIC;
-        m_axi_imageProjs_local_size_r_0_AWREADY : IN STD_LOGIC;
-        m_axi_imageProjs_local_size_r_0_AWADDR : OUT STD_LOGIC_VECTOR (63 downto 0);
-        m_axi_imageProjs_local_size_r_0_AWID : OUT STD_LOGIC_VECTOR (0 downto 0);
-        m_axi_imageProjs_local_size_r_0_AWLEN : OUT STD_LOGIC_VECTOR (31 downto 0);
-        m_axi_imageProjs_local_size_r_0_AWSIZE : OUT STD_LOGIC_VECTOR (2 downto 0);
-        m_axi_imageProjs_local_size_r_0_AWBURST : OUT STD_LOGIC_VECTOR (1 downto 0);
-        m_axi_imageProjs_local_size_r_0_AWLOCK : OUT STD_LOGIC_VECTOR (1 downto 0);
-        m_axi_imageProjs_local_size_r_0_AWCACHE : OUT STD_LOGIC_VECTOR (3 downto 0);
-        m_axi_imageProjs_local_size_r_0_AWPROT : OUT STD_LOGIC_VECTOR (2 downto 0);
-        m_axi_imageProjs_local_size_r_0_AWQOS : OUT STD_LOGIC_VECTOR (3 downto 0);
-        m_axi_imageProjs_local_size_r_0_AWREGION : OUT STD_LOGIC_VECTOR (3 downto 0);
-        m_axi_imageProjs_local_size_r_0_AWUSER : OUT STD_LOGIC_VECTOR (0 downto 0);
-        m_axi_imageProjs_local_size_r_0_WVALID : OUT STD_LOGIC;
-        m_axi_imageProjs_local_size_r_0_WREADY : IN STD_LOGIC;
-        m_axi_imageProjs_local_size_r_0_WDATA : OUT STD_LOGIC_VECTOR (31 downto 0);
-        m_axi_imageProjs_local_size_r_0_WSTRB : OUT STD_LOGIC_VECTOR (3 downto 0);
-        m_axi_imageProjs_local_size_r_0_WLAST : OUT STD_LOGIC;
-        m_axi_imageProjs_local_size_r_0_WID : OUT STD_LOGIC_VECTOR (0 downto 0);
-        m_axi_imageProjs_local_size_r_0_WUSER : OUT STD_LOGIC_VECTOR (0 downto 0);
-        m_axi_imageProjs_local_size_r_0_ARVALID : OUT STD_LOGIC;
-        m_axi_imageProjs_local_size_r_0_ARREADY : IN STD_LOGIC;
-        m_axi_imageProjs_local_size_r_0_ARADDR : OUT STD_LOGIC_VECTOR (63 downto 0);
-        m_axi_imageProjs_local_size_r_0_ARID : OUT STD_LOGIC_VECTOR (0 downto 0);
-        m_axi_imageProjs_local_size_r_0_ARLEN : OUT STD_LOGIC_VECTOR (31 downto 0);
-        m_axi_imageProjs_local_size_r_0_ARSIZE : OUT STD_LOGIC_VECTOR (2 downto 0);
-        m_axi_imageProjs_local_size_r_0_ARBURST : OUT STD_LOGIC_VECTOR (1 downto 0);
-        m_axi_imageProjs_local_size_r_0_ARLOCK : OUT STD_LOGIC_VECTOR (1 downto 0);
-        m_axi_imageProjs_local_size_r_0_ARCACHE : OUT STD_LOGIC_VECTOR (3 downto 0);
-        m_axi_imageProjs_local_size_r_0_ARPROT : OUT STD_LOGIC_VECTOR (2 downto 0);
-        m_axi_imageProjs_local_size_r_0_ARQOS : OUT STD_LOGIC_VECTOR (3 downto 0);
-        m_axi_imageProjs_local_size_r_0_ARREGION : OUT STD_LOGIC_VECTOR (3 downto 0);
-        m_axi_imageProjs_local_size_r_0_ARUSER : OUT STD_LOGIC_VECTOR (0 downto 0);
-        m_axi_imageProjs_local_size_r_0_RVALID : IN STD_LOGIC;
-        m_axi_imageProjs_local_size_r_0_RREADY : OUT STD_LOGIC;
-        m_axi_imageProjs_local_size_r_0_RDATA : IN STD_LOGIC_VECTOR (31 downto 0);
-        m_axi_imageProjs_local_size_r_0_RLAST : IN STD_LOGIC;
-        m_axi_imageProjs_local_size_r_0_RID : IN STD_LOGIC_VECTOR (0 downto 0);
-        m_axi_imageProjs_local_size_r_0_RFIFONUM : IN STD_LOGIC_VECTOR (8 downto 0);
-        m_axi_imageProjs_local_size_r_0_RUSER : IN STD_LOGIC_VECTOR (0 downto 0);
-        m_axi_imageProjs_local_size_r_0_RRESP : IN STD_LOGIC_VECTOR (1 downto 0);
-        m_axi_imageProjs_local_size_r_0_BVALID : IN STD_LOGIC;
-        m_axi_imageProjs_local_size_r_0_BREADY : OUT STD_LOGIC;
-        m_axi_imageProjs_local_size_r_0_BRESP : IN STD_LOGIC_VECTOR (1 downto 0);
-        m_axi_imageProjs_local_size_r_0_BID : IN STD_LOGIC_VECTOR (0 downto 0);
-        m_axi_imageProjs_local_size_r_0_BUSER : IN STD_LOGIC_VECTOR (0 downto 0);
-        imageProjs_local_size3 : IN STD_LOGIC_VECTOR (63 downto 0);
+        empty : IN STD_LOGIC_VECTOR (63 downto 0);
         m_axi_fullImage_0_AWVALID : OUT STD_LOGIC;
         m_axi_fullImage_0_AWREADY : IN STD_LOGIC;
         m_axi_fullImage_0_AWADDR : OUT STD_LOGIC_VECTOR (63 downto 0);
@@ -818,8 +783,8 @@ architecture behav of reconstruct is
         m_axi_fullImage_0_AWUSER : OUT STD_LOGIC_VECTOR (0 downto 0);
         m_axi_fullImage_0_WVALID : OUT STD_LOGIC;
         m_axi_fullImage_0_WREADY : IN STD_LOGIC;
-        m_axi_fullImage_0_WDATA : OUT STD_LOGIC_VECTOR (63 downto 0);
-        m_axi_fullImage_0_WSTRB : OUT STD_LOGIC_VECTOR (7 downto 0);
+        m_axi_fullImage_0_WDATA : OUT STD_LOGIC_VECTOR (31 downto 0);
+        m_axi_fullImage_0_WSTRB : OUT STD_LOGIC_VECTOR (3 downto 0);
         m_axi_fullImage_0_WLAST : OUT STD_LOGIC;
         m_axi_fullImage_0_WID : OUT STD_LOGIC_VECTOR (0 downto 0);
         m_axi_fullImage_0_WUSER : OUT STD_LOGIC_VECTOR (0 downto 0);
@@ -838,7 +803,7 @@ architecture behav of reconstruct is
         m_axi_fullImage_0_ARUSER : OUT STD_LOGIC_VECTOR (0 downto 0);
         m_axi_fullImage_0_RVALID : IN STD_LOGIC;
         m_axi_fullImage_0_RREADY : OUT STD_LOGIC;
-        m_axi_fullImage_0_RDATA : IN STD_LOGIC_VECTOR (63 downto 0);
+        m_axi_fullImage_0_RDATA : IN STD_LOGIC_VECTOR (31 downto 0);
         m_axi_fullImage_0_RLAST : IN STD_LOGIC;
         m_axi_fullImage_0_RID : IN STD_LOGIC_VECTOR (0 downto 0);
         m_axi_fullImage_0_RFIFONUM : IN STD_LOGIC_VECTOR (8 downto 0);
@@ -849,14 +814,55 @@ architecture behav of reconstruct is
         m_axi_fullImage_0_BRESP : IN STD_LOGIC_VECTOR (1 downto 0);
         m_axi_fullImage_0_BID : IN STD_LOGIC_VECTOR (0 downto 0);
         m_axi_fullImage_0_BUSER : IN STD_LOGIC_VECTOR (0 downto 0);
-        fullImage4 : IN STD_LOGIC_VECTOR (63 downto 0);
-        fullImage_rows : IN STD_LOGIC_VECTOR (31 downto 0);
-        fullImage_cols : IN STD_LOGIC_VECTOR (31 downto 0);
-        localImages_dout : IN STD_LOGIC_VECTOR (255 downto 0);
-        localImages_empty_n : IN STD_LOGIC;
-        localImages_read : OUT STD_LOGIC;
-        localImages_num_data_valid : IN STD_LOGIC_VECTOR (2 downto 0);
-        localImages_fifo_cap : IN STD_LOGIC_VECTOR (2 downto 0);
+        fullImage2 : IN STD_LOGIC_VECTOR (63 downto 0);
+        m_axi_imageProjs_local_0_AWVALID : OUT STD_LOGIC;
+        m_axi_imageProjs_local_0_AWREADY : IN STD_LOGIC;
+        m_axi_imageProjs_local_0_AWADDR : OUT STD_LOGIC_VECTOR (63 downto 0);
+        m_axi_imageProjs_local_0_AWID : OUT STD_LOGIC_VECTOR (0 downto 0);
+        m_axi_imageProjs_local_0_AWLEN : OUT STD_LOGIC_VECTOR (31 downto 0);
+        m_axi_imageProjs_local_0_AWSIZE : OUT STD_LOGIC_VECTOR (2 downto 0);
+        m_axi_imageProjs_local_0_AWBURST : OUT STD_LOGIC_VECTOR (1 downto 0);
+        m_axi_imageProjs_local_0_AWLOCK : OUT STD_LOGIC_VECTOR (1 downto 0);
+        m_axi_imageProjs_local_0_AWCACHE : OUT STD_LOGIC_VECTOR (3 downto 0);
+        m_axi_imageProjs_local_0_AWPROT : OUT STD_LOGIC_VECTOR (2 downto 0);
+        m_axi_imageProjs_local_0_AWQOS : OUT STD_LOGIC_VECTOR (3 downto 0);
+        m_axi_imageProjs_local_0_AWREGION : OUT STD_LOGIC_VECTOR (3 downto 0);
+        m_axi_imageProjs_local_0_AWUSER : OUT STD_LOGIC_VECTOR (0 downto 0);
+        m_axi_imageProjs_local_0_WVALID : OUT STD_LOGIC;
+        m_axi_imageProjs_local_0_WREADY : IN STD_LOGIC;
+        m_axi_imageProjs_local_0_WDATA : OUT STD_LOGIC_VECTOR (31 downto 0);
+        m_axi_imageProjs_local_0_WSTRB : OUT STD_LOGIC_VECTOR (3 downto 0);
+        m_axi_imageProjs_local_0_WLAST : OUT STD_LOGIC;
+        m_axi_imageProjs_local_0_WID : OUT STD_LOGIC_VECTOR (0 downto 0);
+        m_axi_imageProjs_local_0_WUSER : OUT STD_LOGIC_VECTOR (0 downto 0);
+        m_axi_imageProjs_local_0_ARVALID : OUT STD_LOGIC;
+        m_axi_imageProjs_local_0_ARREADY : IN STD_LOGIC;
+        m_axi_imageProjs_local_0_ARADDR : OUT STD_LOGIC_VECTOR (63 downto 0);
+        m_axi_imageProjs_local_0_ARID : OUT STD_LOGIC_VECTOR (0 downto 0);
+        m_axi_imageProjs_local_0_ARLEN : OUT STD_LOGIC_VECTOR (31 downto 0);
+        m_axi_imageProjs_local_0_ARSIZE : OUT STD_LOGIC_VECTOR (2 downto 0);
+        m_axi_imageProjs_local_0_ARBURST : OUT STD_LOGIC_VECTOR (1 downto 0);
+        m_axi_imageProjs_local_0_ARLOCK : OUT STD_LOGIC_VECTOR (1 downto 0);
+        m_axi_imageProjs_local_0_ARCACHE : OUT STD_LOGIC_VECTOR (3 downto 0);
+        m_axi_imageProjs_local_0_ARPROT : OUT STD_LOGIC_VECTOR (2 downto 0);
+        m_axi_imageProjs_local_0_ARQOS : OUT STD_LOGIC_VECTOR (3 downto 0);
+        m_axi_imageProjs_local_0_ARREGION : OUT STD_LOGIC_VECTOR (3 downto 0);
+        m_axi_imageProjs_local_0_ARUSER : OUT STD_LOGIC_VECTOR (0 downto 0);
+        m_axi_imageProjs_local_0_RVALID : IN STD_LOGIC;
+        m_axi_imageProjs_local_0_RREADY : OUT STD_LOGIC;
+        m_axi_imageProjs_local_0_RDATA : IN STD_LOGIC_VECTOR (31 downto 0);
+        m_axi_imageProjs_local_0_RLAST : IN STD_LOGIC;
+        m_axi_imageProjs_local_0_RID : IN STD_LOGIC_VECTOR (0 downto 0);
+        m_axi_imageProjs_local_0_RFIFONUM : IN STD_LOGIC_VECTOR (8 downto 0);
+        m_axi_imageProjs_local_0_RUSER : IN STD_LOGIC_VECTOR (0 downto 0);
+        m_axi_imageProjs_local_0_RRESP : IN STD_LOGIC_VECTOR (1 downto 0);
+        m_axi_imageProjs_local_0_BVALID : IN STD_LOGIC;
+        m_axi_imageProjs_local_0_BREADY : OUT STD_LOGIC;
+        m_axi_imageProjs_local_0_BRESP : IN STD_LOGIC_VECTOR (1 downto 0);
+        m_axi_imageProjs_local_0_BID : IN STD_LOGIC_VECTOR (0 downto 0);
+        m_axi_imageProjs_local_0_BUSER : IN STD_LOGIC_VECTOR (0 downto 0);
+        imageProjs_local3 : IN STD_LOGIC_VECTOR (63 downto 0);
+        idx_0 : IN STD_LOGIC_VECTOR (15 downto 0);
         m_axi_emissions_0_AWVALID : OUT STD_LOGIC;
         m_axi_emissions_0_AWREADY : IN STD_LOGIC;
         m_axi_emissions_0_AWADDR : OUT STD_LOGIC_VECTOR (63 downto 0);
@@ -872,8 +878,8 @@ architecture behav of reconstruct is
         m_axi_emissions_0_AWUSER : OUT STD_LOGIC_VECTOR (0 downto 0);
         m_axi_emissions_0_WVALID : OUT STD_LOGIC;
         m_axi_emissions_0_WREADY : IN STD_LOGIC;
-        m_axi_emissions_0_WDATA : OUT STD_LOGIC_VECTOR (63 downto 0);
-        m_axi_emissions_0_WSTRB : OUT STD_LOGIC_VECTOR (7 downto 0);
+        m_axi_emissions_0_WDATA : OUT STD_LOGIC_VECTOR (31 downto 0);
+        m_axi_emissions_0_WSTRB : OUT STD_LOGIC_VECTOR (3 downto 0);
         m_axi_emissions_0_WLAST : OUT STD_LOGIC;
         m_axi_emissions_0_WID : OUT STD_LOGIC_VECTOR (0 downto 0);
         m_axi_emissions_0_WUSER : OUT STD_LOGIC_VECTOR (0 downto 0);
@@ -892,7 +898,7 @@ architecture behav of reconstruct is
         m_axi_emissions_0_ARUSER : OUT STD_LOGIC_VECTOR (0 downto 0);
         m_axi_emissions_0_RVALID : IN STD_LOGIC;
         m_axi_emissions_0_RREADY : OUT STD_LOGIC;
-        m_axi_emissions_0_RDATA : IN STD_LOGIC_VECTOR (63 downto 0);
+        m_axi_emissions_0_RDATA : IN STD_LOGIC_VECTOR (31 downto 0);
         m_axi_emissions_0_RLAST : IN STD_LOGIC;
         m_axi_emissions_0_RID : IN STD_LOGIC_VECTOR (0 downto 0);
         m_axi_emissions_0_RFIFONUM : IN STD_LOGIC_VECTOR (8 downto 0);
@@ -903,26 +909,37 @@ architecture behav of reconstruct is
         m_axi_emissions_0_BRESP : IN STD_LOGIC_VECTOR (1 downto 0);
         m_axi_emissions_0_BID : IN STD_LOGIC_VECTOR (0 downto 0);
         m_axi_emissions_0_BUSER : IN STD_LOGIC_VECTOR (0 downto 0);
-        emissions5 : IN STD_LOGIC_VECTOR (63 downto 0);
-        emission_cnt : OUT STD_LOGIC_VECTOR (31 downto 0);
-        emission_cnt_ap_vld : OUT STD_LOGIC );
+        emissions4 : IN STD_LOGIC_VECTOR (63 downto 0);
+        idx_0_ap_vld : IN STD_LOGIC;
+        emissions4_ap_vld : IN STD_LOGIC;
+        ap_start : IN STD_LOGIC;
+        conv_ap_vld : IN STD_LOGIC;
+        psfSupersample_ap_vld : IN STD_LOGIC;
+        projShape0_ap_vld : IN STD_LOGIC;
+        projShape1_ap_vld : IN STD_LOGIC;
+        atomLocations1_ap_vld : IN STD_LOGIC;
+        fullImage2_ap_vld : IN STD_LOGIC;
+        imageProjs_local3_ap_vld : IN STD_LOGIC;
+        empty_ap_vld : IN STD_LOGIC;
+        ap_done : OUT STD_LOGIC;
+        ap_ready : OUT STD_LOGIC;
+        ap_idle : OUT STD_LOGIC;
+        ap_continue : IN STD_LOGIC );
     end component;
 
 
-    component reconstruct_fifo_w256_d2_S IS
+    component reconstruct_ap_bound IS
     port (
         clk : IN STD_LOGIC;
         reset : IN STD_LOGIC;
         if_read_ce : IN STD_LOGIC;
         if_write_ce : IN STD_LOGIC;
-        if_din : IN STD_LOGIC_VECTOR (255 downto 0);
+        if_din : IN STD_LOGIC_VECTOR (31 downto 0);
         if_full_n : OUT STD_LOGIC;
         if_write : IN STD_LOGIC;
-        if_dout : OUT STD_LOGIC_VECTOR (255 downto 0);
+        if_dout : OUT STD_LOGIC_VECTOR (31 downto 0);
         if_empty_n : OUT STD_LOGIC;
-        if_read : IN STD_LOGIC;
-        if_num_data_valid : OUT STD_LOGIC_VECTOR (2 downto 0);
-        if_fifo_cap : OUT STD_LOGIC_VECTOR (2 downto 0) );
+        if_read : IN STD_LOGIC );
     end component;
 
 
@@ -951,6 +968,7 @@ architecture behav of reconstruct is
         ACLK : IN STD_LOGIC;
         ARESET : IN STD_LOGIC;
         ACLK_EN : IN STD_LOGIC;
+        atomLocations_offset : OUT STD_LOGIC_VECTOR (63 downto 0);
         imageProjs_local_offset : OUT STD_LOGIC_VECTOR (63 downto 0);
         imageProjs_offset : OUT STD_LOGIC_VECTOR (63 downto 0);
         imageProjs_local_size_offset : OUT STD_LOGIC_VECTOR (63 downto 0);
@@ -995,13 +1013,11 @@ architecture behav of reconstruct is
         psfSupersample : OUT STD_LOGIC_VECTOR (31 downto 0);
         imageProjectionSize : OUT STD_LOGIC_VECTOR (31 downto 0);
         fullImage_rows : OUT STD_LOGIC_VECTOR (31 downto 0);
-        fullImage_cols : OUT STD_LOGIC_VECTOR (31 downto 0);
-        emission_cnt : IN STD_LOGIC_VECTOR (31 downto 0);
-        emission_cnt_ap_vld : IN STD_LOGIC );
+        fullImage_cols : OUT STD_LOGIC_VECTOR (31 downto 0) );
     end component;
 
 
-    component reconstruct_emissions_m_axi IS
+    component reconstruct_atomLocations_m_axi IS
     generic (
         CONSERVATIVE : INTEGER;
         USER_MAXREQS : INTEGER;
@@ -1088,6 +1104,98 @@ architecture behav of reconstruct is
         I_CH0_WREADY : OUT STD_LOGIC;
         I_CH0_WDATA : IN STD_LOGIC_VECTOR (63 downto 0);
         I_CH0_WSTRB : IN STD_LOGIC_VECTOR (7 downto 0);
+        I_CH0_BVALID : OUT STD_LOGIC;
+        I_CH0_BREADY : IN STD_LOGIC );
+    end component;
+
+
+    component reconstruct_emissions_m_axi IS
+    generic (
+        CONSERVATIVE : INTEGER;
+        USER_MAXREQS : INTEGER;
+        MAX_READ_BURST_LENGTH : INTEGER;
+        MAX_WRITE_BURST_LENGTH : INTEGER;
+        C_M_AXI_ID_WIDTH : INTEGER;
+        C_M_AXI_ADDR_WIDTH : INTEGER;
+        C_M_AXI_DATA_WIDTH : INTEGER;
+        C_M_AXI_AWUSER_WIDTH : INTEGER;
+        C_M_AXI_ARUSER_WIDTH : INTEGER;
+        C_M_AXI_WUSER_WIDTH : INTEGER;
+        C_M_AXI_RUSER_WIDTH : INTEGER;
+        C_M_AXI_BUSER_WIDTH : INTEGER;
+        C_USER_VALUE : INTEGER;
+        C_PROT_VALUE : INTEGER;
+        C_CACHE_VALUE : INTEGER;
+        CH0_USER_RFIFONUM_WIDTH : INTEGER;
+        CH0_USER_DW : INTEGER;
+        CH0_USER_AW : INTEGER;
+        NUM_READ_OUTSTANDING : INTEGER;
+        NUM_WRITE_OUTSTANDING : INTEGER );
+    port (
+        AWVALID : OUT STD_LOGIC;
+        AWREADY : IN STD_LOGIC;
+        AWADDR : OUT STD_LOGIC_VECTOR (C_M_AXI_ADDR_WIDTH-1 downto 0);
+        AWID : OUT STD_LOGIC_VECTOR (C_M_AXI_ID_WIDTH-1 downto 0);
+        AWLEN : OUT STD_LOGIC_VECTOR (7 downto 0);
+        AWSIZE : OUT STD_LOGIC_VECTOR (2 downto 0);
+        AWBURST : OUT STD_LOGIC_VECTOR (1 downto 0);
+        AWLOCK : OUT STD_LOGIC_VECTOR (1 downto 0);
+        AWCACHE : OUT STD_LOGIC_VECTOR (3 downto 0);
+        AWPROT : OUT STD_LOGIC_VECTOR (2 downto 0);
+        AWQOS : OUT STD_LOGIC_VECTOR (3 downto 0);
+        AWREGION : OUT STD_LOGIC_VECTOR (3 downto 0);
+        AWUSER : OUT STD_LOGIC_VECTOR (C_M_AXI_AWUSER_WIDTH-1 downto 0);
+        WVALID : OUT STD_LOGIC;
+        WREADY : IN STD_LOGIC;
+        WDATA : OUT STD_LOGIC_VECTOR (C_M_AXI_DATA_WIDTH-1 downto 0);
+        WSTRB : OUT STD_LOGIC_VECTOR (C_M_AXI_DATA_WIDTH/8-1 downto 0);
+        WLAST : OUT STD_LOGIC;
+        WID : OUT STD_LOGIC_VECTOR (C_M_AXI_ID_WIDTH-1 downto 0);
+        WUSER : OUT STD_LOGIC_VECTOR (C_M_AXI_WUSER_WIDTH-1 downto 0);
+        ARVALID : OUT STD_LOGIC;
+        ARREADY : IN STD_LOGIC;
+        ARADDR : OUT STD_LOGIC_VECTOR (C_M_AXI_ADDR_WIDTH-1 downto 0);
+        ARID : OUT STD_LOGIC_VECTOR (C_M_AXI_ID_WIDTH-1 downto 0);
+        ARLEN : OUT STD_LOGIC_VECTOR (7 downto 0);
+        ARSIZE : OUT STD_LOGIC_VECTOR (2 downto 0);
+        ARBURST : OUT STD_LOGIC_VECTOR (1 downto 0);
+        ARLOCK : OUT STD_LOGIC_VECTOR (1 downto 0);
+        ARCACHE : OUT STD_LOGIC_VECTOR (3 downto 0);
+        ARPROT : OUT STD_LOGIC_VECTOR (2 downto 0);
+        ARQOS : OUT STD_LOGIC_VECTOR (3 downto 0);
+        ARREGION : OUT STD_LOGIC_VECTOR (3 downto 0);
+        ARUSER : OUT STD_LOGIC_VECTOR (C_M_AXI_ARUSER_WIDTH-1 downto 0);
+        RVALID : IN STD_LOGIC;
+        RREADY : OUT STD_LOGIC;
+        RDATA : IN STD_LOGIC_VECTOR (C_M_AXI_DATA_WIDTH-1 downto 0);
+        RLAST : IN STD_LOGIC;
+        RID : IN STD_LOGIC_VECTOR (C_M_AXI_ID_WIDTH-1 downto 0);
+        RUSER : IN STD_LOGIC_VECTOR (C_M_AXI_RUSER_WIDTH-1 downto 0);
+        RRESP : IN STD_LOGIC_VECTOR (1 downto 0);
+        BVALID : IN STD_LOGIC;
+        BREADY : OUT STD_LOGIC;
+        BRESP : IN STD_LOGIC_VECTOR (1 downto 0);
+        BID : IN STD_LOGIC_VECTOR (C_M_AXI_ID_WIDTH-1 downto 0);
+        BUSER : IN STD_LOGIC_VECTOR (C_M_AXI_BUSER_WIDTH-1 downto 0);
+        ACLK : IN STD_LOGIC;
+        ARESET : IN STD_LOGIC;
+        ACLK_EN : IN STD_LOGIC;
+        I_CH0_ARVALID : IN STD_LOGIC;
+        I_CH0_ARREADY : OUT STD_LOGIC;
+        I_CH0_ARADDR : IN STD_LOGIC_VECTOR (63 downto 0);
+        I_CH0_ARLEN : IN STD_LOGIC_VECTOR (31 downto 0);
+        I_CH0_RVALID : OUT STD_LOGIC;
+        I_CH0_RREADY : IN STD_LOGIC;
+        I_CH0_RDATA : OUT STD_LOGIC_VECTOR (31 downto 0);
+        I_CH0_RFIFONUM : OUT STD_LOGIC_VECTOR (8 downto 0);
+        I_CH0_AWVALID : IN STD_LOGIC;
+        I_CH0_AWREADY : OUT STD_LOGIC;
+        I_CH0_AWADDR : IN STD_LOGIC_VECTOR (63 downto 0);
+        I_CH0_AWLEN : IN STD_LOGIC_VECTOR (31 downto 0);
+        I_CH0_WVALID : IN STD_LOGIC;
+        I_CH0_WREADY : OUT STD_LOGIC;
+        I_CH0_WDATA : IN STD_LOGIC_VECTOR (31 downto 0);
+        I_CH0_WSTRB : IN STD_LOGIC_VECTOR (3 downto 0);
         I_CH0_BVALID : OUT STD_LOGIC;
         I_CH0_BREADY : IN STD_LOGIC );
     end component;
@@ -1170,7 +1278,7 @@ architecture behav of reconstruct is
         I_CH0_ARLEN : IN STD_LOGIC_VECTOR (31 downto 0);
         I_CH0_RVALID : OUT STD_LOGIC;
         I_CH0_RREADY : IN STD_LOGIC;
-        I_CH0_RDATA : OUT STD_LOGIC_VECTOR (63 downto 0);
+        I_CH0_RDATA : OUT STD_LOGIC_VECTOR (31 downto 0);
         I_CH0_RFIFONUM : OUT STD_LOGIC_VECTOR (8 downto 0);
         I_CH0_AWVALID : IN STD_LOGIC;
         I_CH0_AWREADY : OUT STD_LOGIC;
@@ -1178,8 +1286,8 @@ architecture behav of reconstruct is
         I_CH0_AWLEN : IN STD_LOGIC_VECTOR (31 downto 0);
         I_CH0_WVALID : IN STD_LOGIC;
         I_CH0_WREADY : OUT STD_LOGIC;
-        I_CH0_WDATA : IN STD_LOGIC_VECTOR (63 downto 0);
-        I_CH0_WSTRB : IN STD_LOGIC_VECTOR (7 downto 0);
+        I_CH0_WDATA : IN STD_LOGIC_VECTOR (31 downto 0);
+        I_CH0_WSTRB : IN STD_LOGIC_VECTOR (3 downto 0);
         I_CH0_BVALID : OUT STD_LOGIC;
         I_CH0_BREADY : IN STD_LOGIC );
     end component;
@@ -1262,7 +1370,7 @@ architecture behav of reconstruct is
         I_CH0_ARLEN : IN STD_LOGIC_VECTOR (31 downto 0);
         I_CH0_RVALID : OUT STD_LOGIC;
         I_CH0_RREADY : IN STD_LOGIC;
-        I_CH0_RDATA : OUT STD_LOGIC_VECTOR (63 downto 0);
+        I_CH0_RDATA : OUT STD_LOGIC_VECTOR (31 downto 0);
         I_CH0_RFIFONUM : OUT STD_LOGIC_VECTOR (8 downto 0);
         I_CH0_AWVALID : IN STD_LOGIC;
         I_CH0_AWREADY : OUT STD_LOGIC;
@@ -1270,106 +1378,14 @@ architecture behav of reconstruct is
         I_CH0_AWLEN : IN STD_LOGIC_VECTOR (31 downto 0);
         I_CH0_WVALID : IN STD_LOGIC;
         I_CH0_WREADY : OUT STD_LOGIC;
-        I_CH0_WDATA : IN STD_LOGIC_VECTOR (63 downto 0);
-        I_CH0_WSTRB : IN STD_LOGIC_VECTOR (7 downto 0);
+        I_CH0_WDATA : IN STD_LOGIC_VECTOR (31 downto 0);
+        I_CH0_WSTRB : IN STD_LOGIC_VECTOR (3 downto 0);
         I_CH0_BVALID : OUT STD_LOGIC;
         I_CH0_BREADY : IN STD_LOGIC );
     end component;
 
 
     component reconstruct_imageProjs_local_m_axi IS
-    generic (
-        CONSERVATIVE : INTEGER;
-        USER_MAXREQS : INTEGER;
-        MAX_READ_BURST_LENGTH : INTEGER;
-        MAX_WRITE_BURST_LENGTH : INTEGER;
-        C_M_AXI_ID_WIDTH : INTEGER;
-        C_M_AXI_ADDR_WIDTH : INTEGER;
-        C_M_AXI_DATA_WIDTH : INTEGER;
-        C_M_AXI_AWUSER_WIDTH : INTEGER;
-        C_M_AXI_ARUSER_WIDTH : INTEGER;
-        C_M_AXI_WUSER_WIDTH : INTEGER;
-        C_M_AXI_RUSER_WIDTH : INTEGER;
-        C_M_AXI_BUSER_WIDTH : INTEGER;
-        C_USER_VALUE : INTEGER;
-        C_PROT_VALUE : INTEGER;
-        C_CACHE_VALUE : INTEGER;
-        CH0_USER_RFIFONUM_WIDTH : INTEGER;
-        CH0_USER_DW : INTEGER;
-        CH0_USER_AW : INTEGER;
-        NUM_READ_OUTSTANDING : INTEGER;
-        NUM_WRITE_OUTSTANDING : INTEGER );
-    port (
-        AWVALID : OUT STD_LOGIC;
-        AWREADY : IN STD_LOGIC;
-        AWADDR : OUT STD_LOGIC_VECTOR (C_M_AXI_ADDR_WIDTH-1 downto 0);
-        AWID : OUT STD_LOGIC_VECTOR (C_M_AXI_ID_WIDTH-1 downto 0);
-        AWLEN : OUT STD_LOGIC_VECTOR (7 downto 0);
-        AWSIZE : OUT STD_LOGIC_VECTOR (2 downto 0);
-        AWBURST : OUT STD_LOGIC_VECTOR (1 downto 0);
-        AWLOCK : OUT STD_LOGIC_VECTOR (1 downto 0);
-        AWCACHE : OUT STD_LOGIC_VECTOR (3 downto 0);
-        AWPROT : OUT STD_LOGIC_VECTOR (2 downto 0);
-        AWQOS : OUT STD_LOGIC_VECTOR (3 downto 0);
-        AWREGION : OUT STD_LOGIC_VECTOR (3 downto 0);
-        AWUSER : OUT STD_LOGIC_VECTOR (C_M_AXI_AWUSER_WIDTH-1 downto 0);
-        WVALID : OUT STD_LOGIC;
-        WREADY : IN STD_LOGIC;
-        WDATA : OUT STD_LOGIC_VECTOR (C_M_AXI_DATA_WIDTH-1 downto 0);
-        WSTRB : OUT STD_LOGIC_VECTOR (C_M_AXI_DATA_WIDTH/8-1 downto 0);
-        WLAST : OUT STD_LOGIC;
-        WID : OUT STD_LOGIC_VECTOR (C_M_AXI_ID_WIDTH-1 downto 0);
-        WUSER : OUT STD_LOGIC_VECTOR (C_M_AXI_WUSER_WIDTH-1 downto 0);
-        ARVALID : OUT STD_LOGIC;
-        ARREADY : IN STD_LOGIC;
-        ARADDR : OUT STD_LOGIC_VECTOR (C_M_AXI_ADDR_WIDTH-1 downto 0);
-        ARID : OUT STD_LOGIC_VECTOR (C_M_AXI_ID_WIDTH-1 downto 0);
-        ARLEN : OUT STD_LOGIC_VECTOR (7 downto 0);
-        ARSIZE : OUT STD_LOGIC_VECTOR (2 downto 0);
-        ARBURST : OUT STD_LOGIC_VECTOR (1 downto 0);
-        ARLOCK : OUT STD_LOGIC_VECTOR (1 downto 0);
-        ARCACHE : OUT STD_LOGIC_VECTOR (3 downto 0);
-        ARPROT : OUT STD_LOGIC_VECTOR (2 downto 0);
-        ARQOS : OUT STD_LOGIC_VECTOR (3 downto 0);
-        ARREGION : OUT STD_LOGIC_VECTOR (3 downto 0);
-        ARUSER : OUT STD_LOGIC_VECTOR (C_M_AXI_ARUSER_WIDTH-1 downto 0);
-        RVALID : IN STD_LOGIC;
-        RREADY : OUT STD_LOGIC;
-        RDATA : IN STD_LOGIC_VECTOR (C_M_AXI_DATA_WIDTH-1 downto 0);
-        RLAST : IN STD_LOGIC;
-        RID : IN STD_LOGIC_VECTOR (C_M_AXI_ID_WIDTH-1 downto 0);
-        RUSER : IN STD_LOGIC_VECTOR (C_M_AXI_RUSER_WIDTH-1 downto 0);
-        RRESP : IN STD_LOGIC_VECTOR (1 downto 0);
-        BVALID : IN STD_LOGIC;
-        BREADY : OUT STD_LOGIC;
-        BRESP : IN STD_LOGIC_VECTOR (1 downto 0);
-        BID : IN STD_LOGIC_VECTOR (C_M_AXI_ID_WIDTH-1 downto 0);
-        BUSER : IN STD_LOGIC_VECTOR (C_M_AXI_BUSER_WIDTH-1 downto 0);
-        ACLK : IN STD_LOGIC;
-        ARESET : IN STD_LOGIC;
-        ACLK_EN : IN STD_LOGIC;
-        I_CH0_ARVALID : IN STD_LOGIC;
-        I_CH0_ARREADY : OUT STD_LOGIC;
-        I_CH0_ARADDR : IN STD_LOGIC_VECTOR (63 downto 0);
-        I_CH0_ARLEN : IN STD_LOGIC_VECTOR (31 downto 0);
-        I_CH0_RVALID : OUT STD_LOGIC;
-        I_CH0_RREADY : IN STD_LOGIC;
-        I_CH0_RDATA : OUT STD_LOGIC_VECTOR (63 downto 0);
-        I_CH0_RFIFONUM : OUT STD_LOGIC_VECTOR (8 downto 0);
-        I_CH0_AWVALID : IN STD_LOGIC;
-        I_CH0_AWREADY : OUT STD_LOGIC;
-        I_CH0_AWADDR : IN STD_LOGIC_VECTOR (63 downto 0);
-        I_CH0_AWLEN : IN STD_LOGIC_VECTOR (31 downto 0);
-        I_CH0_WVALID : IN STD_LOGIC;
-        I_CH0_WREADY : OUT STD_LOGIC;
-        I_CH0_WDATA : IN STD_LOGIC_VECTOR (63 downto 0);
-        I_CH0_WSTRB : IN STD_LOGIC_VECTOR (7 downto 0);
-        I_CH0_BVALID : OUT STD_LOGIC;
-        I_CH0_BREADY : IN STD_LOGIC );
-    end component;
-
-
-    component reconstruct_imageProjs_local_size_m_axi IS
     generic (
         CONSERVATIVE : INTEGER;
         USER_MAXREQS : INTEGER;
@@ -1488,6 +1504,7 @@ begin
         ACLK => ap_clk,
         ARESET => ap_rst_n_inv,
         ACLK_EN => ap_const_logic_1,
+        atomLocations_offset => atomLocations_offset,
         imageProjs_local_offset => imageProjs_local_offset,
         imageProjs_offset => imageProjs_offset,
         imageProjs_local_size_offset => imageProjs_local_size_offset,
@@ -1530,9 +1547,97 @@ begin
         psfSupersample => psfSupersample,
         imageProjectionSize => imageProjectionSize,
         fullImage_rows => fullImage_rows,
-        fullImage_cols => fullImage_cols,
-        emission_cnt => applyProjectors_U0_emission_cnt,
-        emission_cnt_ap_vld => applyProjectors_U0_emission_cnt_ap_vld);
+        fullImage_cols => fullImage_cols);
+
+    atomLocations_m_axi_U : component reconstruct_atomLocations_m_axi
+    generic map (
+        CONSERVATIVE => 1,
+        USER_MAXREQS => 7,
+        MAX_READ_BURST_LENGTH => 16,
+        MAX_WRITE_BURST_LENGTH => 16,
+        C_M_AXI_ID_WIDTH => C_M_AXI_ATOMLOCATIONS_ID_WIDTH,
+        C_M_AXI_ADDR_WIDTH => C_M_AXI_ATOMLOCATIONS_ADDR_WIDTH,
+        C_M_AXI_DATA_WIDTH => C_M_AXI_ATOMLOCATIONS_DATA_WIDTH,
+        C_M_AXI_AWUSER_WIDTH => C_M_AXI_ATOMLOCATIONS_AWUSER_WIDTH,
+        C_M_AXI_ARUSER_WIDTH => C_M_AXI_ATOMLOCATIONS_ARUSER_WIDTH,
+        C_M_AXI_WUSER_WIDTH => C_M_AXI_ATOMLOCATIONS_WUSER_WIDTH,
+        C_M_AXI_RUSER_WIDTH => C_M_AXI_ATOMLOCATIONS_RUSER_WIDTH,
+        C_M_AXI_BUSER_WIDTH => C_M_AXI_ATOMLOCATIONS_BUSER_WIDTH,
+        C_USER_VALUE => C_M_AXI_ATOMLOCATIONS_USER_VALUE,
+        C_PROT_VALUE => C_M_AXI_ATOMLOCATIONS_PROT_VALUE,
+        C_CACHE_VALUE => C_M_AXI_ATOMLOCATIONS_CACHE_VALUE,
+        CH0_USER_RFIFONUM_WIDTH => 9,
+        CH0_USER_DW => 64,
+        CH0_USER_AW => 64,
+        NUM_READ_OUTSTANDING => 16,
+        NUM_WRITE_OUTSTANDING => 0)
+    port map (
+        AWVALID => m_axi_atomLocations_AWVALID,
+        AWREADY => m_axi_atomLocations_AWREADY,
+        AWADDR => m_axi_atomLocations_AWADDR,
+        AWID => m_axi_atomLocations_AWID,
+        AWLEN => m_axi_atomLocations_AWLEN,
+        AWSIZE => m_axi_atomLocations_AWSIZE,
+        AWBURST => m_axi_atomLocations_AWBURST,
+        AWLOCK => m_axi_atomLocations_AWLOCK,
+        AWCACHE => m_axi_atomLocations_AWCACHE,
+        AWPROT => m_axi_atomLocations_AWPROT,
+        AWQOS => m_axi_atomLocations_AWQOS,
+        AWREGION => m_axi_atomLocations_AWREGION,
+        AWUSER => m_axi_atomLocations_AWUSER,
+        WVALID => m_axi_atomLocations_WVALID,
+        WREADY => m_axi_atomLocations_WREADY,
+        WDATA => m_axi_atomLocations_WDATA,
+        WSTRB => m_axi_atomLocations_WSTRB,
+        WLAST => m_axi_atomLocations_WLAST,
+        WID => m_axi_atomLocations_WID,
+        WUSER => m_axi_atomLocations_WUSER,
+        ARVALID => m_axi_atomLocations_ARVALID,
+        ARREADY => m_axi_atomLocations_ARREADY,
+        ARADDR => m_axi_atomLocations_ARADDR,
+        ARID => m_axi_atomLocations_ARID,
+        ARLEN => m_axi_atomLocations_ARLEN,
+        ARSIZE => m_axi_atomLocations_ARSIZE,
+        ARBURST => m_axi_atomLocations_ARBURST,
+        ARLOCK => m_axi_atomLocations_ARLOCK,
+        ARCACHE => m_axi_atomLocations_ARCACHE,
+        ARPROT => m_axi_atomLocations_ARPROT,
+        ARQOS => m_axi_atomLocations_ARQOS,
+        ARREGION => m_axi_atomLocations_ARREGION,
+        ARUSER => m_axi_atomLocations_ARUSER,
+        RVALID => m_axi_atomLocations_RVALID,
+        RREADY => m_axi_atomLocations_RREADY,
+        RDATA => m_axi_atomLocations_RDATA,
+        RLAST => m_axi_atomLocations_RLAST,
+        RID => m_axi_atomLocations_RID,
+        RUSER => m_axi_atomLocations_RUSER,
+        RRESP => m_axi_atomLocations_RRESP,
+        BVALID => m_axi_atomLocations_BVALID,
+        BREADY => m_axi_atomLocations_BREADY,
+        BRESP => m_axi_atomLocations_BRESP,
+        BID => m_axi_atomLocations_BID,
+        BUSER => m_axi_atomLocations_BUSER,
+        ACLK => ap_clk,
+        ARESET => ap_rst_n_inv,
+        ACLK_EN => ap_const_logic_1,
+        I_CH0_ARVALID => dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_atomLocations_0_ARVALID,
+        I_CH0_ARREADY => atomLocations_0_ARREADY,
+        I_CH0_ARADDR => dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_atomLocations_0_ARADDR,
+        I_CH0_ARLEN => dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_atomLocations_0_ARLEN,
+        I_CH0_RVALID => atomLocations_0_RVALID,
+        I_CH0_RREADY => dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_atomLocations_0_RREADY,
+        I_CH0_RDATA => atomLocations_0_RDATA,
+        I_CH0_RFIFONUM => atomLocations_0_RFIFONUM,
+        I_CH0_AWVALID => ap_const_logic_0,
+        I_CH0_AWREADY => atomLocations_0_AWREADY,
+        I_CH0_AWADDR => ap_const_lv64_0,
+        I_CH0_AWLEN => ap_const_lv32_0,
+        I_CH0_WVALID => ap_const_logic_0,
+        I_CH0_WREADY => atomLocations_0_WREADY,
+        I_CH0_WDATA => ap_const_lv64_0,
+        I_CH0_WSTRB => ap_const_lv8_0,
+        I_CH0_BVALID => atomLocations_0_BVALID,
+        I_CH0_BREADY => ap_const_logic_0);
 
     emissions_m_axi_U : component reconstruct_emissions_m_axi
     generic map (
@@ -1552,7 +1657,7 @@ begin
         C_PROT_VALUE => C_M_AXI_EMISSIONS_PROT_VALUE,
         C_CACHE_VALUE => C_M_AXI_EMISSIONS_CACHE_VALUE,
         CH0_USER_RFIFONUM_WIDTH => 9,
-        CH0_USER_DW => 64,
+        CH0_USER_DW => 32,
         CH0_USER_AW => 64,
         NUM_READ_OUTSTANDING => 0,
         NUM_WRITE_OUTSTANDING => 16)
@@ -1613,16 +1718,16 @@ begin
         I_CH0_RREADY => ap_const_logic_0,
         I_CH0_RDATA => emissions_0_RDATA,
         I_CH0_RFIFONUM => emissions_0_RFIFONUM,
-        I_CH0_AWVALID => applyProjectors_U0_m_axi_emissions_0_AWVALID,
+        I_CH0_AWVALID => dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_emissions_0_AWVALID,
         I_CH0_AWREADY => emissions_0_AWREADY,
-        I_CH0_AWADDR => applyProjectors_U0_m_axi_emissions_0_AWADDR,
-        I_CH0_AWLEN => applyProjectors_U0_m_axi_emissions_0_AWLEN,
-        I_CH0_WVALID => applyProjectors_U0_m_axi_emissions_0_WVALID,
+        I_CH0_AWADDR => dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_emissions_0_AWADDR,
+        I_CH0_AWLEN => dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_emissions_0_AWLEN,
+        I_CH0_WVALID => dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_emissions_0_WVALID,
         I_CH0_WREADY => emissions_0_WREADY,
-        I_CH0_WDATA => applyProjectors_U0_m_axi_emissions_0_WDATA,
-        I_CH0_WSTRB => applyProjectors_U0_m_axi_emissions_0_WSTRB,
+        I_CH0_WDATA => dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_emissions_0_WDATA,
+        I_CH0_WSTRB => dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_emissions_0_WSTRB,
         I_CH0_BVALID => emissions_0_BVALID,
-        I_CH0_BREADY => applyProjectors_U0_m_axi_emissions_0_BREADY);
+        I_CH0_BREADY => dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_emissions_0_BREADY);
 
     fullImage_m_axi_U : component reconstruct_fullImage_m_axi
     generic map (
@@ -1642,7 +1747,7 @@ begin
         C_PROT_VALUE => C_M_AXI_FULLIMAGE_PROT_VALUE,
         C_CACHE_VALUE => C_M_AXI_FULLIMAGE_CACHE_VALUE,
         CH0_USER_RFIFONUM_WIDTH => 9,
-        CH0_USER_DW => 64,
+        CH0_USER_DW => 32,
         CH0_USER_AW => 64,
         NUM_READ_OUTSTANDING => 16,
         NUM_WRITE_OUTSTANDING => 0)
@@ -1695,12 +1800,12 @@ begin
         ACLK => ap_clk,
         ARESET => ap_rst_n_inv,
         ACLK_EN => ap_const_logic_1,
-        I_CH0_ARVALID => applyProjectors_U0_m_axi_fullImage_0_ARVALID,
+        I_CH0_ARVALID => dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_fullImage_0_ARVALID,
         I_CH0_ARREADY => fullImage_0_ARREADY,
-        I_CH0_ARADDR => applyProjectors_U0_m_axi_fullImage_0_ARADDR,
-        I_CH0_ARLEN => applyProjectors_U0_m_axi_fullImage_0_ARLEN,
+        I_CH0_ARADDR => dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_fullImage_0_ARADDR,
+        I_CH0_ARLEN => dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_fullImage_0_ARLEN,
         I_CH0_RVALID => fullImage_0_RVALID,
-        I_CH0_RREADY => applyProjectors_U0_m_axi_fullImage_0_RREADY,
+        I_CH0_RREADY => dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_fullImage_0_RREADY,
         I_CH0_RDATA => fullImage_0_RDATA,
         I_CH0_RFIFONUM => fullImage_0_RFIFONUM,
         I_CH0_AWVALID => ap_const_logic_0,
@@ -1709,8 +1814,8 @@ begin
         I_CH0_AWLEN => ap_const_lv32_0,
         I_CH0_WVALID => ap_const_logic_0,
         I_CH0_WREADY => fullImage_0_WREADY,
-        I_CH0_WDATA => ap_const_lv64_0,
-        I_CH0_WSTRB => ap_const_lv8_0,
+        I_CH0_WDATA => ap_const_lv32_0,
+        I_CH0_WSTRB => ap_const_lv4_0,
         I_CH0_BVALID => fullImage_0_BVALID,
         I_CH0_BREADY => ap_const_logic_0);
 
@@ -1732,7 +1837,7 @@ begin
         C_PROT_VALUE => C_M_AXI_IMAGEPROJS_PROT_VALUE,
         C_CACHE_VALUE => C_M_AXI_IMAGEPROJS_CACHE_VALUE,
         CH0_USER_RFIFONUM_WIDTH => 9,
-        CH0_USER_DW => 64,
+        CH0_USER_DW => 32,
         CH0_USER_AW => 64,
         NUM_READ_OUTSTANDING => 16,
         NUM_WRITE_OUTSTANDING => 0)
@@ -1785,12 +1890,12 @@ begin
         ACLK => ap_clk,
         ARESET => ap_rst_n_inv,
         ACLK_EN => ap_const_logic_1,
-        I_CH0_ARVALID => applyProjectors_U0_m_axi_imageProjs_0_ARVALID,
+        I_CH0_ARVALID => dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_imageProjs_0_ARVALID,
         I_CH0_ARREADY => imageProjs_0_ARREADY,
-        I_CH0_ARADDR => applyProjectors_U0_m_axi_imageProjs_0_ARADDR,
-        I_CH0_ARLEN => applyProjectors_U0_m_axi_imageProjs_0_ARLEN,
+        I_CH0_ARADDR => dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_imageProjs_0_ARADDR,
+        I_CH0_ARLEN => dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_imageProjs_0_ARLEN,
         I_CH0_RVALID => imageProjs_0_RVALID,
-        I_CH0_RREADY => applyProjectors_U0_m_axi_imageProjs_0_RREADY,
+        I_CH0_RREADY => dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_imageProjs_0_RREADY,
         I_CH0_RDATA => imageProjs_0_RDATA,
         I_CH0_RFIFONUM => imageProjs_0_RFIFONUM,
         I_CH0_AWVALID => ap_const_logic_0,
@@ -1799,8 +1904,8 @@ begin
         I_CH0_AWLEN => ap_const_lv32_0,
         I_CH0_WVALID => ap_const_logic_0,
         I_CH0_WREADY => imageProjs_0_WREADY,
-        I_CH0_WDATA => ap_const_lv64_0,
-        I_CH0_WSTRB => ap_const_lv8_0,
+        I_CH0_WDATA => ap_const_lv32_0,
+        I_CH0_WSTRB => ap_const_lv4_0,
         I_CH0_BVALID => imageProjs_0_BVALID,
         I_CH0_BREADY => ap_const_logic_0);
 
@@ -1822,7 +1927,7 @@ begin
         C_PROT_VALUE => C_M_AXI_IMAGEPROJS_LOCAL_PROT_VALUE,
         C_CACHE_VALUE => C_M_AXI_IMAGEPROJS_LOCAL_CACHE_VALUE,
         CH0_USER_RFIFONUM_WIDTH => 9,
-        CH0_USER_DW => 64,
+        CH0_USER_DW => 32,
         CH0_USER_AW => 64,
         NUM_READ_OUTSTANDING => 16,
         NUM_WRITE_OUTSTANDING => 0)
@@ -1875,12 +1980,12 @@ begin
         ACLK => ap_clk,
         ARESET => ap_rst_n_inv,
         ACLK_EN => ap_const_logic_1,
-        I_CH0_ARVALID => applyProjectors_U0_m_axi_imageProjs_local_0_ARVALID,
+        I_CH0_ARVALID => dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_imageProjs_local_0_ARVALID,
         I_CH0_ARREADY => imageProjs_local_0_ARREADY,
-        I_CH0_ARADDR => applyProjectors_U0_m_axi_imageProjs_local_0_ARADDR,
-        I_CH0_ARLEN => applyProjectors_U0_m_axi_imageProjs_local_0_ARLEN,
+        I_CH0_ARADDR => dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_imageProjs_local_0_ARADDR,
+        I_CH0_ARLEN => dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_imageProjs_local_0_ARLEN,
         I_CH0_RVALID => imageProjs_local_0_RVALID,
-        I_CH0_RREADY => applyProjectors_U0_m_axi_imageProjs_local_0_RREADY,
+        I_CH0_RREADY => dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_imageProjs_local_0_RREADY,
         I_CH0_RDATA => imageProjs_local_0_RDATA,
         I_CH0_RFIFONUM => imageProjs_local_0_RFIFONUM,
         I_CH0_AWVALID => ap_const_logic_0,
@@ -1889,217 +1994,101 @@ begin
         I_CH0_AWLEN => ap_const_lv32_0,
         I_CH0_WVALID => ap_const_logic_0,
         I_CH0_WREADY => imageProjs_local_0_WREADY,
-        I_CH0_WDATA => ap_const_lv64_0,
-        I_CH0_WSTRB => ap_const_lv8_0,
+        I_CH0_WDATA => ap_const_lv32_0,
+        I_CH0_WSTRB => ap_const_lv4_0,
         I_CH0_BVALID => imageProjs_local_0_BVALID,
         I_CH0_BREADY => ap_const_logic_0);
 
-    imageProjs_local_size_m_axi_U : component reconstruct_imageProjs_local_size_m_axi
-    generic map (
-        CONSERVATIVE => 1,
-        USER_MAXREQS => 7,
-        MAX_READ_BURST_LENGTH => 16,
-        MAX_WRITE_BURST_LENGTH => 16,
-        C_M_AXI_ID_WIDTH => C_M_AXI_IMAGEPROJS_LOCAL_SIZE_ID_WIDTH,
-        C_M_AXI_ADDR_WIDTH => C_M_AXI_IMAGEPROJS_LOCAL_SIZE_ADDR_WIDTH,
-        C_M_AXI_DATA_WIDTH => C_M_AXI_IMAGEPROJS_LOCAL_SIZE_DATA_WIDTH,
-        C_M_AXI_AWUSER_WIDTH => C_M_AXI_IMAGEPROJS_LOCAL_SIZE_AWUSER_WIDTH,
-        C_M_AXI_ARUSER_WIDTH => C_M_AXI_IMAGEPROJS_LOCAL_SIZE_ARUSER_WIDTH,
-        C_M_AXI_WUSER_WIDTH => C_M_AXI_IMAGEPROJS_LOCAL_SIZE_WUSER_WIDTH,
-        C_M_AXI_RUSER_WIDTH => C_M_AXI_IMAGEPROJS_LOCAL_SIZE_RUSER_WIDTH,
-        C_M_AXI_BUSER_WIDTH => C_M_AXI_IMAGEPROJS_LOCAL_SIZE_BUSER_WIDTH,
-        C_USER_VALUE => C_M_AXI_IMAGEPROJS_LOCAL_SIZE_USER_VALUE,
-        C_PROT_VALUE => C_M_AXI_IMAGEPROJS_LOCAL_SIZE_PROT_VALUE,
-        C_CACHE_VALUE => C_M_AXI_IMAGEPROJS_LOCAL_SIZE_CACHE_VALUE,
-        CH0_USER_RFIFONUM_WIDTH => 9,
-        CH0_USER_DW => 32,
-        CH0_USER_AW => 64,
-        NUM_READ_OUTSTANDING => 16,
-        NUM_WRITE_OUTSTANDING => 0)
-    port map (
-        AWVALID => m_axi_imageProjs_local_size_AWVALID,
-        AWREADY => m_axi_imageProjs_local_size_AWREADY,
-        AWADDR => m_axi_imageProjs_local_size_AWADDR,
-        AWID => m_axi_imageProjs_local_size_AWID,
-        AWLEN => m_axi_imageProjs_local_size_AWLEN,
-        AWSIZE => m_axi_imageProjs_local_size_AWSIZE,
-        AWBURST => m_axi_imageProjs_local_size_AWBURST,
-        AWLOCK => m_axi_imageProjs_local_size_AWLOCK,
-        AWCACHE => m_axi_imageProjs_local_size_AWCACHE,
-        AWPROT => m_axi_imageProjs_local_size_AWPROT,
-        AWQOS => m_axi_imageProjs_local_size_AWQOS,
-        AWREGION => m_axi_imageProjs_local_size_AWREGION,
-        AWUSER => m_axi_imageProjs_local_size_AWUSER,
-        WVALID => m_axi_imageProjs_local_size_WVALID,
-        WREADY => m_axi_imageProjs_local_size_WREADY,
-        WDATA => m_axi_imageProjs_local_size_WDATA,
-        WSTRB => m_axi_imageProjs_local_size_WSTRB,
-        WLAST => m_axi_imageProjs_local_size_WLAST,
-        WID => m_axi_imageProjs_local_size_WID,
-        WUSER => m_axi_imageProjs_local_size_WUSER,
-        ARVALID => m_axi_imageProjs_local_size_ARVALID,
-        ARREADY => m_axi_imageProjs_local_size_ARREADY,
-        ARADDR => m_axi_imageProjs_local_size_ARADDR,
-        ARID => m_axi_imageProjs_local_size_ARID,
-        ARLEN => m_axi_imageProjs_local_size_ARLEN,
-        ARSIZE => m_axi_imageProjs_local_size_ARSIZE,
-        ARBURST => m_axi_imageProjs_local_size_ARBURST,
-        ARLOCK => m_axi_imageProjs_local_size_ARLOCK,
-        ARCACHE => m_axi_imageProjs_local_size_ARCACHE,
-        ARPROT => m_axi_imageProjs_local_size_ARPROT,
-        ARQOS => m_axi_imageProjs_local_size_ARQOS,
-        ARREGION => m_axi_imageProjs_local_size_ARREGION,
-        ARUSER => m_axi_imageProjs_local_size_ARUSER,
-        RVALID => m_axi_imageProjs_local_size_RVALID,
-        RREADY => m_axi_imageProjs_local_size_RREADY,
-        RDATA => m_axi_imageProjs_local_size_RDATA,
-        RLAST => m_axi_imageProjs_local_size_RLAST,
-        RID => m_axi_imageProjs_local_size_RID,
-        RUSER => m_axi_imageProjs_local_size_RUSER,
-        RRESP => m_axi_imageProjs_local_size_RRESP,
-        BVALID => m_axi_imageProjs_local_size_BVALID,
-        BREADY => m_axi_imageProjs_local_size_BREADY,
-        BRESP => m_axi_imageProjs_local_size_BRESP,
-        BID => m_axi_imageProjs_local_size_BID,
-        BUSER => m_axi_imageProjs_local_size_BUSER,
-        ACLK => ap_clk,
-        ARESET => ap_rst_n_inv,
-        ACLK_EN => ap_const_logic_1,
-        I_CH0_ARVALID => applyProjectors_U0_m_axi_imageProjs_local_size_r_0_ARVALID,
-        I_CH0_ARREADY => imageProjs_local_size_r_0_ARREADY,
-        I_CH0_ARADDR => applyProjectors_U0_m_axi_imageProjs_local_size_r_0_ARADDR,
-        I_CH0_ARLEN => applyProjectors_U0_m_axi_imageProjs_local_size_r_0_ARLEN,
-        I_CH0_RVALID => imageProjs_local_size_r_0_RVALID,
-        I_CH0_RREADY => applyProjectors_U0_m_axi_imageProjs_local_size_r_0_RREADY,
-        I_CH0_RDATA => imageProjs_local_size_r_0_RDATA,
-        I_CH0_RFIFONUM => imageProjs_local_size_r_0_RFIFONUM,
-        I_CH0_AWVALID => ap_const_logic_0,
-        I_CH0_AWREADY => imageProjs_local_size_r_0_AWREADY,
-        I_CH0_AWADDR => ap_const_lv64_0,
-        I_CH0_AWLEN => ap_const_lv32_0,
-        I_CH0_WVALID => ap_const_logic_0,
-        I_CH0_WREADY => imageProjs_local_size_r_0_WREADY,
-        I_CH0_WDATA => ap_const_lv32_0,
-        I_CH0_WSTRB => ap_const_lv4_0,
-        I_CH0_BVALID => imageProjs_local_size_r_0_BVALID,
-        I_CH0_BREADY => ap_const_logic_0);
-
-    getLocalImages_U0 : component reconstruct_getLocalImages
+    dataflow_in_loop_VITIS_LOOP_149_1_1_U0 : component reconstruct_dataflow_in_loop_VITIS_LOOP_149_1_1
     port map (
         ap_clk => ap_clk,
         ap_rst => ap_rst_n_inv,
-        ap_start => getLocalImages_U0_ap_start,
-        ap_done => getLocalImages_U0_ap_done,
-        ap_continue => getLocalImages_U0_ap_continue,
-        ap_idle => getLocalImages_U0_ap_idle,
-        ap_ready => getLocalImages_U0_ap_ready,
-        atomLocationsSize => atomLocationsSize,
+        conv => dataflow_in_loop_VITIS_LOOP_149_1_1_U0_conv,
         psfSupersample => psfSupersample,
         projShape0 => projShape0,
         projShape1 => projShape1,
-        atomLocations_address0 => getLocalImages_U0_atomLocations_address0,
-        atomLocations_ce0 => getLocalImages_U0_atomLocations_ce0,
-        atomLocations_q0 => atomLocations_q0,
-        localImages_din => getLocalImages_U0_localImages_din,
-        localImages_full_n => localImages_full_n,
-        localImages_write => getLocalImages_U0_localImages_write,
-        localImages_num_data_valid => getLocalImages_U0_localImages_num_data_valid,
-        localImages_fifo_cap => getLocalImages_U0_localImages_fifo_cap);
-
-    applyProjectors_U0 : component reconstruct_applyProjectors
-    port map (
-        ap_clk => ap_clk,
-        ap_rst => ap_rst_n_inv,
-        ap_start => applyProjectors_U0_ap_start,
-        ap_done => applyProjectors_U0_ap_done,
-        ap_continue => applyProjectors_U0_ap_continue,
-        ap_idle => applyProjectors_U0_ap_idle,
-        ap_ready => applyProjectors_U0_ap_ready,
-        atomLocationsSize => atomLocationsSize,
-        psfSupersample => psfSupersample,
-        imageProjectionSize => imageProjectionSize,
-        m_axi_imageProjs_local_0_AWVALID => applyProjectors_U0_m_axi_imageProjs_local_0_AWVALID,
-        m_axi_imageProjs_local_0_AWREADY => ap_const_logic_0,
-        m_axi_imageProjs_local_0_AWADDR => applyProjectors_U0_m_axi_imageProjs_local_0_AWADDR,
-        m_axi_imageProjs_local_0_AWID => applyProjectors_U0_m_axi_imageProjs_local_0_AWID,
-        m_axi_imageProjs_local_0_AWLEN => applyProjectors_U0_m_axi_imageProjs_local_0_AWLEN,
-        m_axi_imageProjs_local_0_AWSIZE => applyProjectors_U0_m_axi_imageProjs_local_0_AWSIZE,
-        m_axi_imageProjs_local_0_AWBURST => applyProjectors_U0_m_axi_imageProjs_local_0_AWBURST,
-        m_axi_imageProjs_local_0_AWLOCK => applyProjectors_U0_m_axi_imageProjs_local_0_AWLOCK,
-        m_axi_imageProjs_local_0_AWCACHE => applyProjectors_U0_m_axi_imageProjs_local_0_AWCACHE,
-        m_axi_imageProjs_local_0_AWPROT => applyProjectors_U0_m_axi_imageProjs_local_0_AWPROT,
-        m_axi_imageProjs_local_0_AWQOS => applyProjectors_U0_m_axi_imageProjs_local_0_AWQOS,
-        m_axi_imageProjs_local_0_AWREGION => applyProjectors_U0_m_axi_imageProjs_local_0_AWREGION,
-        m_axi_imageProjs_local_0_AWUSER => applyProjectors_U0_m_axi_imageProjs_local_0_AWUSER,
-        m_axi_imageProjs_local_0_WVALID => applyProjectors_U0_m_axi_imageProjs_local_0_WVALID,
-        m_axi_imageProjs_local_0_WREADY => ap_const_logic_0,
-        m_axi_imageProjs_local_0_WDATA => applyProjectors_U0_m_axi_imageProjs_local_0_WDATA,
-        m_axi_imageProjs_local_0_WSTRB => applyProjectors_U0_m_axi_imageProjs_local_0_WSTRB,
-        m_axi_imageProjs_local_0_WLAST => applyProjectors_U0_m_axi_imageProjs_local_0_WLAST,
-        m_axi_imageProjs_local_0_WID => applyProjectors_U0_m_axi_imageProjs_local_0_WID,
-        m_axi_imageProjs_local_0_WUSER => applyProjectors_U0_m_axi_imageProjs_local_0_WUSER,
-        m_axi_imageProjs_local_0_ARVALID => applyProjectors_U0_m_axi_imageProjs_local_0_ARVALID,
-        m_axi_imageProjs_local_0_ARREADY => imageProjs_local_0_ARREADY,
-        m_axi_imageProjs_local_0_ARADDR => applyProjectors_U0_m_axi_imageProjs_local_0_ARADDR,
-        m_axi_imageProjs_local_0_ARID => applyProjectors_U0_m_axi_imageProjs_local_0_ARID,
-        m_axi_imageProjs_local_0_ARLEN => applyProjectors_U0_m_axi_imageProjs_local_0_ARLEN,
-        m_axi_imageProjs_local_0_ARSIZE => applyProjectors_U0_m_axi_imageProjs_local_0_ARSIZE,
-        m_axi_imageProjs_local_0_ARBURST => applyProjectors_U0_m_axi_imageProjs_local_0_ARBURST,
-        m_axi_imageProjs_local_0_ARLOCK => applyProjectors_U0_m_axi_imageProjs_local_0_ARLOCK,
-        m_axi_imageProjs_local_0_ARCACHE => applyProjectors_U0_m_axi_imageProjs_local_0_ARCACHE,
-        m_axi_imageProjs_local_0_ARPROT => applyProjectors_U0_m_axi_imageProjs_local_0_ARPROT,
-        m_axi_imageProjs_local_0_ARQOS => applyProjectors_U0_m_axi_imageProjs_local_0_ARQOS,
-        m_axi_imageProjs_local_0_ARREGION => applyProjectors_U0_m_axi_imageProjs_local_0_ARREGION,
-        m_axi_imageProjs_local_0_ARUSER => applyProjectors_U0_m_axi_imageProjs_local_0_ARUSER,
-        m_axi_imageProjs_local_0_RVALID => imageProjs_local_0_RVALID,
-        m_axi_imageProjs_local_0_RREADY => applyProjectors_U0_m_axi_imageProjs_local_0_RREADY,
-        m_axi_imageProjs_local_0_RDATA => imageProjs_local_0_RDATA,
-        m_axi_imageProjs_local_0_RLAST => imageProjs_local_0_RLAST,
-        m_axi_imageProjs_local_0_RID => imageProjs_local_0_RID,
-        m_axi_imageProjs_local_0_RFIFONUM => imageProjs_local_0_RFIFONUM,
-        m_axi_imageProjs_local_0_RUSER => imageProjs_local_0_RUSER,
-        m_axi_imageProjs_local_0_RRESP => imageProjs_local_0_RRESP,
-        m_axi_imageProjs_local_0_BVALID => ap_const_logic_0,
-        m_axi_imageProjs_local_0_BREADY => applyProjectors_U0_m_axi_imageProjs_local_0_BREADY,
-        m_axi_imageProjs_local_0_BRESP => ap_const_lv2_0,
-        m_axi_imageProjs_local_0_BID => ap_const_lv1_0,
-        m_axi_imageProjs_local_0_BUSER => ap_const_lv1_0,
-        imageProjs_local1 => imageProjs_local_offset,
-        m_axi_imageProjs_0_AWVALID => applyProjectors_U0_m_axi_imageProjs_0_AWVALID,
+        m_axi_atomLocations_0_AWVALID => dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_atomLocations_0_AWVALID,
+        m_axi_atomLocations_0_AWREADY => ap_const_logic_0,
+        m_axi_atomLocations_0_AWADDR => dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_atomLocations_0_AWADDR,
+        m_axi_atomLocations_0_AWID => dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_atomLocations_0_AWID,
+        m_axi_atomLocations_0_AWLEN => dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_atomLocations_0_AWLEN,
+        m_axi_atomLocations_0_AWSIZE => dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_atomLocations_0_AWSIZE,
+        m_axi_atomLocations_0_AWBURST => dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_atomLocations_0_AWBURST,
+        m_axi_atomLocations_0_AWLOCK => dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_atomLocations_0_AWLOCK,
+        m_axi_atomLocations_0_AWCACHE => dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_atomLocations_0_AWCACHE,
+        m_axi_atomLocations_0_AWPROT => dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_atomLocations_0_AWPROT,
+        m_axi_atomLocations_0_AWQOS => dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_atomLocations_0_AWQOS,
+        m_axi_atomLocations_0_AWREGION => dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_atomLocations_0_AWREGION,
+        m_axi_atomLocations_0_AWUSER => dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_atomLocations_0_AWUSER,
+        m_axi_atomLocations_0_WVALID => dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_atomLocations_0_WVALID,
+        m_axi_atomLocations_0_WREADY => ap_const_logic_0,
+        m_axi_atomLocations_0_WDATA => dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_atomLocations_0_WDATA,
+        m_axi_atomLocations_0_WSTRB => dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_atomLocations_0_WSTRB,
+        m_axi_atomLocations_0_WLAST => dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_atomLocations_0_WLAST,
+        m_axi_atomLocations_0_WID => dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_atomLocations_0_WID,
+        m_axi_atomLocations_0_WUSER => dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_atomLocations_0_WUSER,
+        m_axi_atomLocations_0_ARVALID => dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_atomLocations_0_ARVALID,
+        m_axi_atomLocations_0_ARREADY => atomLocations_0_ARREADY,
+        m_axi_atomLocations_0_ARADDR => dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_atomLocations_0_ARADDR,
+        m_axi_atomLocations_0_ARID => dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_atomLocations_0_ARID,
+        m_axi_atomLocations_0_ARLEN => dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_atomLocations_0_ARLEN,
+        m_axi_atomLocations_0_ARSIZE => dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_atomLocations_0_ARSIZE,
+        m_axi_atomLocations_0_ARBURST => dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_atomLocations_0_ARBURST,
+        m_axi_atomLocations_0_ARLOCK => dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_atomLocations_0_ARLOCK,
+        m_axi_atomLocations_0_ARCACHE => dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_atomLocations_0_ARCACHE,
+        m_axi_atomLocations_0_ARPROT => dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_atomLocations_0_ARPROT,
+        m_axi_atomLocations_0_ARQOS => dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_atomLocations_0_ARQOS,
+        m_axi_atomLocations_0_ARREGION => dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_atomLocations_0_ARREGION,
+        m_axi_atomLocations_0_ARUSER => dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_atomLocations_0_ARUSER,
+        m_axi_atomLocations_0_RVALID => atomLocations_0_RVALID,
+        m_axi_atomLocations_0_RREADY => dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_atomLocations_0_RREADY,
+        m_axi_atomLocations_0_RDATA => atomLocations_0_RDATA,
+        m_axi_atomLocations_0_RLAST => atomLocations_0_RLAST,
+        m_axi_atomLocations_0_RID => atomLocations_0_RID,
+        m_axi_atomLocations_0_RFIFONUM => atomLocations_0_RFIFONUM,
+        m_axi_atomLocations_0_RUSER => atomLocations_0_RUSER,
+        m_axi_atomLocations_0_RRESP => atomLocations_0_RRESP,
+        m_axi_atomLocations_0_BVALID => ap_const_logic_0,
+        m_axi_atomLocations_0_BREADY => dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_atomLocations_0_BREADY,
+        m_axi_atomLocations_0_BRESP => ap_const_lv2_0,
+        m_axi_atomLocations_0_BID => ap_const_lv1_0,
+        m_axi_atomLocations_0_BUSER => ap_const_lv1_0,
+        atomLocations1 => atomLocations_offset,
+        m_axi_imageProjs_0_AWVALID => dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_imageProjs_0_AWVALID,
         m_axi_imageProjs_0_AWREADY => ap_const_logic_0,
-        m_axi_imageProjs_0_AWADDR => applyProjectors_U0_m_axi_imageProjs_0_AWADDR,
-        m_axi_imageProjs_0_AWID => applyProjectors_U0_m_axi_imageProjs_0_AWID,
-        m_axi_imageProjs_0_AWLEN => applyProjectors_U0_m_axi_imageProjs_0_AWLEN,
-        m_axi_imageProjs_0_AWSIZE => applyProjectors_U0_m_axi_imageProjs_0_AWSIZE,
-        m_axi_imageProjs_0_AWBURST => applyProjectors_U0_m_axi_imageProjs_0_AWBURST,
-        m_axi_imageProjs_0_AWLOCK => applyProjectors_U0_m_axi_imageProjs_0_AWLOCK,
-        m_axi_imageProjs_0_AWCACHE => applyProjectors_U0_m_axi_imageProjs_0_AWCACHE,
-        m_axi_imageProjs_0_AWPROT => applyProjectors_U0_m_axi_imageProjs_0_AWPROT,
-        m_axi_imageProjs_0_AWQOS => applyProjectors_U0_m_axi_imageProjs_0_AWQOS,
-        m_axi_imageProjs_0_AWREGION => applyProjectors_U0_m_axi_imageProjs_0_AWREGION,
-        m_axi_imageProjs_0_AWUSER => applyProjectors_U0_m_axi_imageProjs_0_AWUSER,
-        m_axi_imageProjs_0_WVALID => applyProjectors_U0_m_axi_imageProjs_0_WVALID,
+        m_axi_imageProjs_0_AWADDR => dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_imageProjs_0_AWADDR,
+        m_axi_imageProjs_0_AWID => dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_imageProjs_0_AWID,
+        m_axi_imageProjs_0_AWLEN => dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_imageProjs_0_AWLEN,
+        m_axi_imageProjs_0_AWSIZE => dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_imageProjs_0_AWSIZE,
+        m_axi_imageProjs_0_AWBURST => dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_imageProjs_0_AWBURST,
+        m_axi_imageProjs_0_AWLOCK => dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_imageProjs_0_AWLOCK,
+        m_axi_imageProjs_0_AWCACHE => dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_imageProjs_0_AWCACHE,
+        m_axi_imageProjs_0_AWPROT => dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_imageProjs_0_AWPROT,
+        m_axi_imageProjs_0_AWQOS => dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_imageProjs_0_AWQOS,
+        m_axi_imageProjs_0_AWREGION => dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_imageProjs_0_AWREGION,
+        m_axi_imageProjs_0_AWUSER => dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_imageProjs_0_AWUSER,
+        m_axi_imageProjs_0_WVALID => dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_imageProjs_0_WVALID,
         m_axi_imageProjs_0_WREADY => ap_const_logic_0,
-        m_axi_imageProjs_0_WDATA => applyProjectors_U0_m_axi_imageProjs_0_WDATA,
-        m_axi_imageProjs_0_WSTRB => applyProjectors_U0_m_axi_imageProjs_0_WSTRB,
-        m_axi_imageProjs_0_WLAST => applyProjectors_U0_m_axi_imageProjs_0_WLAST,
-        m_axi_imageProjs_0_WID => applyProjectors_U0_m_axi_imageProjs_0_WID,
-        m_axi_imageProjs_0_WUSER => applyProjectors_U0_m_axi_imageProjs_0_WUSER,
-        m_axi_imageProjs_0_ARVALID => applyProjectors_U0_m_axi_imageProjs_0_ARVALID,
+        m_axi_imageProjs_0_WDATA => dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_imageProjs_0_WDATA,
+        m_axi_imageProjs_0_WSTRB => dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_imageProjs_0_WSTRB,
+        m_axi_imageProjs_0_WLAST => dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_imageProjs_0_WLAST,
+        m_axi_imageProjs_0_WID => dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_imageProjs_0_WID,
+        m_axi_imageProjs_0_WUSER => dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_imageProjs_0_WUSER,
+        m_axi_imageProjs_0_ARVALID => dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_imageProjs_0_ARVALID,
         m_axi_imageProjs_0_ARREADY => imageProjs_0_ARREADY,
-        m_axi_imageProjs_0_ARADDR => applyProjectors_U0_m_axi_imageProjs_0_ARADDR,
-        m_axi_imageProjs_0_ARID => applyProjectors_U0_m_axi_imageProjs_0_ARID,
-        m_axi_imageProjs_0_ARLEN => applyProjectors_U0_m_axi_imageProjs_0_ARLEN,
-        m_axi_imageProjs_0_ARSIZE => applyProjectors_U0_m_axi_imageProjs_0_ARSIZE,
-        m_axi_imageProjs_0_ARBURST => applyProjectors_U0_m_axi_imageProjs_0_ARBURST,
-        m_axi_imageProjs_0_ARLOCK => applyProjectors_U0_m_axi_imageProjs_0_ARLOCK,
-        m_axi_imageProjs_0_ARCACHE => applyProjectors_U0_m_axi_imageProjs_0_ARCACHE,
-        m_axi_imageProjs_0_ARPROT => applyProjectors_U0_m_axi_imageProjs_0_ARPROT,
-        m_axi_imageProjs_0_ARQOS => applyProjectors_U0_m_axi_imageProjs_0_ARQOS,
-        m_axi_imageProjs_0_ARREGION => applyProjectors_U0_m_axi_imageProjs_0_ARREGION,
-        m_axi_imageProjs_0_ARUSER => applyProjectors_U0_m_axi_imageProjs_0_ARUSER,
+        m_axi_imageProjs_0_ARADDR => dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_imageProjs_0_ARADDR,
+        m_axi_imageProjs_0_ARID => dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_imageProjs_0_ARID,
+        m_axi_imageProjs_0_ARLEN => dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_imageProjs_0_ARLEN,
+        m_axi_imageProjs_0_ARSIZE => dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_imageProjs_0_ARSIZE,
+        m_axi_imageProjs_0_ARBURST => dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_imageProjs_0_ARBURST,
+        m_axi_imageProjs_0_ARLOCK => dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_imageProjs_0_ARLOCK,
+        m_axi_imageProjs_0_ARCACHE => dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_imageProjs_0_ARCACHE,
+        m_axi_imageProjs_0_ARPROT => dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_imageProjs_0_ARPROT,
+        m_axi_imageProjs_0_ARQOS => dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_imageProjs_0_ARQOS,
+        m_axi_imageProjs_0_ARREGION => dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_imageProjs_0_ARREGION,
+        m_axi_imageProjs_0_ARUSER => dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_imageProjs_0_ARUSER,
         m_axi_imageProjs_0_RVALID => imageProjs_0_RVALID,
-        m_axi_imageProjs_0_RREADY => applyProjectors_U0_m_axi_imageProjs_0_RREADY,
+        m_axi_imageProjs_0_RREADY => dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_imageProjs_0_RREADY,
         m_axi_imageProjs_0_RDATA => imageProjs_0_RDATA,
         m_axi_imageProjs_0_RLAST => imageProjs_0_RLAST,
         m_axi_imageProjs_0_RID => imageProjs_0_RID,
@@ -2107,93 +2096,46 @@ begin
         m_axi_imageProjs_0_RUSER => imageProjs_0_RUSER,
         m_axi_imageProjs_0_RRESP => imageProjs_0_RRESP,
         m_axi_imageProjs_0_BVALID => ap_const_logic_0,
-        m_axi_imageProjs_0_BREADY => applyProjectors_U0_m_axi_imageProjs_0_BREADY,
+        m_axi_imageProjs_0_BREADY => dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_imageProjs_0_BREADY,
         m_axi_imageProjs_0_BRESP => ap_const_lv2_0,
         m_axi_imageProjs_0_BID => ap_const_lv1_0,
         m_axi_imageProjs_0_BUSER => ap_const_lv1_0,
-        imageProjs2 => imageProjs_offset,
-        m_axi_imageProjs_local_size_r_0_AWVALID => applyProjectors_U0_m_axi_imageProjs_local_size_r_0_AWVALID,
-        m_axi_imageProjs_local_size_r_0_AWREADY => ap_const_logic_0,
-        m_axi_imageProjs_local_size_r_0_AWADDR => applyProjectors_U0_m_axi_imageProjs_local_size_r_0_AWADDR,
-        m_axi_imageProjs_local_size_r_0_AWID => applyProjectors_U0_m_axi_imageProjs_local_size_r_0_AWID,
-        m_axi_imageProjs_local_size_r_0_AWLEN => applyProjectors_U0_m_axi_imageProjs_local_size_r_0_AWLEN,
-        m_axi_imageProjs_local_size_r_0_AWSIZE => applyProjectors_U0_m_axi_imageProjs_local_size_r_0_AWSIZE,
-        m_axi_imageProjs_local_size_r_0_AWBURST => applyProjectors_U0_m_axi_imageProjs_local_size_r_0_AWBURST,
-        m_axi_imageProjs_local_size_r_0_AWLOCK => applyProjectors_U0_m_axi_imageProjs_local_size_r_0_AWLOCK,
-        m_axi_imageProjs_local_size_r_0_AWCACHE => applyProjectors_U0_m_axi_imageProjs_local_size_r_0_AWCACHE,
-        m_axi_imageProjs_local_size_r_0_AWPROT => applyProjectors_U0_m_axi_imageProjs_local_size_r_0_AWPROT,
-        m_axi_imageProjs_local_size_r_0_AWQOS => applyProjectors_U0_m_axi_imageProjs_local_size_r_0_AWQOS,
-        m_axi_imageProjs_local_size_r_0_AWREGION => applyProjectors_U0_m_axi_imageProjs_local_size_r_0_AWREGION,
-        m_axi_imageProjs_local_size_r_0_AWUSER => applyProjectors_U0_m_axi_imageProjs_local_size_r_0_AWUSER,
-        m_axi_imageProjs_local_size_r_0_WVALID => applyProjectors_U0_m_axi_imageProjs_local_size_r_0_WVALID,
-        m_axi_imageProjs_local_size_r_0_WREADY => ap_const_logic_0,
-        m_axi_imageProjs_local_size_r_0_WDATA => applyProjectors_U0_m_axi_imageProjs_local_size_r_0_WDATA,
-        m_axi_imageProjs_local_size_r_0_WSTRB => applyProjectors_U0_m_axi_imageProjs_local_size_r_0_WSTRB,
-        m_axi_imageProjs_local_size_r_0_WLAST => applyProjectors_U0_m_axi_imageProjs_local_size_r_0_WLAST,
-        m_axi_imageProjs_local_size_r_0_WID => applyProjectors_U0_m_axi_imageProjs_local_size_r_0_WID,
-        m_axi_imageProjs_local_size_r_0_WUSER => applyProjectors_U0_m_axi_imageProjs_local_size_r_0_WUSER,
-        m_axi_imageProjs_local_size_r_0_ARVALID => applyProjectors_U0_m_axi_imageProjs_local_size_r_0_ARVALID,
-        m_axi_imageProjs_local_size_r_0_ARREADY => imageProjs_local_size_r_0_ARREADY,
-        m_axi_imageProjs_local_size_r_0_ARADDR => applyProjectors_U0_m_axi_imageProjs_local_size_r_0_ARADDR,
-        m_axi_imageProjs_local_size_r_0_ARID => applyProjectors_U0_m_axi_imageProjs_local_size_r_0_ARID,
-        m_axi_imageProjs_local_size_r_0_ARLEN => applyProjectors_U0_m_axi_imageProjs_local_size_r_0_ARLEN,
-        m_axi_imageProjs_local_size_r_0_ARSIZE => applyProjectors_U0_m_axi_imageProjs_local_size_r_0_ARSIZE,
-        m_axi_imageProjs_local_size_r_0_ARBURST => applyProjectors_U0_m_axi_imageProjs_local_size_r_0_ARBURST,
-        m_axi_imageProjs_local_size_r_0_ARLOCK => applyProjectors_U0_m_axi_imageProjs_local_size_r_0_ARLOCK,
-        m_axi_imageProjs_local_size_r_0_ARCACHE => applyProjectors_U0_m_axi_imageProjs_local_size_r_0_ARCACHE,
-        m_axi_imageProjs_local_size_r_0_ARPROT => applyProjectors_U0_m_axi_imageProjs_local_size_r_0_ARPROT,
-        m_axi_imageProjs_local_size_r_0_ARQOS => applyProjectors_U0_m_axi_imageProjs_local_size_r_0_ARQOS,
-        m_axi_imageProjs_local_size_r_0_ARREGION => applyProjectors_U0_m_axi_imageProjs_local_size_r_0_ARREGION,
-        m_axi_imageProjs_local_size_r_0_ARUSER => applyProjectors_U0_m_axi_imageProjs_local_size_r_0_ARUSER,
-        m_axi_imageProjs_local_size_r_0_RVALID => imageProjs_local_size_r_0_RVALID,
-        m_axi_imageProjs_local_size_r_0_RREADY => applyProjectors_U0_m_axi_imageProjs_local_size_r_0_RREADY,
-        m_axi_imageProjs_local_size_r_0_RDATA => imageProjs_local_size_r_0_RDATA,
-        m_axi_imageProjs_local_size_r_0_RLAST => imageProjs_local_size_r_0_RLAST,
-        m_axi_imageProjs_local_size_r_0_RID => imageProjs_local_size_r_0_RID,
-        m_axi_imageProjs_local_size_r_0_RFIFONUM => imageProjs_local_size_r_0_RFIFONUM,
-        m_axi_imageProjs_local_size_r_0_RUSER => imageProjs_local_size_r_0_RUSER,
-        m_axi_imageProjs_local_size_r_0_RRESP => imageProjs_local_size_r_0_RRESP,
-        m_axi_imageProjs_local_size_r_0_BVALID => ap_const_logic_0,
-        m_axi_imageProjs_local_size_r_0_BREADY => applyProjectors_U0_m_axi_imageProjs_local_size_r_0_BREADY,
-        m_axi_imageProjs_local_size_r_0_BRESP => ap_const_lv2_0,
-        m_axi_imageProjs_local_size_r_0_BID => ap_const_lv1_0,
-        m_axi_imageProjs_local_size_r_0_BUSER => ap_const_lv1_0,
-        imageProjs_local_size3 => imageProjs_local_size_offset,
-        m_axi_fullImage_0_AWVALID => applyProjectors_U0_m_axi_fullImage_0_AWVALID,
+        empty => imageProjs_offset,
+        m_axi_fullImage_0_AWVALID => dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_fullImage_0_AWVALID,
         m_axi_fullImage_0_AWREADY => ap_const_logic_0,
-        m_axi_fullImage_0_AWADDR => applyProjectors_U0_m_axi_fullImage_0_AWADDR,
-        m_axi_fullImage_0_AWID => applyProjectors_U0_m_axi_fullImage_0_AWID,
-        m_axi_fullImage_0_AWLEN => applyProjectors_U0_m_axi_fullImage_0_AWLEN,
-        m_axi_fullImage_0_AWSIZE => applyProjectors_U0_m_axi_fullImage_0_AWSIZE,
-        m_axi_fullImage_0_AWBURST => applyProjectors_U0_m_axi_fullImage_0_AWBURST,
-        m_axi_fullImage_0_AWLOCK => applyProjectors_U0_m_axi_fullImage_0_AWLOCK,
-        m_axi_fullImage_0_AWCACHE => applyProjectors_U0_m_axi_fullImage_0_AWCACHE,
-        m_axi_fullImage_0_AWPROT => applyProjectors_U0_m_axi_fullImage_0_AWPROT,
-        m_axi_fullImage_0_AWQOS => applyProjectors_U0_m_axi_fullImage_0_AWQOS,
-        m_axi_fullImage_0_AWREGION => applyProjectors_U0_m_axi_fullImage_0_AWREGION,
-        m_axi_fullImage_0_AWUSER => applyProjectors_U0_m_axi_fullImage_0_AWUSER,
-        m_axi_fullImage_0_WVALID => applyProjectors_U0_m_axi_fullImage_0_WVALID,
+        m_axi_fullImage_0_AWADDR => dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_fullImage_0_AWADDR,
+        m_axi_fullImage_0_AWID => dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_fullImage_0_AWID,
+        m_axi_fullImage_0_AWLEN => dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_fullImage_0_AWLEN,
+        m_axi_fullImage_0_AWSIZE => dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_fullImage_0_AWSIZE,
+        m_axi_fullImage_0_AWBURST => dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_fullImage_0_AWBURST,
+        m_axi_fullImage_0_AWLOCK => dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_fullImage_0_AWLOCK,
+        m_axi_fullImage_0_AWCACHE => dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_fullImage_0_AWCACHE,
+        m_axi_fullImage_0_AWPROT => dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_fullImage_0_AWPROT,
+        m_axi_fullImage_0_AWQOS => dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_fullImage_0_AWQOS,
+        m_axi_fullImage_0_AWREGION => dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_fullImage_0_AWREGION,
+        m_axi_fullImage_0_AWUSER => dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_fullImage_0_AWUSER,
+        m_axi_fullImage_0_WVALID => dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_fullImage_0_WVALID,
         m_axi_fullImage_0_WREADY => ap_const_logic_0,
-        m_axi_fullImage_0_WDATA => applyProjectors_U0_m_axi_fullImage_0_WDATA,
-        m_axi_fullImage_0_WSTRB => applyProjectors_U0_m_axi_fullImage_0_WSTRB,
-        m_axi_fullImage_0_WLAST => applyProjectors_U0_m_axi_fullImage_0_WLAST,
-        m_axi_fullImage_0_WID => applyProjectors_U0_m_axi_fullImage_0_WID,
-        m_axi_fullImage_0_WUSER => applyProjectors_U0_m_axi_fullImage_0_WUSER,
-        m_axi_fullImage_0_ARVALID => applyProjectors_U0_m_axi_fullImage_0_ARVALID,
+        m_axi_fullImage_0_WDATA => dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_fullImage_0_WDATA,
+        m_axi_fullImage_0_WSTRB => dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_fullImage_0_WSTRB,
+        m_axi_fullImage_0_WLAST => dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_fullImage_0_WLAST,
+        m_axi_fullImage_0_WID => dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_fullImage_0_WID,
+        m_axi_fullImage_0_WUSER => dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_fullImage_0_WUSER,
+        m_axi_fullImage_0_ARVALID => dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_fullImage_0_ARVALID,
         m_axi_fullImage_0_ARREADY => fullImage_0_ARREADY,
-        m_axi_fullImage_0_ARADDR => applyProjectors_U0_m_axi_fullImage_0_ARADDR,
-        m_axi_fullImage_0_ARID => applyProjectors_U0_m_axi_fullImage_0_ARID,
-        m_axi_fullImage_0_ARLEN => applyProjectors_U0_m_axi_fullImage_0_ARLEN,
-        m_axi_fullImage_0_ARSIZE => applyProjectors_U0_m_axi_fullImage_0_ARSIZE,
-        m_axi_fullImage_0_ARBURST => applyProjectors_U0_m_axi_fullImage_0_ARBURST,
-        m_axi_fullImage_0_ARLOCK => applyProjectors_U0_m_axi_fullImage_0_ARLOCK,
-        m_axi_fullImage_0_ARCACHE => applyProjectors_U0_m_axi_fullImage_0_ARCACHE,
-        m_axi_fullImage_0_ARPROT => applyProjectors_U0_m_axi_fullImage_0_ARPROT,
-        m_axi_fullImage_0_ARQOS => applyProjectors_U0_m_axi_fullImage_0_ARQOS,
-        m_axi_fullImage_0_ARREGION => applyProjectors_U0_m_axi_fullImage_0_ARREGION,
-        m_axi_fullImage_0_ARUSER => applyProjectors_U0_m_axi_fullImage_0_ARUSER,
+        m_axi_fullImage_0_ARADDR => dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_fullImage_0_ARADDR,
+        m_axi_fullImage_0_ARID => dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_fullImage_0_ARID,
+        m_axi_fullImage_0_ARLEN => dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_fullImage_0_ARLEN,
+        m_axi_fullImage_0_ARSIZE => dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_fullImage_0_ARSIZE,
+        m_axi_fullImage_0_ARBURST => dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_fullImage_0_ARBURST,
+        m_axi_fullImage_0_ARLOCK => dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_fullImage_0_ARLOCK,
+        m_axi_fullImage_0_ARCACHE => dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_fullImage_0_ARCACHE,
+        m_axi_fullImage_0_ARPROT => dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_fullImage_0_ARPROT,
+        m_axi_fullImage_0_ARQOS => dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_fullImage_0_ARQOS,
+        m_axi_fullImage_0_ARREGION => dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_fullImage_0_ARREGION,
+        m_axi_fullImage_0_ARUSER => dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_fullImage_0_ARUSER,
         m_axi_fullImage_0_RVALID => fullImage_0_RVALID,
-        m_axi_fullImage_0_RREADY => applyProjectors_U0_m_axi_fullImage_0_RREADY,
+        m_axi_fullImage_0_RREADY => dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_fullImage_0_RREADY,
         m_axi_fullImage_0_RDATA => fullImage_0_RDATA,
         m_axi_fullImage_0_RLAST => fullImage_0_RLAST,
         m_axi_fullImage_0_RID => fullImage_0_RID,
@@ -2201,140 +2143,266 @@ begin
         m_axi_fullImage_0_RUSER => fullImage_0_RUSER,
         m_axi_fullImage_0_RRESP => fullImage_0_RRESP,
         m_axi_fullImage_0_BVALID => ap_const_logic_0,
-        m_axi_fullImage_0_BREADY => applyProjectors_U0_m_axi_fullImage_0_BREADY,
+        m_axi_fullImage_0_BREADY => dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_fullImage_0_BREADY,
         m_axi_fullImage_0_BRESP => ap_const_lv2_0,
         m_axi_fullImage_0_BID => ap_const_lv1_0,
         m_axi_fullImage_0_BUSER => ap_const_lv1_0,
-        fullImage4 => fullImage_offset,
-        fullImage_rows => fullImage_rows,
-        fullImage_cols => fullImage_cols,
-        localImages_dout => localImages_dout,
-        localImages_empty_n => localImages_empty_n,
-        localImages_read => applyProjectors_U0_localImages_read,
-        localImages_num_data_valid => localImages_num_data_valid,
-        localImages_fifo_cap => localImages_fifo_cap,
-        m_axi_emissions_0_AWVALID => applyProjectors_U0_m_axi_emissions_0_AWVALID,
+        fullImage2 => fullImage_offset,
+        m_axi_imageProjs_local_0_AWVALID => dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_imageProjs_local_0_AWVALID,
+        m_axi_imageProjs_local_0_AWREADY => ap_const_logic_0,
+        m_axi_imageProjs_local_0_AWADDR => dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_imageProjs_local_0_AWADDR,
+        m_axi_imageProjs_local_0_AWID => dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_imageProjs_local_0_AWID,
+        m_axi_imageProjs_local_0_AWLEN => dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_imageProjs_local_0_AWLEN,
+        m_axi_imageProjs_local_0_AWSIZE => dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_imageProjs_local_0_AWSIZE,
+        m_axi_imageProjs_local_0_AWBURST => dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_imageProjs_local_0_AWBURST,
+        m_axi_imageProjs_local_0_AWLOCK => dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_imageProjs_local_0_AWLOCK,
+        m_axi_imageProjs_local_0_AWCACHE => dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_imageProjs_local_0_AWCACHE,
+        m_axi_imageProjs_local_0_AWPROT => dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_imageProjs_local_0_AWPROT,
+        m_axi_imageProjs_local_0_AWQOS => dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_imageProjs_local_0_AWQOS,
+        m_axi_imageProjs_local_0_AWREGION => dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_imageProjs_local_0_AWREGION,
+        m_axi_imageProjs_local_0_AWUSER => dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_imageProjs_local_0_AWUSER,
+        m_axi_imageProjs_local_0_WVALID => dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_imageProjs_local_0_WVALID,
+        m_axi_imageProjs_local_0_WREADY => ap_const_logic_0,
+        m_axi_imageProjs_local_0_WDATA => dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_imageProjs_local_0_WDATA,
+        m_axi_imageProjs_local_0_WSTRB => dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_imageProjs_local_0_WSTRB,
+        m_axi_imageProjs_local_0_WLAST => dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_imageProjs_local_0_WLAST,
+        m_axi_imageProjs_local_0_WID => dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_imageProjs_local_0_WID,
+        m_axi_imageProjs_local_0_WUSER => dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_imageProjs_local_0_WUSER,
+        m_axi_imageProjs_local_0_ARVALID => dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_imageProjs_local_0_ARVALID,
+        m_axi_imageProjs_local_0_ARREADY => imageProjs_local_0_ARREADY,
+        m_axi_imageProjs_local_0_ARADDR => dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_imageProjs_local_0_ARADDR,
+        m_axi_imageProjs_local_0_ARID => dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_imageProjs_local_0_ARID,
+        m_axi_imageProjs_local_0_ARLEN => dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_imageProjs_local_0_ARLEN,
+        m_axi_imageProjs_local_0_ARSIZE => dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_imageProjs_local_0_ARSIZE,
+        m_axi_imageProjs_local_0_ARBURST => dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_imageProjs_local_0_ARBURST,
+        m_axi_imageProjs_local_0_ARLOCK => dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_imageProjs_local_0_ARLOCK,
+        m_axi_imageProjs_local_0_ARCACHE => dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_imageProjs_local_0_ARCACHE,
+        m_axi_imageProjs_local_0_ARPROT => dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_imageProjs_local_0_ARPROT,
+        m_axi_imageProjs_local_0_ARQOS => dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_imageProjs_local_0_ARQOS,
+        m_axi_imageProjs_local_0_ARREGION => dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_imageProjs_local_0_ARREGION,
+        m_axi_imageProjs_local_0_ARUSER => dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_imageProjs_local_0_ARUSER,
+        m_axi_imageProjs_local_0_RVALID => imageProjs_local_0_RVALID,
+        m_axi_imageProjs_local_0_RREADY => dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_imageProjs_local_0_RREADY,
+        m_axi_imageProjs_local_0_RDATA => imageProjs_local_0_RDATA,
+        m_axi_imageProjs_local_0_RLAST => imageProjs_local_0_RLAST,
+        m_axi_imageProjs_local_0_RID => imageProjs_local_0_RID,
+        m_axi_imageProjs_local_0_RFIFONUM => imageProjs_local_0_RFIFONUM,
+        m_axi_imageProjs_local_0_RUSER => imageProjs_local_0_RUSER,
+        m_axi_imageProjs_local_0_RRESP => imageProjs_local_0_RRESP,
+        m_axi_imageProjs_local_0_BVALID => ap_const_logic_0,
+        m_axi_imageProjs_local_0_BREADY => dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_imageProjs_local_0_BREADY,
+        m_axi_imageProjs_local_0_BRESP => ap_const_lv2_0,
+        m_axi_imageProjs_local_0_BID => ap_const_lv1_0,
+        m_axi_imageProjs_local_0_BUSER => ap_const_lv1_0,
+        imageProjs_local3 => imageProjs_local_offset,
+        idx_0 => dataflow_in_loop_VITIS_LOOP_149_1_1_U0_idx_0,
+        m_axi_emissions_0_AWVALID => dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_emissions_0_AWVALID,
         m_axi_emissions_0_AWREADY => emissions_0_AWREADY,
-        m_axi_emissions_0_AWADDR => applyProjectors_U0_m_axi_emissions_0_AWADDR,
-        m_axi_emissions_0_AWID => applyProjectors_U0_m_axi_emissions_0_AWID,
-        m_axi_emissions_0_AWLEN => applyProjectors_U0_m_axi_emissions_0_AWLEN,
-        m_axi_emissions_0_AWSIZE => applyProjectors_U0_m_axi_emissions_0_AWSIZE,
-        m_axi_emissions_0_AWBURST => applyProjectors_U0_m_axi_emissions_0_AWBURST,
-        m_axi_emissions_0_AWLOCK => applyProjectors_U0_m_axi_emissions_0_AWLOCK,
-        m_axi_emissions_0_AWCACHE => applyProjectors_U0_m_axi_emissions_0_AWCACHE,
-        m_axi_emissions_0_AWPROT => applyProjectors_U0_m_axi_emissions_0_AWPROT,
-        m_axi_emissions_0_AWQOS => applyProjectors_U0_m_axi_emissions_0_AWQOS,
-        m_axi_emissions_0_AWREGION => applyProjectors_U0_m_axi_emissions_0_AWREGION,
-        m_axi_emissions_0_AWUSER => applyProjectors_U0_m_axi_emissions_0_AWUSER,
-        m_axi_emissions_0_WVALID => applyProjectors_U0_m_axi_emissions_0_WVALID,
+        m_axi_emissions_0_AWADDR => dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_emissions_0_AWADDR,
+        m_axi_emissions_0_AWID => dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_emissions_0_AWID,
+        m_axi_emissions_0_AWLEN => dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_emissions_0_AWLEN,
+        m_axi_emissions_0_AWSIZE => dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_emissions_0_AWSIZE,
+        m_axi_emissions_0_AWBURST => dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_emissions_0_AWBURST,
+        m_axi_emissions_0_AWLOCK => dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_emissions_0_AWLOCK,
+        m_axi_emissions_0_AWCACHE => dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_emissions_0_AWCACHE,
+        m_axi_emissions_0_AWPROT => dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_emissions_0_AWPROT,
+        m_axi_emissions_0_AWQOS => dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_emissions_0_AWQOS,
+        m_axi_emissions_0_AWREGION => dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_emissions_0_AWREGION,
+        m_axi_emissions_0_AWUSER => dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_emissions_0_AWUSER,
+        m_axi_emissions_0_WVALID => dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_emissions_0_WVALID,
         m_axi_emissions_0_WREADY => emissions_0_WREADY,
-        m_axi_emissions_0_WDATA => applyProjectors_U0_m_axi_emissions_0_WDATA,
-        m_axi_emissions_0_WSTRB => applyProjectors_U0_m_axi_emissions_0_WSTRB,
-        m_axi_emissions_0_WLAST => applyProjectors_U0_m_axi_emissions_0_WLAST,
-        m_axi_emissions_0_WID => applyProjectors_U0_m_axi_emissions_0_WID,
-        m_axi_emissions_0_WUSER => applyProjectors_U0_m_axi_emissions_0_WUSER,
-        m_axi_emissions_0_ARVALID => applyProjectors_U0_m_axi_emissions_0_ARVALID,
+        m_axi_emissions_0_WDATA => dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_emissions_0_WDATA,
+        m_axi_emissions_0_WSTRB => dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_emissions_0_WSTRB,
+        m_axi_emissions_0_WLAST => dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_emissions_0_WLAST,
+        m_axi_emissions_0_WID => dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_emissions_0_WID,
+        m_axi_emissions_0_WUSER => dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_emissions_0_WUSER,
+        m_axi_emissions_0_ARVALID => dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_emissions_0_ARVALID,
         m_axi_emissions_0_ARREADY => ap_const_logic_0,
-        m_axi_emissions_0_ARADDR => applyProjectors_U0_m_axi_emissions_0_ARADDR,
-        m_axi_emissions_0_ARID => applyProjectors_U0_m_axi_emissions_0_ARID,
-        m_axi_emissions_0_ARLEN => applyProjectors_U0_m_axi_emissions_0_ARLEN,
-        m_axi_emissions_0_ARSIZE => applyProjectors_U0_m_axi_emissions_0_ARSIZE,
-        m_axi_emissions_0_ARBURST => applyProjectors_U0_m_axi_emissions_0_ARBURST,
-        m_axi_emissions_0_ARLOCK => applyProjectors_U0_m_axi_emissions_0_ARLOCK,
-        m_axi_emissions_0_ARCACHE => applyProjectors_U0_m_axi_emissions_0_ARCACHE,
-        m_axi_emissions_0_ARPROT => applyProjectors_U0_m_axi_emissions_0_ARPROT,
-        m_axi_emissions_0_ARQOS => applyProjectors_U0_m_axi_emissions_0_ARQOS,
-        m_axi_emissions_0_ARREGION => applyProjectors_U0_m_axi_emissions_0_ARREGION,
-        m_axi_emissions_0_ARUSER => applyProjectors_U0_m_axi_emissions_0_ARUSER,
+        m_axi_emissions_0_ARADDR => dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_emissions_0_ARADDR,
+        m_axi_emissions_0_ARID => dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_emissions_0_ARID,
+        m_axi_emissions_0_ARLEN => dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_emissions_0_ARLEN,
+        m_axi_emissions_0_ARSIZE => dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_emissions_0_ARSIZE,
+        m_axi_emissions_0_ARBURST => dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_emissions_0_ARBURST,
+        m_axi_emissions_0_ARLOCK => dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_emissions_0_ARLOCK,
+        m_axi_emissions_0_ARCACHE => dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_emissions_0_ARCACHE,
+        m_axi_emissions_0_ARPROT => dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_emissions_0_ARPROT,
+        m_axi_emissions_0_ARQOS => dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_emissions_0_ARQOS,
+        m_axi_emissions_0_ARREGION => dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_emissions_0_ARREGION,
+        m_axi_emissions_0_ARUSER => dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_emissions_0_ARUSER,
         m_axi_emissions_0_RVALID => ap_const_logic_0,
-        m_axi_emissions_0_RREADY => applyProjectors_U0_m_axi_emissions_0_RREADY,
-        m_axi_emissions_0_RDATA => ap_const_lv64_0,
+        m_axi_emissions_0_RREADY => dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_emissions_0_RREADY,
+        m_axi_emissions_0_RDATA => ap_const_lv32_0,
         m_axi_emissions_0_RLAST => ap_const_logic_0,
         m_axi_emissions_0_RID => ap_const_lv1_0,
         m_axi_emissions_0_RFIFONUM => ap_const_lv9_0,
         m_axi_emissions_0_RUSER => ap_const_lv1_0,
         m_axi_emissions_0_RRESP => ap_const_lv2_0,
         m_axi_emissions_0_BVALID => emissions_0_BVALID,
-        m_axi_emissions_0_BREADY => applyProjectors_U0_m_axi_emissions_0_BREADY,
+        m_axi_emissions_0_BREADY => dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_emissions_0_BREADY,
         m_axi_emissions_0_BRESP => emissions_0_BRESP,
         m_axi_emissions_0_BID => emissions_0_BID,
         m_axi_emissions_0_BUSER => emissions_0_BUSER,
-        emissions5 => emissions_offset,
-        emission_cnt => applyProjectors_U0_emission_cnt,
-        emission_cnt_ap_vld => applyProjectors_U0_emission_cnt_ap_vld);
+        emissions4 => emissions_offset,
+        idx_0_ap_vld => ap_const_logic_0,
+        emissions4_ap_vld => ap_const_logic_1,
+        ap_start => dataflow_in_loop_VITIS_LOOP_149_1_1_U0_ap_start,
+        conv_ap_vld => ap_const_logic_0,
+        psfSupersample_ap_vld => ap_const_logic_1,
+        projShape0_ap_vld => ap_const_logic_1,
+        projShape1_ap_vld => ap_const_logic_1,
+        atomLocations1_ap_vld => ap_const_logic_1,
+        fullImage2_ap_vld => ap_const_logic_1,
+        imageProjs_local3_ap_vld => ap_const_logic_1,
+        empty_ap_vld => ap_const_logic_1,
+        ap_done => dataflow_in_loop_VITIS_LOOP_149_1_1_U0_ap_done,
+        ap_ready => dataflow_in_loop_VITIS_LOOP_149_1_1_U0_ap_ready,
+        ap_idle => dataflow_in_loop_VITIS_LOOP_149_1_1_U0_ap_idle,
+        ap_continue => dataflow_in_loop_VITIS_LOOP_149_1_1_U0_ap_continue);
 
-    localImages_U : component reconstruct_fifo_w256_d2_S
+    ap_bound_U : component reconstruct_ap_bound
     port map (
         clk => ap_clk,
         reset => ap_rst_n_inv,
         if_read_ce => ap_const_logic_1,
         if_write_ce => ap_const_logic_1,
-        if_din => getLocalImages_U0_localImages_din,
-        if_full_n => localImages_full_n,
-        if_write => getLocalImages_U0_localImages_write,
-        if_dout => localImages_dout,
-        if_empty_n => localImages_empty_n,
-        if_read => applyProjectors_U0_localImages_read,
-        if_num_data_valid => localImages_num_data_valid,
-        if_fifo_cap => localImages_fifo_cap);
+        if_din => atomLocationsSize,
+        if_full_n => ap_bound_full_n,
+        if_write => ap_bound_write,
+        if_dout => ap_bound_dout,
+        if_empty_n => ap_bound_empty_n,
+        if_read => ap_bound_read);
 
 
 
 
 
-    ap_sync_reg_applyProjectors_U0_ap_ready_assign_proc : process(ap_clk)
+    ap_bound_reg_ack_assign_proc : process(ap_clk)
     begin
         if (ap_clk'event and ap_clk =  '1') then
             if (ap_rst_n_inv = '1') then
-                ap_sync_reg_applyProjectors_U0_ap_ready <= ap_const_logic_0;
+                ap_bound_reg_ack <= ap_const_logic_0;
             else
-                if (((ap_sync_ready and ap_start) = ap_const_logic_1)) then 
-                    ap_sync_reg_applyProjectors_U0_ap_ready <= ap_const_logic_0;
+                if (((ap_start = ap_const_logic_1) and (ap_internal_ready = ap_const_logic_0))) then 
+                    ap_bound_reg_ack <= ap_bound_ack;
                 else 
-                    ap_sync_reg_applyProjectors_U0_ap_ready <= ap_sync_applyProjectors_U0_ap_ready;
+                    ap_bound_reg_ack <= ap_const_logic_0;
                 end if; 
             end if;
         end if;
     end process;
 
 
-    ap_sync_reg_getLocalImages_U0_ap_ready_assign_proc : process(ap_clk)
+    ap_loop_dataflow_input_count_assign_proc : process(ap_clk)
     begin
         if (ap_clk'event and ap_clk =  '1') then
             if (ap_rst_n_inv = '1') then
-                ap_sync_reg_getLocalImages_U0_ap_ready <= ap_const_logic_0;
+                ap_loop_dataflow_input_count <= ap_const_lv32_0;
             else
-                if (((ap_sync_ready and ap_start) = ap_const_logic_1)) then 
-                    ap_sync_reg_getLocalImages_U0_ap_ready <= ap_const_logic_0;
-                else 
-                    ap_sync_reg_getLocalImages_U0_ap_ready <= ap_sync_getLocalImages_U0_ap_ready;
+                if ((not((ap_loop_dataflow_input_count = ap_bound_minus_1)) and (ap_real_start = ap_const_logic_1) and (dataflow_in_loop_VITIS_LOOP_149_1_1_U0_ap_ready = ap_const_logic_1))) then 
+                    ap_loop_dataflow_input_count <= std_logic_vector(unsigned(ap_loop_dataflow_input_count) + unsigned(ap_const_lv32_1));
+                elsif (((ap_real_start = ap_const_logic_1) and (ap_loop_dataflow_input_count = ap_bound_minus_1) and (dataflow_in_loop_VITIS_LOOP_149_1_1_U0_ap_ready = ap_const_logic_1))) then 
+                    ap_loop_dataflow_input_count <= ap_const_lv32_0;
                 end if; 
             end if;
         end if;
     end process;
 
-    ap_done <= applyProjectors_U0_ap_done;
-    ap_idle <= (getLocalImages_U0_ap_idle and applyProjectors_U0_ap_idle);
-    ap_ready <= ap_sync_ready;
+
+    ap_loop_dataflow_output_count_assign_proc : process(ap_clk)
+    begin
+        if (ap_clk'event and ap_clk =  '1') then
+            if (ap_rst_n_inv = '1') then
+                ap_loop_dataflow_output_count <= ap_const_lv32_0;
+            else
+                if ((not((unsigned(ap_bound_dout) <= unsigned(ap_const_lv32_0))) and not((ap_loop_dataflow_output_count = ap_bound_minus_1_output)) and (ap_const_logic_1 = ap_bound_empty_n) and (dataflow_in_loop_VITIS_LOOP_149_1_1_U0_ap_continue = ap_const_logic_1) and (dataflow_in_loop_VITIS_LOOP_149_1_1_U0_ap_done = ap_const_logic_1))) then 
+                    ap_loop_dataflow_output_count <= std_logic_vector(unsigned(ap_loop_dataflow_output_count) + unsigned(ap_const_lv32_1));
+                elsif ((not((unsigned(ap_bound_dout) <= unsigned(ap_const_lv32_0))) and (ap_const_logic_1 = ap_bound_empty_n) and (ap_loop_dataflow_output_count = ap_bound_minus_1_output) and (dataflow_in_loop_VITIS_LOOP_149_1_1_U0_ap_continue = ap_const_logic_1) and (dataflow_in_loop_VITIS_LOOP_149_1_1_U0_ap_done = ap_const_logic_1))) then 
+                    ap_loop_dataflow_output_count <= ap_const_lv32_0;
+                end if; 
+            end if;
+        end if;
+    end process;
+
+    ap_bound_ack <= (ap_bound_reg_ack or ap_bound_full_n);
+    ap_bound_minus_1 <= std_logic_vector(unsigned(atomLocationsSize) - unsigned(ap_const_lv32_1));
+    ap_bound_minus_1_output <= std_logic_vector(unsigned(ap_bound_dout) - unsigned(ap_const_lv32_1));
+    ap_bound_read <= (ap_internal_done and ap_bound_empty_n);
+
+    ap_bound_write_assign_proc : process(ap_start, ap_bound_reg_ack)
+    begin
+        if (((ap_start = ap_const_logic_1) and (ap_const_logic_0 = ap_bound_reg_ack))) then 
+            ap_bound_write <= ap_const_logic_1;
+        else 
+            ap_bound_write <= ap_const_logic_0;
+        end if; 
+    end process;
+
+    ap_done <= ap_internal_done;
+
+    ap_idle_assign_proc : process(ap_start, dataflow_in_loop_VITIS_LOOP_149_1_1_U0_ap_idle, ap_bound_empty_n, ap_loop_dataflow_output_count)
+    begin
+        if (((ap_start = ap_const_logic_0) and (ap_loop_dataflow_output_count = ap_const_lv32_0) and (ap_const_logic_0 = ap_bound_empty_n) and (dataflow_in_loop_VITIS_LOOP_149_1_1_U0_ap_idle = ap_const_logic_1))) then 
+            ap_idle <= ap_const_logic_1;
+        else 
+            ap_idle <= ap_const_logic_0;
+        end if; 
+    end process;
+
+
+    ap_internal_done_assign_proc : process(dataflow_in_loop_VITIS_LOOP_149_1_1_U0_ap_done, ap_bound_dout, ap_bound_empty_n, ap_loop_dataflow_output_count, ap_bound_minus_1_output)
+    begin
+        if (((ap_const_logic_1 = ap_bound_empty_n) and ((ap_const_lv32_0 = ap_bound_dout) or ((ap_loop_dataflow_output_count = ap_bound_minus_1_output) and (dataflow_in_loop_VITIS_LOOP_149_1_1_U0_ap_done = ap_const_logic_1))))) then 
+            ap_internal_done <= ap_const_logic_1;
+        else 
+            ap_internal_done <= ap_const_logic_0;
+        end if; 
+    end process;
+
+
+    ap_internal_ready_assign_proc : process(ap_start, atomLocationsSize, ap_partial_ready)
+    begin
+        if (((ap_partial_ready = ap_const_logic_1) or ((unsigned(atomLocationsSize) <= unsigned(ap_const_lv32_0)) and (ap_start = ap_const_logic_1)))) then 
+            ap_internal_ready <= ap_const_logic_1;
+        else 
+            ap_internal_ready <= ap_const_logic_0;
+        end if; 
+    end process;
+
+
+    ap_partial_ready_assign_proc : process(dataflow_in_loop_VITIS_LOOP_149_1_1_U0_ap_ready, ap_loop_dataflow_input_count, ap_bound_minus_1, ap_real_start)
+    begin
+        if (((ap_real_start = ap_const_logic_1) and (ap_loop_dataflow_input_count = ap_bound_minus_1) and (dataflow_in_loop_VITIS_LOOP_149_1_1_U0_ap_ready = ap_const_logic_1))) then 
+            ap_partial_ready <= ap_const_logic_1;
+        else 
+            ap_partial_ready <= ap_const_logic_0;
+        end if; 
+    end process;
+
+    ap_ready <= ap_internal_ready;
+
+    ap_real_start_assign_proc : process(ap_start, atomLocationsSize, ap_bound_ack)
+    begin
+        if ((not((unsigned(atomLocationsSize) <= unsigned(ap_const_lv32_0))) and (ap_start = ap_const_logic_1) and (ap_const_logic_1 = ap_bound_ack))) then 
+            ap_real_start <= ap_const_logic_1;
+        else 
+            ap_real_start <= ap_const_logic_0;
+        end if; 
+    end process;
+
 
     ap_rst_n_inv_assign_proc : process(ap_rst_n)
     begin
                 ap_rst_n_inv <= not(ap_rst_n);
     end process;
 
-    ap_sync_applyProjectors_U0_ap_ready <= (applyProjectors_U0_ap_ready or ap_sync_reg_applyProjectors_U0_ap_ready);
-    ap_sync_getLocalImages_U0_ap_ready <= (getLocalImages_U0_ap_ready or ap_sync_reg_getLocalImages_U0_ap_ready);
-    ap_sync_ready <= (ap_sync_getLocalImages_U0_ap_ready and ap_sync_applyProjectors_U0_ap_ready);
-    applyProjectors_U0_ap_continue <= ap_const_logic_1;
-    applyProjectors_U0_ap_start <= ((ap_sync_reg_applyProjectors_U0_ap_ready xor ap_const_logic_1) and ap_start);
-    atomLocations_address0 <= getLocalImages_U0_atomLocations_address0;
-    atomLocations_address1 <= ap_const_lv7_0;
-    atomLocations_ce0 <= getLocalImages_U0_atomLocations_ce0;
-    atomLocations_ce1 <= ap_const_logic_0;
-    atomLocations_d0 <= ap_const_lv128_lc_1;
-    atomLocations_d1 <= ap_const_lv128_lc_1;
-    atomLocations_we0 <= ap_const_logic_0;
-    atomLocations_we1 <= ap_const_logic_0;
+    atomLocations_0_RID <= ap_const_lv1_0;
+    atomLocations_0_RLAST <= ap_const_logic_0;
+    atomLocations_0_RRESP <= ap_const_lv2_0;
+    atomLocations_0_RUSER <= ap_const_lv1_0;
+    dataflow_in_loop_VITIS_LOOP_149_1_1_U0_ap_continue <= ap_const_logic_1;
+    dataflow_in_loop_VITIS_LOOP_149_1_1_U0_ap_start <= ap_real_start;
+    dataflow_in_loop_VITIS_LOOP_149_1_1_U0_conv <= ap_loop_dataflow_input_count(16 - 1 downto 0);
+    dataflow_in_loop_VITIS_LOOP_149_1_1_U0_idx_0 <= ap_loop_dataflow_input_count(16 - 1 downto 0);
     emissions_0_BID <= ap_const_lv1_0;
     emissions_0_BRESP <= ap_const_lv2_0;
     emissions_0_BUSER <= ap_const_lv1_0;
@@ -2342,10 +2410,6 @@ begin
     fullImage_0_RLAST <= ap_const_logic_0;
     fullImage_0_RRESP <= ap_const_lv2_0;
     fullImage_0_RUSER <= ap_const_lv1_0;
-    getLocalImages_U0_ap_continue <= ap_const_logic_1;
-    getLocalImages_U0_ap_start <= ((ap_sync_reg_getLocalImages_U0_ap_ready xor ap_const_logic_1) and ap_start);
-    getLocalImages_U0_localImages_fifo_cap <= std_logic_vector(IEEE.numeric_std.resize(unsigned(std_logic_vector(IEEE.numeric_std.resize(unsigned(localImages_fifo_cap),3))),32));
-    getLocalImages_U0_localImages_num_data_valid <= std_logic_vector(IEEE.numeric_std.resize(unsigned(std_logic_vector(IEEE.numeric_std.resize(unsigned(localImages_num_data_valid),3))),32));
     imageProjs_0_RID <= ap_const_lv1_0;
     imageProjs_0_RLAST <= ap_const_logic_0;
     imageProjs_0_RRESP <= ap_const_lv2_0;
@@ -2354,8 +2418,36 @@ begin
     imageProjs_local_0_RLAST <= ap_const_logic_0;
     imageProjs_local_0_RRESP <= ap_const_lv2_0;
     imageProjs_local_0_RUSER <= ap_const_lv1_0;
-    imageProjs_local_size_r_0_RID <= ap_const_lv1_0;
-    imageProjs_local_size_r_0_RLAST <= ap_const_logic_0;
-    imageProjs_local_size_r_0_RRESP <= ap_const_lv2_0;
-    imageProjs_local_size_r_0_RUSER <= ap_const_lv1_0;
+    m_axi_imageProjs_local_size_ARADDR <= ap_const_lv64_0;
+    m_axi_imageProjs_local_size_ARBURST <= ap_const_lv2_0;
+    m_axi_imageProjs_local_size_ARCACHE <= ap_const_lv4_0;
+    m_axi_imageProjs_local_size_ARID <= ap_const_lv1_0;
+    m_axi_imageProjs_local_size_ARLEN <= ap_const_lv8_0;
+    m_axi_imageProjs_local_size_ARLOCK <= ap_const_lv2_0;
+    m_axi_imageProjs_local_size_ARPROT <= ap_const_lv3_0;
+    m_axi_imageProjs_local_size_ARQOS <= ap_const_lv4_0;
+    m_axi_imageProjs_local_size_ARREGION <= ap_const_lv4_0;
+    m_axi_imageProjs_local_size_ARSIZE <= ap_const_lv3_0;
+    m_axi_imageProjs_local_size_ARUSER <= ap_const_lv1_0;
+    m_axi_imageProjs_local_size_ARVALID <= ap_const_logic_0;
+    m_axi_imageProjs_local_size_AWADDR <= ap_const_lv64_0;
+    m_axi_imageProjs_local_size_AWBURST <= ap_const_lv2_0;
+    m_axi_imageProjs_local_size_AWCACHE <= ap_const_lv4_0;
+    m_axi_imageProjs_local_size_AWID <= ap_const_lv1_0;
+    m_axi_imageProjs_local_size_AWLEN <= ap_const_lv8_0;
+    m_axi_imageProjs_local_size_AWLOCK <= ap_const_lv2_0;
+    m_axi_imageProjs_local_size_AWPROT <= ap_const_lv3_0;
+    m_axi_imageProjs_local_size_AWQOS <= ap_const_lv4_0;
+    m_axi_imageProjs_local_size_AWREGION <= ap_const_lv4_0;
+    m_axi_imageProjs_local_size_AWSIZE <= ap_const_lv3_0;
+    m_axi_imageProjs_local_size_AWUSER <= ap_const_lv1_0;
+    m_axi_imageProjs_local_size_AWVALID <= ap_const_logic_0;
+    m_axi_imageProjs_local_size_BREADY <= ap_const_logic_0;
+    m_axi_imageProjs_local_size_RREADY <= ap_const_logic_0;
+    m_axi_imageProjs_local_size_WDATA <= ap_const_lv32_0;
+    m_axi_imageProjs_local_size_WID <= ap_const_lv1_0;
+    m_axi_imageProjs_local_size_WLAST <= ap_const_logic_0;
+    m_axi_imageProjs_local_size_WSTRB <= ap_const_lv4_0;
+    m_axi_imageProjs_local_size_WUSER <= ap_const_lv1_0;
+    m_axi_imageProjs_local_size_WVALID <= ap_const_logic_0;
 end behav;

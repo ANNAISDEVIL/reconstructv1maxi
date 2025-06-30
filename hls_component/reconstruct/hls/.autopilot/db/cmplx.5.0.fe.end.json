@@ -1,80 +1,110 @@
 {
     "1": {
-        "name": "getLocalImages",
-        "file": "image_analysis.cpp",
-        "fileloc": "7",
-        "instructions": "423",
-        "total_instructions": "1768",
-        "calls": "4 3",
+        "name": "conv_kernel",
+        "file": "..\/image_analysis.cpp",
+        "fileloc": "98",
+        "instructions": "3852",
+        "total_instructions": "5951",
+        "calls": "3",
         "basicblocks": "1",
         "loads": {
-            "L": "200"
+            "L": "1924"
         }
     },
     "2": {
-        "name": "applyProjectors",
+        "name": "getLocalImages_single",
         "file": "image_analysis.cpp",
-        "fileloc": "63",
-        "instructions": "207",
-        "total_instructions": "207",
+        "fileloc": "7",
+        "instructions": "243",
+        "total_instructions": "243",
         "calls": "",
-        "basicblocks": "17",
+        "basicblocks": "3",
+        "loads": {
+            "G": "8"
+        }
+    },
+    "0": {
+        "name": "reconstruct",
+        "file": "image_analysis.cpp",
+        "fileloc": "116",
+        "instructions": "68",
+        "total_instructions": "6607",
+        "calls": "8",
+        "basicblocks": "4",
+        "loops": {
+            "L": "1"
+        }
+    },
+    "3": {
+        "name": "conv_kernel_Pipeline_VITIS_LOOP_101_1",
+        "file": "..\/image_analysis.cpp",
+        "fileloc": "101",
+        "instructions": "2099",
+        "total_instructions": "2099",
+        "calls": "",
+        "basicblocks": "3",
         "loads": {
             "L": "3"
         },
         "stores": {
-            "L": "4"
-        },
-        "loops": {
-            "L": "1",
-            "N": "2"
-        }
-    },
-    "3": {
-        "name": "getLocalImages_Pipeline_process_loop",
-        "file": "..\/image_analysis.cpp",
-        "fileloc": "19",
-        "instructions": "422",
-        "total_instructions": "422",
-        "calls": "",
-        "basicblocks": "4",
-        "loads": {
-            "G": "8",
-            "L": "1"
-        },
-        "stores": {
-            "L": "2"
+            "L": "6"
         },
         "loops": {
             "L": "1"
         }
     },
     "4": {
-        "name": "getLocalImages_Pipeline_copy_loop",
+        "name": "Image_extract_Pipeline_VITIS_LOOP_77_1_VITIS_LOOP_78_2",
         "file": "..\/image_analysis.cpp",
-        "fileloc": "10",
-        "instructions": "923",
-        "total_instructions": "923",
+        "fileloc": "166",
+        "instructions": "213",
+        "total_instructions": "213",
         "calls": "",
-        "basicblocks": "105",
+        "basicblocks": "37",
         "loads": {
-            "L": "201",
-            "T": "1"
+            "L": "4"
         },
         "stores": {
-            "L": "202"
+            "L": "70"
         },
         "loops": {
             "L": "1"
         }
     },
-    "0": {
-        "name": "reconstruct",
+    "5": {
+        "name": "post_process",
+        "file": "..\/image_analysis.cpp",
+        "fileloc": "169",
+        "instructions": "15",
+        "total_instructions": "15",
+        "calls": "",
+        "basicblocks": "1"
+    },
+    "6": {
+        "name": "dataflow_in_loop_VITIS_LOOP_149_1.1_Block_newFuncRoot_proc",
+        "file": "..\/image_analysis.cpp",
+        "fileloc": "169",
+        "instructions": "6",
+        "total_instructions": "6",
+        "calls": "",
+        "basicblocks": "1"
+    },
+    "7": {
+        "name": "Image_extract",
+        "file": "..\/image_analysis.cpp",
+        "fileloc": "166",
+        "instructions": "22",
+        "total_instructions": "235",
+        "calls": "4",
+        "basicblocks": "1"
+    },
+    "8": {
+        "name": "_Z11reconstructiiiP13atom_locationiiPfS1_PiS1_iiS1__for.inc",
         "file": "image_analysis.cpp",
-        "fileloc": "120",
-        "instructions": "67",
-        "total_instructions": "2042",
-        "calls": "1 2",
+        "fileloc": "0",
+        "instructions": "89",
+        "total_instructions": "6539",
+        "calls": "6 2 7 1 5",
         "basicblocks": "1"
     }
 }

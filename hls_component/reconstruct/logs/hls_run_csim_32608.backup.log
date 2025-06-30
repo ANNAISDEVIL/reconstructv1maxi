@@ -1,0 +1,46 @@
+  **** HLS Build v2024.2 5238294
+INFO: [HLS 200-2005] Using work_dir F:/LMU/quantumMA/opimization/reconstructv1maxi/hls_component/reconstruct 
+INFO: [HLS 200-1505] Using default flow_target 'vivado'
+Resolution: For help on HLS 200-1505 see docs.xilinx.com/access/sources/dita/topic?Doc_Version=2024.2%20English&url=ug1448-hls-guidance&resourceid=200-1505.html
+INFO: [HLS 200-1465] Applying ini 'syn.file=F:/LMU/quantumMA/opimization/reconstructv1maxi/image_analysis.cpp' from F:/LMU/quantumMA/opimization/reconstructv1maxi/hls_component/hls_config.cfg(13)
+INFO: [HLS 200-10] Adding design file 'F:/LMU/quantumMA/opimization/reconstructv1maxi/image_analysis.cpp' to the project
+INFO: [HLS 200-1465] Applying ini 'syn.file=F:/LMU/quantumMA/opimization/reconstructv1maxi/image_analysis.hpp' from F:/LMU/quantumMA/opimization/reconstructv1maxi/hls_component/hls_config.cfg(14)
+INFO: [HLS 200-10] Adding design file 'F:/LMU/quantumMA/opimization/reconstructv1maxi/image_analysis.hpp' to the project
+INFO: [HLS 200-1465] Applying ini 'tb.file=F:/LMU/quantumMA/naia/reconstructv1/imagTransform/restoutput.txt' from F:/LMU/quantumMA/opimization/reconstructv1maxi/hls_component/hls_config.cfg(8)
+INFO: [HLS 200-10] Adding test bench file 'F:/LMU/quantumMA/naia/reconstructv1/imagTransform/restoutput.txt' to the project
+INFO: [HLS 200-1465] Applying ini 'tb.file=F:/LMU/quantumMA/naia/reconstructv1/imagTransform/fullImage_output.txt' from F:/LMU/quantumMA/opimization/reconstructv1maxi/hls_component/hls_config.cfg(9)
+INFO: [HLS 200-10] Adding test bench file 'F:/LMU/quantumMA/naia/reconstructv1/imagTransform/fullImage_output.txt' to the project
+INFO: [HLS 200-1465] Applying ini 'tb.file=F:/LMU/quantumMA/opimization/reconstructv1maxi/test.cpp' from F:/LMU/quantumMA/opimization/reconstructv1maxi/hls_component/hls_config.cfg(10)
+INFO: [HLS 200-10] Adding test bench file 'F:/LMU/quantumMA/opimization/reconstructv1maxi/test.cpp' to the project
+INFO: [HLS 200-1465] Applying ini 'syn.top=reconstruct' from F:/LMU/quantumMA/opimization/reconstructv1maxi/hls_component/hls_config.cfg(7)
+INFO: [HLS 200-1465] Applying ini 'flow_target=vivado' from F:/LMU/quantumMA/opimization/reconstructv1maxi/hls_component/hls_config.cfg(4)
+INFO: [HLS 200-1505] Using flow_target 'vivado'
+Resolution: For help on HLS 200-1505 see docs.xilinx.com/access/sources/dita/topic?Doc_Version=2024.2%20English&url=ug1448-hls-guidance&resourceid=200-1505.html
+INFO: [HLS 200-1465] Applying ini 'part=xczu7ev-ffvc1156-2-e' from F:/LMU/quantumMA/opimization/reconstructv1maxi/hls_component/hls_config.cfg(1)
+INFO: [HLS 200-1611] Setting target device to 'xczu7ev-ffvc1156-2-e'
+INFO: [HLS 200-1465] Applying ini 'csim.clean=1' from F:/LMU/quantumMA/opimization/reconstructv1maxi/hls_component/hls_config.cfg(11)
+INFO: [HLS 200-1465] Applying ini 'csim.code_analyzer=1' from F:/LMU/quantumMA/opimization/reconstructv1maxi/hls_component/hls_config.cfg(12)
+INFO: [HLS 200-1465] Applying ini 'package.output.format=ip_catalog' from F:/LMU/quantumMA/opimization/reconstructv1maxi/hls_component/hls_config.cfg(5)
+INFO: [SIM 211-200] Executing Code Analyzer instead of classic HLS C simulation
+INFO: [SIM 211-200] Cleaning
+slxcmd:0:0: info: [ Cleaned build and execution files ]
+INFO: [HLS 211-200] Compiling source code ../image_analysis.cpp as hardware code with instrumentation
+INFO: [HLS 211-200] Compiling source code F:/LMU/quantumMA/opimization/reconstructv1maxi/test.cpp as test bench code with instrumentation
+INFO: [HLS 211-200] Compiling source code ../image_analysis.cpp as test bench code with instrumentation
+../image_analysis.cpp:68:39: warning: The 'enable_flush' option of the 'HLS pipeline' directive or pragma is deprecated, use style=flp instead [-Wignored-hls-pragmas]
+#pragma HLS PIPELINE II=1 enable_flush
+                                      ^
+../image_analysis.cpp:216:6: error: redefinition of 'applyProjectors'
+void applyProjectors(int atomLocationsSize, int psfSupersample, 
+     ^
+../image_analysis.cpp:51:6: note: previous definition is here
+void applyProjectors(int atomLocationsSize, int psfSupersample, 
+     ^
+../image_analysis.cpp:324:98: warning: unexpected pragma parameter 'storage_type' [-Winvalid-hls-pragmas]
+#pragma HLS INTERFACE port=atomLocations mode=m_axi bundle=atomLocations depth=1000 storage_type=RAM_2P // 
+                                                                                                 ^
+2 warnings and 1 error generated.
+slxcmd:0:0: warning: Non-zero exit code: 1 returned by 'INFO: [HLS 211-200] Compiling source code ../image_analysis.cpp as hardware code with instrumentation'
+ERROR: [SIM 211-200] Code Analyzer execution failed. Consider running the classic C simulation instead by disabling the hls.csim.code_analyzer option in the config file.
+ERROR: Problem running csim: child process exited abnormally
+INFO: [HLS 200-112] Total CPU user time: 8 seconds. Total CPU system time: 2 seconds. Total elapsed time: 19.717 seconds; peak allocated memory: 619.375 MB.

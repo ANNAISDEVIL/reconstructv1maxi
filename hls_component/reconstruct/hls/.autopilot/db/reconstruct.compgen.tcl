@@ -1,7 +1,12 @@
 # This script segment is generated automatically by AutoPilot
 
 if {${::AESL::PGuard_rtl_comp_handler}} {
-	::AP::rtl_comp_handler reconstruct_fifo_w256_d2_S BINDTYPE {storage} TYPE {fifo} IMPL {srl} ALLOW_PRAGMA 1 INSTNAME {localImages_U}
+	::AP::rtl_comp_handler reconstruct_ap_bound BINDTYPE {storage} TYPE {fifo} IMPL {srl} ALLOW_PRAGMA 1 INSTNAME {ap_bound_U}
+}
+
+
+if {${::AESL::PGuard_rtl_comp_handler}} {
+	::AP::rtl_comp_handler reconstruct_atomLocations_m_axi BINDTYPE {interface} TYPE {adapter} IMPL {m_axi}
 }
 
 
@@ -12,11 +17,6 @@ if {${::AESL::PGuard_rtl_comp_handler}} {
 
 if {${::AESL::PGuard_rtl_comp_handler}} {
 	::AP::rtl_comp_handler reconstruct_imageProjs_m_axi BINDTYPE {interface} TYPE {adapter} IMPL {m_axi}
-}
-
-
-if {${::AESL::PGuard_rtl_comp_handler}} {
-	::AP::rtl_comp_handler reconstruct_imageProjs_local_size_m_axi BINDTYPE {interface} TYPE {adapter} IMPL {m_axi}
 }
 
 
@@ -39,7 +39,7 @@ if {${::AESL::PGuard_autoexp_gen}} {
 
 set axilite_register_dict [dict create]
 set port_control {
-imageProjs_local_offset { 
+atomLocations_offset { 
 	dir I
 	width 64
 	depth 1
@@ -47,7 +47,7 @@ imageProjs_local_offset {
 	offset 16
 	offset_end 27
 }
-imageProjs_offset { 
+imageProjs_local_offset { 
 	dir I
 	width 64
 	depth 1
@@ -55,7 +55,7 @@ imageProjs_offset {
 	offset 28
 	offset_end 39
 }
-imageProjs_local_size_offset { 
+imageProjs_offset { 
 	dir I
 	width 64
 	depth 1
@@ -63,7 +63,7 @@ imageProjs_local_size_offset {
 	offset 40
 	offset_end 51
 }
-fullImage_offset { 
+imageProjs_local_size_offset { 
 	dir I
 	width 64
 	depth 1
@@ -71,13 +71,21 @@ fullImage_offset {
 	offset 52
 	offset_end 63
 }
-emissions_offset { 
+fullImage_offset { 
 	dir I
 	width 64
 	depth 1
 	mode ap_none
 	offset 64
 	offset_end 75
+}
+emissions_offset { 
+	dir I
+	width 64
+	depth 1
+	mode ap_none
+	offset 76
+	offset_end 87
 }
 ap_start { }
 ap_done { }
@@ -93,7 +101,7 @@ dict set axilite_register_dict control $port_control
 if {${::AESL::PGuard_simmodel_gen}} {
 	if {[info proc ::AESL_LIB_XILADAPTER::s_axilite_gen] == "::AESL_LIB_XILADAPTER::s_axilite_gen"} {
 		eval "::AESL_LIB_XILADAPTER::s_axilite_gen { \
-			id 470 \
+			id 2245 \
 			corename reconstruct_control_axilite \
 			name reconstruct_control_s_axi \
 			ports {$port_control} \
@@ -170,14 +178,6 @@ fullImage_cols {
 	offset 64
 	offset_end 71
 }
-emission_cnt { 
-	dir O
-	width 32
-	depth 1
-	mode ap_vld
-	offset 72
-	offset_end 79
-}
 }
 dict set axilite_register_dict scalar_data $port_scalar_data
 
@@ -186,7 +186,7 @@ dict set axilite_register_dict scalar_data $port_scalar_data
 if {${::AESL::PGuard_simmodel_gen}} {
 	if {[info proc ::AESL_LIB_XILADAPTER::s_axilite_gen] == "::AESL_LIB_XILADAPTER::s_axilite_gen"} {
 		eval "::AESL_LIB_XILADAPTER::s_axilite_gen { \
-			id 471 \
+			id 2246 \
 			corename reconstruct_scalar_data_axilite \
 			name reconstruct_scalar_data_s_axi \
 			ports {$port_scalar_data} \
@@ -205,25 +205,6 @@ if {${::AESL::PGuard_simmodel_gen}} {
 if {${::AESL::PGuard_rtl_comp_handler}} {
 	::AP::rtl_comp_handler reconstruct_scalar_data_s_axi BINDTYPE interface TYPE interface_s_axilite
 }
-
-# XIL_BRAM:
-if {${::AESL::PGuard_autoexp_gen}} {
-if {[info proc ::AESL_LIB_XILADAPTER::xil_bram_gen] == "::AESL_LIB_XILADAPTER::xil_bram_gen"} {
-eval "::AESL_LIB_XILADAPTER::xil_bram_gen { \
-    id 472 \
-    name atomLocations \
-    reset_level 0 \
-    sync_rst true \
-    dir I \
-    corename atomLocations \
-    op interface \
-    ports { atomLocations_address0 { O 7 vector } atomLocations_ce0 { O 1 bit } atomLocations_d0 { O 128 vector } atomLocations_q0 { I 128 vector } atomLocations_we0 { O 1 bit } atomLocations_address1 { O 7 vector } atomLocations_ce1 { O 1 bit } atomLocations_d1 { O 128 vector } atomLocations_q1 { I 128 vector } atomLocations_we1 { O 1 bit } } \
-} "
-} else {
-puts "@W \[IMPL-110\] Cannot find bus interface model in the library. Ignored generation of bus interface for 'atomLocations'"
-}
-}
-
 
 
 # Adapter definition:

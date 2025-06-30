@@ -40,9 +40,7 @@ port (
     psfSupersample        :out  STD_LOGIC_VECTOR(31 downto 0);
     imageProjectionSize   :out  STD_LOGIC_VECTOR(31 downto 0);
     fullImage_rows        :out  STD_LOGIC_VECTOR(31 downto 0);
-    fullImage_cols        :out  STD_LOGIC_VECTOR(31 downto 0);
-    emission_cnt          :in   STD_LOGIC_VECTOR(31 downto 0);
-    emission_cnt_ap_vld   :in   STD_LOGIC
+    fullImage_cols        :out  STD_LOGIC_VECTOR(31 downto 0)
 );
 end entity reconstruct_scalar_data_s_axi;
 
@@ -74,11 +72,6 @@ end entity reconstruct_scalar_data_s_axi;
 -- 0x40 : Data signal of fullImage_cols
 --        bit 31~0 - fullImage_cols[31:0] (Read/Write)
 -- 0x44 : reserved
--- 0x48 : Data signal of emission_cnt
---        bit 31~0 - emission_cnt[31:0] (Read)
--- 0x4c : Control signal of emission_cnt
---        bit 0  - emission_cnt_ap_vld (Read/COR)
---        others - reserved
 -- (SC = Self Clear, COR = Clear on Read, TOW = Toggle on Write, COH = Clear on Handshake)
 
 architecture behave of reconstruct_scalar_data_s_axi is
@@ -100,8 +93,6 @@ architecture behave of reconstruct_scalar_data_s_axi is
     constant ADDR_FULLIMAGE_ROWS_CTRL        : INTEGER := 16#3c#;
     constant ADDR_FULLIMAGE_COLS_DATA_0      : INTEGER := 16#40#;
     constant ADDR_FULLIMAGE_COLS_CTRL        : INTEGER := 16#44#;
-    constant ADDR_EMISSION_CNT_DATA_0        : INTEGER := 16#48#;
-    constant ADDR_EMISSION_CNT_CTRL          : INTEGER := 16#4c#;
     constant ADDR_BITS         : INTEGER := 7;
 
     signal waddr               : UNSIGNED(ADDR_BITS-1 downto 0);
@@ -123,8 +114,6 @@ architecture behave of reconstruct_scalar_data_s_axi is
     signal int_imageProjectionSize : UNSIGNED(31 downto 0) := (others => '0');
     signal int_fullImage_rows  : UNSIGNED(31 downto 0) := (others => '0');
     signal int_fullImage_cols  : UNSIGNED(31 downto 0) := (others => '0');
-    signal int_emission_cnt_ap_vld : STD_LOGIC;
-    signal int_emission_cnt    : UNSIGNED(31 downto 0) := (others => '0');
 
 
 begin
@@ -254,10 +243,6 @@ begin
                         rdata_data <= RESIZE(int_fullImage_rows(31 downto 0), 32);
                     when ADDR_FULLIMAGE_COLS_DATA_0 =>
                         rdata_data <= RESIZE(int_fullImage_cols(31 downto 0), 32);
-                    when ADDR_EMISSION_CNT_DATA_0 =>
-                        rdata_data <= RESIZE(int_emission_cnt(31 downto 0), 32);
-                    when ADDR_EMISSION_CNT_CTRL =>
-                        rdata_data(0) <= int_emission_cnt_ap_vld;
                     when others =>
                         NULL;
                     end case;
@@ -361,34 +346,6 @@ begin
             elsif (ACLK_EN = '1') then
                 if (w_hs = '1' and waddr = ADDR_FULLIMAGE_COLS_DATA_0) then
                     int_fullImage_cols(31 downto 0) <= (UNSIGNED(WDATA(31 downto 0)) and wmask(31 downto 0)) or ((not wmask(31 downto 0)) and int_fullImage_cols(31 downto 0));
-                end if;
-            end if;
-        end if;
-    end process;
-
-    process (ACLK)
-    begin
-        if (ACLK'event and ACLK = '1') then
-            if (ARESET = '1') then
-                int_emission_cnt <= (others => '0');
-            elsif (ACLK_EN = '1') then
-                if (emission_cnt_ap_vld = '1') then
-                    int_emission_cnt <= UNSIGNED(emission_cnt);
-                end if;
-            end if;
-        end if;
-    end process;
-
-    process (ACLK)
-    begin
-        if (ACLK'event and ACLK = '1') then
-            if (ARESET = '1') then
-                int_emission_cnt_ap_vld <= '0';
-            elsif (ACLK_EN = '1') then
-                if (emission_cnt_ap_vld = '1') then
-                    int_emission_cnt_ap_vld <= '1';
-                elsif (ar_hs = '1' and raddr = ADDR_EMISSION_CNT_CTRL) then
-                    int_emission_cnt_ap_vld <= '0'; -- clear on read
                 end if;
             end if;
         end if;

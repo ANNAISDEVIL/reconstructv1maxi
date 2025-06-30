@@ -1,0 +1,157 @@
+<ENTRY>
+{
+ "thisFile": "F:/LMU\\quantumMA\\opimization\\reconstructv1maxi\\hls_component\\reconstruct\\reconstruct.hlsrun_package_summary",
+ "connectId": "",
+ "serverToken": "",
+ "timestamp": "0"
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_CmdStep",
+ "dateTimestamp": "06/27/25 13:51:05",
+ "timestampMillis": "1751025065338",
+ "buildStep": {
+  "cmdId": "e808ace2-a655-478f-a8c8-cf3c6dba766a",
+  "name": "vitis-run",
+  "logFile": "F:/LMU\\quantumMA\\opimization\\reconstructv1maxi\\hls_component\\reconstruct\\logs\\reconstruct.steps.log",
+  "commandLine": "F:/Vitis/2024.2/bin/unwrapped/win64.o/vitis-run.exe  --mode hls --package --config F:\\LMU\\quantumMA\\opimization\\reconstructv1maxi\\hls_component\\hls_config.cfg --work_dir reconstruct ",
+  "args": [
+   "--mode",
+   "hls",
+   "--package",
+   "--config",
+   "F:\\LMU\\quantumMA\\opimization\\reconstructv1maxi\\hls_component\\hls_config.cfg",
+   "--work_dir",
+   "reconstruct"
+  ],
+  "iniFiles": [],
+  "cwd": "F:\\LMU\\quantumMA\\opimization\\reconstructv1maxi\\hls_component"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Status",
+ "dateTimestamp": "06/27/25 13:51:05",
+ "timestampMillis": "1751025065339",
+ "status": {
+  "cmdId": "e808ace2-a655-478f-a8c8-cf3c6dba766a",
+  "state": "CS_RUNNING"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_FlowMetaData",
+ "dateTimestamp": "06/27/25 13:51:14",
+ "timestampMillis": "1751025074538",
+ "buildSummary": {
+  "hardwarePlatform": "",
+  "hardwareDsa": "",
+  "platformDirectory": "",
+  "runtime": "",
+  "systemConfig": "",
+  "flow": "BF_RUN",
+  "target": "TT_HLS_IP",
+  "kernels": [
+   {
+    "base": {
+     "type": "KERNEL",
+     "name": "reconstruct",
+     "file": "F:/LMU\\quantumMA\\opimization\\reconstructv1maxi\\hls_component\\reconstruct\\reconstruct.zip",
+     "reports": [],
+     "uuid": ""
+    },
+    "sources": [
+     "F:/LMU\\quantumMA\\opimization\\reconstructv1maxi\\image_analysis.cpp",
+     "F:/LMU\\quantumMA\\opimization\\reconstructv1maxi\\image_analysis.hpp"
+    ],
+    "psSources": [],
+    "cuNames": [],
+    "type": "HLS",
+    "frequency": 0,
+    "freqUnits": ""
+   }
+  ],
+  "toolVersion": "2024.2"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_SubCmdStep",
+ "dateTimestamp": "06/27/25 13:51:14",
+ "timestampMillis": "1751025074539",
+ "buildStep": {
+  "cmdId": "488c3927-6425-4a22-84e3-a6b8f05fd017",
+  "name": "",
+  "logFile": "F:/LMU\\quantumMA\\opimization\\reconstructv1maxi\\hls_component\\reconstruct\\hls\\hls.log",
+  "commandLine": "",
+  "args": [],
+  "iniFiles": [],
+  "cwd": "F:\\LMU\\quantumMA\\opimization\\reconstructv1maxi\\hls_component"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Status",
+ "dateTimestamp": "06/27/25 13:51:14",
+ "timestampMillis": "1751025074539",
+ "status": {
+  "cmdId": "488c3927-6425-4a22-84e3-a6b8f05fd017",
+  "state": "CS_RUNNING"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Status",
+ "dateTimestamp": "06/27/25 13:52:00",
+ "timestampMillis": "1751025120530",
+ "status": {
+  "cmdId": "488c3927-6425-4a22-84e3-a6b8f05fd017",
+  "state": "CS_PASSED"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Status",
+ "dateTimestamp": "06/27/25 13:52:00",
+ "timestampMillis": "1751025120786",
+ "status": {
+  "cmdId": "e808ace2-a655-478f-a8c8-cf3c6dba766a",
+  "state": "CS_PASSED"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "06/27/25 13:52:00",
+ "timestampMillis": "1751025120787",
+ "report": {
+  "path": "",
+  "name": "",
+  "fileType": "HTML",
+  "reportType": "GLOBAL_RULECHECK_GUIDANCE",
+  "cmdId": ""
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "06/27/25 13:52:00",
+ "timestampMillis": "1751025120787",
+ "report": {
+  "path": "",
+  "name": "",
+  "fileType": "BINARY_PROTOBUF",
+  "reportType": "GLOBAL_RULECHECK_GUIDANCE",
+  "cmdId": ""
+ }
+}
+</ENTRY>

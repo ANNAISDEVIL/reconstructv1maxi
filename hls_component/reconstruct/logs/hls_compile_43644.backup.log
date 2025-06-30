@@ -1,0 +1,242 @@
+  **** HLS Build v2024.2 5238294
+INFO: [HLS 200-2005] Using work_dir F:/LMU/quantumMA/opimization/reconstructv1maxi/hls_component/reconstruct 
+INFO: [HLS 200-1505] Using default flow_target 'vivado'
+Resolution: For help on HLS 200-1505 see docs.xilinx.com/access/sources/dita/topic?Doc_Version=2024.2%20English&url=ug1448-hls-guidance&resourceid=200-1505.html
+INFO: [HLS 200-1465] Applying ini 'syn.file=F:/LMU/quantumMA/opimization/reconstructv1maxi/image_analysis.cpp' from F:/LMU/quantumMA/opimization/reconstructv1maxi/hls_component/hls_config.cfg(13)
+INFO: [HLS 200-10] Adding design file 'F:/LMU/quantumMA/opimization/reconstructv1maxi/image_analysis.cpp' to the project
+INFO: [HLS 200-1465] Applying ini 'syn.file=F:/LMU/quantumMA/opimization/reconstructv1maxi/image_analysis.hpp' from F:/LMU/quantumMA/opimization/reconstructv1maxi/hls_component/hls_config.cfg(14)
+INFO: [HLS 200-10] Adding design file 'F:/LMU/quantumMA/opimization/reconstructv1maxi/image_analysis.hpp' to the project
+INFO: [HLS 200-1465] Applying ini 'tb.file=F:/LMU/quantumMA/naia/reconstructv1/imagTransform/restoutput.txt' from F:/LMU/quantumMA/opimization/reconstructv1maxi/hls_component/hls_config.cfg(8)
+INFO: [HLS 200-10] Adding test bench file 'F:/LMU/quantumMA/naia/reconstructv1/imagTransform/restoutput.txt' to the project
+INFO: [HLS 200-1465] Applying ini 'tb.file=F:/LMU/quantumMA/naia/reconstructv1/imagTransform/fullImage_output.txt' from F:/LMU/quantumMA/opimization/reconstructv1maxi/hls_component/hls_config.cfg(9)
+INFO: [HLS 200-10] Adding test bench file 'F:/LMU/quantumMA/naia/reconstructv1/imagTransform/fullImage_output.txt' to the project
+INFO: [HLS 200-1465] Applying ini 'tb.file=F:/LMU/quantumMA/opimization/reconstructv1maxi/test.cpp' from F:/LMU/quantumMA/opimization/reconstructv1maxi/hls_component/hls_config.cfg(10)
+INFO: [HLS 200-10] Adding test bench file 'F:/LMU/quantumMA/opimization/reconstructv1maxi/test.cpp' to the project
+INFO: [HLS 200-1465] Applying ini 'syn.top=reconstruct' from F:/LMU/quantumMA/opimization/reconstructv1maxi/hls_component/hls_config.cfg(7)
+INFO: [HLS 200-1465] Applying ini 'flow_target=vivado' from F:/LMU/quantumMA/opimization/reconstructv1maxi/hls_component/hls_config.cfg(4)
+INFO: [HLS 200-1505] Using flow_target 'vivado'
+Resolution: For help on HLS 200-1505 see docs.xilinx.com/access/sources/dita/topic?Doc_Version=2024.2%20English&url=ug1448-hls-guidance&resourceid=200-1505.html
+INFO: [HLS 200-1465] Applying ini 'part=xczu7ev-ffvc1156-2-e' from F:/LMU/quantumMA/opimization/reconstructv1maxi/hls_component/hls_config.cfg(1)
+INFO: [HLS 200-1611] Setting target device to 'xczu7ev-ffvc1156-2-e'
+INFO: [HLS 200-1465] Applying ini 'csim.clean=1' from F:/LMU/quantumMA/opimization/reconstructv1maxi/hls_component/hls_config.cfg(11)
+INFO: [HLS 200-1465] Applying ini 'csim.code_analyzer=1' from F:/LMU/quantumMA/opimization/reconstructv1maxi/hls_component/hls_config.cfg(12)
+INFO: [HLS 200-1465] Applying ini 'package.output.format=ip_catalog' from F:/LMU/quantumMA/opimization/reconstructv1maxi/hls_component/hls_config.cfg(5)
+INFO: [HLS 200-111] Finished File checks and directory preparation: CPU user time: 5 seconds. CPU system time: 1 seconds. Elapsed time: 6.693 seconds; current allocated memory: 619.617 MB.
+INFO: [HLS 200-10] Analyzing design file '../image_analysis.cpp' ... 
+WARNING: [HLS 207-5560] The 'enable_flush' option of the 'HLS pipeline' directive or pragma is deprecated, use style=flp instead (../image_analysis.cpp:276:39)
+WARNING: [HLS 207-5569] unexpected pragma parameter 'storage_type' (../image_analysis.cpp:405:98)
+INFO: [HLS 200-111] Finished Source Code Analysis and Preprocessing: CPU user time: 0 seconds. CPU system time: 1 seconds. Elapsed time: 3.879 seconds; current allocated memory: 622.883 MB.
+INFO: [HLS 200-777] Using interface defaults for 'Vivado' flow target.
+INFO: [HLS 200-1995] There were 19,453 instructions in the design after the 'Compile/Link' phase of compilation. See the Design Size Report for more details: F:/LMU/quantumMA/opimization/reconstructv1maxi/hls_component/reconstruct/hls/syn/report/csynth_design_size.rpt
+INFO: [HLS 200-1995] There were 5,677 instructions in the design after the 'Unroll/Inline (step 1)' phase of compilation. See the Design Size Report for more details: F:/LMU/quantumMA/opimization/reconstructv1maxi/hls_component/reconstruct/hls/syn/report/csynth_design_size.rpt
+INFO: [HLS 200-1995] There were 5,125 instructions in the design after the 'Unroll/Inline (step 2)' phase of compilation. See the Design Size Report for more details: F:/LMU/quantumMA/opimization/reconstructv1maxi/hls_component/reconstruct/hls/syn/report/csynth_design_size.rpt
+INFO: [HLS 200-1995] There were 5,124 instructions in the design after the 'Unroll/Inline (step 3)' phase of compilation. See the Design Size Report for more details: F:/LMU/quantumMA/opimization/reconstructv1maxi/hls_component/reconstruct/hls/syn/report/csynth_design_size.rpt
+INFO: [HLS 200-1995] There were 4,629 instructions in the design after the 'Unroll/Inline (step 4)' phase of compilation. See the Design Size Report for more details: F:/LMU/quantumMA/opimization/reconstructv1maxi/hls_component/reconstruct/hls/syn/report/csynth_design_size.rpt
+INFO: [HLS 200-1995] There were 5,424 instructions in the design after the 'Array/Struct' phase of compilation. See the Design Size Report for more details: F:/LMU/quantumMA/opimization/reconstructv1maxi/hls_component/reconstruct/hls/syn/report/csynth_design_size.rpt
+INFO: [HLS 200-1995] There were 5,320 instructions in the design after the 'Array/Struct (step 2)' phase of compilation. See the Design Size Report for more details: F:/LMU/quantumMA/opimization/reconstructv1maxi/hls_component/reconstruct/hls/syn/report/csynth_design_size.rpt
+INFO: [HLS 200-1995] There were 5,328 instructions in the design after the 'Array/Struct (step 3)' phase of compilation. See the Design Size Report for more details: F:/LMU/quantumMA/opimization/reconstructv1maxi/hls_component/reconstruct/hls/syn/report/csynth_design_size.rpt
+INFO: [HLS 200-1995] There were 5,382 instructions in the design after the 'Array/Struct (step 4)' phase of compilation. See the Design Size Report for more details: F:/LMU/quantumMA/opimization/reconstructv1maxi/hls_component/reconstruct/hls/syn/report/csynth_design_size.rpt
+INFO: [HLS 200-1995] There were 5,589 instructions in the design after the 'Array/Struct (step 5)' phase of compilation. See the Design Size Report for more details: F:/LMU/quantumMA/opimization/reconstructv1maxi/hls_component/reconstruct/hls/syn/report/csynth_design_size.rpt
+INFO: [HLS 200-1995] There were 5,589 instructions in the design after the 'Performance (step 1)' phase of compilation. See the Design Size Report for more details: F:/LMU/quantumMA/opimization/reconstructv1maxi/hls_component/reconstruct/hls/syn/report/csynth_design_size.rpt
+INFO: [HLS 200-1995] There were 5,383 instructions in the design after the 'Performance (step 2)' phase of compilation. See the Design Size Report for more details: F:/LMU/quantumMA/opimization/reconstructv1maxi/hls_component/reconstruct/hls/syn/report/csynth_design_size.rpt
+INFO: [HLS 200-1995] There were 5,377 instructions in the design after the 'Performance (step 3)' phase of compilation. See the Design Size Report for more details: F:/LMU/quantumMA/opimization/reconstructv1maxi/hls_component/reconstruct/hls/syn/report/csynth_design_size.rpt
+INFO: [HLS 200-1995] There were 5,377 instructions in the design after the 'Performance (step 4)' phase of compilation. See the Design Size Report for more details: F:/LMU/quantumMA/opimization/reconstructv1maxi/hls_component/reconstruct/hls/syn/report/csynth_design_size.rpt
+INFO: [HLS 200-1995] There were 5,422 instructions in the design after the 'HW Transforms' phase of compilation. See the Design Size Report for more details: F:/LMU/quantumMA/opimization/reconstructv1maxi/hls_component/reconstruct/hls/syn/report/csynth_design_size.rpt
+INFO: [HLS 200-1995] There were 5,247 instructions in the design after the 'HW Transforms (step 2)' phase of compilation. See the Design Size Report for more details: F:/LMU/quantumMA/opimization/reconstructv1maxi/hls_component/reconstruct/hls/syn/report/csynth_design_size.rpt
+INFO: [HLS 214-291] Loop 'VITIS_LOOP_277_1' is marked as complete unroll implied by the pipeline pragma (../image_analysis.cpp:277:20)
+INFO: [HLS 214-291] Loop 'VITIS_LOOP_301_2' is marked as complete unroll implied by the pipeline pragma (../image_analysis.cpp:301:31)
+INFO: [HLS 214-291] Loop 'VITIS_LOOP_304_3' is marked as complete unroll implied by the pipeline pragma (../image_analysis.cpp:304:20)
+INFO: [HLS 214-291] Loop 'VITIS_LOOP_334_4' is marked as complete unroll implied by the pipeline pragma (../image_analysis.cpp:334:31)
+INFO: [HLS 214-291] Loop 'VITIS_LOOP_343_5' is marked as complete unroll implied by the pipeline pragma (../image_analysis.cpp:343:35)
+INFO: [HLS 214-291] Loop 'anonymous' is marked as complete unroll implied by the pipeline pragma
+INFO: [HLS 214-186] Unrolling loop 'anonymous' () in function 'applyProjectors' completely with a factor of 1 (../image_analysis.cpp:238:0)
+INFO: [HLS 214-178] Inlining function 'fp_struct<float>::data() const (.7.28.38.47.58)' into 'fp_struct<float>::to_float() const (.25.35.44.55)' (C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib/src/hls\utils/x_hls_utils.h:322:0)
+INFO: [HLS 214-178] Inlining function 'fp_struct<float>::to_float() const (.25.35.44.55)' into 'fp_struct<float>::to_ieee() const' (C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib/src/hls\utils/x_hls_utils.h:346:0)
+INFO: [HLS 214-178] Inlining function 'fp_struct<float>::fp_struct(float)' into 'float generic_copysign<float>(float, float)' (C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib/hlsmath/include/FloatingPoint/hls_copysign.h:10:0)
+INFO: [HLS 214-178] Inlining function 'fp_struct<float>::to_ieee() const' into 'float generic_copysign<float>(float, float)' (C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib/hlsmath/include/FloatingPoint/hls_copysign.h:10:0)
+INFO: [HLS 214-178] Inlining function 'fp_struct<float>::fp_struct(float)' into 'float generic_round<float>(float)' (C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib/hlsmath/include/FloatingPoint\hls_round.h:160:0)
+INFO: [HLS 214-178] Inlining function 'float generic_copysign<float>(float, float)' into 'float generic_round<float>(float)' (C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib/hlsmath/include/FloatingPoint\hls_round.h:160:0)
+INFO: [HLS 214-178] Inlining function 'fp_struct<float>::data() const (.7.28.38.47.58)' into 'float generic_round<float>(float)' (C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib/hlsmath/include/FloatingPoint\hls_round.h:160:0)
+INFO: [HLS 214-178] Inlining function 'fp_struct<float>::fp_struct(ap_uint<32>)' into 'float generic_round<float>(float)' (C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib/hlsmath/include/FloatingPoint\hls_round.h:160:0)
+INFO: [HLS 214-178] Inlining function 'fp_struct<float>::to_ieee() const' into 'float generic_round<float>(float)' (C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib/hlsmath/include/FloatingPoint\hls_round.h:160:0)
+INFO: [HLS 214-178] Inlining function 'roundf' into 'std::round(float)' (F:/Vitis/2024.2/tps/mingw/8.3.0/win64.o/nt\lib\gcc\x86_64-w64-mingw32\8.3.0\include\c++\cmath:1757:0)
+INFO: [HLS 214-178] Inlining function 'fp_struct<float>::fp_struct(float)' into 'int generic_cast_IEEE754<int, (ap_q_mode)6, float>(float, bool, hls::enable_if<std::numeric_limits<int>::is_signed, bool>::type)' (C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib/hlsmath/include/FloatingPoint\hls_case_IEEE754.h:12:0)
+INFO: [HLS 214-178] Inlining function 'fp_struct<float>::mantissa() const' into 'int generic_cast_IEEE754<int, (ap_q_mode)6, float>(float, bool, hls::enable_if<std::numeric_limits<int>::is_signed, bool>::type)' (C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib/hlsmath/include/FloatingPoint\hls_case_IEEE754.h:12:0)
+INFO: [HLS 214-178] Inlining function 'fp_struct<float>::expv() const' into 'int generic_cast_IEEE754<int, (ap_q_mode)6, float>(float, bool, hls::enable_if<std::numeric_limits<int>::is_signed, bool>::type)' (C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib/hlsmath/include/FloatingPoint\hls_case_IEEE754.h:12:0)
+INFO: [HLS 214-178] Inlining function 'fp_struct<float>::__signbit() const' into 'int generic_cast_IEEE754<int, (ap_q_mode)6, float>(float, bool, hls::enable_if<std::numeric_limits<int>::is_signed, bool>::type)' (C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib/hlsmath/include/FloatingPoint\hls_case_IEEE754.h:12:0)
+INFO: [HLS 214-178] Inlining function 'int generic_cast_IEEE754<int, (ap_q_mode)6, float>(float, bool, hls::enable_if<std::numeric_limits<int>::is_signed, bool>::type)' into 'int generic_cast_IEEE754<int, float>(float, bool)' (C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib/hlsmath/include/FloatingPoint\hls_case_IEEE754.h:116:0)
+INFO: [HLS 214-178] Inlining function 'int generic_cast_IEEE754<int, float>(float, bool)' into '__hls_fptosi_float_i32' (C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib\hlsmath\src\lib_floatconversion.cpp:51:0)
+INFO: [HLS 214-178] Inlining function 'std::round(float)' into 'getLocalImages(int, int, int, int, atom_location*, hls::stream<local_image_info, 0>&)' (../image_analysis.cpp:8:0)
+INFO: [HLS 214-248] Applying array_partition to 'local_atomLocations.x': Complete partitioning on dimension 1. (../image_analysis.cpp:10:19)
+INFO: [HLS 214-248] Applying array_partition to 'local_atomLocations.y': Complete partitioning on dimension 1. (../image_analysis.cpp:10:19)
+INFO: [HLS 214-241] Aggregating fifo (hls::stream) variable 'localImages' with compact=bit mode in 256-bits (../image_analysis.cpp:426:32)
+INFO: [HLS 214-241] Aggregating bram variable 'atomLocations' with compact=bit mode in 64-bits (../image_analysis.cpp:396:0)
+WARNING: [HLS 214-187] Cannot unroll loop 'VITIS_LOOP_277_1' (../image_analysis.cpp:277:20) in function 'applyProjectors' as it has a variable trip count (../image_analysis.cpp:277:20)
+WARNING: [HLS 214-187] Cannot unroll loop 'VITIS_LOOP_301_2' (../image_analysis.cpp:301:31) in function 'applyProjectors' as it has a variable trip count (../image_analysis.cpp:301:31)
+WARNING: [HLS 214-187] Cannot unroll loop 'VITIS_LOOP_304_3' (../image_analysis.cpp:304:20) in function 'applyProjectors' as it has a variable trip count (../image_analysis.cpp:304:20)
+WARNING: [HLS 214-187] Cannot unroll loop 'VITIS_LOOP_334_4' (../image_analysis.cpp:334:31) in function 'applyProjectors' as it has a variable trip count (../image_analysis.cpp:334:31)
+WARNING: [HLS 214-187] Cannot unroll loop 'VITIS_LOOP_343_5' (../image_analysis.cpp:343:35) in function 'applyProjectors' as it has a variable trip count (../image_analysis.cpp:343:35)
+INFO: [HLS 200-111] Finished Compiling Optimization and Transform: CPU user time: 1 seconds. CPU system time: 0 seconds. Elapsed time: 41.263 seconds; current allocated memory: 625.914 MB.
+INFO: [HLS 200-111] Finished Checking Pragmas: CPU user time: 0 seconds. CPU system time: 0 seconds. Elapsed time: 0.002 seconds; current allocated memory: 625.914 MB.
+INFO: [HLS 200-10] Starting code transformations ...
+INFO: [HLS 200-111] Finished Standard Transforms: CPU user time: 1 seconds. CPU system time: 0 seconds. Elapsed time: 0.932 seconds; current allocated memory: 639.469 MB.
+INFO: [HLS 200-10] Checking synthesizability ...
+INFO: [XFORM 203-602] Inlining function '__hls_fptosi_float_i32' into 'getLocalImages' (../image_analysis.cpp:29) automatically.
+INFO: [HLS 200-111] Finished Checking Synthesizability: CPU user time: 0 seconds. CPU system time: 0 seconds. Elapsed time: 0.673 seconds; current allocated memory: 649.105 MB.
+INFO: [XFORM 203-602] Inlining function '__hls_fptosi_float_i32' into 'getLocalImages' (../image_analysis.cpp:29) automatically.
+WARNING: [HLS 200-805] An internal stream 'localImages' with default size can result in deadlock. Please consider resizing the stream using the directive 'set_directive_stream' or the 'HLS stream' pragma.
+INFO: [XFORM 203-712] Applying dataflow to function 'reconstruct' (../image_analysis.cpp:389:1), detected/extracted 2 process function(s): 
+	 'getLocalImages'
+	 'applyProjectors'.
+INFO: [XFORM 203-401] Performing if-conversion on hyperblock from (C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib/hlsmath/include/FloatingPoint\hls_round.h:159:19) to (C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib/hlsmath/include/FloatingPoint\hls_round.h:187:1) in function 'generic_round<float>'... converting 5 basic blocks.
+INFO: [XFORM 203-602] Inlining function 'generic_round<float>' into 'getLocalImages' (C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib\hlsmath\src\c\roundfloat.cpp:7->F:/Vitis/2024.2/tps/mingw/8.3.0/win64.o/nt\lib\gcc\x86_64-w64-mingw32\8.3.0\include\c++\cmath:1757->../image_analysis.cpp:29) automatically.
+INFO: [HLS 200-111] Finished Loop, function and other optimizations: CPU user time: 1 seconds. CPU system time: 0 seconds. Elapsed time: 0.948 seconds; current allocated memory: 678.668 MB.
+WARNING: [HLS 200-1449] Process applyProjectors has both a predecessor and reads an input from its caller (see the GUI dataflow viewer). This may lead to lower throughput. Consider copying this input via a predecessor process.
+INFO: [HLS 200-111] Finished Architecture Synthesis: CPU user time: 25 seconds. CPU system time: 0 seconds. Elapsed time: 26.414 seconds; current allocated memory: 1.231 GB.
+INFO: [HLS 200-10] Starting hardware synthesis ...
+INFO: [HLS 200-10] Synthesizing 'reconstruct' ...
+INFO: [SYN 201-201] Setting up clock 'default' with a period of 10ns.
+WARNING: [SYN 201-107] Renaming port name 'reconstruct/imageProjs_local_size' to 'reconstruct/imageProjs_local_size_r' to avoid the conflict with HDL keywords or other object names.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-42] -- Implementing module 'getLocalImages_Pipeline_copy_loop' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [SCHED 204-11] Starting scheduling ...
+INFO: [SCHED 204-61] Pipelining loop 'copy_loop'.
+INFO: [HLS 200-1470] Pipelining result : Target II = 1, Final II = 1, Depth = 2, loop 'copy_loop'
+INFO: [SCHED 204-11] Finished scheduling.
+INFO: [HLS 200-111] Finished Scheduling: CPU user time: 3 seconds. CPU system time: 1 seconds. Elapsed time: 3.77 seconds; current allocated memory: 1.231 GB.
+INFO: [BIND 205-100] Starting micro-architecture generation ...
+INFO: [BIND 205-101] Performing variable lifetime analysis.
+INFO: [BIND 205-101] Exploring resource sharing.
+INFO: [BIND 205-101] Binding ...
+INFO: [BIND 205-100] Finished micro-architecture generation.
+INFO: [HLS 200-111] Finished Binding: CPU user time: 1 seconds. CPU system time: 0 seconds. Elapsed time: 0.31 seconds; current allocated memory: 1.231 GB.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-42] -- Implementing module 'getLocalImages_Pipeline_process_loop' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [SCHED 204-11] Starting scheduling ...
+INFO: [SCHED 204-61] Pipelining loop 'process_loop'.
+INFO: [HLS 200-1470] Pipelining result : Target II = 1, Final II = 1, Depth = 16, loop 'process_loop'
+INFO: [SCHED 204-11] Finished scheduling.
+INFO: [HLS 200-111] Finished Scheduling: CPU user time: 0 seconds. CPU system time: 0 seconds. Elapsed time: 0.702 seconds; current allocated memory: 1.231 GB.
+INFO: [BIND 205-100] Starting micro-architecture generation ...
+INFO: [BIND 205-101] Performing variable lifetime analysis.
+INFO: [BIND 205-101] Exploring resource sharing.
+INFO: [BIND 205-101] Binding ...
+INFO: [BIND 205-100] Finished micro-architecture generation.
+INFO: [HLS 200-111] Finished Binding: CPU user time: 0 seconds. CPU system time: 0 seconds. Elapsed time: 0.2 seconds; current allocated memory: 1.231 GB.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-42] -- Implementing module 'getLocalImages' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [SCHED 204-11] Starting scheduling ...
+INFO: [SCHED 204-11] Finished scheduling.
+INFO: [HLS 200-111] Finished Scheduling: CPU user time: 1 seconds. CPU system time: 0 seconds. Elapsed time: 0.552 seconds; current allocated memory: 1.231 GB.
+INFO: [BIND 205-100] Starting micro-architecture generation ...
+INFO: [BIND 205-101] Performing variable lifetime analysis.
+INFO: [BIND 205-101] Exploring resource sharing.
+INFO: [BIND 205-101] Binding ...
+INFO: [BIND 205-100] Finished micro-architecture generation.
+INFO: [HLS 200-111] Finished Binding: CPU user time: 0 seconds. CPU system time: 0 seconds. Elapsed time: 0.15 seconds; current allocated memory: 1.231 GB.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-42] -- Implementing module 'applyProjectors' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [SCHED 204-11] Starting scheduling ...
+WARNING: [SCHED 204-65] Unable to satisfy pipeline directive for function 'applyProjectors': contains subloop(s) that are not unrolled.
+WARNING: [SCHED 204-65] Unable to satisfy pipeline directive for function 'applyProjectors': contains subloop(s) that are not unrolled.
+INFO: [SCHED 204-11] Finished scheduling.
+INFO: [HLS 200-111] Finished Scheduling: CPU user time: 5 seconds. CPU system time: 0 seconds. Elapsed time: 6.198 seconds; current allocated memory: 1.231 GB.
+INFO: [BIND 205-100] Starting micro-architecture generation ...
+INFO: [BIND 205-101] Performing variable lifetime analysis.
+INFO: [BIND 205-101] Exploring resource sharing.
+INFO: [BIND 205-101] Binding ...
+INFO: [BIND 205-100] Finished micro-architecture generation.
+INFO: [HLS 200-111] Finished Binding: CPU user time: 2 seconds. CPU system time: 0 seconds. Elapsed time: 2.009 seconds; current allocated memory: 1.231 GB.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-42] -- Implementing module 'reconstruct' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [SCHED 204-11] Starting scheduling ...
+INFO: [SCHED 204-11] Finished scheduling.
+INFO: [HLS 200-111] Finished Scheduling: CPU user time: 1 seconds. CPU system time: 0 seconds. Elapsed time: 1.386 seconds; current allocated memory: 1.231 GB.
+INFO: [BIND 205-100] Starting micro-architecture generation ...
+INFO: [BIND 205-101] Performing variable lifetime analysis.
+INFO: [BIND 205-101] Exploring resource sharing.
+INFO: [BIND 205-101] Binding ...
+INFO: [BIND 205-100] Finished micro-architecture generation.
+INFO: [HLS 200-111] Finished Binding: CPU user time: 0 seconds. CPU system time: 0 seconds. Elapsed time: 0.125 seconds; current allocated memory: 1.231 GB.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-10] -- Generating RTL for module 'getLocalImages_Pipeline_copy_loop' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-1030] Apply Unified Pipeline Control on module 'getLocalImages_Pipeline_copy_loop' pipeline 'copy_loop' pipeline type 'loop pipeline'
+INFO: [RTGEN 206-104] Estimated max fanout for 'getLocalImages_Pipeline_copy_loop' is 6400 from HDL expression: ((ap_loop_exit_ready == 1'b1) & (icmp_ln17_fu_2873_p2 == 1'd0) & (1'b0 == ap_block_pp0_stage0_01001) & (1'b1 == ap_CS_fsm_pp0_stage0))
+INFO: [RTGEN 206-100] Finished creating RTL model for 'getLocalImages_Pipeline_copy_loop'.
+INFO: [HLS 200-111] Finished Creating RTL model: CPU user time: 1 seconds. CPU system time: 0 seconds. Elapsed time: 0.354 seconds; current allocated memory: 1.231 GB.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-10] -- Generating RTL for module 'getLocalImages_Pipeline_process_loop' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-1030] Apply Unified Pipeline Control on module 'getLocalImages_Pipeline_process_loop' pipeline 'process_loop' pipeline type 'loop pipeline'
+INFO: [RTGEN 206-100] Generating core module 'fmul_32ns_32ns_32_3_max_dsp_1': 2 instance(s).
+INFO: [RTGEN 206-100] Generating core module 'fsub_32ns_32ns_32_4_full_dsp_1': 2 instance(s).
+INFO: [RTGEN 206-100] Generating core module 'sitofp_32ns_32_4_no_dsp_1': 2 instance(s).
+INFO: [RTGEN 206-100] Generating core module 'sparsemux_201_7_32_1_1': 2 instance(s).
+INFO: [RTGEN 206-100] Generating core module 'sparsemux_7_2_32_1_1': 4 instance(s).
+INFO: [RTGEN 206-100] Finished creating RTL model for 'getLocalImages_Pipeline_process_loop'.
+INFO: [HLS 200-2168] Implementing memory 'reconstruct_getLocalImages_Pipeline_process_loop_mask_table_ROM_AUTO_1R' using auto ROMs with 4 copies to ensure enough ports to satisfy II or latency constraints.
+INFO: [HLS 200-2168] Implementing memory 'reconstruct_getLocalImages_Pipeline_process_loop_one_half_table_ROM_AUTO_1R' using auto ROMs with 4 copies to ensure enough ports to satisfy II or latency constraints.
+INFO: [HLS 200-111] Finished Creating RTL model: CPU user time: 1 seconds. CPU system time: 1 seconds. Elapsed time: 1.376 seconds; current allocated memory: 1.231 GB.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-10] -- Generating RTL for module 'getLocalImages' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [RTGEN 206-100] Generating core module 'sitofp_32ns_32_4_no_dsp_1': 1 instance(s).
+INFO: [RTGEN 206-100] Finished creating RTL model for 'getLocalImages'.
+INFO: [HLS 200-111] Finished Creating RTL model: CPU user time: 0 seconds. CPU system time: 0 seconds. Elapsed time: 0.632 seconds; current allocated memory: 1.231 GB.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-10] -- Generating RTL for module 'applyProjectors' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [RTGEN 206-100] Generating core module 'fadd_32ns_32ns_32_4_full_dsp_1': 1 instance(s).
+INFO: [RTGEN 206-100] Generating core module 'fcmp_32ns_32ns_1_2_no_dsp_1': 1 instance(s).
+INFO: [RTGEN 206-100] Generating core module 'fdiv_32ns_32ns_32_9_no_dsp_1': 1 instance(s).
+INFO: [RTGEN 206-100] Generating core module 'fmul_32ns_32ns_32_3_max_dsp_1': 1 instance(s).
+INFO: [RTGEN 206-100] Generating core module 'mul_10s_10s_10_1_1': 1 instance(s).
+INFO: [RTGEN 206-100] Generating core module 'mul_32s_32s_32_1_1': 1 instance(s).
+INFO: [RTGEN 206-100] Generating core module 'mul_62s_32s_62_1_1': 1 instance(s).
+INFO: [RTGEN 206-100] Generating core module 'srem_32ns_32s_32_36_1': 2 instance(s).
+INFO: [RTGEN 206-100] Finished creating RTL model for 'applyProjectors'.
+INFO: [RTMG 210-278] Implementing memory 'reconstruct_applyProjectors_s2_reg_local_fullImage_buffer_RAM_AUTO_1R1W' using auto RAMs.
+INFO: [HLS 200-111] Finished Creating RTL model: CPU user time: 13 seconds. CPU system time: 0 seconds. Elapsed time: 13.368 seconds; current allocated memory: 1.231 GB.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-10] -- Generating RTL for module 'reconstruct' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+WARNING: [RTGEN 206-101] Design contains AXI ports. Reset is fixed to synchronous and active low.
+INFO: [RTGEN 206-500] Setting interface mode on port 'reconstruct/imageProjs_local' to 'm_axi'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'reconstruct/imageProjs' to 'm_axi'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'reconstruct/imageProjs_local_size_r' to 'm_axi'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'reconstruct/fullImage' to 'm_axi'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'reconstruct/emissions' to 'm_axi'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'reconstruct/atomLocationsSize' to 's_axilite & ap_none'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'reconstruct/projShape0' to 's_axilite & ap_none'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'reconstruct/projShape1' to 's_axilite & ap_none'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'reconstruct/atomLocations' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'reconstruct/psfSupersample' to 's_axilite & ap_none'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'reconstruct/imageProjectionSize' to 's_axilite & ap_none'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'reconstruct/imageProjs_local_offset' to 's_axilite & ap_none'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'reconstruct/imageProjs_offset' to 's_axilite & ap_none'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'reconstruct/imageProjs_local_size_offset' to 's_axilite & ap_none'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'reconstruct/fullImage_offset' to 's_axilite & ap_none'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'reconstruct/fullImage_rows' to 's_axilite & ap_none'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'reconstruct/fullImage_cols' to 's_axilite & ap_none'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'reconstruct/emissions_offset' to 's_axilite & ap_none'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'reconstruct/emission_cnt' to 's_axilite & ap_vld'.
+INFO: [RTGEN 206-500] Setting interface mode on function 'reconstruct' to 's_axilite & ap_ctrl_hs'.
+INFO: [RTGEN 206-100] Bundling port 'imageProjs_local_offset', 'imageProjs_offset', 'imageProjs_local_size_offset', 'fullImage_offset', 'emissions_offset' and 'return' to AXI-Lite port control.
+INFO: [RTGEN 206-100] Bundling port 'atomLocationsSize', 'projShape0', 'projShape1', 'psfSupersample', 'imageProjectionSize', 'fullImage_rows', 'fullImage_cols' and 'emission_cnt' to AXI-Lite port scalar_data.
+INFO: [RTGEN 206-100] Finished creating RTL model for 'reconstruct'.
+INFO: [RTMG 210-285] Implementing FIFO 'localImages_U(reconstruct_fifo_w256_d2_S)' using Shift Registers.
+INFO: [HLS 200-111] Finished Creating RTL model: CPU user time: 1 seconds. CPU system time: 1 seconds. Elapsed time: 2.934 seconds; current allocated memory: 1.231 GB.
+INFO: [HLS 200-111] Finished Generating all RTL models: CPU user time: 1 seconds. CPU system time: 0 seconds. Elapsed time: 1.612 seconds; current allocated memory: 1.231 GB.
+INFO: [HLS 200-111] Finished Updating report files: CPU user time: 3 seconds. CPU system time: 1 seconds. Elapsed time: 4.197 seconds; current allocated memory: 1.231 GB.
+INFO: [VHDL 208-304] Generating VHDL RTL for reconstruct.
+INFO: [VLOG 209-307] Generating Verilog RTL for reconstruct.
+INFO: [HLS 200-790] **** Loop Constraint Status: All loop constraints were satisfied.
+INFO: [HLS 200-789] **** Estimated Fmax: 136.99 MHz
+INFO: [HLS 200-112] Total CPU user time: 66 seconds. Total CPU system time: 6 seconds. Total elapsed time: 121.194 seconds; peak allocated memory: 1.231 GB.
+INFO: [v++ 60-791] Total elapsed time: 0h 2m 7s

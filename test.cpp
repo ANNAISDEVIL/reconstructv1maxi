@@ -7,7 +7,6 @@
 #include <cstring>
 #include "image_analysis.hpp"
 
-
 std::vector<std::string> split(const std::string& s, const std::string& delimiter) {
     std::vector<std::string> tokens;
     size_t pos_start = 0, pos_end;
@@ -192,7 +191,7 @@ int main(int argc, char** argv){
     int atomLocationsSize;
     int projShape0;
     int projShape1;
-    atom_location atomLocations[1000];
+    atom_location atomLocations[1024];
     int psfSupersample;
     int imageProjectionSize;
     IMAGE_DTYPE imageProjs_local[IMAGE_PROJECTION_LOCAL * IMAGE_PROJECTION_SIZE];
@@ -201,7 +200,7 @@ int main(int argc, char** argv){
     IMAGE_DTYPE fullImage[FULL_IMAGE_SIZE];
     int fullImage_rows;
     int fullImage_cols; 
-    double emissions[500];
+    IMAGE_DTYPE emissions[1024];
     unsigned emission_cnt;
 
     bool success = parse_input_file("restoutput.txt",
@@ -230,11 +229,11 @@ int main(int argc, char** argv){
      imageProjs,
      imageProjs_local_size,
      fullImage,
-     fullImage_rows,  fullImage_cols,  emissions, emission_cnt);
+     fullImage_rows,  fullImage_cols,  emissions);
 
     std::cout << "emissions: ";
     unsigned emission_ptr = 0;
-    while(emission_ptr < emission_cnt){
+    while(emission_ptr < atomLocationsSize){
         std::cout << emissions[emission_ptr] << "|";
         emission_ptr++;
     }

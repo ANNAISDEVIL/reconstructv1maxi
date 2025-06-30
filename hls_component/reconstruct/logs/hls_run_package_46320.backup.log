@@ -1,0 +1,344 @@
+  **** HLS Build v2024.2 5238294
+INFO: [HLS 200-2005] Using work_dir F:/LMU/quantumMA/opimization/reconstructv1maxi/hls_component/reconstruct 
+INFO: [HLS 200-1611] Setting target device to 'xczu7ev-ffvc1156-2-e'
+INFO: [HLS 200-1505] Using default flow_target 'vivado'
+Resolution: For help on HLS 200-1505 see docs.xilinx.com/access/sources/dita/topic?Doc_Version=2024.2%20English&url=ug1448-hls-guidance&resourceid=200-1505.html
+INFO: [HLS 200-1465] Applying ini 'syn.file=F:/LMU/quantumMA/opimization/reconstructv1maxi/image_analysis.cpp' from F:/LMU/quantumMA/opimization/reconstructv1maxi/hls_component/hls_config.cfg(13)
+INFO: [HLS 200-10] Adding design file 'F:/LMU/quantumMA/opimization/reconstructv1maxi/image_analysis.cpp' to the project
+INFO: [HLS 200-1465] Applying ini 'syn.file=F:/LMU/quantumMA/opimization/reconstructv1maxi/image_analysis.hpp' from F:/LMU/quantumMA/opimization/reconstructv1maxi/hls_component/hls_config.cfg(14)
+INFO: [HLS 200-10] Adding design file 'F:/LMU/quantumMA/opimization/reconstructv1maxi/image_analysis.hpp' to the project
+INFO: [HLS 200-1465] Applying ini 'tb.file=F:/LMU/quantumMA/naia/reconstructv1/imagTransform/restoutput.txt' from F:/LMU/quantumMA/opimization/reconstructv1maxi/hls_component/hls_config.cfg(8)
+INFO: [HLS 200-10] Adding test bench file 'F:/LMU/quantumMA/naia/reconstructv1/imagTransform/restoutput.txt' to the project
+INFO: [HLS 200-1465] Applying ini 'tb.file=F:/LMU/quantumMA/naia/reconstructv1/imagTransform/fullImage_output.txt' from F:/LMU/quantumMA/opimization/reconstructv1maxi/hls_component/hls_config.cfg(9)
+INFO: [HLS 200-10] Adding test bench file 'F:/LMU/quantumMA/naia/reconstructv1/imagTransform/fullImage_output.txt' to the project
+INFO: [HLS 200-1465] Applying ini 'tb.file=F:/LMU/quantumMA/opimization/reconstructv1maxi/test.cpp' from F:/LMU/quantumMA/opimization/reconstructv1maxi/hls_component/hls_config.cfg(10)
+INFO: [HLS 200-10] Adding test bench file 'F:/LMU/quantumMA/opimization/reconstructv1maxi/test.cpp' to the project
+INFO: [HLS 200-1465] Applying ini 'syn.top=reconstruct' from F:/LMU/quantumMA/opimization/reconstructv1maxi/hls_component/hls_config.cfg(7)
+INFO: [HLS 200-1465] Applying ini 'flow_target=vivado' from F:/LMU/quantumMA/opimization/reconstructv1maxi/hls_component/hls_config.cfg(4)
+INFO: [HLS 200-1505] Using flow_target 'vivado'
+Resolution: For help on HLS 200-1505 see docs.xilinx.com/access/sources/dita/topic?Doc_Version=2024.2%20English&url=ug1448-hls-guidance&resourceid=200-1505.html
+INFO: [HLS 200-1465] Applying ini 'part=xczu7ev-ffvc1156-2-e' from F:/LMU/quantumMA/opimization/reconstructv1maxi/hls_component/hls_config.cfg(1)
+INFO: [HLS 200-1465] Applying ini 'csim.clean=1' from F:/LMU/quantumMA/opimization/reconstructv1maxi/hls_component/hls_config.cfg(11)
+INFO: [HLS 200-1465] Applying ini 'csim.code_analyzer=1' from F:/LMU/quantumMA/opimization/reconstructv1maxi/hls_component/hls_config.cfg(12)
+INFO: [HLS 200-1465] Applying ini 'package.output.format=ip_catalog' from F:/LMU/quantumMA/opimization/reconstructv1maxi/hls_component/hls_config.cfg(5)
+INFO: [IMPL 213-8] Exporting RTL as a Vivado IP.
+WARNING: F:/Vivado/2024.2/tps/win64/jre11.0.16_1 does not exist.
+
+****** Vivado v2024.2 (64-bit)
+  **** SW Build 5239630 on Fri Nov 08 22:35:27 MST 2024
+  **** IP Build 5239520 on Sun Nov 10 16:12:51 MST 2024
+  **** SharedData Build 5239561 on Fri Nov 08 14:39:27 MST 2024
+  **** Start of session at: Wed Jun  4 01:04:44 2025
+    ** Copyright 1986-2022 Xilinx, Inc. All Rights Reserved.
+    ** Copyright 2022-2024 Advanced Micro Devices, Inc. All Rights Reserved.
+
+source run_ippack.tcl -notrace
+INFO: calling package_hls_ip ip_types=vitis sysgen json_file=F:/LMU/quantumMA/opimization/reconstructv1maxi/hls_component/reconstruct/hls/hls_data.json outdir=F:/LMU/quantumMA/opimization/reconstructv1maxi/hls_component/reconstruct/hls/impl/ip srcdir=F:/LMU/quantumMA/opimization/reconstructv1maxi/hls_component/reconstruct/hls sort_interfaces_ports=false
+INFO: Copied 1 ipmisc file(s) to F:/LMU/quantumMA/opimization/reconstructv1maxi/hls_component/reconstruct/hls/impl/ip/misc
+INFO: Copied 263 verilog file(s) to F:/LMU/quantumMA/opimization/reconstructv1maxi/hls_component/reconstruct/hls/impl/ip/hdl/verilog
+INFO: Copied 258 vhdl file(s) to F:/LMU/quantumMA/opimization/reconstructv1maxi/hls_component/reconstruct/hls/impl/ip/hdl/vhdl
+INFO: Copied 10 swdriver file(s) to F:/LMU/quantumMA/opimization/reconstructv1maxi/hls_component/reconstruct/hls/impl/ip/drivers
+Generating 6 subcores in F:/LMU/quantumMA/opimization/reconstructv1maxi/hls_component/reconstruct/hls/impl/ip/hdl/ip.tmp:
+impl/misc/reconstruct_fadd_32ns_32ns_32_4_full_dsp_1_ip.tcl
+impl/misc/reconstruct_fcmp_32ns_32ns_1_2_no_dsp_1_ip.tcl
+impl/misc/reconstruct_fdiv_32ns_32ns_32_9_no_dsp_1_ip.tcl
+impl/misc/reconstruct_fmul_32ns_32ns_32_3_max_dsp_1_ip.tcl
+impl/misc/reconstruct_fsub_32ns_32ns_32_4_full_dsp_1_ip.tcl
+impl/misc/reconstruct_sitofp_32ns_32_4_no_dsp_1_ip.tcl
+INFO: [ProjectBase 1-489] The host OS only allows 260 characters in a normal path. The project is stored in a path with more than 80 characters. If you experience issues with IP, Block Designs, or files not being found, please consider moving the project to a location with a shorter path. Alternately consider using the OS subst command to map part of the path to a drive letter.
+Current project path is 'F:/LMU/quantumMA/opimization/reconstructv1maxi/hls_component/reconstruct/hls/impl/ip/hdl/ip.tmp'
+create_project: Time (s): cpu = 00:00:11 ; elapsed = 00:00:15 . Memory (MB): peak = 640.984 ; gain = 207.906
+INFO: Using COE_DIR=F:/LMU/quantumMA/opimization/reconstructv1maxi/hls_component/reconstruct/hls/impl/ip/hdl/verilog
+INFO: Generating reconstruct_fadd_32ns_32ns_32_4_full_dsp_1_ip via file impl/misc/reconstruct_fadd_32ns_32ns_32_4_full_dsp_1_ip.tcl
+INFO: [IP_Flow 19-234] Refreshing IP repositories
+INFO: [IP_Flow 19-1704] No user IP repositories specified
+INFO: [IP_Flow 19-2313] Loaded Vivado IP repository 'F:/Vivado/2024.2/data/ip'.
+WARNING: [IP_Flow 19-4832] The IP name 'reconstruct_fadd_32ns_32ns_32_4_full_dsp_1_ip' you have specified is long. The Windows operating system has path length limitations. It is recommended you use shorter names to reduce the likelihood of issues.
+create_ip: Time (s): cpu = 00:00:03 ; elapsed = 00:00:06 . Memory (MB): peak = 693.953 ; gain = 52.969
+INFO: [IP_Flow 19-1686] Generating 'Synthesis' target for IP 'reconstruct_fadd_32ns_32ns_32_4_full_dsp_1_ip'...
+INFO: [IP_Flow 19-1686] Generating 'Simulation' target for IP 'reconstruct_fadd_32ns_32ns_32_4_full_dsp_1_ip'...
+INFO: Done generating reconstruct_fadd_32ns_32ns_32_4_full_dsp_1_ip via file impl/misc/reconstruct_fadd_32ns_32ns_32_4_full_dsp_1_ip.tcl
+INFO: Generating reconstruct_fcmp_32ns_32ns_1_2_no_dsp_1_ip via file impl/misc/reconstruct_fcmp_32ns_32ns_1_2_no_dsp_1_ip.tcl
+WARNING: [IP_Flow 19-4832] The IP name 'reconstruct_fcmp_32ns_32ns_1_2_no_dsp_1_ip' you have specified is long. The Windows operating system has path length limitations. It is recommended you use shorter names to reduce the likelihood of issues.
+INFO: [IP_Flow 19-1686] Generating 'Synthesis' target for IP 'reconstruct_fcmp_32ns_32ns_1_2_no_dsp_1_ip'...
+INFO: [IP_Flow 19-1686] Generating 'Simulation' target for IP 'reconstruct_fcmp_32ns_32ns_1_2_no_dsp_1_ip'...
+INFO: Done generating reconstruct_fcmp_32ns_32ns_1_2_no_dsp_1_ip via file impl/misc/reconstruct_fcmp_32ns_32ns_1_2_no_dsp_1_ip.tcl
+INFO: Generating reconstruct_fdiv_32ns_32ns_32_9_no_dsp_1_ip via file impl/misc/reconstruct_fdiv_32ns_32ns_32_9_no_dsp_1_ip.tcl
+WARNING: [IP_Flow 19-4832] The IP name 'reconstruct_fdiv_32ns_32ns_32_9_no_dsp_1_ip' you have specified is long. The Windows operating system has path length limitations. It is recommended you use shorter names to reduce the likelihood of issues.
+INFO: [IP_Flow 19-1686] Generating 'Synthesis' target for IP 'reconstruct_fdiv_32ns_32ns_32_9_no_dsp_1_ip'...
+INFO: [IP_Flow 19-1686] Generating 'Simulation' target for IP 'reconstruct_fdiv_32ns_32ns_32_9_no_dsp_1_ip'...
+INFO: Done generating reconstruct_fdiv_32ns_32ns_32_9_no_dsp_1_ip via file impl/misc/reconstruct_fdiv_32ns_32ns_32_9_no_dsp_1_ip.tcl
+INFO: Generating reconstruct_fmul_32ns_32ns_32_3_max_dsp_1_ip via file impl/misc/reconstruct_fmul_32ns_32ns_32_3_max_dsp_1_ip.tcl
+WARNING: [IP_Flow 19-4832] The IP name 'reconstruct_fmul_32ns_32ns_32_3_max_dsp_1_ip' you have specified is long. The Windows operating system has path length limitations. It is recommended you use shorter names to reduce the likelihood of issues.
+INFO: [IP_Flow 19-1686] Generating 'Synthesis' target for IP 'reconstruct_fmul_32ns_32ns_32_3_max_dsp_1_ip'...
+INFO: [IP_Flow 19-1686] Generating 'Simulation' target for IP 'reconstruct_fmul_32ns_32ns_32_3_max_dsp_1_ip'...
+INFO: Done generating reconstruct_fmul_32ns_32ns_32_3_max_dsp_1_ip via file impl/misc/reconstruct_fmul_32ns_32ns_32_3_max_dsp_1_ip.tcl
+INFO: Generating reconstruct_fsub_32ns_32ns_32_4_full_dsp_1_ip via file impl/misc/reconstruct_fsub_32ns_32ns_32_4_full_dsp_1_ip.tcl
+WARNING: [IP_Flow 19-4832] The IP name 'reconstruct_fsub_32ns_32ns_32_4_full_dsp_1_ip' you have specified is long. The Windows operating system has path length limitations. It is recommended you use shorter names to reduce the likelihood of issues.
+INFO: [IP_Flow 19-1686] Generating 'Synthesis' target for IP 'reconstruct_fsub_32ns_32ns_32_4_full_dsp_1_ip'...
+INFO: [IP_Flow 19-1686] Generating 'Simulation' target for IP 'reconstruct_fsub_32ns_32ns_32_4_full_dsp_1_ip'...
+INFO: Done generating reconstruct_fsub_32ns_32ns_32_4_full_dsp_1_ip via file impl/misc/reconstruct_fsub_32ns_32ns_32_4_full_dsp_1_ip.tcl
+INFO: Generating reconstruct_sitofp_32ns_32_4_no_dsp_1_ip via file impl/misc/reconstruct_sitofp_32ns_32_4_no_dsp_1_ip.tcl
+WARNING: [IP_Flow 19-4832] The IP name 'reconstruct_sitofp_32ns_32_4_no_dsp_1_ip' you have specified is long. The Windows operating system has path length limitations. It is recommended you use shorter names to reduce the likelihood of issues.
+INFO: [IP_Flow 19-1686] Generating 'Synthesis' target for IP 'reconstruct_sitofp_32ns_32_4_no_dsp_1_ip'...
+INFO: [IP_Flow 19-1686] Generating 'Simulation' target for IP 'reconstruct_sitofp_32ns_32_4_no_dsp_1_ip'...
+INFO: Done generating reconstruct_sitofp_32ns_32_4_no_dsp_1_ip via file impl/misc/reconstruct_sitofp_32ns_32_4_no_dsp_1_ip.tcl
+INFO: Import ports from HDL: F:/LMU/quantumMA/opimization/reconstructv1maxi/hls_component/reconstruct/hls/impl/ip/hdl/vhdl/reconstruct.vhd (reconstruct)
+INFO: Add axi4lite interface s_axi_control
+INFO: Add axi4lite interface s_axi_scalar_data
+INFO: Add clock interface ap_clk
+INFO: Add reset interface ap_rst_n
+INFO: Add interrupt interface interrupt
+INFO: [IP_Flow 19-234] Refreshing IP repositories
+INFO: [IP_Flow 19-1704] No user IP repositories specified
+INFO: [IP_Flow 19-2313] Loaded Vivado IP repository 'F:/Vivado/2024.2/data/ip'.
+INFO: Add axi4full interface m_axi_emissions
+INFO: Add axi4full interface m_axi_fullImage_0
+INFO: Add axi4full interface m_axi_fullImage_1
+INFO: Add axi4full interface m_axi_fullImage_10
+INFO: Add axi4full interface m_axi_fullImage_11
+INFO: Add axi4full interface m_axi_fullImage_12
+INFO: Add axi4full interface m_axi_fullImage_13
+INFO: Add axi4full interface m_axi_fullImage_14
+INFO: Add axi4full interface m_axi_fullImage_15
+INFO: Add axi4full interface m_axi_fullImage_2
+INFO: Add axi4full interface m_axi_fullImage_3
+INFO: Add axi4full interface m_axi_fullImage_4
+INFO: Add axi4full interface m_axi_fullImage_5
+INFO: Add axi4full interface m_axi_fullImage_6
+INFO: Add axi4full interface m_axi_fullImage_7
+INFO: Add axi4full interface m_axi_fullImage_8
+INFO: Add axi4full interface m_axi_fullImage_9
+INFO: Add axi4full interface m_axi_imageProjs_0
+INFO: Add axi4full interface m_axi_imageProjs_1
+INFO: Add axi4full interface m_axi_imageProjs_10
+INFO: Add axi4full interface m_axi_imageProjs_11
+INFO: Add axi4full interface m_axi_imageProjs_12
+INFO: Add axi4full interface m_axi_imageProjs_13
+INFO: Add axi4full interface m_axi_imageProjs_14
+INFO: Add axi4full interface m_axi_imageProjs_15
+INFO: Add axi4full interface m_axi_imageProjs_16
+INFO: Add axi4full interface m_axi_imageProjs_17
+INFO: Add axi4full interface m_axi_imageProjs_18
+INFO: Add axi4full interface m_axi_imageProjs_19
+INFO: Add axi4full interface m_axi_imageProjs_2
+INFO: Add axi4full interface m_axi_imageProjs_20
+INFO: Add axi4full interface m_axi_imageProjs_21
+INFO: Add axi4full interface m_axi_imageProjs_22
+INFO: Add axi4full interface m_axi_imageProjs_23
+INFO: Add axi4full interface m_axi_imageProjs_24
+INFO: Add axi4full interface m_axi_imageProjs_25
+INFO: Add axi4full interface m_axi_imageProjs_26
+INFO: Add axi4full interface m_axi_imageProjs_27
+INFO: Add axi4full interface m_axi_imageProjs_28
+INFO: Add axi4full interface m_axi_imageProjs_29
+INFO: Add axi4full interface m_axi_imageProjs_3
+INFO: Add axi4full interface m_axi_imageProjs_30
+INFO: Add axi4full interface m_axi_imageProjs_31
+INFO: Add axi4full interface m_axi_imageProjs_32
+INFO: Add axi4full interface m_axi_imageProjs_33
+INFO: Add axi4full interface m_axi_imageProjs_34
+INFO: Add axi4full interface m_axi_imageProjs_35
+INFO: Add axi4full interface m_axi_imageProjs_36
+INFO: Add axi4full interface m_axi_imageProjs_37
+INFO: Add axi4full interface m_axi_imageProjs_38
+INFO: Add axi4full interface m_axi_imageProjs_39
+INFO: Add axi4full interface m_axi_imageProjs_4
+INFO: Add axi4full interface m_axi_imageProjs_40
+INFO: Add axi4full interface m_axi_imageProjs_41
+INFO: Add axi4full interface m_axi_imageProjs_42
+INFO: Add axi4full interface m_axi_imageProjs_43
+INFO: Add axi4full interface m_axi_imageProjs_44
+INFO: Add axi4full interface m_axi_imageProjs_45
+INFO: Add axi4full interface m_axi_imageProjs_46
+INFO: Add axi4full interface m_axi_imageProjs_47
+INFO: Add axi4full interface m_axi_imageProjs_48
+INFO: Add axi4full interface m_axi_imageProjs_49
+INFO: Add axi4full interface m_axi_imageProjs_5
+INFO: Add axi4full interface m_axi_imageProjs_50
+INFO: Add axi4full interface m_axi_imageProjs_51
+INFO: Add axi4full interface m_axi_imageProjs_52
+INFO: Add axi4full interface m_axi_imageProjs_53
+INFO: Add axi4full interface m_axi_imageProjs_54
+INFO: Add axi4full interface m_axi_imageProjs_55
+INFO: Add axi4full interface m_axi_imageProjs_56
+INFO: Add axi4full interface m_axi_imageProjs_57
+INFO: Add axi4full interface m_axi_imageProjs_58
+INFO: Add axi4full interface m_axi_imageProjs_59
+INFO: Add axi4full interface m_axi_imageProjs_6
+INFO: Add axi4full interface m_axi_imageProjs_60
+INFO: Add axi4full interface m_axi_imageProjs_61
+INFO: Add axi4full interface m_axi_imageProjs_62
+INFO: Add axi4full interface m_axi_imageProjs_63
+INFO: Add axi4full interface m_axi_imageProjs_64
+INFO: Add axi4full interface m_axi_imageProjs_65
+INFO: Add axi4full interface m_axi_imageProjs_66
+INFO: Add axi4full interface m_axi_imageProjs_67
+INFO: Add axi4full interface m_axi_imageProjs_68
+INFO: Add axi4full interface m_axi_imageProjs_69
+INFO: Add axi4full interface m_axi_imageProjs_7
+INFO: Add axi4full interface m_axi_imageProjs_70
+INFO: Add axi4full interface m_axi_imageProjs_71
+INFO: Add axi4full interface m_axi_imageProjs_72
+INFO: Add axi4full interface m_axi_imageProjs_73
+INFO: Add axi4full interface m_axi_imageProjs_74
+INFO: Add axi4full interface m_axi_imageProjs_75
+INFO: Add axi4full interface m_axi_imageProjs_76
+INFO: Add axi4full interface m_axi_imageProjs_77
+INFO: Add axi4full interface m_axi_imageProjs_78
+INFO: Add axi4full interface m_axi_imageProjs_79
+INFO: Add axi4full interface m_axi_imageProjs_8
+INFO: Add axi4full interface m_axi_imageProjs_80
+INFO: Add axi4full interface m_axi_imageProjs_81
+INFO: Add axi4full interface m_axi_imageProjs_82
+INFO: Add axi4full interface m_axi_imageProjs_83
+INFO: Add axi4full interface m_axi_imageProjs_84
+INFO: Add axi4full interface m_axi_imageProjs_85
+INFO: Add axi4full interface m_axi_imageProjs_86
+INFO: Add axi4full interface m_axi_imageProjs_87
+INFO: Add axi4full interface m_axi_imageProjs_88
+INFO: Add axi4full interface m_axi_imageProjs_89
+INFO: Add axi4full interface m_axi_imageProjs_9
+INFO: Add axi4full interface m_axi_imageProjs_90
+INFO: Add axi4full interface m_axi_imageProjs_91
+INFO: Add axi4full interface m_axi_imageProjs_92
+INFO: Add axi4full interface m_axi_imageProjs_93
+INFO: Add axi4full interface m_axi_imageProjs_94
+INFO: Add axi4full interface m_axi_imageProjs_95
+INFO: Add axi4full interface m_axi_imageProjs_96
+INFO: Add axi4full interface m_axi_imageProjs_97
+INFO: Add axi4full interface m_axi_imageProjs_98
+INFO: Add axi4full interface m_axi_imageProjs_99
+INFO: Add axi4full interface m_axi_imageProjs_local_0
+INFO: Add axi4full interface m_axi_imageProjs_local_1
+INFO: Add axi4full interface m_axi_imageProjs_local_10
+INFO: Add axi4full interface m_axi_imageProjs_local_11
+INFO: Add axi4full interface m_axi_imageProjs_local_12
+INFO: Add axi4full interface m_axi_imageProjs_local_13
+INFO: Add axi4full interface m_axi_imageProjs_local_14
+INFO: Add axi4full interface m_axi_imageProjs_local_15
+INFO: Add axi4full interface m_axi_imageProjs_local_2
+INFO: Add axi4full interface m_axi_imageProjs_local_3
+INFO: Add axi4full interface m_axi_imageProjs_local_4
+INFO: Add axi4full interface m_axi_imageProjs_local_5
+INFO: Add axi4full interface m_axi_imageProjs_local_6
+INFO: Add axi4full interface m_axi_imageProjs_local_7
+INFO: Add axi4full interface m_axi_imageProjs_local_8
+INFO: Add axi4full interface m_axi_imageProjs_local_9
+INFO: Add axi4full interface m_axi_imageProjs_local_size_0
+INFO: Add axi4full interface m_axi_imageProjs_local_size_1
+INFO: Add axi4full interface m_axi_imageProjs_local_size_10
+INFO: Add axi4full interface m_axi_imageProjs_local_size_11
+INFO: Add axi4full interface m_axi_imageProjs_local_size_12
+INFO: Add axi4full interface m_axi_imageProjs_local_size_13
+INFO: Add axi4full interface m_axi_imageProjs_local_size_14
+INFO: Add axi4full interface m_axi_imageProjs_local_size_15
+INFO: Add axi4full interface m_axi_imageProjs_local_size_16
+INFO: Add axi4full interface m_axi_imageProjs_local_size_17
+INFO: Add axi4full interface m_axi_imageProjs_local_size_18
+INFO: Add axi4full interface m_axi_imageProjs_local_size_19
+INFO: Add axi4full interface m_axi_imageProjs_local_size_2
+INFO: Add axi4full interface m_axi_imageProjs_local_size_20
+INFO: Add axi4full interface m_axi_imageProjs_local_size_21
+INFO: Add axi4full interface m_axi_imageProjs_local_size_22
+INFO: Add axi4full interface m_axi_imageProjs_local_size_23
+INFO: Add axi4full interface m_axi_imageProjs_local_size_24
+INFO: Add axi4full interface m_axi_imageProjs_local_size_25
+INFO: Add axi4full interface m_axi_imageProjs_local_size_26
+INFO: Add axi4full interface m_axi_imageProjs_local_size_27
+INFO: Add axi4full interface m_axi_imageProjs_local_size_28
+INFO: Add axi4full interface m_axi_imageProjs_local_size_29
+INFO: Add axi4full interface m_axi_imageProjs_local_size_3
+INFO: Add axi4full interface m_axi_imageProjs_local_size_30
+INFO: Add axi4full interface m_axi_imageProjs_local_size_31
+INFO: Add axi4full interface m_axi_imageProjs_local_size_32
+INFO: Add axi4full interface m_axi_imageProjs_local_size_33
+INFO: Add axi4full interface m_axi_imageProjs_local_size_34
+INFO: Add axi4full interface m_axi_imageProjs_local_size_35
+INFO: Add axi4full interface m_axi_imageProjs_local_size_36
+INFO: Add axi4full interface m_axi_imageProjs_local_size_37
+INFO: Add axi4full interface m_axi_imageProjs_local_size_38
+INFO: Add axi4full interface m_axi_imageProjs_local_size_39
+INFO: Add axi4full interface m_axi_imageProjs_local_size_4
+INFO: Add axi4full interface m_axi_imageProjs_local_size_40
+INFO: Add axi4full interface m_axi_imageProjs_local_size_41
+INFO: Add axi4full interface m_axi_imageProjs_local_size_42
+INFO: Add axi4full interface m_axi_imageProjs_local_size_43
+INFO: Add axi4full interface m_axi_imageProjs_local_size_44
+INFO: Add axi4full interface m_axi_imageProjs_local_size_45
+INFO: Add axi4full interface m_axi_imageProjs_local_size_46
+INFO: Add axi4full interface m_axi_imageProjs_local_size_47
+INFO: Add axi4full interface m_axi_imageProjs_local_size_48
+INFO: Add axi4full interface m_axi_imageProjs_local_size_49
+INFO: Add axi4full interface m_axi_imageProjs_local_size_5
+INFO: Add axi4full interface m_axi_imageProjs_local_size_50
+INFO: Add axi4full interface m_axi_imageProjs_local_size_51
+INFO: Add axi4full interface m_axi_imageProjs_local_size_52
+INFO: Add axi4full interface m_axi_imageProjs_local_size_53
+INFO: Add axi4full interface m_axi_imageProjs_local_size_54
+INFO: Add axi4full interface m_axi_imageProjs_local_size_55
+INFO: Add axi4full interface m_axi_imageProjs_local_size_56
+INFO: Add axi4full interface m_axi_imageProjs_local_size_57
+INFO: Add axi4full interface m_axi_imageProjs_local_size_58
+INFO: Add axi4full interface m_axi_imageProjs_local_size_59
+INFO: Add axi4full interface m_axi_imageProjs_local_size_6
+INFO: Add axi4full interface m_axi_imageProjs_local_size_60
+INFO: Add axi4full interface m_axi_imageProjs_local_size_61
+INFO: Add axi4full interface m_axi_imageProjs_local_size_62
+INFO: Add axi4full interface m_axi_imageProjs_local_size_63
+INFO: Add axi4full interface m_axi_imageProjs_local_size_64
+INFO: Add axi4full interface m_axi_imageProjs_local_size_65
+INFO: Add axi4full interface m_axi_imageProjs_local_size_66
+INFO: Add axi4full interface m_axi_imageProjs_local_size_67
+INFO: Add axi4full interface m_axi_imageProjs_local_size_68
+INFO: Add axi4full interface m_axi_imageProjs_local_size_69
+INFO: Add axi4full interface m_axi_imageProjs_local_size_7
+INFO: Add axi4full interface m_axi_imageProjs_local_size_70
+INFO: Add axi4full interface m_axi_imageProjs_local_size_71
+INFO: Add axi4full interface m_axi_imageProjs_local_size_72
+INFO: Add axi4full interface m_axi_imageProjs_local_size_73
+INFO: Add axi4full interface m_axi_imageProjs_local_size_74
+INFO: Add axi4full interface m_axi_imageProjs_local_size_75
+INFO: Add axi4full interface m_axi_imageProjs_local_size_76
+INFO: Add axi4full interface m_axi_imageProjs_local_size_77
+INFO: Add axi4full interface m_axi_imageProjs_local_size_78
+INFO: Add axi4full interface m_axi_imageProjs_local_size_79
+INFO: Add axi4full interface m_axi_imageProjs_local_size_8
+INFO: Add axi4full interface m_axi_imageProjs_local_size_80
+INFO: Add axi4full interface m_axi_imageProjs_local_size_81
+INFO: Add axi4full interface m_axi_imageProjs_local_size_82
+INFO: Add axi4full interface m_axi_imageProjs_local_size_83
+INFO: Add axi4full interface m_axi_imageProjs_local_size_84
+INFO: Add axi4full interface m_axi_imageProjs_local_size_85
+INFO: Add axi4full interface m_axi_imageProjs_local_size_86
+INFO: Add axi4full interface m_axi_imageProjs_local_size_87
+INFO: Add axi4full interface m_axi_imageProjs_local_size_88
+INFO: Add axi4full interface m_axi_imageProjs_local_size_89
+INFO: Add axi4full interface m_axi_imageProjs_local_size_9
+INFO: Add axi4full interface m_axi_imageProjs_local_size_90
+INFO: Add axi4full interface m_axi_imageProjs_local_size_91
+INFO: Add axi4full interface m_axi_imageProjs_local_size_92
+INFO: Add axi4full interface m_axi_imageProjs_local_size_93
+INFO: Add axi4full interface m_axi_imageProjs_local_size_94
+INFO: Add axi4full interface m_axi_imageProjs_local_size_95
+INFO: Add axi4full interface m_axi_imageProjs_local_size_96
+INFO: Add axi4full interface m_axi_imageProjs_local_size_97
+INFO: Add axi4full interface m_axi_imageProjs_local_size_98
+INFO: Add axi4full interface m_axi_imageProjs_local_size_99
+INFO: Add data interface atomLocations_address0
+INFO: Add data interface atomLocations_d0
+INFO: Add data interface atomLocations_q0
+INFO: Add data interface atomLocations_address1
+INFO: Add data interface atomLocations_d1
+INFO: Add data interface atomLocations_q1
+INFO: Calling post_process_vitis to specialize IP
+INFO: Calling post_process_sysgen to specialize IP
+Generating sysgen info xml from json file
+ipx::update_checksums: Time (s): cpu = 00:00:02 ; elapsed = 00:00:10 . Memory (MB): peak = 823.566 ; gain = 0.000
+INFO: Created IP F:/LMU/quantumMA/opimization/reconstructv1maxi/hls_component/reconstruct/hls/impl/ip/component.xml
+ipx::archive_core: Time (s): cpu = 00:00:02 ; elapsed = 00:00:08 . Memory (MB): peak = 828.633 ; gain = 1.414
+INFO: Created IP archive F:/LMU/quantumMA/opimization/reconstructv1maxi/hls_component/reconstruct/hls/impl/ip/xilinx_com_hls_reconstruct_1_0.zip
+INFO: [Common 17-206] Exiting Vivado at Wed Jun  4 01:40:23 2025...
+INFO: [HLS 200-802] Generated output file reconstruct/reconstruct.zip
+INFO: [HLS 200-112] Total CPU user time: 4626 seconds. Total CPU system time: 868 seconds. Total elapsed time: 7727.49 seconds; peak allocated memory: 705.195 MB.
+INFO: [vitis-run 60-791] Total elapsed time: 2h 8m 55s

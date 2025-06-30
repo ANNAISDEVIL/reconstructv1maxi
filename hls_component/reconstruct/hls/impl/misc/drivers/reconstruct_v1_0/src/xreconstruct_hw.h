@@ -25,46 +25,53 @@
 //        bit 0 - ap_done (Read/TOW)
 //        bit 1 - ap_ready (Read/TOW)
 //        others - reserved
-// 0x10 : Data signal of imageProjs_local_offset
-//        bit 31~0 - imageProjs_local_offset[31:0] (Read/Write)
-// 0x14 : Data signal of imageProjs_local_offset
-//        bit 31~0 - imageProjs_local_offset[63:32] (Read/Write)
+// 0x10 : Data signal of atomLocations_offset
+//        bit 31~0 - atomLocations_offset[31:0] (Read/Write)
+// 0x14 : Data signal of atomLocations_offset
+//        bit 31~0 - atomLocations_offset[63:32] (Read/Write)
 // 0x18 : reserved
-// 0x1c : Data signal of imageProjs_offset
-//        bit 31~0 - imageProjs_offset[31:0] (Read/Write)
-// 0x20 : Data signal of imageProjs_offset
-//        bit 31~0 - imageProjs_offset[63:32] (Read/Write)
+// 0x1c : Data signal of imageProjs_local_offset
+//        bit 31~0 - imageProjs_local_offset[31:0] (Read/Write)
+// 0x20 : Data signal of imageProjs_local_offset
+//        bit 31~0 - imageProjs_local_offset[63:32] (Read/Write)
 // 0x24 : reserved
-// 0x28 : Data signal of imageProjs_local_size_offset
-//        bit 31~0 - imageProjs_local_size_offset[31:0] (Read/Write)
-// 0x2c : Data signal of imageProjs_local_size_offset
-//        bit 31~0 - imageProjs_local_size_offset[63:32] (Read/Write)
+// 0x28 : Data signal of imageProjs_offset
+//        bit 31~0 - imageProjs_offset[31:0] (Read/Write)
+// 0x2c : Data signal of imageProjs_offset
+//        bit 31~0 - imageProjs_offset[63:32] (Read/Write)
 // 0x30 : reserved
-// 0x34 : Data signal of fullImage_offset
-//        bit 31~0 - fullImage_offset[31:0] (Read/Write)
-// 0x38 : Data signal of fullImage_offset
-//        bit 31~0 - fullImage_offset[63:32] (Read/Write)
+// 0x34 : Data signal of imageProjs_local_size_offset
+//        bit 31~0 - imageProjs_local_size_offset[31:0] (Read/Write)
+// 0x38 : Data signal of imageProjs_local_size_offset
+//        bit 31~0 - imageProjs_local_size_offset[63:32] (Read/Write)
 // 0x3c : reserved
-// 0x40 : Data signal of emissions_offset
-//        bit 31~0 - emissions_offset[31:0] (Read/Write)
-// 0x44 : Data signal of emissions_offset
-//        bit 31~0 - emissions_offset[63:32] (Read/Write)
+// 0x40 : Data signal of fullImage_offset
+//        bit 31~0 - fullImage_offset[31:0] (Read/Write)
+// 0x44 : Data signal of fullImage_offset
+//        bit 31~0 - fullImage_offset[63:32] (Read/Write)
 // 0x48 : reserved
+// 0x4c : Data signal of emissions_offset
+//        bit 31~0 - emissions_offset[31:0] (Read/Write)
+// 0x50 : Data signal of emissions_offset
+//        bit 31~0 - emissions_offset[63:32] (Read/Write)
+// 0x54 : reserved
 // (SC = Self Clear, COR = Clear on Read, TOW = Toggle on Write, COH = Clear on Handshake)
 
 #define XRECONSTRUCT_CONTROL_ADDR_AP_CTRL                           0x00
 #define XRECONSTRUCT_CONTROL_ADDR_GIE                               0x04
 #define XRECONSTRUCT_CONTROL_ADDR_IER                               0x08
 #define XRECONSTRUCT_CONTROL_ADDR_ISR                               0x0c
-#define XRECONSTRUCT_CONTROL_ADDR_IMAGEPROJS_LOCAL_OFFSET_DATA      0x10
+#define XRECONSTRUCT_CONTROL_ADDR_ATOMLOCATIONS_OFFSET_DATA         0x10
+#define XRECONSTRUCT_CONTROL_BITS_ATOMLOCATIONS_OFFSET_DATA         64
+#define XRECONSTRUCT_CONTROL_ADDR_IMAGEPROJS_LOCAL_OFFSET_DATA      0x1c
 #define XRECONSTRUCT_CONTROL_BITS_IMAGEPROJS_LOCAL_OFFSET_DATA      64
-#define XRECONSTRUCT_CONTROL_ADDR_IMAGEPROJS_OFFSET_DATA            0x1c
+#define XRECONSTRUCT_CONTROL_ADDR_IMAGEPROJS_OFFSET_DATA            0x28
 #define XRECONSTRUCT_CONTROL_BITS_IMAGEPROJS_OFFSET_DATA            64
-#define XRECONSTRUCT_CONTROL_ADDR_IMAGEPROJS_LOCAL_SIZE_OFFSET_DATA 0x28
+#define XRECONSTRUCT_CONTROL_ADDR_IMAGEPROJS_LOCAL_SIZE_OFFSET_DATA 0x34
 #define XRECONSTRUCT_CONTROL_BITS_IMAGEPROJS_LOCAL_SIZE_OFFSET_DATA 64
-#define XRECONSTRUCT_CONTROL_ADDR_FULLIMAGE_OFFSET_DATA             0x34
+#define XRECONSTRUCT_CONTROL_ADDR_FULLIMAGE_OFFSET_DATA             0x40
 #define XRECONSTRUCT_CONTROL_BITS_FULLIMAGE_OFFSET_DATA             64
-#define XRECONSTRUCT_CONTROL_ADDR_EMISSIONS_OFFSET_DATA             0x40
+#define XRECONSTRUCT_CONTROL_ADDR_EMISSIONS_OFFSET_DATA             0x4c
 #define XRECONSTRUCT_CONTROL_BITS_EMISSIONS_OFFSET_DATA             64
 
 // scalar_data
@@ -93,11 +100,6 @@
 // 0x40 : Data signal of fullImage_cols
 //        bit 31~0 - fullImage_cols[31:0] (Read/Write)
 // 0x44 : reserved
-// 0x48 : Data signal of emission_cnt
-//        bit 31~0 - emission_cnt[31:0] (Read)
-// 0x4c : Control signal of emission_cnt
-//        bit 0  - emission_cnt_ap_vld (Read/COR)
-//        others - reserved
 // (SC = Self Clear, COR = Clear on Read, TOW = Toggle on Write, COH = Clear on Handshake)
 
 #define XRECONSTRUCT_SCALAR_DATA_ADDR_ATOMLOCATIONSSIZE_DATA   0x10
@@ -114,7 +116,4 @@
 #define XRECONSTRUCT_SCALAR_DATA_BITS_FULLIMAGE_ROWS_DATA      32
 #define XRECONSTRUCT_SCALAR_DATA_ADDR_FULLIMAGE_COLS_DATA      0x40
 #define XRECONSTRUCT_SCALAR_DATA_BITS_FULLIMAGE_COLS_DATA      32
-#define XRECONSTRUCT_SCALAR_DATA_ADDR_EMISSION_CNT_DATA        0x48
-#define XRECONSTRUCT_SCALAR_DATA_BITS_EMISSION_CNT_DATA        32
-#define XRECONSTRUCT_SCALAR_DATA_ADDR_EMISSION_CNT_CTRL        0x4c
 

@@ -2,7 +2,7 @@
 
 set axilite_register_dict [dict create]
 set port_control {
-imageProjs_local_offset { 
+atomLocations_offset { 
 	dir I
 	width 64
 	depth 1
@@ -10,7 +10,7 @@ imageProjs_local_offset {
 	offset 16
 	offset_end 27
 }
-imageProjs_offset { 
+imageProjs_local_offset { 
 	dir I
 	width 64
 	depth 1
@@ -18,7 +18,7 @@ imageProjs_offset {
 	offset 28
 	offset_end 39
 }
-imageProjs_local_size_offset { 
+imageProjs_offset { 
 	dir I
 	width 64
 	depth 1
@@ -26,7 +26,7 @@ imageProjs_local_size_offset {
 	offset 40
 	offset_end 51
 }
-fullImage_offset { 
+imageProjs_local_size_offset { 
 	dir I
 	width 64
 	depth 1
@@ -34,13 +34,21 @@ fullImage_offset {
 	offset 52
 	offset_end 63
 }
-emissions_offset { 
+fullImage_offset { 
 	dir I
 	width 64
 	depth 1
 	mode ap_none
 	offset 64
 	offset_end 75
+}
+emissions_offset { 
+	dir I
+	width 64
+	depth 1
+	mode ap_none
+	offset 76
+	offset_end 87
 }
 ap_start { }
 ap_done { }
@@ -108,14 +116,6 @@ fullImage_cols {
 	mode ap_none
 	offset 64
 	offset_end 71
-}
-emission_cnt { 
-	dir O
-	width 32
-	depth 1
-	mode ap_vld
-	offset 72
-	offset_end 79
 }
 }
 dict set axilite_register_dict scalar_data $port_scalar_data

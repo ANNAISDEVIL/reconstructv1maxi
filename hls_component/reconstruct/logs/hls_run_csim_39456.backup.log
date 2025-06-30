@@ -1,0 +1,986 @@
+  **** HLS Build v2024.2 5238294
+INFO: [HLS 200-2005] Using work_dir F:/LMU/quantumMA/opimization/reconstructv1maxi/hls_component/reconstruct 
+INFO: [HLS 200-1505] Using default flow_target 'vivado'
+Resolution: For help on HLS 200-1505 see docs.xilinx.com/access/sources/dita/topic?Doc_Version=2024.2%20English&url=ug1448-hls-guidance&resourceid=200-1505.html
+INFO: [HLS 200-1465] Applying ini 'syn.file=F:/LMU/quantumMA/opimization/reconstructv1maxi/image_analysis.cpp' from F:/LMU/quantumMA/opimization/reconstructv1maxi/hls_component/hls_config.cfg(10)
+INFO: [HLS 200-10] Adding design file 'F:/LMU/quantumMA/opimization/reconstructv1maxi/image_analysis.cpp' to the project
+INFO: [HLS 200-1465] Applying ini 'syn.file=F:/LMU/quantumMA/opimization/reconstructv1maxi/image_analysis.hpp' from F:/LMU/quantumMA/opimization/reconstructv1maxi/hls_component/hls_config.cfg(11)
+INFO: [HLS 200-10] Adding design file 'F:/LMU/quantumMA/opimization/reconstructv1maxi/image_analysis.hpp' to the project
+INFO: [HLS 200-1465] Applying ini 'tb.file=F:/LMU/quantumMA/opimization/reconstructv1maxi/test.cpp' from F:/LMU/quantumMA/opimization/reconstructv1maxi/hls_component/hls_config.cfg(12)
+INFO: [HLS 200-10] Adding test bench file 'F:/LMU/quantumMA/opimization/reconstructv1maxi/test.cpp' to the project
+INFO: [HLS 200-1465] Applying ini 'tb.file=F:/LMU/quantumMA/naia/reconstructv1/sf25fram/fullImage_output.txt' from F:/LMU/quantumMA/opimization/reconstructv1maxi/hls_component/hls_config.cfg(13)
+INFO: [HLS 200-10] Adding test bench file 'F:/LMU/quantumMA/naia/reconstructv1/sf25fram/fullImage_output.txt' to the project
+INFO: [HLS 200-1465] Applying ini 'tb.file=F:/LMU/quantumMA/naia/reconstructv1/sf25fram/restoutput.txt' from F:/LMU/quantumMA/opimization/reconstructv1maxi/hls_component/hls_config.cfg(14)
+INFO: [HLS 200-10] Adding test bench file 'F:/LMU/quantumMA/naia/reconstructv1/sf25fram/restoutput.txt' to the project
+INFO: [HLS 200-1465] Applying ini 'syn.top=reconstruct' from F:/LMU/quantumMA/opimization/reconstructv1maxi/hls_component/hls_config.cfg(7)
+INFO: [HLS 200-1465] Applying ini 'flow_target=vivado' from F:/LMU/quantumMA/opimization/reconstructv1maxi/hls_component/hls_config.cfg(4)
+INFO: [HLS 200-1505] Using flow_target 'vivado'
+Resolution: For help on HLS 200-1505 see docs.xilinx.com/access/sources/dita/topic?Doc_Version=2024.2%20English&url=ug1448-hls-guidance&resourceid=200-1505.html
+INFO: [HLS 200-1465] Applying ini 'part=xczu7ev-ffvc1156-2-e' from F:/LMU/quantumMA/opimization/reconstructv1maxi/hls_component/hls_config.cfg(1)
+INFO: [HLS 200-1611] Setting target device to 'xczu7ev-ffvc1156-2-e'
+INFO: [HLS 200-1465] Applying ini 'csim.clean=1' from F:/LMU/quantumMA/opimization/reconstructv1maxi/hls_component/hls_config.cfg(8)
+INFO: [HLS 200-1465] Applying ini 'csim.code_analyzer=1' from F:/LMU/quantumMA/opimization/reconstructv1maxi/hls_component/hls_config.cfg(9)
+INFO: [HLS 200-1465] Applying ini 'package.output.format=ip_catalog' from F:/LMU/quantumMA/opimization/reconstructv1maxi/hls_component/hls_config.cfg(5)
+INFO: [SIM 211-200] Executing Code Analyzer instead of classic HLS C simulation
+INFO: [SIM 211-200] Cleaning
+slxcmd:0:0: info: [ Cleaned build and execution files ]
+INFO: [HLS 211-200] Compiling source code ../image_analysis.cpp as hardware code with instrumentation
+INFO: [HLS 211-200] Compiling source code F:/LMU/quantumMA/opimization/reconstructv1maxi/test.cpp as test bench code with instrumentation
+INFO: [HLS 211-200] Compiling source code ../image_analysis.cpp as test bench code with instrumentation
+../image_analysis.cpp:66:39: warning: The 'enable_flush' option of the 'HLS pipeline' directive or pragma is deprecated, use style=flp instead [-Wignored-hls-pragmas]
+#pragma HLS PIPELINE II=1 enable_flush
+                                      ^
+../image_analysis.cpp:380:98: warning: unexpected pragma parameter 'storage_type' [-Winvalid-hls-pragmas]
+#pragma HLS INTERFACE port=atomLocations mode=m_axi bundle=atomLocations depth=1024 storage_type=RAM_2P // 
+                                                                                                 ^
+2 warnings generated.
+../image_analysis.cpp:66:39: warning: The 'enable_flush' option of the 'HLS pipeline' directive or pragma is deprecated, use style=flp instead [-Wignored-hls-pragmas]
+#pragma HLS PIPELINE II=1 enable_flush
+                                      ^
+../image_analysis.cpp:380:98: warning: unexpected pragma parameter 'storage_type' [-Winvalid-hls-pragmas]
+#pragma HLS INTERFACE port=atomLocations mode=m_axi bundle=atomLocations depth=1024 storage_type=RAM_2P // 
+                                                                                                 ^
+2 warnings generated.
+INFO: [HLS 211-200] Linking hardware code
+INFO: [HLS 211-200] Transforming hardware bitcode
+INFO: [HLS 211-200] Linking executable
+INFO: [HLS 211-200] Computing HLS IR Information
+INFO: [HLS 211-200] Determining source code dependencies
+INFO: [SIM 211-200] Running executable
+About to call getLocalImages...
+=== getLocalImages FINISHED ===
+About to call applyProjectors...
+Starting pipeline with 1024 atoms
+=== ATOM 0 STAGE 1 ===
+Region: (680,60) to (710,90)
+dx=0 dy=0
+xidx=0 yidx=0 psfSupersample=1
+proj_offset=0 (max=1)
+cols=31 rows=31
+Required pixels=961
+Available pixels=1
+MAX_LOCAL: 31x31
+FAIL: Required pixels (961) > available (1)
+FAIL: Atom 0 failed Stage 1 validation
+SKIP: Stage 2 (no valid input)
+SKIP: Stage 3 (no valid input)
+SKIPPING: Stage 3 invalid
+=== ATOM 1 STAGE 1 ===
+Region: (680,79) to (710,109)
+dx=0 dy=0
+xidx=0 yidx=0 psfSupersample=1
+proj_offset=0 (max=1)
+cols=31 rows=31
+Required pixels=961
+Available pixels=1
+MAX_LOCAL: 31x31
+FAIL: Required pixels (961) > available (1)
+FAIL: Atom 1 failed Stage 1 validation
+SKIP: Stage 2 (no valid input)
+SKIP: Stage 3 (no valid input)
+SKIPPING: Stage 3 invalid
+=== ATOM 2 STAGE 1 ===
+Region: (681,98) to (711,128)
+dx=0 dy=0
+xidx=0 yidx=0 psfSupersample=1
+proj_offset=0 (max=1)
+cols=31 rows=31
+Required pixels=961
+Available pixels=1
+MAX_LOCAL: 31x31
+FAIL: Required pixels (961) > available (1)
+FAIL: Atom 2 failed Stage 1 validation
+SKIP: Stage 2 (no valid input)
+SKIP: Stage 3 (no valid input)
+SKIPPING: Stage 3 invalid
+=== ATOM 3 STAGE 1 ===
+Region: (681,118) to (711,148)
+dx=0 dy=0
+xidx=0 yidx=0 psfSupersample=1
+proj_offset=0 (max=1)
+cols=31 rows=31
+Required pixels=961
+Available pixels=1
+MAX_LOCAL: 31x31
+FAIL: Required pixels (961) > available (1)
+FAIL: Atom 3 failed Stage 1 validation
+SKIP: Stage 2 (no valid input)
+SKIP: Stage 3 (no valid input)
+SKIPPING: Stage 3 invalid
+=== ATOM 4 STAGE 1 ===
+Region: (682,137) to (712,167)
+dx=0 dy=0
+xidx=0 yidx=0 psfSupersample=1
+proj_offset=0 (max=1)
+cols=31 rows=31
+Required pixels=961
+Available pixels=1
+MAX_LOCAL: 31x31
+FAIL: Required pixels (961) > available (1)
+FAIL: Atom 4 failed Stage 1 validation
+SKIP: Stage 2 (no valid input)
+SKIP: Stage 3 (no valid input)
+SKIPPING: Stage 3 invalid
+=== ATOM 5 STAGE 1 ===
+Region: (682,157) to (712,187)
+dx=0 dy=0
+xidx=0 yidx=0 psfSupersample=1
+proj_offset=0 (max=1)
+cols=31 rows=31
+Required pixels=961
+Available pixels=1
+MAX_LOCAL: 31x31
+FAIL: Required pixels (961) > available (1)
+FAIL: Atom 5 failed Stage 1 validation
+SKIP: Stage 2 (no valid input)
+SKIP: Stage 3 (no valid input)
+SKIPPING: Stage 3 invalid
+=== ATOM 6 STAGE 1 ===
+Region: (683,176) to (713,206)
+dx=0 dy=0
+xidx=0 yidx=0 psfSupersample=1
+proj_offset=0 (max=1)
+cols=31 rows=31
+Required pixels=961
+Available pixels=1
+MAX_LOCAL: 31x31
+FAIL: Required pixels (961) > available (1)
+FAIL: Atom 6 failed Stage 1 validation
+SKIP: Stage 2 (no valid input)
+SKIP: Stage 3 (no valid input)
+SKIPPING: Stage 3 invalid
+=== ATOM 7 STAGE 1 ===
+Region: (683,195) to (713,225)
+dx=0 dy=0
+xidx=0 yidx=0 psfSupersample=1
+proj_offset=0 (max=1)
+cols=31 rows=31
+Required pixels=961
+Available pixels=1
+MAX_LOCAL: 31x31
+FAIL: Required pixels (961) > available (1)
+FAIL: Atom 7 failed Stage 1 validation
+SKIP: Stage 2 (no valid input)
+SKIP: Stage 3 (no valid input)
+SKIPPING: Stage 3 invalid
+=== ATOM 8 STAGE 1 ===
+Region: (683,215) to (713,245)
+dx=0 dy=0
+xidx=0 yidx=0 psfSupersample=1
+proj_offset=0 (max=1)
+cols=31 rows=31
+Required pixels=961
+Available pixels=1
+MAX_LOCAL: 31x31
+FAIL: Required pixels (961) > available (1)
+FAIL: Atom 8 failed Stage 1 validation
+SKIP: Stage 2 (no valid input)
+SKIP: Stage 3 (no valid input)
+SKIPPING: Stage 3 invalid
+=== ATOM 9 STAGE 1 ===
+Region: (684,234) to (714,264)
+dx=0 dy=0
+xidx=0 yidx=0 psfSupersample=1
+proj_offset=0 (max=1)
+cols=31 rows=31
+Required pixels=961
+Available pixels=1
+MAX_LOCAL: 31x31
+FAIL: Required pixels (961) > available (1)
+FAIL: Atom 9 failed Stage 1 validation
+SKIP: Stage 2 (no valid input)
+SKIP: Stage 3 (no valid input)
+SKIPPING: Stage 3 invalid
+=== ATOM 10 STAGE 1 ===
+Region: (684,254) to (714,284)
+dx=0 dy=0
+xidx=0 yidx=0 psfSupersample=1
+proj_offset=0 (max=1)
+cols=31 rows=31
+Required pixels=961
+Available pixels=1
+MAX_LOCAL: 31x31
+FAIL: Required pixels (961) > available (1)
+FAIL: Atom 10 failed Stage 1 validation
+SKIP: Stage 2 (no valid input)
+SKIP: Stage 3 (no valid input)
+SKIPPING: Stage 3 invalid
+=== ATOM 11 STAGE 1 ===
+Region: (685,273) to (715,303)
+dx=0 dy=0
+xidx=0 yidx=0 psfSupersample=1
+proj_offset=0 (max=1)
+cols=31 rows=31
+Required pixels=961
+Available pixels=1
+MAX_LOCAL: 31x31
+FAIL: Required pixels (961) > available (1)
+FAIL: Atom 11 failed Stage 1 validation
+SKIP: Stage 2 (no valid input)
+SKIP: Stage 3 (no valid input)
+SKIPPING: Stage 3 invalid
+=== ATOM 12 STAGE 1 ===
+Region: (685,292) to (715,322)
+dx=0 dy=0
+xidx=0 yidx=0 psfSupersample=1
+proj_offset=0 (max=1)
+cols=31 rows=31
+Required pixels=961
+Available pixels=1
+MAX_LOCAL: 31x31
+FAIL: Required pixels (961) > available (1)
+FAIL: Atom 12 failed Stage 1 validation
+SKIP: Stage 2 (no valid input)
+SKIP: Stage 3 (no valid input)
+SKIPPING: Stage 3 invalid
+=== ATOM 13 STAGE 1 ===
+Region: (686,312) to (716,342)
+dx=0 dy=0
+xidx=0 yidx=0 psfSupersample=1
+proj_offset=0 (max=1)
+cols=31 rows=31
+Required pixels=961
+Available pixels=1
+MAX_LOCAL: 31x31
+FAIL: Required pixels (961) > available (1)
+FAIL: Atom 13 failed Stage 1 validation
+SKIP: Stage 2 (no valid input)
+SKIP: Stage 3 (no valid input)
+SKIPPING: Stage 3 invalid
+=== ATOM 14 STAGE 1 ===
+Region: (686,331) to (716,361)
+dx=0 dy=0
+xidx=0 yidx=0 psfSupersample=1
+proj_offset=0 (max=1)
+cols=31 rows=31
+Required pixels=961
+Available pixels=1
+MAX_LOCAL: 31x31
+FAIL: Required pixels (961) > available (1)
+FAIL: Atom 14 failed Stage 1 validation
+SKIP: Stage 2 (no valid input)
+SKIP: Stage 3 (no valid input)
+SKIPPING: Stage 3 invalid
+=== ATOM 15 STAGE 1 ===
+Region: (687,351) to (717,381)
+dx=0 dy=0
+xidx=0 yidx=0 psfSupersample=1
+proj_offset=0 (max=1)
+cols=31 rows=31
+Required pixels=961
+Available pixels=1
+MAX_LOCAL: 31x31
+FAIL: Required pixels (961) > available (1)
+FAIL: Atom 15 failed Stage 1 validation
+SKIP: Stage 2 (no valid input)
+SKIP: Stage 3 (no valid input)
+SKIPPING: Stage 3 invalid
+=== ATOM 16 STAGE 1 ===
+Region: (687,370) to (717,400)
+dx=0 dy=0
+xidx=0 yidx=0 psfSupersample=1
+proj_offset=0 (max=1)
+cols=31 rows=31
+Required pixels=961
+Available pixels=1
+MAX_LOCAL: 31x31
+FAIL: Required pixels (961) > available (1)
+FAIL: Atom 16 failed Stage 1 validation
+SKIP: Stage 2 (no valid input)
+SKIP: Stage 3 (no valid input)
+SKIPPING: Stage 3 invalid
+=== ATOM 17 STAGE 1 ===
+Region: (687,389) to (717,419)
+dx=0 dy=0
+xidx=0 yidx=0 psfSupersample=1
+proj_offset=0 (max=1)
+cols=31 rows=31
+Required pixels=961
+Available pixels=1
+MAX_LOCAL: 31x31
+FAIL: Required pixels (961) > available (1)
+FAIL: Atom 17 failed Stage 1 validation
+SKIP: Stage 2 (no valid input)
+SKIP: Stage 3 (no valid input)
+SKIPPING: Stage 3 invalid
+=== ATOM 18 STAGE 1 ===
+Region: (688,409) to (718,439)
+dx=0 dy=0
+xidx=0 yidx=0 psfSupersample=1
+proj_offset=0 (max=1)
+cols=31 rows=31
+Required pixels=961
+Available pixels=1
+MAX_LOCAL: 31x31
+FAIL: Required pixels (961) > available (1)
+FAIL: Atom 18 failed Stage 1 validation
+SKIP: Stage 2 (no valid input)
+SKIP: Stage 3 (no valid input)
+SKIPPING: Stage 3 invalid
+=== ATOM 19 STAGE 1 ===
+Region: (688,428) to (718,458)
+dx=0 dy=0
+xidx=0 yidx=0 psfSupersample=1
+proj_offset=0 (max=1)
+cols=31 rows=31
+Required pixels=961
+Available pixels=1
+MAX_LOCAL: 31x31
+FAIL: Required pixels (961) > available (1)
+FAIL: Atom 19 failed Stage 1 validation
+SKIP: Stage 2 (no valid input)
+SKIP: Stage 3 (no valid input)
+SKIPPING: Stage 3 invalid
+=== ATOM 20 STAGE 1 ===
+Region: (689,448) to (719,478)
+dx=0 dy=0
+xidx=0 yidx=0 psfSupersample=1
+proj_offset=0 (max=1)
+cols=31 rows=31
+Required pixels=961
+Available pixels=1
+MAX_LOCAL: 31x31
+FAIL: Required pixels (961) > available (1)
+FAIL: Atom 20 failed Stage 1 validation
+SKIP: Stage 2 (no valid input)
+SKIP: Stage 3 (no valid input)
+SKIPPING: Stage 3 invalid
+=== ATOM 21 STAGE 1 ===
+Region: (689,467) to (719,497)
+dx=0 dy=0
+xidx=0 yidx=0 psfSupersample=1
+proj_offset=0 (max=1)
+cols=31 rows=31
+Required pixels=961
+Available pixels=1
+MAX_LOCAL: 31x31
+FAIL: Required pixels (961) > available (1)
+FAIL: Atom 21 failed Stage 1 validation
+SKIP: Stage 2 (no valid input)
+SKIP: Stage 3 (no valid input)
+SKIPPING: Stage 3 invalid
+=== ATOM 22 STAGE 1 ===
+Region: (690,486) to (720,516)
+dx=0 dy=0
+xidx=0 yidx=0 psfSupersample=1
+proj_offset=0 (max=1)
+cols=31 rows=31
+Required pixels=961
+Available pixels=1
+MAX_LOCAL: 31x31
+FAIL: Required pixels (961) > available (1)
+FAIL: Atom 22 failed Stage 1 validation
+SKIP: Stage 2 (no valid input)
+SKIP: Stage 3 (no valid input)
+SKIPPING: Stage 3 invalid
+=== ATOM 23 STAGE 1 ===
+Region: (690,506) to (720,536)
+dx=0 dy=0
+xidx=0 yidx=0 psfSupersample=1
+proj_offset=0 (max=1)
+cols=31 rows=31
+Required pixels=961
+Available pixels=1
+MAX_LOCAL: 31x31
+FAIL: Required pixels (961) > available (1)
+FAIL: Atom 23 failed Stage 1 validation
+SKIP: Stage 2 (no valid input)
+SKIP: Stage 3 (no valid input)
+SKIPPING: Stage 3 invalid
+=== ATOM 24 STAGE 1 ===
+Region: (691,525) to (721,555)
+dx=0 dy=0
+xidx=0 yidx=0 psfSupersample=1
+proj_offset=0 (max=1)
+cols=31 rows=31
+Required pixels=961
+Available pixels=1
+MAX_LOCAL: 31x31
+FAIL: Required pixels (961) > available (1)
+FAIL: Atom 24 failed Stage 1 validation
+SKIP: Stage 2 (no valid input)
+SKIP: Stage 3 (no valid input)
+SKIPPING: Stage 3 invalid
+=== ATOM 25 STAGE 1 ===
+Region: (691,545) to (721,575)
+dx=0 dy=0
+xidx=0 yidx=0 psfSupersample=1
+proj_offset=0 (max=1)
+cols=31 rows=31
+Required pixels=961
+Available pixels=1
+MAX_LOCAL: 31x31
+FAIL: Required pixels (961) > available (1)
+FAIL: Atom 25 failed Stage 1 validation
+SKIP: Stage 2 (no valid input)
+SKIP: Stage 3 (no valid input)
+SKIPPING: Stage 3 invalid
+=== ATOM 26 STAGE 1 ===
+Region: (691,564) to (721,594)
+dx=0 dy=0
+xidx=0 yidx=0 psfSupersample=1
+proj_offset=0 (max=1)
+cols=31 rows=31
+Required pixels=961
+Available pixels=1
+MAX_LOCAL: 31x31
+FAIL: Required pixels (961) > available (1)
+FAIL: Atom 26 failed Stage 1 validation
+SKIP: Stage 2 (no valid input)
+SKIP: Stage 3 (no valid input)
+SKIPPING: Stage 3 invalid
+=== ATOM 27 STAGE 1 ===
+Region: (692,583) to (722,613)
+dx=0 dy=0
+xidx=0 yidx=0 psfSupersample=1
+proj_offset=0 (max=1)
+cols=31 rows=31
+Required pixels=961
+Available pixels=1
+MAX_LOCAL: 31x31
+FAIL: Required pixels (961) > available (1)
+FAIL: Atom 27 failed Stage 1 validation
+SKIP: Stage 2 (no valid input)
+SKIP: Stage 3 (no valid input)
+SKIPPING: Stage 3 invalid
+=== ATOM 28 STAGE 1 ===
+Region: (692,603) to (722,633)
+dx=0 dy=0
+xidx=0 yidx=0 psfSupersample=1
+proj_offset=0 (max=1)
+cols=31 rows=31
+Required pixels=961
+Available pixels=1
+MAX_LOCAL: 31x31
+FAIL: Required pixels (961) > available (1)
+FAIL: Atom 28 failed Stage 1 validation
+SKIP: Stage 2 (no valid input)
+SKIP: Stage 3 (no valid input)
+SKIPPING: Stage 3 invalid
+=== ATOM 29 STAGE 1 ===
+Region: (693,622) to (723,652)
+dx=0 dy=0
+xidx=0 yidx=0 psfSupersample=1
+proj_offset=0 (max=1)
+cols=31 rows=31
+Required pixels=961
+Available pixels=1
+MAX_LOCAL: 31x31
+FAIL: Required pixels (961) > available (1)
+FAIL: Atom 29 failed Stage 1 validation
+SKIP: Stage 2 (no valid input)
+SKIP: Stage 3 (no valid input)
+SKIPPING: Stage 3 invalid
+=== ATOM 30 STAGE 1 ===
+Region: (693,642) to (723,672)
+dx=0 dy=0
+xidx=0 yidx=0 psfSupersample=1
+proj_offset=0 (max=1)
+cols=31 rows=31
+Required pixels=961
+Available pixels=1
+MAX_LOCAL: 31x31
+FAIL: Required pixels (961) > available (1)
+FAIL: Atom 30 failed Stage 1 validation
+SKIP: Stage 2 (no valid input)
+SKIP: Stage 3 (no valid input)
+SKIPPING: Stage 3 invalid
+=== ATOM 31 STAGE 1 ===
+Region: (694,661) to (724,691)
+dx=0 dy=0
+xidx=0 yidx=0 psfSupersample=1
+proj_offset=0 (max=1)
+cols=31 rows=31
+Required pixels=961
+Available pixels=1
+MAX_LOCAL: 31x31
+FAIL: Required pixels (961) > available (1)
+FAIL: Atom 31 failed Stage 1 validation
+SKIP: Stage 2 (no valid input)
+SKIP: Stage 3 (no valid input)
+SKIPPING: Stage 3 invalid
+=== ATOM 32 STAGE 1 ===
+Region: (660,60) to (690,90)
+dx=0 dy=0
+xidx=0 yidx=0 psfSupersample=1
+proj_offset=0 (max=1)
+cols=31 rows=31
+Required pixels=961
+Available pixels=1
+MAX_LOCAL: 31x31
+FAIL: Required pixels (961) > available (1)
+FAIL: Atom 32 failed Stage 1 validation
+SKIP: Stage 2 (no valid input)
+SKIP: Stage 3 (no valid input)
+SKIPPING: Stage 3 invalid
+=== ATOM 33 STAGE 1 ===
+Region: (660,79) to (690,109)
+dx=0 dy=0
+xidx=0 yidx=0 psfSupersample=1
+proj_offset=0 (max=1)
+cols=31 rows=31
+Required pixels=961
+Available pixels=1
+MAX_LOCAL: 31x31
+FAIL: Required pixels (961) > available (1)
+FAIL: Atom 33 failed Stage 1 validation
+SKIP: Stage 2 (no valid input)
+SKIP: Stage 3 (no valid input)
+SKIPPING: Stage 3 invalid
+=== ATOM 34 STAGE 1 ===
+Region: (661,99) to (691,129)
+dx=0 dy=0
+xidx=0 yidx=0 psfSupersample=1
+proj_offset=0 (max=1)
+cols=31 rows=31
+Required pixels=961
+Available pixels=1
+MAX_LOCAL: 31x31
+FAIL: Required pixels (961) > available (1)
+FAIL: Atom 34 failed Stage 1 validation
+SKIP: Stage 2 (no valid input)
+SKIP: Stage 3 (no valid input)
+SKIPPING: Stage 3 invalid
+=== ATOM 35 STAGE 1 ===
+Region: (661,118) to (691,148)
+dx=0 dy=0
+xidx=0 yidx=0 psfSupersample=1
+proj_offset=0 (max=1)
+cols=31 rows=31
+Required pixels=961
+Available pixels=1
+MAX_LOCAL: 31x31
+FAIL: Required pixels (961) > available (1)
+FAIL: Atom 35 failed Stage 1 validation
+SKIP: Stage 2 (no valid input)
+SKIP: Stage 3 (no valid input)
+SKIPPING: Stage 3 invalid
+=== ATOM 36 STAGE 1 ===
+Region: (662,138) to (692,168)
+dx=0 dy=0
+xidx=0 yidx=0 psfSupersample=1
+proj_offset=0 (max=1)
+cols=31 rows=31
+Required pixels=961
+Available pixels=1
+MAX_LOCAL: 31x31
+FAIL: Required pixels (961) > available (1)
+FAIL: Atom 36 failed Stage 1 validation
+SKIP: Stage 2 (no valid input)
+SKIP: Stage 3 (no valid input)
+SKIPPING: Stage 3 invalid
+=== ATOM 37 STAGE 1 ===
+Region: (662,157) to (692,187)
+dx=0 dy=0
+xidx=0 yidx=0 psfSupersample=1
+proj_offset=0 (max=1)
+cols=31 rows=31
+Required pixels=961
+Available pixels=1
+MAX_LOCAL: 31x31
+FAIL: Required pixels (961) > available (1)
+FAIL: Atom 37 failed Stage 1 validation
+SKIP: Stage 2 (no valid input)
+SKIP: Stage 3 (no valid input)
+SKIPPING: Stage 3 invalid
+=== ATOM 38 STAGE 1 ===
+Region: (662,176) to (692,206)
+dx=0 dy=0
+xidx=0 yidx=0 psfSupersample=1
+proj_offset=0 (max=1)
+cols=31 rows=31
+Required pixels=961
+Available pixels=1
+MAX_LOCAL: 31x31
+FAIL: Required pixels (961) > available (1)
+FAIL: Atom 38 failed Stage 1 validation
+SKIP: Stage 2 (no valid input)
+SKIP: Stage 3 (no valid input)
+SKIPPING: Stage 3 invalid
+=== ATOM 39 STAGE 1 ===
+Region: (663,196) to (693,226)
+dx=0 dy=0
+xidx=0 yidx=0 psfSupersample=1
+proj_offset=0 (max=1)
+cols=31 rows=31
+Required pixels=961
+Available pixels=1
+MAX_LOCAL: 31x31
+FAIL: Required pixels (961) > available (1)
+FAIL: Atom 39 failed Stage 1 validation
+SKIP: Stage 2 (no valid input)
+SKIP: Stage 3 (no valid input)
+SKIPPING: Stage 3 invalid
+=== ATOM 40 STAGE 1 ===
+Region: (663,215) to (693,245)
+dx=0 dy=0
+xidx=0 yidx=0 psfSupersample=1
+proj_offset=0 (max=1)
+cols=31 rows=31
+Required pixels=961
+Available pixels=1
+MAX_LOCAL: 31x31
+FAIL: Required pixels (961) > available (1)
+FAIL: Atom 40 failed Stage 1 validation
+SKIP: Stage 2 (no valid input)
+SKIP: Stage 3 (no valid input)
+SKIPPING: Stage 3 invalid
+=== ATOM 41 STAGE 1 ===
+Region: (664,235) to (694,265)
+dx=0 dy=0
+xidx=0 yidx=0 psfSupersample=1
+proj_offset=0 (max=1)
+cols=31 rows=31
+Required pixels=961
+Available pixels=1
+MAX_LOCAL: 31x31
+FAIL: Required pixels (961) > available (1)
+FAIL: Atom 41 failed Stage 1 validation
+SKIP: Stage 2 (no valid input)
+SKIP: Stage 3 (no valid input)
+SKIPPING: Stage 3 invalid
+=== ATOM 42 STAGE 1 ===
+Region: (664,254) to (694,284)
+dx=0 dy=0
+xidx=0 yidx=0 psfSupersample=1
+proj_offset=0 (max=1)
+cols=31 rows=31
+Required pixels=961
+Available pixels=1
+MAX_LOCAL: 31x31
+FAIL: Required pixels (961) > available (1)
+FAIL: Atom 42 failed Stage 1 validation
+SKIP: Stage 2 (no valid input)
+SKIP: Stage 3 (no valid input)
+SKIPPING: Stage 3 invalid
+=== ATOM 43 STAGE 1 ===
+Region: (665,273) to (695,303)
+dx=0 dy=0
+xidx=0 yidx=0 psfSupersample=1
+proj_offset=0 (max=1)
+cols=31 rows=31
+Required pixels=961
+Available pixels=1
+MAX_LOCAL: 31x31
+FAIL: Required pixels (961) > available (1)
+FAIL: Atom 43 failed Stage 1 validation
+SKIP: Stage 2 (no valid input)
+SKIP: Stage 3 (no valid input)
+SKIPPING: Stage 3 invalid
+=== ATOM 44 STAGE 1 ===
+Region: (665,293) to (695,323)
+dx=0 dy=0
+xidx=0 yidx=0 psfSupersample=1
+proj_offset=0 (max=1)
+cols=31 rows=31
+Required pixels=961
+Available pixels=1
+MAX_LOCAL: 31x31
+FAIL: Required pixels (961) > available (1)
+FAIL: Atom 44 failed Stage 1 validation
+SKIP: Stage 2 (no valid input)
+SKIP: Stage 3 (no valid input)
+SKIPPING: Stage 3 invalid
+=== ATOM 45 STAGE 1 ===
+Region: (666,312) to (696,342)
+dx=0 dy=0
+xidx=0 yidx=0 psfSupersample=1
+proj_offset=0 (max=1)
+cols=31 rows=31
+Required pixels=961
+Available pixels=1
+MAX_LOCAL: 31x31
+FAIL: Required pixels (961) > available (1)
+FAIL: Atom 45 failed Stage 1 validation
+SKIP: Stage 2 (no valid input)
+SKIP: Stage 3 (no valid input)
+SKIPPING: Stage 3 invalid
+=== ATOM 46 STAGE 1 ===
+Region: (666,332) to (696,362)
+dx=0 dy=0
+xidx=0 yidx=0 psfSupersample=1
+proj_offset=0 (max=1)
+cols=31 rows=31
+Required pixels=961
+Available pixels=1
+MAX_LOCAL: 31x31
+FAIL: Required pixels (961) > available (1)
+FAIL: Atom 46 failed Stage 1 validation
+SKIP: Stage 2 (no valid input)
+SKIP: Stage 3 (no valid input)
+SKIPPING: Stage 3 invalid
+=== ATOM 47 STAGE 1 ===
+Region: (666,351) to (696,381)
+dx=0 dy=0
+xidx=0 yidx=0 psfSupersample=1
+proj_offset=0 (max=1)
+cols=31 rows=31
+Required pixels=961
+Available pixels=1
+MAX_LOCAL: 31x31
+FAIL: Required pixels (961) > available (1)
+FAIL: Atom 47 failed Stage 1 validation
+SKIP: Stage 2 (no valid input)
+SKIP: Stage 3 (no valid input)
+SKIPPING: Stage 3 invalid
+=== ATOM 48 STAGE 1 ===
+Region: (667,370) to (697,400)
+dx=0 dy=0
+xidx=0 yidx=0 psfSupersample=1
+proj_offset=0 (max=1)
+cols=31 rows=31
+Required pixels=961
+Available pixels=1
+MAX_LOCAL: 31x31
+FAIL: Required pixels (961) > available (1)
+FAIL: Atom 48 failed Stage 1 validation
+SKIP: Stage 2 (no valid input)
+SKIP: Stage 3 (no valid input)
+SKIPPING: Stage 3 invalid
+=== ATOM 49 STAGE 1 ===
+Region: (667,390) to (697,420)
+dx=0 dy=0
+xidx=0 yidx=0 psfSupersample=1
+proj_offset=0 (max=1)
+cols=31 rows=31
+Required pixels=961
+Available pixels=1
+MAX_LOCAL: 31x31
+FAIL: Required pixels (961) > available (1)
+FAIL: Atom 49 failed Stage 1 validation
+SKIP: Stage 2 (no valid input)
+SKIP: Stage 3 (no valid input)
+SKIPPING: Stage 3 invalid
+=== ATOM 50 STAGE 1 ===
+Region: (668,409) to (698,439)
+dx=0 dy=0
+xidx=0 yidx=0 psfSupersample=1
+proj_offset=0 (max=1)
+cols=31 rows=31
+Required pixels=961
+Available pixels=1
+MAX_LOCAL: 31x31
+FAIL: Required pixels (961) > available (1)
+FAIL: Atom 50 failed Stage 1 validation
+SKIP: Stage 2 (no valid input)
+SKIP: Stage 3 (no valid input)
+SKIPPING: Stage 3 invalid
+=== ATOM 51 STAGE 1 ===
+Region: (668,429) to (698,459)
+dx=0 dy=0
+xidx=0 yidx=0 psfSupersample=1
+proj_offset=0 (max=1)
+cols=31 rows=31
+Required pixels=961
+Available pixels=1
+MAX_LOCAL: 31x31
+FAIL: Required pixels (961) > available (1)
+FAIL: Atom 51 failed Stage 1 validation
+SKIP: Stage 2 (no valid input)
+SKIP: Stage 3 (no valid input)
+SKIPPING: Stage 3 invalid
+=== ATOM 52 STAGE 1 ===
+Region: (669,448) to (699,478)
+dx=0 dy=0
+xidx=0 yidx=0 psfSupersample=1
+proj_offset=0 (max=1)
+cols=31 rows=31
+Required pixels=961
+Available pixels=1
+MAX_LOCAL: 31x31
+FAIL: Required pixels (961) > available (1)
+FAIL: Atom 52 failed Stage 1 validation
+SKIP: Stage 2 (no valid input)
+SKIP: Stage 3 (no valid input)
+SKIPPING: Stage 3 invalid
+=== ATOM 53 STAGE 1 ===
+Region: (669,467) to (699,497)
+dx=0 dy=0
+xidx=0 yidx=0 psfSupersample=1
+proj_offset=0 (max=1)
+cols=31 rows=31
+Required pixels=961
+Available pixels=1
+MAX_LOCAL: 31x31
+FAIL: Required pixels (961) > available (1)
+FAIL: Atom 53 failed Stage 1 validation
+SKIP: Stage 2 (no valid input)
+SKIP: Stage 3 (no valid input)
+SKIPPING: Stage 3 invalid
+=== ATOM 54 STAGE 1 ===
+Region: (670,487) to (700,517)
+dx=0 dy=0
+xidx=0 yidx=0 psfSupersample=1
+proj_offset=0 (max=1)
+cols=31 rows=31
+Required pixels=961
+Available pixels=1
+MAX_LOCAL: 31x31
+FAIL: Required pixels (961) > available (1)
+FAIL: Atom 54 failed Stage 1 validation
+SKIP: Stage 2 (no valid input)
+SKIP: Stage 3 (no valid input)
+SKIPPING: Stage 3 invalid
+=== ATOM 55 STAGE 1 ===
+Region: (670,506) to (700,536)
+dx=0 dy=0
+xidx=0 yidx=0 psfSupersample=1
+proj_offset=0 (max=1)
+cols=31 rows=31
+Required pixels=961
+Available pixels=1
+MAX_LOCAL: 31x31
+FAIL: Required pixels (961) > available (1)
+FAIL: Atom 55 failed Stage 1 validation
+SKIP: Stage 2 (no valid input)
+SKIP: Stage 3 (no valid input)
+SKIPPING: Stage 3 invalid
+=== ATOM 56 STAGE 1 ===
+Region: (670,526) to (700,556)
+dx=0 dy=0
+xidx=0 yidx=0 psfSupersample=1
+proj_offset=0 (max=1)
+cols=31 rows=31
+Required pixels=961
+Available pixels=1
+MAX_LOCAL: 31x31
+FAIL: Required pixels (961) > available (1)
+FAIL: Atom 56 failed Stage 1 validation
+SKIP: Stage 2 (no valid input)
+SKIP: Stage 3 (no valid input)
+SKIPPING: Stage 3 invalid
+=== ATOM 57 STAGE 1 ===
+Region: (671,545) to (701,575)
+dx=0 dy=0
+xidx=0 yidx=0 psfSupersample=1
+proj_offset=0 (max=1)
+cols=31 rows=31
+Required pixels=961
+Available pixels=1
+MAX_LOCAL: 31x31
+FAIL: Required pixels (961) > available (1)
+FAIL: Atom 57 failed Stage 1 validation
+SKIP: Stage 2 (no valid input)
+SKIP: Stage 3 (no valid input)
+SKIPPING: Stage 3 invalid
+=== ATOM 58 STAGE 1 ===
+Region: (671,564) to (701,594)
+dx=0 dy=0
+xidx=0 yidx=0 psfSupersample=1
+proj_offset=0 (max=1)
+cols=31 rows=31
+Required pixels=961
+Available pixels=1
+MAX_LOCAL: 31x31
+FAIL: Required pixels (961) > available (1)
+FAIL: Atom 58 failed Stage 1 validation
+SKIP: Stage 2 (no valid input)
+SKIP: Stage 3 (no valid input)
+SKIPPING: Stage 3 invalid
+=== ATOM 59 STAGE 1 ===
+Region: (672,584) to (702,614)
+dx=0 dy=0
+xidx=0 yidx=0 psfSupersample=1
+proj_offset=0 (max=1)
+cols=31 rows=31
+Required pixels=961
+Available pixels=1
+MAX_LOCAL: 31x31
+FAIL: Required pixels (961) > available (1)
+FAIL: Atom 59 failed Stage 1 validation
+SKIP: Stage 2 (no valid input)
+SKIP: Stage 3 (no valid input)
+SKIPPING: Stage 3 invalid
+=== ATOM 60 STAGE 1 ===
+Region: (672,603) to (702,633)
+dx=0 dy=0
+xidx=0 yidx=0 psfSupersample=1
+proj_offset=0 (max=1)
+cols=31 rows=31
+Required pixels=961
+Available pixels=1
+MAX_LOCAL: 31x31
+FAIL: Required pixels (961) > available (1)
+FAIL: Atom 60 failed Stage 1 validation
+SKIP: Stage 2 (no valid input)
+SKIP: Stage 3 (no valid input)
+SKIPPING: Stage 3 invalid
+=== ATOM 61 STAGE 1 ===
+Region: (673,623) to (703,653)
+dx=0 dy=0
+xidx=0 yidx=0 psfSupersample=1
+proj_offset=0 (max=1)
+cols=31 rows=31
+Required pixels=961
+Available pixels=1
+MAX_LOCAL: 31x31
+FAIL: Required pixels (961) > available (1)
+FAIL: Atom 61 failed Stage 1 validation
+SKIP: Stage 2 (no valid input)
+SKIP: Stage 3 (no valid input)
+SKIPPING: Stage 3 invalid
+=== ATOM 62 STAGE 1 ===
+Region: (673,642) to (703,672)
+dx=0 dy=0
+xidx=0 yidx=0 psfSupersample=1
+proj_offset=0 (max=1)
+cols=31 rows=31
+Required pixels=961
+Available pixels=1
+MAX_LOCAL: 31x31
+FAIL: Required pixels (961) > available (1)
+FAIL: Atom 62 failed Stage 1 validation
+SKIP: Stage 2 (no valid input)
+SKIP: Stage 3 (no valid input)
+SKIPPING: Stage 3 invalid
+=== ATOM 63 STAGE 1 ===
+Region: (674,661) to (704,691)
+dx=0 dy=0
+xidx=0 yidx=0 psfSupersample=1
+proj_offset=0 (max=1)
+cols=31 rows=31
+Required pixels=961
+Available pixels=1
+MAX_LOCAL: 31x31
+FAIL: Required pixels (961) > available (1)
+FAIL: Atom 63 failed Stage 1 validation
+SKIP: Stage 2 (no valid input)
+SKIP: Stage 3 (no valid input)
+SKIPPING: Stage 3 invalid
+=== ATOM 64 STAGE 1 ===
+Region: (640,60) to (670,90)
+dx=0 dy=0
+xidx=0 yidx=0 psfSupersample=1
+proj_offset=0 (max=1)
+cols=31 rows=31
+Required pixels=961
+Available pixels=1
+MAX_LOCAL: 31x31
+FAIL: Required pixels (961) > available (1)
+FAIL: Atom 64 failed Stage 1 validation
+SKIP: Stage 2 (no valid input)
+SKIP: Stage 3 (no valid input)
+SKIPPING: Stage 3 invalid
+=== ATOM 65 STAGE 1 ===
+Region: (640,80) to (670,110)
+dx=0 dy=0
+xidx=0 yidx=0 psfSupersample=1
+proj_offset=0 (max=1)
+cols=31 rows=31
+Required pixels=961
+Available pixels=1
+MAX_LOCAL: 31x31
+FAIL: Required pixels (961) > available (1)
+FAIL: Atom 65 failed Stage 1 validation
+SKIP: Stage 2 (no valid input)
+SKIP: Stage 3 (no valid input)
+SKIPPING: Stage 3 invalid
+=== ATOM 66 STAGE 1 ===
+Region: (641,99) to (671,129)
+dx=0 dy=0
+xidx=0 yidx=0 psfSupersample=1
+proj_offset=0 (max=1)
+cols=31 rows=31
+Required pixels=961
+Available pixels=1
+MAX_LOCAL: 31x31

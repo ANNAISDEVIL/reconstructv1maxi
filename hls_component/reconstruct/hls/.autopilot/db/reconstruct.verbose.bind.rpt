@@ -3,13 +3,13 @@
 ================================================================
 == Vitis HLS Report for 'reconstruct'
 ================================================================
-* Date:           Wed May 21 17:37:28 2025
+* Date:           Mon Jun 30 08:25:41 2025
 
 * Version:        2024.2 (Build 5238294 on Nov  8 2024)
 * Project:        reconstruct
 * Solution:       hls (Vivado IP Flow Target)
-* Product family: zynq
-* Target device:  xc7z020-clg400-1
+* Product family: zynquplusRFSOC
+* Target device:  xczu49dr-ffvf1760-2-e
 
 
 ================================================================
@@ -20,30 +20,34 @@
     +--------+----------+----------+------------+
     |  Clock |  Target  | Estimated| Uncertainty|
     +--------+----------+----------+------------+
-    |ap_clk  |  10.00 ns|  7.300 ns|     2.70 ns|
+    |ap_clk  |  10.00 ns|  7.705 ns|     2.70 ns|
     +--------+----------+----------+------------+
 
 + Latency: 
     * Summary: 
-    +---------+---------+----------+----------+-----+-----+----------+
-    |  Latency (cycles) |  Latency (absolute) |  Interval | Pipeline |
-    |   min   |   max   |    min   |    max   | min | max |   Type   |
-    +---------+---------+----------+----------+-----+-----+----------+
-    |        ?|        ?|         ?|         ?|    ?|    ?|  dataflow|
-    +---------+---------+----------+----------+-----+-----+----------+
+    +---------+---------+-----------+-----------+---------+---------+---------+
+    |  Latency (cycles) |   Latency (absolute)  |      Interval     | Pipeline|
+    |   min   |   max   |    min    |    max    |   min   |   max   |   Type  |
+    +---------+---------+-----------+-----------+---------+---------+---------+
+    |  3961855|  3961855|  39.619 ms|  39.619 ms|  3961856|  3961856|       no|
+    +---------+---------+-----------+-----------+---------+---------+---------+
 
     + Detail: 
         * Instance: 
-        +----------------------------+-----------------+---------+---------+----------+----------+-----+-----+---------+
-        |                            |                 |  Latency (cycles) |  Latency (absolute) |  Interval | Pipeline|
-        |          Instance          |      Module     |   min   |   max   |    min   |    max   | min | max |   Type  |
-        +----------------------------+-----------------+---------+---------+----------+----------+-----+-----+---------+
-        |grp_getLocalImages_fu_208   |getLocalImages   |        ?|        ?|         ?|         ?|    ?|    ?|       no|
-        |grp_applyProjectors_fu_227  |applyProjectors  |        ?|        ?|         ?|         ?|    ?|    ?|       no|
-        +----------------------------+-----------------+---------+---------+----------+----------+-----+-----+---------+
+        +------------------------------------------------+-------------------------------------+---------+---------+-----------+-----------+------+------+----------+
+        |                                                |                                     |  Latency (cycles) |   Latency (absolute)  |   Interval  | Pipeline |
+        |                    Instance                    |                Module               |   min   |   max   |    min    |    max    |  min |  max |   Type   |
+        +------------------------------------------------+-------------------------------------+---------+---------+-----------+-----------+------+------+----------+
+        |grp_dataflow_in_loop_VITIS_LOOP_149_1_1_fu_200  |dataflow_in_loop_VITIS_LOOP_149_1_1  |     4888|     4888|  48.880 us|  48.880 us|  3868|  3868|  dataflow|
+        +------------------------------------------------+-------------------------------------+---------+---------+-----------+-----------+------+------+----------+
 
         * Loop: 
-        N/A
+        +--------------------+---------+---------+----------+-----------+-----------+------+----------+
+        |                    |  Latency (cycles) | Iteration|  Initiation Interval  | Trip |          |
+        |      Loop Name     |   min   |   max   |  Latency |  achieved |   target  | Count| Pipelined|
+        +--------------------+---------+---------+----------+-----------+-----------+------+----------+
+        |- VITIS_LOOP_149_1  |  3961854|  3961854|      4891|          -|          -|  1024|        no|
+        +--------------------+---------+---------+----------+-----------+-----------+------+----------+
 
 ============================================================
 + Verbose Summary: Synthesis Manager
@@ -74,92 +78,92 @@ IsGatedGlobalClock: 0
 * Number of FSM states : 4
 * Pipeline : 0
 * Dataflow Pipeline: 1
-  DF-Pipeline-0: Size = 4, States = { 1 2 3 4 }
+  DF-Pipeline-0: Size = 3, States = { 2 3 4 }
 
 * FSM state transitions: 
 1 --> 2 
 2 --> 3 
 3 --> 4 
-4 --> 
+4 --> 2 
 
 * FSM state operations: 
 
-State 1 <SV = 0> <Delay = 7.28>
-ST_1 : Operation 5 [1/1] (1.00ns)   --->   "%emissions_offset_read = read i64 @_ssdm_op_Read.s_axilite.i64, i64 %emissions_offset"   --->   Operation 5 'read' 'emissions_offset_read' <Predicate = true> <Delay = 1.00> <CoreInst = "s_axilite">   --->   Core 112 's_axilite' <Latency = 0> <II = 1> <Delay = 1.00> <Adapter> <Opcode : 'read' 'write'>
-ST_1 : Operation 6 [1/1] (1.00ns)   --->   "%fullImage_cols_read = read i32 @_ssdm_op_Read.s_axilite.i32, i32 %fullImage_cols"   --->   Operation 6 'read' 'fullImage_cols_read' <Predicate = true> <Delay = 1.00> <CoreInst = "s_axilite">   --->   Core 112 's_axilite' <Latency = 0> <II = 1> <Delay = 1.00> <Adapter> <Opcode : 'read' 'write'>
-ST_1 : Operation 7 [1/1] (1.00ns)   --->   "%fullImage_rows_read = read i32 @_ssdm_op_Read.s_axilite.i32, i32 %fullImage_rows"   --->   Operation 7 'read' 'fullImage_rows_read' <Predicate = true> <Delay = 1.00> <CoreInst = "s_axilite">   --->   Core 112 's_axilite' <Latency = 0> <II = 1> <Delay = 1.00> <Adapter> <Opcode : 'read' 'write'>
-ST_1 : Operation 8 [1/1] (1.00ns)   --->   "%fullImage_offset_read = read i64 @_ssdm_op_Read.s_axilite.i64, i64 %fullImage_offset"   --->   Operation 8 'read' 'fullImage_offset_read' <Predicate = true> <Delay = 1.00> <CoreInst = "s_axilite">   --->   Core 112 's_axilite' <Latency = 0> <II = 1> <Delay = 1.00> <Adapter> <Opcode : 'read' 'write'>
-ST_1 : Operation 9 [1/1] (1.00ns)   --->   "%imageProjs_local_size_offset_read = read i64 @_ssdm_op_Read.s_axilite.i64, i64 %imageProjs_local_size_offset"   --->   Operation 9 'read' 'imageProjs_local_size_offset_read' <Predicate = true> <Delay = 1.00> <CoreInst = "s_axilite">   --->   Core 112 's_axilite' <Latency = 0> <II = 1> <Delay = 1.00> <Adapter> <Opcode : 'read' 'write'>
-ST_1 : Operation 10 [1/1] (1.00ns)   --->   "%imageProjs_offset_read = read i64 @_ssdm_op_Read.s_axilite.i64, i64 %imageProjs_offset"   --->   Operation 10 'read' 'imageProjs_offset_read' <Predicate = true> <Delay = 1.00> <CoreInst = "s_axilite">   --->   Core 112 's_axilite' <Latency = 0> <II = 1> <Delay = 1.00> <Adapter> <Opcode : 'read' 'write'>
-ST_1 : Operation 11 [1/1] (1.00ns)   --->   "%imageProjs_local_offset_read = read i64 @_ssdm_op_Read.s_axilite.i64, i64 %imageProjs_local_offset"   --->   Operation 11 'read' 'imageProjs_local_offset_read' <Predicate = true> <Delay = 1.00> <CoreInst = "s_axilite">   --->   Core 112 's_axilite' <Latency = 0> <II = 1> <Delay = 1.00> <Adapter> <Opcode : 'read' 'write'>
-ST_1 : Operation 12 [1/1] (1.00ns)   --->   "%imageProjectionSize_read = read i32 @_ssdm_op_Read.s_axilite.i32, i32 %imageProjectionSize"   --->   Operation 12 'read' 'imageProjectionSize_read' <Predicate = true> <Delay = 1.00> <CoreInst = "s_axilite">   --->   Core 112 's_axilite' <Latency = 0> <II = 1> <Delay = 1.00> <Adapter> <Opcode : 'read' 'write'>
-ST_1 : Operation 13 [1/1] (1.00ns)   --->   "%psfSupersample_read = read i32 @_ssdm_op_Read.s_axilite.i32, i32 %psfSupersample"   --->   Operation 13 'read' 'psfSupersample_read' <Predicate = true> <Delay = 1.00> <CoreInst = "s_axilite">   --->   Core 112 's_axilite' <Latency = 0> <II = 1> <Delay = 1.00> <Adapter> <Opcode : 'read' 'write'>
-ST_1 : Operation 14 [1/1] (1.00ns)   --->   "%projShape1_read = read i32 @_ssdm_op_Read.s_axilite.i32, i32 %projShape1"   --->   Operation 14 'read' 'projShape1_read' <Predicate = true> <Delay = 1.00> <CoreInst = "s_axilite">   --->   Core 112 's_axilite' <Latency = 0> <II = 1> <Delay = 1.00> <Adapter> <Opcode : 'read' 'write'>
-ST_1 : Operation 15 [1/1] (1.00ns)   --->   "%projShape0_read = read i32 @_ssdm_op_Read.s_axilite.i32, i32 %projShape0"   --->   Operation 15 'read' 'projShape0_read' <Predicate = true> <Delay = 1.00> <CoreInst = "s_axilite">   --->   Core 112 's_axilite' <Latency = 0> <II = 1> <Delay = 1.00> <Adapter> <Opcode : 'read' 'write'>
-ST_1 : Operation 16 [1/1] (1.00ns)   --->   "%atomLocationsSize_read = read i32 @_ssdm_op_Read.s_axilite.i32, i32 %atomLocationsSize"   --->   Operation 16 'read' 'atomLocationsSize_read' <Predicate = true> <Delay = 1.00> <CoreInst = "s_axilite">   --->   Core 112 's_axilite' <Latency = 0> <II = 1> <Delay = 1.00> <Adapter> <Opcode : 'read' 'write'>
-ST_1 : Operation 17 [1/1] (0.00ns)   --->   "%localImages = alloca i64 1"   --->   Operation 17 'alloca' 'localImages' <Predicate = true> <Delay = 0.00> <CoreInst = "FIFO_SRL">   --->   Core 80 'FIFO_SRL' <Latency = 0> <II = 1> <Delay = 3.63> <Storage> <Opcode : 'read' 'write' 'nbread' 'nbwrite'> <Ports = 0> <Width = 256> <Depth = 2> <FIFO>
-ST_1 : Operation 18 [2/2] (6.28ns)   --->   "%call_ln159 = call void @getLocalImages, i32 %atomLocationsSize_read, i32 %psfSupersample_read, i32 %projShape0_read, i32 %projShape1_read, i128 %atomLocations, i256 %localImages, i52 %mask_table, i53 %one_half_table" [../image_analysis.cpp:159]   --->   Operation 18 'call' 'call_ln159' <Predicate = true> <Delay = 6.28> <CoreType = "Generic">   --->   Generic Core
+State 1 <SV = 0> <Delay = 1.00>
+ST_1 : Operation 5 [1/1] (0.00ns)   --->   "%spectopmodule_ln116 = spectopmodule void @_ssdm_op_SpecTopModule, void @empty_11" [../image_analysis.cpp:116]   --->   Operation 5 'spectopmodule' 'spectopmodule_ln116' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 6 [1/1] (0.00ns)   --->   "%specinterface_ln0 = specinterface void @_ssdm_op_SpecInterface, i64 %atomLocations, void @empty_16, i32 0, i32 0, void @empty_17, i32 0, i32 1024, void @empty_18, void @empty_19, void @empty_17, i32 16, i32 16, i32 16, i32 16, void @empty_17, void @empty_17, i32 4294967295, i32 0, i32 0"   --->   Operation 6 'specinterface' 'specinterface_ln0' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 7 [1/1] (0.00ns)   --->   "%specbitsmap_ln0 = specbitsmap void @_ssdm_op_SpecBitsMap, i64 %atomLocations"   --->   Operation 7 'specbitsmap' 'specbitsmap_ln0' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 8 [1/1] (0.00ns)   --->   "%specinterface_ln0 = specinterface void @_ssdm_op_SpecInterface, i32 %imageProjs_local, void @empty_16, i32 0, i32 0, void @empty_17, i32 0, i32 0, void @empty_20, void @empty_19, void @empty_17, i32 16, i32 16, i32 16, i32 16, void @empty_17, void @empty_17, i32 4294967295, i32 0, i32 0"   --->   Operation 8 'specinterface' 'specinterface_ln0' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 9 [1/1] (0.00ns)   --->   "%specbitsmap_ln0 = specbitsmap void @_ssdm_op_SpecBitsMap, i32 %imageProjs_local"   --->   Operation 9 'specbitsmap' 'specbitsmap_ln0' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 10 [1/1] (0.00ns)   --->   "%specinterface_ln0 = specinterface void @_ssdm_op_SpecInterface, i32 %imageProjs, void @empty_16, i32 0, i32 0, void @empty_17, i32 0, i32 0, void @empty_25, void @empty_19, void @empty_17, i32 16, i32 16, i32 16, i32 16, void @empty_17, void @empty_17, i32 4294967295, i32 0, i32 0"   --->   Operation 10 'specinterface' 'specinterface_ln0' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 11 [1/1] (0.00ns)   --->   "%specbitsmap_ln0 = specbitsmap void @_ssdm_op_SpecBitsMap, i32 %imageProjs"   --->   Operation 11 'specbitsmap' 'specbitsmap_ln0' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 12 [1/1] (0.00ns)   --->   "%specinterface_ln0 = specinterface void @_ssdm_op_SpecInterface, i32 %imageProjs_local_size_r, void @empty_16, i32 0, i32 0, void @empty_17, i32 0, i32 0, void @empty_26, void @empty_19, void @empty_17, i32 16, i32 16, i32 16, i32 16, void @empty_17, void @empty_17, i32 4294967295, i32 0, i32 0"   --->   Operation 12 'specinterface' 'specinterface_ln0' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 13 [1/1] (0.00ns)   --->   "%specbitsmap_ln0 = specbitsmap void @_ssdm_op_SpecBitsMap, i32 %imageProjs_local_size_r"   --->   Operation 13 'specbitsmap' 'specbitsmap_ln0' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 14 [1/1] (0.00ns)   --->   "%specinterface_ln0 = specinterface void @_ssdm_op_SpecInterface, i32 %fullImage, void @empty_16, i32 0, i32 0, void @empty_17, i32 0, i32 589824, void @empty, void @empty_19, void @empty_17, i32 16, i32 16, i32 16, i32 16, void @empty_17, void @empty_17, i32 4294967295, i32 0, i32 0"   --->   Operation 14 'specinterface' 'specinterface_ln0' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 15 [1/1] (0.00ns)   --->   "%specbitsmap_ln0 = specbitsmap void @_ssdm_op_SpecBitsMap, i32 %fullImage"   --->   Operation 15 'specbitsmap' 'specbitsmap_ln0' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 16 [1/1] (0.00ns)   --->   "%specinterface_ln0 = specinterface void @_ssdm_op_SpecInterface, i32 %emissions, void @empty_16, i32 0, i32 0, void @empty_17, i32 0, i32 1024, void @empty_0, void @empty_19, void @empty_17, i32 16, i32 16, i32 16, i32 16, void @empty_17, void @empty_17, i32 4294967295, i32 0, i32 0"   --->   Operation 16 'specinterface' 'specinterface_ln0' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 17 [1/1] (0.00ns)   --->   "%specbitsmap_ln0 = specbitsmap void @_ssdm_op_SpecBitsMap, i32 %emissions"   --->   Operation 17 'specbitsmap' 'specbitsmap_ln0' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 18 [1/1] (0.00ns)   --->   "%specbitsmap_ln0 = specbitsmap void @_ssdm_op_SpecBitsMap, i32 %atomLocationsSize"   --->   Operation 18 'specbitsmap' 'specbitsmap_ln0' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 19 [1/1] (0.00ns)   --->   "%specinterface_ln0 = specinterface void @_ssdm_op_SpecInterface, i32 %atomLocationsSize, void @empty_1, i32 4294967295, i32 4294967295, void @empty_2, i32 0, i32 0, void @empty_3, void @empty_4, void @empty_17, i32 0, i32 0, i32 0, i32 0, void @empty_17, void @empty_17, i32 4294967295, i32 0, i32 0"   --->   Operation 19 'specinterface' 'specinterface_ln0' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 20 [1/1] (0.00ns)   --->   "%specinterface_ln0 = specinterface void @_ssdm_op_SpecInterface, i32 %atomLocationsSize, void @empty_5, i32 4294967295, i32 4294967295, void @empty_17, i32 0, i32 0, void @empty_17, void @empty_17, void @empty_17, i32 0, i32 0, i32 0, i32 0, void @empty_17, void @empty_17, i32 4294967295, i32 0, i32 0"   --->   Operation 20 'specinterface' 'specinterface_ln0' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 21 [1/1] (0.00ns)   --->   "%specbitsmap_ln0 = specbitsmap void @_ssdm_op_SpecBitsMap, i32 %projShape0"   --->   Operation 21 'specbitsmap' 'specbitsmap_ln0' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 22 [1/1] (0.00ns)   --->   "%specinterface_ln0 = specinterface void @_ssdm_op_SpecInterface, i32 %projShape0, void @empty_1, i32 4294967295, i32 4294967295, void @empty_2, i32 0, i32 0, void @empty_3, void @empty_6, void @empty_17, i32 0, i32 0, i32 0, i32 0, void @empty_17, void @empty_17, i32 4294967295, i32 0, i32 0"   --->   Operation 22 'specinterface' 'specinterface_ln0' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 23 [1/1] (0.00ns)   --->   "%specinterface_ln0 = specinterface void @_ssdm_op_SpecInterface, i32 %projShape0, void @empty_5, i32 4294967295, i32 4294967295, void @empty_17, i32 0, i32 0, void @empty_17, void @empty_17, void @empty_17, i32 0, i32 0, i32 0, i32 0, void @empty_17, void @empty_17, i32 4294967295, i32 0, i32 0"   --->   Operation 23 'specinterface' 'specinterface_ln0' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 24 [1/1] (0.00ns)   --->   "%specbitsmap_ln0 = specbitsmap void @_ssdm_op_SpecBitsMap, i32 %projShape1"   --->   Operation 24 'specbitsmap' 'specbitsmap_ln0' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 25 [1/1] (0.00ns)   --->   "%specinterface_ln0 = specinterface void @_ssdm_op_SpecInterface, i32 %projShape1, void @empty_1, i32 4294967295, i32 4294967295, void @empty_2, i32 0, i32 0, void @empty_3, void @empty_14, void @empty_17, i32 0, i32 0, i32 0, i32 0, void @empty_17, void @empty_17, i32 4294967295, i32 0, i32 0"   --->   Operation 25 'specinterface' 'specinterface_ln0' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 26 [1/1] (0.00ns)   --->   "%specinterface_ln0 = specinterface void @_ssdm_op_SpecInterface, i32 %projShape1, void @empty_5, i32 4294967295, i32 4294967295, void @empty_17, i32 0, i32 0, void @empty_17, void @empty_17, void @empty_17, i32 0, i32 0, i32 0, i32 0, void @empty_17, void @empty_17, i32 4294967295, i32 0, i32 0"   --->   Operation 26 'specinterface' 'specinterface_ln0' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 27 [1/1] (0.00ns)   --->   "%specinterface_ln0 = specinterface void @_ssdm_op_SpecInterface, i64 %atomLocations_offset, void @empty_1, i32 0, i32 0, void @empty_17, i32 0, i32 0, void @empty_10, void @empty_4, void @empty_17, i32 0, i32 0, i32 0, i32 0, void @empty_17, void @empty_7, i32 4294967295, i32 0, i32 0"   --->   Operation 27 'specinterface' 'specinterface_ln0' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 28 [1/1] (0.00ns)   --->   "%specinterface_ln0 = specinterface void @_ssdm_op_SpecInterface, i64 %atomLocations_offset, void @empty_5, i32 0, i32 0, void @empty_17, i32 0, i32 0, void @empty_17, void @empty_17, void @empty_17, i32 0, i32 0, i32 0, i32 0, void @empty_17, void @empty_7, i32 4294967295, i32 0, i32 0"   --->   Operation 28 'specinterface' 'specinterface_ln0' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 29 [1/1] (0.00ns)   --->   "%specbitsmap_ln0 = specbitsmap void @_ssdm_op_SpecBitsMap, i32 %psfSupersample"   --->   Operation 29 'specbitsmap' 'specbitsmap_ln0' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 30 [1/1] (0.00ns)   --->   "%specinterface_ln0 = specinterface void @_ssdm_op_SpecInterface, i32 %psfSupersample, void @empty_1, i32 4294967295, i32 4294967295, void @empty_2, i32 0, i32 0, void @empty_3, void @empty_15, void @empty_17, i32 0, i32 0, i32 0, i32 0, void @empty_17, void @empty_17, i32 4294967295, i32 0, i32 0"   --->   Operation 30 'specinterface' 'specinterface_ln0' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 31 [1/1] (0.00ns)   --->   "%specinterface_ln0 = specinterface void @_ssdm_op_SpecInterface, i32 %psfSupersample, void @empty_5, i32 4294967295, i32 4294967295, void @empty_17, i32 0, i32 0, void @empty_17, void @empty_17, void @empty_17, i32 0, i32 0, i32 0, i32 0, void @empty_17, void @empty_17, i32 4294967295, i32 0, i32 0"   --->   Operation 31 'specinterface' 'specinterface_ln0' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 32 [1/1] (0.00ns)   --->   "%specbitsmap_ln0 = specbitsmap void @_ssdm_op_SpecBitsMap, i32 %imageProjectionSize"   --->   Operation 32 'specbitsmap' 'specbitsmap_ln0' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 33 [1/1] (0.00ns)   --->   "%specinterface_ln0 = specinterface void @_ssdm_op_SpecInterface, i32 %imageProjectionSize, void @empty_1, i32 4294967295, i32 4294967295, void @empty_2, i32 0, i32 0, void @empty_3, void @empty_21, void @empty_17, i32 0, i32 0, i32 0, i32 0, void @empty_17, void @empty_17, i32 4294967295, i32 0, i32 0"   --->   Operation 33 'specinterface' 'specinterface_ln0' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 34 [1/1] (0.00ns)   --->   "%specinterface_ln0 = specinterface void @_ssdm_op_SpecInterface, i32 %imageProjectionSize, void @empty_5, i32 4294967295, i32 4294967295, void @empty_17, i32 0, i32 0, void @empty_17, void @empty_17, void @empty_17, i32 0, i32 0, i32 0, i32 0, void @empty_17, void @empty_17, i32 4294967295, i32 0, i32 0"   --->   Operation 34 'specinterface' 'specinterface_ln0' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 35 [1/1] (0.00ns)   --->   "%specinterface_ln0 = specinterface void @_ssdm_op_SpecInterface, i64 %imageProjs_local_offset, void @empty_1, i32 0, i32 0, void @empty_17, i32 0, i32 0, void @empty_10, void @empty_8, void @empty_17, i32 0, i32 0, i32 0, i32 0, void @empty_17, void @empty_7, i32 4294967295, i32 0, i32 0"   --->   Operation 35 'specinterface' 'specinterface_ln0' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 36 [1/1] (0.00ns)   --->   "%specinterface_ln0 = specinterface void @_ssdm_op_SpecInterface, i64 %imageProjs_local_offset, void @empty_5, i32 0, i32 0, void @empty_17, i32 0, i32 0, void @empty_17, void @empty_17, void @empty_17, i32 0, i32 0, i32 0, i32 0, void @empty_17, void @empty_7, i32 4294967295, i32 0, i32 0"   --->   Operation 36 'specinterface' 'specinterface_ln0' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 37 [1/1] (0.00ns)   --->   "%specinterface_ln0 = specinterface void @_ssdm_op_SpecInterface, i64 %imageProjs_offset, void @empty_1, i32 0, i32 0, void @empty_17, i32 0, i32 0, void @empty_10, void @empty_15, void @empty_17, i32 0, i32 0, i32 0, i32 0, void @empty_17, void @empty_7, i32 4294967295, i32 0, i32 0"   --->   Operation 37 'specinterface' 'specinterface_ln0' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 38 [1/1] (0.00ns)   --->   "%specinterface_ln0 = specinterface void @_ssdm_op_SpecInterface, i64 %imageProjs_offset, void @empty_5, i32 0, i32 0, void @empty_17, i32 0, i32 0, void @empty_17, void @empty_17, void @empty_17, i32 0, i32 0, i32 0, i32 0, void @empty_17, void @empty_7, i32 4294967295, i32 0, i32 0"   --->   Operation 38 'specinterface' 'specinterface_ln0' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 39 [1/1] (0.00ns)   --->   "%specinterface_ln0 = specinterface void @_ssdm_op_SpecInterface, i64 %imageProjs_local_size_offset, void @empty_1, i32 0, i32 0, void @empty_17, i32 0, i32 0, void @empty_10, void @empty_24, void @empty_17, i32 0, i32 0, i32 0, i32 0, void @empty_17, void @empty_7, i32 4294967295, i32 0, i32 0"   --->   Operation 39 'specinterface' 'specinterface_ln0' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 40 [1/1] (0.00ns)   --->   "%specinterface_ln0 = specinterface void @_ssdm_op_SpecInterface, i64 %imageProjs_local_size_offset, void @empty_5, i32 0, i32 0, void @empty_17, i32 0, i32 0, void @empty_17, void @empty_17, void @empty_17, i32 0, i32 0, i32 0, i32 0, void @empty_17, void @empty_7, i32 4294967295, i32 0, i32 0"   --->   Operation 40 'specinterface' 'specinterface_ln0' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 41 [1/1] (0.00ns)   --->   "%specinterface_ln0 = specinterface void @_ssdm_op_SpecInterface, i64 %fullImage_offset, void @empty_1, i32 0, i32 0, void @empty_17, i32 0, i32 0, void @empty_10, void @empty_23, void @empty_17, i32 0, i32 0, i32 0, i32 0, void @empty_17, void @empty_7, i32 4294967295, i32 0, i32 0"   --->   Operation 41 'specinterface' 'specinterface_ln0' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 42 [1/1] (0.00ns)   --->   "%specinterface_ln0 = specinterface void @_ssdm_op_SpecInterface, i64 %fullImage_offset, void @empty_5, i32 0, i32 0, void @empty_17, i32 0, i32 0, void @empty_17, void @empty_17, void @empty_17, i32 0, i32 0, i32 0, i32 0, void @empty_17, void @empty_7, i32 4294967295, i32 0, i32 0"   --->   Operation 42 'specinterface' 'specinterface_ln0' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 43 [1/1] (0.00ns)   --->   "%specbitsmap_ln0 = specbitsmap void @_ssdm_op_SpecBitsMap, i32 %fullImage_rows"   --->   Operation 43 'specbitsmap' 'specbitsmap_ln0' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 44 [1/1] (0.00ns)   --->   "%specinterface_ln0 = specinterface void @_ssdm_op_SpecInterface, i32 %fullImage_rows, void @empty_1, i32 4294967295, i32 4294967295, void @empty_2, i32 0, i32 0, void @empty_3, void @empty_22, void @empty_17, i32 0, i32 0, i32 0, i32 0, void @empty_17, void @empty_17, i32 4294967295, i32 0, i32 0"   --->   Operation 44 'specinterface' 'specinterface_ln0' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 45 [1/1] (0.00ns)   --->   "%specinterface_ln0 = specinterface void @_ssdm_op_SpecInterface, i32 %fullImage_rows, void @empty_5, i32 4294967295, i32 4294967295, void @empty_17, i32 0, i32 0, void @empty_17, void @empty_17, void @empty_17, i32 0, i32 0, i32 0, i32 0, void @empty_17, void @empty_17, i32 4294967295, i32 0, i32 0"   --->   Operation 45 'specinterface' 'specinterface_ln0' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 46 [1/1] (0.00ns)   --->   "%specbitsmap_ln0 = specbitsmap void @_ssdm_op_SpecBitsMap, i32 %fullImage_cols"   --->   Operation 46 'specbitsmap' 'specbitsmap_ln0' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 47 [1/1] (0.00ns)   --->   "%specinterface_ln0 = specinterface void @_ssdm_op_SpecInterface, i32 %fullImage_cols, void @empty_1, i32 4294967295, i32 4294967295, void @empty_2, i32 0, i32 0, void @empty_3, void @empty_23, void @empty_17, i32 0, i32 0, i32 0, i32 0, void @empty_17, void @empty_17, i32 4294967295, i32 0, i32 0"   --->   Operation 47 'specinterface' 'specinterface_ln0' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 48 [1/1] (0.00ns)   --->   "%specinterface_ln0 = specinterface void @_ssdm_op_SpecInterface, i32 %fullImage_cols, void @empty_5, i32 4294967295, i32 4294967295, void @empty_17, i32 0, i32 0, void @empty_17, void @empty_17, void @empty_17, i32 0, i32 0, i32 0, i32 0, void @empty_17, void @empty_17, i32 4294967295, i32 0, i32 0"   --->   Operation 48 'specinterface' 'specinterface_ln0' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 49 [1/1] (0.00ns)   --->   "%specinterface_ln0 = specinterface void @_ssdm_op_SpecInterface, i64 %emissions_offset, void @empty_1, i32 0, i32 0, void @empty_17, i32 0, i32 0, void @empty_10, void @empty_9, void @empty_17, i32 0, i32 0, i32 0, i32 0, void @empty_17, void @empty_7, i32 4294967295, i32 0, i32 0"   --->   Operation 49 'specinterface' 'specinterface_ln0' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 50 [1/1] (0.00ns)   --->   "%specinterface_ln0 = specinterface void @_ssdm_op_SpecInterface, i64 %emissions_offset, void @empty_5, i32 0, i32 0, void @empty_17, i32 0, i32 0, void @empty_17, void @empty_17, void @empty_17, i32 0, i32 0, i32 0, i32 0, void @empty_17, void @empty_7, i32 4294967295, i32 0, i32 0"   --->   Operation 50 'specinterface' 'specinterface_ln0' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 51 [1/1] (0.00ns)   --->   "%specinterface_ln0 = specinterface void @_ssdm_op_SpecInterface, i32 0, void @empty_1, i32 0, i32 0, void @empty_17, i32 0, i32 0, void @empty_10, void @empty_17, void @empty_17, i32 0, i32 0, i32 0, i32 0, void @empty_17, void @empty_17, i32 4294967295, i32 0, i32 0"   --->   Operation 51 'specinterface' 'specinterface_ln0' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 52 [1/1] (1.00ns)   --->   "%emissions_offset_read = read i64 @_ssdm_op_Read.s_axilite.i64, i64 %emissions_offset" [../image_analysis.cpp:116]   --->   Operation 52 'read' 'emissions_offset_read' <Predicate = true> <Delay = 1.00> <CoreInst = "s_axilite">   --->   Core 120 's_axilite' <Latency = 0> <II = 1> <Delay = 1.00> <Adapter> <Opcode : 'read' 'write'>
+ST_1 : Operation 53 [1/1] (1.00ns)   --->   "%fullImage_offset_read = read i64 @_ssdm_op_Read.s_axilite.i64, i64 %fullImage_offset" [../image_analysis.cpp:116]   --->   Operation 53 'read' 'fullImage_offset_read' <Predicate = true> <Delay = 1.00> <CoreInst = "s_axilite">   --->   Core 120 's_axilite' <Latency = 0> <II = 1> <Delay = 1.00> <Adapter> <Opcode : 'read' 'write'>
+ST_1 : Operation 54 [1/1] (1.00ns)   --->   "%imageProjs_offset_read = read i64 @_ssdm_op_Read.s_axilite.i64, i64 %imageProjs_offset" [../image_analysis.cpp:116]   --->   Operation 54 'read' 'imageProjs_offset_read' <Predicate = true> <Delay = 1.00> <CoreInst = "s_axilite">   --->   Core 120 's_axilite' <Latency = 0> <II = 1> <Delay = 1.00> <Adapter> <Opcode : 'read' 'write'>
+ST_1 : Operation 55 [1/1] (1.00ns)   --->   "%imageProjs_local_offset_read = read i64 @_ssdm_op_Read.s_axilite.i64, i64 %imageProjs_local_offset" [../image_analysis.cpp:116]   --->   Operation 55 'read' 'imageProjs_local_offset_read' <Predicate = true> <Delay = 1.00> <CoreInst = "s_axilite">   --->   Core 120 's_axilite' <Latency = 0> <II = 1> <Delay = 1.00> <Adapter> <Opcode : 'read' 'write'>
+ST_1 : Operation 56 [1/1] (1.00ns)   --->   "%psfSupersample_read = read i32 @_ssdm_op_Read.s_axilite.i32, i32 %psfSupersample" [../image_analysis.cpp:116]   --->   Operation 56 'read' 'psfSupersample_read' <Predicate = true> <Delay = 1.00> <CoreInst = "s_axilite">   --->   Core 120 's_axilite' <Latency = 0> <II = 1> <Delay = 1.00> <Adapter> <Opcode : 'read' 'write'>
+ST_1 : Operation 57 [1/1] (1.00ns)   --->   "%atomLocations_offset_read = read i64 @_ssdm_op_Read.s_axilite.i64, i64 %atomLocations_offset" [../image_analysis.cpp:116]   --->   Operation 57 'read' 'atomLocations_offset_read' <Predicate = true> <Delay = 1.00> <CoreInst = "s_axilite">   --->   Core 120 's_axilite' <Latency = 0> <II = 1> <Delay = 1.00> <Adapter> <Opcode : 'read' 'write'>
+ST_1 : Operation 58 [1/1] (1.00ns)   --->   "%projShape1_read = read i32 @_ssdm_op_Read.s_axilite.i32, i32 %projShape1" [../image_analysis.cpp:116]   --->   Operation 58 'read' 'projShape1_read' <Predicate = true> <Delay = 1.00> <CoreInst = "s_axilite">   --->   Core 120 's_axilite' <Latency = 0> <II = 1> <Delay = 1.00> <Adapter> <Opcode : 'read' 'write'>
+ST_1 : Operation 59 [1/1] (1.00ns)   --->   "%projShape0_read = read i32 @_ssdm_op_Read.s_axilite.i32, i32 %projShape0" [../image_analysis.cpp:116]   --->   Operation 59 'read' 'projShape0_read' <Predicate = true> <Delay = 1.00> <CoreInst = "s_axilite">   --->   Core 120 's_axilite' <Latency = 0> <II = 1> <Delay = 1.00> <Adapter> <Opcode : 'read' 'write'>
+ST_1 : Operation 60 [1/1] (1.00ns)   --->   "%atomLocationsSize_read = read i32 @_ssdm_op_Read.s_axilite.i32, i32 %atomLocationsSize" [../image_analysis.cpp:116]   --->   Operation 60 'read' 'atomLocationsSize_read' <Predicate = true> <Delay = 1.00> <CoreInst = "s_axilite">   --->   Core 120 's_axilite' <Latency = 0> <II = 1> <Delay = 1.00> <Adapter> <Opcode : 'read' 'write'>
+ST_1 : Operation 61 [1/1] (0.42ns)   --->   "%br_ln149 = br void %for.cond" [../image_analysis.cpp:149]   --->   Operation 61 'br' 'br_ln149' <Predicate = true> <Delay = 0.42>
 
-State 2 <SV = 1> <Delay = 0.00>
-ST_2 : Operation 19 [1/2] (0.00ns)   --->   "%call_ln159 = call void @getLocalImages, i32 %atomLocationsSize_read, i32 %psfSupersample_read, i32 %projShape0_read, i32 %projShape1_read, i128 %atomLocations, i256 %localImages, i52 %mask_table, i53 %one_half_table" [../image_analysis.cpp:159]   --->   Operation 19 'call' 'call_ln159' <Predicate = true> <Delay = 0.00> <CoreType = "Generic">   --->   Generic Core
+State 2 <SV = 1> <Delay = 1.01>
+ST_2 : Operation 62 [1/1] (0.00ns)   --->   "%idx = phi i16 0, void %entry, i16 %add_ln149, void %codeRepl" [../image_analysis.cpp:149]   --->   Operation 62 'phi' 'idx' <Predicate = true> <Delay = 0.00>
+ST_2 : Operation 63 [1/1] (0.00ns)   --->   "%zext_ln149 = zext i16 %idx" [../image_analysis.cpp:149]   --->   Operation 63 'zext' 'zext_ln149' <Predicate = true> <Delay = 0.00>
+ST_2 : Operation 64 [1/1] (1.01ns)   --->   "%icmp_ln149 = icmp_slt  i32 %zext_ln149, i32 %atomLocationsSize_read" [../image_analysis.cpp:149]   --->   Operation 64 'icmp' 'icmp_ln149' <Predicate = true> <Delay = 1.01> <CoreInst = "Cmp">   --->   Core 9 'Cmp' <Latency = 0> <II = 1> <Delay = 1.01> <FuncUnit> <Opcode : 'seteq' 'setne' 'setle' 'setge' 'setlt' 'setgt'> <InPorts = 2> <OutPorts = 1>
+ST_2 : Operation 65 [1/1] (0.85ns)   --->   "%add_ln149 = add i16 %idx, i16 1" [../image_analysis.cpp:149]   --->   Operation 65 'add' 'add_ln149' <Predicate = true> <Delay = 0.85> <CoreInst = "Adder">   --->   Core 1 'Adder' <Latency = 0> <II = 1> <Delay = 0.85> <FuncUnit> <Opcode : 'add' 'sub'> <InPorts = 2> <OutPorts = 1>
+ST_2 : Operation 66 [1/1] (0.00ns)   --->   "%specdataflowpipeline_ln149 = specdataflowpipeline void @_ssdm_op_SpecDataflowPipeline, i32 4294967295, i32 0, void @dataflow_parent_loop_str, i16 %idx, i32 %atomLocationsSize, i32 1" [../image_analysis.cpp:149]   --->   Operation 66 'specdataflowpipeline' 'specdataflowpipeline_ln149' <Predicate = true> <Delay = 0.00>
+ST_2 : Operation 67 [1/1] (0.00ns)   --->   "%br_ln149 = br i1 %icmp_ln149, void %for.end, void %codeRepl" [../image_analysis.cpp:149]   --->   Operation 67 'br' 'br_ln149' <Predicate = true> <Delay = 0.00>
+ST_2 : Operation 68 [1/1] (0.00ns)   --->   "%ret_ln171 = ret" [../image_analysis.cpp:171]   --->   Operation 68 'ret' 'ret_ln171' <Predicate = (!icmp_ln149)> <Delay = 0.00>
 
-State 3 <SV = 2> <Delay = 0.00>
-ST_3 : Operation 20 [2/2] (0.00ns)   --->   "%call_ln160 = call void @applyProjectors, i32 %atomLocationsSize_read, i32 %psfSupersample_read, i32 %imageProjectionSize_read, i64 %imageProjs_local, i64 %imageProjs_local_offset_read, i64 %imageProjs, i64 %imageProjs_offset_read, i32 %imageProjs_local_size_r, i64 %imageProjs_local_size_offset_read, i64 %fullImage, i64 %fullImage_offset_read, i32 %fullImage_rows_read, i32 %fullImage_cols_read, i256 %localImages, i64 %emissions, i64 %emissions_offset_read, i32 %emission_cnt" [../image_analysis.cpp:160]   --->   Operation 20 'call' 'call_ln160' <Predicate = true> <Delay = 0.00> <CoreType = "Generic">   --->   Generic Core
+State 3 <SV = 2> <Delay = 7.30>
+ST_3 : Operation 69 [2/2] (7.30ns)   --->   "%call_ln158 = call void @dataflow_in_loop_VITIS_LOOP_149_1.1, i16 %idx, i32 %psfSupersample_read, i32 %projShape0_read, i32 %projShape1_read, i64 %atomLocations, i64 %atomLocations_offset_read, i32 %imageProjs, i64 %imageProjs_offset_read, i32 %fullImage, i64 %fullImage_offset_read, i32 %imageProjs_local, i64 %imageProjs_local_offset_read, i16 %idx, i32 %emissions, i64 %emissions_offset_read, i23 %mask_table, i24 %one_half_table" [../image_analysis.cpp:158]   --->   Operation 69 'call' 'call_ln158' <Predicate = (icmp_ln149)> <Delay = 7.30> <CoreType = "Generic">   --->   Generic Core
 
-State 4 <SV = 3> <Delay = 2.55>
-ST_4 : Operation 21 [1/1] (0.00ns)   --->   "%specdataflowpipeline_ln156 = specdataflowpipeline void @_ssdm_op_SpecDataflowPipeline, i32 4294967295, i32 0, void @empty_27" [../image_analysis.cpp:156]   --->   Operation 21 'specdataflowpipeline' 'specdataflowpipeline_ln156' <Predicate = true> <Delay = 0.00>
-ST_4 : Operation 22 [1/1] (0.00ns)   --->   "%spectopmodule_ln120 = spectopmodule void @_ssdm_op_SpecTopModule, void @empty_19" [../image_analysis.cpp:120]   --->   Operation 22 'spectopmodule' 'spectopmodule_ln120' <Predicate = true> <Delay = 0.00>
-ST_4 : Operation 23 [1/1] (0.00ns)   --->   "%specinterface_ln0 = specinterface void @_ssdm_op_SpecInterface, i64 %imageProjs_local, void @empty_26, i32 0, i32 0, void @empty_27, i32 0, i32 0, void @empty_28, void @empty_29, void @empty_27, i32 16, i32 16, i32 16, i32 16, void @empty_27, void @empty_27, i32 4294967295, i32 0, i32 0"   --->   Operation 23 'specinterface' 'specinterface_ln0' <Predicate = true> <Delay = 0.00>
-ST_4 : Operation 24 [1/1] (0.00ns)   --->   "%specbitsmap_ln0 = specbitsmap void @_ssdm_op_SpecBitsMap, i64 %imageProjs_local"   --->   Operation 24 'specbitsmap' 'specbitsmap_ln0' <Predicate = true> <Delay = 0.00>
-ST_4 : Operation 25 [1/1] (0.00ns)   --->   "%specinterface_ln0 = specinterface void @_ssdm_op_SpecInterface, i64 %imageProjs, void @empty_26, i32 0, i32 0, void @empty_27, i32 0, i32 0, void @empty, void @empty_29, void @empty_27, i32 16, i32 16, i32 16, i32 16, void @empty_27, void @empty_27, i32 4294967295, i32 0, i32 0"   --->   Operation 25 'specinterface' 'specinterface_ln0' <Predicate = true> <Delay = 0.00>
-ST_4 : Operation 26 [1/1] (0.00ns)   --->   "%specbitsmap_ln0 = specbitsmap void @_ssdm_op_SpecBitsMap, i64 %imageProjs"   --->   Operation 26 'specbitsmap' 'specbitsmap_ln0' <Predicate = true> <Delay = 0.00>
-ST_4 : Operation 27 [1/1] (0.00ns)   --->   "%specinterface_ln0 = specinterface void @_ssdm_op_SpecInterface, i32 %imageProjs_local_size_r, void @empty_26, i32 0, i32 0, void @empty_27, i32 0, i32 0, void @empty_0, void @empty_29, void @empty_27, i32 16, i32 16, i32 16, i32 16, void @empty_27, void @empty_27, i32 4294967295, i32 0, i32 0"   --->   Operation 27 'specinterface' 'specinterface_ln0' <Predicate = true> <Delay = 0.00>
-ST_4 : Operation 28 [1/1] (0.00ns)   --->   "%specbitsmap_ln0 = specbitsmap void @_ssdm_op_SpecBitsMap, i32 %imageProjs_local_size_r"   --->   Operation 28 'specbitsmap' 'specbitsmap_ln0' <Predicate = true> <Delay = 0.00>
-ST_4 : Operation 29 [1/1] (0.00ns)   --->   "%specinterface_ln0 = specinterface void @_ssdm_op_SpecInterface, i64 %fullImage, void @empty_26, i32 0, i32 0, void @empty_27, i32 0, i32 0, void @empty_1, void @empty_29, void @empty_27, i32 16, i32 16, i32 16, i32 16, void @empty_27, void @empty_27, i32 4294967295, i32 0, i32 0"   --->   Operation 29 'specinterface' 'specinterface_ln0' <Predicate = true> <Delay = 0.00>
-ST_4 : Operation 30 [1/1] (0.00ns)   --->   "%specbitsmap_ln0 = specbitsmap void @_ssdm_op_SpecBitsMap, i64 %fullImage"   --->   Operation 30 'specbitsmap' 'specbitsmap_ln0' <Predicate = true> <Delay = 0.00>
-ST_4 : Operation 31 [1/1] (0.00ns)   --->   "%specinterface_ln0 = specinterface void @_ssdm_op_SpecInterface, i64 %emissions, void @empty_26, i32 0, i32 0, void @empty_27, i32 0, i32 1000, void @empty_2, void @empty_29, void @empty_27, i32 16, i32 16, i32 16, i32 16, void @empty_27, void @empty_27, i32 4294967295, i32 0, i32 0"   --->   Operation 31 'specinterface' 'specinterface_ln0' <Predicate = true> <Delay = 0.00>
-ST_4 : Operation 32 [1/1] (0.00ns)   --->   "%specbitsmap_ln0 = specbitsmap void @_ssdm_op_SpecBitsMap, i64 %emissions"   --->   Operation 32 'specbitsmap' 'specbitsmap_ln0' <Predicate = true> <Delay = 0.00>
-ST_4 : Operation 33 [1/1] (0.00ns)   --->   "%specbitsmap_ln0 = specbitsmap void @_ssdm_op_SpecBitsMap, i32 %atomLocationsSize"   --->   Operation 33 'specbitsmap' 'specbitsmap_ln0' <Predicate = true> <Delay = 0.00>
-ST_4 : Operation 34 [1/1] (0.00ns)   --->   "%specinterface_ln0 = specinterface void @_ssdm_op_SpecInterface, i32 %atomLocationsSize, void @empty_3, i32 4294967295, i32 4294967295, void @empty_4, i32 0, i32 0, void @empty_5, void @empty_6, void @empty_27, i32 0, i32 0, i32 0, i32 0, void @empty_27, void @empty_27, i32 4294967295, i32 0, i32 0"   --->   Operation 34 'specinterface' 'specinterface_ln0' <Predicate = true> <Delay = 0.00>
-ST_4 : Operation 35 [1/1] (0.00ns)   --->   "%specinterface_ln0 = specinterface void @_ssdm_op_SpecInterface, i32 %atomLocationsSize, void @empty_7, i32 4294967295, i32 4294967295, void @empty_27, i32 0, i32 0, void @empty_27, void @empty_27, void @empty_27, i32 0, i32 0, i32 0, i32 0, void @empty_27, void @empty_27, i32 4294967295, i32 0, i32 0"   --->   Operation 35 'specinterface' 'specinterface_ln0' <Predicate = true> <Delay = 0.00>
-ST_4 : Operation 36 [1/1] (0.00ns)   --->   "%specbitsmap_ln0 = specbitsmap void @_ssdm_op_SpecBitsMap, i32 %projShape0"   --->   Operation 36 'specbitsmap' 'specbitsmap_ln0' <Predicate = true> <Delay = 0.00>
-ST_4 : Operation 37 [1/1] (0.00ns)   --->   "%specinterface_ln0 = specinterface void @_ssdm_op_SpecInterface, i32 %projShape0, void @empty_3, i32 4294967295, i32 4294967295, void @empty_4, i32 0, i32 0, void @empty_5, void @empty_8, void @empty_27, i32 0, i32 0, i32 0, i32 0, void @empty_27, void @empty_27, i32 4294967295, i32 0, i32 0"   --->   Operation 37 'specinterface' 'specinterface_ln0' <Predicate = true> <Delay = 0.00>
-ST_4 : Operation 38 [1/1] (0.00ns)   --->   "%specinterface_ln0 = specinterface void @_ssdm_op_SpecInterface, i32 %projShape0, void @empty_7, i32 4294967295, i32 4294967295, void @empty_27, i32 0, i32 0, void @empty_27, void @empty_27, void @empty_27, i32 0, i32 0, i32 0, i32 0, void @empty_27, void @empty_27, i32 4294967295, i32 0, i32 0"   --->   Operation 38 'specinterface' 'specinterface_ln0' <Predicate = true> <Delay = 0.00>
-ST_4 : Operation 39 [1/1] (0.00ns)   --->   "%specbitsmap_ln0 = specbitsmap void @_ssdm_op_SpecBitsMap, i32 %projShape1"   --->   Operation 39 'specbitsmap' 'specbitsmap_ln0' <Predicate = true> <Delay = 0.00>
-ST_4 : Operation 40 [1/1] (0.00ns)   --->   "%specinterface_ln0 = specinterface void @_ssdm_op_SpecInterface, i32 %projShape1, void @empty_3, i32 4294967295, i32 4294967295, void @empty_4, i32 0, i32 0, void @empty_5, void @empty_9, void @empty_27, i32 0, i32 0, i32 0, i32 0, void @empty_27, void @empty_27, i32 4294967295, i32 0, i32 0"   --->   Operation 40 'specinterface' 'specinterface_ln0' <Predicate = true> <Delay = 0.00>
-ST_4 : Operation 41 [1/1] (0.00ns)   --->   "%specinterface_ln0 = specinterface void @_ssdm_op_SpecInterface, i32 %projShape1, void @empty_7, i32 4294967295, i32 4294967295, void @empty_27, i32 0, i32 0, void @empty_27, void @empty_27, void @empty_27, i32 0, i32 0, i32 0, i32 0, void @empty_27, void @empty_27, i32 4294967295, i32 0, i32 0"   --->   Operation 41 'specinterface' 'specinterface_ln0' <Predicate = true> <Delay = 0.00>
-ST_4 : Operation 42 [1/1] (0.00ns)   --->   "%specinterface_ln0 = specinterface void @_ssdm_op_SpecInterface, i128 %atomLocations, void @empty_10, i32 0, i32 0, void @empty_27, i32 4294967295, i32 0, void @empty_27, void @empty_27, void @empty_27, i32 0, i32 0, i32 0, i32 0, void @empty_27, void @empty_27, i32 4294967295, i32 0, i32 0"   --->   Operation 42 'specinterface' 'specinterface_ln0' <Predicate = true> <Delay = 0.00>
-ST_4 : Operation 43 [1/1] (0.00ns)   --->   "%specbitsmap_ln0 = specbitsmap void @_ssdm_op_SpecBitsMap, i128 %atomLocations"   --->   Operation 43 'specbitsmap' 'specbitsmap_ln0' <Predicate = true> <Delay = 0.00>
-ST_4 : Operation 44 [1/1] (0.00ns)   --->   "%specbitsmap_ln0 = specbitsmap void @_ssdm_op_SpecBitsMap, i32 %psfSupersample"   --->   Operation 44 'specbitsmap' 'specbitsmap_ln0' <Predicate = true> <Delay = 0.00>
-ST_4 : Operation 45 [1/1] (0.00ns)   --->   "%specinterface_ln0 = specinterface void @_ssdm_op_SpecInterface, i32 %psfSupersample, void @empty_3, i32 4294967295, i32 4294967295, void @empty_4, i32 0, i32 0, void @empty_5, void @empty_30, void @empty_27, i32 0, i32 0, i32 0, i32 0, void @empty_27, void @empty_27, i32 4294967295, i32 0, i32 0"   --->   Operation 45 'specinterface' 'specinterface_ln0' <Predicate = true> <Delay = 0.00>
-ST_4 : Operation 46 [1/1] (0.00ns)   --->   "%specinterface_ln0 = specinterface void @_ssdm_op_SpecInterface, i32 %psfSupersample, void @empty_7, i32 4294967295, i32 4294967295, void @empty_27, i32 0, i32 0, void @empty_27, void @empty_27, void @empty_27, i32 0, i32 0, i32 0, i32 0, void @empty_27, void @empty_27, i32 4294967295, i32 0, i32 0"   --->   Operation 46 'specinterface' 'specinterface_ln0' <Predicate = true> <Delay = 0.00>
-ST_4 : Operation 47 [1/1] (0.00ns)   --->   "%specbitsmap_ln0 = specbitsmap void @_ssdm_op_SpecBitsMap, i32 %imageProjectionSize"   --->   Operation 47 'specbitsmap' 'specbitsmap_ln0' <Predicate = true> <Delay = 0.00>
-ST_4 : Operation 48 [1/1] (0.00ns)   --->   "%specinterface_ln0 = specinterface void @_ssdm_op_SpecInterface, i32 %imageProjectionSize, void @empty_3, i32 4294967295, i32 4294967295, void @empty_4, i32 0, i32 0, void @empty_5, void @empty_11, void @empty_27, i32 0, i32 0, i32 0, i32 0, void @empty_27, void @empty_27, i32 4294967295, i32 0, i32 0"   --->   Operation 48 'specinterface' 'specinterface_ln0' <Predicate = true> <Delay = 0.00>
-ST_4 : Operation 49 [1/1] (0.00ns)   --->   "%specinterface_ln0 = specinterface void @_ssdm_op_SpecInterface, i32 %imageProjectionSize, void @empty_7, i32 4294967295, i32 4294967295, void @empty_27, i32 0, i32 0, void @empty_27, void @empty_27, void @empty_27, i32 0, i32 0, i32 0, i32 0, void @empty_27, void @empty_27, i32 4294967295, i32 0, i32 0"   --->   Operation 49 'specinterface' 'specinterface_ln0' <Predicate = true> <Delay = 0.00>
-ST_4 : Operation 50 [1/1] (0.00ns)   --->   "%specinterface_ln0 = specinterface void @_ssdm_op_SpecInterface, i64 %imageProjs_local_offset, void @empty_3, i32 0, i32 0, void @empty_27, i32 0, i32 0, void @empty_25, void @empty_6, void @empty_27, i32 0, i32 0, i32 0, i32 0, void @empty_27, void @empty_12, i32 4294967295, i32 0, i32 0"   --->   Operation 50 'specinterface' 'specinterface_ln0' <Predicate = true> <Delay = 0.00>
-ST_4 : Operation 51 [1/1] (0.00ns)   --->   "%specinterface_ln0 = specinterface void @_ssdm_op_SpecInterface, i64 %imageProjs_local_offset, void @empty_7, i32 0, i32 0, void @empty_27, i32 0, i32 0, void @empty_27, void @empty_27, void @empty_27, i32 0, i32 0, i32 0, i32 0, void @empty_27, void @empty_12, i32 4294967295, i32 0, i32 0"   --->   Operation 51 'specinterface' 'specinterface_ln0' <Predicate = true> <Delay = 0.00>
-ST_4 : Operation 52 [1/1] (0.00ns)   --->   "%specinterface_ln0 = specinterface void @_ssdm_op_SpecInterface, i64 %imageProjs_offset, void @empty_3, i32 0, i32 0, void @empty_27, i32 0, i32 0, void @empty_25, void @empty_13, void @empty_27, i32 0, i32 0, i32 0, i32 0, void @empty_27, void @empty_12, i32 4294967295, i32 0, i32 0"   --->   Operation 52 'specinterface' 'specinterface_ln0' <Predicate = true> <Delay = 0.00>
-ST_4 : Operation 53 [1/1] (0.00ns)   --->   "%specinterface_ln0 = specinterface void @_ssdm_op_SpecInterface, i64 %imageProjs_offset, void @empty_7, i32 0, i32 0, void @empty_27, i32 0, i32 0, void @empty_27, void @empty_27, void @empty_27, i32 0, i32 0, i32 0, i32 0, void @empty_27, void @empty_12, i32 4294967295, i32 0, i32 0"   --->   Operation 53 'specinterface' 'specinterface_ln0' <Predicate = true> <Delay = 0.00>
-ST_4 : Operation 54 [1/1] (0.00ns)   --->   "%specinterface_ln0 = specinterface void @_ssdm_op_SpecInterface, i64 %imageProjs_local_size_offset, void @empty_3, i32 0, i32 0, void @empty_27, i32 0, i32 0, void @empty_25, void @empty_30, void @empty_27, i32 0, i32 0, i32 0, i32 0, void @empty_27, void @empty_12, i32 4294967295, i32 0, i32 0"   --->   Operation 54 'specinterface' 'specinterface_ln0' <Predicate = true> <Delay = 0.00>
-ST_4 : Operation 55 [1/1] (0.00ns)   --->   "%specinterface_ln0 = specinterface void @_ssdm_op_SpecInterface, i64 %imageProjs_local_size_offset, void @empty_7, i32 0, i32 0, void @empty_27, i32 0, i32 0, void @empty_27, void @empty_27, void @empty_27, i32 0, i32 0, i32 0, i32 0, void @empty_27, void @empty_12, i32 4294967295, i32 0, i32 0"   --->   Operation 55 'specinterface' 'specinterface_ln0' <Predicate = true> <Delay = 0.00>
-ST_4 : Operation 56 [1/1] (0.00ns)   --->   "%specinterface_ln0 = specinterface void @_ssdm_op_SpecInterface, i64 %fullImage_offset, void @empty_3, i32 0, i32 0, void @empty_27, i32 0, i32 0, void @empty_25, void @empty_14, void @empty_27, i32 0, i32 0, i32 0, i32 0, void @empty_27, void @empty_12, i32 4294967295, i32 0, i32 0"   --->   Operation 56 'specinterface' 'specinterface_ln0' <Predicate = true> <Delay = 0.00>
-ST_4 : Operation 57 [1/1] (0.00ns)   --->   "%specinterface_ln0 = specinterface void @_ssdm_op_SpecInterface, i64 %fullImage_offset, void @empty_7, i32 0, i32 0, void @empty_27, i32 0, i32 0, void @empty_27, void @empty_27, void @empty_27, i32 0, i32 0, i32 0, i32 0, void @empty_27, void @empty_12, i32 4294967295, i32 0, i32 0"   --->   Operation 57 'specinterface' 'specinterface_ln0' <Predicate = true> <Delay = 0.00>
-ST_4 : Operation 58 [1/1] (0.00ns)   --->   "%specbitsmap_ln0 = specbitsmap void @_ssdm_op_SpecBitsMap, i32 %fullImage_rows"   --->   Operation 58 'specbitsmap' 'specbitsmap_ln0' <Predicate = true> <Delay = 0.00>
-ST_4 : Operation 59 [1/1] (0.00ns)   --->   "%specinterface_ln0 = specinterface void @_ssdm_op_SpecInterface, i32 %fullImage_rows, void @empty_3, i32 4294967295, i32 4294967295, void @empty_4, i32 0, i32 0, void @empty_5, void @empty_15, void @empty_27, i32 0, i32 0, i32 0, i32 0, void @empty_27, void @empty_27, i32 4294967295, i32 0, i32 0"   --->   Operation 59 'specinterface' 'specinterface_ln0' <Predicate = true> <Delay = 0.00>
-ST_4 : Operation 60 [1/1] (0.00ns)   --->   "%specinterface_ln0 = specinterface void @_ssdm_op_SpecInterface, i32 %fullImage_rows, void @empty_7, i32 4294967295, i32 4294967295, void @empty_27, i32 0, i32 0, void @empty_27, void @empty_27, void @empty_27, i32 0, i32 0, i32 0, i32 0, void @empty_27, void @empty_27, i32 4294967295, i32 0, i32 0"   --->   Operation 60 'specinterface' 'specinterface_ln0' <Predicate = true> <Delay = 0.00>
-ST_4 : Operation 61 [1/1] (0.00ns)   --->   "%specbitsmap_ln0 = specbitsmap void @_ssdm_op_SpecBitsMap, i32 %fullImage_cols"   --->   Operation 61 'specbitsmap' 'specbitsmap_ln0' <Predicate = true> <Delay = 0.00>
-ST_4 : Operation 62 [1/1] (0.00ns)   --->   "%specinterface_ln0 = specinterface void @_ssdm_op_SpecInterface, i32 %fullImage_cols, void @empty_3, i32 4294967295, i32 4294967295, void @empty_4, i32 0, i32 0, void @empty_5, void @empty_16, void @empty_27, i32 0, i32 0, i32 0, i32 0, void @empty_27, void @empty_27, i32 4294967295, i32 0, i32 0"   --->   Operation 62 'specinterface' 'specinterface_ln0' <Predicate = true> <Delay = 0.00>
-ST_4 : Operation 63 [1/1] (0.00ns)   --->   "%specinterface_ln0 = specinterface void @_ssdm_op_SpecInterface, i32 %fullImage_cols, void @empty_7, i32 4294967295, i32 4294967295, void @empty_27, i32 0, i32 0, void @empty_27, void @empty_27, void @empty_27, i32 0, i32 0, i32 0, i32 0, void @empty_27, void @empty_27, i32 4294967295, i32 0, i32 0"   --->   Operation 63 'specinterface' 'specinterface_ln0' <Predicate = true> <Delay = 0.00>
-ST_4 : Operation 64 [1/1] (0.00ns)   --->   "%specinterface_ln0 = specinterface void @_ssdm_op_SpecInterface, i64 %emissions_offset, void @empty_3, i32 0, i32 0, void @empty_27, i32 0, i32 0, void @empty_25, void @empty_16, void @empty_27, i32 0, i32 0, i32 0, i32 0, void @empty_27, void @empty_12, i32 4294967295, i32 0, i32 0"   --->   Operation 64 'specinterface' 'specinterface_ln0' <Predicate = true> <Delay = 0.00>
-ST_4 : Operation 65 [1/1] (0.00ns)   --->   "%specinterface_ln0 = specinterface void @_ssdm_op_SpecInterface, i64 %emissions_offset, void @empty_7, i32 0, i32 0, void @empty_27, i32 0, i32 0, void @empty_27, void @empty_27, void @empty_27, i32 0, i32 0, i32 0, i32 0, void @empty_27, void @empty_12, i32 4294967295, i32 0, i32 0"   --->   Operation 65 'specinterface' 'specinterface_ln0' <Predicate = true> <Delay = 0.00>
-ST_4 : Operation 66 [1/1] (0.00ns)   --->   "%specbitsmap_ln0 = specbitsmap void @_ssdm_op_SpecBitsMap, i32 %emission_cnt"   --->   Operation 66 'specbitsmap' 'specbitsmap_ln0' <Predicate = true> <Delay = 0.00>
-ST_4 : Operation 67 [1/1] (0.00ns)   --->   "%specinterface_ln0 = specinterface void @_ssdm_op_SpecInterface, i32 %emission_cnt, void @empty_3, i32 4294967295, i32 4294967295, void @empty_4, i32 0, i32 0, void @empty_5, void @empty_17, void @empty_27, i32 0, i32 0, i32 0, i32 0, void @empty_27, void @empty_27, i32 4294967295, i32 0, i32 0"   --->   Operation 67 'specinterface' 'specinterface_ln0' <Predicate = true> <Delay = 0.00>
-ST_4 : Operation 68 [1/1] (0.00ns)   --->   "%specinterface_ln0 = specinterface void @_ssdm_op_SpecInterface, i32 %emission_cnt, void @empty_7, i32 4294967295, i32 4294967295, void @empty_27, i32 0, i32 0, void @empty_27, void @empty_27, void @empty_27, i32 0, i32 0, i32 0, i32 0, void @empty_27, void @empty_27, i32 4294967295, i32 0, i32 0"   --->   Operation 68 'specinterface' 'specinterface_ln0' <Predicate = true> <Delay = 0.00>
-ST_4 : Operation 69 [1/1] (0.00ns)   --->   "%specinterface_ln0 = specinterface void @_ssdm_op_SpecInterface, i32 0, void @empty_3, i32 0, i32 0, void @empty_27, i32 0, i32 0, void @empty_25, void @empty_27, void @empty_27, i32 0, i32 0, i32 0, i32 0, void @empty_27, void @empty_27, i32 4294967295, i32 0, i32 0"   --->   Operation 69 'specinterface' 'specinterface_ln0' <Predicate = true> <Delay = 0.00>
-ST_4 : Operation 70 [1/1] (0.00ns)   --->   "%empty = specchannel i32 @_ssdm_op_SpecChannel, void @localImages_str, i32 1, void @p_str, void @p_str, i32 2, i32 2, i256 %localImages, i256 %localImages"   --->   Operation 70 'specchannel' 'empty' <Predicate = true> <Delay = 0.00>
-ST_4 : Operation 71 [1/1] (0.00ns)   --->   "%specinterface_ln0 = specinterface void @_ssdm_op_SpecInterface, i256 %localImages, void @empty_18, i32 0, i32 0, void @empty_27, i32 0, i32 0, void @empty_27, void @empty_27, void @empty_27, i32 0, i32 0, i32 0, i32 0, void @empty_27, void @empty_27, i32 4294967295, i32 0, i32 0"   --->   Operation 71 'specinterface' 'specinterface_ln0' <Predicate = true> <Delay = 0.00>
-ST_4 : Operation 72 [1/2] (2.55ns)   --->   "%call_ln160 = call void @applyProjectors, i32 %atomLocationsSize_read, i32 %psfSupersample_read, i32 %imageProjectionSize_read, i64 %imageProjs_local, i64 %imageProjs_local_offset_read, i64 %imageProjs, i64 %imageProjs_offset_read, i32 %imageProjs_local_size_r, i64 %imageProjs_local_size_offset_read, i64 %fullImage, i64 %fullImage_offset_read, i32 %fullImage_rows_read, i32 %fullImage_cols_read, i256 %localImages, i64 %emissions, i64 %emissions_offset_read, i32 %emission_cnt" [../image_analysis.cpp:160]   --->   Operation 72 'call' 'call_ln160' <Predicate = true> <Delay = 2.55> <CoreType = "Generic">   --->   Generic Core
-ST_4 : Operation 73 [1/1] (0.00ns)   --->   "%ret_ln161 = ret" [../image_analysis.cpp:161]   --->   Operation 73 'ret' 'ret_ln161' <Predicate = true> <Delay = 0.00>
+State 4 <SV = 3> <Delay = 0.00>
+ST_4 : Operation 70 [1/1] (0.00ns)   --->   "%speclooptripcount_ln151 = speclooptripcount void @_ssdm_op_SpecLoopTripCount, i64 1024, i64 1024, i64 1024" [../image_analysis.cpp:151]   --->   Operation 70 'speclooptripcount' 'speclooptripcount_ln151' <Predicate = (icmp_ln149)> <Delay = 0.00>
+ST_4 : Operation 71 [1/1] (0.00ns)   --->   "%specloopname_ln149 = specloopname void @_ssdm_op_SpecLoopName, void @empty_12" [../image_analysis.cpp:149]   --->   Operation 71 'specloopname' 'specloopname_ln149' <Predicate = (icmp_ln149)> <Delay = 0.00>
+ST_4 : Operation 72 [1/2] (0.00ns)   --->   "%call_ln158 = call void @dataflow_in_loop_VITIS_LOOP_149_1.1, i16 %idx, i32 %psfSupersample_read, i32 %projShape0_read, i32 %projShape1_read, i64 %atomLocations, i64 %atomLocations_offset_read, i32 %imageProjs, i64 %imageProjs_offset_read, i32 %fullImage, i64 %fullImage_offset_read, i32 %imageProjs_local, i64 %imageProjs_local_offset_read, i16 %idx, i32 %emissions, i64 %emissions_offset_read, i23 %mask_table, i24 %one_half_table" [../image_analysis.cpp:158]   --->   Operation 72 'call' 'call_ln158' <Predicate = (icmp_ln149)> <Delay = 0.00> <CoreType = "Generic">   --->   Generic Core
+ST_4 : Operation 73 [1/1] (0.00ns)   --->   "%br_ln149 = br void %for.cond" [../image_analysis.cpp:149]   --->   Operation 73 'br' 'br_ln149' <Predicate = (icmp_ln149)> <Delay = 0.00>
 
 
 ============================================================
@@ -173,108 +177,119 @@ STG Binding:
 - Is pipelined: 0
 - Is top level: 1
 Port [ Return ] is wired: 1; IO mode=ap_ctrl_hs:ce=0
+Port [ atomLocations]:  wired=1; compound=1; hidden=0; nouse=0; global=0; static=0; extern=0; dir=0; type=4; pingpong=0; private_global=0; IO mode=m_axi:ce=0
 Port [ imageProjs_local]:  wired=1; compound=1; hidden=0; nouse=0; global=0; static=0; extern=0; dir=0; type=4; pingpong=0; private_global=0; IO mode=m_axi:ce=0
 Port [ imageProjs]:  wired=1; compound=1; hidden=0; nouse=0; global=0; static=0; extern=0; dir=0; type=4; pingpong=0; private_global=0; IO mode=m_axi:ce=0
-Port [ imageProjs_local_size_r]:  wired=1; compound=1; hidden=0; nouse=0; global=0; static=0; extern=0; dir=0; type=4; pingpong=0; private_global=0; IO mode=m_axi:ce=0
+Port [ imageProjs_local_size_r]:  wired=1; compound=1; hidden=0; nouse=1; global=0; static=0; extern=0; dir=0; type=4; pingpong=0; private_global=0; IO mode=m_axi:ce=0
 Port [ fullImage]:  wired=1; compound=1; hidden=0; nouse=0; global=0; static=0; extern=0; dir=0; type=4; pingpong=0; private_global=0; IO mode=m_axi:ce=0
 Port [ emissions]:  wired=1; compound=1; hidden=0; nouse=0; global=0; static=0; extern=0; dir=1; type=4; pingpong=0; private_global=0; IO mode=m_axi:ce=0
 Port [ atomLocationsSize]:  wired=1; compound=0; hidden=0; nouse=0; global=0; static=0; extern=0; dir=0; type=0; pingpong=0; private_global=0; IO mode=ap_none:ce=0
 Port [ projShape0]:  wired=1; compound=0; hidden=0; nouse=0; global=0; static=0; extern=0; dir=0; type=0; pingpong=0; private_global=0; IO mode=ap_none:ce=0
 Port [ projShape1]:  wired=1; compound=0; hidden=0; nouse=0; global=0; static=0; extern=0; dir=0; type=0; pingpong=0; private_global=0; IO mode=ap_none:ce=0
-Port [ atomLocations]:  wired=1; compound=1; hidden=0; nouse=0; global=0; static=0; extern=0; dir=0; type=1; pingpong=0; private_global=0; MemPort=[13]; IO mode=ap_memory:ce=0
+Port [ atomLocations_offset]:  wired=1; compound=0; hidden=0; nouse=0; global=0; static=0; extern=0; dir=0; type=0; pingpong=0; private_global=0; IO mode=ap_none:ce=0
 Port [ psfSupersample]:  wired=1; compound=0; hidden=0; nouse=0; global=0; static=0; extern=0; dir=0; type=0; pingpong=0; private_global=0; IO mode=ap_none:ce=0
-Port [ imageProjectionSize]:  wired=1; compound=0; hidden=0; nouse=0; global=0; static=0; extern=0; dir=0; type=0; pingpong=0; private_global=0; IO mode=ap_none:ce=0
+Port [ imageProjectionSize]:  wired=1; compound=0; hidden=0; nouse=1; global=0; static=0; extern=0; dir=0; type=0; pingpong=0; private_global=0; IO mode=ap_none:ce=0
 Port [ imageProjs_local_offset]:  wired=1; compound=0; hidden=0; nouse=0; global=0; static=0; extern=0; dir=0; type=0; pingpong=0; private_global=0; IO mode=ap_none:ce=0
 Port [ imageProjs_offset]:  wired=1; compound=0; hidden=0; nouse=0; global=0; static=0; extern=0; dir=0; type=0; pingpong=0; private_global=0; IO mode=ap_none:ce=0
-Port [ imageProjs_local_size_offset]:  wired=1; compound=0; hidden=0; nouse=0; global=0; static=0; extern=0; dir=0; type=0; pingpong=0; private_global=0; IO mode=ap_none:ce=0
+Port [ imageProjs_local_size_offset]:  wired=1; compound=0; hidden=0; nouse=1; global=0; static=0; extern=0; dir=0; type=0; pingpong=0; private_global=0; IO mode=ap_none:ce=0
 Port [ fullImage_offset]:  wired=1; compound=0; hidden=0; nouse=0; global=0; static=0; extern=0; dir=0; type=0; pingpong=0; private_global=0; IO mode=ap_none:ce=0
-Port [ fullImage_rows]:  wired=1; compound=0; hidden=0; nouse=0; global=0; static=0; extern=0; dir=0; type=0; pingpong=0; private_global=0; IO mode=ap_none:ce=0
-Port [ fullImage_cols]:  wired=1; compound=0; hidden=0; nouse=0; global=0; static=0; extern=0; dir=0; type=0; pingpong=0; private_global=0; IO mode=ap_none:ce=0
+Port [ fullImage_rows]:  wired=1; compound=0; hidden=0; nouse=1; global=0; static=0; extern=0; dir=0; type=0; pingpong=0; private_global=0; IO mode=ap_none:ce=0
+Port [ fullImage_cols]:  wired=1; compound=0; hidden=0; nouse=1; global=0; static=0; extern=0; dir=0; type=0; pingpong=0; private_global=0; IO mode=ap_none:ce=0
 Port [ emissions_offset]:  wired=1; compound=0; hidden=0; nouse=0; global=0; static=0; extern=0; dir=0; type=0; pingpong=0; private_global=0; IO mode=ap_none:ce=0
-Port [ emission_cnt]:  wired=1; compound=0; hidden=0; nouse=0; global=0; static=0; extern=0; dir=1; type=0; pingpong=0; private_global=0; IO mode=ap_vld:ce=0
-Port [ mask_table]:  wired=0; compound=1; hidden=1; nouse=1; global=1; static=1; extern=0; dir=0; type=1; pingpong=0; private_global=0; MemPort=[1111]; IO mode=ap_memory:ce=0
-Port [ one_half_table]:  wired=0; compound=1; hidden=1; nouse=1; global=1; static=1; extern=0; dir=0; type=1; pingpong=0; private_global=0; MemPort=[1111]; IO mode=ap_memory:ce=0
+Port [ mask_table]:  wired=0; compound=1; hidden=1; nouse=1; global=1; static=1; extern=0; dir=0; type=1; pingpong=0; private_global=0; MemPort=[11]; IO mode=ap_memory:ce=0
+Port [ one_half_table]:  wired=0; compound=1; hidden=1; nouse=1; global=1; static=1; extern=0; dir=0; type=1; pingpong=0; private_global=0; MemPort=[11]; IO mode=ap_memory:ce=0
 ---------------- STG Properties END ------------------
 
 ---------------- Datapath Model BEGIN ----------------
 
 <LifeTime>
 <method=bitvector/>
-emissions_offset_read             (read                ) [ 00111]
-fullImage_cols_read               (read                ) [ 00111]
-fullImage_rows_read               (read                ) [ 00111]
-fullImage_offset_read             (read                ) [ 00111]
-imageProjs_local_size_offset_read (read                ) [ 00111]
-imageProjs_offset_read            (read                ) [ 00111]
-imageProjs_local_offset_read      (read                ) [ 00111]
-imageProjectionSize_read          (read                ) [ 00111]
-psfSupersample_read               (read                ) [ 00111]
-projShape1_read                   (read                ) [ 00100]
-projShape0_read                   (read                ) [ 00100]
-atomLocationsSize_read            (read                ) [ 00111]
-localImages                       (alloca              ) [ 01111]
-call_ln159                        (call                ) [ 00000]
-specdataflowpipeline_ln156        (specdataflowpipeline) [ 00000]
-spectopmodule_ln120               (spectopmodule       ) [ 00000]
-specinterface_ln0                 (specinterface       ) [ 00000]
-specbitsmap_ln0                   (specbitsmap         ) [ 00000]
-specinterface_ln0                 (specinterface       ) [ 00000]
-specbitsmap_ln0                   (specbitsmap         ) [ 00000]
-specinterface_ln0                 (specinterface       ) [ 00000]
-specbitsmap_ln0                   (specbitsmap         ) [ 00000]
-specinterface_ln0                 (specinterface       ) [ 00000]
-specbitsmap_ln0                   (specbitsmap         ) [ 00000]
-specinterface_ln0                 (specinterface       ) [ 00000]
-specbitsmap_ln0                   (specbitsmap         ) [ 00000]
-specbitsmap_ln0                   (specbitsmap         ) [ 00000]
-specinterface_ln0                 (specinterface       ) [ 00000]
-specinterface_ln0                 (specinterface       ) [ 00000]
-specbitsmap_ln0                   (specbitsmap         ) [ 00000]
-specinterface_ln0                 (specinterface       ) [ 00000]
-specinterface_ln0                 (specinterface       ) [ 00000]
-specbitsmap_ln0                   (specbitsmap         ) [ 00000]
-specinterface_ln0                 (specinterface       ) [ 00000]
-specinterface_ln0                 (specinterface       ) [ 00000]
-specinterface_ln0                 (specinterface       ) [ 00000]
-specbitsmap_ln0                   (specbitsmap         ) [ 00000]
-specbitsmap_ln0                   (specbitsmap         ) [ 00000]
-specinterface_ln0                 (specinterface       ) [ 00000]
-specinterface_ln0                 (specinterface       ) [ 00000]
-specbitsmap_ln0                   (specbitsmap         ) [ 00000]
-specinterface_ln0                 (specinterface       ) [ 00000]
-specinterface_ln0                 (specinterface       ) [ 00000]
-specinterface_ln0                 (specinterface       ) [ 00000]
-specinterface_ln0                 (specinterface       ) [ 00000]
-specinterface_ln0                 (specinterface       ) [ 00000]
-specinterface_ln0                 (specinterface       ) [ 00000]
-specinterface_ln0                 (specinterface       ) [ 00000]
-specinterface_ln0                 (specinterface       ) [ 00000]
-specinterface_ln0                 (specinterface       ) [ 00000]
-specinterface_ln0                 (specinterface       ) [ 00000]
-specbitsmap_ln0                   (specbitsmap         ) [ 00000]
-specinterface_ln0                 (specinterface       ) [ 00000]
-specinterface_ln0                 (specinterface       ) [ 00000]
-specbitsmap_ln0                   (specbitsmap         ) [ 00000]
-specinterface_ln0                 (specinterface       ) [ 00000]
-specinterface_ln0                 (specinterface       ) [ 00000]
-specinterface_ln0                 (specinterface       ) [ 00000]
-specinterface_ln0                 (specinterface       ) [ 00000]
-specbitsmap_ln0                   (specbitsmap         ) [ 00000]
-specinterface_ln0                 (specinterface       ) [ 00000]
-specinterface_ln0                 (specinterface       ) [ 00000]
-specinterface_ln0                 (specinterface       ) [ 00000]
-empty                             (specchannel         ) [ 00000]
-specinterface_ln0                 (specinterface       ) [ 00000]
-call_ln160                        (call                ) [ 00000]
-ret_ln161                         (ret                 ) [ 00000]
+spectopmodule_ln116          (spectopmodule       ) [ 00000]
+specinterface_ln0            (specinterface       ) [ 00000]
+specbitsmap_ln0              (specbitsmap         ) [ 00000]
+specinterface_ln0            (specinterface       ) [ 00000]
+specbitsmap_ln0              (specbitsmap         ) [ 00000]
+specinterface_ln0            (specinterface       ) [ 00000]
+specbitsmap_ln0              (specbitsmap         ) [ 00000]
+specinterface_ln0            (specinterface       ) [ 00000]
+specbitsmap_ln0              (specbitsmap         ) [ 00000]
+specinterface_ln0            (specinterface       ) [ 00000]
+specbitsmap_ln0              (specbitsmap         ) [ 00000]
+specinterface_ln0            (specinterface       ) [ 00000]
+specbitsmap_ln0              (specbitsmap         ) [ 00000]
+specbitsmap_ln0              (specbitsmap         ) [ 00000]
+specinterface_ln0            (specinterface       ) [ 00000]
+specinterface_ln0            (specinterface       ) [ 00000]
+specbitsmap_ln0              (specbitsmap         ) [ 00000]
+specinterface_ln0            (specinterface       ) [ 00000]
+specinterface_ln0            (specinterface       ) [ 00000]
+specbitsmap_ln0              (specbitsmap         ) [ 00000]
+specinterface_ln0            (specinterface       ) [ 00000]
+specinterface_ln0            (specinterface       ) [ 00000]
+specinterface_ln0            (specinterface       ) [ 00000]
+specinterface_ln0            (specinterface       ) [ 00000]
+specbitsmap_ln0              (specbitsmap         ) [ 00000]
+specinterface_ln0            (specinterface       ) [ 00000]
+specinterface_ln0            (specinterface       ) [ 00000]
+specbitsmap_ln0              (specbitsmap         ) [ 00000]
+specinterface_ln0            (specinterface       ) [ 00000]
+specinterface_ln0            (specinterface       ) [ 00000]
+specinterface_ln0            (specinterface       ) [ 00000]
+specinterface_ln0            (specinterface       ) [ 00000]
+specinterface_ln0            (specinterface       ) [ 00000]
+specinterface_ln0            (specinterface       ) [ 00000]
+specinterface_ln0            (specinterface       ) [ 00000]
+specinterface_ln0            (specinterface       ) [ 00000]
+specinterface_ln0            (specinterface       ) [ 00000]
+specinterface_ln0            (specinterface       ) [ 00000]
+specbitsmap_ln0              (specbitsmap         ) [ 00000]
+specinterface_ln0            (specinterface       ) [ 00000]
+specinterface_ln0            (specinterface       ) [ 00000]
+specbitsmap_ln0              (specbitsmap         ) [ 00000]
+specinterface_ln0            (specinterface       ) [ 00000]
+specinterface_ln0            (specinterface       ) [ 00000]
+specinterface_ln0            (specinterface       ) [ 00000]
+specinterface_ln0            (specinterface       ) [ 00000]
+specinterface_ln0            (specinterface       ) [ 00000]
+emissions_offset_read        (read                ) [ 00111]
+fullImage_offset_read        (read                ) [ 00111]
+imageProjs_offset_read       (read                ) [ 00111]
+imageProjs_local_offset_read (read                ) [ 00111]
+psfSupersample_read          (read                ) [ 00111]
+atomLocations_offset_read    (read                ) [ 00111]
+projShape1_read              (read                ) [ 00111]
+projShape0_read              (read                ) [ 00111]
+atomLocationsSize_read       (read                ) [ 00111]
+br_ln149                     (br                  ) [ 01111]
+idx                          (phi                 ) [ 00111]
+zext_ln149                   (zext                ) [ 00000]
+icmp_ln149                   (icmp                ) [ 00111]
+add_ln149                    (add                 ) [ 01111]
+specdataflowpipeline_ln149   (specdataflowpipeline) [ 00000]
+br_ln149                     (br                  ) [ 00000]
+ret_ln171                    (ret                 ) [ 00000]
+speclooptripcount_ln151      (speclooptripcount   ) [ 00000]
+specloopname_ln149           (specloopname        ) [ 00000]
+call_ln158                   (call                ) [ 00000]
+br_ln149                     (br                  ) [ 01111]
 </LifeTime>
 
 <model>
 
 <comp_list>
-<comp id="0" class="1000" name="imageProjs_local">
+<comp id="0" class="1000" name="atomLocations">
 <pin_list>
 <pin id="1" dir="1" index="0" bw="1" slack="0"/>
+</pin_list>
+<bind>
+<StgValue><ssdm name="atomLocations"/><MemPortTyVec>0 </MemPortTyVec>
+</StgValue>
+</bind>
+</comp>
+
+<comp id="2" class="1000" name="imageProjs_local">
+<pin_list>
+<pin id="3" dir="1" index="0" bw="1" slack="0"/>
 </pin_list>
 <bind>
 <StgValue><ssdm name="imageProjs_local"/><MemPortTyVec>0 </MemPortTyVec>
@@ -282,9 +297,9 @@ ret_ln161                         (ret                 ) [ 00000]
 </bind>
 </comp>
 
-<comp id="2" class="1000" name="imageProjs">
+<comp id="4" class="1000" name="imageProjs">
 <pin_list>
-<pin id="3" dir="1" index="0" bw="1" slack="0"/>
+<pin id="5" dir="1" index="0" bw="1" slack="0"/>
 </pin_list>
 <bind>
 <StgValue><ssdm name="imageProjs"/><MemPortTyVec>0 </MemPortTyVec>
@@ -292,19 +307,18 @@ ret_ln161                         (ret                 ) [ 00000]
 </bind>
 </comp>
 
-<comp id="4" class="1000" name="imageProjs_local_size_r">
+<comp id="6" class="1000" name="imageProjs_local_size_r">
 <pin_list>
-<pin id="5" dir="1" index="0" bw="1" slack="0"/>
+<pin id="7" dir="1" index="0" bw="1" slack="2147483647"/>
 </pin_list>
 <bind>
-<StgValue><ssdm name="imageProjs_local_size_r"/><MemPortTyVec>0 </MemPortTyVec>
-</StgValue>
+<StgValue><ssdm name="imageProjs_local_size_r"/></StgValue>
 </bind>
 </comp>
 
-<comp id="6" class="1000" name="fullImage">
+<comp id="8" class="1000" name="fullImage">
 <pin_list>
-<pin id="7" dir="1" index="0" bw="1" slack="0"/>
+<pin id="9" dir="1" index="0" bw="1" slack="0"/>
 </pin_list>
 <bind>
 <StgValue><ssdm name="fullImage"/><MemPortTyVec>0 </MemPortTyVec>
@@ -312,9 +326,9 @@ ret_ln161                         (ret                 ) [ 00000]
 </bind>
 </comp>
 
-<comp id="8" class="1000" name="emissions">
+<comp id="10" class="1000" name="emissions">
 <pin_list>
-<pin id="9" dir="1" index="0" bw="1" slack="0"/>
+<pin id="11" dir="1" index="0" bw="1" slack="0"/>
 </pin_list>
 <bind>
 <StgValue><ssdm name="emissions"/><MemPortTyVec>1 </MemPortTyVec>
@@ -322,130 +336,120 @@ ret_ln161                         (ret                 ) [ 00000]
 </bind>
 </comp>
 
-<comp id="10" class="1000" name="atomLocationsSize">
+<comp id="12" class="1000" name="atomLocationsSize">
 <pin_list>
-<pin id="11" dir="1" index="0" bw="1" slack="0"/>
+<pin id="13" dir="1" index="0" bw="1" slack="0"/>
 </pin_list>
 <bind>
 <StgValue><ssdm name="atomLocationsSize"/></StgValue>
 </bind>
 </comp>
 
-<comp id="12" class="1000" name="projShape0">
+<comp id="14" class="1000" name="projShape0">
 <pin_list>
-<pin id="13" dir="1" index="0" bw="1" slack="0"/>
+<pin id="15" dir="1" index="0" bw="1" slack="0"/>
 </pin_list>
 <bind>
 <StgValue><ssdm name="projShape0"/></StgValue>
 </bind>
 </comp>
 
-<comp id="14" class="1000" name="projShape1">
+<comp id="16" class="1000" name="projShape1">
 <pin_list>
-<pin id="15" dir="1" index="0" bw="1" slack="0"/>
+<pin id="17" dir="1" index="0" bw="1" slack="0"/>
 </pin_list>
 <bind>
 <StgValue><ssdm name="projShape1"/></StgValue>
 </bind>
 </comp>
 
-<comp id="16" class="1000" name="atomLocations">
+<comp id="18" class="1000" name="atomLocations_offset">
 <pin_list>
-<pin id="17" dir="1" index="0" bw="1" slack="0"/>
+<pin id="19" dir="1" index="0" bw="1" slack="0"/>
 </pin_list>
 <bind>
-<StgValue><ssdm name="atomLocations"/><MemPortTyVec>1 3 </MemPortTyVec>
-</StgValue>
+<StgValue><ssdm name="atomLocations_offset"/></StgValue>
 </bind>
 </comp>
 
-<comp id="18" class="1000" name="psfSupersample">
+<comp id="20" class="1000" name="psfSupersample">
 <pin_list>
-<pin id="19" dir="1" index="0" bw="1" slack="0"/>
+<pin id="21" dir="1" index="0" bw="1" slack="0"/>
 </pin_list>
 <bind>
 <StgValue><ssdm name="psfSupersample"/></StgValue>
 </bind>
 </comp>
 
-<comp id="20" class="1000" name="imageProjectionSize">
+<comp id="22" class="1000" name="imageProjectionSize">
 <pin_list>
-<pin id="21" dir="1" index="0" bw="1" slack="0"/>
+<pin id="23" dir="1" index="0" bw="1" slack="2147483647"/>
 </pin_list>
 <bind>
 <StgValue><ssdm name="imageProjectionSize"/></StgValue>
 </bind>
 </comp>
 
-<comp id="22" class="1000" name="imageProjs_local_offset">
+<comp id="24" class="1000" name="imageProjs_local_offset">
 <pin_list>
-<pin id="23" dir="1" index="0" bw="1" slack="0"/>
+<pin id="25" dir="1" index="0" bw="1" slack="0"/>
 </pin_list>
 <bind>
 <StgValue><ssdm name="imageProjs_local_offset"/></StgValue>
 </bind>
 </comp>
 
-<comp id="24" class="1000" name="imageProjs_offset">
+<comp id="26" class="1000" name="imageProjs_offset">
 <pin_list>
-<pin id="25" dir="1" index="0" bw="1" slack="0"/>
+<pin id="27" dir="1" index="0" bw="1" slack="0"/>
 </pin_list>
 <bind>
 <StgValue><ssdm name="imageProjs_offset"/></StgValue>
 </bind>
 </comp>
 
-<comp id="26" class="1000" name="imageProjs_local_size_offset">
+<comp id="28" class="1000" name="imageProjs_local_size_offset">
 <pin_list>
-<pin id="27" dir="1" index="0" bw="1" slack="0"/>
+<pin id="29" dir="1" index="0" bw="1" slack="2147483647"/>
 </pin_list>
 <bind>
 <StgValue><ssdm name="imageProjs_local_size_offset"/></StgValue>
 </bind>
 </comp>
 
-<comp id="28" class="1000" name="fullImage_offset">
+<comp id="30" class="1000" name="fullImage_offset">
 <pin_list>
-<pin id="29" dir="1" index="0" bw="1" slack="0"/>
+<pin id="31" dir="1" index="0" bw="1" slack="0"/>
 </pin_list>
 <bind>
 <StgValue><ssdm name="fullImage_offset"/></StgValue>
 </bind>
 </comp>
 
-<comp id="30" class="1000" name="fullImage_rows">
+<comp id="32" class="1000" name="fullImage_rows">
 <pin_list>
-<pin id="31" dir="1" index="0" bw="1" slack="0"/>
+<pin id="33" dir="1" index="0" bw="1" slack="2147483647"/>
 </pin_list>
 <bind>
 <StgValue><ssdm name="fullImage_rows"/></StgValue>
 </bind>
 </comp>
 
-<comp id="32" class="1000" name="fullImage_cols">
+<comp id="34" class="1000" name="fullImage_cols">
 <pin_list>
-<pin id="33" dir="1" index="0" bw="1" slack="0"/>
+<pin id="35" dir="1" index="0" bw="1" slack="2147483647"/>
 </pin_list>
 <bind>
 <StgValue><ssdm name="fullImage_cols"/></StgValue>
 </bind>
 </comp>
 
-<comp id="34" class="1000" name="emissions_offset">
-<pin_list>
-<pin id="35" dir="1" index="0" bw="1" slack="0"/>
-</pin_list>
-<bind>
-<StgValue><ssdm name="emissions_offset"/></StgValue>
-</bind>
-</comp>
-
-<comp id="36" class="1000" name="emission_cnt">
+<comp id="36" class="1000" name="emissions_offset">
 <pin_list>
 <pin id="37" dir="1" index="0" bw="1" slack="0"/>
 </pin_list>
 <bind>
-<StgValue><ssdm name="emission_cnt"/></StgValue>
+<StgValue><ssdm name="emissions_offset"/></StgValue>
 </bind>
 </comp>
 
@@ -454,7 +458,7 @@ ret_ln161                         (ret                 ) [ 00000]
 <pin id="39" dir="1" index="0" bw="1" slack="0"/>
 </pin_list>
 <bind>
-<StgValue><ssdm name="mask_table"/><MemPortTyVec>1 1 1 1 </MemPortTyVec>
+<StgValue><ssdm name="mask_table"/><MemPortTyVec>1 1 </MemPortTyVec>
 </StgValue>
 </bind>
 </comp>
@@ -464,53 +468,53 @@ ret_ln161                         (ret                 ) [ 00000]
 <pin id="41" dir="1" index="0" bw="1" slack="0"/>
 </pin_list>
 <bind>
-<StgValue><ssdm name="one_half_table"/><MemPortTyVec>1 1 1 1 </MemPortTyVec>
+<StgValue><ssdm name="one_half_table"/><MemPortTyVec>1 1 </MemPortTyVec>
 </StgValue>
 </bind>
 </comp>
 
 <comp id="42" class="1001" name="const_42">
 <pin_list>
-<pin id="43" dir="1" index="0" bw="1" slack="0"/>
+<pin id="43" dir="1" index="0" bw="1" slack="2147483647"/>
 </pin_list>
 <bind>
-<StgValue><ssdm name="_ssdm_op_Read.s_axilite.i64"/></StgValue>
+<StgValue><ssdm name="_ssdm_op_SpecTopModule"/></StgValue>
 </bind>
 </comp>
 
 <comp id="44" class="1001" name="const_44">
 <pin_list>
-<pin id="45" dir="1" index="0" bw="1" slack="0"/>
+<pin id="45" dir="1" index="0" bw="1" slack="2147483647"/>
 </pin_list>
 <bind>
-<StgValue><ssdm name="_ssdm_op_Read.s_axilite.i32"/></StgValue>
+<StgValue><ssdm name="empty_11"/></StgValue>
 </bind>
 </comp>
 
 <comp id="46" class="1001" name="const_46">
 <pin_list>
-<pin id="47" dir="1" index="0" bw="1" slack="0"/>
+<pin id="47" dir="1" index="0" bw="1" slack="2147483647"/>
 </pin_list>
 <bind>
-<StgValue><ssdm name=""/></StgValue>
+<StgValue><ssdm name="_ssdm_op_SpecInterface"/></StgValue>
 </bind>
 </comp>
 
 <comp id="48" class="1001" name="const_48">
 <pin_list>
-<pin id="49" dir="1" index="0" bw="1" slack="0"/>
+<pin id="49" dir="1" index="0" bw="1" slack="2147483647"/>
 </pin_list>
 <bind>
-<StgValue><ssdm name="getLocalImages"/></StgValue>
+<StgValue><ssdm name="empty_16"/></StgValue>
 </bind>
 </comp>
 
 <comp id="50" class="1001" name="const_50">
 <pin_list>
-<pin id="51" dir="1" index="0" bw="1" slack="0"/>
+<pin id="51" dir="1" index="0" bw="1" slack="2147483647"/>
 </pin_list>
 <bind>
-<StgValue><ssdm name="applyProjectors"/></StgValue>
+<StgValue><ssdm name=""/></StgValue>
 </bind>
 </comp>
 
@@ -519,7 +523,7 @@ ret_ln161                         (ret                 ) [ 00000]
 <pin id="53" dir="1" index="0" bw="1" slack="2147483647"/>
 </pin_list>
 <bind>
-<StgValue><ssdm name="_ssdm_op_SpecDataflowPipeline"/></StgValue>
+<StgValue><ssdm name="empty_17"/></StgValue>
 </bind>
 </comp>
 
@@ -537,7 +541,7 @@ ret_ln161                         (ret                 ) [ 00000]
 <pin id="57" dir="1" index="0" bw="1" slack="2147483647"/>
 </pin_list>
 <bind>
-<StgValue><ssdm name=""/></StgValue>
+<StgValue><ssdm name="empty_18"/></StgValue>
 </bind>
 </comp>
 
@@ -546,7 +550,7 @@ ret_ln161                         (ret                 ) [ 00000]
 <pin id="59" dir="1" index="0" bw="1" slack="2147483647"/>
 </pin_list>
 <bind>
-<StgValue><ssdm name="empty_27"/></StgValue>
+<StgValue><ssdm name="empty_19"/></StgValue>
 </bind>
 </comp>
 
@@ -555,7 +559,7 @@ ret_ln161                         (ret                 ) [ 00000]
 <pin id="61" dir="1" index="0" bw="1" slack="2147483647"/>
 </pin_list>
 <bind>
-<StgValue><ssdm name="_ssdm_op_SpecTopModule"/></StgValue>
+<StgValue><ssdm name=""/></StgValue>
 </bind>
 </comp>
 
@@ -564,7 +568,7 @@ ret_ln161                         (ret                 ) [ 00000]
 <pin id="63" dir="1" index="0" bw="1" slack="2147483647"/>
 </pin_list>
 <bind>
-<StgValue><ssdm name="empty_19"/></StgValue>
+<StgValue><ssdm name=""/></StgValue>
 </bind>
 </comp>
 
@@ -573,7 +577,7 @@ ret_ln161                         (ret                 ) [ 00000]
 <pin id="65" dir="1" index="0" bw="1" slack="2147483647"/>
 </pin_list>
 <bind>
-<StgValue><ssdm name="_ssdm_op_SpecInterface"/></StgValue>
+<StgValue><ssdm name="_ssdm_op_SpecBitsMap"/></StgValue>
 </bind>
 </comp>
 
@@ -582,7 +586,7 @@ ret_ln161                         (ret                 ) [ 00000]
 <pin id="67" dir="1" index="0" bw="1" slack="2147483647"/>
 </pin_list>
 <bind>
-<StgValue><ssdm name="empty_26"/></StgValue>
+<StgValue><ssdm name="empty_20"/></StgValue>
 </bind>
 </comp>
 
@@ -591,7 +595,7 @@ ret_ln161                         (ret                 ) [ 00000]
 <pin id="69" dir="1" index="0" bw="1" slack="2147483647"/>
 </pin_list>
 <bind>
-<StgValue><ssdm name="empty_28"/></StgValue>
+<StgValue><ssdm name="empty_25"/></StgValue>
 </bind>
 </comp>
 
@@ -600,7 +604,7 @@ ret_ln161                         (ret                 ) [ 00000]
 <pin id="71" dir="1" index="0" bw="1" slack="2147483647"/>
 </pin_list>
 <bind>
-<StgValue><ssdm name="empty_29"/></StgValue>
+<StgValue><ssdm name="empty_26"/></StgValue>
 </bind>
 </comp>
 
@@ -618,7 +622,7 @@ ret_ln161                         (ret                 ) [ 00000]
 <pin id="75" dir="1" index="0" bw="1" slack="2147483647"/>
 </pin_list>
 <bind>
-<StgValue><ssdm name="_ssdm_op_SpecBitsMap"/></StgValue>
+<StgValue><ssdm name="empty"/></StgValue>
 </bind>
 </comp>
 
@@ -627,7 +631,7 @@ ret_ln161                         (ret                 ) [ 00000]
 <pin id="77" dir="1" index="0" bw="1" slack="2147483647"/>
 </pin_list>
 <bind>
-<StgValue><ssdm name="empty"/></StgValue>
+<StgValue><ssdm name="empty_0"/></StgValue>
 </bind>
 </comp>
 
@@ -636,7 +640,7 @@ ret_ln161                         (ret                 ) [ 00000]
 <pin id="79" dir="1" index="0" bw="1" slack="2147483647"/>
 </pin_list>
 <bind>
-<StgValue><ssdm name="empty_0"/></StgValue>
+<StgValue><ssdm name="empty_1"/></StgValue>
 </bind>
 </comp>
 
@@ -645,7 +649,7 @@ ret_ln161                         (ret                 ) [ 00000]
 <pin id="81" dir="1" index="0" bw="1" slack="2147483647"/>
 </pin_list>
 <bind>
-<StgValue><ssdm name="empty_1"/></StgValue>
+<StgValue><ssdm name="empty_2"/></StgValue>
 </bind>
 </comp>
 
@@ -654,7 +658,7 @@ ret_ln161                         (ret                 ) [ 00000]
 <pin id="83" dir="1" index="0" bw="1" slack="2147483647"/>
 </pin_list>
 <bind>
-<StgValue><ssdm name=""/></StgValue>
+<StgValue><ssdm name="empty_3"/></StgValue>
 </bind>
 </comp>
 
@@ -663,7 +667,7 @@ ret_ln161                         (ret                 ) [ 00000]
 <pin id="85" dir="1" index="0" bw="1" slack="2147483647"/>
 </pin_list>
 <bind>
-<StgValue><ssdm name="empty_2"/></StgValue>
+<StgValue><ssdm name="empty_4"/></StgValue>
 </bind>
 </comp>
 
@@ -672,7 +676,7 @@ ret_ln161                         (ret                 ) [ 00000]
 <pin id="87" dir="1" index="0" bw="1" slack="2147483647"/>
 </pin_list>
 <bind>
-<StgValue><ssdm name="empty_3"/></StgValue>
+<StgValue><ssdm name="empty_5"/></StgValue>
 </bind>
 </comp>
 
@@ -681,7 +685,7 @@ ret_ln161                         (ret                 ) [ 00000]
 <pin id="89" dir="1" index="0" bw="1" slack="2147483647"/>
 </pin_list>
 <bind>
-<StgValue><ssdm name="empty_4"/></StgValue>
+<StgValue><ssdm name="empty_6"/></StgValue>
 </bind>
 </comp>
 
@@ -690,7 +694,7 @@ ret_ln161                         (ret                 ) [ 00000]
 <pin id="91" dir="1" index="0" bw="1" slack="2147483647"/>
 </pin_list>
 <bind>
-<StgValue><ssdm name="empty_5"/></StgValue>
+<StgValue><ssdm name="empty_14"/></StgValue>
 </bind>
 </comp>
 
@@ -699,7 +703,7 @@ ret_ln161                         (ret                 ) [ 00000]
 <pin id="93" dir="1" index="0" bw="1" slack="2147483647"/>
 </pin_list>
 <bind>
-<StgValue><ssdm name="empty_6"/></StgValue>
+<StgValue><ssdm name="empty_10"/></StgValue>
 </bind>
 </comp>
 
@@ -717,7 +721,7 @@ ret_ln161                         (ret                 ) [ 00000]
 <pin id="97" dir="1" index="0" bw="1" slack="2147483647"/>
 </pin_list>
 <bind>
-<StgValue><ssdm name="empty_8"/></StgValue>
+<StgValue><ssdm name="empty_15"/></StgValue>
 </bind>
 </comp>
 
@@ -726,7 +730,7 @@ ret_ln161                         (ret                 ) [ 00000]
 <pin id="99" dir="1" index="0" bw="1" slack="2147483647"/>
 </pin_list>
 <bind>
-<StgValue><ssdm name="empty_9"/></StgValue>
+<StgValue><ssdm name="empty_21"/></StgValue>
 </bind>
 </comp>
 
@@ -735,7 +739,7 @@ ret_ln161                         (ret                 ) [ 00000]
 <pin id="101" dir="1" index="0" bw="1" slack="2147483647"/>
 </pin_list>
 <bind>
-<StgValue><ssdm name="empty_10"/></StgValue>
+<StgValue><ssdm name="empty_8"/></StgValue>
 </bind>
 </comp>
 
@@ -744,7 +748,7 @@ ret_ln161                         (ret                 ) [ 00000]
 <pin id="103" dir="1" index="0" bw="1" slack="2147483647"/>
 </pin_list>
 <bind>
-<StgValue><ssdm name="empty_30"/></StgValue>
+<StgValue><ssdm name="empty_24"/></StgValue>
 </bind>
 </comp>
 
@@ -753,7 +757,7 @@ ret_ln161                         (ret                 ) [ 00000]
 <pin id="105" dir="1" index="0" bw="1" slack="2147483647"/>
 </pin_list>
 <bind>
-<StgValue><ssdm name="empty_11"/></StgValue>
+<StgValue><ssdm name="empty_23"/></StgValue>
 </bind>
 </comp>
 
@@ -762,7 +766,7 @@ ret_ln161                         (ret                 ) [ 00000]
 <pin id="107" dir="1" index="0" bw="1" slack="2147483647"/>
 </pin_list>
 <bind>
-<StgValue><ssdm name="empty_25"/></StgValue>
+<StgValue><ssdm name="empty_22"/></StgValue>
 </bind>
 </comp>
 
@@ -771,43 +775,43 @@ ret_ln161                         (ret                 ) [ 00000]
 <pin id="109" dir="1" index="0" bw="1" slack="2147483647"/>
 </pin_list>
 <bind>
-<StgValue><ssdm name="empty_12"/></StgValue>
+<StgValue><ssdm name="empty_9"/></StgValue>
 </bind>
 </comp>
 
 <comp id="110" class="1001" name="const_110">
 <pin_list>
-<pin id="111" dir="1" index="0" bw="1" slack="2147483647"/>
+<pin id="111" dir="1" index="0" bw="1" slack="0"/>
 </pin_list>
 <bind>
-<StgValue><ssdm name="empty_13"/></StgValue>
+<StgValue><ssdm name="_ssdm_op_Read.s_axilite.i64"/></StgValue>
 </bind>
 </comp>
 
 <comp id="112" class="1001" name="const_112">
 <pin_list>
-<pin id="113" dir="1" index="0" bw="1" slack="2147483647"/>
+<pin id="113" dir="1" index="0" bw="1" slack="0"/>
 </pin_list>
 <bind>
-<StgValue><ssdm name="empty_14"/></StgValue>
+<StgValue><ssdm name="_ssdm_op_Read.s_axilite.i32"/></StgValue>
 </bind>
 </comp>
 
 <comp id="114" class="1001" name="const_114">
 <pin_list>
-<pin id="115" dir="1" index="0" bw="1" slack="2147483647"/>
+<pin id="115" dir="1" index="0" bw="1" slack="1"/>
 </pin_list>
 <bind>
-<StgValue><ssdm name="empty_15"/></StgValue>
+<StgValue><ssdm name=""/></StgValue>
 </bind>
 </comp>
 
 <comp id="116" class="1001" name="const_116">
 <pin_list>
-<pin id="117" dir="1" index="0" bw="1" slack="2147483647"/>
+<pin id="117" dir="1" index="0" bw="1" slack="0"/>
 </pin_list>
 <bind>
-<StgValue><ssdm name="empty_16"/></StgValue>
+<StgValue><ssdm name=""/></StgValue>
 </bind>
 </comp>
 
@@ -816,7 +820,7 @@ ret_ln161                         (ret                 ) [ 00000]
 <pin id="119" dir="1" index="0" bw="1" slack="2147483647"/>
 </pin_list>
 <bind>
-<StgValue><ssdm name="empty_17"/></StgValue>
+<StgValue><ssdm name="_ssdm_op_SpecDataflowPipeline"/></StgValue>
 </bind>
 </comp>
 
@@ -825,7 +829,7 @@ ret_ln161                         (ret                 ) [ 00000]
 <pin id="121" dir="1" index="0" bw="1" slack="2147483647"/>
 </pin_list>
 <bind>
-<StgValue><ssdm name="_ssdm_op_SpecChannel"/></StgValue>
+<StgValue><ssdm name="dataflow_parent_loop_str"/></StgValue>
 </bind>
 </comp>
 
@@ -834,16 +838,16 @@ ret_ln161                         (ret                 ) [ 00000]
 <pin id="123" dir="1" index="0" bw="1" slack="2147483647"/>
 </pin_list>
 <bind>
-<StgValue><ssdm name="localImages_str"/></StgValue>
+<StgValue><ssdm name=""/></StgValue>
 </bind>
 </comp>
 
 <comp id="124" class="1001" name="const_124">
 <pin_list>
-<pin id="125" dir="1" index="0" bw="1" slack="2147483647"/>
+<pin id="125" dir="1" index="0" bw="1" slack="0"/>
 </pin_list>
 <bind>
-<StgValue><ssdm name=""/></StgValue>
+<StgValue><ssdm name="dataflow_in_loop_VITIS_LOOP_149_1.1"/></StgValue>
 </bind>
 </comp>
 
@@ -852,7 +856,7 @@ ret_ln161                         (ret                 ) [ 00000]
 <pin id="127" dir="1" index="0" bw="1" slack="2147483647"/>
 </pin_list>
 <bind>
-<StgValue><ssdm name="p_str"/></StgValue>
+<StgValue><ssdm name="_ssdm_op_SpecLoopTripCount"/></StgValue>
 </bind>
 </comp>
 
@@ -870,26 +874,24 @@ ret_ln161                         (ret                 ) [ 00000]
 <pin id="131" dir="1" index="0" bw="1" slack="2147483647"/>
 </pin_list>
 <bind>
-<StgValue><ssdm name="empty_18"/></StgValue>
+<StgValue><ssdm name="_ssdm_op_SpecLoopName"/></StgValue>
 </bind>
 </comp>
 
-<comp id="132" class="1004" name="localImages_fu_132">
+<comp id="132" class="1001" name="const_132">
 <pin_list>
-<pin id="133" dir="0" index="0" bw="1" slack="0"/>
-<pin id="134" dir="1" index="1" bw="256" slack="0"/>
+<pin id="133" dir="1" index="0" bw="1" slack="2147483647"/>
 </pin_list>
 <bind>
-<opcode="alloca(26) " fcode="alloca"/>
-<opset="localImages/1 "/>
+<StgValue><ssdm name="empty_12"/></StgValue>
 </bind>
 </comp>
 
-<comp id="136" class="1004" name="emissions_offset_read_read_fu_136">
+<comp id="134" class="1004" name="emissions_offset_read_read_fu_134">
 <pin_list>
-<pin id="137" dir="0" index="0" bw="64" slack="0"/>
-<pin id="138" dir="0" index="1" bw="64" slack="0"/>
-<pin id="139" dir="1" index="2" bw="64" slack="2"/>
+<pin id="135" dir="0" index="0" bw="64" slack="0"/>
+<pin id="136" dir="0" index="1" bw="64" slack="0"/>
+<pin id="137" dir="1" index="2" bw="64" slack="2"/>
 </pin_list>
 <bind>
 <opcode="read(1150) " fcode="read"/>
@@ -897,35 +899,11 @@ ret_ln161                         (ret                 ) [ 00000]
 </bind>
 </comp>
 
-<comp id="142" class="1004" name="fullImage_cols_read_read_fu_142">
+<comp id="140" class="1004" name="fullImage_offset_read_read_fu_140">
 <pin_list>
-<pin id="143" dir="0" index="0" bw="32" slack="0"/>
-<pin id="144" dir="0" index="1" bw="32" slack="0"/>
-<pin id="145" dir="1" index="2" bw="32" slack="2"/>
-</pin_list>
-<bind>
-<opcode="read(1150) " fcode="read"/>
-<opset="fullImage_cols_read/1 "/>
-</bind>
-</comp>
-
-<comp id="148" class="1004" name="fullImage_rows_read_read_fu_148">
-<pin_list>
-<pin id="149" dir="0" index="0" bw="32" slack="0"/>
-<pin id="150" dir="0" index="1" bw="32" slack="0"/>
-<pin id="151" dir="1" index="2" bw="32" slack="2"/>
-</pin_list>
-<bind>
-<opcode="read(1150) " fcode="read"/>
-<opset="fullImage_rows_read/1 "/>
-</bind>
-</comp>
-
-<comp id="154" class="1004" name="fullImage_offset_read_read_fu_154">
-<pin_list>
-<pin id="155" dir="0" index="0" bw="64" slack="0"/>
-<pin id="156" dir="0" index="1" bw="64" slack="0"/>
-<pin id="157" dir="1" index="2" bw="64" slack="2"/>
+<pin id="141" dir="0" index="0" bw="64" slack="0"/>
+<pin id="142" dir="0" index="1" bw="64" slack="0"/>
+<pin id="143" dir="1" index="2" bw="64" slack="2"/>
 </pin_list>
 <bind>
 <opcode="read(1150) " fcode="read"/>
@@ -933,23 +911,11 @@ ret_ln161                         (ret                 ) [ 00000]
 </bind>
 </comp>
 
-<comp id="160" class="1004" name="imageProjs_local_size_offset_read_read_fu_160">
+<comp id="146" class="1004" name="imageProjs_offset_read_read_fu_146">
 <pin_list>
-<pin id="161" dir="0" index="0" bw="64" slack="0"/>
-<pin id="162" dir="0" index="1" bw="64" slack="0"/>
-<pin id="163" dir="1" index="2" bw="64" slack="2"/>
-</pin_list>
-<bind>
-<opcode="read(1150) " fcode="read"/>
-<opset="imageProjs_local_size_offset_read/1 "/>
-</bind>
-</comp>
-
-<comp id="166" class="1004" name="imageProjs_offset_read_read_fu_166">
-<pin_list>
-<pin id="167" dir="0" index="0" bw="64" slack="0"/>
-<pin id="168" dir="0" index="1" bw="64" slack="0"/>
-<pin id="169" dir="1" index="2" bw="64" slack="2"/>
+<pin id="147" dir="0" index="0" bw="64" slack="0"/>
+<pin id="148" dir="0" index="1" bw="64" slack="0"/>
+<pin id="149" dir="1" index="2" bw="64" slack="2"/>
 </pin_list>
 <bind>
 <opcode="read(1150) " fcode="read"/>
@@ -957,11 +923,11 @@ ret_ln161                         (ret                 ) [ 00000]
 </bind>
 </comp>
 
-<comp id="172" class="1004" name="imageProjs_local_offset_read_read_fu_172">
+<comp id="152" class="1004" name="imageProjs_local_offset_read_read_fu_152">
 <pin_list>
-<pin id="173" dir="0" index="0" bw="64" slack="0"/>
-<pin id="174" dir="0" index="1" bw="64" slack="0"/>
-<pin id="175" dir="1" index="2" bw="64" slack="2"/>
+<pin id="153" dir="0" index="0" bw="64" slack="0"/>
+<pin id="154" dir="0" index="1" bw="64" slack="0"/>
+<pin id="155" dir="1" index="2" bw="64" slack="2"/>
 </pin_list>
 <bind>
 <opcode="read(1150) " fcode="read"/>
@@ -969,23 +935,11 @@ ret_ln161                         (ret                 ) [ 00000]
 </bind>
 </comp>
 
-<comp id="178" class="1004" name="imageProjectionSize_read_read_fu_178">
+<comp id="158" class="1004" name="psfSupersample_read_read_fu_158">
 <pin_list>
-<pin id="179" dir="0" index="0" bw="32" slack="0"/>
-<pin id="180" dir="0" index="1" bw="32" slack="0"/>
-<pin id="181" dir="1" index="2" bw="32" slack="2"/>
-</pin_list>
-<bind>
-<opcode="read(1150) " fcode="read"/>
-<opset="imageProjectionSize_read/1 "/>
-</bind>
-</comp>
-
-<comp id="184" class="1004" name="psfSupersample_read_read_fu_184">
-<pin_list>
-<pin id="185" dir="0" index="0" bw="32" slack="0"/>
-<pin id="186" dir="0" index="1" bw="32" slack="0"/>
-<pin id="187" dir="1" index="2" bw="32" slack="0"/>
+<pin id="159" dir="0" index="0" bw="32" slack="0"/>
+<pin id="160" dir="0" index="1" bw="32" slack="0"/>
+<pin id="161" dir="1" index="2" bw="32" slack="2"/>
 </pin_list>
 <bind>
 <opcode="read(1150) " fcode="read"/>
@@ -993,11 +947,23 @@ ret_ln161                         (ret                 ) [ 00000]
 </bind>
 </comp>
 
-<comp id="190" class="1004" name="projShape1_read_read_fu_190">
+<comp id="164" class="1004" name="atomLocations_offset_read_read_fu_164">
 <pin_list>
-<pin id="191" dir="0" index="0" bw="32" slack="0"/>
-<pin id="192" dir="0" index="1" bw="32" slack="0"/>
-<pin id="193" dir="1" index="2" bw="32" slack="0"/>
+<pin id="165" dir="0" index="0" bw="64" slack="0"/>
+<pin id="166" dir="0" index="1" bw="64" slack="0"/>
+<pin id="167" dir="1" index="2" bw="64" slack="2"/>
+</pin_list>
+<bind>
+<opcode="read(1150) " fcode="read"/>
+<opset="atomLocations_offset_read/1 "/>
+</bind>
+</comp>
+
+<comp id="170" class="1004" name="projShape1_read_read_fu_170">
+<pin_list>
+<pin id="171" dir="0" index="0" bw="32" slack="0"/>
+<pin id="172" dir="0" index="1" bw="32" slack="0"/>
+<pin id="173" dir="1" index="2" bw="32" slack="2"/>
 </pin_list>
 <bind>
 <opcode="read(1150) " fcode="read"/>
@@ -1005,11 +971,11 @@ ret_ln161                         (ret                 ) [ 00000]
 </bind>
 </comp>
 
-<comp id="196" class="1004" name="projShape0_read_read_fu_196">
+<comp id="176" class="1004" name="projShape0_read_read_fu_176">
 <pin_list>
-<pin id="197" dir="0" index="0" bw="32" slack="0"/>
-<pin id="198" dir="0" index="1" bw="32" slack="0"/>
-<pin id="199" dir="1" index="2" bw="32" slack="0"/>
+<pin id="177" dir="0" index="0" bw="32" slack="0"/>
+<pin id="178" dir="0" index="1" bw="32" slack="0"/>
+<pin id="179" dir="1" index="2" bw="32" slack="2"/>
 </pin_list>
 <bind>
 <opcode="read(1150) " fcode="read"/>
@@ -1017,11 +983,11 @@ ret_ln161                         (ret                 ) [ 00000]
 </bind>
 </comp>
 
-<comp id="202" class="1004" name="atomLocationsSize_read_read_fu_202">
+<comp id="182" class="1004" name="atomLocationsSize_read_read_fu_182">
 <pin_list>
-<pin id="203" dir="0" index="0" bw="32" slack="0"/>
-<pin id="204" dir="0" index="1" bw="32" slack="0"/>
-<pin id="205" dir="1" index="2" bw="32" slack="0"/>
+<pin id="183" dir="0" index="0" bw="32" slack="0"/>
+<pin id="184" dir="0" index="1" bw="32" slack="0"/>
+<pin id="185" dir="1" index="2" bw="32" slack="1"/>
 </pin_list>
 <bind>
 <opcode="read(1150) " fcode="read"/>
@@ -1029,323 +995,317 @@ ret_ln161                         (ret                 ) [ 00000]
 </bind>
 </comp>
 
-<comp id="208" class="1004" name="grp_getLocalImages_fu_208">
+<comp id="188" class="1005" name="idx_reg_188">
 <pin_list>
-<pin id="209" dir="0" index="0" bw="0" slack="0"/>
-<pin id="210" dir="0" index="1" bw="32" slack="0"/>
-<pin id="211" dir="0" index="2" bw="32" slack="0"/>
-<pin id="212" dir="0" index="3" bw="32" slack="0"/>
-<pin id="213" dir="0" index="4" bw="32" slack="0"/>
-<pin id="214" dir="0" index="5" bw="128" slack="0"/>
-<pin id="215" dir="0" index="6" bw="256" slack="0"/>
-<pin id="216" dir="0" index="7" bw="52" slack="0"/>
-<pin id="217" dir="0" index="8" bw="53" slack="0"/>
-<pin id="218" dir="1" index="9" bw="0" slack="2147483647"/>
+<pin id="189" dir="0" index="0" bw="16" slack="1"/>
+<pin id="190" dir="1" index="1" bw="16" slack="1"/>
 </pin_list>
 <bind>
-<opcode="call(48) " fcode="call"/>
-<opset="call_ln159/1 "/>
+<opset="idx (phireg) "/>
 </bind>
 </comp>
 
-<comp id="227" class="1004" name="grp_applyProjectors_fu_227">
+<comp id="192" class="1004" name="idx_phi_fu_192">
 <pin_list>
-<pin id="228" dir="0" index="0" bw="0" slack="0"/>
-<pin id="229" dir="0" index="1" bw="32" slack="2"/>
-<pin id="230" dir="0" index="2" bw="32" slack="2"/>
-<pin id="231" dir="0" index="3" bw="32" slack="2"/>
-<pin id="232" dir="0" index="4" bw="64" slack="0"/>
-<pin id="233" dir="0" index="5" bw="64" slack="2"/>
-<pin id="234" dir="0" index="6" bw="64" slack="0"/>
-<pin id="235" dir="0" index="7" bw="64" slack="2"/>
-<pin id="236" dir="0" index="8" bw="32" slack="0"/>
-<pin id="237" dir="0" index="9" bw="64" slack="2"/>
-<pin id="238" dir="0" index="10" bw="64" slack="0"/>
-<pin id="239" dir="0" index="11" bw="64" slack="2"/>
-<pin id="240" dir="0" index="12" bw="32" slack="2"/>
-<pin id="241" dir="0" index="13" bw="32" slack="2"/>
-<pin id="242" dir="0" index="14" bw="256" slack="2"/>
-<pin id="243" dir="0" index="15" bw="64" slack="0"/>
-<pin id="244" dir="0" index="16" bw="64" slack="2"/>
-<pin id="245" dir="0" index="17" bw="32" slack="0"/>
-<pin id="246" dir="1" index="18" bw="0" slack="2147483647"/>
+<pin id="193" dir="0" index="0" bw="1" slack="1"/>
+<pin id="194" dir="0" index="1" bw="0" slack="2147483647"/>
+<pin id="195" dir="0" index="2" bw="16" slack="0"/>
+<pin id="196" dir="0" index="3" bw="0" slack="2147483647"/>
+<pin id="197" dir="1" index="4" bw="16" slack="0"/>
 </pin_list>
 <bind>
-<opcode="call(48) " fcode="call"/>
-<opset="call_ln160/3 "/>
+<opcode="phi(47) " fcode="phi"/>
+<opset="idx/2 "/>
 </bind>
 </comp>
 
-<comp id="254" class="1005" name="emissions_offset_read_reg_254">
+<comp id="200" class="1004" name="grp_dataflow_in_loop_VITIS_LOOP_149_1_1_fu_200">
 <pin_list>
-<pin id="255" dir="0" index="0" bw="64" slack="2"/>
-<pin id="256" dir="1" index="1" bw="64" slack="2"/>
+<pin id="201" dir="0" index="0" bw="0" slack="0"/>
+<pin id="202" dir="0" index="1" bw="16" slack="1"/>
+<pin id="203" dir="0" index="2" bw="32" slack="2"/>
+<pin id="204" dir="0" index="3" bw="32" slack="2"/>
+<pin id="205" dir="0" index="4" bw="32" slack="2"/>
+<pin id="206" dir="0" index="5" bw="64" slack="0"/>
+<pin id="207" dir="0" index="6" bw="64" slack="2"/>
+<pin id="208" dir="0" index="7" bw="32" slack="0"/>
+<pin id="209" dir="0" index="8" bw="64" slack="2"/>
+<pin id="210" dir="0" index="9" bw="32" slack="0"/>
+<pin id="211" dir="0" index="10" bw="64" slack="2"/>
+<pin id="212" dir="0" index="11" bw="32" slack="0"/>
+<pin id="213" dir="0" index="12" bw="64" slack="2"/>
+<pin id="214" dir="0" index="13" bw="16" slack="1"/>
+<pin id="215" dir="0" index="14" bw="32" slack="0"/>
+<pin id="216" dir="0" index="15" bw="64" slack="2"/>
+<pin id="217" dir="0" index="16" bw="23" slack="0"/>
+<pin id="218" dir="0" index="17" bw="24" slack="0"/>
+<pin id="219" dir="1" index="18" bw="0" slack="2147483647"/>
+</pin_list>
+<bind>
+<opcode="call(48) " fcode="call"/>
+<opset="call_ln158/3 "/>
+</bind>
+</comp>
+
+<comp id="230" class="1004" name="zext_ln149_fu_230">
+<pin_list>
+<pin id="231" dir="0" index="0" bw="16" slack="0"/>
+<pin id="232" dir="1" index="1" bw="32" slack="0"/>
+</pin_list>
+<bind>
+<opcode="zext(34) " fcode="zext"/>
+<opset="zext_ln149/2 "/>
+</bind>
+</comp>
+
+<comp id="234" class="1004" name="icmp_ln149_fu_234">
+<pin_list>
+<pin id="235" dir="0" index="0" bw="16" slack="0"/>
+<pin id="236" dir="0" index="1" bw="32" slack="1"/>
+<pin id="237" dir="1" index="2" bw="1" slack="1"/>
+</pin_list>
+<bind>
+<opcode="icmp(45) " fcode="icmp"/>
+<opset="icmp_ln149/2 "/>
+</bind>
+</comp>
+
+<comp id="239" class="1004" name="add_ln149_fu_239">
+<pin_list>
+<pin id="240" dir="0" index="0" bw="16" slack="0"/>
+<pin id="241" dir="0" index="1" bw="1" slack="0"/>
+<pin id="242" dir="1" index="2" bw="16" slack="0"/>
+</pin_list>
+<bind>
+<opcode="add(8) " fcode="add"/>
+<opset="add_ln149/2 "/>
+</bind>
+</comp>
+
+<comp id="245" class="1005" name="emissions_offset_read_reg_245">
+<pin_list>
+<pin id="246" dir="0" index="0" bw="64" slack="2"/>
+<pin id="247" dir="1" index="1" bw="64" slack="2"/>
 </pin_list>
 <bind>
 <opset="emissions_offset_read "/>
 </bind>
 </comp>
 
-<comp id="259" class="1005" name="fullImage_cols_read_reg_259">
+<comp id="250" class="1005" name="fullImage_offset_read_reg_250">
 <pin_list>
-<pin id="260" dir="0" index="0" bw="32" slack="2"/>
-<pin id="261" dir="1" index="1" bw="32" slack="2"/>
-</pin_list>
-<bind>
-<opset="fullImage_cols_read "/>
-</bind>
-</comp>
-
-<comp id="264" class="1005" name="fullImage_rows_read_reg_264">
-<pin_list>
-<pin id="265" dir="0" index="0" bw="32" slack="2"/>
-<pin id="266" dir="1" index="1" bw="32" slack="2"/>
-</pin_list>
-<bind>
-<opset="fullImage_rows_read "/>
-</bind>
-</comp>
-
-<comp id="269" class="1005" name="fullImage_offset_read_reg_269">
-<pin_list>
-<pin id="270" dir="0" index="0" bw="64" slack="2"/>
-<pin id="271" dir="1" index="1" bw="64" slack="2"/>
+<pin id="251" dir="0" index="0" bw="64" slack="2"/>
+<pin id="252" dir="1" index="1" bw="64" slack="2"/>
 </pin_list>
 <bind>
 <opset="fullImage_offset_read "/>
 </bind>
 </comp>
 
-<comp id="274" class="1005" name="imageProjs_local_size_offset_read_reg_274">
+<comp id="255" class="1005" name="imageProjs_offset_read_reg_255">
 <pin_list>
-<pin id="275" dir="0" index="0" bw="64" slack="2"/>
-<pin id="276" dir="1" index="1" bw="64" slack="2"/>
-</pin_list>
-<bind>
-<opset="imageProjs_local_size_offset_read "/>
-</bind>
-</comp>
-
-<comp id="279" class="1005" name="imageProjs_offset_read_reg_279">
-<pin_list>
-<pin id="280" dir="0" index="0" bw="64" slack="2"/>
-<pin id="281" dir="1" index="1" bw="64" slack="2"/>
+<pin id="256" dir="0" index="0" bw="64" slack="2"/>
+<pin id="257" dir="1" index="1" bw="64" slack="2"/>
 </pin_list>
 <bind>
 <opset="imageProjs_offset_read "/>
 </bind>
 </comp>
 
-<comp id="284" class="1005" name="imageProjs_local_offset_read_reg_284">
+<comp id="260" class="1005" name="imageProjs_local_offset_read_reg_260">
 <pin_list>
-<pin id="285" dir="0" index="0" bw="64" slack="2"/>
-<pin id="286" dir="1" index="1" bw="64" slack="2"/>
+<pin id="261" dir="0" index="0" bw="64" slack="2"/>
+<pin id="262" dir="1" index="1" bw="64" slack="2"/>
 </pin_list>
 <bind>
 <opset="imageProjs_local_offset_read "/>
 </bind>
 </comp>
 
-<comp id="289" class="1005" name="imageProjectionSize_read_reg_289">
+<comp id="265" class="1005" name="psfSupersample_read_reg_265">
 <pin_list>
-<pin id="290" dir="0" index="0" bw="32" slack="2"/>
-<pin id="291" dir="1" index="1" bw="32" slack="2"/>
-</pin_list>
-<bind>
-<opset="imageProjectionSize_read "/>
-</bind>
-</comp>
-
-<comp id="294" class="1005" name="psfSupersample_read_reg_294">
-<pin_list>
-<pin id="295" dir="0" index="0" bw="32" slack="1"/>
-<pin id="296" dir="1" index="1" bw="32" slack="1"/>
+<pin id="266" dir="0" index="0" bw="32" slack="2"/>
+<pin id="267" dir="1" index="1" bw="32" slack="2"/>
 </pin_list>
 <bind>
 <opset="psfSupersample_read "/>
 </bind>
 </comp>
 
-<comp id="300" class="1005" name="projShape1_read_reg_300">
+<comp id="270" class="1005" name="atomLocations_offset_read_reg_270">
 <pin_list>
-<pin id="301" dir="0" index="0" bw="32" slack="1"/>
-<pin id="302" dir="1" index="1" bw="32" slack="1"/>
+<pin id="271" dir="0" index="0" bw="64" slack="2"/>
+<pin id="272" dir="1" index="1" bw="64" slack="2"/>
+</pin_list>
+<bind>
+<opset="atomLocations_offset_read "/>
+</bind>
+</comp>
+
+<comp id="275" class="1005" name="projShape1_read_reg_275">
+<pin_list>
+<pin id="276" dir="0" index="0" bw="32" slack="2"/>
+<pin id="277" dir="1" index="1" bw="32" slack="2"/>
 </pin_list>
 <bind>
 <opset="projShape1_read "/>
 </bind>
 </comp>
 
-<comp id="305" class="1005" name="projShape0_read_reg_305">
+<comp id="280" class="1005" name="projShape0_read_reg_280">
 <pin_list>
-<pin id="306" dir="0" index="0" bw="32" slack="1"/>
-<pin id="307" dir="1" index="1" bw="32" slack="1"/>
+<pin id="281" dir="0" index="0" bw="32" slack="2"/>
+<pin id="282" dir="1" index="1" bw="32" slack="2"/>
 </pin_list>
 <bind>
 <opset="projShape0_read "/>
 </bind>
 </comp>
 
-<comp id="310" class="1005" name="atomLocationsSize_read_reg_310">
+<comp id="285" class="1005" name="atomLocationsSize_read_reg_285">
 <pin_list>
-<pin id="311" dir="0" index="0" bw="32" slack="1"/>
-<pin id="312" dir="1" index="1" bw="32" slack="1"/>
+<pin id="286" dir="0" index="0" bw="32" slack="1"/>
+<pin id="287" dir="1" index="1" bw="32" slack="1"/>
 </pin_list>
 <bind>
 <opset="atomLocationsSize_read "/>
 </bind>
 </comp>
 
-<comp id="316" class="1005" name="localImages_reg_316">
+<comp id="290" class="1005" name="icmp_ln149_reg_290">
 <pin_list>
-<pin id="317" dir="0" index="0" bw="256" slack="0"/>
-<pin id="318" dir="1" index="1" bw="256" slack="0"/>
+<pin id="291" dir="0" index="0" bw="1" slack="1"/>
+<pin id="292" dir="1" index="1" bw="1" slack="2147483647"/>
 </pin_list>
 <bind>
-<opset="localImages "/>
+<opset="icmp_ln149 "/>
+</bind>
+</comp>
+
+<comp id="294" class="1005" name="add_ln149_reg_294">
+<pin_list>
+<pin id="295" dir="0" index="0" bw="16" slack="0"/>
+<pin id="296" dir="1" index="1" bw="16" slack="0"/>
+</pin_list>
+<bind>
+<opset="add_ln149 "/>
 </bind>
 </comp>
 
 </comp_list>
 
 <net_list>
-<net id="135"><net_src comp="46" pin="0"/><net_sink comp="132" pin=0"/></net>
+<net id="138"><net_src comp="110" pin="0"/><net_sink comp="134" pin=0"/></net>
 
-<net id="140"><net_src comp="42" pin="0"/><net_sink comp="136" pin=0"/></net>
+<net id="139"><net_src comp="36" pin="0"/><net_sink comp="134" pin=1"/></net>
 
-<net id="141"><net_src comp="34" pin="0"/><net_sink comp="136" pin=1"/></net>
+<net id="144"><net_src comp="110" pin="0"/><net_sink comp="140" pin=0"/></net>
 
-<net id="146"><net_src comp="44" pin="0"/><net_sink comp="142" pin=0"/></net>
+<net id="145"><net_src comp="30" pin="0"/><net_sink comp="140" pin=1"/></net>
 
-<net id="147"><net_src comp="32" pin="0"/><net_sink comp="142" pin=1"/></net>
+<net id="150"><net_src comp="110" pin="0"/><net_sink comp="146" pin=0"/></net>
 
-<net id="152"><net_src comp="44" pin="0"/><net_sink comp="148" pin=0"/></net>
+<net id="151"><net_src comp="26" pin="0"/><net_sink comp="146" pin=1"/></net>
 
-<net id="153"><net_src comp="30" pin="0"/><net_sink comp="148" pin=1"/></net>
+<net id="156"><net_src comp="110" pin="0"/><net_sink comp="152" pin=0"/></net>
 
-<net id="158"><net_src comp="42" pin="0"/><net_sink comp="154" pin=0"/></net>
+<net id="157"><net_src comp="24" pin="0"/><net_sink comp="152" pin=1"/></net>
 
-<net id="159"><net_src comp="28" pin="0"/><net_sink comp="154" pin=1"/></net>
+<net id="162"><net_src comp="112" pin="0"/><net_sink comp="158" pin=0"/></net>
 
-<net id="164"><net_src comp="42" pin="0"/><net_sink comp="160" pin=0"/></net>
+<net id="163"><net_src comp="20" pin="0"/><net_sink comp="158" pin=1"/></net>
 
-<net id="165"><net_src comp="26" pin="0"/><net_sink comp="160" pin=1"/></net>
+<net id="168"><net_src comp="110" pin="0"/><net_sink comp="164" pin=0"/></net>
 
-<net id="170"><net_src comp="42" pin="0"/><net_sink comp="166" pin=0"/></net>
+<net id="169"><net_src comp="18" pin="0"/><net_sink comp="164" pin=1"/></net>
 
-<net id="171"><net_src comp="24" pin="0"/><net_sink comp="166" pin=1"/></net>
+<net id="174"><net_src comp="112" pin="0"/><net_sink comp="170" pin=0"/></net>
 
-<net id="176"><net_src comp="42" pin="0"/><net_sink comp="172" pin=0"/></net>
+<net id="175"><net_src comp="16" pin="0"/><net_sink comp="170" pin=1"/></net>
 
-<net id="177"><net_src comp="22" pin="0"/><net_sink comp="172" pin=1"/></net>
+<net id="180"><net_src comp="112" pin="0"/><net_sink comp="176" pin=0"/></net>
 
-<net id="182"><net_src comp="44" pin="0"/><net_sink comp="178" pin=0"/></net>
+<net id="181"><net_src comp="14" pin="0"/><net_sink comp="176" pin=1"/></net>
 
-<net id="183"><net_src comp="20" pin="0"/><net_sink comp="178" pin=1"/></net>
+<net id="186"><net_src comp="112" pin="0"/><net_sink comp="182" pin=0"/></net>
 
-<net id="188"><net_src comp="44" pin="0"/><net_sink comp="184" pin=0"/></net>
+<net id="187"><net_src comp="12" pin="0"/><net_sink comp="182" pin=1"/></net>
 
-<net id="189"><net_src comp="18" pin="0"/><net_sink comp="184" pin=1"/></net>
+<net id="191"><net_src comp="114" pin="0"/><net_sink comp="188" pin=0"/></net>
 
-<net id="194"><net_src comp="44" pin="0"/><net_sink comp="190" pin=0"/></net>
+<net id="198"><net_src comp="188" pin="1"/><net_sink comp="192" pin=0"/></net>
 
-<net id="195"><net_src comp="14" pin="0"/><net_sink comp="190" pin=1"/></net>
+<net id="199"><net_src comp="192" pin="4"/><net_sink comp="188" pin=0"/></net>
 
-<net id="200"><net_src comp="44" pin="0"/><net_sink comp="196" pin=0"/></net>
+<net id="220"><net_src comp="124" pin="0"/><net_sink comp="200" pin=0"/></net>
 
-<net id="201"><net_src comp="12" pin="0"/><net_sink comp="196" pin=1"/></net>
+<net id="221"><net_src comp="188" pin="1"/><net_sink comp="200" pin=1"/></net>
 
-<net id="206"><net_src comp="44" pin="0"/><net_sink comp="202" pin=0"/></net>
+<net id="222"><net_src comp="0" pin="0"/><net_sink comp="200" pin=5"/></net>
 
-<net id="207"><net_src comp="10" pin="0"/><net_sink comp="202" pin=1"/></net>
+<net id="223"><net_src comp="4" pin="0"/><net_sink comp="200" pin=7"/></net>
 
-<net id="219"><net_src comp="48" pin="0"/><net_sink comp="208" pin=0"/></net>
+<net id="224"><net_src comp="8" pin="0"/><net_sink comp="200" pin=9"/></net>
 
-<net id="220"><net_src comp="202" pin="2"/><net_sink comp="208" pin=1"/></net>
+<net id="225"><net_src comp="2" pin="0"/><net_sink comp="200" pin=11"/></net>
 
-<net id="221"><net_src comp="184" pin="2"/><net_sink comp="208" pin=2"/></net>
+<net id="226"><net_src comp="188" pin="1"/><net_sink comp="200" pin=13"/></net>
 
-<net id="222"><net_src comp="196" pin="2"/><net_sink comp="208" pin=3"/></net>
+<net id="227"><net_src comp="10" pin="0"/><net_sink comp="200" pin=14"/></net>
 
-<net id="223"><net_src comp="190" pin="2"/><net_sink comp="208" pin=4"/></net>
+<net id="228"><net_src comp="38" pin="0"/><net_sink comp="200" pin=16"/></net>
 
-<net id="224"><net_src comp="16" pin="0"/><net_sink comp="208" pin=5"/></net>
+<net id="229"><net_src comp="40" pin="0"/><net_sink comp="200" pin=17"/></net>
 
-<net id="225"><net_src comp="38" pin="0"/><net_sink comp="208" pin=7"/></net>
+<net id="233"><net_src comp="192" pin="4"/><net_sink comp="230" pin=0"/></net>
 
-<net id="226"><net_src comp="40" pin="0"/><net_sink comp="208" pin=8"/></net>
+<net id="238"><net_src comp="230" pin="1"/><net_sink comp="234" pin=0"/></net>
 
-<net id="247"><net_src comp="50" pin="0"/><net_sink comp="227" pin=0"/></net>
+<net id="243"><net_src comp="192" pin="4"/><net_sink comp="239" pin=0"/></net>
 
-<net id="248"><net_src comp="0" pin="0"/><net_sink comp="227" pin=4"/></net>
+<net id="244"><net_src comp="116" pin="0"/><net_sink comp="239" pin=1"/></net>
 
-<net id="249"><net_src comp="2" pin="0"/><net_sink comp="227" pin=6"/></net>
+<net id="248"><net_src comp="134" pin="2"/><net_sink comp="245" pin=0"/></net>
 
-<net id="250"><net_src comp="4" pin="0"/><net_sink comp="227" pin=8"/></net>
+<net id="249"><net_src comp="245" pin="1"/><net_sink comp="200" pin=15"/></net>
 
-<net id="251"><net_src comp="6" pin="0"/><net_sink comp="227" pin=10"/></net>
+<net id="253"><net_src comp="140" pin="2"/><net_sink comp="250" pin=0"/></net>
 
-<net id="252"><net_src comp="8" pin="0"/><net_sink comp="227" pin=15"/></net>
+<net id="254"><net_src comp="250" pin="1"/><net_sink comp="200" pin=10"/></net>
 
-<net id="253"><net_src comp="36" pin="0"/><net_sink comp="227" pin=17"/></net>
+<net id="258"><net_src comp="146" pin="2"/><net_sink comp="255" pin=0"/></net>
 
-<net id="257"><net_src comp="136" pin="2"/><net_sink comp="254" pin=0"/></net>
+<net id="259"><net_src comp="255" pin="1"/><net_sink comp="200" pin=8"/></net>
 
-<net id="258"><net_src comp="254" pin="1"/><net_sink comp="227" pin=16"/></net>
+<net id="263"><net_src comp="152" pin="2"/><net_sink comp="260" pin=0"/></net>
 
-<net id="262"><net_src comp="142" pin="2"/><net_sink comp="259" pin=0"/></net>
+<net id="264"><net_src comp="260" pin="1"/><net_sink comp="200" pin=12"/></net>
 
-<net id="263"><net_src comp="259" pin="1"/><net_sink comp="227" pin=13"/></net>
+<net id="268"><net_src comp="158" pin="2"/><net_sink comp="265" pin=0"/></net>
 
-<net id="267"><net_src comp="148" pin="2"/><net_sink comp="264" pin=0"/></net>
+<net id="269"><net_src comp="265" pin="1"/><net_sink comp="200" pin=2"/></net>
 
-<net id="268"><net_src comp="264" pin="1"/><net_sink comp="227" pin=12"/></net>
+<net id="273"><net_src comp="164" pin="2"/><net_sink comp="270" pin=0"/></net>
 
-<net id="272"><net_src comp="154" pin="2"/><net_sink comp="269" pin=0"/></net>
+<net id="274"><net_src comp="270" pin="1"/><net_sink comp="200" pin=6"/></net>
 
-<net id="273"><net_src comp="269" pin="1"/><net_sink comp="227" pin=11"/></net>
+<net id="278"><net_src comp="170" pin="2"/><net_sink comp="275" pin=0"/></net>
 
-<net id="277"><net_src comp="160" pin="2"/><net_sink comp="274" pin=0"/></net>
+<net id="279"><net_src comp="275" pin="1"/><net_sink comp="200" pin=4"/></net>
 
-<net id="278"><net_src comp="274" pin="1"/><net_sink comp="227" pin=9"/></net>
+<net id="283"><net_src comp="176" pin="2"/><net_sink comp="280" pin=0"/></net>
 
-<net id="282"><net_src comp="166" pin="2"/><net_sink comp="279" pin=0"/></net>
+<net id="284"><net_src comp="280" pin="1"/><net_sink comp="200" pin=3"/></net>
 
-<net id="283"><net_src comp="279" pin="1"/><net_sink comp="227" pin=7"/></net>
+<net id="288"><net_src comp="182" pin="2"/><net_sink comp="285" pin=0"/></net>
 
-<net id="287"><net_src comp="172" pin="2"/><net_sink comp="284" pin=0"/></net>
+<net id="289"><net_src comp="285" pin="1"/><net_sink comp="234" pin=1"/></net>
 
-<net id="288"><net_src comp="284" pin="1"/><net_sink comp="227" pin=5"/></net>
+<net id="293"><net_src comp="234" pin="2"/><net_sink comp="290" pin=0"/></net>
 
-<net id="292"><net_src comp="178" pin="2"/><net_sink comp="289" pin=0"/></net>
+<net id="297"><net_src comp="239" pin="2"/><net_sink comp="294" pin=0"/></net>
 
-<net id="293"><net_src comp="289" pin="1"/><net_sink comp="227" pin=3"/></net>
-
-<net id="297"><net_src comp="184" pin="2"/><net_sink comp="294" pin=0"/></net>
-
-<net id="298"><net_src comp="294" pin="1"/><net_sink comp="208" pin=2"/></net>
-
-<net id="299"><net_src comp="294" pin="1"/><net_sink comp="227" pin=2"/></net>
-
-<net id="303"><net_src comp="190" pin="2"/><net_sink comp="300" pin=0"/></net>
-
-<net id="304"><net_src comp="300" pin="1"/><net_sink comp="208" pin=4"/></net>
-
-<net id="308"><net_src comp="196" pin="2"/><net_sink comp="305" pin=0"/></net>
-
-<net id="309"><net_src comp="305" pin="1"/><net_sink comp="208" pin=3"/></net>
-
-<net id="313"><net_src comp="202" pin="2"/><net_sink comp="310" pin=0"/></net>
-
-<net id="314"><net_src comp="310" pin="1"/><net_sink comp="208" pin=1"/></net>
-
-<net id="315"><net_src comp="310" pin="1"/><net_sink comp="227" pin=1"/></net>
-
-<net id="319"><net_src comp="132" pin="1"/><net_sink comp="316" pin=0"/></net>
-
-<net id="320"><net_src comp="316" pin="1"/><net_sink comp="208" pin=6"/></net>
-
-<net id="321"><net_src comp="316" pin="1"/><net_sink comp="227" pin=14"/></net>
+<net id="298"><net_src comp="294" pin="1"/><net_sink comp="192" pin=2"/></net>
 
 </net_list>
 
@@ -1355,31 +1315,30 @@ ret_ln161                         (ret                 ) [ 00000]
 * FSMD analyzer results:
   - Output states:
 	Port: emissions | {3 4 }
-	Port: emission_cnt | {3 4 }
  - Input state : 
+	Port: reconstruct : atomLocations | {3 4 }
 	Port: reconstruct : imageProjs_local | {3 4 }
 	Port: reconstruct : imageProjs | {3 4 }
-	Port: reconstruct : imageProjs_local_size_r | {3 4 }
 	Port: reconstruct : fullImage | {3 4 }
 	Port: reconstruct : atomLocationsSize | {1 }
 	Port: reconstruct : projShape0 | {1 }
 	Port: reconstruct : projShape1 | {1 }
-	Port: reconstruct : atomLocations | {1 2 }
+	Port: reconstruct : atomLocations_offset | {1 }
 	Port: reconstruct : psfSupersample | {1 }
-	Port: reconstruct : imageProjectionSize | {1 }
 	Port: reconstruct : imageProjs_local_offset | {1 }
 	Port: reconstruct : imageProjs_offset | {1 }
-	Port: reconstruct : imageProjs_local_size_offset | {1 }
 	Port: reconstruct : fullImage_offset | {1 }
-	Port: reconstruct : fullImage_rows | {1 }
-	Port: reconstruct : fullImage_cols | {1 }
 	Port: reconstruct : emissions_offset | {1 }
-	Port: reconstruct : mask_table | {1 2 }
-	Port: reconstruct : one_half_table | {1 2 }
+	Port: reconstruct : mask_table | {3 4 }
+	Port: reconstruct : one_half_table | {3 4 }
   - Chain level:
 	State 1
-		call_ln159 : 1
 	State 2
+		zext_ln149 : 1
+		icmp_ln149 : 2
+		add_ln149 : 1
+		specdataflowpipeline_ln149 : 1
+		br_ln149 : 3
 	State 3
 	State 4
 
@@ -1389,81 +1348,79 @@ ret_ln161                         (ret                 ) [ 00000]
 ============================================================
 
 * Functional unit list:
-|----------|-----------------------------------------------|---------|---------|---------|---------|
-| Operation|                Functional Unit                |   DSP   |  Delay  |    FF   |   LUT   |
-|----------|-----------------------------------------------|---------|---------|---------|---------|
-|   call   |           grp_getLocalImages_fu_208           |    28   |  17.468 |  29961  |   7771  |
-|          |           grp_applyProjectors_fu_227          |    27   | 26.0045 |  11033  |   9236  |
-|----------|-----------------------------------------------|---------|---------|---------|---------|
-|          |       emissions_offset_read_read_fu_136       |    0    |    0    |    0    |    0    |
-|          |        fullImage_cols_read_read_fu_142        |    0    |    0    |    0    |    0    |
-|          |        fullImage_rows_read_read_fu_148        |    0    |    0    |    0    |    0    |
-|          |       fullImage_offset_read_read_fu_154       |    0    |    0    |    0    |    0    |
-|          | imageProjs_local_size_offset_read_read_fu_160 |    0    |    0    |    0    |    0    |
-|   read   |       imageProjs_offset_read_read_fu_166      |    0    |    0    |    0    |    0    |
-|          |    imageProjs_local_offset_read_read_fu_172   |    0    |    0    |    0    |    0    |
-|          |      imageProjectionSize_read_read_fu_178     |    0    |    0    |    0    |    0    |
-|          |        psfSupersample_read_read_fu_184        |    0    |    0    |    0    |    0    |
-|          |          projShape1_read_read_fu_190          |    0    |    0    |    0    |    0    |
-|          |          projShape0_read_read_fu_196          |    0    |    0    |    0    |    0    |
-|          |       atomLocationsSize_read_read_fu_202      |    0    |    0    |    0    |    0    |
-|----------|-----------------------------------------------|---------|---------|---------|---------|
-|   Total  |                                               |    55   | 43.4725 |  40994  |  17007  |
-|----------|-----------------------------------------------|---------|---------|---------|---------|
+|----------|------------------------------------------------|---------|---------|---------|---------|---------|---------|
+| Operation|                 Functional Unit                |   BRAM  |   DSP   |  Delay  |    FF   |   LUT   |   URAM  |
+|----------|------------------------------------------------|---------|---------|---------|---------|---------|---------|
+|   call   | grp_dataflow_in_loop_VITIS_LOOP_149_1_1_fu_200 |    0    |    18   | 169.262 |  85744  |  35302  |    0    |
+|----------|------------------------------------------------|---------|---------|---------|---------|---------|---------|
+|   icmp   |                icmp_ln149_fu_234               |    0    |    0    |    0    |    0    |    39   |    0    |
+|----------|------------------------------------------------|---------|---------|---------|---------|---------|---------|
+|    add   |                add_ln149_fu_239                |    0    |    0    |    0    |    0    |    23   |    0    |
+|----------|------------------------------------------------|---------|---------|---------|---------|---------|---------|
+|          |        emissions_offset_read_read_fu_134       |    0    |    0    |    0    |    0    |    0    |    0    |
+|          |        fullImage_offset_read_read_fu_140       |    0    |    0    |    0    |    0    |    0    |    0    |
+|          |       imageProjs_offset_read_read_fu_146       |    0    |    0    |    0    |    0    |    0    |    0    |
+|          |    imageProjs_local_offset_read_read_fu_152    |    0    |    0    |    0    |    0    |    0    |    0    |
+|   read   |         psfSupersample_read_read_fu_158        |    0    |    0    |    0    |    0    |    0    |    0    |
+|          |      atomLocations_offset_read_read_fu_164     |    0    |    0    |    0    |    0    |    0    |    0    |
+|          |           projShape1_read_read_fu_170          |    0    |    0    |    0    |    0    |    0    |    0    |
+|          |           projShape0_read_read_fu_176          |    0    |    0    |    0    |    0    |    0    |    0    |
+|          |       atomLocationsSize_read_read_fu_182       |    0    |    0    |    0    |    0    |    0    |    0    |
+|----------|------------------------------------------------|---------|---------|---------|---------|---------|---------|
+|   zext   |                zext_ln149_fu_230               |    0    |    0    |    0    |    0    |    0    |    0    |
+|----------|------------------------------------------------|---------|---------|---------|---------|---------|---------|
+|   Total  |                                                |    0    |    18   | 169.262 |  85744  |  35364  |    0    |
+|----------|------------------------------------------------|---------|---------|---------|---------|---------|---------|
 
 Memories:
 +--------------+--------+--------+--------+
 |              |  BRAM  |   FF   |   LUT  |
 +--------------+--------+--------+--------+
-|  mask_table  |    6   |    0   |    0   |
-|one_half_table|    6   |    0   |    0   |
+|  mask_table  |    0   |   46   |   12   |
+|one_half_table|    0   |   48   |   12   |
 +--------------+--------+--------+--------+
-|     Total    |   12   |    0   |    0   |
+|     Total    |    0   |   94   |   24   |
 +--------------+--------+--------+--------+
 
 * Register list:
-+-----------------------------------------+--------+
-|                                         |   FF   |
-+-----------------------------------------+--------+
-|      atomLocationsSize_read_reg_310     |   32   |
-|      emissions_offset_read_reg_254      |   64   |
-|       fullImage_cols_read_reg_259       |   32   |
-|      fullImage_offset_read_reg_269      |   64   |
-|       fullImage_rows_read_reg_264       |   32   |
-|     imageProjectionSize_read_reg_289    |   32   |
-|   imageProjs_local_offset_read_reg_284  |   64   |
-|imageProjs_local_size_offset_read_reg_274|   64   |
-|      imageProjs_offset_read_reg_279     |   64   |
-|           localImages_reg_316           |   256  |
-|         projShape0_read_reg_305         |   32   |
-|         projShape1_read_reg_300         |   32   |
-|       psfSupersample_read_reg_294       |   32   |
-+-----------------------------------------+--------+
-|                  Total                  |   800  |
-+-----------------------------------------+--------+
++------------------------------------+--------+
+|                                    |   FF   |
++------------------------------------+--------+
+|          add_ln149_reg_294         |   16   |
+|   atomLocationsSize_read_reg_285   |   32   |
+|  atomLocations_offset_read_reg_270 |   64   |
+|    emissions_offset_read_reg_245   |   64   |
+|    fullImage_offset_read_reg_250   |   64   |
+|         icmp_ln149_reg_290         |    1   |
+|             idx_reg_188            |   16   |
+|imageProjs_local_offset_read_reg_260|   64   |
+|   imageProjs_offset_read_reg_255   |   64   |
+|       projShape0_read_reg_280      |   32   |
+|       projShape1_read_reg_275      |   32   |
+|     psfSupersample_read_reg_265    |   32   |
++------------------------------------+--------+
+|                Total               |   481  |
++------------------------------------+--------+
 
 * Multiplexer (MUX) list: 
-|---------------------------|------|------|------|--------||---------||---------||---------|
-|            Comp           |  Pin | Size |  BW  | S x BW ||  Delay  ||    FF   ||   LUT   |
-|---------------------------|------|------|------|--------||---------||---------||---------|
-| grp_getLocalImages_fu_208 |  p1  |   2  |  32  |   64   ||    0    ||    9    |
-| grp_getLocalImages_fu_208 |  p2  |   2  |  32  |   64   ||    0    ||    9    |
-| grp_getLocalImages_fu_208 |  p3  |   2  |  32  |   64   ||    0    ||    9    |
-| grp_getLocalImages_fu_208 |  p4  |   2  |  32  |   64   ||    0    ||    9    |
-|---------------------------|------|------|------|--------||---------||---------||---------|
-|           Total           |      |      |      |   256  ||  6.352  ||    0    ||    36   |
-|---------------------------|------|------|------|--------||---------||---------||---------|
+|-------------|------|------|------|--------||---------||---------||---------|
+|     Comp    |  Pin | Size |  BW  | S x BW ||  Delay  ||    FF   ||   LUT   |
+|-------------|------|------|------|--------||---------||---------||---------|
+| idx_reg_188 |  p0  |   2  |  16  |   32   ||    0    ||    9    |
+|-------------|------|------|------|--------||---------||---------||---------|
+|    Total    |      |      |      |   32   ||  0.427  ||    0    ||    9    |
+|-------------|------|------|------|--------||---------||---------||---------|
 
 
 
 * Summary:
-+-----------+--------+--------+--------+--------+--------+
-|           |  BRAM  |   DSP  |  Delay |   FF   |   LUT  |
-+-----------+--------+--------+--------+--------+--------+
-|  Function |    -   |   55   |   43   |  40994 |  17007 |
-|   Memory  |   12   |    -   |    -   |    0   |    0   |
-|Multiplexer|    -   |    -   |    6   |    0   |   36   |
-|  Register |    -   |    -   |    -   |   800  |    -   |
-+-----------+--------+--------+--------+--------+--------+
-|   Total   |   12   |   55   |   49   |  41794 |  17043 |
-+-----------+--------+--------+--------+--------+--------+
++-----------+--------+--------+--------+--------+--------+--------+
+|           |  BRAM  |   DSP  |  Delay |   FF   |   LUT  |  URAM  |
++-----------+--------+--------+--------+--------+--------+--------+
+|  Function |    0   |   18   |   169  |  85744 |  35364 |    0   |
+|   Memory  |    0   |    -   |    -   |   94   |   24   |    -   |
+|Multiplexer|    -   |    -   |    0   |    0   |    9   |    -   |
+|  Register |    -   |    -   |    -   |   481  |    -   |    -   |
++-----------+--------+--------+--------+--------+--------+--------+
+|   Total   |    0   |   18   |   169  |  86319 |  35397 |    0   |
++-----------+--------+--------+--------+--------+--------+--------+

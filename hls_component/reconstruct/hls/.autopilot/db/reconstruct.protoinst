@@ -13,7 +13,7 @@
 						"AP_START": { "actual": "ap_start"}
 					}
 				},
-				"applyProjectors_U0/applyProjectors_U0_activity": {
+				"dataflow_in_loop_VITIS_LOOP_149_1_1_U0/Image_extract_U0/Image_extract_U0_activity": {
 					"interface": "xilinx.com:interface:internal_hls_dataflow:1.0",
 					"ports": {
 						"AP_CLK": { "actual": "ap_clk"},
@@ -24,7 +24,17 @@
 						"AP_START": { "actual": "ap_start"}
 					}
 				},
-				"getLocalImages_U0/getLocalImages_U0_activity": {
+				"dataflow_in_loop_VITIS_LOOP_149_1_1_U0/Image_extract_U0/grp_Image_extract_Pipeline_VITIS_LOOP_77_1_VITIS_LOOP_78_2_fu_239/grp_Image_extract_Pipeline_VITIS_LOOP_77_1_VITIS_LOOP_78_2_fu_239_activity": {
+					"interface": "xilinx.com:interface:internal_hls_dataflow:1.0",
+					"ports": {
+						"AP_CLK": { "actual": "ap_clk"},
+						"AP_DONE": { "actual": "ap_done"},
+						"AP_READY": { "actual": "ap_ready"},
+						"AP_RESET": { "actual": "ap_rst"},
+						"AP_START": { "actual": "ap_start"}
+					}
+				},
+				"dataflow_in_loop_VITIS_LOOP_149_1_1_U0/conv_kernel_U0/conv_kernel_U0_activity": {
 					"interface": "xilinx.com:interface:internal_hls_dataflow:1.0",
 					"ports": {
 						"AP_CLK": { "actual": "ap_clk"},
@@ -35,7 +45,7 @@
 						"AP_START": { "actual": "ap_start"}
 					}
 				},
-				"getLocalImages_U0/grp_getLocalImages_Pipeline_copy_loop_fu_872/grp_getLocalImages_Pipeline_copy_loop_fu_872_activity": {
+				"dataflow_in_loop_VITIS_LOOP_149_1_1_U0/conv_kernel_U0/grp_conv_kernel_Pipeline_VITIS_LOOP_101_1_fu_18054/grp_conv_kernel_Pipeline_VITIS_LOOP_101_1_fu_18054_activity": {
 					"interface": "xilinx.com:interface:internal_hls_dataflow:1.0",
 					"ports": {
 						"AP_CLK": { "actual": "ap_clk"},
@@ -45,10 +55,44 @@
 						"AP_START": { "actual": "ap_start"}
 					}
 				},
-				"getLocalImages_U0/grp_getLocalImages_Pipeline_process_loop_fu_1080/grp_getLocalImages_Pipeline_process_loop_fu_1080_activity": {
+				"dataflow_in_loop_VITIS_LOOP_149_1_1_U0/dataflow_in_loop_VITIS_LOOP_149_1_1_Block_newFuncRoot_proc_U0/dataflow_in_loop_VITIS_LOOP_149_1_1_Block_newFuncRoot_proc_U0_activity": {
 					"interface": "xilinx.com:interface:internal_hls_dataflow:1.0",
 					"ports": {
 						"AP_CLK": { "actual": "ap_clk"},
+						"AP_CONTINUE": { "actual": "ap_continue"},
+						"AP_DONE": { "actual": "ap_done"},
+						"AP_READY": { "actual": "ap_ready"},
+						"AP_RESET": { "actual": "ap_rst"},
+						"AP_START": { "actual": "ap_start"}
+					}
+				},
+				"dataflow_in_loop_VITIS_LOOP_149_1_1_U0/dataflow_in_loop_VITIS_LOOP_149_1_1_U0_activity": {
+					"interface": "xilinx.com:interface:internal_hls_dataflow:1.0",
+					"ports": {
+						"AP_CLK": { "actual": "ap_clk"},
+						"AP_CONTINUE": { "actual": "ap_continue"},
+						"AP_DONE": { "actual": "ap_done"},
+						"AP_READY": { "actual": "ap_ready"},
+						"AP_RESET": { "actual": "ap_rst"},
+						"AP_START": { "actual": "ap_start"}
+					}
+				},
+				"dataflow_in_loop_VITIS_LOOP_149_1_1_U0/getLocalImages_single_U0/getLocalImages_single_U0_activity": {
+					"interface": "xilinx.com:interface:internal_hls_dataflow:1.0",
+					"ports": {
+						"AP_CLK": { "actual": "ap_clk"},
+						"AP_CONTINUE": { "actual": "ap_continue"},
+						"AP_DONE": { "actual": "ap_done"},
+						"AP_READY": { "actual": "ap_ready"},
+						"AP_RESET": { "actual": "ap_rst"},
+						"AP_START": { "actual": "ap_start"}
+					}
+				},
+				"dataflow_in_loop_VITIS_LOOP_149_1_1_U0/post_process_U0/post_process_U0_activity": {
+					"interface": "xilinx.com:interface:internal_hls_dataflow:1.0",
+					"ports": {
+						"AP_CLK": { "actual": "ap_clk"},
+						"AP_CONTINUE": { "actual": "ap_continue"},
 						"AP_DONE": { "actual": "ap_done"},
 						"AP_READY": { "actual": "ap_ready"},
 						"AP_RESET": { "actual": "ap_rst"},

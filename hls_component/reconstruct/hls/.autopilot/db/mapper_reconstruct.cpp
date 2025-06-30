@@ -243,67 +243,70 @@ class AESL_RUNTIME_BC {
     string mName;
 };
 using hls::sim::Byte;
-struct __cosim_s16__ { char data[16]; };
-extern "C" void reconstruct(Byte<8>*, Byte<8>*, Byte<4>*, Byte<8>*, Byte<8>*, int, int, int, Byte<16>*, int, int, int, int, int, int, int, int, int, volatile void *);
-extern "C" void apatb_reconstruct_hw(int __xlx_apatb_param_atomLocationsSize, int __xlx_apatb_param_projShape0, int __xlx_apatb_param_projShape1, volatile void * __xlx_apatb_param_atomLocations, int __xlx_apatb_param_psfSupersample, int __xlx_apatb_param_imageProjectionSize, volatile void * __xlx_apatb_param_imageProjs_local, volatile void * __xlx_apatb_param_imageProjs, volatile void * __xlx_apatb_param_imageProjs_local_size, volatile void * __xlx_apatb_param_fullImage, int __xlx_apatb_param_fullImage_rows, int __xlx_apatb_param_fullImage_cols, volatile void * __xlx_apatb_param_emissions, volatile void * __xlx_apatb_param_emission_cnt) {
+extern "C" void reconstruct(Byte<8>*, Byte<4>*, Byte<4>*, Byte<4>*, Byte<4>*, Byte<4>*, int, int, int, int, int, int, int, int, int, int, int, int, int);
+extern "C" void apatb_reconstruct_hw(int __xlx_apatb_param_atomLocationsSize, int __xlx_apatb_param_projShape0, int __xlx_apatb_param_projShape1, volatile void * __xlx_apatb_param_atomLocations, int __xlx_apatb_param_psfSupersample, int __xlx_apatb_param_imageProjectionSize, volatile void * __xlx_apatb_param_imageProjs_local, volatile void * __xlx_apatb_param_imageProjs, volatile void * __xlx_apatb_param_imageProjs_local_size, volatile void * __xlx_apatb_param_fullImage, int __xlx_apatb_param_fullImage_rows, int __xlx_apatb_param_fullImage_cols, volatile void * __xlx_apatb_param_emissions) {
 using hls::sim::createStream;
+  // Collect __xlx_atomLocations__tmp_vec
+std::vector<Byte<8>> __xlx_atomLocations__tmp_vec;
+for (size_t i = 0; i < 1024; ++i){
+__xlx_atomLocations__tmp_vec.push_back(((Byte<8>*)__xlx_apatb_param_atomLocations)[i]);
+}
+  int __xlx_size_param_atomLocations = 1024;
+  int __xlx_offset_param_atomLocations = 0;
+  int __xlx_offset_byte_param_atomLocations = 0*8;
   // Collect __xlx_imageProjs_local__tmp_vec
-std::vector<Byte<8>> __xlx_imageProjs_local__tmp_vec;
-for (size_t i = 0; i < 100000; ++i){
-__xlx_imageProjs_local__tmp_vec.push_back(((Byte<8>*)__xlx_apatb_param_imageProjs_local)[i]);
+std::vector<Byte<4>> __xlx_imageProjs_local__tmp_vec;
+for (size_t i = 0; i < 1048576; ++i){
+__xlx_imageProjs_local__tmp_vec.push_back(((Byte<4>*)__xlx_apatb_param_imageProjs_local)[i]);
 }
-  int __xlx_size_param_imageProjs_local = 100000;
+  int __xlx_size_param_imageProjs_local = 1048576;
   int __xlx_offset_param_imageProjs_local = 0;
-  int __xlx_offset_byte_param_imageProjs_local = 0*8;
+  int __xlx_offset_byte_param_imageProjs_local = 0*4;
   // Collect __xlx_imageProjs__tmp_vec
-std::vector<Byte<8>> __xlx_imageProjs__tmp_vec;
-for (size_t i = 0; i < 100; ++i){
-__xlx_imageProjs__tmp_vec.push_back(((Byte<8>*)__xlx_apatb_param_imageProjs)[i]);
+std::vector<Byte<4>> __xlx_imageProjs__tmp_vec;
+for (size_t i = 0; i < 1024; ++i){
+__xlx_imageProjs__tmp_vec.push_back(((Byte<4>*)__xlx_apatb_param_imageProjs)[i]);
 }
-  int __xlx_size_param_imageProjs = 100;
+  int __xlx_size_param_imageProjs = 1024;
   int __xlx_offset_param_imageProjs = 0;
-  int __xlx_offset_byte_param_imageProjs = 0*8;
+  int __xlx_offset_byte_param_imageProjs = 0*4;
   // Collect __xlx_imageProjs_local_size__tmp_vec
 std::vector<Byte<4>> __xlx_imageProjs_local_size__tmp_vec;
-for (size_t i = 0; i < 100; ++i){
+for (size_t i = 0; i < 1024; ++i){
 __xlx_imageProjs_local_size__tmp_vec.push_back(((Byte<4>*)__xlx_apatb_param_imageProjs_local_size)[i]);
 }
-  int __xlx_size_param_imageProjs_local_size = 100;
+  int __xlx_size_param_imageProjs_local_size = 1024;
   int __xlx_offset_param_imageProjs_local_size = 0;
   int __xlx_offset_byte_param_imageProjs_local_size = 0*4;
   // Collect __xlx_fullImage__tmp_vec
-std::vector<Byte<8>> __xlx_fullImage__tmp_vec;
-for (size_t i = 0; i < 65536; ++i){
-__xlx_fullImage__tmp_vec.push_back(((Byte<8>*)__xlx_apatb_param_fullImage)[i]);
+std::vector<Byte<4>> __xlx_fullImage__tmp_vec;
+for (size_t i = 0; i < 589824; ++i){
+__xlx_fullImage__tmp_vec.push_back(((Byte<4>*)__xlx_apatb_param_fullImage)[i]);
 }
-  int __xlx_size_param_fullImage = 65536;
+  int __xlx_size_param_fullImage = 589824;
   int __xlx_offset_param_fullImage = 0;
-  int __xlx_offset_byte_param_fullImage = 0*8;
+  int __xlx_offset_byte_param_fullImage = 0*4;
   // Collect __xlx_emissions__tmp_vec
-std::vector<Byte<8>> __xlx_emissions__tmp_vec;
-for (size_t i = 0; i < 1000; ++i){
-__xlx_emissions__tmp_vec.push_back(((Byte<8>*)__xlx_apatb_param_emissions)[i]);
+std::vector<Byte<4>> __xlx_emissions__tmp_vec;
+for (size_t i = 0; i < 1024; ++i){
+__xlx_emissions__tmp_vec.push_back(((Byte<4>*)__xlx_apatb_param_emissions)[i]);
 }
-  int __xlx_size_param_emissions = 1000;
+  int __xlx_size_param_emissions = 1024;
   int __xlx_offset_param_emissions = 0;
-  int __xlx_offset_byte_param_emissions = 0*8;
-  // Collect __xlx_atomLocations__tmp_vec
-std::vector<Byte<16>> __xlx_atomLocations__tmp_vec;
-for (size_t i = 0; i < 100; ++i){
-__xlx_atomLocations__tmp_vec.push_back(((Byte<16>*)__xlx_apatb_param_atomLocations)[i]);
-}
-  int __xlx_size_param_atomLocations = 100;
-  int __xlx_offset_param_atomLocations = 0;
-  int __xlx_offset_byte_param_atomLocations = 0*16;
+  int __xlx_offset_byte_param_emissions = 0*4;
   // DUT call
-  reconstruct(__xlx_imageProjs_local__tmp_vec.data(), __xlx_imageProjs__tmp_vec.data(), __xlx_imageProjs_local_size__tmp_vec.data(), __xlx_fullImage__tmp_vec.data(), __xlx_emissions__tmp_vec.data(), __xlx_apatb_param_atomLocationsSize, __xlx_apatb_param_projShape0, __xlx_apatb_param_projShape1, __xlx_atomLocations__tmp_vec.data(), __xlx_apatb_param_psfSupersample, __xlx_apatb_param_imageProjectionSize, __xlx_offset_byte_param_imageProjs_local, __xlx_offset_byte_param_imageProjs, __xlx_offset_byte_param_imageProjs_local_size, __xlx_offset_byte_param_fullImage, __xlx_apatb_param_fullImage_rows, __xlx_apatb_param_fullImage_cols, __xlx_offset_byte_param_emissions, __xlx_apatb_param_emission_cnt);
+  reconstruct(__xlx_atomLocations__tmp_vec.data(), __xlx_imageProjs_local__tmp_vec.data(), __xlx_imageProjs__tmp_vec.data(), __xlx_imageProjs_local_size__tmp_vec.data(), __xlx_fullImage__tmp_vec.data(), __xlx_emissions__tmp_vec.data(), __xlx_apatb_param_atomLocationsSize, __xlx_apatb_param_projShape0, __xlx_apatb_param_projShape1, __xlx_offset_byte_param_atomLocations, __xlx_apatb_param_psfSupersample, __xlx_apatb_param_imageProjectionSize, __xlx_offset_byte_param_imageProjs_local, __xlx_offset_byte_param_imageProjs, __xlx_offset_byte_param_imageProjs_local_size, __xlx_offset_byte_param_fullImage, __xlx_apatb_param_fullImage_rows, __xlx_apatb_param_fullImage_cols, __xlx_offset_byte_param_emissions);
+// print __xlx_apatb_param_atomLocations
+for (size_t i = 0; i < __xlx_size_param_atomLocations; ++i) {
+((Byte<8>*)__xlx_apatb_param_atomLocations)[i] = __xlx_atomLocations__tmp_vec[__xlx_offset_param_atomLocations+i];
+}
 // print __xlx_apatb_param_imageProjs_local
 for (size_t i = 0; i < __xlx_size_param_imageProjs_local; ++i) {
-((Byte<8>*)__xlx_apatb_param_imageProjs_local)[i] = __xlx_imageProjs_local__tmp_vec[__xlx_offset_param_imageProjs_local+i];
+((Byte<4>*)__xlx_apatb_param_imageProjs_local)[i] = __xlx_imageProjs_local__tmp_vec[__xlx_offset_param_imageProjs_local+i];
 }
 // print __xlx_apatb_param_imageProjs
 for (size_t i = 0; i < __xlx_size_param_imageProjs; ++i) {
-((Byte<8>*)__xlx_apatb_param_imageProjs)[i] = __xlx_imageProjs__tmp_vec[__xlx_offset_param_imageProjs+i];
+((Byte<4>*)__xlx_apatb_param_imageProjs)[i] = __xlx_imageProjs__tmp_vec[__xlx_offset_param_imageProjs+i];
 }
 // print __xlx_apatb_param_imageProjs_local_size
 for (size_t i = 0; i < __xlx_size_param_imageProjs_local_size; ++i) {
@@ -311,14 +314,10 @@ for (size_t i = 0; i < __xlx_size_param_imageProjs_local_size; ++i) {
 }
 // print __xlx_apatb_param_fullImage
 for (size_t i = 0; i < __xlx_size_param_fullImage; ++i) {
-((Byte<8>*)__xlx_apatb_param_fullImage)[i] = __xlx_fullImage__tmp_vec[__xlx_offset_param_fullImage+i];
+((Byte<4>*)__xlx_apatb_param_fullImage)[i] = __xlx_fullImage__tmp_vec[__xlx_offset_param_fullImage+i];
 }
 // print __xlx_apatb_param_emissions
 for (size_t i = 0; i < __xlx_size_param_emissions; ++i) {
-((Byte<8>*)__xlx_apatb_param_emissions)[i] = __xlx_emissions__tmp_vec[__xlx_offset_param_emissions+i];
-}
-// print __xlx_apatb_param_atomLocations
-for (size_t i = 0; i < __xlx_size_param_atomLocations; ++i) {
-((Byte<16>*)__xlx_apatb_param_atomLocations)[i] = __xlx_atomLocations__tmp_vec[__xlx_offset_param_atomLocations+i];
+((Byte<4>*)__xlx_apatb_param_emissions)[i] = __xlx_emissions__tmp_vec[__xlx_offset_param_emissions+i];
 }
 }

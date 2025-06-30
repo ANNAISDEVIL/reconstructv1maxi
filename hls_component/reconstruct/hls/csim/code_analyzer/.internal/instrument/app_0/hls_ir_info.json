@@ -1,5 +1,5 @@
 {
-    "top_level_hw_fn_id": 353,
+    "top_level_hw_fn_id": 358,
     "functions": {
         "200": {
             "fn_id": 200,
@@ -95,9 +95,9 @@
             "is_declaration": true,
             "supports_dataflow": false
         },
-        "350": {
-            "fn_id": 350,
-            "mangled_name": "_GLOBAL__sub_I_image_analysis.cpp.25",
+        "355": {
+            "fn_id": 355,
+            "mangled_name": "_GLOBAL__sub_I_image_analysis.cpp.42",
             "fully_qualified_name": "_GLOBAL__sub_I_image_analysis",
             "is_sys": true,
             "is_declaration": false,
@@ -108,9 +108,9 @@
                 "column": 0
             }
         },
-        "351": {
-            "fn_id": 351,
-            "mangled_name": "__cxx_global_var_init.26",
+        "356": {
+            "fn_id": 356,
+            "mangled_name": "__cxx_global_var_init.43",
             "fully_qualified_name": "__cxx_global_var_init",
             "is_sys": true,
             "is_declaration": false,
@@ -121,9 +121,9 @@
                 "column": 0
             }
         },
-        "352": {
-            "fn_id": 352,
-            "mangled_name": "__dtor__ZStL8__ioinit.28",
+        "357": {
+            "fn_id": 357,
+            "mangled_name": "__dtor__ZStL8__ioinit.45",
             "fully_qualified_name": "__dtor__ZStL8__ioinit",
             "is_sys": true,
             "is_declaration": false,
@@ -134,23 +134,23 @@
                 "column": 0
             }
         },
-        "353": {
-            "fn_id": 353,
-            "mangled_name": "_Z11reconstructiiiP13atom_locationiiPdS1_PiS1_iiS1_Rj",
+        "358": {
+            "fn_id": 358,
+            "mangled_name": "_Z11reconstructiiiP13atom_locationiiPfS1_PiS1_iiS1_",
             "fully_qualified_name": "reconstruct",
             "is_sys": false,
             "is_declaration": false,
             "supports_dataflow": true,
             "src_loc": {
                 "file": "F:\\LMU\\quantumMA\\opimization\\reconstructv1maxi\\image_analysis.cpp",
-                "line": 120,
+                "line": 116,
                 "column": 1
             }
         },
-        "354": {
-            "fn_id": 354,
-            "mangled_name": "_Z14getLocalImagesiiiiP13atom_locationRN3hls6streamI16local_image_infoLi0EEE",
-            "fully_qualified_name": "getLocalImages",
+        "359": {
+            "fn_id": 359,
+            "mangled_name": "_Z21getLocalImages_singleiiiiP13atom_locationRN3hls6streamI16local_image_infoLi0EEE",
+            "fully_qualified_name": "getLocalImages_single",
             "is_sys": false,
             "is_declaration": false,
             "supports_dataflow": true,
@@ -160,42 +160,79 @@
                 "column": 1
             }
         },
-        "355": {
-            "fn_id": 355,
-            "mangled_name": "_Z15applyProjectorsiiiPdS_PiS_iiRN3hls6streamI16local_image_infoLi0EEES_Rj",
-            "fully_qualified_name": "applyProjectors",
+        "360": {
+            "fn_id": 360,
+            "mangled_name": "_Z13Image_extractiRN3hls6streamI16local_image_infoLi0EEEPfPA31_fS4_S6_S4_Rf",
+            "fully_qualified_name": "Image_extract",
             "is_sys": false,
             "is_declaration": false,
             "supports_dataflow": true,
             "src_loc": {
                 "file": "F:\\LMU\\quantumMA\\opimization\\reconstructv1maxi\\image_analysis.cpp",
-                "line": 63,
+                "line": 66,
                 "column": 1
+            }
+        },
+        "361": {
+            "fn_id": 361,
+            "mangled_name": "_Z11conv_kernelPA31_fS0_RfS1_",
+            "fully_qualified_name": "conv_kernel",
+            "is_sys": false,
+            "is_declaration": false,
+            "supports_dataflow": true,
+            "src_loc": {
+                "file": "F:\\LMU\\quantumMA\\opimization\\reconstructv1maxi\\image_analysis.cpp",
+                "line": 98,
+                "column": 1
+            }
+        },
+        "362": {
+            "fn_id": 362,
+            "mangled_name": "_Z12post_processfffRf",
+            "fully_qualified_name": "post_process",
+            "is_sys": false,
+            "is_declaration": false,
+            "supports_dataflow": true,
+            "src_loc": {
+                "file": "F:\\LMU\\quantumMA\\opimization\\reconstructv1maxi\\image_analysis.cpp",
+                "line": 112,
+                "column": 1
+            }
+        },
+        "364": {
+            "fn_id": 364,
+            "mangled_name": "_ZSt5roundf",
+            "fully_qualified_name": "std::round",
+            "is_sys": true,
+            "is_declaration": false,
+            "supports_dataflow": false,
+            "src_loc": {
+                "file": "F:\\Vitis\\2024.2\\tps\\mingw\\10.0.0\\win64.o\\nt\\include\\c++\\9.5.0\\cmath",
+                "line": 1755,
+                "column": 3
             }
         }
     },
     "loops": {
+        "16": {
+            "fn_id": 358,
+            "lp_id": 16
+        },
         "17": {
-            "fn_id": 354,
-            "lp_id": 17,
-            "label": "process_loop"
+            "fn_id": 360,
+            "lp_id": 17
         },
         "18": {
-            "fn_id": 354,
-            "lp_id": 18,
-            "label": "copy_loop"
+            "fn_id": 360,
+            "lp_id": 18
         },
         "19": {
-            "fn_id": 355,
+            "fn_id": 361,
             "lp_id": 19
         },
         "20": {
-            "fn_id": 355,
+            "fn_id": 361,
             "lp_id": 20
-        },
-        "21": {
-            "fn_id": 355,
-            "lp_id": 21
         }
     }
 }

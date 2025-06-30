@@ -9,75 +9,11 @@
       <key>filename</key>
       <string>../image_analysis.cpp</string>
       <key>line</key>
-      <integer>9</integer>
+      <integer>103</integer>
       <key>column</key>
       <integer>9</integer>
       <key>message</key>
-      <string>HLS pragma dump _XLX_SEP_ PragmaIsValid=1_XLX_SEP_ PragmaType=pipeline_XLX_SEP_ PragmaContext=_XLX_SEP_ PragmaFunction=getLocalImages_XLX_SEP_ PragmaOptions=_XLX_SEP_</string>
-      <key>ID</key>
-      <integer>5471</integer>
-      <key>WarningOption</key>
-      <string>dump-hls-pragmas</string>
-    </dict>
-    <dict>
-      <key>level</key>
-      <string>warning</string>
-      <key>filename</key>
-      <string>../image_analysis.cpp</string>
-      <key>line</key>
-      <integer>11</integer>
-      <key>column</key>
-      <integer>9</integer>
-      <key>message</key>
-      <string>HLS pragma dump _XLX_SEP_ PragmaIsValid=1_XLX_SEP_ PragmaType=array_partition_XLX_SEP_ PragmaContext=_XLX_SEP_ PragmaFunction=getLocalImages_XLX_SEP_ PragmaOptions=variable=local_atomLocations complete dim=1_XLX_SEP_</string>
-      <key>ID</key>
-      <integer>5471</integer>
-      <key>WarningOption</key>
-      <string>dump-hls-pragmas</string>
-    </dict>
-    <dict>
-      <key>level</key>
-      <string>warning</string>
-      <key>filename</key>
-      <string>../image_analysis.cpp</string>
-      <key>line</key>
-      <integer>14</integer>
-      <key>column</key>
-      <integer>9</integer>
-      <key>message</key>
-      <string>HLS pragma dump _XLX_SEP_ PragmaIsValid=1_XLX_SEP_ PragmaType=pipeline_XLX_SEP_ PragmaContext=_XLX_SEP_ PragmaFunction=getLocalImages_XLX_SEP_ PragmaOptions=II=1_XLX_SEP_</string>
-      <key>ID</key>
-      <integer>5471</integer>
-      <key>WarningOption</key>
-      <string>dump-hls-pragmas</string>
-    </dict>
-    <dict>
-      <key>level</key>
-      <string>warning</string>
-      <key>filename</key>
-      <string>../image_analysis.cpp</string>
-      <key>line</key>
-      <integer>20</integer>
-      <key>column</key>
-      <integer>9</integer>
-      <key>message</key>
-      <string>HLS pragma dump _XLX_SEP_ PragmaIsValid=1_XLX_SEP_ PragmaType=pipeline_XLX_SEP_ PragmaContext=_XLX_SEP_ PragmaFunction=getLocalImages_XLX_SEP_ PragmaOptions=II=1_XLX_SEP_</string>
-      <key>ID</key>
-      <integer>5471</integer>
-      <key>WarningOption</key>
-      <string>dump-hls-pragmas</string>
-    </dict>
-    <dict>
-      <key>level</key>
-      <string>warning</string>
-      <key>filename</key>
-      <string>../image_analysis.cpp</string>
-      <key>line</key>
-      <integer>73</integer>
-      <key>column</key>
-      <integer>9</integer>
-      <key>message</key>
-      <string>HLS pragma dump _XLX_SEP_ PragmaIsValid=1_XLX_SEP_ PragmaType=pipeline_XLX_SEP_ PragmaContext=_XLX_SEP_ PragmaFunction=applyProjectors_XLX_SEP_ PragmaOptions=II=1_XLX_SEP_</string>
+      <string>HLS pragma dump _XLX_SEP_ PragmaIsValid=1_XLX_SEP_ PragmaType=unroll_XLX_SEP_ PragmaContext=_XLX_SEP_ PragmaFunction=conv_kernel_XLX_SEP_ PragmaOptions=_XLX_SEP_</string>
       <key>ID</key>
       <integer>5471</integer>
       <key>WarningOption</key>
@@ -105,7 +41,7 @@
       <key>filename</key>
       <string>../image_analysis.cpp</string>
       <key>line</key>
-      <integer>130</integer>
+      <integer>126</integer>
       <key>column</key>
       <integer>9</integer>
       <key>message</key>
@@ -121,7 +57,7 @@
       <key>filename</key>
       <string>../image_analysis.cpp</string>
       <key>line</key>
-      <integer>132</integer>
+      <integer>128</integer>
       <key>column</key>
       <integer>9</integer>
       <key>message</key>
@@ -137,7 +73,7 @@
       <key>filename</key>
       <string>../image_analysis.cpp</string>
       <key>line</key>
-      <integer>133</integer>
+      <integer>129</integer>
       <key>column</key>
       <integer>9</integer>
       <key>message</key>
@@ -153,7 +89,7 @@
       <key>filename</key>
       <string>../image_analysis.cpp</string>
       <key>line</key>
-      <integer>134</integer>
+      <integer>130</integer>
       <key>column</key>
       <integer>9</integer>
       <key>message</key>
@@ -169,27 +105,11 @@
       <key>filename</key>
       <string>../image_analysis.cpp</string>
       <key>line</key>
-      <integer>136</integer>
-      <key>column</key>
-      <integer>98</integer>
-      <key>message</key>
-      <string>unexpected pragma parameter &apos;storage_type&apos;</string>
-      <key>ID</key>
-      <integer>5569</integer>
-      <key>WarningOption</key>
-      <string>invalid-hls-pragmas</string>
-    </dict>
-    <dict>
-      <key>level</key>
-      <string>warning</string>
-      <key>filename</key>
-      <string>../image_analysis.cpp</string>
-      <key>line</key>
-      <integer>136</integer>
+      <integer>132</integer>
       <key>column</key>
       <integer>9</integer>
       <key>message</key>
-      <string>HLS pragma dump _XLX_SEP_ PragmaIsValid=0_XLX_SEP_ PragmaType=interface_XLX_SEP_ PragmaContext=_XLX_SEP_ PragmaFunction=reconstruct_XLX_SEP_ PragmaOptions=port=atomLocations mode=m_axi bundle=atomLocations depth=1000 storage_type=RAM_2P_XLX_SEP_</string>
+      <string>HLS pragma dump _XLX_SEP_ PragmaIsValid=1_XLX_SEP_ PragmaType=interface_XLX_SEP_ PragmaContext=_XLX_SEP_ PragmaFunction=reconstruct_XLX_SEP_ PragmaOptions=port=atomLocations mode=m_axi bundle=atomLocations depth=1024_XLX_SEP_</string>
       <key>ID</key>
       <integer>5471</integer>
       <key>WarningOption</key>
@@ -201,7 +121,7 @@
       <key>filename</key>
       <string>../image_analysis.cpp</string>
       <key>line</key>
-      <integer>138</integer>
+      <integer>134</integer>
       <key>column</key>
       <integer>9</integer>
       <key>message</key>
@@ -217,7 +137,7 @@
       <key>filename</key>
       <string>../image_analysis.cpp</string>
       <key>line</key>
-      <integer>139</integer>
+      <integer>135</integer>
       <key>column</key>
       <integer>9</integer>
       <key>message</key>
@@ -233,7 +153,7 @@
       <key>filename</key>
       <string>../image_analysis.cpp</string>
       <key>line</key>
-      <integer>141</integer>
+      <integer>137</integer>
       <key>column</key>
       <integer>9</integer>
       <key>message</key>
@@ -249,7 +169,7 @@
       <key>filename</key>
       <string>../image_analysis.cpp</string>
       <key>line</key>
-      <integer>142</integer>
+      <integer>138</integer>
       <key>column</key>
       <integer>9</integer>
       <key>message</key>
@@ -265,7 +185,7 @@
       <key>filename</key>
       <string>../image_analysis.cpp</string>
       <key>line</key>
-      <integer>143</integer>
+      <integer>139</integer>
       <key>column</key>
       <integer>9</integer>
       <key>message</key>
@@ -281,11 +201,11 @@
       <key>filename</key>
       <string>../image_analysis.cpp</string>
       <key>line</key>
-      <integer>145</integer>
+      <integer>141</integer>
       <key>column</key>
       <integer>9</integer>
       <key>message</key>
-      <string>HLS pragma dump _XLX_SEP_ PragmaIsValid=1_XLX_SEP_ PragmaType=interface_XLX_SEP_ PragmaContext=_XLX_SEP_ PragmaFunction=reconstruct_XLX_SEP_ PragmaOptions=port=fullImage mode=m_axi bundle=fullImage_XLX_SEP_</string>
+      <string>HLS pragma dump _XLX_SEP_ PragmaIsValid=1_XLX_SEP_ PragmaType=interface_XLX_SEP_ PragmaContext=_XLX_SEP_ PragmaFunction=reconstruct_XLX_SEP_ PragmaOptions=port=fullImage mode=m_axi bundle=fullImage depth=768*768_XLX_SEP_</string>
       <key>ID</key>
       <integer>5471</integer>
       <key>WarningOption</key>
@@ -297,7 +217,7 @@
       <key>filename</key>
       <string>../image_analysis.cpp</string>
       <key>line</key>
-      <integer>147</integer>
+      <integer>143</integer>
       <key>column</key>
       <integer>9</integer>
       <key>message</key>
@@ -313,7 +233,7 @@
       <key>filename</key>
       <string>../image_analysis.cpp</string>
       <key>line</key>
-      <integer>148</integer>
+      <integer>144</integer>
       <key>column</key>
       <integer>9</integer>
       <key>message</key>
@@ -329,11 +249,27 @@
       <key>filename</key>
       <string>../image_analysis.cpp</string>
       <key>line</key>
+      <integer>146</integer>
+      <key>column</key>
+      <integer>9</integer>
+      <key>message</key>
+      <string>HLS pragma dump _XLX_SEP_ PragmaIsValid=1_XLX_SEP_ PragmaType=interface_XLX_SEP_ PragmaContext=_XLX_SEP_ PragmaFunction=reconstruct_XLX_SEP_ PragmaOptions=port=emissions mode=m_axi bundle=emissions depth=1024_XLX_SEP_</string>
+      <key>ID</key>
+      <integer>5471</integer>
+      <key>WarningOption</key>
+      <string>dump-hls-pragmas</string>
+    </dict>
+    <dict>
+      <key>level</key>
+      <string>warning</string>
+      <key>filename</key>
+      <string>../image_analysis.cpp</string>
+      <key>line</key>
       <integer>150</integer>
       <key>column</key>
       <integer>9</integer>
       <key>message</key>
-      <string>HLS pragma dump _XLX_SEP_ PragmaIsValid=1_XLX_SEP_ PragmaType=interface_XLX_SEP_ PragmaContext=_XLX_SEP_ PragmaFunction=reconstruct_XLX_SEP_ PragmaOptions=port=emissions mode=m_axi bundle=emissions depth=1000_XLX_SEP_</string>
+      <string>HLS pragma dump _XLX_SEP_ PragmaIsValid=1_XLX_SEP_ PragmaType=dataflow_XLX_SEP_ PragmaContext=_XLX_SEP_ PragmaFunction=reconstruct_XLX_SEP_ PragmaOptions=_XLX_SEP_</string>
       <key>ID</key>
       <integer>5471</integer>
       <key>WarningOption</key>
@@ -349,7 +285,7 @@
       <key>column</key>
       <integer>9</integer>
       <key>message</key>
-      <string>HLS pragma dump _XLX_SEP_ PragmaIsValid=1_XLX_SEP_ PragmaType=interface_XLX_SEP_ PragmaContext=_XLX_SEP_ PragmaFunction=reconstruct_XLX_SEP_ PragmaOptions=port=emission_cnt mode=s_axilite bundle=scalar_data_XLX_SEP_</string>
+      <string>HLS pragma dump _XLX_SEP_ PragmaIsValid=1_XLX_SEP_ PragmaType=loop_tripcount_XLX_SEP_ PragmaContext=_XLX_SEP_ PragmaFunction=reconstruct_XLX_SEP_ PragmaOptions=max=1024 min=1024 avg=1024_XLX_SEP_</string>
       <key>ID</key>
       <integer>5471</integer>
       <key>WarningOption</key>
@@ -361,11 +297,27 @@
       <key>filename</key>
       <string>../image_analysis.cpp</string>
       <key>line</key>
-      <integer>156</integer>
+      <integer>162</integer>
       <key>column</key>
       <integer>9</integer>
       <key>message</key>
-      <string>HLS pragma dump _XLX_SEP_ PragmaIsValid=1_XLX_SEP_ PragmaType=dataflow_XLX_SEP_ PragmaContext=_XLX_SEP_ PragmaFunction=reconstruct_XLX_SEP_ PragmaOptions=_XLX_SEP_</string>
+      <string>HLS pragma dump _XLX_SEP_ PragmaIsValid=1_XLX_SEP_ PragmaType=array_partition_XLX_SEP_ PragmaContext=_XLX_SEP_ PragmaFunction=reconstruct_XLX_SEP_ PragmaOptions=variable=curr_fullImage type=complete_XLX_SEP_</string>
+      <key>ID</key>
+      <integer>5471</integer>
+      <key>WarningOption</key>
+      <string>dump-hls-pragmas</string>
+    </dict>
+    <dict>
+      <key>level</key>
+      <string>warning</string>
+      <key>filename</key>
+      <string>../image_analysis.cpp</string>
+      <key>line</key>
+      <integer>163</integer>
+      <key>column</key>
+      <integer>9</integer>
+      <key>message</key>
+      <string>HLS pragma dump _XLX_SEP_ PragmaIsValid=1_XLX_SEP_ PragmaType=array_partition_XLX_SEP_ PragmaContext=_XLX_SEP_ PragmaFunction=reconstruct_XLX_SEP_ PragmaOptions=variable=curr_localImage type=complete_XLX_SEP_</string>
       <key>ID</key>
       <integer>5471</integer>
       <key>WarningOption</key>

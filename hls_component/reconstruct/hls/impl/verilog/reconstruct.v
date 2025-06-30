@@ -6,7 +6,7 @@
 
 `timescale 1 ns / 1 ps 
 
-(* CORE_GENERATION_INFO="reconstruct_reconstruct,hls_ip_2024_2,{HLS_INPUT_TYPE=cxx,HLS_INPUT_FLOAT=0,HLS_INPUT_FIXED=0,HLS_INPUT_PART=xc7z020-clg400-1,HLS_INPUT_CLOCK=10.000000,HLS_INPUT_ARCH=dataflow,HLS_SYN_CLOCK=7.300000,HLS_SYN_LAT=-1,HLS_SYN_TPT=-1,HLS_SYN_MEM=30,HLS_SYN_DSP=0,HLS_SYN_FF=32656,HLS_SYN_LUT=26146,HLS_VERSION=2024_2}" *)
+(* CORE_GENERATION_INFO="reconstruct_reconstruct,hls_ip_2024_2,{HLS_INPUT_TYPE=cxx,HLS_INPUT_FLOAT=0,HLS_INPUT_FIXED=0,HLS_INPUT_PART=xczu49dr-ffvf1760-2-e,HLS_INPUT_CLOCK=10.000000,HLS_INPUT_ARCH=others,HLS_SYN_CLOCK=7.704800,HLS_SYN_LAT=3961855,HLS_SYN_TPT=none,HLS_SYN_MEM=12,HLS_SYN_DSP=0,HLS_SYN_FF=80247,HLS_SYN_LUT=32991,HLS_VERSION=2024_2}" *)
 
 module reconstruct (
         s_axi_control_AWVALID,
@@ -46,6 +46,51 @@ module reconstruct (
         s_axi_scalar_data_BVALID,
         s_axi_scalar_data_BREADY,
         s_axi_scalar_data_BRESP,
+        m_axi_atomLocations_AWVALID,
+        m_axi_atomLocations_AWREADY,
+        m_axi_atomLocations_AWADDR,
+        m_axi_atomLocations_AWID,
+        m_axi_atomLocations_AWLEN,
+        m_axi_atomLocations_AWSIZE,
+        m_axi_atomLocations_AWBURST,
+        m_axi_atomLocations_AWLOCK,
+        m_axi_atomLocations_AWCACHE,
+        m_axi_atomLocations_AWPROT,
+        m_axi_atomLocations_AWQOS,
+        m_axi_atomLocations_AWREGION,
+        m_axi_atomLocations_AWUSER,
+        m_axi_atomLocations_WVALID,
+        m_axi_atomLocations_WREADY,
+        m_axi_atomLocations_WDATA,
+        m_axi_atomLocations_WSTRB,
+        m_axi_atomLocations_WLAST,
+        m_axi_atomLocations_WID,
+        m_axi_atomLocations_WUSER,
+        m_axi_atomLocations_ARVALID,
+        m_axi_atomLocations_ARREADY,
+        m_axi_atomLocations_ARADDR,
+        m_axi_atomLocations_ARID,
+        m_axi_atomLocations_ARLEN,
+        m_axi_atomLocations_ARSIZE,
+        m_axi_atomLocations_ARBURST,
+        m_axi_atomLocations_ARLOCK,
+        m_axi_atomLocations_ARCACHE,
+        m_axi_atomLocations_ARPROT,
+        m_axi_atomLocations_ARQOS,
+        m_axi_atomLocations_ARREGION,
+        m_axi_atomLocations_ARUSER,
+        m_axi_atomLocations_RVALID,
+        m_axi_atomLocations_RREADY,
+        m_axi_atomLocations_RDATA,
+        m_axi_atomLocations_RLAST,
+        m_axi_atomLocations_RID,
+        m_axi_atomLocations_RUSER,
+        m_axi_atomLocations_RRESP,
+        m_axi_atomLocations_BVALID,
+        m_axi_atomLocations_BREADY,
+        m_axi_atomLocations_BRESP,
+        m_axi_atomLocations_BID,
+        m_axi_atomLocations_BUSER,
         m_axi_emissions_AWVALID,
         m_axi_emissions_AWREADY,
         m_axi_emissions_AWADDR,
@@ -270,17 +315,7 @@ module reconstruct (
         m_axi_imageProjs_local_size_BREADY,
         m_axi_imageProjs_local_size_BRESP,
         m_axi_imageProjs_local_size_BID,
-        m_axi_imageProjs_local_size_BUSER,
-        atomLocations_address0,
-        atomLocations_ce0,
-        atomLocations_d0,
-        atomLocations_q0,
-        atomLocations_we0,
-        atomLocations_address1,
-        atomLocations_ce1,
-        atomLocations_d1,
-        atomLocations_q1,
-        atomLocations_we1
+        m_axi_imageProjs_local_size_BUSER
 );
 
 parameter    C_S_AXI_CONTROL_DATA_WIDTH = 32;
@@ -288,9 +323,21 @@ parameter    C_S_AXI_CONTROL_ADDR_WIDTH = 7;
 parameter    C_S_AXI_DATA_WIDTH = 32;
 parameter    C_S_AXI_SCALAR_DATA_DATA_WIDTH = 32;
 parameter    C_S_AXI_SCALAR_DATA_ADDR_WIDTH = 7;
+parameter    C_M_AXI_ATOMLOCATIONS_ID_WIDTH = 1;
+parameter    C_M_AXI_ATOMLOCATIONS_ADDR_WIDTH = 64;
+parameter    C_M_AXI_ATOMLOCATIONS_DATA_WIDTH = 64;
+parameter    C_M_AXI_ATOMLOCATIONS_AWUSER_WIDTH = 1;
+parameter    C_M_AXI_ATOMLOCATIONS_ARUSER_WIDTH = 1;
+parameter    C_M_AXI_ATOMLOCATIONS_WUSER_WIDTH = 1;
+parameter    C_M_AXI_ATOMLOCATIONS_RUSER_WIDTH = 1;
+parameter    C_M_AXI_ATOMLOCATIONS_BUSER_WIDTH = 1;
+parameter    C_M_AXI_ATOMLOCATIONS_USER_VALUE = 0;
+parameter    C_M_AXI_ATOMLOCATIONS_PROT_VALUE = 0;
+parameter    C_M_AXI_ATOMLOCATIONS_CACHE_VALUE = 3;
+parameter    C_M_AXI_DATA_WIDTH = 32;
 parameter    C_M_AXI_EMISSIONS_ID_WIDTH = 1;
 parameter    C_M_AXI_EMISSIONS_ADDR_WIDTH = 64;
-parameter    C_M_AXI_EMISSIONS_DATA_WIDTH = 64;
+parameter    C_M_AXI_EMISSIONS_DATA_WIDTH = 32;
 parameter    C_M_AXI_EMISSIONS_AWUSER_WIDTH = 1;
 parameter    C_M_AXI_EMISSIONS_ARUSER_WIDTH = 1;
 parameter    C_M_AXI_EMISSIONS_WUSER_WIDTH = 1;
@@ -299,10 +346,9 @@ parameter    C_M_AXI_EMISSIONS_BUSER_WIDTH = 1;
 parameter    C_M_AXI_EMISSIONS_USER_VALUE = 0;
 parameter    C_M_AXI_EMISSIONS_PROT_VALUE = 0;
 parameter    C_M_AXI_EMISSIONS_CACHE_VALUE = 3;
-parameter    C_M_AXI_DATA_WIDTH = 32;
 parameter    C_M_AXI_FULLIMAGE_ID_WIDTH = 1;
 parameter    C_M_AXI_FULLIMAGE_ADDR_WIDTH = 64;
-parameter    C_M_AXI_FULLIMAGE_DATA_WIDTH = 64;
+parameter    C_M_AXI_FULLIMAGE_DATA_WIDTH = 32;
 parameter    C_M_AXI_FULLIMAGE_AWUSER_WIDTH = 1;
 parameter    C_M_AXI_FULLIMAGE_ARUSER_WIDTH = 1;
 parameter    C_M_AXI_FULLIMAGE_WUSER_WIDTH = 1;
@@ -313,7 +359,7 @@ parameter    C_M_AXI_FULLIMAGE_PROT_VALUE = 0;
 parameter    C_M_AXI_FULLIMAGE_CACHE_VALUE = 3;
 parameter    C_M_AXI_IMAGEPROJS_ID_WIDTH = 1;
 parameter    C_M_AXI_IMAGEPROJS_ADDR_WIDTH = 64;
-parameter    C_M_AXI_IMAGEPROJS_DATA_WIDTH = 64;
+parameter    C_M_AXI_IMAGEPROJS_DATA_WIDTH = 32;
 parameter    C_M_AXI_IMAGEPROJS_AWUSER_WIDTH = 1;
 parameter    C_M_AXI_IMAGEPROJS_ARUSER_WIDTH = 1;
 parameter    C_M_AXI_IMAGEPROJS_WUSER_WIDTH = 1;
@@ -324,7 +370,7 @@ parameter    C_M_AXI_IMAGEPROJS_PROT_VALUE = 0;
 parameter    C_M_AXI_IMAGEPROJS_CACHE_VALUE = 3;
 parameter    C_M_AXI_IMAGEPROJS_LOCAL_ID_WIDTH = 1;
 parameter    C_M_AXI_IMAGEPROJS_LOCAL_ADDR_WIDTH = 64;
-parameter    C_M_AXI_IMAGEPROJS_LOCAL_DATA_WIDTH = 64;
+parameter    C_M_AXI_IMAGEPROJS_LOCAL_DATA_WIDTH = 32;
 parameter    C_M_AXI_IMAGEPROJS_LOCAL_AWUSER_WIDTH = 1;
 parameter    C_M_AXI_IMAGEPROJS_LOCAL_ARUSER_WIDTH = 1;
 parameter    C_M_AXI_IMAGEPROJS_LOCAL_WUSER_WIDTH = 1;
@@ -348,11 +394,12 @@ parameter    C_M_AXI_IMAGEPROJS_LOCAL_SIZE_CACHE_VALUE = 3;
 parameter C_S_AXI_CONTROL_WSTRB_WIDTH = (32 / 8);
 parameter C_S_AXI_WSTRB_WIDTH = (32 / 8);
 parameter C_S_AXI_SCALAR_DATA_WSTRB_WIDTH = (32 / 8);
-parameter C_M_AXI_EMISSIONS_WSTRB_WIDTH = (64 / 8);
+parameter C_M_AXI_ATOMLOCATIONS_WSTRB_WIDTH = (64 / 8);
 parameter C_M_AXI_WSTRB_WIDTH = (32 / 8);
-parameter C_M_AXI_FULLIMAGE_WSTRB_WIDTH = (64 / 8);
-parameter C_M_AXI_IMAGEPROJS_WSTRB_WIDTH = (64 / 8);
-parameter C_M_AXI_IMAGEPROJS_LOCAL_WSTRB_WIDTH = (64 / 8);
+parameter C_M_AXI_EMISSIONS_WSTRB_WIDTH = (32 / 8);
+parameter C_M_AXI_FULLIMAGE_WSTRB_WIDTH = (32 / 8);
+parameter C_M_AXI_IMAGEPROJS_WSTRB_WIDTH = (32 / 8);
+parameter C_M_AXI_IMAGEPROJS_LOCAL_WSTRB_WIDTH = (32 / 8);
 parameter C_M_AXI_IMAGEPROJS_LOCAL_SIZE_WSTRB_WIDTH = (32 / 8);
 
 input   s_axi_control_AWVALID;
@@ -392,6 +439,51 @@ output  [1:0] s_axi_scalar_data_RRESP;
 output   s_axi_scalar_data_BVALID;
 input   s_axi_scalar_data_BREADY;
 output  [1:0] s_axi_scalar_data_BRESP;
+output   m_axi_atomLocations_AWVALID;
+input   m_axi_atomLocations_AWREADY;
+output  [C_M_AXI_ATOMLOCATIONS_ADDR_WIDTH - 1:0] m_axi_atomLocations_AWADDR;
+output  [C_M_AXI_ATOMLOCATIONS_ID_WIDTH - 1:0] m_axi_atomLocations_AWID;
+output  [7:0] m_axi_atomLocations_AWLEN;
+output  [2:0] m_axi_atomLocations_AWSIZE;
+output  [1:0] m_axi_atomLocations_AWBURST;
+output  [1:0] m_axi_atomLocations_AWLOCK;
+output  [3:0] m_axi_atomLocations_AWCACHE;
+output  [2:0] m_axi_atomLocations_AWPROT;
+output  [3:0] m_axi_atomLocations_AWQOS;
+output  [3:0] m_axi_atomLocations_AWREGION;
+output  [C_M_AXI_ATOMLOCATIONS_AWUSER_WIDTH - 1:0] m_axi_atomLocations_AWUSER;
+output   m_axi_atomLocations_WVALID;
+input   m_axi_atomLocations_WREADY;
+output  [C_M_AXI_ATOMLOCATIONS_DATA_WIDTH - 1:0] m_axi_atomLocations_WDATA;
+output  [C_M_AXI_ATOMLOCATIONS_WSTRB_WIDTH - 1:0] m_axi_atomLocations_WSTRB;
+output   m_axi_atomLocations_WLAST;
+output  [C_M_AXI_ATOMLOCATIONS_ID_WIDTH - 1:0] m_axi_atomLocations_WID;
+output  [C_M_AXI_ATOMLOCATIONS_WUSER_WIDTH - 1:0] m_axi_atomLocations_WUSER;
+output   m_axi_atomLocations_ARVALID;
+input   m_axi_atomLocations_ARREADY;
+output  [C_M_AXI_ATOMLOCATIONS_ADDR_WIDTH - 1:0] m_axi_atomLocations_ARADDR;
+output  [C_M_AXI_ATOMLOCATIONS_ID_WIDTH - 1:0] m_axi_atomLocations_ARID;
+output  [7:0] m_axi_atomLocations_ARLEN;
+output  [2:0] m_axi_atomLocations_ARSIZE;
+output  [1:0] m_axi_atomLocations_ARBURST;
+output  [1:0] m_axi_atomLocations_ARLOCK;
+output  [3:0] m_axi_atomLocations_ARCACHE;
+output  [2:0] m_axi_atomLocations_ARPROT;
+output  [3:0] m_axi_atomLocations_ARQOS;
+output  [3:0] m_axi_atomLocations_ARREGION;
+output  [C_M_AXI_ATOMLOCATIONS_ARUSER_WIDTH - 1:0] m_axi_atomLocations_ARUSER;
+input   m_axi_atomLocations_RVALID;
+output   m_axi_atomLocations_RREADY;
+input  [C_M_AXI_ATOMLOCATIONS_DATA_WIDTH - 1:0] m_axi_atomLocations_RDATA;
+input   m_axi_atomLocations_RLAST;
+input  [C_M_AXI_ATOMLOCATIONS_ID_WIDTH - 1:0] m_axi_atomLocations_RID;
+input  [C_M_AXI_ATOMLOCATIONS_RUSER_WIDTH - 1:0] m_axi_atomLocations_RUSER;
+input  [1:0] m_axi_atomLocations_RRESP;
+input   m_axi_atomLocations_BVALID;
+output   m_axi_atomLocations_BREADY;
+input  [1:0] m_axi_atomLocations_BRESP;
+input  [C_M_AXI_ATOMLOCATIONS_ID_WIDTH - 1:0] m_axi_atomLocations_BID;
+input  [C_M_AXI_ATOMLOCATIONS_BUSER_WIDTH - 1:0] m_axi_atomLocations_BUSER;
 output   m_axi_emissions_AWVALID;
 input   m_axi_emissions_AWREADY;
 output  [C_M_AXI_EMISSIONS_ADDR_WIDTH - 1:0] m_axi_emissions_AWADDR;
@@ -617,18 +709,9 @@ output   m_axi_imageProjs_local_size_BREADY;
 input  [1:0] m_axi_imageProjs_local_size_BRESP;
 input  [C_M_AXI_IMAGEPROJS_LOCAL_SIZE_ID_WIDTH - 1:0] m_axi_imageProjs_local_size_BID;
 input  [C_M_AXI_IMAGEPROJS_LOCAL_SIZE_BUSER_WIDTH - 1:0] m_axi_imageProjs_local_size_BUSER;
-output  [6:0] atomLocations_address0;
-output   atomLocations_ce0;
-output  [127:0] atomLocations_d0;
-input  [127:0] atomLocations_q0;
-output   atomLocations_we0;
-output  [6:0] atomLocations_address1;
-output   atomLocations_ce1;
-output  [127:0] atomLocations_d1;
-input  [127:0] atomLocations_q1;
-output   atomLocations_we1;
 
  reg    ap_rst_n_inv;
+wire   [63:0] atomLocations_offset;
 wire   [63:0] imageProjs_local_offset;
 wire   [63:0] imageProjs_offset;
 wire   [63:0] imageProjs_local_size_offset;
@@ -637,7 +720,7 @@ wire   [63:0] emissions_offset;
 wire    ap_start;
 wire    ap_ready;
 wire    ap_done;
-wire    ap_idle;
+reg    ap_idle;
 wire   [31:0] atomLocationsSize;
 wire   [31:0] projShape0;
 wire   [31:0] projShape1;
@@ -645,11 +728,22 @@ wire   [31:0] psfSupersample;
 wire   [31:0] imageProjectionSize;
 wire   [31:0] fullImage_rows;
 wire   [31:0] fullImage_cols;
+wire    atomLocations_0_AWREADY;
+wire    atomLocations_0_WREADY;
+wire    atomLocations_0_ARREADY;
+wire    atomLocations_0_RVALID;
+wire   [63:0] atomLocations_0_RDATA;
+wire    atomLocations_0_RLAST;
+wire   [0:0] atomLocations_0_RID;
+wire   [8:0] atomLocations_0_RFIFONUM;
+wire   [0:0] atomLocations_0_RUSER;
+wire   [1:0] atomLocations_0_RRESP;
+wire    atomLocations_0_BVALID;
 wire    emissions_0_AWREADY;
 wire    emissions_0_WREADY;
 wire    emissions_0_ARREADY;
 wire    emissions_0_RVALID;
-wire   [63:0] emissions_0_RDATA;
+wire   [31:0] emissions_0_RDATA;
 wire   [8:0] emissions_0_RFIFONUM;
 wire    emissions_0_BVALID;
 wire   [1:0] emissions_0_BRESP;
@@ -659,7 +753,7 @@ wire    fullImage_0_AWREADY;
 wire    fullImage_0_WREADY;
 wire    fullImage_0_ARREADY;
 wire    fullImage_0_RVALID;
-wire   [63:0] fullImage_0_RDATA;
+wire   [31:0] fullImage_0_RDATA;
 wire    fullImage_0_RLAST;
 wire   [0:0] fullImage_0_RID;
 wire   [8:0] fullImage_0_RFIFONUM;
@@ -670,7 +764,7 @@ wire    imageProjs_0_AWREADY;
 wire    imageProjs_0_WREADY;
 wire    imageProjs_0_ARREADY;
 wire    imageProjs_0_RVALID;
-wire   [63:0] imageProjs_0_RDATA;
+wire   [31:0] imageProjs_0_RDATA;
 wire    imageProjs_0_RLAST;
 wire   [0:0] imageProjs_0_RID;
 wire   [8:0] imageProjs_0_RFIFONUM;
@@ -681,219 +775,202 @@ wire    imageProjs_local_0_AWREADY;
 wire    imageProjs_local_0_WREADY;
 wire    imageProjs_local_0_ARREADY;
 wire    imageProjs_local_0_RVALID;
-wire   [63:0] imageProjs_local_0_RDATA;
+wire   [31:0] imageProjs_local_0_RDATA;
 wire    imageProjs_local_0_RLAST;
 wire   [0:0] imageProjs_local_0_RID;
 wire   [8:0] imageProjs_local_0_RFIFONUM;
 wire   [0:0] imageProjs_local_0_RUSER;
 wire   [1:0] imageProjs_local_0_RRESP;
 wire    imageProjs_local_0_BVALID;
-wire    imageProjs_local_size_r_0_AWREADY;
-wire    imageProjs_local_size_r_0_WREADY;
-wire    imageProjs_local_size_r_0_ARREADY;
-wire    imageProjs_local_size_r_0_RVALID;
-wire   [31:0] imageProjs_local_size_r_0_RDATA;
-wire    imageProjs_local_size_r_0_RLAST;
-wire   [0:0] imageProjs_local_size_r_0_RID;
-wire   [8:0] imageProjs_local_size_r_0_RFIFONUM;
-wire   [0:0] imageProjs_local_size_r_0_RUSER;
-wire   [1:0] imageProjs_local_size_r_0_RRESP;
-wire    imageProjs_local_size_r_0_BVALID;
-wire    getLocalImages_U0_ap_start;
-wire    getLocalImages_U0_ap_done;
-wire    getLocalImages_U0_ap_continue;
-wire    getLocalImages_U0_ap_idle;
-wire    getLocalImages_U0_ap_ready;
-wire   [6:0] getLocalImages_U0_atomLocations_address0;
-wire    getLocalImages_U0_atomLocations_ce0;
-wire   [255:0] getLocalImages_U0_localImages_din;
-wire    getLocalImages_U0_localImages_write;
-wire   [31:0] getLocalImages_U0_localImages_num_data_valid;
-wire   [31:0] getLocalImages_U0_localImages_fifo_cap;
-wire    applyProjectors_U0_ap_start;
-wire    applyProjectors_U0_ap_done;
-wire    applyProjectors_U0_ap_continue;
-wire    applyProjectors_U0_ap_idle;
-wire    applyProjectors_U0_ap_ready;
-wire    applyProjectors_U0_m_axi_imageProjs_local_0_AWVALID;
-wire   [63:0] applyProjectors_U0_m_axi_imageProjs_local_0_AWADDR;
-wire   [0:0] applyProjectors_U0_m_axi_imageProjs_local_0_AWID;
-wire   [31:0] applyProjectors_U0_m_axi_imageProjs_local_0_AWLEN;
-wire   [2:0] applyProjectors_U0_m_axi_imageProjs_local_0_AWSIZE;
-wire   [1:0] applyProjectors_U0_m_axi_imageProjs_local_0_AWBURST;
-wire   [1:0] applyProjectors_U0_m_axi_imageProjs_local_0_AWLOCK;
-wire   [3:0] applyProjectors_U0_m_axi_imageProjs_local_0_AWCACHE;
-wire   [2:0] applyProjectors_U0_m_axi_imageProjs_local_0_AWPROT;
-wire   [3:0] applyProjectors_U0_m_axi_imageProjs_local_0_AWQOS;
-wire   [3:0] applyProjectors_U0_m_axi_imageProjs_local_0_AWREGION;
-wire   [0:0] applyProjectors_U0_m_axi_imageProjs_local_0_AWUSER;
-wire    applyProjectors_U0_m_axi_imageProjs_local_0_WVALID;
-wire   [63:0] applyProjectors_U0_m_axi_imageProjs_local_0_WDATA;
-wire   [7:0] applyProjectors_U0_m_axi_imageProjs_local_0_WSTRB;
-wire    applyProjectors_U0_m_axi_imageProjs_local_0_WLAST;
-wire   [0:0] applyProjectors_U0_m_axi_imageProjs_local_0_WID;
-wire   [0:0] applyProjectors_U0_m_axi_imageProjs_local_0_WUSER;
-wire    applyProjectors_U0_m_axi_imageProjs_local_0_ARVALID;
-wire   [63:0] applyProjectors_U0_m_axi_imageProjs_local_0_ARADDR;
-wire   [0:0] applyProjectors_U0_m_axi_imageProjs_local_0_ARID;
-wire   [31:0] applyProjectors_U0_m_axi_imageProjs_local_0_ARLEN;
-wire   [2:0] applyProjectors_U0_m_axi_imageProjs_local_0_ARSIZE;
-wire   [1:0] applyProjectors_U0_m_axi_imageProjs_local_0_ARBURST;
-wire   [1:0] applyProjectors_U0_m_axi_imageProjs_local_0_ARLOCK;
-wire   [3:0] applyProjectors_U0_m_axi_imageProjs_local_0_ARCACHE;
-wire   [2:0] applyProjectors_U0_m_axi_imageProjs_local_0_ARPROT;
-wire   [3:0] applyProjectors_U0_m_axi_imageProjs_local_0_ARQOS;
-wire   [3:0] applyProjectors_U0_m_axi_imageProjs_local_0_ARREGION;
-wire   [0:0] applyProjectors_U0_m_axi_imageProjs_local_0_ARUSER;
-wire    applyProjectors_U0_m_axi_imageProjs_local_0_RREADY;
-wire    applyProjectors_U0_m_axi_imageProjs_local_0_BREADY;
-wire    applyProjectors_U0_m_axi_imageProjs_0_AWVALID;
-wire   [63:0] applyProjectors_U0_m_axi_imageProjs_0_AWADDR;
-wire   [0:0] applyProjectors_U0_m_axi_imageProjs_0_AWID;
-wire   [31:0] applyProjectors_U0_m_axi_imageProjs_0_AWLEN;
-wire   [2:0] applyProjectors_U0_m_axi_imageProjs_0_AWSIZE;
-wire   [1:0] applyProjectors_U0_m_axi_imageProjs_0_AWBURST;
-wire   [1:0] applyProjectors_U0_m_axi_imageProjs_0_AWLOCK;
-wire   [3:0] applyProjectors_U0_m_axi_imageProjs_0_AWCACHE;
-wire   [2:0] applyProjectors_U0_m_axi_imageProjs_0_AWPROT;
-wire   [3:0] applyProjectors_U0_m_axi_imageProjs_0_AWQOS;
-wire   [3:0] applyProjectors_U0_m_axi_imageProjs_0_AWREGION;
-wire   [0:0] applyProjectors_U0_m_axi_imageProjs_0_AWUSER;
-wire    applyProjectors_U0_m_axi_imageProjs_0_WVALID;
-wire   [63:0] applyProjectors_U0_m_axi_imageProjs_0_WDATA;
-wire   [7:0] applyProjectors_U0_m_axi_imageProjs_0_WSTRB;
-wire    applyProjectors_U0_m_axi_imageProjs_0_WLAST;
-wire   [0:0] applyProjectors_U0_m_axi_imageProjs_0_WID;
-wire   [0:0] applyProjectors_U0_m_axi_imageProjs_0_WUSER;
-wire    applyProjectors_U0_m_axi_imageProjs_0_ARVALID;
-wire   [63:0] applyProjectors_U0_m_axi_imageProjs_0_ARADDR;
-wire   [0:0] applyProjectors_U0_m_axi_imageProjs_0_ARID;
-wire   [31:0] applyProjectors_U0_m_axi_imageProjs_0_ARLEN;
-wire   [2:0] applyProjectors_U0_m_axi_imageProjs_0_ARSIZE;
-wire   [1:0] applyProjectors_U0_m_axi_imageProjs_0_ARBURST;
-wire   [1:0] applyProjectors_U0_m_axi_imageProjs_0_ARLOCK;
-wire   [3:0] applyProjectors_U0_m_axi_imageProjs_0_ARCACHE;
-wire   [2:0] applyProjectors_U0_m_axi_imageProjs_0_ARPROT;
-wire   [3:0] applyProjectors_U0_m_axi_imageProjs_0_ARQOS;
-wire   [3:0] applyProjectors_U0_m_axi_imageProjs_0_ARREGION;
-wire   [0:0] applyProjectors_U0_m_axi_imageProjs_0_ARUSER;
-wire    applyProjectors_U0_m_axi_imageProjs_0_RREADY;
-wire    applyProjectors_U0_m_axi_imageProjs_0_BREADY;
-wire    applyProjectors_U0_m_axi_imageProjs_local_size_r_0_AWVALID;
-wire   [63:0] applyProjectors_U0_m_axi_imageProjs_local_size_r_0_AWADDR;
-wire   [0:0] applyProjectors_U0_m_axi_imageProjs_local_size_r_0_AWID;
-wire   [31:0] applyProjectors_U0_m_axi_imageProjs_local_size_r_0_AWLEN;
-wire   [2:0] applyProjectors_U0_m_axi_imageProjs_local_size_r_0_AWSIZE;
-wire   [1:0] applyProjectors_U0_m_axi_imageProjs_local_size_r_0_AWBURST;
-wire   [1:0] applyProjectors_U0_m_axi_imageProjs_local_size_r_0_AWLOCK;
-wire   [3:0] applyProjectors_U0_m_axi_imageProjs_local_size_r_0_AWCACHE;
-wire   [2:0] applyProjectors_U0_m_axi_imageProjs_local_size_r_0_AWPROT;
-wire   [3:0] applyProjectors_U0_m_axi_imageProjs_local_size_r_0_AWQOS;
-wire   [3:0] applyProjectors_U0_m_axi_imageProjs_local_size_r_0_AWREGION;
-wire   [0:0] applyProjectors_U0_m_axi_imageProjs_local_size_r_0_AWUSER;
-wire    applyProjectors_U0_m_axi_imageProjs_local_size_r_0_WVALID;
-wire   [31:0] applyProjectors_U0_m_axi_imageProjs_local_size_r_0_WDATA;
-wire   [3:0] applyProjectors_U0_m_axi_imageProjs_local_size_r_0_WSTRB;
-wire    applyProjectors_U0_m_axi_imageProjs_local_size_r_0_WLAST;
-wire   [0:0] applyProjectors_U0_m_axi_imageProjs_local_size_r_0_WID;
-wire   [0:0] applyProjectors_U0_m_axi_imageProjs_local_size_r_0_WUSER;
-wire    applyProjectors_U0_m_axi_imageProjs_local_size_r_0_ARVALID;
-wire   [63:0] applyProjectors_U0_m_axi_imageProjs_local_size_r_0_ARADDR;
-wire   [0:0] applyProjectors_U0_m_axi_imageProjs_local_size_r_0_ARID;
-wire   [31:0] applyProjectors_U0_m_axi_imageProjs_local_size_r_0_ARLEN;
-wire   [2:0] applyProjectors_U0_m_axi_imageProjs_local_size_r_0_ARSIZE;
-wire   [1:0] applyProjectors_U0_m_axi_imageProjs_local_size_r_0_ARBURST;
-wire   [1:0] applyProjectors_U0_m_axi_imageProjs_local_size_r_0_ARLOCK;
-wire   [3:0] applyProjectors_U0_m_axi_imageProjs_local_size_r_0_ARCACHE;
-wire   [2:0] applyProjectors_U0_m_axi_imageProjs_local_size_r_0_ARPROT;
-wire   [3:0] applyProjectors_U0_m_axi_imageProjs_local_size_r_0_ARQOS;
-wire   [3:0] applyProjectors_U0_m_axi_imageProjs_local_size_r_0_ARREGION;
-wire   [0:0] applyProjectors_U0_m_axi_imageProjs_local_size_r_0_ARUSER;
-wire    applyProjectors_U0_m_axi_imageProjs_local_size_r_0_RREADY;
-wire    applyProjectors_U0_m_axi_imageProjs_local_size_r_0_BREADY;
-wire    applyProjectors_U0_m_axi_fullImage_0_AWVALID;
-wire   [63:0] applyProjectors_U0_m_axi_fullImage_0_AWADDR;
-wire   [0:0] applyProjectors_U0_m_axi_fullImage_0_AWID;
-wire   [31:0] applyProjectors_U0_m_axi_fullImage_0_AWLEN;
-wire   [2:0] applyProjectors_U0_m_axi_fullImage_0_AWSIZE;
-wire   [1:0] applyProjectors_U0_m_axi_fullImage_0_AWBURST;
-wire   [1:0] applyProjectors_U0_m_axi_fullImage_0_AWLOCK;
-wire   [3:0] applyProjectors_U0_m_axi_fullImage_0_AWCACHE;
-wire   [2:0] applyProjectors_U0_m_axi_fullImage_0_AWPROT;
-wire   [3:0] applyProjectors_U0_m_axi_fullImage_0_AWQOS;
-wire   [3:0] applyProjectors_U0_m_axi_fullImage_0_AWREGION;
-wire   [0:0] applyProjectors_U0_m_axi_fullImage_0_AWUSER;
-wire    applyProjectors_U0_m_axi_fullImage_0_WVALID;
-wire   [63:0] applyProjectors_U0_m_axi_fullImage_0_WDATA;
-wire   [7:0] applyProjectors_U0_m_axi_fullImage_0_WSTRB;
-wire    applyProjectors_U0_m_axi_fullImage_0_WLAST;
-wire   [0:0] applyProjectors_U0_m_axi_fullImage_0_WID;
-wire   [0:0] applyProjectors_U0_m_axi_fullImage_0_WUSER;
-wire    applyProjectors_U0_m_axi_fullImage_0_ARVALID;
-wire   [63:0] applyProjectors_U0_m_axi_fullImage_0_ARADDR;
-wire   [0:0] applyProjectors_U0_m_axi_fullImage_0_ARID;
-wire   [31:0] applyProjectors_U0_m_axi_fullImage_0_ARLEN;
-wire   [2:0] applyProjectors_U0_m_axi_fullImage_0_ARSIZE;
-wire   [1:0] applyProjectors_U0_m_axi_fullImage_0_ARBURST;
-wire   [1:0] applyProjectors_U0_m_axi_fullImage_0_ARLOCK;
-wire   [3:0] applyProjectors_U0_m_axi_fullImage_0_ARCACHE;
-wire   [2:0] applyProjectors_U0_m_axi_fullImage_0_ARPROT;
-wire   [3:0] applyProjectors_U0_m_axi_fullImage_0_ARQOS;
-wire   [3:0] applyProjectors_U0_m_axi_fullImage_0_ARREGION;
-wire   [0:0] applyProjectors_U0_m_axi_fullImage_0_ARUSER;
-wire    applyProjectors_U0_m_axi_fullImage_0_RREADY;
-wire    applyProjectors_U0_m_axi_fullImage_0_BREADY;
-wire    applyProjectors_U0_localImages_read;
-wire    applyProjectors_U0_m_axi_emissions_0_AWVALID;
-wire   [63:0] applyProjectors_U0_m_axi_emissions_0_AWADDR;
-wire   [0:0] applyProjectors_U0_m_axi_emissions_0_AWID;
-wire   [31:0] applyProjectors_U0_m_axi_emissions_0_AWLEN;
-wire   [2:0] applyProjectors_U0_m_axi_emissions_0_AWSIZE;
-wire   [1:0] applyProjectors_U0_m_axi_emissions_0_AWBURST;
-wire   [1:0] applyProjectors_U0_m_axi_emissions_0_AWLOCK;
-wire   [3:0] applyProjectors_U0_m_axi_emissions_0_AWCACHE;
-wire   [2:0] applyProjectors_U0_m_axi_emissions_0_AWPROT;
-wire   [3:0] applyProjectors_U0_m_axi_emissions_0_AWQOS;
-wire   [3:0] applyProjectors_U0_m_axi_emissions_0_AWREGION;
-wire   [0:0] applyProjectors_U0_m_axi_emissions_0_AWUSER;
-wire    applyProjectors_U0_m_axi_emissions_0_WVALID;
-wire   [63:0] applyProjectors_U0_m_axi_emissions_0_WDATA;
-wire   [7:0] applyProjectors_U0_m_axi_emissions_0_WSTRB;
-wire    applyProjectors_U0_m_axi_emissions_0_WLAST;
-wire   [0:0] applyProjectors_U0_m_axi_emissions_0_WID;
-wire   [0:0] applyProjectors_U0_m_axi_emissions_0_WUSER;
-wire    applyProjectors_U0_m_axi_emissions_0_ARVALID;
-wire   [63:0] applyProjectors_U0_m_axi_emissions_0_ARADDR;
-wire   [0:0] applyProjectors_U0_m_axi_emissions_0_ARID;
-wire   [31:0] applyProjectors_U0_m_axi_emissions_0_ARLEN;
-wire   [2:0] applyProjectors_U0_m_axi_emissions_0_ARSIZE;
-wire   [1:0] applyProjectors_U0_m_axi_emissions_0_ARBURST;
-wire   [1:0] applyProjectors_U0_m_axi_emissions_0_ARLOCK;
-wire   [3:0] applyProjectors_U0_m_axi_emissions_0_ARCACHE;
-wire   [2:0] applyProjectors_U0_m_axi_emissions_0_ARPROT;
-wire   [3:0] applyProjectors_U0_m_axi_emissions_0_ARQOS;
-wire   [3:0] applyProjectors_U0_m_axi_emissions_0_ARREGION;
-wire   [0:0] applyProjectors_U0_m_axi_emissions_0_ARUSER;
-wire    applyProjectors_U0_m_axi_emissions_0_RREADY;
-wire    applyProjectors_U0_m_axi_emissions_0_BREADY;
-wire   [31:0] applyProjectors_U0_emission_cnt;
-wire    applyProjectors_U0_emission_cnt_ap_vld;
-wire    localImages_full_n;
-wire   [255:0] localImages_dout;
-wire    localImages_empty_n;
-wire   [2:0] localImages_num_data_valid;
-wire   [2:0] localImages_fifo_cap;
-wire    ap_sync_ready;
-reg    ap_sync_reg_getLocalImages_U0_ap_ready;
-wire    ap_sync_getLocalImages_U0_ap_ready;
-reg    ap_sync_reg_applyProjectors_U0_ap_ready;
-wire    ap_sync_applyProjectors_U0_ap_ready;
+wire   [15:0] dataflow_in_loop_VITIS_LOOP_149_1_1_U0_conv;
+wire    dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_atomLocations_0_AWVALID;
+wire   [63:0] dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_atomLocations_0_AWADDR;
+wire   [0:0] dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_atomLocations_0_AWID;
+wire   [31:0] dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_atomLocations_0_AWLEN;
+wire   [2:0] dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_atomLocations_0_AWSIZE;
+wire   [1:0] dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_atomLocations_0_AWBURST;
+wire   [1:0] dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_atomLocations_0_AWLOCK;
+wire   [3:0] dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_atomLocations_0_AWCACHE;
+wire   [2:0] dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_atomLocations_0_AWPROT;
+wire   [3:0] dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_atomLocations_0_AWQOS;
+wire   [3:0] dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_atomLocations_0_AWREGION;
+wire   [0:0] dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_atomLocations_0_AWUSER;
+wire    dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_atomLocations_0_WVALID;
+wire   [63:0] dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_atomLocations_0_WDATA;
+wire   [7:0] dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_atomLocations_0_WSTRB;
+wire    dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_atomLocations_0_WLAST;
+wire   [0:0] dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_atomLocations_0_WID;
+wire   [0:0] dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_atomLocations_0_WUSER;
+wire    dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_atomLocations_0_ARVALID;
+wire   [63:0] dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_atomLocations_0_ARADDR;
+wire   [0:0] dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_atomLocations_0_ARID;
+wire   [31:0] dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_atomLocations_0_ARLEN;
+wire   [2:0] dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_atomLocations_0_ARSIZE;
+wire   [1:0] dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_atomLocations_0_ARBURST;
+wire   [1:0] dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_atomLocations_0_ARLOCK;
+wire   [3:0] dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_atomLocations_0_ARCACHE;
+wire   [2:0] dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_atomLocations_0_ARPROT;
+wire   [3:0] dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_atomLocations_0_ARQOS;
+wire   [3:0] dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_atomLocations_0_ARREGION;
+wire   [0:0] dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_atomLocations_0_ARUSER;
+wire    dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_atomLocations_0_RREADY;
+wire    dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_atomLocations_0_BREADY;
+wire    dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_imageProjs_0_AWVALID;
+wire   [63:0] dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_imageProjs_0_AWADDR;
+wire   [0:0] dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_imageProjs_0_AWID;
+wire   [31:0] dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_imageProjs_0_AWLEN;
+wire   [2:0] dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_imageProjs_0_AWSIZE;
+wire   [1:0] dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_imageProjs_0_AWBURST;
+wire   [1:0] dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_imageProjs_0_AWLOCK;
+wire   [3:0] dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_imageProjs_0_AWCACHE;
+wire   [2:0] dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_imageProjs_0_AWPROT;
+wire   [3:0] dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_imageProjs_0_AWQOS;
+wire   [3:0] dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_imageProjs_0_AWREGION;
+wire   [0:0] dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_imageProjs_0_AWUSER;
+wire    dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_imageProjs_0_WVALID;
+wire   [31:0] dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_imageProjs_0_WDATA;
+wire   [3:0] dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_imageProjs_0_WSTRB;
+wire    dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_imageProjs_0_WLAST;
+wire   [0:0] dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_imageProjs_0_WID;
+wire   [0:0] dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_imageProjs_0_WUSER;
+wire    dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_imageProjs_0_ARVALID;
+wire   [63:0] dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_imageProjs_0_ARADDR;
+wire   [0:0] dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_imageProjs_0_ARID;
+wire   [31:0] dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_imageProjs_0_ARLEN;
+wire   [2:0] dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_imageProjs_0_ARSIZE;
+wire   [1:0] dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_imageProjs_0_ARBURST;
+wire   [1:0] dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_imageProjs_0_ARLOCK;
+wire   [3:0] dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_imageProjs_0_ARCACHE;
+wire   [2:0] dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_imageProjs_0_ARPROT;
+wire   [3:0] dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_imageProjs_0_ARQOS;
+wire   [3:0] dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_imageProjs_0_ARREGION;
+wire   [0:0] dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_imageProjs_0_ARUSER;
+wire    dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_imageProjs_0_RREADY;
+wire    dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_imageProjs_0_BREADY;
+wire    dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_fullImage_0_AWVALID;
+wire   [63:0] dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_fullImage_0_AWADDR;
+wire   [0:0] dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_fullImage_0_AWID;
+wire   [31:0] dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_fullImage_0_AWLEN;
+wire   [2:0] dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_fullImage_0_AWSIZE;
+wire   [1:0] dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_fullImage_0_AWBURST;
+wire   [1:0] dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_fullImage_0_AWLOCK;
+wire   [3:0] dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_fullImage_0_AWCACHE;
+wire   [2:0] dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_fullImage_0_AWPROT;
+wire   [3:0] dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_fullImage_0_AWQOS;
+wire   [3:0] dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_fullImage_0_AWREGION;
+wire   [0:0] dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_fullImage_0_AWUSER;
+wire    dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_fullImage_0_WVALID;
+wire   [31:0] dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_fullImage_0_WDATA;
+wire   [3:0] dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_fullImage_0_WSTRB;
+wire    dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_fullImage_0_WLAST;
+wire   [0:0] dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_fullImage_0_WID;
+wire   [0:0] dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_fullImage_0_WUSER;
+wire    dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_fullImage_0_ARVALID;
+wire   [63:0] dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_fullImage_0_ARADDR;
+wire   [0:0] dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_fullImage_0_ARID;
+wire   [31:0] dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_fullImage_0_ARLEN;
+wire   [2:0] dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_fullImage_0_ARSIZE;
+wire   [1:0] dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_fullImage_0_ARBURST;
+wire   [1:0] dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_fullImage_0_ARLOCK;
+wire   [3:0] dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_fullImage_0_ARCACHE;
+wire   [2:0] dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_fullImage_0_ARPROT;
+wire   [3:0] dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_fullImage_0_ARQOS;
+wire   [3:0] dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_fullImage_0_ARREGION;
+wire   [0:0] dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_fullImage_0_ARUSER;
+wire    dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_fullImage_0_RREADY;
+wire    dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_fullImage_0_BREADY;
+wire    dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_imageProjs_local_0_AWVALID;
+wire   [63:0] dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_imageProjs_local_0_AWADDR;
+wire   [0:0] dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_imageProjs_local_0_AWID;
+wire   [31:0] dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_imageProjs_local_0_AWLEN;
+wire   [2:0] dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_imageProjs_local_0_AWSIZE;
+wire   [1:0] dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_imageProjs_local_0_AWBURST;
+wire   [1:0] dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_imageProjs_local_0_AWLOCK;
+wire   [3:0] dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_imageProjs_local_0_AWCACHE;
+wire   [2:0] dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_imageProjs_local_0_AWPROT;
+wire   [3:0] dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_imageProjs_local_0_AWQOS;
+wire   [3:0] dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_imageProjs_local_0_AWREGION;
+wire   [0:0] dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_imageProjs_local_0_AWUSER;
+wire    dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_imageProjs_local_0_WVALID;
+wire   [31:0] dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_imageProjs_local_0_WDATA;
+wire   [3:0] dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_imageProjs_local_0_WSTRB;
+wire    dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_imageProjs_local_0_WLAST;
+wire   [0:0] dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_imageProjs_local_0_WID;
+wire   [0:0] dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_imageProjs_local_0_WUSER;
+wire    dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_imageProjs_local_0_ARVALID;
+wire   [63:0] dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_imageProjs_local_0_ARADDR;
+wire   [0:0] dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_imageProjs_local_0_ARID;
+wire   [31:0] dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_imageProjs_local_0_ARLEN;
+wire   [2:0] dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_imageProjs_local_0_ARSIZE;
+wire   [1:0] dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_imageProjs_local_0_ARBURST;
+wire   [1:0] dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_imageProjs_local_0_ARLOCK;
+wire   [3:0] dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_imageProjs_local_0_ARCACHE;
+wire   [2:0] dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_imageProjs_local_0_ARPROT;
+wire   [3:0] dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_imageProjs_local_0_ARQOS;
+wire   [3:0] dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_imageProjs_local_0_ARREGION;
+wire   [0:0] dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_imageProjs_local_0_ARUSER;
+wire    dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_imageProjs_local_0_RREADY;
+wire    dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_imageProjs_local_0_BREADY;
+wire   [15:0] dataflow_in_loop_VITIS_LOOP_149_1_1_U0_idx_0;
+wire    dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_emissions_0_AWVALID;
+wire   [63:0] dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_emissions_0_AWADDR;
+wire   [0:0] dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_emissions_0_AWID;
+wire   [31:0] dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_emissions_0_AWLEN;
+wire   [2:0] dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_emissions_0_AWSIZE;
+wire   [1:0] dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_emissions_0_AWBURST;
+wire   [1:0] dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_emissions_0_AWLOCK;
+wire   [3:0] dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_emissions_0_AWCACHE;
+wire   [2:0] dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_emissions_0_AWPROT;
+wire   [3:0] dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_emissions_0_AWQOS;
+wire   [3:0] dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_emissions_0_AWREGION;
+wire   [0:0] dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_emissions_0_AWUSER;
+wire    dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_emissions_0_WVALID;
+wire   [31:0] dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_emissions_0_WDATA;
+wire   [3:0] dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_emissions_0_WSTRB;
+wire    dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_emissions_0_WLAST;
+wire   [0:0] dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_emissions_0_WID;
+wire   [0:0] dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_emissions_0_WUSER;
+wire    dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_emissions_0_ARVALID;
+wire   [63:0] dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_emissions_0_ARADDR;
+wire   [0:0] dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_emissions_0_ARID;
+wire   [31:0] dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_emissions_0_ARLEN;
+wire   [2:0] dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_emissions_0_ARSIZE;
+wire   [1:0] dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_emissions_0_ARBURST;
+wire   [1:0] dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_emissions_0_ARLOCK;
+wire   [3:0] dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_emissions_0_ARCACHE;
+wire   [2:0] dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_emissions_0_ARPROT;
+wire   [3:0] dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_emissions_0_ARQOS;
+wire   [3:0] dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_emissions_0_ARREGION;
+wire   [0:0] dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_emissions_0_ARUSER;
+wire    dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_emissions_0_RREADY;
+wire    dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_emissions_0_BREADY;
+wire    dataflow_in_loop_VITIS_LOOP_149_1_1_U0_ap_start;
+wire    dataflow_in_loop_VITIS_LOOP_149_1_1_U0_ap_done;
+wire    dataflow_in_loop_VITIS_LOOP_149_1_1_U0_ap_ready;
+wire    dataflow_in_loop_VITIS_LOOP_149_1_1_U0_ap_idle;
+wire    dataflow_in_loop_VITIS_LOOP_149_1_1_U0_ap_continue;
+wire    ap_bound_full_n;
+reg    ap_bound_write;
+wire   [31:0] ap_bound_dout;
+wire    ap_bound_empty_n;
+wire    ap_bound_read;
+reg   [31:0] ap_loop_dataflow_input_count;
+reg   [31:0] ap_loop_dataflow_output_count;
+wire   [31:0] ap_bound_minus_1;
+wire   [31:0] ap_bound_minus_1_output;
+reg    ap_real_start;
+reg    ap_partial_ready;
+reg    ap_internal_ready;
+reg    ap_internal_done;
+wire    ap_bound_ack;
+reg    ap_bound_reg_ack;
 wire    ap_ce_reg;
 
 // power-on initialization
 initial begin
-#0 ap_sync_reg_getLocalImages_U0_ap_ready = 1'b0;
-#0 ap_sync_reg_applyProjectors_U0_ap_ready = 1'b0;
+#0 ap_loop_dataflow_input_count = 32'd0;
+#0 ap_loop_dataflow_output_count = 32'd0;
+#0 ap_bound_reg_ack = 1'b0;
 end
 
 reconstruct_control_s_axi #(
@@ -920,6 +997,7 @@ control_s_axi_U(
     .ACLK(ap_clk),
     .ARESET(ap_rst_n_inv),
     .ACLK_EN(1'b1),
+    .atomLocations_offset(atomLocations_offset),
     .imageProjs_local_offset(imageProjs_local_offset),
     .imageProjs_offset(imageProjs_offset),
     .imageProjs_local_size_offset(imageProjs_local_size_offset),
@@ -962,9 +1040,97 @@ scalar_data_s_axi_U(
     .psfSupersample(psfSupersample),
     .imageProjectionSize(imageProjectionSize),
     .fullImage_rows(fullImage_rows),
-    .fullImage_cols(fullImage_cols),
-    .emission_cnt(applyProjectors_U0_emission_cnt),
-    .emission_cnt_ap_vld(applyProjectors_U0_emission_cnt_ap_vld)
+    .fullImage_cols(fullImage_cols)
+);
+
+reconstruct_atomLocations_m_axi #(
+    .CONSERVATIVE( 1 ),
+    .USER_MAXREQS( 7 ),
+    .MAX_READ_BURST_LENGTH( 16 ),
+    .MAX_WRITE_BURST_LENGTH( 16 ),
+    .C_M_AXI_ID_WIDTH( C_M_AXI_ATOMLOCATIONS_ID_WIDTH ),
+    .C_M_AXI_ADDR_WIDTH( C_M_AXI_ATOMLOCATIONS_ADDR_WIDTH ),
+    .C_M_AXI_DATA_WIDTH( C_M_AXI_ATOMLOCATIONS_DATA_WIDTH ),
+    .C_M_AXI_AWUSER_WIDTH( C_M_AXI_ATOMLOCATIONS_AWUSER_WIDTH ),
+    .C_M_AXI_ARUSER_WIDTH( C_M_AXI_ATOMLOCATIONS_ARUSER_WIDTH ),
+    .C_M_AXI_WUSER_WIDTH( C_M_AXI_ATOMLOCATIONS_WUSER_WIDTH ),
+    .C_M_AXI_RUSER_WIDTH( C_M_AXI_ATOMLOCATIONS_RUSER_WIDTH ),
+    .C_M_AXI_BUSER_WIDTH( C_M_AXI_ATOMLOCATIONS_BUSER_WIDTH ),
+    .C_USER_VALUE( C_M_AXI_ATOMLOCATIONS_USER_VALUE ),
+    .C_PROT_VALUE( C_M_AXI_ATOMLOCATIONS_PROT_VALUE ),
+    .C_CACHE_VALUE( C_M_AXI_ATOMLOCATIONS_CACHE_VALUE ),
+    .CH0_USER_RFIFONUM_WIDTH( 9 ),
+    .CH0_USER_DW( 64 ),
+    .CH0_USER_AW( 64 ),
+    .NUM_READ_OUTSTANDING( 16 ),
+    .NUM_WRITE_OUTSTANDING( 0 ))
+atomLocations_m_axi_U(
+    .AWVALID(m_axi_atomLocations_AWVALID),
+    .AWREADY(m_axi_atomLocations_AWREADY),
+    .AWADDR(m_axi_atomLocations_AWADDR),
+    .AWID(m_axi_atomLocations_AWID),
+    .AWLEN(m_axi_atomLocations_AWLEN),
+    .AWSIZE(m_axi_atomLocations_AWSIZE),
+    .AWBURST(m_axi_atomLocations_AWBURST),
+    .AWLOCK(m_axi_atomLocations_AWLOCK),
+    .AWCACHE(m_axi_atomLocations_AWCACHE),
+    .AWPROT(m_axi_atomLocations_AWPROT),
+    .AWQOS(m_axi_atomLocations_AWQOS),
+    .AWREGION(m_axi_atomLocations_AWREGION),
+    .AWUSER(m_axi_atomLocations_AWUSER),
+    .WVALID(m_axi_atomLocations_WVALID),
+    .WREADY(m_axi_atomLocations_WREADY),
+    .WDATA(m_axi_atomLocations_WDATA),
+    .WSTRB(m_axi_atomLocations_WSTRB),
+    .WLAST(m_axi_atomLocations_WLAST),
+    .WID(m_axi_atomLocations_WID),
+    .WUSER(m_axi_atomLocations_WUSER),
+    .ARVALID(m_axi_atomLocations_ARVALID),
+    .ARREADY(m_axi_atomLocations_ARREADY),
+    .ARADDR(m_axi_atomLocations_ARADDR),
+    .ARID(m_axi_atomLocations_ARID),
+    .ARLEN(m_axi_atomLocations_ARLEN),
+    .ARSIZE(m_axi_atomLocations_ARSIZE),
+    .ARBURST(m_axi_atomLocations_ARBURST),
+    .ARLOCK(m_axi_atomLocations_ARLOCK),
+    .ARCACHE(m_axi_atomLocations_ARCACHE),
+    .ARPROT(m_axi_atomLocations_ARPROT),
+    .ARQOS(m_axi_atomLocations_ARQOS),
+    .ARREGION(m_axi_atomLocations_ARREGION),
+    .ARUSER(m_axi_atomLocations_ARUSER),
+    .RVALID(m_axi_atomLocations_RVALID),
+    .RREADY(m_axi_atomLocations_RREADY),
+    .RDATA(m_axi_atomLocations_RDATA),
+    .RLAST(m_axi_atomLocations_RLAST),
+    .RID(m_axi_atomLocations_RID),
+    .RUSER(m_axi_atomLocations_RUSER),
+    .RRESP(m_axi_atomLocations_RRESP),
+    .BVALID(m_axi_atomLocations_BVALID),
+    .BREADY(m_axi_atomLocations_BREADY),
+    .BRESP(m_axi_atomLocations_BRESP),
+    .BID(m_axi_atomLocations_BID),
+    .BUSER(m_axi_atomLocations_BUSER),
+    .ACLK(ap_clk),
+    .ARESET(ap_rst_n_inv),
+    .ACLK_EN(1'b1),
+    .I_CH0_ARVALID(dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_atomLocations_0_ARVALID),
+    .I_CH0_ARREADY(atomLocations_0_ARREADY),
+    .I_CH0_ARADDR(dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_atomLocations_0_ARADDR),
+    .I_CH0_ARLEN(dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_atomLocations_0_ARLEN),
+    .I_CH0_RVALID(atomLocations_0_RVALID),
+    .I_CH0_RREADY(dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_atomLocations_0_RREADY),
+    .I_CH0_RDATA(atomLocations_0_RDATA),
+    .I_CH0_RFIFONUM(atomLocations_0_RFIFONUM),
+    .I_CH0_AWVALID(1'b0),
+    .I_CH0_AWREADY(atomLocations_0_AWREADY),
+    .I_CH0_AWADDR(64'd0),
+    .I_CH0_AWLEN(32'd0),
+    .I_CH0_WVALID(1'b0),
+    .I_CH0_WREADY(atomLocations_0_WREADY),
+    .I_CH0_WDATA(64'd0),
+    .I_CH0_WSTRB(8'd0),
+    .I_CH0_BVALID(atomLocations_0_BVALID),
+    .I_CH0_BREADY(1'b0)
 );
 
 reconstruct_emissions_m_axi #(
@@ -984,7 +1150,7 @@ reconstruct_emissions_m_axi #(
     .C_PROT_VALUE( C_M_AXI_EMISSIONS_PROT_VALUE ),
     .C_CACHE_VALUE( C_M_AXI_EMISSIONS_CACHE_VALUE ),
     .CH0_USER_RFIFONUM_WIDTH( 9 ),
-    .CH0_USER_DW( 64 ),
+    .CH0_USER_DW( 32 ),
     .CH0_USER_AW( 64 ),
     .NUM_READ_OUTSTANDING( 0 ),
     .NUM_WRITE_OUTSTANDING( 16 ))
@@ -1045,16 +1211,16 @@ emissions_m_axi_U(
     .I_CH0_RREADY(1'b0),
     .I_CH0_RDATA(emissions_0_RDATA),
     .I_CH0_RFIFONUM(emissions_0_RFIFONUM),
-    .I_CH0_AWVALID(applyProjectors_U0_m_axi_emissions_0_AWVALID),
+    .I_CH0_AWVALID(dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_emissions_0_AWVALID),
     .I_CH0_AWREADY(emissions_0_AWREADY),
-    .I_CH0_AWADDR(applyProjectors_U0_m_axi_emissions_0_AWADDR),
-    .I_CH0_AWLEN(applyProjectors_U0_m_axi_emissions_0_AWLEN),
-    .I_CH0_WVALID(applyProjectors_U0_m_axi_emissions_0_WVALID),
+    .I_CH0_AWADDR(dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_emissions_0_AWADDR),
+    .I_CH0_AWLEN(dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_emissions_0_AWLEN),
+    .I_CH0_WVALID(dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_emissions_0_WVALID),
     .I_CH0_WREADY(emissions_0_WREADY),
-    .I_CH0_WDATA(applyProjectors_U0_m_axi_emissions_0_WDATA),
-    .I_CH0_WSTRB(applyProjectors_U0_m_axi_emissions_0_WSTRB),
+    .I_CH0_WDATA(dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_emissions_0_WDATA),
+    .I_CH0_WSTRB(dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_emissions_0_WSTRB),
     .I_CH0_BVALID(emissions_0_BVALID),
-    .I_CH0_BREADY(applyProjectors_U0_m_axi_emissions_0_BREADY)
+    .I_CH0_BREADY(dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_emissions_0_BREADY)
 );
 
 reconstruct_fullImage_m_axi #(
@@ -1074,7 +1240,7 @@ reconstruct_fullImage_m_axi #(
     .C_PROT_VALUE( C_M_AXI_FULLIMAGE_PROT_VALUE ),
     .C_CACHE_VALUE( C_M_AXI_FULLIMAGE_CACHE_VALUE ),
     .CH0_USER_RFIFONUM_WIDTH( 9 ),
-    .CH0_USER_DW( 64 ),
+    .CH0_USER_DW( 32 ),
     .CH0_USER_AW( 64 ),
     .NUM_READ_OUTSTANDING( 16 ),
     .NUM_WRITE_OUTSTANDING( 0 ))
@@ -1127,12 +1293,12 @@ fullImage_m_axi_U(
     .ACLK(ap_clk),
     .ARESET(ap_rst_n_inv),
     .ACLK_EN(1'b1),
-    .I_CH0_ARVALID(applyProjectors_U0_m_axi_fullImage_0_ARVALID),
+    .I_CH0_ARVALID(dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_fullImage_0_ARVALID),
     .I_CH0_ARREADY(fullImage_0_ARREADY),
-    .I_CH0_ARADDR(applyProjectors_U0_m_axi_fullImage_0_ARADDR),
-    .I_CH0_ARLEN(applyProjectors_U0_m_axi_fullImage_0_ARLEN),
+    .I_CH0_ARADDR(dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_fullImage_0_ARADDR),
+    .I_CH0_ARLEN(dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_fullImage_0_ARLEN),
     .I_CH0_RVALID(fullImage_0_RVALID),
-    .I_CH0_RREADY(applyProjectors_U0_m_axi_fullImage_0_RREADY),
+    .I_CH0_RREADY(dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_fullImage_0_RREADY),
     .I_CH0_RDATA(fullImage_0_RDATA),
     .I_CH0_RFIFONUM(fullImage_0_RFIFONUM),
     .I_CH0_AWVALID(1'b0),
@@ -1141,8 +1307,8 @@ fullImage_m_axi_U(
     .I_CH0_AWLEN(32'd0),
     .I_CH0_WVALID(1'b0),
     .I_CH0_WREADY(fullImage_0_WREADY),
-    .I_CH0_WDATA(64'd0),
-    .I_CH0_WSTRB(8'd0),
+    .I_CH0_WDATA(32'd0),
+    .I_CH0_WSTRB(4'd0),
     .I_CH0_BVALID(fullImage_0_BVALID),
     .I_CH0_BREADY(1'b0)
 );
@@ -1164,7 +1330,7 @@ reconstruct_imageProjs_m_axi #(
     .C_PROT_VALUE( C_M_AXI_IMAGEPROJS_PROT_VALUE ),
     .C_CACHE_VALUE( C_M_AXI_IMAGEPROJS_CACHE_VALUE ),
     .CH0_USER_RFIFONUM_WIDTH( 9 ),
-    .CH0_USER_DW( 64 ),
+    .CH0_USER_DW( 32 ),
     .CH0_USER_AW( 64 ),
     .NUM_READ_OUTSTANDING( 16 ),
     .NUM_WRITE_OUTSTANDING( 0 ))
@@ -1217,12 +1383,12 @@ imageProjs_m_axi_U(
     .ACLK(ap_clk),
     .ARESET(ap_rst_n_inv),
     .ACLK_EN(1'b1),
-    .I_CH0_ARVALID(applyProjectors_U0_m_axi_imageProjs_0_ARVALID),
+    .I_CH0_ARVALID(dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_imageProjs_0_ARVALID),
     .I_CH0_ARREADY(imageProjs_0_ARREADY),
-    .I_CH0_ARADDR(applyProjectors_U0_m_axi_imageProjs_0_ARADDR),
-    .I_CH0_ARLEN(applyProjectors_U0_m_axi_imageProjs_0_ARLEN),
+    .I_CH0_ARADDR(dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_imageProjs_0_ARADDR),
+    .I_CH0_ARLEN(dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_imageProjs_0_ARLEN),
     .I_CH0_RVALID(imageProjs_0_RVALID),
-    .I_CH0_RREADY(applyProjectors_U0_m_axi_imageProjs_0_RREADY),
+    .I_CH0_RREADY(dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_imageProjs_0_RREADY),
     .I_CH0_RDATA(imageProjs_0_RDATA),
     .I_CH0_RFIFONUM(imageProjs_0_RFIFONUM),
     .I_CH0_AWVALID(1'b0),
@@ -1231,8 +1397,8 @@ imageProjs_m_axi_U(
     .I_CH0_AWLEN(32'd0),
     .I_CH0_WVALID(1'b0),
     .I_CH0_WREADY(imageProjs_0_WREADY),
-    .I_CH0_WDATA(64'd0),
-    .I_CH0_WSTRB(8'd0),
+    .I_CH0_WDATA(32'd0),
+    .I_CH0_WSTRB(4'd0),
     .I_CH0_BVALID(imageProjs_0_BVALID),
     .I_CH0_BREADY(1'b0)
 );
@@ -1254,7 +1420,7 @@ reconstruct_imageProjs_local_m_axi #(
     .C_PROT_VALUE( C_M_AXI_IMAGEPROJS_LOCAL_PROT_VALUE ),
     .C_CACHE_VALUE( C_M_AXI_IMAGEPROJS_LOCAL_CACHE_VALUE ),
     .CH0_USER_RFIFONUM_WIDTH( 9 ),
-    .CH0_USER_DW( 64 ),
+    .CH0_USER_DW( 32 ),
     .CH0_USER_AW( 64 ),
     .NUM_READ_OUTSTANDING( 16 ),
     .NUM_WRITE_OUTSTANDING( 0 ))
@@ -1307,12 +1473,12 @@ imageProjs_local_m_axi_U(
     .ACLK(ap_clk),
     .ARESET(ap_rst_n_inv),
     .ACLK_EN(1'b1),
-    .I_CH0_ARVALID(applyProjectors_U0_m_axi_imageProjs_local_0_ARVALID),
+    .I_CH0_ARVALID(dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_imageProjs_local_0_ARVALID),
     .I_CH0_ARREADY(imageProjs_local_0_ARREADY),
-    .I_CH0_ARADDR(applyProjectors_U0_m_axi_imageProjs_local_0_ARADDR),
-    .I_CH0_ARLEN(applyProjectors_U0_m_axi_imageProjs_local_0_ARLEN),
+    .I_CH0_ARADDR(dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_imageProjs_local_0_ARADDR),
+    .I_CH0_ARLEN(dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_imageProjs_local_0_ARLEN),
     .I_CH0_RVALID(imageProjs_local_0_RVALID),
-    .I_CH0_RREADY(applyProjectors_U0_m_axi_imageProjs_local_0_RREADY),
+    .I_CH0_RREADY(dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_imageProjs_local_0_RREADY),
     .I_CH0_RDATA(imageProjs_local_0_RDATA),
     .I_CH0_RFIFONUM(imageProjs_local_0_RFIFONUM),
     .I_CH0_AWVALID(1'b0),
@@ -1321,217 +1487,101 @@ imageProjs_local_m_axi_U(
     .I_CH0_AWLEN(32'd0),
     .I_CH0_WVALID(1'b0),
     .I_CH0_WREADY(imageProjs_local_0_WREADY),
-    .I_CH0_WDATA(64'd0),
-    .I_CH0_WSTRB(8'd0),
+    .I_CH0_WDATA(32'd0),
+    .I_CH0_WSTRB(4'd0),
     .I_CH0_BVALID(imageProjs_local_0_BVALID),
     .I_CH0_BREADY(1'b0)
 );
 
-reconstruct_imageProjs_local_size_m_axi #(
-    .CONSERVATIVE( 1 ),
-    .USER_MAXREQS( 7 ),
-    .MAX_READ_BURST_LENGTH( 16 ),
-    .MAX_WRITE_BURST_LENGTH( 16 ),
-    .C_M_AXI_ID_WIDTH( C_M_AXI_IMAGEPROJS_LOCAL_SIZE_ID_WIDTH ),
-    .C_M_AXI_ADDR_WIDTH( C_M_AXI_IMAGEPROJS_LOCAL_SIZE_ADDR_WIDTH ),
-    .C_M_AXI_DATA_WIDTH( C_M_AXI_IMAGEPROJS_LOCAL_SIZE_DATA_WIDTH ),
-    .C_M_AXI_AWUSER_WIDTH( C_M_AXI_IMAGEPROJS_LOCAL_SIZE_AWUSER_WIDTH ),
-    .C_M_AXI_ARUSER_WIDTH( C_M_AXI_IMAGEPROJS_LOCAL_SIZE_ARUSER_WIDTH ),
-    .C_M_AXI_WUSER_WIDTH( C_M_AXI_IMAGEPROJS_LOCAL_SIZE_WUSER_WIDTH ),
-    .C_M_AXI_RUSER_WIDTH( C_M_AXI_IMAGEPROJS_LOCAL_SIZE_RUSER_WIDTH ),
-    .C_M_AXI_BUSER_WIDTH( C_M_AXI_IMAGEPROJS_LOCAL_SIZE_BUSER_WIDTH ),
-    .C_USER_VALUE( C_M_AXI_IMAGEPROJS_LOCAL_SIZE_USER_VALUE ),
-    .C_PROT_VALUE( C_M_AXI_IMAGEPROJS_LOCAL_SIZE_PROT_VALUE ),
-    .C_CACHE_VALUE( C_M_AXI_IMAGEPROJS_LOCAL_SIZE_CACHE_VALUE ),
-    .CH0_USER_RFIFONUM_WIDTH( 9 ),
-    .CH0_USER_DW( 32 ),
-    .CH0_USER_AW( 64 ),
-    .NUM_READ_OUTSTANDING( 16 ),
-    .NUM_WRITE_OUTSTANDING( 0 ))
-imageProjs_local_size_m_axi_U(
-    .AWVALID(m_axi_imageProjs_local_size_AWVALID),
-    .AWREADY(m_axi_imageProjs_local_size_AWREADY),
-    .AWADDR(m_axi_imageProjs_local_size_AWADDR),
-    .AWID(m_axi_imageProjs_local_size_AWID),
-    .AWLEN(m_axi_imageProjs_local_size_AWLEN),
-    .AWSIZE(m_axi_imageProjs_local_size_AWSIZE),
-    .AWBURST(m_axi_imageProjs_local_size_AWBURST),
-    .AWLOCK(m_axi_imageProjs_local_size_AWLOCK),
-    .AWCACHE(m_axi_imageProjs_local_size_AWCACHE),
-    .AWPROT(m_axi_imageProjs_local_size_AWPROT),
-    .AWQOS(m_axi_imageProjs_local_size_AWQOS),
-    .AWREGION(m_axi_imageProjs_local_size_AWREGION),
-    .AWUSER(m_axi_imageProjs_local_size_AWUSER),
-    .WVALID(m_axi_imageProjs_local_size_WVALID),
-    .WREADY(m_axi_imageProjs_local_size_WREADY),
-    .WDATA(m_axi_imageProjs_local_size_WDATA),
-    .WSTRB(m_axi_imageProjs_local_size_WSTRB),
-    .WLAST(m_axi_imageProjs_local_size_WLAST),
-    .WID(m_axi_imageProjs_local_size_WID),
-    .WUSER(m_axi_imageProjs_local_size_WUSER),
-    .ARVALID(m_axi_imageProjs_local_size_ARVALID),
-    .ARREADY(m_axi_imageProjs_local_size_ARREADY),
-    .ARADDR(m_axi_imageProjs_local_size_ARADDR),
-    .ARID(m_axi_imageProjs_local_size_ARID),
-    .ARLEN(m_axi_imageProjs_local_size_ARLEN),
-    .ARSIZE(m_axi_imageProjs_local_size_ARSIZE),
-    .ARBURST(m_axi_imageProjs_local_size_ARBURST),
-    .ARLOCK(m_axi_imageProjs_local_size_ARLOCK),
-    .ARCACHE(m_axi_imageProjs_local_size_ARCACHE),
-    .ARPROT(m_axi_imageProjs_local_size_ARPROT),
-    .ARQOS(m_axi_imageProjs_local_size_ARQOS),
-    .ARREGION(m_axi_imageProjs_local_size_ARREGION),
-    .ARUSER(m_axi_imageProjs_local_size_ARUSER),
-    .RVALID(m_axi_imageProjs_local_size_RVALID),
-    .RREADY(m_axi_imageProjs_local_size_RREADY),
-    .RDATA(m_axi_imageProjs_local_size_RDATA),
-    .RLAST(m_axi_imageProjs_local_size_RLAST),
-    .RID(m_axi_imageProjs_local_size_RID),
-    .RUSER(m_axi_imageProjs_local_size_RUSER),
-    .RRESP(m_axi_imageProjs_local_size_RRESP),
-    .BVALID(m_axi_imageProjs_local_size_BVALID),
-    .BREADY(m_axi_imageProjs_local_size_BREADY),
-    .BRESP(m_axi_imageProjs_local_size_BRESP),
-    .BID(m_axi_imageProjs_local_size_BID),
-    .BUSER(m_axi_imageProjs_local_size_BUSER),
-    .ACLK(ap_clk),
-    .ARESET(ap_rst_n_inv),
-    .ACLK_EN(1'b1),
-    .I_CH0_ARVALID(applyProjectors_U0_m_axi_imageProjs_local_size_r_0_ARVALID),
-    .I_CH0_ARREADY(imageProjs_local_size_r_0_ARREADY),
-    .I_CH0_ARADDR(applyProjectors_U0_m_axi_imageProjs_local_size_r_0_ARADDR),
-    .I_CH0_ARLEN(applyProjectors_U0_m_axi_imageProjs_local_size_r_0_ARLEN),
-    .I_CH0_RVALID(imageProjs_local_size_r_0_RVALID),
-    .I_CH0_RREADY(applyProjectors_U0_m_axi_imageProjs_local_size_r_0_RREADY),
-    .I_CH0_RDATA(imageProjs_local_size_r_0_RDATA),
-    .I_CH0_RFIFONUM(imageProjs_local_size_r_0_RFIFONUM),
-    .I_CH0_AWVALID(1'b0),
-    .I_CH0_AWREADY(imageProjs_local_size_r_0_AWREADY),
-    .I_CH0_AWADDR(64'd0),
-    .I_CH0_AWLEN(32'd0),
-    .I_CH0_WVALID(1'b0),
-    .I_CH0_WREADY(imageProjs_local_size_r_0_WREADY),
-    .I_CH0_WDATA(32'd0),
-    .I_CH0_WSTRB(4'd0),
-    .I_CH0_BVALID(imageProjs_local_size_r_0_BVALID),
-    .I_CH0_BREADY(1'b0)
-);
-
-reconstruct_getLocalImages getLocalImages_U0(
+reconstruct_dataflow_in_loop_VITIS_LOOP_149_1_1 dataflow_in_loop_VITIS_LOOP_149_1_1_U0(
     .ap_clk(ap_clk),
     .ap_rst(ap_rst_n_inv),
-    .ap_start(getLocalImages_U0_ap_start),
-    .ap_done(getLocalImages_U0_ap_done),
-    .ap_continue(getLocalImages_U0_ap_continue),
-    .ap_idle(getLocalImages_U0_ap_idle),
-    .ap_ready(getLocalImages_U0_ap_ready),
-    .atomLocationsSize(atomLocationsSize),
+    .conv(dataflow_in_loop_VITIS_LOOP_149_1_1_U0_conv),
     .psfSupersample(psfSupersample),
     .projShape0(projShape0),
     .projShape1(projShape1),
-    .atomLocations_address0(getLocalImages_U0_atomLocations_address0),
-    .atomLocations_ce0(getLocalImages_U0_atomLocations_ce0),
-    .atomLocations_q0(atomLocations_q0),
-    .localImages_din(getLocalImages_U0_localImages_din),
-    .localImages_full_n(localImages_full_n),
-    .localImages_write(getLocalImages_U0_localImages_write),
-    .localImages_num_data_valid(getLocalImages_U0_localImages_num_data_valid),
-    .localImages_fifo_cap(getLocalImages_U0_localImages_fifo_cap)
-);
-
-reconstruct_applyProjectors applyProjectors_U0(
-    .ap_clk(ap_clk),
-    .ap_rst(ap_rst_n_inv),
-    .ap_start(applyProjectors_U0_ap_start),
-    .ap_done(applyProjectors_U0_ap_done),
-    .ap_continue(applyProjectors_U0_ap_continue),
-    .ap_idle(applyProjectors_U0_ap_idle),
-    .ap_ready(applyProjectors_U0_ap_ready),
-    .atomLocationsSize(atomLocationsSize),
-    .psfSupersample(psfSupersample),
-    .imageProjectionSize(imageProjectionSize),
-    .m_axi_imageProjs_local_0_AWVALID(applyProjectors_U0_m_axi_imageProjs_local_0_AWVALID),
-    .m_axi_imageProjs_local_0_AWREADY(1'b0),
-    .m_axi_imageProjs_local_0_AWADDR(applyProjectors_U0_m_axi_imageProjs_local_0_AWADDR),
-    .m_axi_imageProjs_local_0_AWID(applyProjectors_U0_m_axi_imageProjs_local_0_AWID),
-    .m_axi_imageProjs_local_0_AWLEN(applyProjectors_U0_m_axi_imageProjs_local_0_AWLEN),
-    .m_axi_imageProjs_local_0_AWSIZE(applyProjectors_U0_m_axi_imageProjs_local_0_AWSIZE),
-    .m_axi_imageProjs_local_0_AWBURST(applyProjectors_U0_m_axi_imageProjs_local_0_AWBURST),
-    .m_axi_imageProjs_local_0_AWLOCK(applyProjectors_U0_m_axi_imageProjs_local_0_AWLOCK),
-    .m_axi_imageProjs_local_0_AWCACHE(applyProjectors_U0_m_axi_imageProjs_local_0_AWCACHE),
-    .m_axi_imageProjs_local_0_AWPROT(applyProjectors_U0_m_axi_imageProjs_local_0_AWPROT),
-    .m_axi_imageProjs_local_0_AWQOS(applyProjectors_U0_m_axi_imageProjs_local_0_AWQOS),
-    .m_axi_imageProjs_local_0_AWREGION(applyProjectors_U0_m_axi_imageProjs_local_0_AWREGION),
-    .m_axi_imageProjs_local_0_AWUSER(applyProjectors_U0_m_axi_imageProjs_local_0_AWUSER),
-    .m_axi_imageProjs_local_0_WVALID(applyProjectors_U0_m_axi_imageProjs_local_0_WVALID),
-    .m_axi_imageProjs_local_0_WREADY(1'b0),
-    .m_axi_imageProjs_local_0_WDATA(applyProjectors_U0_m_axi_imageProjs_local_0_WDATA),
-    .m_axi_imageProjs_local_0_WSTRB(applyProjectors_U0_m_axi_imageProjs_local_0_WSTRB),
-    .m_axi_imageProjs_local_0_WLAST(applyProjectors_U0_m_axi_imageProjs_local_0_WLAST),
-    .m_axi_imageProjs_local_0_WID(applyProjectors_U0_m_axi_imageProjs_local_0_WID),
-    .m_axi_imageProjs_local_0_WUSER(applyProjectors_U0_m_axi_imageProjs_local_0_WUSER),
-    .m_axi_imageProjs_local_0_ARVALID(applyProjectors_U0_m_axi_imageProjs_local_0_ARVALID),
-    .m_axi_imageProjs_local_0_ARREADY(imageProjs_local_0_ARREADY),
-    .m_axi_imageProjs_local_0_ARADDR(applyProjectors_U0_m_axi_imageProjs_local_0_ARADDR),
-    .m_axi_imageProjs_local_0_ARID(applyProjectors_U0_m_axi_imageProjs_local_0_ARID),
-    .m_axi_imageProjs_local_0_ARLEN(applyProjectors_U0_m_axi_imageProjs_local_0_ARLEN),
-    .m_axi_imageProjs_local_0_ARSIZE(applyProjectors_U0_m_axi_imageProjs_local_0_ARSIZE),
-    .m_axi_imageProjs_local_0_ARBURST(applyProjectors_U0_m_axi_imageProjs_local_0_ARBURST),
-    .m_axi_imageProjs_local_0_ARLOCK(applyProjectors_U0_m_axi_imageProjs_local_0_ARLOCK),
-    .m_axi_imageProjs_local_0_ARCACHE(applyProjectors_U0_m_axi_imageProjs_local_0_ARCACHE),
-    .m_axi_imageProjs_local_0_ARPROT(applyProjectors_U0_m_axi_imageProjs_local_0_ARPROT),
-    .m_axi_imageProjs_local_0_ARQOS(applyProjectors_U0_m_axi_imageProjs_local_0_ARQOS),
-    .m_axi_imageProjs_local_0_ARREGION(applyProjectors_U0_m_axi_imageProjs_local_0_ARREGION),
-    .m_axi_imageProjs_local_0_ARUSER(applyProjectors_U0_m_axi_imageProjs_local_0_ARUSER),
-    .m_axi_imageProjs_local_0_RVALID(imageProjs_local_0_RVALID),
-    .m_axi_imageProjs_local_0_RREADY(applyProjectors_U0_m_axi_imageProjs_local_0_RREADY),
-    .m_axi_imageProjs_local_0_RDATA(imageProjs_local_0_RDATA),
-    .m_axi_imageProjs_local_0_RLAST(imageProjs_local_0_RLAST),
-    .m_axi_imageProjs_local_0_RID(imageProjs_local_0_RID),
-    .m_axi_imageProjs_local_0_RFIFONUM(imageProjs_local_0_RFIFONUM),
-    .m_axi_imageProjs_local_0_RUSER(imageProjs_local_0_RUSER),
-    .m_axi_imageProjs_local_0_RRESP(imageProjs_local_0_RRESP),
-    .m_axi_imageProjs_local_0_BVALID(1'b0),
-    .m_axi_imageProjs_local_0_BREADY(applyProjectors_U0_m_axi_imageProjs_local_0_BREADY),
-    .m_axi_imageProjs_local_0_BRESP(2'd0),
-    .m_axi_imageProjs_local_0_BID(1'd0),
-    .m_axi_imageProjs_local_0_BUSER(1'd0),
-    .imageProjs_local1(imageProjs_local_offset),
-    .m_axi_imageProjs_0_AWVALID(applyProjectors_U0_m_axi_imageProjs_0_AWVALID),
+    .m_axi_atomLocations_0_AWVALID(dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_atomLocations_0_AWVALID),
+    .m_axi_atomLocations_0_AWREADY(1'b0),
+    .m_axi_atomLocations_0_AWADDR(dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_atomLocations_0_AWADDR),
+    .m_axi_atomLocations_0_AWID(dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_atomLocations_0_AWID),
+    .m_axi_atomLocations_0_AWLEN(dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_atomLocations_0_AWLEN),
+    .m_axi_atomLocations_0_AWSIZE(dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_atomLocations_0_AWSIZE),
+    .m_axi_atomLocations_0_AWBURST(dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_atomLocations_0_AWBURST),
+    .m_axi_atomLocations_0_AWLOCK(dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_atomLocations_0_AWLOCK),
+    .m_axi_atomLocations_0_AWCACHE(dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_atomLocations_0_AWCACHE),
+    .m_axi_atomLocations_0_AWPROT(dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_atomLocations_0_AWPROT),
+    .m_axi_atomLocations_0_AWQOS(dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_atomLocations_0_AWQOS),
+    .m_axi_atomLocations_0_AWREGION(dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_atomLocations_0_AWREGION),
+    .m_axi_atomLocations_0_AWUSER(dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_atomLocations_0_AWUSER),
+    .m_axi_atomLocations_0_WVALID(dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_atomLocations_0_WVALID),
+    .m_axi_atomLocations_0_WREADY(1'b0),
+    .m_axi_atomLocations_0_WDATA(dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_atomLocations_0_WDATA),
+    .m_axi_atomLocations_0_WSTRB(dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_atomLocations_0_WSTRB),
+    .m_axi_atomLocations_0_WLAST(dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_atomLocations_0_WLAST),
+    .m_axi_atomLocations_0_WID(dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_atomLocations_0_WID),
+    .m_axi_atomLocations_0_WUSER(dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_atomLocations_0_WUSER),
+    .m_axi_atomLocations_0_ARVALID(dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_atomLocations_0_ARVALID),
+    .m_axi_atomLocations_0_ARREADY(atomLocations_0_ARREADY),
+    .m_axi_atomLocations_0_ARADDR(dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_atomLocations_0_ARADDR),
+    .m_axi_atomLocations_0_ARID(dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_atomLocations_0_ARID),
+    .m_axi_atomLocations_0_ARLEN(dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_atomLocations_0_ARLEN),
+    .m_axi_atomLocations_0_ARSIZE(dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_atomLocations_0_ARSIZE),
+    .m_axi_atomLocations_0_ARBURST(dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_atomLocations_0_ARBURST),
+    .m_axi_atomLocations_0_ARLOCK(dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_atomLocations_0_ARLOCK),
+    .m_axi_atomLocations_0_ARCACHE(dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_atomLocations_0_ARCACHE),
+    .m_axi_atomLocations_0_ARPROT(dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_atomLocations_0_ARPROT),
+    .m_axi_atomLocations_0_ARQOS(dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_atomLocations_0_ARQOS),
+    .m_axi_atomLocations_0_ARREGION(dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_atomLocations_0_ARREGION),
+    .m_axi_atomLocations_0_ARUSER(dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_atomLocations_0_ARUSER),
+    .m_axi_atomLocations_0_RVALID(atomLocations_0_RVALID),
+    .m_axi_atomLocations_0_RREADY(dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_atomLocations_0_RREADY),
+    .m_axi_atomLocations_0_RDATA(atomLocations_0_RDATA),
+    .m_axi_atomLocations_0_RLAST(atomLocations_0_RLAST),
+    .m_axi_atomLocations_0_RID(atomLocations_0_RID),
+    .m_axi_atomLocations_0_RFIFONUM(atomLocations_0_RFIFONUM),
+    .m_axi_atomLocations_0_RUSER(atomLocations_0_RUSER),
+    .m_axi_atomLocations_0_RRESP(atomLocations_0_RRESP),
+    .m_axi_atomLocations_0_BVALID(1'b0),
+    .m_axi_atomLocations_0_BREADY(dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_atomLocations_0_BREADY),
+    .m_axi_atomLocations_0_BRESP(2'd0),
+    .m_axi_atomLocations_0_BID(1'd0),
+    .m_axi_atomLocations_0_BUSER(1'd0),
+    .atomLocations1(atomLocations_offset),
+    .m_axi_imageProjs_0_AWVALID(dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_imageProjs_0_AWVALID),
     .m_axi_imageProjs_0_AWREADY(1'b0),
-    .m_axi_imageProjs_0_AWADDR(applyProjectors_U0_m_axi_imageProjs_0_AWADDR),
-    .m_axi_imageProjs_0_AWID(applyProjectors_U0_m_axi_imageProjs_0_AWID),
-    .m_axi_imageProjs_0_AWLEN(applyProjectors_U0_m_axi_imageProjs_0_AWLEN),
-    .m_axi_imageProjs_0_AWSIZE(applyProjectors_U0_m_axi_imageProjs_0_AWSIZE),
-    .m_axi_imageProjs_0_AWBURST(applyProjectors_U0_m_axi_imageProjs_0_AWBURST),
-    .m_axi_imageProjs_0_AWLOCK(applyProjectors_U0_m_axi_imageProjs_0_AWLOCK),
-    .m_axi_imageProjs_0_AWCACHE(applyProjectors_U0_m_axi_imageProjs_0_AWCACHE),
-    .m_axi_imageProjs_0_AWPROT(applyProjectors_U0_m_axi_imageProjs_0_AWPROT),
-    .m_axi_imageProjs_0_AWQOS(applyProjectors_U0_m_axi_imageProjs_0_AWQOS),
-    .m_axi_imageProjs_0_AWREGION(applyProjectors_U0_m_axi_imageProjs_0_AWREGION),
-    .m_axi_imageProjs_0_AWUSER(applyProjectors_U0_m_axi_imageProjs_0_AWUSER),
-    .m_axi_imageProjs_0_WVALID(applyProjectors_U0_m_axi_imageProjs_0_WVALID),
+    .m_axi_imageProjs_0_AWADDR(dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_imageProjs_0_AWADDR),
+    .m_axi_imageProjs_0_AWID(dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_imageProjs_0_AWID),
+    .m_axi_imageProjs_0_AWLEN(dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_imageProjs_0_AWLEN),
+    .m_axi_imageProjs_0_AWSIZE(dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_imageProjs_0_AWSIZE),
+    .m_axi_imageProjs_0_AWBURST(dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_imageProjs_0_AWBURST),
+    .m_axi_imageProjs_0_AWLOCK(dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_imageProjs_0_AWLOCK),
+    .m_axi_imageProjs_0_AWCACHE(dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_imageProjs_0_AWCACHE),
+    .m_axi_imageProjs_0_AWPROT(dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_imageProjs_0_AWPROT),
+    .m_axi_imageProjs_0_AWQOS(dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_imageProjs_0_AWQOS),
+    .m_axi_imageProjs_0_AWREGION(dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_imageProjs_0_AWREGION),
+    .m_axi_imageProjs_0_AWUSER(dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_imageProjs_0_AWUSER),
+    .m_axi_imageProjs_0_WVALID(dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_imageProjs_0_WVALID),
     .m_axi_imageProjs_0_WREADY(1'b0),
-    .m_axi_imageProjs_0_WDATA(applyProjectors_U0_m_axi_imageProjs_0_WDATA),
-    .m_axi_imageProjs_0_WSTRB(applyProjectors_U0_m_axi_imageProjs_0_WSTRB),
-    .m_axi_imageProjs_0_WLAST(applyProjectors_U0_m_axi_imageProjs_0_WLAST),
-    .m_axi_imageProjs_0_WID(applyProjectors_U0_m_axi_imageProjs_0_WID),
-    .m_axi_imageProjs_0_WUSER(applyProjectors_U0_m_axi_imageProjs_0_WUSER),
-    .m_axi_imageProjs_0_ARVALID(applyProjectors_U0_m_axi_imageProjs_0_ARVALID),
+    .m_axi_imageProjs_0_WDATA(dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_imageProjs_0_WDATA),
+    .m_axi_imageProjs_0_WSTRB(dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_imageProjs_0_WSTRB),
+    .m_axi_imageProjs_0_WLAST(dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_imageProjs_0_WLAST),
+    .m_axi_imageProjs_0_WID(dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_imageProjs_0_WID),
+    .m_axi_imageProjs_0_WUSER(dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_imageProjs_0_WUSER),
+    .m_axi_imageProjs_0_ARVALID(dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_imageProjs_0_ARVALID),
     .m_axi_imageProjs_0_ARREADY(imageProjs_0_ARREADY),
-    .m_axi_imageProjs_0_ARADDR(applyProjectors_U0_m_axi_imageProjs_0_ARADDR),
-    .m_axi_imageProjs_0_ARID(applyProjectors_U0_m_axi_imageProjs_0_ARID),
-    .m_axi_imageProjs_0_ARLEN(applyProjectors_U0_m_axi_imageProjs_0_ARLEN),
-    .m_axi_imageProjs_0_ARSIZE(applyProjectors_U0_m_axi_imageProjs_0_ARSIZE),
-    .m_axi_imageProjs_0_ARBURST(applyProjectors_U0_m_axi_imageProjs_0_ARBURST),
-    .m_axi_imageProjs_0_ARLOCK(applyProjectors_U0_m_axi_imageProjs_0_ARLOCK),
-    .m_axi_imageProjs_0_ARCACHE(applyProjectors_U0_m_axi_imageProjs_0_ARCACHE),
-    .m_axi_imageProjs_0_ARPROT(applyProjectors_U0_m_axi_imageProjs_0_ARPROT),
-    .m_axi_imageProjs_0_ARQOS(applyProjectors_U0_m_axi_imageProjs_0_ARQOS),
-    .m_axi_imageProjs_0_ARREGION(applyProjectors_U0_m_axi_imageProjs_0_ARREGION),
-    .m_axi_imageProjs_0_ARUSER(applyProjectors_U0_m_axi_imageProjs_0_ARUSER),
+    .m_axi_imageProjs_0_ARADDR(dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_imageProjs_0_ARADDR),
+    .m_axi_imageProjs_0_ARID(dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_imageProjs_0_ARID),
+    .m_axi_imageProjs_0_ARLEN(dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_imageProjs_0_ARLEN),
+    .m_axi_imageProjs_0_ARSIZE(dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_imageProjs_0_ARSIZE),
+    .m_axi_imageProjs_0_ARBURST(dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_imageProjs_0_ARBURST),
+    .m_axi_imageProjs_0_ARLOCK(dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_imageProjs_0_ARLOCK),
+    .m_axi_imageProjs_0_ARCACHE(dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_imageProjs_0_ARCACHE),
+    .m_axi_imageProjs_0_ARPROT(dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_imageProjs_0_ARPROT),
+    .m_axi_imageProjs_0_ARQOS(dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_imageProjs_0_ARQOS),
+    .m_axi_imageProjs_0_ARREGION(dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_imageProjs_0_ARREGION),
+    .m_axi_imageProjs_0_ARUSER(dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_imageProjs_0_ARUSER),
     .m_axi_imageProjs_0_RVALID(imageProjs_0_RVALID),
-    .m_axi_imageProjs_0_RREADY(applyProjectors_U0_m_axi_imageProjs_0_RREADY),
+    .m_axi_imageProjs_0_RREADY(dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_imageProjs_0_RREADY),
     .m_axi_imageProjs_0_RDATA(imageProjs_0_RDATA),
     .m_axi_imageProjs_0_RLAST(imageProjs_0_RLAST),
     .m_axi_imageProjs_0_RID(imageProjs_0_RID),
@@ -1539,93 +1589,46 @@ reconstruct_applyProjectors applyProjectors_U0(
     .m_axi_imageProjs_0_RUSER(imageProjs_0_RUSER),
     .m_axi_imageProjs_0_RRESP(imageProjs_0_RRESP),
     .m_axi_imageProjs_0_BVALID(1'b0),
-    .m_axi_imageProjs_0_BREADY(applyProjectors_U0_m_axi_imageProjs_0_BREADY),
+    .m_axi_imageProjs_0_BREADY(dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_imageProjs_0_BREADY),
     .m_axi_imageProjs_0_BRESP(2'd0),
     .m_axi_imageProjs_0_BID(1'd0),
     .m_axi_imageProjs_0_BUSER(1'd0),
-    .imageProjs2(imageProjs_offset),
-    .m_axi_imageProjs_local_size_r_0_AWVALID(applyProjectors_U0_m_axi_imageProjs_local_size_r_0_AWVALID),
-    .m_axi_imageProjs_local_size_r_0_AWREADY(1'b0),
-    .m_axi_imageProjs_local_size_r_0_AWADDR(applyProjectors_U0_m_axi_imageProjs_local_size_r_0_AWADDR),
-    .m_axi_imageProjs_local_size_r_0_AWID(applyProjectors_U0_m_axi_imageProjs_local_size_r_0_AWID),
-    .m_axi_imageProjs_local_size_r_0_AWLEN(applyProjectors_U0_m_axi_imageProjs_local_size_r_0_AWLEN),
-    .m_axi_imageProjs_local_size_r_0_AWSIZE(applyProjectors_U0_m_axi_imageProjs_local_size_r_0_AWSIZE),
-    .m_axi_imageProjs_local_size_r_0_AWBURST(applyProjectors_U0_m_axi_imageProjs_local_size_r_0_AWBURST),
-    .m_axi_imageProjs_local_size_r_0_AWLOCK(applyProjectors_U0_m_axi_imageProjs_local_size_r_0_AWLOCK),
-    .m_axi_imageProjs_local_size_r_0_AWCACHE(applyProjectors_U0_m_axi_imageProjs_local_size_r_0_AWCACHE),
-    .m_axi_imageProjs_local_size_r_0_AWPROT(applyProjectors_U0_m_axi_imageProjs_local_size_r_0_AWPROT),
-    .m_axi_imageProjs_local_size_r_0_AWQOS(applyProjectors_U0_m_axi_imageProjs_local_size_r_0_AWQOS),
-    .m_axi_imageProjs_local_size_r_0_AWREGION(applyProjectors_U0_m_axi_imageProjs_local_size_r_0_AWREGION),
-    .m_axi_imageProjs_local_size_r_0_AWUSER(applyProjectors_U0_m_axi_imageProjs_local_size_r_0_AWUSER),
-    .m_axi_imageProjs_local_size_r_0_WVALID(applyProjectors_U0_m_axi_imageProjs_local_size_r_0_WVALID),
-    .m_axi_imageProjs_local_size_r_0_WREADY(1'b0),
-    .m_axi_imageProjs_local_size_r_0_WDATA(applyProjectors_U0_m_axi_imageProjs_local_size_r_0_WDATA),
-    .m_axi_imageProjs_local_size_r_0_WSTRB(applyProjectors_U0_m_axi_imageProjs_local_size_r_0_WSTRB),
-    .m_axi_imageProjs_local_size_r_0_WLAST(applyProjectors_U0_m_axi_imageProjs_local_size_r_0_WLAST),
-    .m_axi_imageProjs_local_size_r_0_WID(applyProjectors_U0_m_axi_imageProjs_local_size_r_0_WID),
-    .m_axi_imageProjs_local_size_r_0_WUSER(applyProjectors_U0_m_axi_imageProjs_local_size_r_0_WUSER),
-    .m_axi_imageProjs_local_size_r_0_ARVALID(applyProjectors_U0_m_axi_imageProjs_local_size_r_0_ARVALID),
-    .m_axi_imageProjs_local_size_r_0_ARREADY(imageProjs_local_size_r_0_ARREADY),
-    .m_axi_imageProjs_local_size_r_0_ARADDR(applyProjectors_U0_m_axi_imageProjs_local_size_r_0_ARADDR),
-    .m_axi_imageProjs_local_size_r_0_ARID(applyProjectors_U0_m_axi_imageProjs_local_size_r_0_ARID),
-    .m_axi_imageProjs_local_size_r_0_ARLEN(applyProjectors_U0_m_axi_imageProjs_local_size_r_0_ARLEN),
-    .m_axi_imageProjs_local_size_r_0_ARSIZE(applyProjectors_U0_m_axi_imageProjs_local_size_r_0_ARSIZE),
-    .m_axi_imageProjs_local_size_r_0_ARBURST(applyProjectors_U0_m_axi_imageProjs_local_size_r_0_ARBURST),
-    .m_axi_imageProjs_local_size_r_0_ARLOCK(applyProjectors_U0_m_axi_imageProjs_local_size_r_0_ARLOCK),
-    .m_axi_imageProjs_local_size_r_0_ARCACHE(applyProjectors_U0_m_axi_imageProjs_local_size_r_0_ARCACHE),
-    .m_axi_imageProjs_local_size_r_0_ARPROT(applyProjectors_U0_m_axi_imageProjs_local_size_r_0_ARPROT),
-    .m_axi_imageProjs_local_size_r_0_ARQOS(applyProjectors_U0_m_axi_imageProjs_local_size_r_0_ARQOS),
-    .m_axi_imageProjs_local_size_r_0_ARREGION(applyProjectors_U0_m_axi_imageProjs_local_size_r_0_ARREGION),
-    .m_axi_imageProjs_local_size_r_0_ARUSER(applyProjectors_U0_m_axi_imageProjs_local_size_r_0_ARUSER),
-    .m_axi_imageProjs_local_size_r_0_RVALID(imageProjs_local_size_r_0_RVALID),
-    .m_axi_imageProjs_local_size_r_0_RREADY(applyProjectors_U0_m_axi_imageProjs_local_size_r_0_RREADY),
-    .m_axi_imageProjs_local_size_r_0_RDATA(imageProjs_local_size_r_0_RDATA),
-    .m_axi_imageProjs_local_size_r_0_RLAST(imageProjs_local_size_r_0_RLAST),
-    .m_axi_imageProjs_local_size_r_0_RID(imageProjs_local_size_r_0_RID),
-    .m_axi_imageProjs_local_size_r_0_RFIFONUM(imageProjs_local_size_r_0_RFIFONUM),
-    .m_axi_imageProjs_local_size_r_0_RUSER(imageProjs_local_size_r_0_RUSER),
-    .m_axi_imageProjs_local_size_r_0_RRESP(imageProjs_local_size_r_0_RRESP),
-    .m_axi_imageProjs_local_size_r_0_BVALID(1'b0),
-    .m_axi_imageProjs_local_size_r_0_BREADY(applyProjectors_U0_m_axi_imageProjs_local_size_r_0_BREADY),
-    .m_axi_imageProjs_local_size_r_0_BRESP(2'd0),
-    .m_axi_imageProjs_local_size_r_0_BID(1'd0),
-    .m_axi_imageProjs_local_size_r_0_BUSER(1'd0),
-    .imageProjs_local_size3(imageProjs_local_size_offset),
-    .m_axi_fullImage_0_AWVALID(applyProjectors_U0_m_axi_fullImage_0_AWVALID),
+    .empty(imageProjs_offset),
+    .m_axi_fullImage_0_AWVALID(dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_fullImage_0_AWVALID),
     .m_axi_fullImage_0_AWREADY(1'b0),
-    .m_axi_fullImage_0_AWADDR(applyProjectors_U0_m_axi_fullImage_0_AWADDR),
-    .m_axi_fullImage_0_AWID(applyProjectors_U0_m_axi_fullImage_0_AWID),
-    .m_axi_fullImage_0_AWLEN(applyProjectors_U0_m_axi_fullImage_0_AWLEN),
-    .m_axi_fullImage_0_AWSIZE(applyProjectors_U0_m_axi_fullImage_0_AWSIZE),
-    .m_axi_fullImage_0_AWBURST(applyProjectors_U0_m_axi_fullImage_0_AWBURST),
-    .m_axi_fullImage_0_AWLOCK(applyProjectors_U0_m_axi_fullImage_0_AWLOCK),
-    .m_axi_fullImage_0_AWCACHE(applyProjectors_U0_m_axi_fullImage_0_AWCACHE),
-    .m_axi_fullImage_0_AWPROT(applyProjectors_U0_m_axi_fullImage_0_AWPROT),
-    .m_axi_fullImage_0_AWQOS(applyProjectors_U0_m_axi_fullImage_0_AWQOS),
-    .m_axi_fullImage_0_AWREGION(applyProjectors_U0_m_axi_fullImage_0_AWREGION),
-    .m_axi_fullImage_0_AWUSER(applyProjectors_U0_m_axi_fullImage_0_AWUSER),
-    .m_axi_fullImage_0_WVALID(applyProjectors_U0_m_axi_fullImage_0_WVALID),
+    .m_axi_fullImage_0_AWADDR(dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_fullImage_0_AWADDR),
+    .m_axi_fullImage_0_AWID(dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_fullImage_0_AWID),
+    .m_axi_fullImage_0_AWLEN(dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_fullImage_0_AWLEN),
+    .m_axi_fullImage_0_AWSIZE(dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_fullImage_0_AWSIZE),
+    .m_axi_fullImage_0_AWBURST(dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_fullImage_0_AWBURST),
+    .m_axi_fullImage_0_AWLOCK(dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_fullImage_0_AWLOCK),
+    .m_axi_fullImage_0_AWCACHE(dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_fullImage_0_AWCACHE),
+    .m_axi_fullImage_0_AWPROT(dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_fullImage_0_AWPROT),
+    .m_axi_fullImage_0_AWQOS(dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_fullImage_0_AWQOS),
+    .m_axi_fullImage_0_AWREGION(dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_fullImage_0_AWREGION),
+    .m_axi_fullImage_0_AWUSER(dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_fullImage_0_AWUSER),
+    .m_axi_fullImage_0_WVALID(dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_fullImage_0_WVALID),
     .m_axi_fullImage_0_WREADY(1'b0),
-    .m_axi_fullImage_0_WDATA(applyProjectors_U0_m_axi_fullImage_0_WDATA),
-    .m_axi_fullImage_0_WSTRB(applyProjectors_U0_m_axi_fullImage_0_WSTRB),
-    .m_axi_fullImage_0_WLAST(applyProjectors_U0_m_axi_fullImage_0_WLAST),
-    .m_axi_fullImage_0_WID(applyProjectors_U0_m_axi_fullImage_0_WID),
-    .m_axi_fullImage_0_WUSER(applyProjectors_U0_m_axi_fullImage_0_WUSER),
-    .m_axi_fullImage_0_ARVALID(applyProjectors_U0_m_axi_fullImage_0_ARVALID),
+    .m_axi_fullImage_0_WDATA(dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_fullImage_0_WDATA),
+    .m_axi_fullImage_0_WSTRB(dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_fullImage_0_WSTRB),
+    .m_axi_fullImage_0_WLAST(dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_fullImage_0_WLAST),
+    .m_axi_fullImage_0_WID(dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_fullImage_0_WID),
+    .m_axi_fullImage_0_WUSER(dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_fullImage_0_WUSER),
+    .m_axi_fullImage_0_ARVALID(dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_fullImage_0_ARVALID),
     .m_axi_fullImage_0_ARREADY(fullImage_0_ARREADY),
-    .m_axi_fullImage_0_ARADDR(applyProjectors_U0_m_axi_fullImage_0_ARADDR),
-    .m_axi_fullImage_0_ARID(applyProjectors_U0_m_axi_fullImage_0_ARID),
-    .m_axi_fullImage_0_ARLEN(applyProjectors_U0_m_axi_fullImage_0_ARLEN),
-    .m_axi_fullImage_0_ARSIZE(applyProjectors_U0_m_axi_fullImage_0_ARSIZE),
-    .m_axi_fullImage_0_ARBURST(applyProjectors_U0_m_axi_fullImage_0_ARBURST),
-    .m_axi_fullImage_0_ARLOCK(applyProjectors_U0_m_axi_fullImage_0_ARLOCK),
-    .m_axi_fullImage_0_ARCACHE(applyProjectors_U0_m_axi_fullImage_0_ARCACHE),
-    .m_axi_fullImage_0_ARPROT(applyProjectors_U0_m_axi_fullImage_0_ARPROT),
-    .m_axi_fullImage_0_ARQOS(applyProjectors_U0_m_axi_fullImage_0_ARQOS),
-    .m_axi_fullImage_0_ARREGION(applyProjectors_U0_m_axi_fullImage_0_ARREGION),
-    .m_axi_fullImage_0_ARUSER(applyProjectors_U0_m_axi_fullImage_0_ARUSER),
+    .m_axi_fullImage_0_ARADDR(dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_fullImage_0_ARADDR),
+    .m_axi_fullImage_0_ARID(dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_fullImage_0_ARID),
+    .m_axi_fullImage_0_ARLEN(dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_fullImage_0_ARLEN),
+    .m_axi_fullImage_0_ARSIZE(dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_fullImage_0_ARSIZE),
+    .m_axi_fullImage_0_ARBURST(dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_fullImage_0_ARBURST),
+    .m_axi_fullImage_0_ARLOCK(dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_fullImage_0_ARLOCK),
+    .m_axi_fullImage_0_ARCACHE(dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_fullImage_0_ARCACHE),
+    .m_axi_fullImage_0_ARPROT(dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_fullImage_0_ARPROT),
+    .m_axi_fullImage_0_ARQOS(dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_fullImage_0_ARQOS),
+    .m_axi_fullImage_0_ARREGION(dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_fullImage_0_ARREGION),
+    .m_axi_fullImage_0_ARUSER(dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_fullImage_0_ARUSER),
     .m_axi_fullImage_0_RVALID(fullImage_0_RVALID),
-    .m_axi_fullImage_0_RREADY(applyProjectors_U0_m_axi_fullImage_0_RREADY),
+    .m_axi_fullImage_0_RREADY(dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_fullImage_0_RREADY),
     .m_axi_fullImage_0_RDATA(fullImage_0_RDATA),
     .m_axi_fullImage_0_RLAST(fullImage_0_RLAST),
     .m_axi_fullImage_0_RID(fullImage_0_RID),
@@ -1633,143 +1636,249 @@ reconstruct_applyProjectors applyProjectors_U0(
     .m_axi_fullImage_0_RUSER(fullImage_0_RUSER),
     .m_axi_fullImage_0_RRESP(fullImage_0_RRESP),
     .m_axi_fullImage_0_BVALID(1'b0),
-    .m_axi_fullImage_0_BREADY(applyProjectors_U0_m_axi_fullImage_0_BREADY),
+    .m_axi_fullImage_0_BREADY(dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_fullImage_0_BREADY),
     .m_axi_fullImage_0_BRESP(2'd0),
     .m_axi_fullImage_0_BID(1'd0),
     .m_axi_fullImage_0_BUSER(1'd0),
-    .fullImage4(fullImage_offset),
-    .fullImage_rows(fullImage_rows),
-    .fullImage_cols(fullImage_cols),
-    .localImages_dout(localImages_dout),
-    .localImages_empty_n(localImages_empty_n),
-    .localImages_read(applyProjectors_U0_localImages_read),
-    .localImages_num_data_valid(localImages_num_data_valid),
-    .localImages_fifo_cap(localImages_fifo_cap),
-    .m_axi_emissions_0_AWVALID(applyProjectors_U0_m_axi_emissions_0_AWVALID),
+    .fullImage2(fullImage_offset),
+    .m_axi_imageProjs_local_0_AWVALID(dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_imageProjs_local_0_AWVALID),
+    .m_axi_imageProjs_local_0_AWREADY(1'b0),
+    .m_axi_imageProjs_local_0_AWADDR(dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_imageProjs_local_0_AWADDR),
+    .m_axi_imageProjs_local_0_AWID(dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_imageProjs_local_0_AWID),
+    .m_axi_imageProjs_local_0_AWLEN(dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_imageProjs_local_0_AWLEN),
+    .m_axi_imageProjs_local_0_AWSIZE(dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_imageProjs_local_0_AWSIZE),
+    .m_axi_imageProjs_local_0_AWBURST(dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_imageProjs_local_0_AWBURST),
+    .m_axi_imageProjs_local_0_AWLOCK(dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_imageProjs_local_0_AWLOCK),
+    .m_axi_imageProjs_local_0_AWCACHE(dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_imageProjs_local_0_AWCACHE),
+    .m_axi_imageProjs_local_0_AWPROT(dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_imageProjs_local_0_AWPROT),
+    .m_axi_imageProjs_local_0_AWQOS(dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_imageProjs_local_0_AWQOS),
+    .m_axi_imageProjs_local_0_AWREGION(dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_imageProjs_local_0_AWREGION),
+    .m_axi_imageProjs_local_0_AWUSER(dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_imageProjs_local_0_AWUSER),
+    .m_axi_imageProjs_local_0_WVALID(dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_imageProjs_local_0_WVALID),
+    .m_axi_imageProjs_local_0_WREADY(1'b0),
+    .m_axi_imageProjs_local_0_WDATA(dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_imageProjs_local_0_WDATA),
+    .m_axi_imageProjs_local_0_WSTRB(dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_imageProjs_local_0_WSTRB),
+    .m_axi_imageProjs_local_0_WLAST(dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_imageProjs_local_0_WLAST),
+    .m_axi_imageProjs_local_0_WID(dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_imageProjs_local_0_WID),
+    .m_axi_imageProjs_local_0_WUSER(dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_imageProjs_local_0_WUSER),
+    .m_axi_imageProjs_local_0_ARVALID(dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_imageProjs_local_0_ARVALID),
+    .m_axi_imageProjs_local_0_ARREADY(imageProjs_local_0_ARREADY),
+    .m_axi_imageProjs_local_0_ARADDR(dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_imageProjs_local_0_ARADDR),
+    .m_axi_imageProjs_local_0_ARID(dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_imageProjs_local_0_ARID),
+    .m_axi_imageProjs_local_0_ARLEN(dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_imageProjs_local_0_ARLEN),
+    .m_axi_imageProjs_local_0_ARSIZE(dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_imageProjs_local_0_ARSIZE),
+    .m_axi_imageProjs_local_0_ARBURST(dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_imageProjs_local_0_ARBURST),
+    .m_axi_imageProjs_local_0_ARLOCK(dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_imageProjs_local_0_ARLOCK),
+    .m_axi_imageProjs_local_0_ARCACHE(dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_imageProjs_local_0_ARCACHE),
+    .m_axi_imageProjs_local_0_ARPROT(dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_imageProjs_local_0_ARPROT),
+    .m_axi_imageProjs_local_0_ARQOS(dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_imageProjs_local_0_ARQOS),
+    .m_axi_imageProjs_local_0_ARREGION(dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_imageProjs_local_0_ARREGION),
+    .m_axi_imageProjs_local_0_ARUSER(dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_imageProjs_local_0_ARUSER),
+    .m_axi_imageProjs_local_0_RVALID(imageProjs_local_0_RVALID),
+    .m_axi_imageProjs_local_0_RREADY(dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_imageProjs_local_0_RREADY),
+    .m_axi_imageProjs_local_0_RDATA(imageProjs_local_0_RDATA),
+    .m_axi_imageProjs_local_0_RLAST(imageProjs_local_0_RLAST),
+    .m_axi_imageProjs_local_0_RID(imageProjs_local_0_RID),
+    .m_axi_imageProjs_local_0_RFIFONUM(imageProjs_local_0_RFIFONUM),
+    .m_axi_imageProjs_local_0_RUSER(imageProjs_local_0_RUSER),
+    .m_axi_imageProjs_local_0_RRESP(imageProjs_local_0_RRESP),
+    .m_axi_imageProjs_local_0_BVALID(1'b0),
+    .m_axi_imageProjs_local_0_BREADY(dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_imageProjs_local_0_BREADY),
+    .m_axi_imageProjs_local_0_BRESP(2'd0),
+    .m_axi_imageProjs_local_0_BID(1'd0),
+    .m_axi_imageProjs_local_0_BUSER(1'd0),
+    .imageProjs_local3(imageProjs_local_offset),
+    .idx_0(dataflow_in_loop_VITIS_LOOP_149_1_1_U0_idx_0),
+    .m_axi_emissions_0_AWVALID(dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_emissions_0_AWVALID),
     .m_axi_emissions_0_AWREADY(emissions_0_AWREADY),
-    .m_axi_emissions_0_AWADDR(applyProjectors_U0_m_axi_emissions_0_AWADDR),
-    .m_axi_emissions_0_AWID(applyProjectors_U0_m_axi_emissions_0_AWID),
-    .m_axi_emissions_0_AWLEN(applyProjectors_U0_m_axi_emissions_0_AWLEN),
-    .m_axi_emissions_0_AWSIZE(applyProjectors_U0_m_axi_emissions_0_AWSIZE),
-    .m_axi_emissions_0_AWBURST(applyProjectors_U0_m_axi_emissions_0_AWBURST),
-    .m_axi_emissions_0_AWLOCK(applyProjectors_U0_m_axi_emissions_0_AWLOCK),
-    .m_axi_emissions_0_AWCACHE(applyProjectors_U0_m_axi_emissions_0_AWCACHE),
-    .m_axi_emissions_0_AWPROT(applyProjectors_U0_m_axi_emissions_0_AWPROT),
-    .m_axi_emissions_0_AWQOS(applyProjectors_U0_m_axi_emissions_0_AWQOS),
-    .m_axi_emissions_0_AWREGION(applyProjectors_U0_m_axi_emissions_0_AWREGION),
-    .m_axi_emissions_0_AWUSER(applyProjectors_U0_m_axi_emissions_0_AWUSER),
-    .m_axi_emissions_0_WVALID(applyProjectors_U0_m_axi_emissions_0_WVALID),
+    .m_axi_emissions_0_AWADDR(dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_emissions_0_AWADDR),
+    .m_axi_emissions_0_AWID(dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_emissions_0_AWID),
+    .m_axi_emissions_0_AWLEN(dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_emissions_0_AWLEN),
+    .m_axi_emissions_0_AWSIZE(dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_emissions_0_AWSIZE),
+    .m_axi_emissions_0_AWBURST(dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_emissions_0_AWBURST),
+    .m_axi_emissions_0_AWLOCK(dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_emissions_0_AWLOCK),
+    .m_axi_emissions_0_AWCACHE(dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_emissions_0_AWCACHE),
+    .m_axi_emissions_0_AWPROT(dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_emissions_0_AWPROT),
+    .m_axi_emissions_0_AWQOS(dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_emissions_0_AWQOS),
+    .m_axi_emissions_0_AWREGION(dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_emissions_0_AWREGION),
+    .m_axi_emissions_0_AWUSER(dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_emissions_0_AWUSER),
+    .m_axi_emissions_0_WVALID(dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_emissions_0_WVALID),
     .m_axi_emissions_0_WREADY(emissions_0_WREADY),
-    .m_axi_emissions_0_WDATA(applyProjectors_U0_m_axi_emissions_0_WDATA),
-    .m_axi_emissions_0_WSTRB(applyProjectors_U0_m_axi_emissions_0_WSTRB),
-    .m_axi_emissions_0_WLAST(applyProjectors_U0_m_axi_emissions_0_WLAST),
-    .m_axi_emissions_0_WID(applyProjectors_U0_m_axi_emissions_0_WID),
-    .m_axi_emissions_0_WUSER(applyProjectors_U0_m_axi_emissions_0_WUSER),
-    .m_axi_emissions_0_ARVALID(applyProjectors_U0_m_axi_emissions_0_ARVALID),
+    .m_axi_emissions_0_WDATA(dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_emissions_0_WDATA),
+    .m_axi_emissions_0_WSTRB(dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_emissions_0_WSTRB),
+    .m_axi_emissions_0_WLAST(dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_emissions_0_WLAST),
+    .m_axi_emissions_0_WID(dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_emissions_0_WID),
+    .m_axi_emissions_0_WUSER(dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_emissions_0_WUSER),
+    .m_axi_emissions_0_ARVALID(dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_emissions_0_ARVALID),
     .m_axi_emissions_0_ARREADY(1'b0),
-    .m_axi_emissions_0_ARADDR(applyProjectors_U0_m_axi_emissions_0_ARADDR),
-    .m_axi_emissions_0_ARID(applyProjectors_U0_m_axi_emissions_0_ARID),
-    .m_axi_emissions_0_ARLEN(applyProjectors_U0_m_axi_emissions_0_ARLEN),
-    .m_axi_emissions_0_ARSIZE(applyProjectors_U0_m_axi_emissions_0_ARSIZE),
-    .m_axi_emissions_0_ARBURST(applyProjectors_U0_m_axi_emissions_0_ARBURST),
-    .m_axi_emissions_0_ARLOCK(applyProjectors_U0_m_axi_emissions_0_ARLOCK),
-    .m_axi_emissions_0_ARCACHE(applyProjectors_U0_m_axi_emissions_0_ARCACHE),
-    .m_axi_emissions_0_ARPROT(applyProjectors_U0_m_axi_emissions_0_ARPROT),
-    .m_axi_emissions_0_ARQOS(applyProjectors_U0_m_axi_emissions_0_ARQOS),
-    .m_axi_emissions_0_ARREGION(applyProjectors_U0_m_axi_emissions_0_ARREGION),
-    .m_axi_emissions_0_ARUSER(applyProjectors_U0_m_axi_emissions_0_ARUSER),
+    .m_axi_emissions_0_ARADDR(dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_emissions_0_ARADDR),
+    .m_axi_emissions_0_ARID(dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_emissions_0_ARID),
+    .m_axi_emissions_0_ARLEN(dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_emissions_0_ARLEN),
+    .m_axi_emissions_0_ARSIZE(dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_emissions_0_ARSIZE),
+    .m_axi_emissions_0_ARBURST(dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_emissions_0_ARBURST),
+    .m_axi_emissions_0_ARLOCK(dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_emissions_0_ARLOCK),
+    .m_axi_emissions_0_ARCACHE(dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_emissions_0_ARCACHE),
+    .m_axi_emissions_0_ARPROT(dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_emissions_0_ARPROT),
+    .m_axi_emissions_0_ARQOS(dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_emissions_0_ARQOS),
+    .m_axi_emissions_0_ARREGION(dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_emissions_0_ARREGION),
+    .m_axi_emissions_0_ARUSER(dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_emissions_0_ARUSER),
     .m_axi_emissions_0_RVALID(1'b0),
-    .m_axi_emissions_0_RREADY(applyProjectors_U0_m_axi_emissions_0_RREADY),
-    .m_axi_emissions_0_RDATA(64'd0),
+    .m_axi_emissions_0_RREADY(dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_emissions_0_RREADY),
+    .m_axi_emissions_0_RDATA(32'd0),
     .m_axi_emissions_0_RLAST(1'b0),
     .m_axi_emissions_0_RID(1'd0),
     .m_axi_emissions_0_RFIFONUM(9'd0),
     .m_axi_emissions_0_RUSER(1'd0),
     .m_axi_emissions_0_RRESP(2'd0),
     .m_axi_emissions_0_BVALID(emissions_0_BVALID),
-    .m_axi_emissions_0_BREADY(applyProjectors_U0_m_axi_emissions_0_BREADY),
+    .m_axi_emissions_0_BREADY(dataflow_in_loop_VITIS_LOOP_149_1_1_U0_m_axi_emissions_0_BREADY),
     .m_axi_emissions_0_BRESP(emissions_0_BRESP),
     .m_axi_emissions_0_BID(emissions_0_BID),
     .m_axi_emissions_0_BUSER(emissions_0_BUSER),
-    .emissions5(emissions_offset),
-    .emission_cnt(applyProjectors_U0_emission_cnt),
-    .emission_cnt_ap_vld(applyProjectors_U0_emission_cnt_ap_vld)
+    .emissions4(emissions_offset),
+    .idx_0_ap_vld(1'b0),
+    .emissions4_ap_vld(1'b1),
+    .ap_start(dataflow_in_loop_VITIS_LOOP_149_1_1_U0_ap_start),
+    .conv_ap_vld(1'b0),
+    .psfSupersample_ap_vld(1'b1),
+    .projShape0_ap_vld(1'b1),
+    .projShape1_ap_vld(1'b1),
+    .atomLocations1_ap_vld(1'b1),
+    .fullImage2_ap_vld(1'b1),
+    .imageProjs_local3_ap_vld(1'b1),
+    .empty_ap_vld(1'b1),
+    .ap_done(dataflow_in_loop_VITIS_LOOP_149_1_1_U0_ap_done),
+    .ap_ready(dataflow_in_loop_VITIS_LOOP_149_1_1_U0_ap_ready),
+    .ap_idle(dataflow_in_loop_VITIS_LOOP_149_1_1_U0_ap_idle),
+    .ap_continue(dataflow_in_loop_VITIS_LOOP_149_1_1_U0_ap_continue)
 );
 
-reconstruct_fifo_w256_d2_S localImages_U(
+reconstruct_ap_bound ap_bound_U(
     .clk(ap_clk),
     .reset(ap_rst_n_inv),
     .if_read_ce(1'b1),
     .if_write_ce(1'b1),
-    .if_din(getLocalImages_U0_localImages_din),
-    .if_full_n(localImages_full_n),
-    .if_write(getLocalImages_U0_localImages_write),
-    .if_dout(localImages_dout),
-    .if_empty_n(localImages_empty_n),
-    .if_read(applyProjectors_U0_localImages_read),
-    .if_num_data_valid(localImages_num_data_valid),
-    .if_fifo_cap(localImages_fifo_cap)
+    .if_din(atomLocationsSize),
+    .if_full_n(ap_bound_full_n),
+    .if_write(ap_bound_write),
+    .if_dout(ap_bound_dout),
+    .if_empty_n(ap_bound_empty_n),
+    .if_read(ap_bound_read)
 );
 
 always @ (posedge ap_clk) begin
     if (ap_rst_n_inv == 1'b1) begin
-        ap_sync_reg_applyProjectors_U0_ap_ready <= 1'b0;
+        ap_bound_reg_ack <= 1'b0;
     end else begin
-        if (((ap_sync_ready & ap_start) == 1'b1)) begin
-            ap_sync_reg_applyProjectors_U0_ap_ready <= 1'b0;
+        if (((ap_start == 1'b1) & (ap_internal_ready == 1'b0))) begin
+            ap_bound_reg_ack <= ap_bound_ack;
         end else begin
-            ap_sync_reg_applyProjectors_U0_ap_ready <= ap_sync_applyProjectors_U0_ap_ready;
+            ap_bound_reg_ack <= 1'b0;
         end
     end
 end
 
 always @ (posedge ap_clk) begin
     if (ap_rst_n_inv == 1'b1) begin
-        ap_sync_reg_getLocalImages_U0_ap_ready <= 1'b0;
+        ap_loop_dataflow_input_count <= 32'd0;
     end else begin
-        if (((ap_sync_ready & ap_start) == 1'b1)) begin
-            ap_sync_reg_getLocalImages_U0_ap_ready <= 1'b0;
-        end else begin
-            ap_sync_reg_getLocalImages_U0_ap_ready <= ap_sync_getLocalImages_U0_ap_ready;
+        if ((~(ap_loop_dataflow_input_count == ap_bound_minus_1) & (ap_real_start == 1'b1) & (dataflow_in_loop_VITIS_LOOP_149_1_1_U0_ap_ready == 1'b1))) begin
+            ap_loop_dataflow_input_count <= (ap_loop_dataflow_input_count + 32'd1);
+        end else if (((ap_real_start == 1'b1) & (ap_loop_dataflow_input_count == ap_bound_minus_1) & (dataflow_in_loop_VITIS_LOOP_149_1_1_U0_ap_ready == 1'b1))) begin
+            ap_loop_dataflow_input_count <= 32'd0;
         end
     end
 end
 
-assign ap_done = applyProjectors_U0_ap_done;
+always @ (posedge ap_clk) begin
+    if (ap_rst_n_inv == 1'b1) begin
+        ap_loop_dataflow_output_count <= 32'd0;
+    end else begin
+        if ((~(ap_bound_dout <= 32'd0) & ~(ap_loop_dataflow_output_count == ap_bound_minus_1_output) & (1'b1 == ap_bound_empty_n) & (dataflow_in_loop_VITIS_LOOP_149_1_1_U0_ap_continue == 1'b1) & (dataflow_in_loop_VITIS_LOOP_149_1_1_U0_ap_done == 1'b1))) begin
+            ap_loop_dataflow_output_count <= (ap_loop_dataflow_output_count + 32'd1);
+        end else if ((~(ap_bound_dout <= 32'd0) & (1'b1 == ap_bound_empty_n) & (ap_loop_dataflow_output_count == ap_bound_minus_1_output) & (dataflow_in_loop_VITIS_LOOP_149_1_1_U0_ap_continue == 1'b1) & (dataflow_in_loop_VITIS_LOOP_149_1_1_U0_ap_done == 1'b1))) begin
+            ap_loop_dataflow_output_count <= 32'd0;
+        end
+    end
+end
 
-assign ap_idle = (getLocalImages_U0_ap_idle & applyProjectors_U0_ap_idle);
+always @ (*) begin
+    if (((ap_start == 1'b1) & (1'b0 == ap_bound_reg_ack))) begin
+        ap_bound_write = 1'b1;
+    end else begin
+        ap_bound_write = 1'b0;
+    end
+end
 
-assign ap_ready = ap_sync_ready;
+always @ (*) begin
+    if (((ap_start == 1'b0) & (ap_loop_dataflow_output_count == 32'd0) & (1'b0 == ap_bound_empty_n) & (dataflow_in_loop_VITIS_LOOP_149_1_1_U0_ap_idle == 1'b1))) begin
+        ap_idle = 1'b1;
+    end else begin
+        ap_idle = 1'b0;
+    end
+end
+
+always @ (*) begin
+    if (((1'b1 == ap_bound_empty_n) & ((32'd0 == ap_bound_dout) | ((ap_loop_dataflow_output_count == ap_bound_minus_1_output) & (dataflow_in_loop_VITIS_LOOP_149_1_1_U0_ap_done == 1'b1))))) begin
+        ap_internal_done = 1'b1;
+    end else begin
+        ap_internal_done = 1'b0;
+    end
+end
+
+always @ (*) begin
+    if (((ap_partial_ready == 1'b1) | ((atomLocationsSize <= 32'd0) & (ap_start == 1'b1)))) begin
+        ap_internal_ready = 1'b1;
+    end else begin
+        ap_internal_ready = 1'b0;
+    end
+end
+
+always @ (*) begin
+    if (((ap_real_start == 1'b1) & (ap_loop_dataflow_input_count == ap_bound_minus_1) & (dataflow_in_loop_VITIS_LOOP_149_1_1_U0_ap_ready == 1'b1))) begin
+        ap_partial_ready = 1'b1;
+    end else begin
+        ap_partial_ready = 1'b0;
+    end
+end
+
+always @ (*) begin
+    if ((~(atomLocationsSize <= 32'd0) & (ap_start == 1'b1) & (1'b1 == ap_bound_ack))) begin
+        ap_real_start = 1'b1;
+    end else begin
+        ap_real_start = 1'b0;
+    end
+end
+
+assign ap_bound_ack = (ap_bound_reg_ack | ap_bound_full_n);
+
+assign ap_bound_minus_1 = (atomLocationsSize - 32'd1);
+
+assign ap_bound_minus_1_output = (ap_bound_dout - 32'd1);
+
+assign ap_bound_read = (ap_internal_done & ap_bound_empty_n);
+
+assign ap_done = ap_internal_done;
+
+assign ap_ready = ap_internal_ready;
 
 always @ (*) begin
     ap_rst_n_inv = ~ap_rst_n;
 end
 
-assign ap_sync_applyProjectors_U0_ap_ready = (applyProjectors_U0_ap_ready | ap_sync_reg_applyProjectors_U0_ap_ready);
+assign atomLocations_0_RID = 1'd0;
 
-assign ap_sync_getLocalImages_U0_ap_ready = (getLocalImages_U0_ap_ready | ap_sync_reg_getLocalImages_U0_ap_ready);
+assign atomLocations_0_RLAST = 1'b0;
 
-assign ap_sync_ready = (ap_sync_getLocalImages_U0_ap_ready & ap_sync_applyProjectors_U0_ap_ready);
+assign atomLocations_0_RRESP = 2'd0;
 
-assign applyProjectors_U0_ap_continue = 1'b1;
+assign atomLocations_0_RUSER = 1'd0;
 
-assign applyProjectors_U0_ap_start = ((ap_sync_reg_applyProjectors_U0_ap_ready ^ 1'b1) & ap_start);
+assign dataflow_in_loop_VITIS_LOOP_149_1_1_U0_ap_start = ap_real_start;
 
-assign atomLocations_address0 = getLocalImages_U0_atomLocations_address0;
+assign dataflow_in_loop_VITIS_LOOP_149_1_1_U0_conv = ap_loop_dataflow_input_count;
 
-assign atomLocations_address1 = 7'd0;
-
-assign atomLocations_ce0 = getLocalImages_U0_atomLocations_ce0;
-
-assign atomLocations_ce1 = 1'b0;
-
-assign atomLocations_d0 = 128'd0;
-
-assign atomLocations_d1 = 128'd0;
-
-assign atomLocations_we0 = 1'b0;
-
-assign atomLocations_we1 = 1'b0;
+assign dataflow_in_loop_VITIS_LOOP_149_1_1_U0_idx_0 = ap_loop_dataflow_input_count;
 
 assign emissions_0_BID = 1'd0;
 
@@ -1784,14 +1893,6 @@ assign fullImage_0_RLAST = 1'b0;
 assign fullImage_0_RRESP = 2'd0;
 
 assign fullImage_0_RUSER = 1'd0;
-
-assign getLocalImages_U0_ap_continue = 1'b1;
-
-assign getLocalImages_U0_ap_start = ((ap_sync_reg_getLocalImages_U0_ap_ready ^ 1'b1) & ap_start);
-
-assign getLocalImages_U0_localImages_fifo_cap = localImages_fifo_cap;
-
-assign getLocalImages_U0_localImages_num_data_valid = localImages_num_data_valid;
 
 assign imageProjs_0_RID = 1'd0;
 
@@ -1809,12 +1910,70 @@ assign imageProjs_local_0_RRESP = 2'd0;
 
 assign imageProjs_local_0_RUSER = 1'd0;
 
-assign imageProjs_local_size_r_0_RID = 1'd0;
+assign m_axi_imageProjs_local_size_ARADDR = 64'd0;
 
-assign imageProjs_local_size_r_0_RLAST = 1'b0;
+assign m_axi_imageProjs_local_size_ARBURST = 2'd0;
 
-assign imageProjs_local_size_r_0_RRESP = 2'd0;
+assign m_axi_imageProjs_local_size_ARCACHE = 4'd0;
 
-assign imageProjs_local_size_r_0_RUSER = 1'd0;
+assign m_axi_imageProjs_local_size_ARID = 1'd0;
+
+assign m_axi_imageProjs_local_size_ARLEN = 8'd0;
+
+assign m_axi_imageProjs_local_size_ARLOCK = 2'd0;
+
+assign m_axi_imageProjs_local_size_ARPROT = 3'd0;
+
+assign m_axi_imageProjs_local_size_ARQOS = 4'd0;
+
+assign m_axi_imageProjs_local_size_ARREGION = 4'd0;
+
+assign m_axi_imageProjs_local_size_ARSIZE = 3'd0;
+
+assign m_axi_imageProjs_local_size_ARUSER = 1'd0;
+
+assign m_axi_imageProjs_local_size_ARVALID = 1'b0;
+
+assign m_axi_imageProjs_local_size_AWADDR = 64'd0;
+
+assign m_axi_imageProjs_local_size_AWBURST = 2'd0;
+
+assign m_axi_imageProjs_local_size_AWCACHE = 4'd0;
+
+assign m_axi_imageProjs_local_size_AWID = 1'd0;
+
+assign m_axi_imageProjs_local_size_AWLEN = 8'd0;
+
+assign m_axi_imageProjs_local_size_AWLOCK = 2'd0;
+
+assign m_axi_imageProjs_local_size_AWPROT = 3'd0;
+
+assign m_axi_imageProjs_local_size_AWQOS = 4'd0;
+
+assign m_axi_imageProjs_local_size_AWREGION = 4'd0;
+
+assign m_axi_imageProjs_local_size_AWSIZE = 3'd0;
+
+assign m_axi_imageProjs_local_size_AWUSER = 1'd0;
+
+assign m_axi_imageProjs_local_size_AWVALID = 1'b0;
+
+assign m_axi_imageProjs_local_size_BREADY = 1'b0;
+
+assign m_axi_imageProjs_local_size_RREADY = 1'b0;
+
+assign m_axi_imageProjs_local_size_WDATA = 32'd0;
+
+assign m_axi_imageProjs_local_size_WID = 1'd0;
+
+assign m_axi_imageProjs_local_size_WLAST = 1'b0;
+
+assign m_axi_imageProjs_local_size_WSTRB = 4'd0;
+
+assign m_axi_imageProjs_local_size_WUSER = 1'd0;
+
+assign m_axi_imageProjs_local_size_WVALID = 1'b0;
+
+assign dataflow_in_loop_VITIS_LOOP_149_1_1_U0_ap_continue = 1'b1;
 
 endmodule //reconstruct

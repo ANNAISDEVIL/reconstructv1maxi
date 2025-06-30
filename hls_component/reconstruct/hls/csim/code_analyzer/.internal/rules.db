@@ -20,7 +20,7 @@
                 "-o",
                 "F:\\LMU\\quantumMA\\opimization\\reconstructv1maxi\\hls_component\\reconstruct\\hls\\csim\\code_analyzer\\.internal\\build\\image_analysis.cpp.0.bc"
             ],
-            "exectime": 1.4269661903381348,
+            "exectime": 1.706578016281128,
             "cwd": "F:\\LMU\\quantumMA\\opimization\\reconstructv1maxi\\hls_component"
         },
         "['F:\\\\LMU\\\\quantumMA\\\\opimization\\\\reconstructv1maxi\\\\hls_component\\\\reconstruct\\\\hls\\\\csim\\\\code_analyzer\\\\.internal\\\\build\\\\test.cpp.0.o', 'F:\\\\LMU\\\\quantumMA\\\\opimization\\\\reconstructv1maxi\\\\hls_component\\\\reconstruct\\\\hls\\\\csim\\\\code_analyzer\\\\.internal\\\\build\\\\test.cpp.0.o.d']": {
@@ -42,7 +42,7 @@
                 "-o",
                 "F:\\LMU\\quantumMA\\opimization\\reconstructv1maxi\\hls_component\\reconstruct\\hls\\csim\\code_analyzer\\.internal\\build\\test.cpp.0.o"
             ],
-            "exectime": 0.8006093502044678,
+            "exectime": 1.0009198188781738,
             "cwd": "F:\\LMU\\quantumMA\\opimization\\reconstructv1maxi\\hls_component"
         },
         "['F:\\\\LMU\\\\quantumMA\\\\opimization\\\\reconstructv1maxi\\\\hls_component\\\\reconstruct\\\\hls\\\\csim\\\\code_analyzer\\\\.internal\\\\build\\\\image_analysis.cpp.0.o', 'F:\\\\LMU\\\\quantumMA\\\\opimization\\\\reconstructv1maxi\\\\hls_component\\\\reconstruct\\\\hls\\\\csim\\\\code_analyzer\\\\.internal\\\\build\\\\image_analysis.cpp.0.o.d']": {
@@ -64,7 +64,7 @@
                 "-o",
                 "F:\\LMU\\quantumMA\\opimization\\reconstructv1maxi\\hls_component\\reconstruct\\hls\\csim\\code_analyzer\\.internal\\build\\image_analysis.cpp.0.o"
             ],
-            "exectime": 0.7277274131774902,
+            "exectime": 0.7975952625274658,
             "cwd": "F:\\LMU\\quantumMA\\opimization\\reconstructv1maxi\\hls_component"
         },
         "['F:\\\\LMU\\\\quantumMA\\\\opimization\\\\reconstructv1maxi\\\\hls_component\\\\reconstruct\\\\hls\\\\csim\\\\code_analyzer\\\\.internal\\\\build\\\\syn_srcs.bc']": {
@@ -74,7 +74,7 @@
                 "-o",
                 "F:\\LMU\\quantumMA\\opimization\\reconstructv1maxi\\hls_component\\reconstruct\\hls\\csim\\code_analyzer\\.internal\\build\\syn_srcs.bc"
             ],
-            "exectime": 0.2817201614379883,
+            "exectime": 0.3629436492919922,
             "cwd": "F:\\LMU\\quantumMA\\opimization\\reconstructv1maxi\\hls_component"
         },
         "['F:\\\\LMU\\\\quantumMA\\\\opimization\\\\reconstructv1maxi\\\\hls_component\\\\reconstruct\\\\hls\\\\csim\\\\code_analyzer\\\\.internal\\\\build\\\\syn_srcs.opt.bc']": {
@@ -86,7 +86,7 @@
                 "-o",
                 "F:\\LMU\\quantumMA\\opimization\\reconstructv1maxi\\hls_component\\reconstruct\\hls\\csim\\code_analyzer\\.internal\\build\\syn_srcs.opt.bc"
             ],
-            "exectime": 0.10561323165893555,
+            "exectime": 0.11443090438842773,
             "cwd": "F:\\LMU\\quantumMA\\opimization\\reconstructv1maxi\\hls_component"
         },
         "['F:\\\\LMU\\\\quantumMA\\\\opimization\\\\reconstructv1maxi\\\\hls_component\\\\reconstruct\\\\hls\\\\csim\\\\code_analyzer\\\\.internal\\\\build\\\\app.exe']": {
@@ -125,7 +125,7 @@
                 "-fslxpthreads",
                 "-lpthread"
             ],
-            "exectime": 1.8824520111083984,
+            "exectime": 1.8993744850158691,
             "cwd": "F:\\LMU\\quantumMA\\opimization\\reconstructv1maxi\\hls_component"
         },
         "['F:\\\\LMU\\\\quantumMA\\\\opimization\\\\reconstructv1maxi\\\\hls_component\\\\reconstruct\\\\hls\\\\csim\\\\code_analyzer\\\\.internal\\\\instrument\\\\app_0\\\\hls_ir_info.json']": {
@@ -138,7 +138,7 @@
                 "--hw-function",
                 "reconstruct"
             ],
-            "exectime": 0.2300717830657959,
+            "exectime": 0.15196442604064941,
             "cwd": "F:\\LMU\\quantumMA\\opimization\\reconstructv1maxi\\hls_component"
         },
         "['F:\\\\LMU\\\\quantumMA\\\\opimization\\\\reconstructv1maxi\\\\hls_component\\\\reconstruct\\\\hls\\\\csim\\\\code_analyzer\\\\.internal\\\\instrument\\\\app_0\\\\binary_dependencies.json']": {
@@ -149,14 +149,14 @@
                 "--reuse-filemanager=false",
                 "--output=F:\\LMU\\quantumMA\\opimization\\reconstructv1maxi\\hls_component\\reconstruct\\hls\\csim\\code_analyzer\\.internal\\instrument\\app_0\\binary_dependencies.json"
             ],
-            "exectime": 0.26749396324157715,
+            "exectime": 0.2881126403808594,
             "cwd": "F:\\LMU\\quantumMA\\opimization\\reconstructv1maxi\\hls_component"
         },
         "['F:\\\\LMU\\\\quantumMA\\\\opimization\\\\reconstructv1maxi\\\\hls_component\\\\reconstruct\\\\hls\\\\csim\\\\code_analyzer\\\\bin\\\\.tracing_stdout.txt', 'F:\\\\LMU\\\\quantumMA\\\\opimization\\\\reconstructv1maxi\\\\hls_component\\\\reconstruct\\\\hls\\\\csim\\\\code_analyzer\\\\bin\\\\.tracing_stderr.txt']": {
             "command": [
                 "F:\\LMU\\quantumMA\\opimization\\reconstructv1maxi\\hls_component\\reconstruct\\hls\\csim\\code_analyzer\\.internal\\build\\app.exe"
             ],
-            "exectime": 2.050659656524658,
+            "exectime": 5.487621068954468,
             "cwd": "F:\\LMU\\quantumMA\\opimization\\reconstructv1maxi\\hls_component\\reconstruct\\hls\\csim\\code_analyzer\\tracing\\csim\\build"
         },
         "['F:\\\\LMU\\\\quantumMA\\\\opimization\\\\reconstructv1maxi\\\\hls_component\\\\reconstruct\\\\hls\\\\csim\\\\code_analyzer\\\\.internal\\\\instrument\\\\app_0\\\\annotated.bc']": {
@@ -175,7 +175,7 @@
                 "-o",
                 "F:\\LMU\\quantumMA\\opimization\\reconstructv1maxi\\hls_component\\reconstruct\\hls\\csim\\code_analyzer\\.internal\\instrument\\app_0\\annotated.bc"
             ],
-            "exectime": 1.6378495693206787,
+            "exectime": 1.9809935092926025,
             "cwd": "F:\\LMU\\quantumMA\\opimization\\reconstructv1maxi\\hls_component"
         },
         "['F:\\\\LMU\\\\quantumMA\\\\opimization\\\\reconstructv1maxi\\\\hls_component\\\\reconstruct\\\\hls\\\\csim\\\\code_analyzer\\\\.internal\\\\dataflow\\\\0\\\\taskgraph.json']": {
@@ -184,7 +184,7 @@
                 "--basepath",
                 "F:\\LMU\\quantumMA\\opimization\\reconstructv1maxi\\hls_component",
                 "--fpga-part",
-                "xc7z020-clg400-1",
+                "xczu49dr-ffvf1760-2-e",
                 "--device-totals",
                 "f:\\vitis\\2024.2\\vcxx\\data\\platform\\logic\\fpga.devicetotals",
                 "--clock-frequency",
@@ -220,9 +220,9 @@
                 "--df-id",
                 "0",
                 "--df-target",
-                "%F353"
+                "%F358"
             ],
-            "exectime": 1.3082120418548584,
+            "exectime": 1.411163091659546,
             "cwd": "F:\\LMU\\quantumMA\\opimization\\reconstructv1maxi\\hls_component"
         }
     }

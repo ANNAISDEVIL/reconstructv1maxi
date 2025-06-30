@@ -37,9 +37,7 @@ module reconstruct_scalar_data_s_axi
     output wire [31:0]                   psfSupersample,
     output wire [31:0]                   imageProjectionSize,
     output wire [31:0]                   fullImage_rows,
-    output wire [31:0]                   fullImage_cols,
-    input  wire [31:0]                   emission_cnt,
-    input  wire                          emission_cnt_ap_vld
+    output wire [31:0]                   fullImage_cols
 );
 //------------------------Address Info-------------------
 // Protocol Used: ap_ctrl_none
@@ -69,11 +67,6 @@ module reconstruct_scalar_data_s_axi
 // 0x40 : Data signal of fullImage_cols
 //        bit 31~0 - fullImage_cols[31:0] (Read/Write)
 // 0x44 : reserved
-// 0x48 : Data signal of emission_cnt
-//        bit 31~0 - emission_cnt[31:0] (Read)
-// 0x4c : Control signal of emission_cnt
-//        bit 0  - emission_cnt_ap_vld (Read/COR)
-//        others - reserved
 // (SC = Self Clear, COR = Clear on Read, TOW = Toggle on Write, COH = Clear on Handshake)
 
 //------------------------Parameter----------------------
@@ -92,8 +85,6 @@ localparam
     ADDR_FULLIMAGE_ROWS_CTRL        = 7'h3c,
     ADDR_FULLIMAGE_COLS_DATA_0      = 7'h40,
     ADDR_FULLIMAGE_COLS_CTRL        = 7'h44,
-    ADDR_EMISSION_CNT_DATA_0        = 7'h48,
-    ADDR_EMISSION_CNT_CTRL          = 7'h4c,
     WRIDLE                          = 2'd0,
     WRDATA                          = 2'd1,
     WRRESP                          = 2'd2,
@@ -123,8 +114,6 @@ localparam
     reg  [31:0]                   int_imageProjectionSize = 'b0;
     reg  [31:0]                   int_fullImage_rows = 'b0;
     reg  [31:0]                   int_fullImage_cols = 'b0;
-    reg                           int_emission_cnt_ap_vld;
-    reg  [31:0]                   int_emission_cnt = 'b0;
 
 //------------------------Instantiation------------------
 
@@ -238,12 +227,6 @@ always @(posedge ACLK) begin
                 ADDR_FULLIMAGE_COLS_DATA_0: begin
                     rdata <= int_fullImage_cols[31:0];
                 end
-                ADDR_EMISSION_CNT_DATA_0: begin
-                    rdata <= int_emission_cnt[31:0];
-                end
-                ADDR_EMISSION_CNT_CTRL: begin
-                    rdata[0] <= int_emission_cnt_ap_vld;
-                end
             endcase
         end
     end
@@ -325,28 +308,6 @@ always @(posedge ACLK) begin
     else if (ACLK_EN) begin
         if (w_hs && waddr == ADDR_FULLIMAGE_COLS_DATA_0)
             int_fullImage_cols[31:0] <= (WDATA[31:0] & wmask) | (int_fullImage_cols[31:0] & ~wmask);
-    end
-end
-
-// int_emission_cnt
-always @(posedge ACLK) begin
-    if (ARESET)
-        int_emission_cnt <= 0;
-    else if (ACLK_EN) begin
-        if (emission_cnt_ap_vld)
-            int_emission_cnt <= emission_cnt;
-    end
-end
-
-// int_emission_cnt_ap_vld
-always @(posedge ACLK) begin
-    if (ARESET)
-        int_emission_cnt_ap_vld <= 1'b0;
-    else if (ACLK_EN) begin
-        if (emission_cnt_ap_vld)
-            int_emission_cnt_ap_vld <= 1'b1;
-        else if (ar_hs && raddr == ADDR_EMISSION_CNT_CTRL)
-            int_emission_cnt_ap_vld <= 1'b0; // clear on read
     end
 end
 

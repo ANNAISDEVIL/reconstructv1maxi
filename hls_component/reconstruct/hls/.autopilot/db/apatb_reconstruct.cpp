@@ -26,8 +26,8 @@ using namespace std;
 #define AUTOTB_TVOUT_projShape0 "../tv/cdatafile/c.reconstruct.autotvout_projShape0.dat"
 #define AUTOTB_TVIN_projShape1 "../tv/cdatafile/c.reconstruct.autotvin_projShape1.dat"
 #define AUTOTB_TVOUT_projShape1 "../tv/cdatafile/c.reconstruct.autotvout_projShape1.dat"
-#define AUTOTB_TVIN_atomLocations "../tv/cdatafile/c.reconstruct.autotvin_atomLocations.dat"
-#define AUTOTB_TVOUT_atomLocations "../tv/cdatafile/c.reconstruct.autotvout_atomLocations.dat"
+#define AUTOTB_TVIN_atomLocations_offset "../tv/cdatafile/c.reconstruct.autotvin_atomLocations_offset.dat"
+#define AUTOTB_TVOUT_atomLocations_offset "../tv/cdatafile/c.reconstruct.autotvout_atomLocations_offset.dat"
 #define AUTOTB_TVIN_psfSupersample "../tv/cdatafile/c.reconstruct.autotvin_psfSupersample.dat"
 #define AUTOTB_TVOUT_psfSupersample "../tv/cdatafile/c.reconstruct.autotvout_psfSupersample.dat"
 #define AUTOTB_TVIN_imageProjectionSize "../tv/cdatafile/c.reconstruct.autotvin_imageProjectionSize.dat"
@@ -46,8 +46,8 @@ using namespace std;
 #define AUTOTB_TVOUT_fullImage_cols "../tv/cdatafile/c.reconstruct.autotvout_fullImage_cols.dat"
 #define AUTOTB_TVIN_emissions_offset "../tv/cdatafile/c.reconstruct.autotvin_emissions_offset.dat"
 #define AUTOTB_TVOUT_emissions_offset "../tv/cdatafile/c.reconstruct.autotvout_emissions_offset.dat"
-#define AUTOTB_TVIN_emission_cnt "../tv/cdatafile/c.reconstruct.autotvin_emission_cnt.dat"
-#define AUTOTB_TVOUT_emission_cnt "../tv/cdatafile/c.reconstruct.autotvout_emission_cnt.dat"
+#define AUTOTB_TVIN_atomLocations "../tv/cdatafile/c.reconstruct.autotvin_atomLocations.dat"
+#define AUTOTB_TVOUT_atomLocations "../tv/cdatafile/c.reconstruct.autotvout_atomLocations.dat"
 #define AUTOTB_TVIN_emissions "../tv/cdatafile/c.reconstruct.autotvin_emissions.dat"
 #define AUTOTB_TVOUT_emissions "../tv/cdatafile/c.reconstruct.autotvout_emissions.dat"
 #define AUTOTB_TVIN_fullImage "../tv/cdatafile/c.reconstruct.autotvin_fullImage.dat"
@@ -61,7 +61,7 @@ using namespace std;
 
 
 // tvout file define:
-#define AUTOTB_TVOUT_PC_emission_cnt "../tv/rtldatafile/rtl.reconstruct.autotvout_emission_cnt.dat"
+#define AUTOTB_TVOUT_PC_atomLocations "../tv/rtldatafile/rtl.reconstruct.autotvout_atomLocations.dat"
 #define AUTOTB_TVOUT_PC_emissions "../tv/rtldatafile/rtl.reconstruct.autotvout_emissions.dat"
 #define AUTOTB_TVOUT_PC_fullImage "../tv/rtldatafile/rtl.reconstruct.autotvout_fullImage.dat"
 #define AUTOTB_TVOUT_PC_imageProjs "../tv/rtldatafile/rtl.reconstruct.autotvout_imageProjs.dat"
@@ -1260,10 +1260,10 @@ namespace hls::sim
 
 
 extern "C"
-void reconstruct_hw_stub_wrapper(hls::sim::Byte<4>, hls::sim::Byte<4>, hls::sim::Byte<4>, void*, hls::sim::Byte<4>, hls::sim::Byte<4>, void*, void*, void*, void*, hls::sim::Byte<4>, hls::sim::Byte<4>, void*, void*);
+void reconstruct_hw_stub_wrapper(hls::sim::Byte<4>, hls::sim::Byte<4>, hls::sim::Byte<4>, void*, hls::sim::Byte<4>, hls::sim::Byte<4>, void*, void*, void*, void*, hls::sim::Byte<4>, hls::sim::Byte<4>, void*);
 
 extern "C"
-void apatb_reconstruct_hw(hls::sim::Byte<4> __xlx_apatb_param_atomLocationsSize, hls::sim::Byte<4> __xlx_apatb_param_projShape0, hls::sim::Byte<4> __xlx_apatb_param_projShape1, void* __xlx_apatb_param_atomLocations, hls::sim::Byte<4> __xlx_apatb_param_psfSupersample, hls::sim::Byte<4> __xlx_apatb_param_imageProjectionSize, void* __xlx_apatb_param_imageProjs_local, void* __xlx_apatb_param_imageProjs, void* __xlx_apatb_param_imageProjs_local_size, void* __xlx_apatb_param_fullImage, hls::sim::Byte<4> __xlx_apatb_param_fullImage_rows, hls::sim::Byte<4> __xlx_apatb_param_fullImage_cols, void* __xlx_apatb_param_emissions, void* __xlx_apatb_param_emission_cnt)
+void apatb_reconstruct_hw(hls::sim::Byte<4> __xlx_apatb_param_atomLocationsSize, hls::sim::Byte<4> __xlx_apatb_param_projShape0, hls::sim::Byte<4> __xlx_apatb_param_projShape1, void* __xlx_apatb_param_atomLocations, hls::sim::Byte<4> __xlx_apatb_param_psfSupersample, hls::sim::Byte<4> __xlx_apatb_param_imageProjectionSize, void* __xlx_apatb_param_imageProjs_local, void* __xlx_apatb_param_imageProjs, void* __xlx_apatb_param_imageProjs_local_size, void* __xlx_apatb_param_fullImage, hls::sim::Byte<4> __xlx_apatb_param_fullImage_rows, hls::sim::Byte<4> __xlx_apatb_param_fullImage_cols, void* __xlx_apatb_param_emissions)
 {
   static hls::sim::Register port0 {
     .name = "atomLocationsSize",
@@ -1298,7 +1298,19 @@ void apatb_reconstruct_hw(hls::sim::Byte<4> __xlx_apatb_param_atomLocationsSize,
   };
   port2.param = &__xlx_apatb_param_projShape1;
 
+  hls::sim::Byte<4> __xlx_offset_byte_param_atomLocations;
   static hls::sim::Register port3 {
+    .name = "atomLocations_offset",
+    .width = 32,
+#ifdef POST_CHECK
+#else
+    .owriter = nullptr,
+    .iwriter = new hls::sim::Writer(AUTOTB_TVIN_atomLocations_offset),
+#endif
+  };
+  port3.param = &__xlx_offset_byte_param_atomLocations;
+
+  static hls::sim::Register port4 {
     .name = "psfSupersample",
     .width = 32,
 #ifdef POST_CHECK
@@ -1307,9 +1319,9 @@ void apatb_reconstruct_hw(hls::sim::Byte<4> __xlx_apatb_param_atomLocationsSize,
     .iwriter = new hls::sim::Writer(AUTOTB_TVIN_psfSupersample),
 #endif
   };
-  port3.param = &__xlx_apatb_param_psfSupersample;
+  port4.param = &__xlx_apatb_param_psfSupersample;
 
-  static hls::sim::Register port4 {
+  static hls::sim::Register port5 {
     .name = "imageProjectionSize",
     .width = 32,
 #ifdef POST_CHECK
@@ -1318,10 +1330,10 @@ void apatb_reconstruct_hw(hls::sim::Byte<4> __xlx_apatb_param_atomLocationsSize,
     .iwriter = new hls::sim::Writer(AUTOTB_TVIN_imageProjectionSize),
 #endif
   };
-  port4.param = &__xlx_apatb_param_imageProjectionSize;
+  port5.param = &__xlx_apatb_param_imageProjectionSize;
 
   hls::sim::Byte<4> __xlx_offset_byte_param_imageProjs_local;
-  static hls::sim::Register port5 {
+  static hls::sim::Register port6 {
     .name = "imageProjs_local_offset",
     .width = 32,
 #ifdef POST_CHECK
@@ -1330,10 +1342,10 @@ void apatb_reconstruct_hw(hls::sim::Byte<4> __xlx_apatb_param_atomLocationsSize,
     .iwriter = new hls::sim::Writer(AUTOTB_TVIN_imageProjs_local_offset),
 #endif
   };
-  port5.param = &__xlx_offset_byte_param_imageProjs_local;
+  port6.param = &__xlx_offset_byte_param_imageProjs_local;
 
   hls::sim::Byte<4> __xlx_offset_byte_param_imageProjs;
-  static hls::sim::Register port6 {
+  static hls::sim::Register port7 {
     .name = "imageProjs_offset",
     .width = 32,
 #ifdef POST_CHECK
@@ -1342,10 +1354,10 @@ void apatb_reconstruct_hw(hls::sim::Byte<4> __xlx_apatb_param_atomLocationsSize,
     .iwriter = new hls::sim::Writer(AUTOTB_TVIN_imageProjs_offset),
 #endif
   };
-  port6.param = &__xlx_offset_byte_param_imageProjs;
+  port7.param = &__xlx_offset_byte_param_imageProjs;
 
   hls::sim::Byte<4> __xlx_offset_byte_param_imageProjs_local_size;
-  static hls::sim::Register port7 {
+  static hls::sim::Register port8 {
     .name = "imageProjs_local_size_offset",
     .width = 32,
 #ifdef POST_CHECK
@@ -1354,10 +1366,10 @@ void apatb_reconstruct_hw(hls::sim::Byte<4> __xlx_apatb_param_atomLocationsSize,
     .iwriter = new hls::sim::Writer(AUTOTB_TVIN_imageProjs_local_size_offset),
 #endif
   };
-  port7.param = &__xlx_offset_byte_param_imageProjs_local_size;
+  port8.param = &__xlx_offset_byte_param_imageProjs_local_size;
 
   hls::sim::Byte<4> __xlx_offset_byte_param_fullImage;
-  static hls::sim::Register port8 {
+  static hls::sim::Register port9 {
     .name = "fullImage_offset",
     .width = 32,
 #ifdef POST_CHECK
@@ -1366,9 +1378,9 @@ void apatb_reconstruct_hw(hls::sim::Byte<4> __xlx_apatb_param_atomLocationsSize,
     .iwriter = new hls::sim::Writer(AUTOTB_TVIN_fullImage_offset),
 #endif
   };
-  port8.param = &__xlx_offset_byte_param_fullImage;
+  port9.param = &__xlx_offset_byte_param_fullImage;
 
-  static hls::sim::Register port9 {
+  static hls::sim::Register port10 {
     .name = "fullImage_rows",
     .width = 32,
 #ifdef POST_CHECK
@@ -1377,9 +1389,9 @@ void apatb_reconstruct_hw(hls::sim::Byte<4> __xlx_apatb_param_atomLocationsSize,
     .iwriter = new hls::sim::Writer(AUTOTB_TVIN_fullImage_rows),
 #endif
   };
-  port9.param = &__xlx_apatb_param_fullImage_rows;
+  port10.param = &__xlx_apatb_param_fullImage_rows;
 
-  static hls::sim::Register port10 {
+  static hls::sim::Register port11 {
     .name = "fullImage_cols",
     .width = 32,
 #ifdef POST_CHECK
@@ -1388,10 +1400,10 @@ void apatb_reconstruct_hw(hls::sim::Byte<4> __xlx_apatb_param_atomLocationsSize,
     .iwriter = new hls::sim::Writer(AUTOTB_TVIN_fullImage_cols),
 #endif
   };
-  port10.param = &__xlx_apatb_param_fullImage_cols;
+  port11.param = &__xlx_apatb_param_fullImage_cols;
 
   hls::sim::Byte<4> __xlx_offset_byte_param_emissions;
-  static hls::sim::Register port11 {
+  static hls::sim::Register port12 {
     .name = "emissions_offset",
     .width = 32,
 #ifdef POST_CHECK
@@ -1400,19 +1412,7 @@ void apatb_reconstruct_hw(hls::sim::Byte<4> __xlx_apatb_param_atomLocationsSize,
     .iwriter = new hls::sim::Writer(AUTOTB_TVIN_emissions_offset),
 #endif
   };
-  port11.param = &__xlx_offset_byte_param_emissions;
-
-  static hls::sim::Register port12 {
-    .name = "emission_cnt",
-    .width = 32,
-#ifdef POST_CHECK
-    .reader = new hls::sim::Reader(AUTOTB_TVOUT_PC_emission_cnt),
-#else
-    .owriter = new hls::sim::Writer(AUTOTB_TVOUT_emission_cnt),
-    .iwriter = new hls::sim::Writer(AUTOTB_TVIN_emission_cnt),
-#endif
-  };
-  port12.param = __xlx_apatb_param_emission_cnt;
+  port12.param = &__xlx_offset_byte_param_emissions;
 
 #ifdef USE_BINARY_TV_FILE
   static hls::sim::Memory<hls::sim::Input, hls::sim::Output> port13 {
@@ -1421,6 +1421,30 @@ void apatb_reconstruct_hw(hls::sim::Byte<4> __xlx_apatb_param_atomLocationsSize,
 #endif
     .width = 64,
     .asize = 8,
+    .hbm = false,
+    .name = { "atomLocations" },
+#ifdef POST_CHECK
+#else
+    .owriter = nullptr,
+#ifdef USE_BINARY_TV_FILE
+    .iwriter = new hls::sim::Output(AUTOTB_TVIN_atomLocations),
+#else
+    .iwriter = new hls::sim::Writer(AUTOTB_TVIN_atomLocations),
+#endif
+#endif
+    .hasWrite = { false },
+  };
+  port13.param = { __xlx_apatb_param_atomLocations };
+  port13.mname = { "atomLocations" };
+  port13.nbytes = { 8192 };
+
+#ifdef USE_BINARY_TV_FILE
+  static hls::sim::Memory<hls::sim::Input, hls::sim::Output> port14 {
+#else
+  static hls::sim::Memory<hls::sim::Reader, hls::sim::Writer> port14 {
+#endif
+    .width = 32,
+    .asize = 4,
     .hbm = false,
     .name = { "emissions" },
 #ifdef POST_CHECK
@@ -1443,17 +1467,17 @@ void apatb_reconstruct_hw(hls::sim::Byte<4> __xlx_apatb_param_atomLocationsSize,
 #endif
     .hasWrite = { true },
   };
-  port13.param = { __xlx_apatb_param_emissions };
-  port13.mname = { "emissions" };
-  port13.nbytes = { 8000 };
+  port14.param = { __xlx_apatb_param_emissions };
+  port14.mname = { "emissions" };
+  port14.nbytes = { 4096 };
 
 #ifdef USE_BINARY_TV_FILE
-  static hls::sim::Memory<hls::sim::Input, hls::sim::Output> port14 {
+  static hls::sim::Memory<hls::sim::Input, hls::sim::Output> port15 {
 #else
-  static hls::sim::Memory<hls::sim::Reader, hls::sim::Writer> port14 {
+  static hls::sim::Memory<hls::sim::Reader, hls::sim::Writer> port15 {
 #endif
-    .width = 64,
-    .asize = 8,
+    .width = 32,
+    .asize = 4,
     .hbm = false,
     .name = { "fullImage" },
 #ifdef POST_CHECK
@@ -1467,17 +1491,17 @@ void apatb_reconstruct_hw(hls::sim::Byte<4> __xlx_apatb_param_atomLocationsSize,
 #endif
     .hasWrite = { false },
   };
-  port14.param = { __xlx_apatb_param_fullImage };
-  port14.mname = { "fullImage" };
-  port14.nbytes = { 524288 };
+  port15.param = { __xlx_apatb_param_fullImage };
+  port15.mname = { "fullImage" };
+  port15.nbytes = { 2359296 };
 
 #ifdef USE_BINARY_TV_FILE
-  static hls::sim::Memory<hls::sim::Input, hls::sim::Output> port15 {
+  static hls::sim::Memory<hls::sim::Input, hls::sim::Output> port16 {
 #else
-  static hls::sim::Memory<hls::sim::Reader, hls::sim::Writer> port15 {
+  static hls::sim::Memory<hls::sim::Reader, hls::sim::Writer> port16 {
 #endif
-    .width = 64,
-    .asize = 8,
+    .width = 32,
+    .asize = 4,
     .hbm = false,
     .name = { "imageProjs" },
 #ifdef POST_CHECK
@@ -1491,17 +1515,17 @@ void apatb_reconstruct_hw(hls::sim::Byte<4> __xlx_apatb_param_atomLocationsSize,
 #endif
     .hasWrite = { false },
   };
-  port15.param = { __xlx_apatb_param_imageProjs };
-  port15.mname = { "imageProjs" };
-  port15.nbytes = { 800 };
+  port16.param = { __xlx_apatb_param_imageProjs };
+  port16.mname = { "imageProjs" };
+  port16.nbytes = { 4096 };
 
 #ifdef USE_BINARY_TV_FILE
-  static hls::sim::Memory<hls::sim::Input, hls::sim::Output> port16 {
+  static hls::sim::Memory<hls::sim::Input, hls::sim::Output> port17 {
 #else
-  static hls::sim::Memory<hls::sim::Reader, hls::sim::Writer> port16 {
+  static hls::sim::Memory<hls::sim::Reader, hls::sim::Writer> port17 {
 #endif
-    .width = 64,
-    .asize = 8,
+    .width = 32,
+    .asize = 4,
     .hbm = false,
     .name = { "imageProjs_local" },
 #ifdef POST_CHECK
@@ -1515,14 +1539,14 @@ void apatb_reconstruct_hw(hls::sim::Byte<4> __xlx_apatb_param_atomLocationsSize,
 #endif
     .hasWrite = { false },
   };
-  port16.param = { __xlx_apatb_param_imageProjs_local };
-  port16.mname = { "imageProjs_local" };
-  port16.nbytes = { 800000 };
+  port17.param = { __xlx_apatb_param_imageProjs_local };
+  port17.mname = { "imageProjs_local" };
+  port17.nbytes = { 4194304 };
 
 #ifdef USE_BINARY_TV_FILE
-  static hls::sim::Memory<hls::sim::Input, hls::sim::Output> port17 {
+  static hls::sim::Memory<hls::sim::Input, hls::sim::Output> port18 {
 #else
-  static hls::sim::Memory<hls::sim::Reader, hls::sim::Writer> port17 {
+  static hls::sim::Memory<hls::sim::Reader, hls::sim::Writer> port18 {
 #endif
     .width = 32,
     .asize = 4,
@@ -1539,39 +1563,14 @@ void apatb_reconstruct_hw(hls::sim::Byte<4> __xlx_apatb_param_atomLocationsSize,
 #endif
     .hasWrite = { false },
   };
-  port17.param = { __xlx_apatb_param_imageProjs_local_size };
-  port17.mname = { "imageProjs_local_size" };
-  port17.nbytes = { 400 };
-
-#ifdef USE_BINARY_TV_FILE
-  static hls::sim::Memory<hls::sim::Input, hls::sim::Output> port18 {
-#else
-  static hls::sim::Memory<hls::sim::Reader, hls::sim::Writer> port18 {
-#endif
-    .width = 128,
-    .asize = 16,
-    .hbm = false,
-    .name = { "atomLocations" },
-#ifdef POST_CHECK
-#else
-    .owriter = nullptr,
-#ifdef USE_BINARY_TV_FILE
-    .iwriter = new hls::sim::Output(AUTOTB_TVIN_atomLocations),
-#else
-    .iwriter = new hls::sim::Writer(AUTOTB_TVIN_atomLocations),
-#endif
-#endif
-    .hasWrite = { false },
-  };
-  port18.param = { __xlx_apatb_param_atomLocations };
-  port18.mname = { "atomLocations" };
-  port18.nbytes = { 1600 };
+  port18.param = { __xlx_apatb_param_imageProjs_local_size };
+  port18.mname = { "imageProjs_local_size" };
+  port18.nbytes = { 4096 };
 
   try {
 #ifdef POST_CHECK
     CodeState = ENTER_WRAPC_PC;
-    check(port12);
-    check(port13);
+    check(port14);
 #else
     static hls::sim::RefTCL tcl("../tv/cdatafile/ref.tcl");
     tcl.containsVLA = 0;
@@ -1615,10 +1614,9 @@ void apatb_reconstruct_hw(hls::sim::Byte<4> __xlx_apatb_param_atomLocationsSize,
     port17.doTCL(tcl);
     port18.doTCL(tcl);
     CodeState = CALL_C_DUT;
-    reconstruct_hw_stub_wrapper(__xlx_apatb_param_atomLocationsSize, __xlx_apatb_param_projShape0, __xlx_apatb_param_projShape1, __xlx_apatb_param_atomLocations, __xlx_apatb_param_psfSupersample, __xlx_apatb_param_imageProjectionSize, __xlx_apatb_param_imageProjs_local, __xlx_apatb_param_imageProjs, __xlx_apatb_param_imageProjs_local_size, __xlx_apatb_param_fullImage, __xlx_apatb_param_fullImage_rows, __xlx_apatb_param_fullImage_cols, __xlx_apatb_param_emissions, __xlx_apatb_param_emission_cnt);
+    reconstruct_hw_stub_wrapper(__xlx_apatb_param_atomLocationsSize, __xlx_apatb_param_projShape0, __xlx_apatb_param_projShape1, __xlx_apatb_param_atomLocations, __xlx_apatb_param_psfSupersample, __xlx_apatb_param_imageProjectionSize, __xlx_apatb_param_imageProjs_local, __xlx_apatb_param_imageProjs, __xlx_apatb_param_imageProjs_local_size, __xlx_apatb_param_fullImage, __xlx_apatb_param_fullImage_rows, __xlx_apatb_param_fullImage_cols, __xlx_apatb_param_emissions);
     CodeState = DUMP_OUTPUTS;
-    dump(port12, port12.owriter, tcl.AESL_transaction);
-    dump(port13, port13.owriter, tcl.AESL_transaction);
+    dump(port14, port14.owriter, tcl.AESL_transaction);
     tcl.AESL_transaction++;
 #endif
   } catch (const hls::sim::SimException &e) {

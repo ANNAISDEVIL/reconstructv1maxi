@@ -41,7 +41,7 @@ set DataType "int"
 set Port [list $PortName $Interface $DataType $Pointer $Dims $Const    $Volatile $ArrayOpt]
 lappend PortList $Port
 set PortName "atomLocations"
-set BitWidth "128"
+set BitWidth "64"
 set ArrayOpt ""
 set Const "0"
 set Volatile "1"
@@ -150,18 +150,6 @@ set Port [list $PortName $Interface $DataType $Pointer $Dims $Const    $Volatile
 lappend PortList $Port
 set PortName "emissions"
 set BitWidth "64"
-set ArrayOpt ""
-set Const "0"
-set Volatile "1"
-set Pointer "1"
-set Reference "0"
-set Dims [list 0]
-set Interface "wire"
-set DataType "void"
-set Port [list $PortName $Interface $DataType $Pointer $Dims $Const    $Volatile $ArrayOpt]
-lappend PortList $Port
-set PortName "emission_cnt"
-set BitWidth "32"
 set ArrayOpt ""
 set Const "0"
 set Volatile "1"

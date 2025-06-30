@@ -1,13 +1,13 @@
 <profile>
 
 <section name = "Vitis HLS Report for 'reconstruct'" level="0">
-<item name = "Date">Wed May 21 17:37:32 2025
+<item name = "Date">Mon Jun 30 08:26:18 2025
 </item>
 <item name = "Version">2024.2 (Build 5238294 on Nov  8 2024)</item>
 <item name = "Project">reconstruct</item>
 <item name = "Solution">hls (Vivado IP Flow Target)</item>
-<item name = "Product family">zynq</item>
-<item name = "Target device">xc7z020-clg400-1</item>
+<item name = "Product family">zynquplusRFSOC</item>
+<item name = "Target device">xczu49dr-ffvf1760-2-e</item>
 </section>
 
 <section name = "Performance Estimates" level="0">
@@ -15,7 +15,7 @@
 <section name = "" level="1">
 <item name = "Summary"><table name="" hasTotal="0">
 <keys size="4">Clock, Target, Estimated, Uncertainty</keys>
-<column name="ap_clk">10.00 ns, 7.300 ns, 2.70 ns</column>
+<column name="ap_clk">10.00 ns, 7.705 ns, 2.70 ns</column>
 </table>
 </item>
 </section>
@@ -24,19 +24,19 @@
 <section name = "" level="1">
 <item name = "Summary"><table name="" hasTotal="0">
 <keys size="8">, min, max, min, max, min, max, Type</keys>
-<column name="">?, ?, ?, ?, ?, ?, dataflow</column>
+<column name="">3961855, 3961855, 39.619 ms, 39.619 ms, 3961856, 3961856, no</column>
 </table>
 </item>
 <item name = "Detail">
 <section name = "" level="1">
 <item name = "Instance"><table name="" hasTotal="0">
 <keys size="9">Instance, Module, min, max, min, max, min, max, Type</keys>
-<column name="getLocalImages_U0">getLocalImages, ?, ?, ?, ?, ?, ?, no</column>
-<column name="applyProjectors_U0">applyProjectors, ?, ?, ?, ?, ?, ?, no</column>
+<column name="dataflow_in_loop_VITIS_LOOP_149_1_1_U0">dataflow_in_loop_VITIS_LOOP_149_1_1, 4888, 4888, 48.880 us, 48.880 us, 3868, 3868, dataflow</column>
 </table>
 </item>
 <item name = "Loop"><table name="" hasTotal="0">
 <keys size="8">Loop Name, min, max, Latency, achieved, target, Count, Pipelined</keys>
+<column name="- VITIS_LOOP_149_1">3961854, 3961854, 4891, -, -, 1024, no</column>
 </table>
 </item>
 </section>
@@ -49,29 +49,28 @@
 <item name = "Summary"><table name="" hasTotal="1">
 <keys size="6">Name, BRAM_18K, DSP, FF, LUT, URAM</keys>
 <column name="DSP">-, -, -, -, -</column>
-<column name="Expression">-, -, 0, 12, -</column>
-<column name="FIFO">-, -, 99, 68, -</column>
-<column name="Instance">30, 55, 32555, 26048, -</column>
+<column name="Expression">-, -, 0, 160, -</column>
+<column name="FIFO">-, -, -, -, -</column>
+<column name="Instance">12, 18, 80182, 32804, 0</column>
 <column name="Memory">-, -, -, -, -</column>
-<column name="Multiplexer">-, -, 0, 18, -</column>
-<column name="Register">-, -, 2, -, -</column>
-<specialColumn name="Available">280, 220, 106400, 53200, 0</specialColumn>
-<specialColumn name="Utilization (%)">10, 25, 30, 49, 0</specialColumn>
+<column name="Multiplexer">-, -, 0, 27, -</column>
+<column name="Register">-, -, 65, -, -</column>
+<specialColumn name="Available">2160, 4272, 850560, 425280, 80</specialColumn>
+<specialColumn name="Utilization (%)">~0, ~0, 9, 7, 0</specialColumn>
 </table>
 </item>
 <item name = "Detail">
 <section name = "" level="1">
 <item name = "Instance"><table name="" hasTotal="1">
 <keys size="7">Instance, Module, BRAM_18K, DSP, FF, LUT, URAM</keys>
-<column name="applyProjectors_U0">applyProjectors, 0, 27, 10724, 10368, 0</column>
-<column name="control_s_axi_U">control_s_axi, 0, 0, 386, 680, 0</column>
-<column name="emissions_m_axi_U">emissions_m_axi, 4, 0, 719, 832, 0</column>
-<column name="fullImage_m_axi_U">fullImage_m_axi, 4, 0, 725, 843, 0</column>
-<column name="getLocalImages_U0">getLocalImages, 12, 28, 17546, 10430, 0</column>
-<column name="imageProjs_local_m_axi_U">imageProjs_local_m_axi, 4, 0, 725, 843, 0</column>
-<column name="imageProjs_local_size_m_axi_U">imageProjs_local_size_m_axi, 2, 0, 671, 657, 0</column>
-<column name="imageProjs_m_axi_U">imageProjs_m_axi, 4, 0, 725, 843, 0</column>
-<column name="scalar_data_s_axi_U">scalar_data_s_axi, 0, 0, 334, 552, 0</column>
+<column name="atomLocations_m_axi_U">atomLocations_m_axi, 4, 0, 725, 823, 0</column>
+<column name="control_s_axi_U">control_s_axi, 0, 0, 456, 808, 0</column>
+<column name="dataflow_in_loop_VITIS_LOOP_149_1_1_U0">dataflow_in_loop_VITIS_LOOP_149_1_1, 0, 18, 76027, 28149, 0</column>
+<column name="emissions_m_axi_U">emissions_m_axi, 2, 0, 665, 625, 0</column>
+<column name="fullImage_m_axi_U">fullImage_m_axi, 2, 0, 671, 637, 0</column>
+<column name="imageProjs_local_m_axi_U">imageProjs_local_m_axi, 2, 0, 671, 637, 0</column>
+<column name="imageProjs_m_axi_U">imageProjs_m_axi, 2, 0, 671, 637, 0</column>
+<column name="scalar_data_s_axi_U">scalar_data_s_axi, 0, 0, 296, 488, 0</column>
 </table>
 </item>
 <item name = "DSP"><table name="" hasTotal="0">
@@ -84,29 +83,30 @@
 </item>
 <item name = "FIFO"><table name="" hasTotal="1">
 <keys size="8">Name, BRAM_18K, FF, LUT, URAM, Depth, Bits, Size:D*B</keys>
-<column name="localImages_U">0, 99, 0, -, 2, 256, 512</column>
 </table>
 </item>
 <item name = "Expression"><table name="" hasTotal="1">
 <keys size="7">Variable Name, Operation, DSP, FF, LUT, Bitwidth P0, Bitwidth P1</keys>
-<column name="ap_idle">and, 0, 0, 2, 1, 1</column>
-<column name="ap_sync_ready">and, 0, 0, 2, 1, 1</column>
-<column name="applyProjectors_U0_ap_start">and, 0, 0, 2, 1, 1</column>
-<column name="getLocalImages_U0_ap_start">and, 0, 0, 2, 1, 1</column>
-<column name="ap_sync_applyProjectors_U0_ap_ready">or, 0, 0, 2, 1, 1</column>
-<column name="ap_sync_getLocalImages_U0_ap_ready">or, 0, 0, 2, 1, 1</column>
+<column name="ap_loop_dataflow_input_count">+, 0, 0, 39, 32, 1</column>
+<column name="ap_loop_dataflow_output_count">+, 0, 0, 39, 32, 1</column>
+<column name="ap_bound_minus_1">-, 0, 0, 39, 32, 1</column>
+<column name="ap_bound_minus_1_output">-, 0, 0, 39, 32, 1</column>
+<column name="ap_bound_read">and, 0, 0, 2, 1, 1</column>
+<column name="ap_bound_ack">or, 0, 0, 2, 1, 1</column>
 </table>
 </item>
 <item name = "Multiplexer"><table name="" hasTotal="1">
 <keys size="5">Name, LUT, Input Size, Bits, Total Bits</keys>
-<column name="ap_sync_reg_applyProjectors_U0_ap_ready">9, 2, 1, 2</column>
-<column name="ap_sync_reg_getLocalImages_U0_ap_ready">9, 2, 1, 2</column>
+<column name="ap_bound_reg_ack">9, 2, 1, 2</column>
+<column name="ap_loop_dataflow_input_count">9, 2, 32, 64</column>
+<column name="ap_loop_dataflow_output_count">9, 2, 32, 64</column>
 </table>
 </item>
 <item name = "Register"><table name="" hasTotal="1">
 <keys size="5">Name, FF, LUT, Bits, Const Bits</keys>
-<column name="ap_sync_reg_applyProjectors_U0_ap_ready">1, 0, 1, 0</column>
-<column name="ap_sync_reg_getLocalImages_U0_ap_ready">1, 0, 1, 0</column>
+<column name="ap_bound_reg_ack">1, 0, 1, 0</column>
+<column name="ap_loop_dataflow_input_count">32, 0, 32, 0</column>
+<column name="ap_loop_dataflow_output_count">32, 0, 32, 0</column>
 </table>
 </item>
 </section>
@@ -133,26 +133,71 @@
 <column name="s_axi_control_BVALID">out, 1, s_axi, control, scalar</column>
 <column name="s_axi_control_BREADY">in, 1, s_axi, control, scalar</column>
 <column name="s_axi_control_BRESP">out, 2, s_axi, control, scalar</column>
-<column name="s_axi_scalar_data_AWVALID">in, 1, s_axi, scalar_data, pointer</column>
-<column name="s_axi_scalar_data_AWREADY">out, 1, s_axi, scalar_data, pointer</column>
-<column name="s_axi_scalar_data_AWADDR">in, 7, s_axi, scalar_data, pointer</column>
-<column name="s_axi_scalar_data_WVALID">in, 1, s_axi, scalar_data, pointer</column>
-<column name="s_axi_scalar_data_WREADY">out, 1, s_axi, scalar_data, pointer</column>
-<column name="s_axi_scalar_data_WDATA">in, 32, s_axi, scalar_data, pointer</column>
-<column name="s_axi_scalar_data_WSTRB">in, 4, s_axi, scalar_data, pointer</column>
-<column name="s_axi_scalar_data_ARVALID">in, 1, s_axi, scalar_data, pointer</column>
-<column name="s_axi_scalar_data_ARREADY">out, 1, s_axi, scalar_data, pointer</column>
-<column name="s_axi_scalar_data_ARADDR">in, 7, s_axi, scalar_data, pointer</column>
-<column name="s_axi_scalar_data_RVALID">out, 1, s_axi, scalar_data, pointer</column>
-<column name="s_axi_scalar_data_RREADY">in, 1, s_axi, scalar_data, pointer</column>
-<column name="s_axi_scalar_data_RDATA">out, 32, s_axi, scalar_data, pointer</column>
-<column name="s_axi_scalar_data_RRESP">out, 2, s_axi, scalar_data, pointer</column>
-<column name="s_axi_scalar_data_BVALID">out, 1, s_axi, scalar_data, pointer</column>
-<column name="s_axi_scalar_data_BREADY">in, 1, s_axi, scalar_data, pointer</column>
-<column name="s_axi_scalar_data_BRESP">out, 2, s_axi, scalar_data, pointer</column>
+<column name="s_axi_scalar_data_AWVALID">in, 1, s_axi, scalar_data, scalar</column>
+<column name="s_axi_scalar_data_AWREADY">out, 1, s_axi, scalar_data, scalar</column>
+<column name="s_axi_scalar_data_AWADDR">in, 7, s_axi, scalar_data, scalar</column>
+<column name="s_axi_scalar_data_WVALID">in, 1, s_axi, scalar_data, scalar</column>
+<column name="s_axi_scalar_data_WREADY">out, 1, s_axi, scalar_data, scalar</column>
+<column name="s_axi_scalar_data_WDATA">in, 32, s_axi, scalar_data, scalar</column>
+<column name="s_axi_scalar_data_WSTRB">in, 4, s_axi, scalar_data, scalar</column>
+<column name="s_axi_scalar_data_ARVALID">in, 1, s_axi, scalar_data, scalar</column>
+<column name="s_axi_scalar_data_ARREADY">out, 1, s_axi, scalar_data, scalar</column>
+<column name="s_axi_scalar_data_ARADDR">in, 7, s_axi, scalar_data, scalar</column>
+<column name="s_axi_scalar_data_RVALID">out, 1, s_axi, scalar_data, scalar</column>
+<column name="s_axi_scalar_data_RREADY">in, 1, s_axi, scalar_data, scalar</column>
+<column name="s_axi_scalar_data_RDATA">out, 32, s_axi, scalar_data, scalar</column>
+<column name="s_axi_scalar_data_RRESP">out, 2, s_axi, scalar_data, scalar</column>
+<column name="s_axi_scalar_data_BVALID">out, 1, s_axi, scalar_data, scalar</column>
+<column name="s_axi_scalar_data_BREADY">in, 1, s_axi, scalar_data, scalar</column>
+<column name="s_axi_scalar_data_BRESP">out, 2, s_axi, scalar_data, scalar</column>
 <column name="ap_clk">in, 1, ap_ctrl_hs, reconstruct, return value</column>
 <column name="ap_rst_n">in, 1, ap_ctrl_hs, reconstruct, return value</column>
 <column name="interrupt">out, 1, ap_ctrl_hs, reconstruct, return value</column>
+<column name="m_axi_atomLocations_AWVALID">out, 1, m_axi, atomLocations, pointer</column>
+<column name="m_axi_atomLocations_AWREADY">in, 1, m_axi, atomLocations, pointer</column>
+<column name="m_axi_atomLocations_AWADDR">out, 64, m_axi, atomLocations, pointer</column>
+<column name="m_axi_atomLocations_AWID">out, 1, m_axi, atomLocations, pointer</column>
+<column name="m_axi_atomLocations_AWLEN">out, 8, m_axi, atomLocations, pointer</column>
+<column name="m_axi_atomLocations_AWSIZE">out, 3, m_axi, atomLocations, pointer</column>
+<column name="m_axi_atomLocations_AWBURST">out, 2, m_axi, atomLocations, pointer</column>
+<column name="m_axi_atomLocations_AWLOCK">out, 2, m_axi, atomLocations, pointer</column>
+<column name="m_axi_atomLocations_AWCACHE">out, 4, m_axi, atomLocations, pointer</column>
+<column name="m_axi_atomLocations_AWPROT">out, 3, m_axi, atomLocations, pointer</column>
+<column name="m_axi_atomLocations_AWQOS">out, 4, m_axi, atomLocations, pointer</column>
+<column name="m_axi_atomLocations_AWREGION">out, 4, m_axi, atomLocations, pointer</column>
+<column name="m_axi_atomLocations_AWUSER">out, 1, m_axi, atomLocations, pointer</column>
+<column name="m_axi_atomLocations_WVALID">out, 1, m_axi, atomLocations, pointer</column>
+<column name="m_axi_atomLocations_WREADY">in, 1, m_axi, atomLocations, pointer</column>
+<column name="m_axi_atomLocations_WDATA">out, 64, m_axi, atomLocations, pointer</column>
+<column name="m_axi_atomLocations_WSTRB">out, 8, m_axi, atomLocations, pointer</column>
+<column name="m_axi_atomLocations_WLAST">out, 1, m_axi, atomLocations, pointer</column>
+<column name="m_axi_atomLocations_WID">out, 1, m_axi, atomLocations, pointer</column>
+<column name="m_axi_atomLocations_WUSER">out, 1, m_axi, atomLocations, pointer</column>
+<column name="m_axi_atomLocations_ARVALID">out, 1, m_axi, atomLocations, pointer</column>
+<column name="m_axi_atomLocations_ARREADY">in, 1, m_axi, atomLocations, pointer</column>
+<column name="m_axi_atomLocations_ARADDR">out, 64, m_axi, atomLocations, pointer</column>
+<column name="m_axi_atomLocations_ARID">out, 1, m_axi, atomLocations, pointer</column>
+<column name="m_axi_atomLocations_ARLEN">out, 8, m_axi, atomLocations, pointer</column>
+<column name="m_axi_atomLocations_ARSIZE">out, 3, m_axi, atomLocations, pointer</column>
+<column name="m_axi_atomLocations_ARBURST">out, 2, m_axi, atomLocations, pointer</column>
+<column name="m_axi_atomLocations_ARLOCK">out, 2, m_axi, atomLocations, pointer</column>
+<column name="m_axi_atomLocations_ARCACHE">out, 4, m_axi, atomLocations, pointer</column>
+<column name="m_axi_atomLocations_ARPROT">out, 3, m_axi, atomLocations, pointer</column>
+<column name="m_axi_atomLocations_ARQOS">out, 4, m_axi, atomLocations, pointer</column>
+<column name="m_axi_atomLocations_ARREGION">out, 4, m_axi, atomLocations, pointer</column>
+<column name="m_axi_atomLocations_ARUSER">out, 1, m_axi, atomLocations, pointer</column>
+<column name="m_axi_atomLocations_RVALID">in, 1, m_axi, atomLocations, pointer</column>
+<column name="m_axi_atomLocations_RREADY">out, 1, m_axi, atomLocations, pointer</column>
+<column name="m_axi_atomLocations_RDATA">in, 64, m_axi, atomLocations, pointer</column>
+<column name="m_axi_atomLocations_RLAST">in, 1, m_axi, atomLocations, pointer</column>
+<column name="m_axi_atomLocations_RID">in, 1, m_axi, atomLocations, pointer</column>
+<column name="m_axi_atomLocations_RUSER">in, 1, m_axi, atomLocations, pointer</column>
+<column name="m_axi_atomLocations_RRESP">in, 2, m_axi, atomLocations, pointer</column>
+<column name="m_axi_atomLocations_BVALID">in, 1, m_axi, atomLocations, pointer</column>
+<column name="m_axi_atomLocations_BREADY">out, 1, m_axi, atomLocations, pointer</column>
+<column name="m_axi_atomLocations_BRESP">in, 2, m_axi, atomLocations, pointer</column>
+<column name="m_axi_atomLocations_BID">in, 1, m_axi, atomLocations, pointer</column>
+<column name="m_axi_atomLocations_BUSER">in, 1, m_axi, atomLocations, pointer</column>
 <column name="m_axi_emissions_AWVALID">out, 1, m_axi, emissions, pointer</column>
 <column name="m_axi_emissions_AWREADY">in, 1, m_axi, emissions, pointer</column>
 <column name="m_axi_emissions_AWADDR">out, 64, m_axi, emissions, pointer</column>
@@ -168,8 +213,8 @@
 <column name="m_axi_emissions_AWUSER">out, 1, m_axi, emissions, pointer</column>
 <column name="m_axi_emissions_WVALID">out, 1, m_axi, emissions, pointer</column>
 <column name="m_axi_emissions_WREADY">in, 1, m_axi, emissions, pointer</column>
-<column name="m_axi_emissions_WDATA">out, 64, m_axi, emissions, pointer</column>
-<column name="m_axi_emissions_WSTRB">out, 8, m_axi, emissions, pointer</column>
+<column name="m_axi_emissions_WDATA">out, 32, m_axi, emissions, pointer</column>
+<column name="m_axi_emissions_WSTRB">out, 4, m_axi, emissions, pointer</column>
 <column name="m_axi_emissions_WLAST">out, 1, m_axi, emissions, pointer</column>
 <column name="m_axi_emissions_WID">out, 1, m_axi, emissions, pointer</column>
 <column name="m_axi_emissions_WUSER">out, 1, m_axi, emissions, pointer</column>
@@ -188,7 +233,7 @@
 <column name="m_axi_emissions_ARUSER">out, 1, m_axi, emissions, pointer</column>
 <column name="m_axi_emissions_RVALID">in, 1, m_axi, emissions, pointer</column>
 <column name="m_axi_emissions_RREADY">out, 1, m_axi, emissions, pointer</column>
-<column name="m_axi_emissions_RDATA">in, 64, m_axi, emissions, pointer</column>
+<column name="m_axi_emissions_RDATA">in, 32, m_axi, emissions, pointer</column>
 <column name="m_axi_emissions_RLAST">in, 1, m_axi, emissions, pointer</column>
 <column name="m_axi_emissions_RID">in, 1, m_axi, emissions, pointer</column>
 <column name="m_axi_emissions_RUSER">in, 1, m_axi, emissions, pointer</column>
@@ -213,8 +258,8 @@
 <column name="m_axi_fullImage_AWUSER">out, 1, m_axi, fullImage, pointer</column>
 <column name="m_axi_fullImage_WVALID">out, 1, m_axi, fullImage, pointer</column>
 <column name="m_axi_fullImage_WREADY">in, 1, m_axi, fullImage, pointer</column>
-<column name="m_axi_fullImage_WDATA">out, 64, m_axi, fullImage, pointer</column>
-<column name="m_axi_fullImage_WSTRB">out, 8, m_axi, fullImage, pointer</column>
+<column name="m_axi_fullImage_WDATA">out, 32, m_axi, fullImage, pointer</column>
+<column name="m_axi_fullImage_WSTRB">out, 4, m_axi, fullImage, pointer</column>
 <column name="m_axi_fullImage_WLAST">out, 1, m_axi, fullImage, pointer</column>
 <column name="m_axi_fullImage_WID">out, 1, m_axi, fullImage, pointer</column>
 <column name="m_axi_fullImage_WUSER">out, 1, m_axi, fullImage, pointer</column>
@@ -233,7 +278,7 @@
 <column name="m_axi_fullImage_ARUSER">out, 1, m_axi, fullImage, pointer</column>
 <column name="m_axi_fullImage_RVALID">in, 1, m_axi, fullImage, pointer</column>
 <column name="m_axi_fullImage_RREADY">out, 1, m_axi, fullImage, pointer</column>
-<column name="m_axi_fullImage_RDATA">in, 64, m_axi, fullImage, pointer</column>
+<column name="m_axi_fullImage_RDATA">in, 32, m_axi, fullImage, pointer</column>
 <column name="m_axi_fullImage_RLAST">in, 1, m_axi, fullImage, pointer</column>
 <column name="m_axi_fullImage_RID">in, 1, m_axi, fullImage, pointer</column>
 <column name="m_axi_fullImage_RUSER">in, 1, m_axi, fullImage, pointer</column>
@@ -258,8 +303,8 @@
 <column name="m_axi_imageProjs_AWUSER">out, 1, m_axi, imageProjs, pointer</column>
 <column name="m_axi_imageProjs_WVALID">out, 1, m_axi, imageProjs, pointer</column>
 <column name="m_axi_imageProjs_WREADY">in, 1, m_axi, imageProjs, pointer</column>
-<column name="m_axi_imageProjs_WDATA">out, 64, m_axi, imageProjs, pointer</column>
-<column name="m_axi_imageProjs_WSTRB">out, 8, m_axi, imageProjs, pointer</column>
+<column name="m_axi_imageProjs_WDATA">out, 32, m_axi, imageProjs, pointer</column>
+<column name="m_axi_imageProjs_WSTRB">out, 4, m_axi, imageProjs, pointer</column>
 <column name="m_axi_imageProjs_WLAST">out, 1, m_axi, imageProjs, pointer</column>
 <column name="m_axi_imageProjs_WID">out, 1, m_axi, imageProjs, pointer</column>
 <column name="m_axi_imageProjs_WUSER">out, 1, m_axi, imageProjs, pointer</column>
@@ -278,7 +323,7 @@
 <column name="m_axi_imageProjs_ARUSER">out, 1, m_axi, imageProjs, pointer</column>
 <column name="m_axi_imageProjs_RVALID">in, 1, m_axi, imageProjs, pointer</column>
 <column name="m_axi_imageProjs_RREADY">out, 1, m_axi, imageProjs, pointer</column>
-<column name="m_axi_imageProjs_RDATA">in, 64, m_axi, imageProjs, pointer</column>
+<column name="m_axi_imageProjs_RDATA">in, 32, m_axi, imageProjs, pointer</column>
 <column name="m_axi_imageProjs_RLAST">in, 1, m_axi, imageProjs, pointer</column>
 <column name="m_axi_imageProjs_RID">in, 1, m_axi, imageProjs, pointer</column>
 <column name="m_axi_imageProjs_RUSER">in, 1, m_axi, imageProjs, pointer</column>
@@ -303,8 +348,8 @@
 <column name="m_axi_imageProjs_local_AWUSER">out, 1, m_axi, imageProjs_local, pointer</column>
 <column name="m_axi_imageProjs_local_WVALID">out, 1, m_axi, imageProjs_local, pointer</column>
 <column name="m_axi_imageProjs_local_WREADY">in, 1, m_axi, imageProjs_local, pointer</column>
-<column name="m_axi_imageProjs_local_WDATA">out, 64, m_axi, imageProjs_local, pointer</column>
-<column name="m_axi_imageProjs_local_WSTRB">out, 8, m_axi, imageProjs_local, pointer</column>
+<column name="m_axi_imageProjs_local_WDATA">out, 32, m_axi, imageProjs_local, pointer</column>
+<column name="m_axi_imageProjs_local_WSTRB">out, 4, m_axi, imageProjs_local, pointer</column>
 <column name="m_axi_imageProjs_local_WLAST">out, 1, m_axi, imageProjs_local, pointer</column>
 <column name="m_axi_imageProjs_local_WID">out, 1, m_axi, imageProjs_local, pointer</column>
 <column name="m_axi_imageProjs_local_WUSER">out, 1, m_axi, imageProjs_local, pointer</column>
@@ -323,7 +368,7 @@
 <column name="m_axi_imageProjs_local_ARUSER">out, 1, m_axi, imageProjs_local, pointer</column>
 <column name="m_axi_imageProjs_local_RVALID">in, 1, m_axi, imageProjs_local, pointer</column>
 <column name="m_axi_imageProjs_local_RREADY">out, 1, m_axi, imageProjs_local, pointer</column>
-<column name="m_axi_imageProjs_local_RDATA">in, 64, m_axi, imageProjs_local, pointer</column>
+<column name="m_axi_imageProjs_local_RDATA">in, 32, m_axi, imageProjs_local, pointer</column>
 <column name="m_axi_imageProjs_local_RLAST">in, 1, m_axi, imageProjs_local, pointer</column>
 <column name="m_axi_imageProjs_local_RID">in, 1, m_axi, imageProjs_local, pointer</column>
 <column name="m_axi_imageProjs_local_RUSER">in, 1, m_axi, imageProjs_local, pointer</column>
@@ -378,16 +423,6 @@
 <column name="m_axi_imageProjs_local_size_BRESP">in, 2, m_axi, imageProjs_local_size, pointer</column>
 <column name="m_axi_imageProjs_local_size_BID">in, 1, m_axi, imageProjs_local_size, pointer</column>
 <column name="m_axi_imageProjs_local_size_BUSER">in, 1, m_axi, imageProjs_local_size, pointer</column>
-<column name="atomLocations_address0">out, 7, ap_memory, atomLocations, array</column>
-<column name="atomLocations_ce0">out, 1, ap_memory, atomLocations, array</column>
-<column name="atomLocations_d0">out, 128, ap_memory, atomLocations, array</column>
-<column name="atomLocations_q0">in, 128, ap_memory, atomLocations, array</column>
-<column name="atomLocations_we0">out, 1, ap_memory, atomLocations, array</column>
-<column name="atomLocations_address1">out, 7, ap_memory, atomLocations, array</column>
-<column name="atomLocations_ce1">out, 1, ap_memory, atomLocations, array</column>
-<column name="atomLocations_d1">out, 128, ap_memory, atomLocations, array</column>
-<column name="atomLocations_q1">in, 128, ap_memory, atomLocations, array</column>
-<column name="atomLocations_we1">out, 1, ap_memory, atomLocations, array</column>
 </table>
 </item>
 </section>

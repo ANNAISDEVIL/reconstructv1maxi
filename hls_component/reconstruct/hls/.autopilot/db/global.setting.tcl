@@ -42,11 +42,11 @@ set ExportMCPathFlag 0
 set SCTraceFileName mytrace
 set SCTraceFileFormat vcd
 set SCTraceOption all
-set TargetInfo xc7z020:-clg400:-1
+set TargetInfo xczu49dr:-ffvf1760:-2-e
 set SourceFiles {sc {} c ../../../image_analysis.cpp}
 set SourceFlags {sc {} c {{}}}
 set DirectiveFile {}
-set TBFiles {verilog {F:/LMU/quantumMA/opimization/reconstructv1maxi/test.cpp F:/LMU/quantumMA/naia/reconstructv1/imagTransform/fullImage_output.txt F:/LMU/quantumMA/naia/reconstructv1/imagTransform/restoutput.txt} bc {F:/LMU/quantumMA/opimization/reconstructv1maxi/test.cpp F:/LMU/quantumMA/naia/reconstructv1/imagTransform/fullImage_output.txt F:/LMU/quantumMA/naia/reconstructv1/imagTransform/restoutput.txt} vhdl {F:/LMU/quantumMA/opimization/reconstructv1maxi/test.cpp F:/LMU/quantumMA/naia/reconstructv1/imagTransform/fullImage_output.txt F:/LMU/quantumMA/naia/reconstructv1/imagTransform/restoutput.txt} sc {F:/LMU/quantumMA/opimization/reconstructv1maxi/test.cpp F:/LMU/quantumMA/naia/reconstructv1/imagTransform/fullImage_output.txt F:/LMU/quantumMA/naia/reconstructv1/imagTransform/restoutput.txt} cas {F:/LMU/quantumMA/opimization/reconstructv1maxi/test.cpp F:/LMU/quantumMA/naia/reconstructv1/imagTransform/fullImage_output.txt F:/LMU/quantumMA/naia/reconstructv1/imagTransform/restoutput.txt} c {}}
+set TBFiles {verilog {F:/LMU/quantumMA/opimization/reconstructv1maxi/restoutput.txt F:/LMU/quantumMA/opimization/reconstructv1maxi/fullImage_output.txt F:/LMU/quantumMA/opimization/reconstructv1maxi/test.cpp} bc {F:/LMU/quantumMA/opimization/reconstructv1maxi/restoutput.txt F:/LMU/quantumMA/opimization/reconstructv1maxi/fullImage_output.txt F:/LMU/quantumMA/opimization/reconstructv1maxi/test.cpp} vhdl {F:/LMU/quantumMA/opimization/reconstructv1maxi/restoutput.txt F:/LMU/quantumMA/opimization/reconstructv1maxi/fullImage_output.txt F:/LMU/quantumMA/opimization/reconstructv1maxi/test.cpp} sc {F:/LMU/quantumMA/opimization/reconstructv1maxi/restoutput.txt F:/LMU/quantumMA/opimization/reconstructv1maxi/fullImage_output.txt F:/LMU/quantumMA/opimization/reconstructv1maxi/test.cpp} cas {F:/LMU/quantumMA/opimization/reconstructv1maxi/restoutput.txt F:/LMU/quantumMA/opimization/reconstructv1maxi/fullImage_output.txt F:/LMU/quantumMA/opimization/reconstructv1maxi/test.cpp} c {}}
 set SpecLanguage C
 set TVInFiles {bc {} c {} sc {} cas {} vhdl {} verilog {}}
 set TVOutFiles {bc {} c {} sc {} cas {} vhdl {} verilog {}}
@@ -62,5 +62,5 @@ set DefaultPlatform DefaultPlatform
 set multiClockList {}
 set SCPortClockMap {}
 set intNbAccess 0
-set PlatformFiles {{DefaultPlatform {xilinx/zynq/zynq}}}
+set PlatformFiles {{DefaultPlatform {xilinx/zynquplus/zynquplus}}}
 set HPFPO 0

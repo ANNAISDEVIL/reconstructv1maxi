@@ -1,0 +1,534 @@
+<profile>
+
+<section name = "Vitis HLS Report for 'Image_extract'" level="0">
+<item name = "Date">Mon Jun 30 08:25:44 2025
+</item>
+<item name = "Version">2024.2 (Build 5238294 on Nov  8 2024)</item>
+<item name = "Project">reconstruct</item>
+<item name = "Solution">hls (Vivado IP Flow Target)</item>
+<item name = "Product family">zynquplusRFSOC</item>
+<item name = "Target device">xczu49dr-ffvf1760-2-e</item>
+</section>
+
+<section name = "Performance Estimates" level="0">
+<item name = "Timing">
+<section name = "" level="1">
+<item name = "Summary"><table name="" hasTotal="0">
+<keys size="4">Clock, Target, Estimated, Uncertainty</keys>
+<column name="ap_clk">10.00 ns, 7.300 ns, 2.70 ns</column>
+</table>
+</item>
+</section>
+</item>
+<item name = "Latency">
+<section name = "" level="1">
+<item name = "Summary"><table name="" hasTotal="0">
+<keys size="8">, min, max, min, max, min, max, Type</keys>
+<column name="">982, 982, 9.820 us, 9.820 us, 982, 982, no</column>
+</table>
+</item>
+<item name = "Detail">
+<section name = "" level="1">
+<item name = "Instance"><table name="" hasTotal="0">
+<keys size="9">Instance, Module, min, max, min, max, min, max, Type</keys>
+<column name="grp_Image_extract_Pipeline_VITIS_LOOP_77_1_VITIS_LOOP_78_2_fu_239">Image_extract_Pipeline_VITIS_LOOP_77_1_VITIS_LOOP_78_2, 972, 972, 9.720 us, 9.720 us, 961, 961, loop auto-rewind stp (delay=0 clock cycles(s))</column>
+</table>
+</item>
+<item name = "Loop"><table name="" hasTotal="0">
+<keys size="8">Loop Name, min, max, Latency, achieved, target, Count, Pipelined</keys>
+</table>
+</item>
+</section>
+</item>
+</section>
+</item>
+</section>
+
+<section name = "Utilization Estimates" level="0">
+<item name = "Summary"><table name="" hasTotal="1">
+<keys size="6">Name, BRAM_18K, DSP, FF, LUT, URAM</keys>
+<column name="DSP">-, -, -, -, -</column>
+<column name="Expression">-, -, 0, 6, -</column>
+<column name="FIFO">-, -, -, -, -</column>
+<column name="Instance">-, -, 354, 435, -</column>
+<column name="Memory">-, -, -, -, -</column>
+<column name="Multiplexer">-, -, 0, 242, -</column>
+<column name="Register">-, -, 227, -, -</column>
+<specialColumn name="Available">2160, 4272, 850560, 425280, 80</specialColumn>
+<specialColumn name="Utilization (%)">0, 0, ~0, ~0, 0</specialColumn>
+</table>
+</item>
+<item name = "Detail">
+<section name = "" level="1">
+<item name = "Instance"><table name="" hasTotal="1">
+<keys size="7">Instance, Module, BRAM_18K, DSP, FF, LUT, URAM</keys>
+<column name="grp_Image_extract_Pipeline_VITIS_LOOP_77_1_VITIS_LOOP_78_2_fu_239">Image_extract_Pipeline_VITIS_LOOP_77_1_VITIS_LOOP_78_2, 0, 0, 354, 435, 0</column>
+</table>
+</item>
+<item name = "DSP"><table name="" hasTotal="0">
+<keys size="3">Instance, Module, Expression</keys>
+</table>
+</item>
+<item name = "Memory"><table name="" hasTotal="1">
+<keys size="10">Memory, Module, BRAM_18K, FF, LUT, URAM, Words, Bits, Banks, W*Bits*Banks</keys>
+</table>
+</item>
+<item name = "FIFO"><table name="" hasTotal="1">
+<keys size="8">Name, BRAM_18K, FF, LUT, URAM, Depth, Bits, Size:D*B</keys>
+</table>
+</item>
+<item name = "Expression"><table name="" hasTotal="1">
+<keys size="7">Variable Name, Operation, DSP, FF, LUT, Bitwidth P0, Bitwidth P1</keys>
+<column name="ap_block_state1">or, 0, 0, 2, 1, 1</column>
+<column name="ap_block_state1_io">or, 0, 0, 2, 1, 1</column>
+<column name="ap_block_state9">or, 0, 0, 2, 1, 1</column>
+</table>
+</item>
+<item name = "Multiplexer"><table name="" hasTotal="1">
+<keys size="5">Name, LUT, Input Size, Bits, Total Bits</keys>
+<column name="ap_NS_fsm">65, 12, 1, 12</column>
+<column name="ap_done">9, 2, 1, 2</column>
+<column name="imageProjs_blk_n_AR">9, 2, 1, 2</column>
+<column name="imageProjs_blk_n_R">9, 2, 1, 2</column>
+<column name="imageProjs_local_blk_n_AR">9, 2, 1, 2</column>
+<column name="localImages_blk_n">9, 2, 1, 2</column>
+<column name="m_axi_imageProjs_local_0_ARADDR">14, 3, 64, 192</column>
+<column name="m_axi_imageProjs_local_0_ARBURST">9, 2, 2, 4</column>
+<column name="m_axi_imageProjs_local_0_ARCACHE">9, 2, 4, 8</column>
+<column name="m_axi_imageProjs_local_0_ARID">9, 2, 1, 2</column>
+<column name="m_axi_imageProjs_local_0_ARLEN">14, 3, 32, 96</column>
+<column name="m_axi_imageProjs_local_0_ARLOCK">9, 2, 2, 4</column>
+<column name="m_axi_imageProjs_local_0_ARPROT">9, 2, 3, 6</column>
+<column name="m_axi_imageProjs_local_0_ARQOS">9, 2, 4, 8</column>
+<column name="m_axi_imageProjs_local_0_ARREGION">9, 2, 4, 8</column>
+<column name="m_axi_imageProjs_local_0_ARSIZE">9, 2, 3, 6</column>
+<column name="m_axi_imageProjs_local_0_ARUSER">9, 2, 1, 2</column>
+<column name="m_axi_imageProjs_local_0_ARVALID">14, 3, 1, 3</column>
+<column name="m_axi_imageProjs_local_0_RREADY">9, 2, 1, 2</column>
+</table>
+</item>
+<item name = "Register"><table name="" hasTotal="1">
+<keys size="5">Name, FF, LUT, Bits, Const Bits</keys>
+<column name="ap_CS_fsm">11, 0, 11, 0</column>
+<column name="ap_done_reg">1, 0, 1, 0</column>
+<column name="curr_info_X_min_reg_462">32, 0, 32, 0</column>
+<column name="fullImage2_read_reg_472">64, 0, 64, 0</column>
+<column name="grp_Image_extract_Pipeline_VITIS_LOOP_77_1_VITIS_LOOP_78_2_fu_239_ap_start_reg">1, 0, 1, 0</column>
+<column name="imageProjs_addr_read_reg_457">32, 0, 32, 0</column>
+<column name="lshr_ln70_1_cast_i_reg_467">24, 0, 24, 0</column>
+<column name="trunc_ln_reg_447">62, 0, 62, 0</column>
+</table>
+</item>
+</section>
+</item>
+</section>
+
+<section name = "Interface" level="0">
+<item name = "Summary"><table name="" hasTotal="0">
+<keys size="6">RTL Ports, Dir, Bits, Protocol, Source Object, C Type</keys>
+<column name="ap_clk">in, 1, ap_ctrl_hs, Image_extract, return value</column>
+<column name="ap_rst">in, 1, ap_ctrl_hs, Image_extract, return value</column>
+<column name="ap_start">in, 1, ap_ctrl_hs, Image_extract, return value</column>
+<column name="ap_done">out, 1, ap_ctrl_hs, Image_extract, return value</column>
+<column name="ap_continue">in, 1, ap_ctrl_hs, Image_extract, return value</column>
+<column name="ap_idle">out, 1, ap_ctrl_hs, Image_extract, return value</column>
+<column name="ap_ready">out, 1, ap_ctrl_hs, Image_extract, return value</column>
+<column name="ap_return">out, 32, ap_ctrl_hs, Image_extract, return value</column>
+<column name="localImages_dout">in, 256, ap_fifo, localImages, pointer</column>
+<column name="localImages_empty_n">in, 1, ap_fifo, localImages, pointer</column>
+<column name="localImages_read">out, 1, ap_fifo, localImages, pointer</column>
+<column name="localImages_num_data_valid">in, 3, ap_fifo, localImages, pointer</column>
+<column name="localImages_fifo_cap">in, 3, ap_fifo, localImages, pointer</column>
+<column name="m_axi_fullImage_0_AWVALID">out, 1, m_axi, fullImage, pointer</column>
+<column name="m_axi_fullImage_0_AWREADY">in, 1, m_axi, fullImage, pointer</column>
+<column name="m_axi_fullImage_0_AWADDR">out, 64, m_axi, fullImage, pointer</column>
+<column name="m_axi_fullImage_0_AWID">out, 1, m_axi, fullImage, pointer</column>
+<column name="m_axi_fullImage_0_AWLEN">out, 32, m_axi, fullImage, pointer</column>
+<column name="m_axi_fullImage_0_AWSIZE">out, 3, m_axi, fullImage, pointer</column>
+<column name="m_axi_fullImage_0_AWBURST">out, 2, m_axi, fullImage, pointer</column>
+<column name="m_axi_fullImage_0_AWLOCK">out, 2, m_axi, fullImage, pointer</column>
+<column name="m_axi_fullImage_0_AWCACHE">out, 4, m_axi, fullImage, pointer</column>
+<column name="m_axi_fullImage_0_AWPROT">out, 3, m_axi, fullImage, pointer</column>
+<column name="m_axi_fullImage_0_AWQOS">out, 4, m_axi, fullImage, pointer</column>
+<column name="m_axi_fullImage_0_AWREGION">out, 4, m_axi, fullImage, pointer</column>
+<column name="m_axi_fullImage_0_AWUSER">out, 1, m_axi, fullImage, pointer</column>
+<column name="m_axi_fullImage_0_WVALID">out, 1, m_axi, fullImage, pointer</column>
+<column name="m_axi_fullImage_0_WREADY">in, 1, m_axi, fullImage, pointer</column>
+<column name="m_axi_fullImage_0_WDATA">out, 32, m_axi, fullImage, pointer</column>
+<column name="m_axi_fullImage_0_WSTRB">out, 4, m_axi, fullImage, pointer</column>
+<column name="m_axi_fullImage_0_WLAST">out, 1, m_axi, fullImage, pointer</column>
+<column name="m_axi_fullImage_0_WID">out, 1, m_axi, fullImage, pointer</column>
+<column name="m_axi_fullImage_0_WUSER">out, 1, m_axi, fullImage, pointer</column>
+<column name="m_axi_fullImage_0_ARVALID">out, 1, m_axi, fullImage, pointer</column>
+<column name="m_axi_fullImage_0_ARREADY">in, 1, m_axi, fullImage, pointer</column>
+<column name="m_axi_fullImage_0_ARADDR">out, 64, m_axi, fullImage, pointer</column>
+<column name="m_axi_fullImage_0_ARID">out, 1, m_axi, fullImage, pointer</column>
+<column name="m_axi_fullImage_0_ARLEN">out, 32, m_axi, fullImage, pointer</column>
+<column name="m_axi_fullImage_0_ARSIZE">out, 3, m_axi, fullImage, pointer</column>
+<column name="m_axi_fullImage_0_ARBURST">out, 2, m_axi, fullImage, pointer</column>
+<column name="m_axi_fullImage_0_ARLOCK">out, 2, m_axi, fullImage, pointer</column>
+<column name="m_axi_fullImage_0_ARCACHE">out, 4, m_axi, fullImage, pointer</column>
+<column name="m_axi_fullImage_0_ARPROT">out, 3, m_axi, fullImage, pointer</column>
+<column name="m_axi_fullImage_0_ARQOS">out, 4, m_axi, fullImage, pointer</column>
+<column name="m_axi_fullImage_0_ARREGION">out, 4, m_axi, fullImage, pointer</column>
+<column name="m_axi_fullImage_0_ARUSER">out, 1, m_axi, fullImage, pointer</column>
+<column name="m_axi_fullImage_0_RVALID">in, 1, m_axi, fullImage, pointer</column>
+<column name="m_axi_fullImage_0_RREADY">out, 1, m_axi, fullImage, pointer</column>
+<column name="m_axi_fullImage_0_RDATA">in, 32, m_axi, fullImage, pointer</column>
+<column name="m_axi_fullImage_0_RLAST">in, 1, m_axi, fullImage, pointer</column>
+<column name="m_axi_fullImage_0_RID">in, 1, m_axi, fullImage, pointer</column>
+<column name="m_axi_fullImage_0_RFIFONUM">in, 9, m_axi, fullImage, pointer</column>
+<column name="m_axi_fullImage_0_RUSER">in, 1, m_axi, fullImage, pointer</column>
+<column name="m_axi_fullImage_0_RRESP">in, 2, m_axi, fullImage, pointer</column>
+<column name="m_axi_fullImage_0_BVALID">in, 1, m_axi, fullImage, pointer</column>
+<column name="m_axi_fullImage_0_BREADY">out, 1, m_axi, fullImage, pointer</column>
+<column name="m_axi_fullImage_0_BRESP">in, 2, m_axi, fullImage, pointer</column>
+<column name="m_axi_fullImage_0_BID">in, 1, m_axi, fullImage, pointer</column>
+<column name="m_axi_fullImage_0_BUSER">in, 1, m_axi, fullImage, pointer</column>
+<column name="fullImage2">in, 64, ap_none, fullImage2, scalar</column>
+<column name="curr_fullImage_16_address0">out, 5, ap_memory, curr_fullImage_16, array</column>
+<column name="curr_fullImage_16_ce0">out, 1, ap_memory, curr_fullImage_16, array</column>
+<column name="curr_fullImage_16_we0">out, 1, ap_memory, curr_fullImage_16, array</column>
+<column name="curr_fullImage_16_d0">out, 32, ap_memory, curr_fullImage_16, array</column>
+<column name="curr_fullImage_1_83_address0">out, 5, ap_memory, curr_fullImage_1_83, array</column>
+<column name="curr_fullImage_1_83_ce0">out, 1, ap_memory, curr_fullImage_1_83, array</column>
+<column name="curr_fullImage_1_83_we0">out, 1, ap_memory, curr_fullImage_1_83, array</column>
+<column name="curr_fullImage_1_83_d0">out, 32, ap_memory, curr_fullImage_1_83, array</column>
+<column name="curr_fullImage_2_82_address0">out, 5, ap_memory, curr_fullImage_2_82, array</column>
+<column name="curr_fullImage_2_82_ce0">out, 1, ap_memory, curr_fullImage_2_82, array</column>
+<column name="curr_fullImage_2_82_we0">out, 1, ap_memory, curr_fullImage_2_82, array</column>
+<column name="curr_fullImage_2_82_d0">out, 32, ap_memory, curr_fullImage_2_82, array</column>
+<column name="curr_fullImage_3_81_address0">out, 5, ap_memory, curr_fullImage_3_81, array</column>
+<column name="curr_fullImage_3_81_ce0">out, 1, ap_memory, curr_fullImage_3_81, array</column>
+<column name="curr_fullImage_3_81_we0">out, 1, ap_memory, curr_fullImage_3_81, array</column>
+<column name="curr_fullImage_3_81_d0">out, 32, ap_memory, curr_fullImage_3_81, array</column>
+<column name="curr_fullImage_4_80_address0">out, 5, ap_memory, curr_fullImage_4_80, array</column>
+<column name="curr_fullImage_4_80_ce0">out, 1, ap_memory, curr_fullImage_4_80, array</column>
+<column name="curr_fullImage_4_80_we0">out, 1, ap_memory, curr_fullImage_4_80, array</column>
+<column name="curr_fullImage_4_80_d0">out, 32, ap_memory, curr_fullImage_4_80, array</column>
+<column name="curr_fullImage_5_79_address0">out, 5, ap_memory, curr_fullImage_5_79, array</column>
+<column name="curr_fullImage_5_79_ce0">out, 1, ap_memory, curr_fullImage_5_79, array</column>
+<column name="curr_fullImage_5_79_we0">out, 1, ap_memory, curr_fullImage_5_79, array</column>
+<column name="curr_fullImage_5_79_d0">out, 32, ap_memory, curr_fullImage_5_79, array</column>
+<column name="curr_fullImage_6_78_address0">out, 5, ap_memory, curr_fullImage_6_78, array</column>
+<column name="curr_fullImage_6_78_ce0">out, 1, ap_memory, curr_fullImage_6_78, array</column>
+<column name="curr_fullImage_6_78_we0">out, 1, ap_memory, curr_fullImage_6_78, array</column>
+<column name="curr_fullImage_6_78_d0">out, 32, ap_memory, curr_fullImage_6_78, array</column>
+<column name="curr_fullImage_7_77_address0">out, 5, ap_memory, curr_fullImage_7_77, array</column>
+<column name="curr_fullImage_7_77_ce0">out, 1, ap_memory, curr_fullImage_7_77, array</column>
+<column name="curr_fullImage_7_77_we0">out, 1, ap_memory, curr_fullImage_7_77, array</column>
+<column name="curr_fullImage_7_77_d0">out, 32, ap_memory, curr_fullImage_7_77, array</column>
+<column name="curr_fullImage_8_76_address0">out, 5, ap_memory, curr_fullImage_8_76, array</column>
+<column name="curr_fullImage_8_76_ce0">out, 1, ap_memory, curr_fullImage_8_76, array</column>
+<column name="curr_fullImage_8_76_we0">out, 1, ap_memory, curr_fullImage_8_76, array</column>
+<column name="curr_fullImage_8_76_d0">out, 32, ap_memory, curr_fullImage_8_76, array</column>
+<column name="curr_fullImage_9_75_address0">out, 5, ap_memory, curr_fullImage_9_75, array</column>
+<column name="curr_fullImage_9_75_ce0">out, 1, ap_memory, curr_fullImage_9_75, array</column>
+<column name="curr_fullImage_9_75_we0">out, 1, ap_memory, curr_fullImage_9_75, array</column>
+<column name="curr_fullImage_9_75_d0">out, 32, ap_memory, curr_fullImage_9_75, array</column>
+<column name="curr_fullImage_10_74_address0">out, 5, ap_memory, curr_fullImage_10_74, array</column>
+<column name="curr_fullImage_10_74_ce0">out, 1, ap_memory, curr_fullImage_10_74, array</column>
+<column name="curr_fullImage_10_74_we0">out, 1, ap_memory, curr_fullImage_10_74, array</column>
+<column name="curr_fullImage_10_74_d0">out, 32, ap_memory, curr_fullImage_10_74, array</column>
+<column name="curr_fullImage_11_73_address0">out, 5, ap_memory, curr_fullImage_11_73, array</column>
+<column name="curr_fullImage_11_73_ce0">out, 1, ap_memory, curr_fullImage_11_73, array</column>
+<column name="curr_fullImage_11_73_we0">out, 1, ap_memory, curr_fullImage_11_73, array</column>
+<column name="curr_fullImage_11_73_d0">out, 32, ap_memory, curr_fullImage_11_73, array</column>
+<column name="curr_fullImage_12_72_address0">out, 5, ap_memory, curr_fullImage_12_72, array</column>
+<column name="curr_fullImage_12_72_ce0">out, 1, ap_memory, curr_fullImage_12_72, array</column>
+<column name="curr_fullImage_12_72_we0">out, 1, ap_memory, curr_fullImage_12_72, array</column>
+<column name="curr_fullImage_12_72_d0">out, 32, ap_memory, curr_fullImage_12_72, array</column>
+<column name="curr_fullImage_13_71_address0">out, 5, ap_memory, curr_fullImage_13_71, array</column>
+<column name="curr_fullImage_13_71_ce0">out, 1, ap_memory, curr_fullImage_13_71, array</column>
+<column name="curr_fullImage_13_71_we0">out, 1, ap_memory, curr_fullImage_13_71, array</column>
+<column name="curr_fullImage_13_71_d0">out, 32, ap_memory, curr_fullImage_13_71, array</column>
+<column name="curr_fullImage_14_70_address0">out, 5, ap_memory, curr_fullImage_14_70, array</column>
+<column name="curr_fullImage_14_70_ce0">out, 1, ap_memory, curr_fullImage_14_70, array</column>
+<column name="curr_fullImage_14_70_we0">out, 1, ap_memory, curr_fullImage_14_70, array</column>
+<column name="curr_fullImage_14_70_d0">out, 32, ap_memory, curr_fullImage_14_70, array</column>
+<column name="curr_fullImage_15_address0">out, 5, ap_memory, curr_fullImage_15, array</column>
+<column name="curr_fullImage_15_ce0">out, 1, ap_memory, curr_fullImage_15, array</column>
+<column name="curr_fullImage_15_we0">out, 1, ap_memory, curr_fullImage_15, array</column>
+<column name="curr_fullImage_15_d0">out, 32, ap_memory, curr_fullImage_15, array</column>
+<column name="curr_fullImage_14_address0">out, 5, ap_memory, curr_fullImage_14, array</column>
+<column name="curr_fullImage_14_ce0">out, 1, ap_memory, curr_fullImage_14, array</column>
+<column name="curr_fullImage_14_we0">out, 1, ap_memory, curr_fullImage_14, array</column>
+<column name="curr_fullImage_14_d0">out, 32, ap_memory, curr_fullImage_14, array</column>
+<column name="curr_fullImage_13_address0">out, 5, ap_memory, curr_fullImage_13, array</column>
+<column name="curr_fullImage_13_ce0">out, 1, ap_memory, curr_fullImage_13, array</column>
+<column name="curr_fullImage_13_we0">out, 1, ap_memory, curr_fullImage_13, array</column>
+<column name="curr_fullImage_13_d0">out, 32, ap_memory, curr_fullImage_13, array</column>
+<column name="curr_fullImage_12_address0">out, 5, ap_memory, curr_fullImage_12, array</column>
+<column name="curr_fullImage_12_ce0">out, 1, ap_memory, curr_fullImage_12, array</column>
+<column name="curr_fullImage_12_we0">out, 1, ap_memory, curr_fullImage_12, array</column>
+<column name="curr_fullImage_12_d0">out, 32, ap_memory, curr_fullImage_12, array</column>
+<column name="curr_fullImage_11_address0">out, 5, ap_memory, curr_fullImage_11, array</column>
+<column name="curr_fullImage_11_ce0">out, 1, ap_memory, curr_fullImage_11, array</column>
+<column name="curr_fullImage_11_we0">out, 1, ap_memory, curr_fullImage_11, array</column>
+<column name="curr_fullImage_11_d0">out, 32, ap_memory, curr_fullImage_11, array</column>
+<column name="curr_fullImage_10_address0">out, 5, ap_memory, curr_fullImage_10, array</column>
+<column name="curr_fullImage_10_ce0">out, 1, ap_memory, curr_fullImage_10, array</column>
+<column name="curr_fullImage_10_we0">out, 1, ap_memory, curr_fullImage_10, array</column>
+<column name="curr_fullImage_10_d0">out, 32, ap_memory, curr_fullImage_10, array</column>
+<column name="curr_fullImage_9_address0">out, 5, ap_memory, curr_fullImage_9, array</column>
+<column name="curr_fullImage_9_ce0">out, 1, ap_memory, curr_fullImage_9, array</column>
+<column name="curr_fullImage_9_we0">out, 1, ap_memory, curr_fullImage_9, array</column>
+<column name="curr_fullImage_9_d0">out, 32, ap_memory, curr_fullImage_9, array</column>
+<column name="curr_fullImage_8_address0">out, 5, ap_memory, curr_fullImage_8, array</column>
+<column name="curr_fullImage_8_ce0">out, 1, ap_memory, curr_fullImage_8, array</column>
+<column name="curr_fullImage_8_we0">out, 1, ap_memory, curr_fullImage_8, array</column>
+<column name="curr_fullImage_8_d0">out, 32, ap_memory, curr_fullImage_8, array</column>
+<column name="curr_fullImage_7_address0">out, 5, ap_memory, curr_fullImage_7, array</column>
+<column name="curr_fullImage_7_ce0">out, 1, ap_memory, curr_fullImage_7, array</column>
+<column name="curr_fullImage_7_we0">out, 1, ap_memory, curr_fullImage_7, array</column>
+<column name="curr_fullImage_7_d0">out, 32, ap_memory, curr_fullImage_7, array</column>
+<column name="curr_fullImage_6_address0">out, 5, ap_memory, curr_fullImage_6, array</column>
+<column name="curr_fullImage_6_ce0">out, 1, ap_memory, curr_fullImage_6, array</column>
+<column name="curr_fullImage_6_we0">out, 1, ap_memory, curr_fullImage_6, array</column>
+<column name="curr_fullImage_6_d0">out, 32, ap_memory, curr_fullImage_6, array</column>
+<column name="curr_fullImage_5_address0">out, 5, ap_memory, curr_fullImage_5, array</column>
+<column name="curr_fullImage_5_ce0">out, 1, ap_memory, curr_fullImage_5, array</column>
+<column name="curr_fullImage_5_we0">out, 1, ap_memory, curr_fullImage_5, array</column>
+<column name="curr_fullImage_5_d0">out, 32, ap_memory, curr_fullImage_5, array</column>
+<column name="curr_fullImage_4_address0">out, 5, ap_memory, curr_fullImage_4, array</column>
+<column name="curr_fullImage_4_ce0">out, 1, ap_memory, curr_fullImage_4, array</column>
+<column name="curr_fullImage_4_we0">out, 1, ap_memory, curr_fullImage_4, array</column>
+<column name="curr_fullImage_4_d0">out, 32, ap_memory, curr_fullImage_4, array</column>
+<column name="curr_fullImage_3_address0">out, 5, ap_memory, curr_fullImage_3, array</column>
+<column name="curr_fullImage_3_ce0">out, 1, ap_memory, curr_fullImage_3, array</column>
+<column name="curr_fullImage_3_we0">out, 1, ap_memory, curr_fullImage_3, array</column>
+<column name="curr_fullImage_3_d0">out, 32, ap_memory, curr_fullImage_3, array</column>
+<column name="curr_fullImage_2_address0">out, 5, ap_memory, curr_fullImage_2, array</column>
+<column name="curr_fullImage_2_ce0">out, 1, ap_memory, curr_fullImage_2, array</column>
+<column name="curr_fullImage_2_we0">out, 1, ap_memory, curr_fullImage_2, array</column>
+<column name="curr_fullImage_2_d0">out, 32, ap_memory, curr_fullImage_2, array</column>
+<column name="curr_fullImage_1_address0">out, 5, ap_memory, curr_fullImage_1, array</column>
+<column name="curr_fullImage_1_ce0">out, 1, ap_memory, curr_fullImage_1, array</column>
+<column name="curr_fullImage_1_we0">out, 1, ap_memory, curr_fullImage_1, array</column>
+<column name="curr_fullImage_1_d0">out, 32, ap_memory, curr_fullImage_1, array</column>
+<column name="curr_fullImage_address0">out, 5, ap_memory, curr_fullImage, array</column>
+<column name="curr_fullImage_ce0">out, 1, ap_memory, curr_fullImage, array</column>
+<column name="curr_fullImage_we0">out, 1, ap_memory, curr_fullImage, array</column>
+<column name="curr_fullImage_d0">out, 32, ap_memory, curr_fullImage, array</column>
+<column name="m_axi_imageProjs_local_0_AWVALID">out, 1, m_axi, imageProjs_local, pointer</column>
+<column name="m_axi_imageProjs_local_0_AWREADY">in, 1, m_axi, imageProjs_local, pointer</column>
+<column name="m_axi_imageProjs_local_0_AWADDR">out, 64, m_axi, imageProjs_local, pointer</column>
+<column name="m_axi_imageProjs_local_0_AWID">out, 1, m_axi, imageProjs_local, pointer</column>
+<column name="m_axi_imageProjs_local_0_AWLEN">out, 32, m_axi, imageProjs_local, pointer</column>
+<column name="m_axi_imageProjs_local_0_AWSIZE">out, 3, m_axi, imageProjs_local, pointer</column>
+<column name="m_axi_imageProjs_local_0_AWBURST">out, 2, m_axi, imageProjs_local, pointer</column>
+<column name="m_axi_imageProjs_local_0_AWLOCK">out, 2, m_axi, imageProjs_local, pointer</column>
+<column name="m_axi_imageProjs_local_0_AWCACHE">out, 4, m_axi, imageProjs_local, pointer</column>
+<column name="m_axi_imageProjs_local_0_AWPROT">out, 3, m_axi, imageProjs_local, pointer</column>
+<column name="m_axi_imageProjs_local_0_AWQOS">out, 4, m_axi, imageProjs_local, pointer</column>
+<column name="m_axi_imageProjs_local_0_AWREGION">out, 4, m_axi, imageProjs_local, pointer</column>
+<column name="m_axi_imageProjs_local_0_AWUSER">out, 1, m_axi, imageProjs_local, pointer</column>
+<column name="m_axi_imageProjs_local_0_WVALID">out, 1, m_axi, imageProjs_local, pointer</column>
+<column name="m_axi_imageProjs_local_0_WREADY">in, 1, m_axi, imageProjs_local, pointer</column>
+<column name="m_axi_imageProjs_local_0_WDATA">out, 32, m_axi, imageProjs_local, pointer</column>
+<column name="m_axi_imageProjs_local_0_WSTRB">out, 4, m_axi, imageProjs_local, pointer</column>
+<column name="m_axi_imageProjs_local_0_WLAST">out, 1, m_axi, imageProjs_local, pointer</column>
+<column name="m_axi_imageProjs_local_0_WID">out, 1, m_axi, imageProjs_local, pointer</column>
+<column name="m_axi_imageProjs_local_0_WUSER">out, 1, m_axi, imageProjs_local, pointer</column>
+<column name="m_axi_imageProjs_local_0_ARVALID">out, 1, m_axi, imageProjs_local, pointer</column>
+<column name="m_axi_imageProjs_local_0_ARREADY">in, 1, m_axi, imageProjs_local, pointer</column>
+<column name="m_axi_imageProjs_local_0_ARADDR">out, 64, m_axi, imageProjs_local, pointer</column>
+<column name="m_axi_imageProjs_local_0_ARID">out, 1, m_axi, imageProjs_local, pointer</column>
+<column name="m_axi_imageProjs_local_0_ARLEN">out, 32, m_axi, imageProjs_local, pointer</column>
+<column name="m_axi_imageProjs_local_0_ARSIZE">out, 3, m_axi, imageProjs_local, pointer</column>
+<column name="m_axi_imageProjs_local_0_ARBURST">out, 2, m_axi, imageProjs_local, pointer</column>
+<column name="m_axi_imageProjs_local_0_ARLOCK">out, 2, m_axi, imageProjs_local, pointer</column>
+<column name="m_axi_imageProjs_local_0_ARCACHE">out, 4, m_axi, imageProjs_local, pointer</column>
+<column name="m_axi_imageProjs_local_0_ARPROT">out, 3, m_axi, imageProjs_local, pointer</column>
+<column name="m_axi_imageProjs_local_0_ARQOS">out, 4, m_axi, imageProjs_local, pointer</column>
+<column name="m_axi_imageProjs_local_0_ARREGION">out, 4, m_axi, imageProjs_local, pointer</column>
+<column name="m_axi_imageProjs_local_0_ARUSER">out, 1, m_axi, imageProjs_local, pointer</column>
+<column name="m_axi_imageProjs_local_0_RVALID">in, 1, m_axi, imageProjs_local, pointer</column>
+<column name="m_axi_imageProjs_local_0_RREADY">out, 1, m_axi, imageProjs_local, pointer</column>
+<column name="m_axi_imageProjs_local_0_RDATA">in, 32, m_axi, imageProjs_local, pointer</column>
+<column name="m_axi_imageProjs_local_0_RLAST">in, 1, m_axi, imageProjs_local, pointer</column>
+<column name="m_axi_imageProjs_local_0_RID">in, 1, m_axi, imageProjs_local, pointer</column>
+<column name="m_axi_imageProjs_local_0_RFIFONUM">in, 9, m_axi, imageProjs_local, pointer</column>
+<column name="m_axi_imageProjs_local_0_RUSER">in, 1, m_axi, imageProjs_local, pointer</column>
+<column name="m_axi_imageProjs_local_0_RRESP">in, 2, m_axi, imageProjs_local, pointer</column>
+<column name="m_axi_imageProjs_local_0_BVALID">in, 1, m_axi, imageProjs_local, pointer</column>
+<column name="m_axi_imageProjs_local_0_BREADY">out, 1, m_axi, imageProjs_local, pointer</column>
+<column name="m_axi_imageProjs_local_0_BRESP">in, 2, m_axi, imageProjs_local, pointer</column>
+<column name="m_axi_imageProjs_local_0_BID">in, 1, m_axi, imageProjs_local, pointer</column>
+<column name="m_axi_imageProjs_local_0_BUSER">in, 1, m_axi, imageProjs_local, pointer</column>
+<column name="imageProjs_local3">in, 64, ap_none, imageProjs_local3, scalar</column>
+<column name="curr_localImage_16_address0">out, 5, ap_memory, curr_localImage_16, array</column>
+<column name="curr_localImage_16_ce0">out, 1, ap_memory, curr_localImage_16, array</column>
+<column name="curr_localImage_16_we0">out, 1, ap_memory, curr_localImage_16, array</column>
+<column name="curr_localImage_16_d0">out, 32, ap_memory, curr_localImage_16, array</column>
+<column name="curr_localImage_1_97_address0">out, 5, ap_memory, curr_localImage_1_97, array</column>
+<column name="curr_localImage_1_97_ce0">out, 1, ap_memory, curr_localImage_1_97, array</column>
+<column name="curr_localImage_1_97_we0">out, 1, ap_memory, curr_localImage_1_97, array</column>
+<column name="curr_localImage_1_97_d0">out, 32, ap_memory, curr_localImage_1_97, array</column>
+<column name="curr_localImage_2_96_address0">out, 5, ap_memory, curr_localImage_2_96, array</column>
+<column name="curr_localImage_2_96_ce0">out, 1, ap_memory, curr_localImage_2_96, array</column>
+<column name="curr_localImage_2_96_we0">out, 1, ap_memory, curr_localImage_2_96, array</column>
+<column name="curr_localImage_2_96_d0">out, 32, ap_memory, curr_localImage_2_96, array</column>
+<column name="curr_localImage_3_95_address0">out, 5, ap_memory, curr_localImage_3_95, array</column>
+<column name="curr_localImage_3_95_ce0">out, 1, ap_memory, curr_localImage_3_95, array</column>
+<column name="curr_localImage_3_95_we0">out, 1, ap_memory, curr_localImage_3_95, array</column>
+<column name="curr_localImage_3_95_d0">out, 32, ap_memory, curr_localImage_3_95, array</column>
+<column name="curr_localImage_4_94_address0">out, 5, ap_memory, curr_localImage_4_94, array</column>
+<column name="curr_localImage_4_94_ce0">out, 1, ap_memory, curr_localImage_4_94, array</column>
+<column name="curr_localImage_4_94_we0">out, 1, ap_memory, curr_localImage_4_94, array</column>
+<column name="curr_localImage_4_94_d0">out, 32, ap_memory, curr_localImage_4_94, array</column>
+<column name="curr_localImage_5_93_address0">out, 5, ap_memory, curr_localImage_5_93, array</column>
+<column name="curr_localImage_5_93_ce0">out, 1, ap_memory, curr_localImage_5_93, array</column>
+<column name="curr_localImage_5_93_we0">out, 1, ap_memory, curr_localImage_5_93, array</column>
+<column name="curr_localImage_5_93_d0">out, 32, ap_memory, curr_localImage_5_93, array</column>
+<column name="curr_localImage_6_92_address0">out, 5, ap_memory, curr_localImage_6_92, array</column>
+<column name="curr_localImage_6_92_ce0">out, 1, ap_memory, curr_localImage_6_92, array</column>
+<column name="curr_localImage_6_92_we0">out, 1, ap_memory, curr_localImage_6_92, array</column>
+<column name="curr_localImage_6_92_d0">out, 32, ap_memory, curr_localImage_6_92, array</column>
+<column name="curr_localImage_7_91_address0">out, 5, ap_memory, curr_localImage_7_91, array</column>
+<column name="curr_localImage_7_91_ce0">out, 1, ap_memory, curr_localImage_7_91, array</column>
+<column name="curr_localImage_7_91_we0">out, 1, ap_memory, curr_localImage_7_91, array</column>
+<column name="curr_localImage_7_91_d0">out, 32, ap_memory, curr_localImage_7_91, array</column>
+<column name="curr_localImage_8_90_address0">out, 5, ap_memory, curr_localImage_8_90, array</column>
+<column name="curr_localImage_8_90_ce0">out, 1, ap_memory, curr_localImage_8_90, array</column>
+<column name="curr_localImage_8_90_we0">out, 1, ap_memory, curr_localImage_8_90, array</column>
+<column name="curr_localImage_8_90_d0">out, 32, ap_memory, curr_localImage_8_90, array</column>
+<column name="curr_localImage_9_89_address0">out, 5, ap_memory, curr_localImage_9_89, array</column>
+<column name="curr_localImage_9_89_ce0">out, 1, ap_memory, curr_localImage_9_89, array</column>
+<column name="curr_localImage_9_89_we0">out, 1, ap_memory, curr_localImage_9_89, array</column>
+<column name="curr_localImage_9_89_d0">out, 32, ap_memory, curr_localImage_9_89, array</column>
+<column name="curr_localImage_10_88_address0">out, 5, ap_memory, curr_localImage_10_88, array</column>
+<column name="curr_localImage_10_88_ce0">out, 1, ap_memory, curr_localImage_10_88, array</column>
+<column name="curr_localImage_10_88_we0">out, 1, ap_memory, curr_localImage_10_88, array</column>
+<column name="curr_localImage_10_88_d0">out, 32, ap_memory, curr_localImage_10_88, array</column>
+<column name="curr_localImage_11_87_address0">out, 5, ap_memory, curr_localImage_11_87, array</column>
+<column name="curr_localImage_11_87_ce0">out, 1, ap_memory, curr_localImage_11_87, array</column>
+<column name="curr_localImage_11_87_we0">out, 1, ap_memory, curr_localImage_11_87, array</column>
+<column name="curr_localImage_11_87_d0">out, 32, ap_memory, curr_localImage_11_87, array</column>
+<column name="curr_localImage_12_86_address0">out, 5, ap_memory, curr_localImage_12_86, array</column>
+<column name="curr_localImage_12_86_ce0">out, 1, ap_memory, curr_localImage_12_86, array</column>
+<column name="curr_localImage_12_86_we0">out, 1, ap_memory, curr_localImage_12_86, array</column>
+<column name="curr_localImage_12_86_d0">out, 32, ap_memory, curr_localImage_12_86, array</column>
+<column name="curr_localImage_13_85_address0">out, 5, ap_memory, curr_localImage_13_85, array</column>
+<column name="curr_localImage_13_85_ce0">out, 1, ap_memory, curr_localImage_13_85, array</column>
+<column name="curr_localImage_13_85_we0">out, 1, ap_memory, curr_localImage_13_85, array</column>
+<column name="curr_localImage_13_85_d0">out, 32, ap_memory, curr_localImage_13_85, array</column>
+<column name="curr_localImage_14_84_address0">out, 5, ap_memory, curr_localImage_14_84, array</column>
+<column name="curr_localImage_14_84_ce0">out, 1, ap_memory, curr_localImage_14_84, array</column>
+<column name="curr_localImage_14_84_we0">out, 1, ap_memory, curr_localImage_14_84, array</column>
+<column name="curr_localImage_14_84_d0">out, 32, ap_memory, curr_localImage_14_84, array</column>
+<column name="curr_localImage_15_address0">out, 5, ap_memory, curr_localImage_15, array</column>
+<column name="curr_localImage_15_ce0">out, 1, ap_memory, curr_localImage_15, array</column>
+<column name="curr_localImage_15_we0">out, 1, ap_memory, curr_localImage_15, array</column>
+<column name="curr_localImage_15_d0">out, 32, ap_memory, curr_localImage_15, array</column>
+<column name="curr_localImage_14_address0">out, 5, ap_memory, curr_localImage_14, array</column>
+<column name="curr_localImage_14_ce0">out, 1, ap_memory, curr_localImage_14, array</column>
+<column name="curr_localImage_14_we0">out, 1, ap_memory, curr_localImage_14, array</column>
+<column name="curr_localImage_14_d0">out, 32, ap_memory, curr_localImage_14, array</column>
+<column name="curr_localImage_13_address0">out, 5, ap_memory, curr_localImage_13, array</column>
+<column name="curr_localImage_13_ce0">out, 1, ap_memory, curr_localImage_13, array</column>
+<column name="curr_localImage_13_we0">out, 1, ap_memory, curr_localImage_13, array</column>
+<column name="curr_localImage_13_d0">out, 32, ap_memory, curr_localImage_13, array</column>
+<column name="curr_localImage_12_address0">out, 5, ap_memory, curr_localImage_12, array</column>
+<column name="curr_localImage_12_ce0">out, 1, ap_memory, curr_localImage_12, array</column>
+<column name="curr_localImage_12_we0">out, 1, ap_memory, curr_localImage_12, array</column>
+<column name="curr_localImage_12_d0">out, 32, ap_memory, curr_localImage_12, array</column>
+<column name="curr_localImage_11_address0">out, 5, ap_memory, curr_localImage_11, array</column>
+<column name="curr_localImage_11_ce0">out, 1, ap_memory, curr_localImage_11, array</column>
+<column name="curr_localImage_11_we0">out, 1, ap_memory, curr_localImage_11, array</column>
+<column name="curr_localImage_11_d0">out, 32, ap_memory, curr_localImage_11, array</column>
+<column name="curr_localImage_10_address0">out, 5, ap_memory, curr_localImage_10, array</column>
+<column name="curr_localImage_10_ce0">out, 1, ap_memory, curr_localImage_10, array</column>
+<column name="curr_localImage_10_we0">out, 1, ap_memory, curr_localImage_10, array</column>
+<column name="curr_localImage_10_d0">out, 32, ap_memory, curr_localImage_10, array</column>
+<column name="curr_localImage_9_address0">out, 5, ap_memory, curr_localImage_9, array</column>
+<column name="curr_localImage_9_ce0">out, 1, ap_memory, curr_localImage_9, array</column>
+<column name="curr_localImage_9_we0">out, 1, ap_memory, curr_localImage_9, array</column>
+<column name="curr_localImage_9_d0">out, 32, ap_memory, curr_localImage_9, array</column>
+<column name="curr_localImage_8_address0">out, 5, ap_memory, curr_localImage_8, array</column>
+<column name="curr_localImage_8_ce0">out, 1, ap_memory, curr_localImage_8, array</column>
+<column name="curr_localImage_8_we0">out, 1, ap_memory, curr_localImage_8, array</column>
+<column name="curr_localImage_8_d0">out, 32, ap_memory, curr_localImage_8, array</column>
+<column name="curr_localImage_7_address0">out, 5, ap_memory, curr_localImage_7, array</column>
+<column name="curr_localImage_7_ce0">out, 1, ap_memory, curr_localImage_7, array</column>
+<column name="curr_localImage_7_we0">out, 1, ap_memory, curr_localImage_7, array</column>
+<column name="curr_localImage_7_d0">out, 32, ap_memory, curr_localImage_7, array</column>
+<column name="curr_localImage_6_address0">out, 5, ap_memory, curr_localImage_6, array</column>
+<column name="curr_localImage_6_ce0">out, 1, ap_memory, curr_localImage_6, array</column>
+<column name="curr_localImage_6_we0">out, 1, ap_memory, curr_localImage_6, array</column>
+<column name="curr_localImage_6_d0">out, 32, ap_memory, curr_localImage_6, array</column>
+<column name="curr_localImage_5_address0">out, 5, ap_memory, curr_localImage_5, array</column>
+<column name="curr_localImage_5_ce0">out, 1, ap_memory, curr_localImage_5, array</column>
+<column name="curr_localImage_5_we0">out, 1, ap_memory, curr_localImage_5, array</column>
+<column name="curr_localImage_5_d0">out, 32, ap_memory, curr_localImage_5, array</column>
+<column name="curr_localImage_4_address0">out, 5, ap_memory, curr_localImage_4, array</column>
+<column name="curr_localImage_4_ce0">out, 1, ap_memory, curr_localImage_4, array</column>
+<column name="curr_localImage_4_we0">out, 1, ap_memory, curr_localImage_4, array</column>
+<column name="curr_localImage_4_d0">out, 32, ap_memory, curr_localImage_4, array</column>
+<column name="curr_localImage_3_address0">out, 5, ap_memory, curr_localImage_3, array</column>
+<column name="curr_localImage_3_ce0">out, 1, ap_memory, curr_localImage_3, array</column>
+<column name="curr_localImage_3_we0">out, 1, ap_memory, curr_localImage_3, array</column>
+<column name="curr_localImage_3_d0">out, 32, ap_memory, curr_localImage_3, array</column>
+<column name="curr_localImage_2_address0">out, 5, ap_memory, curr_localImage_2, array</column>
+<column name="curr_localImage_2_ce0">out, 1, ap_memory, curr_localImage_2, array</column>
+<column name="curr_localImage_2_we0">out, 1, ap_memory, curr_localImage_2, array</column>
+<column name="curr_localImage_2_d0">out, 32, ap_memory, curr_localImage_2, array</column>
+<column name="curr_localImage_1_address0">out, 5, ap_memory, curr_localImage_1, array</column>
+<column name="curr_localImage_1_ce0">out, 1, ap_memory, curr_localImage_1, array</column>
+<column name="curr_localImage_1_we0">out, 1, ap_memory, curr_localImage_1, array</column>
+<column name="curr_localImage_1_d0">out, 32, ap_memory, curr_localImage_1, array</column>
+<column name="curr_localImage_address0">out, 5, ap_memory, curr_localImage, array</column>
+<column name="curr_localImage_ce0">out, 1, ap_memory, curr_localImage, array</column>
+<column name="curr_localImage_we0">out, 1, ap_memory, curr_localImage, array</column>
+<column name="curr_localImage_d0">out, 32, ap_memory, curr_localImage, array</column>
+<column name="m_axi_imageProjs_0_AWVALID">out, 1, m_axi, imageProjs, pointer</column>
+<column name="m_axi_imageProjs_0_AWREADY">in, 1, m_axi, imageProjs, pointer</column>
+<column name="m_axi_imageProjs_0_AWADDR">out, 64, m_axi, imageProjs, pointer</column>
+<column name="m_axi_imageProjs_0_AWID">out, 1, m_axi, imageProjs, pointer</column>
+<column name="m_axi_imageProjs_0_AWLEN">out, 32, m_axi, imageProjs, pointer</column>
+<column name="m_axi_imageProjs_0_AWSIZE">out, 3, m_axi, imageProjs, pointer</column>
+<column name="m_axi_imageProjs_0_AWBURST">out, 2, m_axi, imageProjs, pointer</column>
+<column name="m_axi_imageProjs_0_AWLOCK">out, 2, m_axi, imageProjs, pointer</column>
+<column name="m_axi_imageProjs_0_AWCACHE">out, 4, m_axi, imageProjs, pointer</column>
+<column name="m_axi_imageProjs_0_AWPROT">out, 3, m_axi, imageProjs, pointer</column>
+<column name="m_axi_imageProjs_0_AWQOS">out, 4, m_axi, imageProjs, pointer</column>
+<column name="m_axi_imageProjs_0_AWREGION">out, 4, m_axi, imageProjs, pointer</column>
+<column name="m_axi_imageProjs_0_AWUSER">out, 1, m_axi, imageProjs, pointer</column>
+<column name="m_axi_imageProjs_0_WVALID">out, 1, m_axi, imageProjs, pointer</column>
+<column name="m_axi_imageProjs_0_WREADY">in, 1, m_axi, imageProjs, pointer</column>
+<column name="m_axi_imageProjs_0_WDATA">out, 32, m_axi, imageProjs, pointer</column>
+<column name="m_axi_imageProjs_0_WSTRB">out, 4, m_axi, imageProjs, pointer</column>
+<column name="m_axi_imageProjs_0_WLAST">out, 1, m_axi, imageProjs, pointer</column>
+<column name="m_axi_imageProjs_0_WID">out, 1, m_axi, imageProjs, pointer</column>
+<column name="m_axi_imageProjs_0_WUSER">out, 1, m_axi, imageProjs, pointer</column>
+<column name="m_axi_imageProjs_0_ARVALID">out, 1, m_axi, imageProjs, pointer</column>
+<column name="m_axi_imageProjs_0_ARREADY">in, 1, m_axi, imageProjs, pointer</column>
+<column name="m_axi_imageProjs_0_ARADDR">out, 64, m_axi, imageProjs, pointer</column>
+<column name="m_axi_imageProjs_0_ARID">out, 1, m_axi, imageProjs, pointer</column>
+<column name="m_axi_imageProjs_0_ARLEN">out, 32, m_axi, imageProjs, pointer</column>
+<column name="m_axi_imageProjs_0_ARSIZE">out, 3, m_axi, imageProjs, pointer</column>
+<column name="m_axi_imageProjs_0_ARBURST">out, 2, m_axi, imageProjs, pointer</column>
+<column name="m_axi_imageProjs_0_ARLOCK">out, 2, m_axi, imageProjs, pointer</column>
+<column name="m_axi_imageProjs_0_ARCACHE">out, 4, m_axi, imageProjs, pointer</column>
+<column name="m_axi_imageProjs_0_ARPROT">out, 3, m_axi, imageProjs, pointer</column>
+<column name="m_axi_imageProjs_0_ARQOS">out, 4, m_axi, imageProjs, pointer</column>
+<column name="m_axi_imageProjs_0_ARREGION">out, 4, m_axi, imageProjs, pointer</column>
+<column name="m_axi_imageProjs_0_ARUSER">out, 1, m_axi, imageProjs, pointer</column>
+<column name="m_axi_imageProjs_0_RVALID">in, 1, m_axi, imageProjs, pointer</column>
+<column name="m_axi_imageProjs_0_RREADY">out, 1, m_axi, imageProjs, pointer</column>
+<column name="m_axi_imageProjs_0_RDATA">in, 32, m_axi, imageProjs, pointer</column>
+<column name="m_axi_imageProjs_0_RLAST">in, 1, m_axi, imageProjs, pointer</column>
+<column name="m_axi_imageProjs_0_RID">in, 1, m_axi, imageProjs, pointer</column>
+<column name="m_axi_imageProjs_0_RFIFONUM">in, 9, m_axi, imageProjs, pointer</column>
+<column name="m_axi_imageProjs_0_RUSER">in, 1, m_axi, imageProjs, pointer</column>
+<column name="m_axi_imageProjs_0_RRESP">in, 2, m_axi, imageProjs, pointer</column>
+<column name="m_axi_imageProjs_0_BVALID">in, 1, m_axi, imageProjs, pointer</column>
+<column name="m_axi_imageProjs_0_BREADY">out, 1, m_axi, imageProjs, pointer</column>
+<column name="m_axi_imageProjs_0_BRESP">in, 2, m_axi, imageProjs, pointer</column>
+<column name="m_axi_imageProjs_0_BID">in, 1, m_axi, imageProjs, pointer</column>
+<column name="m_axi_imageProjs_0_BUSER">in, 1, m_axi, imageProjs, pointer</column>
+<column name="empty">in, 64, ap_none, empty, scalar</column>
+</table>
+</item>
+</section>
+</profile>

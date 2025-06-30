@@ -1,0 +1,2001 @@
+  **** HLS Build v2024.2 5238294
+INFO: [HLS 200-2005] Using work_dir F:/LMU/quantumMA/opimization/reconstructv1maxi/hls_component/reconstruct 
+INFO: [HLS 200-1505] Using default flow_target 'vivado'
+Resolution: For help on HLS 200-1505 see docs.xilinx.com/access/sources/dita/topic?Doc_Version=2024.2%20English&url=ug1448-hls-guidance&resourceid=200-1505.html
+INFO: [HLS 200-1465] Applying ini 'syn.file=F:/LMU/quantumMA/opimization/reconstructv1maxi/image_analysis.cpp' from F:/LMU/quantumMA/opimization/reconstructv1maxi/hls_component/hls_config.cfg(10)
+INFO: [HLS 200-10] Adding design file 'F:/LMU/quantumMA/opimization/reconstructv1maxi/image_analysis.cpp' to the project
+INFO: [HLS 200-1465] Applying ini 'syn.file=F:/LMU/quantumMA/opimization/reconstructv1maxi/image_analysis.hpp' from F:/LMU/quantumMA/opimization/reconstructv1maxi/hls_component/hls_config.cfg(11)
+INFO: [HLS 200-10] Adding design file 'F:/LMU/quantumMA/opimization/reconstructv1maxi/image_analysis.hpp' to the project
+INFO: [HLS 200-1465] Applying ini 'tb.file=F:/LMU/quantumMA/opimization/reconstructv1maxi/test.cpp' from F:/LMU/quantumMA/opimization/reconstructv1maxi/hls_component/hls_config.cfg(12)
+INFO: [HLS 200-10] Adding test bench file 'F:/LMU/quantumMA/opimization/reconstructv1maxi/test.cpp' to the project
+INFO: [HLS 200-1465] Applying ini 'tb.file=F:/LMU/quantumMA/naia/reconstructv1/sf25fram/fullImage_output.txt' from F:/LMU/quantumMA/opimization/reconstructv1maxi/hls_component/hls_config.cfg(13)
+INFO: [HLS 200-10] Adding test bench file 'F:/LMU/quantumMA/naia/reconstructv1/sf25fram/fullImage_output.txt' to the project
+INFO: [HLS 200-1465] Applying ini 'tb.file=F:/LMU/quantumMA/naia/reconstructv1/sf25fram/restoutput.txt' from F:/LMU/quantumMA/opimization/reconstructv1maxi/hls_component/hls_config.cfg(14)
+INFO: [HLS 200-10] Adding test bench file 'F:/LMU/quantumMA/naia/reconstructv1/sf25fram/restoutput.txt' to the project
+INFO: [HLS 200-1465] Applying ini 'syn.top=reconstruct' from F:/LMU/quantumMA/opimization/reconstructv1maxi/hls_component/hls_config.cfg(7)
+INFO: [HLS 200-1465] Applying ini 'flow_target=vivado' from F:/LMU/quantumMA/opimization/reconstructv1maxi/hls_component/hls_config.cfg(4)
+INFO: [HLS 200-1505] Using flow_target 'vivado'
+Resolution: For help on HLS 200-1505 see docs.xilinx.com/access/sources/dita/topic?Doc_Version=2024.2%20English&url=ug1448-hls-guidance&resourceid=200-1505.html
+INFO: [HLS 200-1465] Applying ini 'part=xczu7ev-ffvc1156-2-e' from F:/LMU/quantumMA/opimization/reconstructv1maxi/hls_component/hls_config.cfg(1)
+INFO: [HLS 200-1611] Setting target device to 'xczu7ev-ffvc1156-2-e'
+INFO: [HLS 200-1465] Applying ini 'csim.clean=1' from F:/LMU/quantumMA/opimization/reconstructv1maxi/hls_component/hls_config.cfg(8)
+INFO: [HLS 200-1465] Applying ini 'csim.code_analyzer=1' from F:/LMU/quantumMA/opimization/reconstructv1maxi/hls_component/hls_config.cfg(9)
+INFO: [HLS 200-1465] Applying ini 'package.output.format=ip_catalog' from F:/LMU/quantumMA/opimization/reconstructv1maxi/hls_component/hls_config.cfg(5)
+INFO: [SIM 211-200] Executing Code Analyzer instead of classic HLS C simulation
+INFO: [SIM 211-200] Cleaning
+slxcmd:0:0: info: [ Cleaned build and execution files ]
+INFO: [HLS 211-200] Compiling source code ../image_analysis.cpp as hardware code with instrumentation
+INFO: [HLS 211-200] Compiling source code F:/LMU/quantumMA/opimization/reconstructv1maxi/test.cpp as test bench code with instrumentation
+INFO: [HLS 211-200] Compiling source code ../image_analysis.cpp as test bench code with instrumentation
+../image_analysis.cpp:62:39: warning: The 'enable_flush' option of the 'HLS pipeline' directive or pragma is deprecated, use style=flp instead [-Wignored-hls-pragmas]
+#pragma HLS PIPELINE II=1 enable_flush
+                                      ^
+../image_analysis.cpp:348:98: warning: unexpected pragma parameter 'storage_type' [-Winvalid-hls-pragmas]
+#pragma HLS INTERFACE port=atomLocations mode=m_axi bundle=atomLocations depth=1024 storage_type=RAM_2P // 
+                                                                                                 ^
+2 warnings generated.
+../image_analysis.cpp:62:39: warning: The 'enable_flush' option of the 'HLS pipeline' directive or pragma is deprecated, use style=flp instead [-Wignored-hls-pragmas]
+#pragma HLS PIPELINE II=1 enable_flush
+                                      ^
+../image_analysis.cpp:348:98: warning: unexpected pragma parameter 'storage_type' [-Winvalid-hls-pragmas]
+#pragma HLS INTERFACE port=atomLocations mode=m_axi bundle=atomLocations depth=1024 storage_type=RAM_2P // 
+                                                                                                 ^
+2 warnings generated.
+INFO: [HLS 211-200] Linking hardware code
+INFO: [HLS 211-200] Transforming hardware bitcode
+INFO: [HLS 211-200] Linking executable
+INFO: [HLS 211-200] Computing HLS IR Information
+INFO: [HLS 211-200] Determining source code dependencies
+INFO: [SIM 211-200] Running executable
+About to call getLocalImages...
+=== getLocalImages FINISHED ===
+About to call applyProjectors...
+=== ATOM 0 VALIDATION ===
+Region: (680,60) to (710,90)
+dx=0 dy=0
+xidx=0 yidx=0
+proj_offset=0 (max allowed=1)
+cols=31 rows=31
+Required pixels=961
+Available pixels=1
+MAX_LOCAL: 31x31
+--- Logging error ---
+Traceback (most recent call last):
+  File "logging\__init__.py", line 1103, in emit
+  File "F:\Vitis\2024.2\vcxx\libexec\slxcmd.py", line 22, in write
+    res = self.stream.write(data)
+UnicodeEncodeError: 'gbk' codec can't encode character '\u274c' in position 0: illegal multibyte sequence
+Call stack:
+  File "F:\Vitis\2024.2\vcxx\libexec\slxcmd.py", line 38, in <module>
+    sys.exit(slx.main.main())
+  File "F:\Vitis\2024.2\vcxx\python\slx\main.py", line 138, in main
+    return args.func(args, logger)
+  File "F:\Vitis\2024.2\vcxx\python\slx\code_analyzer.py", line 572, in cmd_code_analyzer
+    common.run(
+  File "F:\Vitis\2024.2\vcxx\python\slx\common.py", line 44, in run
+    return asyncio.get_event_loop().run_until_complete(coroutine)
+  File "asyncio\base_events.py", line 636, in run_until_complete
+  File "asyncio\windows_events.py", line 321, in run_forever
+  File "asyncio\base_events.py", line 603, in run_forever
+  File "asyncio\base_events.py", line 1909, in _run_once
+  File "asyncio\events.py", line 80, in _run
+  File "F:\Vitis\2024.2\vcxx\python\slx\rule.py", line 954, in _async_tee
+    f(line)
+  File "F:\Vitis\2024.2\vcxx\python\slx\rule.py", line 889, in log_out_as_stream_write
+    self._logger.log(SUBPROCESS_OUT, msg.rstrip("\r\n"))
+  File "logging\__init__.py", line 1879, in log
+  File "logging\__init__.py", line 1547, in log
+  File "logging\__init__.py", line 1624, in _log
+  File "logging\__init__.py", line 1634, in handle
+  File "logging\__init__.py", line 1696, in callHandlers
+  File "logging\__init__.py", line 968, in handle
+  File "logging\__init__.py", line 1108, in emit
+Message: '\u274c FAIL: Required pixels (961) > available (1)'
+Arguments: ()
+--- Logging error ---
+Traceback (most recent call last):
+  File "logging\__init__.py", line 1103, in emit
+  File "F:\Vitis\2024.2\vcxx\libexec\slxcmd.py", line 22, in write
+    res = self.stream.write(data)
+UnicodeEncodeError: 'gbk' codec can't encode character '\u274c' in position 0: illegal multibyte sequence
+Call stack:
+  File "F:\Vitis\2024.2\vcxx\libexec\slxcmd.py", line 38, in <module>
+    sys.exit(slx.main.main())
+  File "F:\Vitis\2024.2\vcxx\python\slx\main.py", line 138, in main
+    return args.func(args, logger)
+  File "F:\Vitis\2024.2\vcxx\python\slx\code_analyzer.py", line 572, in cmd_code_analyzer
+    common.run(
+  File "F:\Vitis\2024.2\vcxx\python\slx\common.py", line 44, in run
+    return asyncio.get_event_loop().run_until_complete(coroutine)
+  File "asyncio\base_events.py", line 636, in run_until_complete
+  File "asyncio\windows_events.py", line 321, in run_forever
+  File "asyncio\base_events.py", line 603, in run_forever
+  File "asyncio\base_events.py", line 1909, in _run_once
+  File "asyncio\events.py", line 80, in _run
+  File "F:\Vitis\2024.2\vcxx\python\slx\rule.py", line 954, in _async_tee
+    f(line)
+  File "F:\Vitis\2024.2\vcxx\python\slx\rule.py", line 889, in log_out_as_stream_write
+    self._logger.log(SUBPROCESS_OUT, msg.rstrip("\r\n"))
+  File "logging\__init__.py", line 1879, in log
+  File "logging\__init__.py", line 1547, in log
+  File "logging\__init__.py", line 1624, in _log
+  File "logging\__init__.py", line 1634, in handle
+  File "logging\__init__.py", line 1696, in callHandlers
+  File "logging\__init__.py", line 968, in handle
+  File "logging\__init__.py", line 1108, in emit
+Message: '\u274c FAIL: Atom 0 failed validation'
+Arguments: ()
+=================================
+=== ATOM 1 VALIDATION ===
+Region: (680,79) to (710,109)
+dx=0 dy=0
+xidx=0 yidx=0
+proj_offset=0 (max allowed=1)
+cols=31 rows=31
+Required pixels=961
+Available pixels=1
+MAX_LOCAL: 31x31
+--- Logging error ---
+Traceback (most recent call last):
+  File "logging\__init__.py", line 1103, in emit
+  File "F:\Vitis\2024.2\vcxx\libexec\slxcmd.py", line 22, in write
+    res = self.stream.write(data)
+UnicodeEncodeError: 'gbk' codec can't encode character '\u274c' in position 0: illegal multibyte sequence
+Call stack:
+  File "F:\Vitis\2024.2\vcxx\libexec\slxcmd.py", line 38, in <module>
+    sys.exit(slx.main.main())
+  File "F:\Vitis\2024.2\vcxx\python\slx\main.py", line 138, in main
+    return args.func(args, logger)
+  File "F:\Vitis\2024.2\vcxx\python\slx\code_analyzer.py", line 572, in cmd_code_analyzer
+    common.run(
+  File "F:\Vitis\2024.2\vcxx\python\slx\common.py", line 44, in run
+    return asyncio.get_event_loop().run_until_complete(coroutine)
+  File "asyncio\base_events.py", line 636, in run_until_complete
+  File "asyncio\windows_events.py", line 321, in run_forever
+  File "asyncio\base_events.py", line 603, in run_forever
+  File "asyncio\base_events.py", line 1909, in _run_once
+  File "asyncio\events.py", line 80, in _run
+  File "F:\Vitis\2024.2\vcxx\python\slx\rule.py", line 954, in _async_tee
+    f(line)
+  File "F:\Vitis\2024.2\vcxx\python\slx\rule.py", line 889, in log_out_as_stream_write
+    self._logger.log(SUBPROCESS_OUT, msg.rstrip("\r\n"))
+  File "logging\__init__.py", line 1879, in log
+  File "logging\__init__.py", line 1547, in log
+  File "logging\__init__.py", line 1624, in _log
+  File "logging\__init__.py", line 1634, in handle
+  File "logging\__init__.py", line 1696, in callHandlers
+  File "logging\__init__.py", line 968, in handle
+  File "logging\__init__.py", line 1108, in emit
+Message: '\u274c FAIL: Required pixels (961) > available (1)'
+Arguments: ()
+--- Logging error ---
+Traceback (most recent call last):
+  File "logging\__init__.py", line 1103, in emit
+  File "F:\Vitis\2024.2\vcxx\libexec\slxcmd.py", line 22, in write
+    res = self.stream.write(data)
+UnicodeEncodeError: 'gbk' codec can't encode character '\u274c' in position 0: illegal multibyte sequence
+Call stack:
+  File "F:\Vitis\2024.2\vcxx\libexec\slxcmd.py", line 38, in <module>
+    sys.exit(slx.main.main())
+  File "F:\Vitis\2024.2\vcxx\python\slx\main.py", line 138, in main
+    return args.func(args, logger)
+  File "F:\Vitis\2024.2\vcxx\python\slx\code_analyzer.py", line 572, in cmd_code_analyzer
+    common.run(
+  File "F:\Vitis\2024.2\vcxx\python\slx\common.py", line 44, in run
+    return asyncio.get_event_loop().run_until_complete(coroutine)
+  File "asyncio\base_events.py", line 636, in run_until_complete
+  File "asyncio\windows_events.py", line 321, in run_forever
+  File "asyncio\base_events.py", line 603, in run_forever
+  File "asyncio\base_events.py", line 1909, in _run_once
+  File "asyncio\events.py", line 80, in _run
+  File "F:\Vitis\2024.2\vcxx\python\slx\rule.py", line 954, in _async_tee
+    f(line)
+  File "F:\Vitis\2024.2\vcxx\python\slx\rule.py", line 889, in log_out_as_stream_write
+    self._logger.log(SUBPROCESS_OUT, msg.rstrip("\r\n"))
+  File "logging\__init__.py", line 1879, in log
+  File "logging\__init__.py", line 1547, in log
+  File "logging\__init__.py", line 1624, in _log
+  File "logging\__init__.py", line 1634, in handle
+  File "logging\__init__.py", line 1696, in callHandlers
+  File "logging\__init__.py", line 968, in handle
+  File "logging\__init__.py", line 1108, in emit
+Message: '\u274c FAIL: Atom 1 failed validation'
+Arguments: ()
+=================================
+=== ATOM 2 VALIDATION ===
+Region: (681,98) to (711,128)
+dx=0 dy=0
+xidx=0 yidx=0
+proj_offset=0 (max allowed=1)
+cols=31 rows=31
+Required pixels=961
+Available pixels=1
+MAX_LOCAL: 31x31
+--- Logging error ---
+Traceback (most recent call last):
+  File "logging\__init__.py", line 1103, in emit
+  File "F:\Vitis\2024.2\vcxx\libexec\slxcmd.py", line 22, in write
+    res = self.stream.write(data)
+UnicodeEncodeError: 'gbk' codec can't encode character '\u274c' in position 0: illegal multibyte sequence
+Call stack:
+  File "F:\Vitis\2024.2\vcxx\libexec\slxcmd.py", line 38, in <module>
+    sys.exit(slx.main.main())
+  File "F:\Vitis\2024.2\vcxx\python\slx\main.py", line 138, in main
+    return args.func(args, logger)
+  File "F:\Vitis\2024.2\vcxx\python\slx\code_analyzer.py", line 572, in cmd_code_analyzer
+    common.run(
+  File "F:\Vitis\2024.2\vcxx\python\slx\common.py", line 44, in run
+    return asyncio.get_event_loop().run_until_complete(coroutine)
+  File "asyncio\base_events.py", line 636, in run_until_complete
+  File "asyncio\windows_events.py", line 321, in run_forever
+  File "asyncio\base_events.py", line 603, in run_forever
+  File "asyncio\base_events.py", line 1909, in _run_once
+  File "asyncio\events.py", line 80, in _run
+  File "F:\Vitis\2024.2\vcxx\python\slx\rule.py", line 954, in _async_tee
+    f(line)
+  File "F:\Vitis\2024.2\vcxx\python\slx\rule.py", line 889, in log_out_as_stream_write
+    self._logger.log(SUBPROCESS_OUT, msg.rstrip("\r\n"))
+  File "logging\__init__.py", line 1879, in log
+  File "logging\__init__.py", line 1547, in log
+  File "logging\__init__.py", line 1624, in _log
+  File "logging\__init__.py", line 1634, in handle
+  File "logging\__init__.py", line 1696, in callHandlers
+  File "logging\__init__.py", line 968, in handle
+  File "logging\__init__.py", line 1108, in emit
+Message: '\u274c FAIL: Required pixels (961) > available (1)'
+Arguments: ()
+--- Logging error ---
+Traceback (most recent call last):
+  File "logging\__init__.py", line 1103, in emit
+  File "F:\Vitis\2024.2\vcxx\libexec\slxcmd.py", line 22, in write
+    res = self.stream.write(data)
+UnicodeEncodeError: 'gbk' codec can't encode character '\u274c' in position 0: illegal multibyte sequence
+Call stack:
+  File "F:\Vitis\2024.2\vcxx\libexec\slxcmd.py", line 38, in <module>
+    sys.exit(slx.main.main())
+  File "F:\Vitis\2024.2\vcxx\python\slx\main.py", line 138, in main
+    return args.func(args, logger)
+  File "F:\Vitis\2024.2\vcxx\python\slx\code_analyzer.py", line 572, in cmd_code_analyzer
+    common.run(
+  File "F:\Vitis\2024.2\vcxx\python\slx\common.py", line 44, in run
+    return asyncio.get_event_loop().run_until_complete(coroutine)
+  File "asyncio\base_events.py", line 636, in run_until_complete
+  File "asyncio\windows_events.py", line 321, in run_forever
+  File "asyncio\base_events.py", line 603, in run_forever
+  File "asyncio\base_events.py", line 1909, in _run_once
+  File "asyncio\events.py", line 80, in _run
+  File "F:\Vitis\2024.2\vcxx\python\slx\rule.py", line 954, in _async_tee
+    f(line)
+  File "F:\Vitis\2024.2\vcxx\python\slx\rule.py", line 889, in log_out_as_stream_write
+    self._logger.log(SUBPROCESS_OUT, msg.rstrip("\r\n"))
+  File "logging\__init__.py", line 1879, in log
+  File "logging\__init__.py", line 1547, in log
+  File "logging\__init__.py", line 1624, in _log
+  File "logging\__init__.py", line 1634, in handle
+  File "logging\__init__.py", line 1696, in callHandlers
+  File "logging\__init__.py", line 968, in handle
+  File "logging\__init__.py", line 1108, in emit
+Message: '\u274c FAIL: Atom 2 failed validation'
+Arguments: ()
+=================================
+=== ATOM 3 VALIDATION ===
+Region: (681,118) to (711,148)
+dx=0 dy=0
+xidx=0 yidx=0
+proj_offset=0 (max allowed=1)
+cols=31 rows=31
+Required pixels=961
+Available pixels=1
+MAX_LOCAL: 31x31
+--- Logging error ---
+Traceback (most recent call last):
+  File "logging\__init__.py", line 1103, in emit
+  File "F:\Vitis\2024.2\vcxx\libexec\slxcmd.py", line 22, in write
+    res = self.stream.write(data)
+UnicodeEncodeError: 'gbk' codec can't encode character '\u274c' in position 0: illegal multibyte sequence
+Call stack:
+  File "F:\Vitis\2024.2\vcxx\libexec\slxcmd.py", line 38, in <module>
+    sys.exit(slx.main.main())
+  File "F:\Vitis\2024.2\vcxx\python\slx\main.py", line 138, in main
+    return args.func(args, logger)
+  File "F:\Vitis\2024.2\vcxx\python\slx\code_analyzer.py", line 572, in cmd_code_analyzer
+    common.run(
+  File "F:\Vitis\2024.2\vcxx\python\slx\common.py", line 44, in run
+    return asyncio.get_event_loop().run_until_complete(coroutine)
+  File "asyncio\base_events.py", line 636, in run_until_complete
+  File "asyncio\windows_events.py", line 321, in run_forever
+  File "asyncio\base_events.py", line 603, in run_forever
+  File "asyncio\base_events.py", line 1909, in _run_once
+  File "asyncio\events.py", line 80, in _run
+  File "F:\Vitis\2024.2\vcxx\python\slx\rule.py", line 954, in _async_tee
+    f(line)
+  File "F:\Vitis\2024.2\vcxx\python\slx\rule.py", line 889, in log_out_as_stream_write
+    self._logger.log(SUBPROCESS_OUT, msg.rstrip("\r\n"))
+  File "logging\__init__.py", line 1879, in log
+  File "logging\__init__.py", line 1547, in log
+  File "logging\__init__.py", line 1624, in _log
+  File "logging\__init__.py", line 1634, in handle
+  File "logging\__init__.py", line 1696, in callHandlers
+  File "logging\__init__.py", line 968, in handle
+  File "logging\__init__.py", line 1108, in emit
+Message: '\u274c FAIL: Required pixels (961) > available (1)'
+Arguments: ()
+--- Logging error ---
+Traceback (most recent call last):
+  File "logging\__init__.py", line 1103, in emit
+  File "F:\Vitis\2024.2\vcxx\libexec\slxcmd.py", line 22, in write
+    res = self.stream.write(data)
+UnicodeEncodeError: 'gbk' codec can't encode character '\u274c' in position 0: illegal multibyte sequence
+Call stack:
+  File "F:\Vitis\2024.2\vcxx\libexec\slxcmd.py", line 38, in <module>
+    sys.exit(slx.main.main())
+  File "F:\Vitis\2024.2\vcxx\python\slx\main.py", line 138, in main
+    return args.func(args, logger)
+  File "F:\Vitis\2024.2\vcxx\python\slx\code_analyzer.py", line 572, in cmd_code_analyzer
+    common.run(
+  File "F:\Vitis\2024.2\vcxx\python\slx\common.py", line 44, in run
+    return asyncio.get_event_loop().run_until_complete(coroutine)
+  File "asyncio\base_events.py", line 636, in run_until_complete
+  File "asyncio\windows_events.py", line 321, in run_forever
+  File "asyncio\base_events.py", line 603, in run_forever
+  File "asyncio\base_events.py", line 1909, in _run_once
+  File "asyncio\events.py", line 80, in _run
+  File "F:\Vitis\2024.2\vcxx\python\slx\rule.py", line 954, in _async_tee
+    f(line)
+  File "F:\Vitis\2024.2\vcxx\python\slx\rule.py", line 889, in log_out_as_stream_write
+    self._logger.log(SUBPROCESS_OUT, msg.rstrip("\r\n"))
+  File "logging\__init__.py", line 1879, in log
+  File "logging\__init__.py", line 1547, in log
+  File "logging\__init__.py", line 1624, in _log
+  File "logging\__init__.py", line 1634, in handle
+  File "logging\__init__.py", line 1696, in callHandlers
+  File "logging\__init__.py", line 968, in handle
+  File "logging\__init__.py", line 1108, in emit
+Message: '\u274c FAIL: Atom 3 failed validation'
+Arguments: ()
+=================================
+=== ATOM 4 VALIDATION ===
+Region: (682,137) to (712,167)
+dx=0 dy=0
+xidx=0 yidx=0
+proj_offset=0 (max allowed=1)
+cols=31 rows=31
+Required pixels=961
+Available pixels=1
+MAX_LOCAL: 31x31
+--- Logging error ---
+Traceback (most recent call last):
+  File "logging\__init__.py", line 1103, in emit
+  File "F:\Vitis\2024.2\vcxx\libexec\slxcmd.py", line 22, in write
+    res = self.stream.write(data)
+UnicodeEncodeError: 'gbk' codec can't encode character '\u274c' in position 0: illegal multibyte sequence
+Call stack:
+  File "F:\Vitis\2024.2\vcxx\libexec\slxcmd.py", line 38, in <module>
+    sys.exit(slx.main.main())
+  File "F:\Vitis\2024.2\vcxx\python\slx\main.py", line 138, in main
+    return args.func(args, logger)
+  File "F:\Vitis\2024.2\vcxx\python\slx\code_analyzer.py", line 572, in cmd_code_analyzer
+    common.run(
+  File "F:\Vitis\2024.2\vcxx\python\slx\common.py", line 44, in run
+    return asyncio.get_event_loop().run_until_complete(coroutine)
+  File "asyncio\base_events.py", line 636, in run_until_complete
+  File "asyncio\windows_events.py", line 321, in run_forever
+  File "asyncio\base_events.py", line 603, in run_forever
+  File "asyncio\base_events.py", line 1909, in _run_once
+  File "asyncio\events.py", line 80, in _run
+  File "F:\Vitis\2024.2\vcxx\python\slx\rule.py", line 954, in _async_tee
+    f(line)
+  File "F:\Vitis\2024.2\vcxx\python\slx\rule.py", line 889, in log_out_as_stream_write
+    self._logger.log(SUBPROCESS_OUT, msg.rstrip("\r\n"))
+  File "logging\__init__.py", line 1879, in log
+  File "logging\__init__.py", line 1547, in log
+  File "logging\__init__.py", line 1624, in _log
+  File "logging\__init__.py", line 1634, in handle
+  File "logging\__init__.py", line 1696, in callHandlers
+  File "logging\__init__.py", line 968, in handle
+  File "logging\__init__.py", line 1108, in emit
+Message: '\u274c FAIL: Required pixels (961) > available (1)'
+Arguments: ()
+--- Logging error ---
+Traceback (most recent call last):
+  File "logging\__init__.py", line 1103, in emit
+  File "F:\Vitis\2024.2\vcxx\libexec\slxcmd.py", line 22, in write
+    res = self.stream.write(data)
+UnicodeEncodeError: 'gbk' codec can't encode character '\u274c' in position 0: illegal multibyte sequence
+Call stack:
+  File "F:\Vitis\2024.2\vcxx\libexec\slxcmd.py", line 38, in <module>
+    sys.exit(slx.main.main())
+  File "F:\Vitis\2024.2\vcxx\python\slx\main.py", line 138, in main
+    return args.func(args, logger)
+  File "F:\Vitis\2024.2\vcxx\python\slx\code_analyzer.py", line 572, in cmd_code_analyzer
+    common.run(
+  File "F:\Vitis\2024.2\vcxx\python\slx\common.py", line 44, in run
+    return asyncio.get_event_loop().run_until_complete(coroutine)
+  File "asyncio\base_events.py", line 636, in run_until_complete
+  File "asyncio\windows_events.py", line 321, in run_forever
+  File "asyncio\base_events.py", line 603, in run_forever
+  File "asyncio\base_events.py", line 1909, in _run_once
+  File "asyncio\events.py", line 80, in _run
+  File "F:\Vitis\2024.2\vcxx\python\slx\rule.py", line 954, in _async_tee
+    f(line)
+  File "F:\Vitis\2024.2\vcxx\python\slx\rule.py", line 889, in log_out_as_stream_write
+    self._logger.log(SUBPROCESS_OUT, msg.rstrip("\r\n"))
+  File "logging\__init__.py", line 1879, in log
+  File "logging\__init__.py", line 1547, in log
+  File "logging\__init__.py", line 1624, in _log
+  File "logging\__init__.py", line 1634, in handle
+  File "logging\__init__.py", line 1696, in callHandlers
+  File "logging\__init__.py", line 968, in handle
+  File "logging\__init__.py", line 1108, in emit
+Message: '\u274c FAIL: Atom 4 failed validation'
+Arguments: ()
+=================================
+=== ATOM 5 VALIDATION ===
+Region: (682,157) to (712,187)
+dx=0 dy=0
+xidx=0 yidx=0
+proj_offset=0 (max allowed=1)
+cols=31 rows=31
+Required pixels=961
+Available pixels=1
+MAX_LOCAL: 31x31
+--- Logging error ---
+Traceback (most recent call last):
+  File "logging\__init__.py", line 1103, in emit
+  File "F:\Vitis\2024.2\vcxx\libexec\slxcmd.py", line 22, in write
+    res = self.stream.write(data)
+UnicodeEncodeError: 'gbk' codec can't encode character '\u274c' in position 0: illegal multibyte sequence
+Call stack:
+  File "F:\Vitis\2024.2\vcxx\libexec\slxcmd.py", line 38, in <module>
+    sys.exit(slx.main.main())
+  File "F:\Vitis\2024.2\vcxx\python\slx\main.py", line 138, in main
+    return args.func(args, logger)
+  File "F:\Vitis\2024.2\vcxx\python\slx\code_analyzer.py", line 572, in cmd_code_analyzer
+    common.run(
+  File "F:\Vitis\2024.2\vcxx\python\slx\common.py", line 44, in run
+    return asyncio.get_event_loop().run_until_complete(coroutine)
+  File "asyncio\base_events.py", line 636, in run_until_complete
+  File "asyncio\windows_events.py", line 321, in run_forever
+  File "asyncio\base_events.py", line 603, in run_forever
+  File "asyncio\base_events.py", line 1909, in _run_once
+  File "asyncio\events.py", line 80, in _run
+  File "F:\Vitis\2024.2\vcxx\python\slx\rule.py", line 954, in _async_tee
+    f(line)
+  File "F:\Vitis\2024.2\vcxx\python\slx\rule.py", line 889, in log_out_as_stream_write
+    self._logger.log(SUBPROCESS_OUT, msg.rstrip("\r\n"))
+  File "logging\__init__.py", line 1879, in log
+  File "logging\__init__.py", line 1547, in log
+  File "logging\__init__.py", line 1624, in _log
+  File "logging\__init__.py", line 1634, in handle
+  File "logging\__init__.py", line 1696, in callHandlers
+  File "logging\__init__.py", line 968, in handle
+  File "logging\__init__.py", line 1108, in emit
+Message: '\u274c FAIL: Required pixels (961) > available (1)'
+Arguments: ()
+--- Logging error ---
+Traceback (most recent call last):
+  File "logging\__init__.py", line 1103, in emit
+  File "F:\Vitis\2024.2\vcxx\libexec\slxcmd.py", line 22, in write
+    res = self.stream.write(data)
+UnicodeEncodeError: 'gbk' codec can't encode character '\u274c' in position 0: illegal multibyte sequence
+Call stack:
+  File "F:\Vitis\2024.2\vcxx\libexec\slxcmd.py", line 38, in <module>
+    sys.exit(slx.main.main())
+  File "F:\Vitis\2024.2\vcxx\python\slx\main.py", line 138, in main
+    return args.func(args, logger)
+  File "F:\Vitis\2024.2\vcxx\python\slx\code_analyzer.py", line 572, in cmd_code_analyzer
+    common.run(
+  File "F:\Vitis\2024.2\vcxx\python\slx\common.py", line 44, in run
+    return asyncio.get_event_loop().run_until_complete(coroutine)
+  File "asyncio\base_events.py", line 636, in run_until_complete
+  File "asyncio\windows_events.py", line 321, in run_forever
+  File "asyncio\base_events.py", line 603, in run_forever
+  File "asyncio\base_events.py", line 1909, in _run_once
+  File "asyncio\events.py", line 80, in _run
+  File "F:\Vitis\2024.2\vcxx\python\slx\rule.py", line 954, in _async_tee
+    f(line)
+  File "F:\Vitis\2024.2\vcxx\python\slx\rule.py", line 889, in log_out_as_stream_write
+    self._logger.log(SUBPROCESS_OUT, msg.rstrip("\r\n"))
+  File "logging\__init__.py", line 1879, in log
+  File "logging\__init__.py", line 1547, in log
+  File "logging\__init__.py", line 1624, in _log
+  File "logging\__init__.py", line 1634, in handle
+  File "logging\__init__.py", line 1696, in callHandlers
+  File "logging\__init__.py", line 968, in handle
+  File "logging\__init__.py", line 1108, in emit
+Message: '\u274c FAIL: Atom 5 failed validation'
+Arguments: ()
+=================================
+=== ATOM 6 VALIDATION ===
+Region: (683,176) to (713,206)
+dx=0 dy=0
+xidx=0 yidx=0
+proj_offset=0 (max allowed=1)
+cols=31 rows=31
+Required pixels=961
+Available pixels=1
+MAX_LOCAL: 31x31
+--- Logging error ---
+Traceback (most recent call last):
+  File "logging\__init__.py", line 1103, in emit
+  File "F:\Vitis\2024.2\vcxx\libexec\slxcmd.py", line 22, in write
+    res = self.stream.write(data)
+UnicodeEncodeError: 'gbk' codec can't encode character '\u274c' in position 0: illegal multibyte sequence
+Call stack:
+  File "F:\Vitis\2024.2\vcxx\libexec\slxcmd.py", line 38, in <module>
+    sys.exit(slx.main.main())
+  File "F:\Vitis\2024.2\vcxx\python\slx\main.py", line 138, in main
+    return args.func(args, logger)
+  File "F:\Vitis\2024.2\vcxx\python\slx\code_analyzer.py", line 572, in cmd_code_analyzer
+    common.run(
+  File "F:\Vitis\2024.2\vcxx\python\slx\common.py", line 44, in run
+    return asyncio.get_event_loop().run_until_complete(coroutine)
+  File "asyncio\base_events.py", line 636, in run_until_complete
+  File "asyncio\windows_events.py", line 321, in run_forever
+  File "asyncio\base_events.py", line 603, in run_forever
+  File "asyncio\base_events.py", line 1909, in _run_once
+  File "asyncio\events.py", line 80, in _run
+  File "F:\Vitis\2024.2\vcxx\python\slx\rule.py", line 954, in _async_tee
+    f(line)
+  File "F:\Vitis\2024.2\vcxx\python\slx\rule.py", line 889, in log_out_as_stream_write
+    self._logger.log(SUBPROCESS_OUT, msg.rstrip("\r\n"))
+  File "logging\__init__.py", line 1879, in log
+  File "logging\__init__.py", line 1547, in log
+  File "logging\__init__.py", line 1624, in _log
+  File "logging\__init__.py", line 1634, in handle
+  File "logging\__init__.py", line 1696, in callHandlers
+  File "logging\__init__.py", line 968, in handle
+  File "logging\__init__.py", line 1108, in emit
+Message: '\u274c FAIL: Required pixels (961) > available (1)'
+Arguments: ()
+--- Logging error ---
+Traceback (most recent call last):
+  File "logging\__init__.py", line 1103, in emit
+  File "F:\Vitis\2024.2\vcxx\libexec\slxcmd.py", line 22, in write
+    res = self.stream.write(data)
+UnicodeEncodeError: 'gbk' codec can't encode character '\u274c' in position 0: illegal multibyte sequence
+Call stack:
+  File "F:\Vitis\2024.2\vcxx\libexec\slxcmd.py", line 38, in <module>
+    sys.exit(slx.main.main())
+  File "F:\Vitis\2024.2\vcxx\python\slx\main.py", line 138, in main
+    return args.func(args, logger)
+  File "F:\Vitis\2024.2\vcxx\python\slx\code_analyzer.py", line 572, in cmd_code_analyzer
+    common.run(
+  File "F:\Vitis\2024.2\vcxx\python\slx\common.py", line 44, in run
+    return asyncio.get_event_loop().run_until_complete(coroutine)
+  File "asyncio\base_events.py", line 636, in run_until_complete
+  File "asyncio\windows_events.py", line 321, in run_forever
+  File "asyncio\base_events.py", line 603, in run_forever
+  File "asyncio\base_events.py", line 1909, in _run_once
+  File "asyncio\events.py", line 80, in _run
+  File "F:\Vitis\2024.2\vcxx\python\slx\rule.py", line 954, in _async_tee
+    f(line)
+  File "F:\Vitis\2024.2\vcxx\python\slx\rule.py", line 889, in log_out_as_stream_write
+    self._logger.log(SUBPROCESS_OUT, msg.rstrip("\r\n"))
+  File "logging\__init__.py", line 1879, in log
+  File "logging\__init__.py", line 1547, in log
+  File "logging\__init__.py", line 1624, in _log
+  File "logging\__init__.py", line 1634, in handle
+  File "logging\__init__.py", line 1696, in callHandlers
+  File "logging\__init__.py", line 968, in handle
+  File "logging\__init__.py", line 1108, in emit
+Message: '\u274c FAIL: Atom 6 failed validation'
+Arguments: ()
+=================================
+=== ATOM 7 VALIDATION ===
+Region: (683,195) to (713,225)
+dx=0 dy=0
+xidx=0 yidx=0
+proj_offset=0 (max allowed=1)
+cols=31 rows=31
+Required pixels=961
+Available pixels=1
+MAX_LOCAL: 31x31
+--- Logging error ---
+Traceback (most recent call last):
+  File "logging\__init__.py", line 1103, in emit
+  File "F:\Vitis\2024.2\vcxx\libexec\slxcmd.py", line 22, in write
+    res = self.stream.write(data)
+UnicodeEncodeError: 'gbk' codec can't encode character '\u274c' in position 0: illegal multibyte sequence
+Call stack:
+  File "F:\Vitis\2024.2\vcxx\libexec\slxcmd.py", line 38, in <module>
+    sys.exit(slx.main.main())
+  File "F:\Vitis\2024.2\vcxx\python\slx\main.py", line 138, in main
+    return args.func(args, logger)
+  File "F:\Vitis\2024.2\vcxx\python\slx\code_analyzer.py", line 572, in cmd_code_analyzer
+    common.run(
+  File "F:\Vitis\2024.2\vcxx\python\slx\common.py", line 44, in run
+    return asyncio.get_event_loop().run_until_complete(coroutine)
+  File "asyncio\base_events.py", line 636, in run_until_complete
+  File "asyncio\windows_events.py", line 321, in run_forever
+  File "asyncio\base_events.py", line 603, in run_forever
+  File "asyncio\base_events.py", line 1909, in _run_once
+  File "asyncio\events.py", line 80, in _run
+  File "F:\Vitis\2024.2\vcxx\python\slx\rule.py", line 954, in _async_tee
+    f(line)
+  File "F:\Vitis\2024.2\vcxx\python\slx\rule.py", line 889, in log_out_as_stream_write
+    self._logger.log(SUBPROCESS_OUT, msg.rstrip("\r\n"))
+  File "logging\__init__.py", line 1879, in log
+  File "logging\__init__.py", line 1547, in log
+  File "logging\__init__.py", line 1624, in _log
+  File "logging\__init__.py", line 1634, in handle
+  File "logging\__init__.py", line 1696, in callHandlers
+  File "logging\__init__.py", line 968, in handle
+  File "logging\__init__.py", line 1108, in emit
+Message: '\u274c FAIL: Required pixels (961) > available (1)'
+Arguments: ()
+--- Logging error ---
+Traceback (most recent call last):
+  File "logging\__init__.py", line 1103, in emit
+  File "F:\Vitis\2024.2\vcxx\libexec\slxcmd.py", line 22, in write
+    res = self.stream.write(data)
+UnicodeEncodeError: 'gbk' codec can't encode character '\u274c' in position 0: illegal multibyte sequence
+Call stack:
+  File "F:\Vitis\2024.2\vcxx\libexec\slxcmd.py", line 38, in <module>
+    sys.exit(slx.main.main())
+  File "F:\Vitis\2024.2\vcxx\python\slx\main.py", line 138, in main
+    return args.func(args, logger)
+  File "F:\Vitis\2024.2\vcxx\python\slx\code_analyzer.py", line 572, in cmd_code_analyzer
+    common.run(
+  File "F:\Vitis\2024.2\vcxx\python\slx\common.py", line 44, in run
+    return asyncio.get_event_loop().run_until_complete(coroutine)
+  File "asyncio\base_events.py", line 636, in run_until_complete
+  File "asyncio\windows_events.py", line 321, in run_forever
+  File "asyncio\base_events.py", line 603, in run_forever
+  File "asyncio\base_events.py", line 1909, in _run_once
+  File "asyncio\events.py", line 80, in _run
+  File "F:\Vitis\2024.2\vcxx\python\slx\rule.py", line 954, in _async_tee
+    f(line)
+  File "F:\Vitis\2024.2\vcxx\python\slx\rule.py", line 889, in log_out_as_stream_write
+    self._logger.log(SUBPROCESS_OUT, msg.rstrip("\r\n"))
+  File "logging\__init__.py", line 1879, in log
+  File "logging\__init__.py", line 1547, in log
+  File "logging\__init__.py", line 1624, in _log
+  File "logging\__init__.py", line 1634, in handle
+  File "logging\__init__.py", line 1696, in callHandlers
+  File "logging\__init__.py", line 968, in handle
+  File "logging\__init__.py", line 1108, in emit
+Message: '\u274c FAIL: Atom 7 failed validation'
+Arguments: ()
+=================================
+=== ATOM 8 VALIDATION ===
+Region: (683,215) to (713,245)
+dx=0 dy=0
+xidx=0 yidx=0
+proj_offset=0 (max allowed=1)
+cols=31 rows=31
+Required pixels=961
+Available pixels=1
+MAX_LOCAL: 31x31
+--- Logging error ---
+Traceback (most recent call last):
+  File "logging\__init__.py", line 1103, in emit
+  File "F:\Vitis\2024.2\vcxx\libexec\slxcmd.py", line 22, in write
+    res = self.stream.write(data)
+UnicodeEncodeError: 'gbk' codec can't encode character '\u274c' in position 0: illegal multibyte sequence
+Call stack:
+  File "F:\Vitis\2024.2\vcxx\libexec\slxcmd.py", line 38, in <module>
+    sys.exit(slx.main.main())
+  File "F:\Vitis\2024.2\vcxx\python\slx\main.py", line 138, in main
+    return args.func(args, logger)
+  File "F:\Vitis\2024.2\vcxx\python\slx\code_analyzer.py", line 572, in cmd_code_analyzer
+    common.run(
+  File "F:\Vitis\2024.2\vcxx\python\slx\common.py", line 44, in run
+    return asyncio.get_event_loop().run_until_complete(coroutine)
+  File "asyncio\base_events.py", line 636, in run_until_complete
+  File "asyncio\windows_events.py", line 321, in run_forever
+  File "asyncio\base_events.py", line 603, in run_forever
+  File "asyncio\base_events.py", line 1909, in _run_once
+  File "asyncio\events.py", line 80, in _run
+  File "F:\Vitis\2024.2\vcxx\python\slx\rule.py", line 954, in _async_tee
+    f(line)
+  File "F:\Vitis\2024.2\vcxx\python\slx\rule.py", line 889, in log_out_as_stream_write
+    self._logger.log(SUBPROCESS_OUT, msg.rstrip("\r\n"))
+  File "logging\__init__.py", line 1879, in log
+  File "logging\__init__.py", line 1547, in log
+  File "logging\__init__.py", line 1624, in _log
+  File "logging\__init__.py", line 1634, in handle
+  File "logging\__init__.py", line 1696, in callHandlers
+  File "logging\__init__.py", line 968, in handle
+  File "logging\__init__.py", line 1108, in emit
+Message: '\u274c FAIL: Required pixels (961) > available (1)'
+Arguments: ()
+--- Logging error ---
+Traceback (most recent call last):
+  File "logging\__init__.py", line 1103, in emit
+  File "F:\Vitis\2024.2\vcxx\libexec\slxcmd.py", line 22, in write
+    res = self.stream.write(data)
+UnicodeEncodeError: 'gbk' codec can't encode character '\u274c' in position 0: illegal multibyte sequence
+Call stack:
+  File "F:\Vitis\2024.2\vcxx\libexec\slxcmd.py", line 38, in <module>
+    sys.exit(slx.main.main())
+  File "F:\Vitis\2024.2\vcxx\python\slx\main.py", line 138, in main
+    return args.func(args, logger)
+  File "F:\Vitis\2024.2\vcxx\python\slx\code_analyzer.py", line 572, in cmd_code_analyzer
+    common.run(
+  File "F:\Vitis\2024.2\vcxx\python\slx\common.py", line 44, in run
+    return asyncio.get_event_loop().run_until_complete(coroutine)
+  File "asyncio\base_events.py", line 636, in run_until_complete
+  File "asyncio\windows_events.py", line 321, in run_forever
+  File "asyncio\base_events.py", line 603, in run_forever
+  File "asyncio\base_events.py", line 1909, in _run_once
+  File "asyncio\events.py", line 80, in _run
+  File "F:\Vitis\2024.2\vcxx\python\slx\rule.py", line 954, in _async_tee
+    f(line)
+  File "F:\Vitis\2024.2\vcxx\python\slx\rule.py", line 889, in log_out_as_stream_write
+    self._logger.log(SUBPROCESS_OUT, msg.rstrip("\r\n"))
+  File "logging\__init__.py", line 1879, in log
+  File "logging\__init__.py", line 1547, in log
+  File "logging\__init__.py", line 1624, in _log
+  File "logging\__init__.py", line 1634, in handle
+  File "logging\__init__.py", line 1696, in callHandlers
+  File "logging\__init__.py", line 968, in handle
+  File "logging\__init__.py", line 1108, in emit
+Message: '\u274c FAIL: Atom 8 failed validation'
+Arguments: ()
+=================================
+=== ATOM 9 VALIDATION ===
+Region: (684,234) to (714,264)
+dx=0 dy=0
+xidx=0 yidx=0
+proj_offset=0 (max allowed=1)
+cols=31 rows=31
+Required pixels=961
+Available pixels=1
+MAX_LOCAL: 31x31
+--- Logging error ---
+Traceback (most recent call last):
+  File "logging\__init__.py", line 1103, in emit
+  File "F:\Vitis\2024.2\vcxx\libexec\slxcmd.py", line 22, in write
+    res = self.stream.write(data)
+UnicodeEncodeError: 'gbk' codec can't encode character '\u274c' in position 0: illegal multibyte sequence
+Call stack:
+  File "F:\Vitis\2024.2\vcxx\libexec\slxcmd.py", line 38, in <module>
+    sys.exit(slx.main.main())
+  File "F:\Vitis\2024.2\vcxx\python\slx\main.py", line 138, in main
+    return args.func(args, logger)
+  File "F:\Vitis\2024.2\vcxx\python\slx\code_analyzer.py", line 572, in cmd_code_analyzer
+    common.run(
+  File "F:\Vitis\2024.2\vcxx\python\slx\common.py", line 44, in run
+    return asyncio.get_event_loop().run_until_complete(coroutine)
+  File "asyncio\base_events.py", line 636, in run_until_complete
+  File "asyncio\windows_events.py", line 321, in run_forever
+  File "asyncio\base_events.py", line 603, in run_forever
+  File "asyncio\base_events.py", line 1909, in _run_once
+  File "asyncio\events.py", line 80, in _run
+  File "F:\Vitis\2024.2\vcxx\python\slx\rule.py", line 954, in _async_tee
+    f(line)
+  File "F:\Vitis\2024.2\vcxx\python\slx\rule.py", line 889, in log_out_as_stream_write
+    self._logger.log(SUBPROCESS_OUT, msg.rstrip("\r\n"))
+  File "logging\__init__.py", line 1879, in log
+  File "logging\__init__.py", line 1547, in log
+  File "logging\__init__.py", line 1624, in _log
+  File "logging\__init__.py", line 1634, in handle
+  File "logging\__init__.py", line 1696, in callHandlers
+  File "logging\__init__.py", line 968, in handle
+  File "logging\__init__.py", line 1108, in emit
+Message: '\u274c FAIL: Required pixels (961) > available (1)'
+Arguments: ()
+--- Logging error ---
+Traceback (most recent call last):
+  File "logging\__init__.py", line 1103, in emit
+  File "F:\Vitis\2024.2\vcxx\libexec\slxcmd.py", line 22, in write
+    res = self.stream.write(data)
+UnicodeEncodeError: 'gbk' codec can't encode character '\u274c' in position 0: illegal multibyte sequence
+Call stack:
+  File "F:\Vitis\2024.2\vcxx\libexec\slxcmd.py", line 38, in <module>
+    sys.exit(slx.main.main())
+  File "F:\Vitis\2024.2\vcxx\python\slx\main.py", line 138, in main
+    return args.func(args, logger)
+  File "F:\Vitis\2024.2\vcxx\python\slx\code_analyzer.py", line 572, in cmd_code_analyzer
+    common.run(
+  File "F:\Vitis\2024.2\vcxx\python\slx\common.py", line 44, in run
+    return asyncio.get_event_loop().run_until_complete(coroutine)
+  File "asyncio\base_events.py", line 636, in run_until_complete
+  File "asyncio\windows_events.py", line 321, in run_forever
+  File "asyncio\base_events.py", line 603, in run_forever
+  File "asyncio\base_events.py", line 1909, in _run_once
+  File "asyncio\events.py", line 80, in _run
+  File "F:\Vitis\2024.2\vcxx\python\slx\rule.py", line 954, in _async_tee
+    f(line)
+  File "F:\Vitis\2024.2\vcxx\python\slx\rule.py", line 889, in log_out_as_stream_write
+    self._logger.log(SUBPROCESS_OUT, msg.rstrip("\r\n"))
+  File "logging\__init__.py", line 1879, in log
+  File "logging\__init__.py", line 1547, in log
+  File "logging\__init__.py", line 1624, in _log
+  File "logging\__init__.py", line 1634, in handle
+  File "logging\__init__.py", line 1696, in callHandlers
+  File "logging\__init__.py", line 968, in handle
+  File "logging\__init__.py", line 1108, in emit
+Message: '\u274c FAIL: Atom 9 failed validation'
+Arguments: ()
+=================================
+=== ATOM 10 VALIDATION ===
+Region: (684,254) to (714,284)
+dx=0 dy=0
+xidx=0 yidx=0
+proj_offset=0 (max allowed=1)
+cols=31 rows=31
+Required pixels=961
+Available pixels=1
+MAX_LOCAL: 31x31
+--- Logging error ---
+Traceback (most recent call last):
+  File "logging\__init__.py", line 1103, in emit
+  File "F:\Vitis\2024.2\vcxx\libexec\slxcmd.py", line 22, in write
+    res = self.stream.write(data)
+UnicodeEncodeError: 'gbk' codec can't encode character '\u274c' in position 0: illegal multibyte sequence
+Call stack:
+  File "F:\Vitis\2024.2\vcxx\libexec\slxcmd.py", line 38, in <module>
+    sys.exit(slx.main.main())
+  File "F:\Vitis\2024.2\vcxx\python\slx\main.py", line 138, in main
+    return args.func(args, logger)
+  File "F:\Vitis\2024.2\vcxx\python\slx\code_analyzer.py", line 572, in cmd_code_analyzer
+    common.run(
+  File "F:\Vitis\2024.2\vcxx\python\slx\common.py", line 44, in run
+    return asyncio.get_event_loop().run_until_complete(coroutine)
+  File "asyncio\base_events.py", line 636, in run_until_complete
+  File "asyncio\windows_events.py", line 321, in run_forever
+  File "asyncio\base_events.py", line 603, in run_forever
+  File "asyncio\base_events.py", line 1909, in _run_once
+  File "asyncio\events.py", line 80, in _run
+  File "F:\Vitis\2024.2\vcxx\python\slx\rule.py", line 954, in _async_tee
+    f(line)
+  File "F:\Vitis\2024.2\vcxx\python\slx\rule.py", line 889, in log_out_as_stream_write
+    self._logger.log(SUBPROCESS_OUT, msg.rstrip("\r\n"))
+  File "logging\__init__.py", line 1879, in log
+  File "logging\__init__.py", line 1547, in log
+  File "logging\__init__.py", line 1624, in _log
+  File "logging\__init__.py", line 1634, in handle
+  File "logging\__init__.py", line 1696, in callHandlers
+  File "logging\__init__.py", line 968, in handle
+  File "logging\__init__.py", line 1108, in emit
+Message: '\u274c FAIL: Required pixels (961) > available (1)'
+Arguments: ()
+--- Logging error ---
+Traceback (most recent call last):
+  File "logging\__init__.py", line 1103, in emit
+  File "F:\Vitis\2024.2\vcxx\libexec\slxcmd.py", line 22, in write
+    res = self.stream.write(data)
+UnicodeEncodeError: 'gbk' codec can't encode character '\u274c' in position 0: illegal multibyte sequence
+Call stack:
+  File "F:\Vitis\2024.2\vcxx\libexec\slxcmd.py", line 38, in <module>
+    sys.exit(slx.main.main())
+  File "F:\Vitis\2024.2\vcxx\python\slx\main.py", line 138, in main
+    return args.func(args, logger)
+  File "F:\Vitis\2024.2\vcxx\python\slx\code_analyzer.py", line 572, in cmd_code_analyzer
+    common.run(
+  File "F:\Vitis\2024.2\vcxx\python\slx\common.py", line 44, in run
+    return asyncio.get_event_loop().run_until_complete(coroutine)
+  File "asyncio\base_events.py", line 636, in run_until_complete
+  File "asyncio\windows_events.py", line 321, in run_forever
+  File "asyncio\base_events.py", line 603, in run_forever
+  File "asyncio\base_events.py", line 1909, in _run_once
+  File "asyncio\events.py", line 80, in _run
+  File "F:\Vitis\2024.2\vcxx\python\slx\rule.py", line 954, in _async_tee
+    f(line)
+  File "F:\Vitis\2024.2\vcxx\python\slx\rule.py", line 889, in log_out_as_stream_write
+    self._logger.log(SUBPROCESS_OUT, msg.rstrip("\r\n"))
+  File "logging\__init__.py", line 1879, in log
+  File "logging\__init__.py", line 1547, in log
+  File "logging\__init__.py", line 1624, in _log
+  File "logging\__init__.py", line 1634, in handle
+  File "logging\__init__.py", line 1696, in callHandlers
+  File "logging\__init__.py", line 968, in handle
+  File "logging\__init__.py", line 1108, in emit
+Message: '\u274c FAIL: Atom 10 failed validation'
+Arguments: ()
+=================================
+=== ATOM 11 VALIDATION ===
+Region: (685,273) to (715,303)
+dx=0 dy=0
+xidx=0 yidx=0
+proj_offset=0 (max allowed=1)
+cols=31 rows=31
+Required pixels=961
+Available pixels=1
+MAX_LOCAL: 31x31
+--- Logging error ---
+Traceback (most recent call last):
+  File "logging\__init__.py", line 1103, in emit
+  File "F:\Vitis\2024.2\vcxx\libexec\slxcmd.py", line 22, in write
+    res = self.stream.write(data)
+UnicodeEncodeError: 'gbk' codec can't encode character '\u274c' in position 0: illegal multibyte sequence
+Call stack:
+  File "F:\Vitis\2024.2\vcxx\libexec\slxcmd.py", line 38, in <module>
+    sys.exit(slx.main.main())
+  File "F:\Vitis\2024.2\vcxx\python\slx\main.py", line 138, in main
+    return args.func(args, logger)
+  File "F:\Vitis\2024.2\vcxx\python\slx\code_analyzer.py", line 572, in cmd_code_analyzer
+    common.run(
+  File "F:\Vitis\2024.2\vcxx\python\slx\common.py", line 44, in run
+    return asyncio.get_event_loop().run_until_complete(coroutine)
+  File "asyncio\base_events.py", line 636, in run_until_complete
+  File "asyncio\windows_events.py", line 321, in run_forever
+  File "asyncio\base_events.py", line 603, in run_forever
+  File "asyncio\base_events.py", line 1909, in _run_once
+  File "asyncio\events.py", line 80, in _run
+  File "F:\Vitis\2024.2\vcxx\python\slx\rule.py", line 954, in _async_tee
+    f(line)
+  File "F:\Vitis\2024.2\vcxx\python\slx\rule.py", line 889, in log_out_as_stream_write
+    self._logger.log(SUBPROCESS_OUT, msg.rstrip("\r\n"))
+  File "logging\__init__.py", line 1879, in log
+  File "logging\__init__.py", line 1547, in log
+  File "logging\__init__.py", line 1624, in _log
+  File "logging\__init__.py", line 1634, in handle
+  File "logging\__init__.py", line 1696, in callHandlers
+  File "logging\__init__.py", line 968, in handle
+  File "logging\__init__.py", line 1108, in emit
+Message: '\u274c FAIL: Required pixels (961) > available (1)'
+Arguments: ()
+--- Logging error ---
+Traceback (most recent call last):
+  File "logging\__init__.py", line 1103, in emit
+  File "F:\Vitis\2024.2\vcxx\libexec\slxcmd.py", line 22, in write
+    res = self.stream.write(data)
+UnicodeEncodeError: 'gbk' codec can't encode character '\u274c' in position 0: illegal multibyte sequence
+Call stack:
+  File "F:\Vitis\2024.2\vcxx\libexec\slxcmd.py", line 38, in <module>
+    sys.exit(slx.main.main())
+  File "F:\Vitis\2024.2\vcxx\python\slx\main.py", line 138, in main
+    return args.func(args, logger)
+  File "F:\Vitis\2024.2\vcxx\python\slx\code_analyzer.py", line 572, in cmd_code_analyzer
+    common.run(
+  File "F:\Vitis\2024.2\vcxx\python\slx\common.py", line 44, in run
+    return asyncio.get_event_loop().run_until_complete(coroutine)
+  File "asyncio\base_events.py", line 636, in run_until_complete
+  File "asyncio\windows_events.py", line 321, in run_forever
+  File "asyncio\base_events.py", line 603, in run_forever
+  File "asyncio\base_events.py", line 1909, in _run_once
+  File "asyncio\events.py", line 80, in _run
+  File "F:\Vitis\2024.2\vcxx\python\slx\rule.py", line 954, in _async_tee
+    f(line)
+  File "F:\Vitis\2024.2\vcxx\python\slx\rule.py", line 889, in log_out_as_stream_write
+    self._logger.log(SUBPROCESS_OUT, msg.rstrip("\r\n"))
+  File "logging\__init__.py", line 1879, in log
+  File "logging\__init__.py", line 1547, in log
+  File "logging\__init__.py", line 1624, in _log
+  File "logging\__init__.py", line 1634, in handle
+  File "logging\__init__.py", line 1696, in callHandlers
+  File "logging\__init__.py", line 968, in handle
+  File "logging\__init__.py", line 1108, in emit
+Message: '\u274c FAIL: Atom 11 failed validation'
+Arguments: ()
+=================================
+=== ATOM 12 VALIDATION ===
+Region: (685,292) to (715,322)
+dx=0 dy=0
+xidx=0 yidx=0
+proj_offset=0 (max allowed=1)
+cols=31 rows=31
+Required pixels=961
+Available pixels=1
+MAX_LOCAL: 31x31
+--- Logging error ---
+Traceback (most recent call last):
+  File "logging\__init__.py", line 1103, in emit
+  File "F:\Vitis\2024.2\vcxx\libexec\slxcmd.py", line 22, in write
+    res = self.stream.write(data)
+UnicodeEncodeError: 'gbk' codec can't encode character '\u274c' in position 0: illegal multibyte sequence
+Call stack:
+  File "F:\Vitis\2024.2\vcxx\libexec\slxcmd.py", line 38, in <module>
+    sys.exit(slx.main.main())
+  File "F:\Vitis\2024.2\vcxx\python\slx\main.py", line 138, in main
+    return args.func(args, logger)
+  File "F:\Vitis\2024.2\vcxx\python\slx\code_analyzer.py", line 572, in cmd_code_analyzer
+    common.run(
+  File "F:\Vitis\2024.2\vcxx\python\slx\common.py", line 44, in run
+    return asyncio.get_event_loop().run_until_complete(coroutine)
+  File "asyncio\base_events.py", line 636, in run_until_complete
+  File "asyncio\windows_events.py", line 321, in run_forever
+  File "asyncio\base_events.py", line 603, in run_forever
+  File "asyncio\base_events.py", line 1909, in _run_once
+  File "asyncio\events.py", line 80, in _run
+  File "F:\Vitis\2024.2\vcxx\python\slx\rule.py", line 954, in _async_tee
+    f(line)
+  File "F:\Vitis\2024.2\vcxx\python\slx\rule.py", line 889, in log_out_as_stream_write
+    self._logger.log(SUBPROCESS_OUT, msg.rstrip("\r\n"))
+  File "logging\__init__.py", line 1879, in log
+  File "logging\__init__.py", line 1547, in log
+  File "logging\__init__.py", line 1624, in _log
+  File "logging\__init__.py", line 1634, in handle
+  File "logging\__init__.py", line 1696, in callHandlers
+  File "logging\__init__.py", line 968, in handle
+  File "logging\__init__.py", line 1108, in emit
+Message: '\u274c FAIL: Required pixels (961) > available (1)'
+Arguments: ()
+--- Logging error ---
+Traceback (most recent call last):
+  File "logging\__init__.py", line 1103, in emit
+  File "F:\Vitis\2024.2\vcxx\libexec\slxcmd.py", line 22, in write
+    res = self.stream.write(data)
+UnicodeEncodeError: 'gbk' codec can't encode character '\u274c' in position 0: illegal multibyte sequence
+Call stack:
+  File "F:\Vitis\2024.2\vcxx\libexec\slxcmd.py", line 38, in <module>
+    sys.exit(slx.main.main())
+  File "F:\Vitis\2024.2\vcxx\python\slx\main.py", line 138, in main
+    return args.func(args, logger)
+  File "F:\Vitis\2024.2\vcxx\python\slx\code_analyzer.py", line 572, in cmd_code_analyzer
+    common.run(
+  File "F:\Vitis\2024.2\vcxx\python\slx\common.py", line 44, in run
+    return asyncio.get_event_loop().run_until_complete(coroutine)
+  File "asyncio\base_events.py", line 636, in run_until_complete
+  File "asyncio\windows_events.py", line 321, in run_forever
+  File "asyncio\base_events.py", line 603, in run_forever
+  File "asyncio\base_events.py", line 1909, in _run_once
+  File "asyncio\events.py", line 80, in _run
+  File "F:\Vitis\2024.2\vcxx\python\slx\rule.py", line 954, in _async_tee
+    f(line)
+  File "F:\Vitis\2024.2\vcxx\python\slx\rule.py", line 889, in log_out_as_stream_write
+    self._logger.log(SUBPROCESS_OUT, msg.rstrip("\r\n"))
+  File "logging\__init__.py", line 1879, in log
+  File "logging\__init__.py", line 1547, in log
+  File "logging\__init__.py", line 1624, in _log
+  File "logging\__init__.py", line 1634, in handle
+  File "logging\__init__.py", line 1696, in callHandlers
+  File "logging\__init__.py", line 968, in handle
+  File "logging\__init__.py", line 1108, in emit
+Message: '\u274c FAIL: Atom 12 failed validation'
+Arguments: ()
+=================================
+=== ATOM 13 VALIDATION ===
+Region: (686,312) to (716,342)
+dx=0 dy=0
+xidx=0 yidx=0
+proj_offset=0 (max allowed=1)
+cols=31 rows=31
+Required pixels=961
+Available pixels=1
+MAX_LOCAL: 31x31
+--- Logging error ---
+Traceback (most recent call last):
+  File "logging\__init__.py", line 1103, in emit
+  File "F:\Vitis\2024.2\vcxx\libexec\slxcmd.py", line 22, in write
+    res = self.stream.write(data)
+UnicodeEncodeError: 'gbk' codec can't encode character '\u274c' in position 0: illegal multibyte sequence
+Call stack:
+  File "F:\Vitis\2024.2\vcxx\libexec\slxcmd.py", line 38, in <module>
+    sys.exit(slx.main.main())
+  File "F:\Vitis\2024.2\vcxx\python\slx\main.py", line 138, in main
+    return args.func(args, logger)
+  File "F:\Vitis\2024.2\vcxx\python\slx\code_analyzer.py", line 572, in cmd_code_analyzer
+    common.run(
+  File "F:\Vitis\2024.2\vcxx\python\slx\common.py", line 44, in run
+    return asyncio.get_event_loop().run_until_complete(coroutine)
+  File "asyncio\base_events.py", line 636, in run_until_complete
+  File "asyncio\windows_events.py", line 321, in run_forever
+  File "asyncio\base_events.py", line 603, in run_forever
+  File "asyncio\base_events.py", line 1909, in _run_once
+  File "asyncio\events.py", line 80, in _run
+  File "F:\Vitis\2024.2\vcxx\python\slx\rule.py", line 954, in _async_tee
+    f(line)
+  File "F:\Vitis\2024.2\vcxx\python\slx\rule.py", line 889, in log_out_as_stream_write
+    self._logger.log(SUBPROCESS_OUT, msg.rstrip("\r\n"))
+  File "logging\__init__.py", line 1879, in log
+  File "logging\__init__.py", line 1547, in log
+  File "logging\__init__.py", line 1624, in _log
+  File "logging\__init__.py", line 1634, in handle
+  File "logging\__init__.py", line 1696, in callHandlers
+  File "logging\__init__.py", line 968, in handle
+  File "logging\__init__.py", line 1108, in emit
+Message: '\u274c FAIL: Required pixels (961) > available (1)'
+Arguments: ()
+--- Logging error ---
+Traceback (most recent call last):
+  File "logging\__init__.py", line 1103, in emit
+  File "F:\Vitis\2024.2\vcxx\libexec\slxcmd.py", line 22, in write
+    res = self.stream.write(data)
+UnicodeEncodeError: 'gbk' codec can't encode character '\u274c' in position 0: illegal multibyte sequence
+Call stack:
+  File "F:\Vitis\2024.2\vcxx\libexec\slxcmd.py", line 38, in <module>
+    sys.exit(slx.main.main())
+  File "F:\Vitis\2024.2\vcxx\python\slx\main.py", line 138, in main
+    return args.func(args, logger)
+  File "F:\Vitis\2024.2\vcxx\python\slx\code_analyzer.py", line 572, in cmd_code_analyzer
+    common.run(
+  File "F:\Vitis\2024.2\vcxx\python\slx\common.py", line 44, in run
+    return asyncio.get_event_loop().run_until_complete(coroutine)
+  File "asyncio\base_events.py", line 636, in run_until_complete
+  File "asyncio\windows_events.py", line 321, in run_forever
+  File "asyncio\base_events.py", line 603, in run_forever
+  File "asyncio\base_events.py", line 1909, in _run_once
+  File "asyncio\events.py", line 80, in _run
+  File "F:\Vitis\2024.2\vcxx\python\slx\rule.py", line 954, in _async_tee
+    f(line)
+  File "F:\Vitis\2024.2\vcxx\python\slx\rule.py", line 889, in log_out_as_stream_write
+    self._logger.log(SUBPROCESS_OUT, msg.rstrip("\r\n"))
+  File "logging\__init__.py", line 1879, in log
+  File "logging\__init__.py", line 1547, in log
+  File "logging\__init__.py", line 1624, in _log
+  File "logging\__init__.py", line 1634, in handle
+  File "logging\__init__.py", line 1696, in callHandlers
+  File "logging\__init__.py", line 968, in handle
+  File "logging\__init__.py", line 1108, in emit
+Message: '\u274c FAIL: Atom 13 failed validation'
+Arguments: ()
+=================================
+=== ATOM 14 VALIDATION ===
+Region: (686,331) to (716,361)
+dx=0 dy=0
+xidx=0 yidx=0
+proj_offset=0 (max allowed=1)
+cols=31 rows=31
+Required pixels=961
+Available pixels=1
+MAX_LOCAL: 31x31
+--- Logging error ---
+Traceback (most recent call last):
+  File "logging\__init__.py", line 1103, in emit
+  File "F:\Vitis\2024.2\vcxx\libexec\slxcmd.py", line 22, in write
+    res = self.stream.write(data)
+UnicodeEncodeError: 'gbk' codec can't encode character '\u274c' in position 0: illegal multibyte sequence
+Call stack:
+  File "F:\Vitis\2024.2\vcxx\libexec\slxcmd.py", line 38, in <module>
+    sys.exit(slx.main.main())
+  File "F:\Vitis\2024.2\vcxx\python\slx\main.py", line 138, in main
+    return args.func(args, logger)
+  File "F:\Vitis\2024.2\vcxx\python\slx\code_analyzer.py", line 572, in cmd_code_analyzer
+    common.run(
+  File "F:\Vitis\2024.2\vcxx\python\slx\common.py", line 44, in run
+    return asyncio.get_event_loop().run_until_complete(coroutine)
+  File "asyncio\base_events.py", line 636, in run_until_complete
+  File "asyncio\windows_events.py", line 321, in run_forever
+  File "asyncio\base_events.py", line 603, in run_forever
+  File "asyncio\base_events.py", line 1909, in _run_once
+  File "asyncio\events.py", line 80, in _run
+  File "F:\Vitis\2024.2\vcxx\python\slx\rule.py", line 954, in _async_tee
+    f(line)
+  File "F:\Vitis\2024.2\vcxx\python\slx\rule.py", line 889, in log_out_as_stream_write
+    self._logger.log(SUBPROCESS_OUT, msg.rstrip("\r\n"))
+  File "logging\__init__.py", line 1879, in log
+  File "logging\__init__.py", line 1547, in log
+  File "logging\__init__.py", line 1624, in _log
+  File "logging\__init__.py", line 1634, in handle
+  File "logging\__init__.py", line 1696, in callHandlers
+  File "logging\__init__.py", line 968, in handle
+  File "logging\__init__.py", line 1108, in emit
+Message: '\u274c FAIL: Required pixels (961) > available (1)'
+Arguments: ()
+--- Logging error ---
+Traceback (most recent call last):
+  File "logging\__init__.py", line 1103, in emit
+  File "F:\Vitis\2024.2\vcxx\libexec\slxcmd.py", line 22, in write
+    res = self.stream.write(data)
+UnicodeEncodeError: 'gbk' codec can't encode character '\u274c' in position 0: illegal multibyte sequence
+Call stack:
+  File "F:\Vitis\2024.2\vcxx\libexec\slxcmd.py", line 38, in <module>
+    sys.exit(slx.main.main())
+  File "F:\Vitis\2024.2\vcxx\python\slx\main.py", line 138, in main
+    return args.func(args, logger)
+  File "F:\Vitis\2024.2\vcxx\python\slx\code_analyzer.py", line 572, in cmd_code_analyzer
+    common.run(
+  File "F:\Vitis\2024.2\vcxx\python\slx\common.py", line 44, in run
+    return asyncio.get_event_loop().run_until_complete(coroutine)
+  File "asyncio\base_events.py", line 636, in run_until_complete
+  File "asyncio\windows_events.py", line 321, in run_forever
+  File "asyncio\base_events.py", line 603, in run_forever
+  File "asyncio\base_events.py", line 1909, in _run_once
+  File "asyncio\events.py", line 80, in _run
+  File "F:\Vitis\2024.2\vcxx\python\slx\rule.py", line 954, in _async_tee
+    f(line)
+  File "F:\Vitis\2024.2\vcxx\python\slx\rule.py", line 889, in log_out_as_stream_write
+    self._logger.log(SUBPROCESS_OUT, msg.rstrip("\r\n"))
+  File "logging\__init__.py", line 1879, in log
+  File "logging\__init__.py", line 1547, in log
+  File "logging\__init__.py", line 1624, in _log
+  File "logging\__init__.py", line 1634, in handle
+  File "logging\__init__.py", line 1696, in callHandlers
+  File "logging\__init__.py", line 968, in handle
+  File "logging\__init__.py", line 1108, in emit
+Message: '\u274c FAIL: Atom 14 failed validation'
+Arguments: ()
+=================================
+=== ATOM 15 VALIDATION ===
+Region: (687,351) to (717,381)
+dx=0 dy=0
+xidx=0 yidx=0
+proj_offset=0 (max allowed=1)
+cols=31 rows=31
+Required pixels=961
+Available pixels=1
+MAX_LOCAL: 31x31
+--- Logging error ---
+Traceback (most recent call last):
+  File "logging\__init__.py", line 1103, in emit
+  File "F:\Vitis\2024.2\vcxx\libexec\slxcmd.py", line 22, in write
+    res = self.stream.write(data)
+UnicodeEncodeError: 'gbk' codec can't encode character '\u274c' in position 0: illegal multibyte sequence
+Call stack:
+  File "F:\Vitis\2024.2\vcxx\libexec\slxcmd.py", line 38, in <module>
+    sys.exit(slx.main.main())
+  File "F:\Vitis\2024.2\vcxx\python\slx\main.py", line 138, in main
+    return args.func(args, logger)
+  File "F:\Vitis\2024.2\vcxx\python\slx\code_analyzer.py", line 572, in cmd_code_analyzer
+    common.run(
+  File "F:\Vitis\2024.2\vcxx\python\slx\common.py", line 44, in run
+    return asyncio.get_event_loop().run_until_complete(coroutine)
+  File "asyncio\base_events.py", line 636, in run_until_complete
+  File "asyncio\windows_events.py", line 321, in run_forever
+  File "asyncio\base_events.py", line 603, in run_forever
+  File "asyncio\base_events.py", line 1909, in _run_once
+  File "asyncio\events.py", line 80, in _run
+  File "F:\Vitis\2024.2\vcxx\python\slx\rule.py", line 954, in _async_tee
+    f(line)
+  File "F:\Vitis\2024.2\vcxx\python\slx\rule.py", line 889, in log_out_as_stream_write
+    self._logger.log(SUBPROCESS_OUT, msg.rstrip("\r\n"))
+  File "logging\__init__.py", line 1879, in log
+  File "logging\__init__.py", line 1547, in log
+  File "logging\__init__.py", line 1624, in _log
+  File "logging\__init__.py", line 1634, in handle
+  File "logging\__init__.py", line 1696, in callHandlers
+  File "logging\__init__.py", line 968, in handle
+  File "logging\__init__.py", line 1108, in emit
+Message: '\u274c FAIL: Required pixels (961) > available (1)'
+Arguments: ()
+--- Logging error ---
+Traceback (most recent call last):
+  File "logging\__init__.py", line 1103, in emit
+  File "F:\Vitis\2024.2\vcxx\libexec\slxcmd.py", line 22, in write
+    res = self.stream.write(data)
+UnicodeEncodeError: 'gbk' codec can't encode character '\u274c' in position 0: illegal multibyte sequence
+Call stack:
+  File "F:\Vitis\2024.2\vcxx\libexec\slxcmd.py", line 38, in <module>
+    sys.exit(slx.main.main())
+  File "F:\Vitis\2024.2\vcxx\python\slx\main.py", line 138, in main
+    return args.func(args, logger)
+  File "F:\Vitis\2024.2\vcxx\python\slx\code_analyzer.py", line 572, in cmd_code_analyzer
+    common.run(
+  File "F:\Vitis\2024.2\vcxx\python\slx\common.py", line 44, in run
+    return asyncio.get_event_loop().run_until_complete(coroutine)
+  File "asyncio\base_events.py", line 636, in run_until_complete
+  File "asyncio\windows_events.py", line 321, in run_forever
+  File "asyncio\base_events.py", line 603, in run_forever
+  File "asyncio\base_events.py", line 1909, in _run_once
+  File "asyncio\events.py", line 80, in _run
+  File "F:\Vitis\2024.2\vcxx\python\slx\rule.py", line 954, in _async_tee
+    f(line)
+  File "F:\Vitis\2024.2\vcxx\python\slx\rule.py", line 889, in log_out_as_stream_write
+    self._logger.log(SUBPROCESS_OUT, msg.rstrip("\r\n"))
+  File "logging\__init__.py", line 1879, in log
+  File "logging\__init__.py", line 1547, in log
+  File "logging\__init__.py", line 1624, in _log
+  File "logging\__init__.py", line 1634, in handle
+  File "logging\__init__.py", line 1696, in callHandlers
+  File "logging\__init__.py", line 968, in handle
+  File "logging\__init__.py", line 1108, in emit
+Message: '\u274c FAIL: Atom 15 failed validation'
+Arguments: ()
+=================================
+=== ATOM 16 VALIDATION ===
+Region: (687,370) to (717,400)
+dx=0 dy=0
+xidx=0 yidx=0
+proj_offset=0 (max allowed=1)
+cols=31 rows=31
+Required pixels=961
+Available pixels=1
+MAX_LOCAL: 31x31
+--- Logging error ---
+Traceback (most recent call last):
+  File "logging\__init__.py", line 1103, in emit
+  File "F:\Vitis\2024.2\vcxx\libexec\slxcmd.py", line 22, in write
+    res = self.stream.write(data)
+UnicodeEncodeError: 'gbk' codec can't encode character '\u274c' in position 0: illegal multibyte sequence
+Call stack:
+  File "F:\Vitis\2024.2\vcxx\libexec\slxcmd.py", line 38, in <module>
+    sys.exit(slx.main.main())
+  File "F:\Vitis\2024.2\vcxx\python\slx\main.py", line 138, in main
+    return args.func(args, logger)
+  File "F:\Vitis\2024.2\vcxx\python\slx\code_analyzer.py", line 572, in cmd_code_analyzer
+    common.run(
+  File "F:\Vitis\2024.2\vcxx\python\slx\common.py", line 44, in run
+    return asyncio.get_event_loop().run_until_complete(coroutine)
+  File "asyncio\base_events.py", line 636, in run_until_complete
+  File "asyncio\windows_events.py", line 321, in run_forever
+  File "asyncio\base_events.py", line 603, in run_forever
+  File "asyncio\base_events.py", line 1909, in _run_once
+  File "asyncio\events.py", line 80, in _run
+  File "F:\Vitis\2024.2\vcxx\python\slx\rule.py", line 954, in _async_tee
+    f(line)
+  File "F:\Vitis\2024.2\vcxx\python\slx\rule.py", line 889, in log_out_as_stream_write
+    self._logger.log(SUBPROCESS_OUT, msg.rstrip("\r\n"))
+  File "logging\__init__.py", line 1879, in log
+  File "logging\__init__.py", line 1547, in log
+  File "logging\__init__.py", line 1624, in _log
+  File "logging\__init__.py", line 1634, in handle
+  File "logging\__init__.py", line 1696, in callHandlers
+  File "logging\__init__.py", line 968, in handle
+  File "logging\__init__.py", line 1108, in emit
+Message: '\u274c FAIL: Required pixels (961) > available (1)'
+Arguments: ()
+--- Logging error ---
+Traceback (most recent call last):
+  File "logging\__init__.py", line 1103, in emit
+  File "F:\Vitis\2024.2\vcxx\libexec\slxcmd.py", line 22, in write
+    res = self.stream.write(data)
+UnicodeEncodeError: 'gbk' codec can't encode character '\u274c' in position 0: illegal multibyte sequence
+Call stack:
+  File "F:\Vitis\2024.2\vcxx\libexec\slxcmd.py", line 38, in <module>
+    sys.exit(slx.main.main())
+  File "F:\Vitis\2024.2\vcxx\python\slx\main.py", line 138, in main
+    return args.func(args, logger)
+  File "F:\Vitis\2024.2\vcxx\python\slx\code_analyzer.py", line 572, in cmd_code_analyzer
+    common.run(
+  File "F:\Vitis\2024.2\vcxx\python\slx\common.py", line 44, in run
+    return asyncio.get_event_loop().run_until_complete(coroutine)
+  File "asyncio\base_events.py", line 636, in run_until_complete
+  File "asyncio\windows_events.py", line 321, in run_forever
+  File "asyncio\base_events.py", line 603, in run_forever
+  File "asyncio\base_events.py", line 1909, in _run_once
+  File "asyncio\events.py", line 80, in _run
+  File "F:\Vitis\2024.2\vcxx\python\slx\rule.py", line 954, in _async_tee
+    f(line)
+  File "F:\Vitis\2024.2\vcxx\python\slx\rule.py", line 889, in log_out_as_stream_write
+    self._logger.log(SUBPROCESS_OUT, msg.rstrip("\r\n"))
+  File "logging\__init__.py", line 1879, in log
+  File "logging\__init__.py", line 1547, in log
+  File "logging\__init__.py", line 1624, in _log
+  File "logging\__init__.py", line 1634, in handle
+  File "logging\__init__.py", line 1696, in callHandlers
+  File "logging\__init__.py", line 968, in handle
+  File "logging\__init__.py", line 1108, in emit
+Message: '\u274c FAIL: Atom 16 failed validation'
+Arguments: ()
+=================================
+=== ATOM 17 VALIDATION ===
+Region: (687,389) to (717,419)
+dx=0 dy=0
+xidx=0 yidx=0
+proj_offset=0 (max allowed=1)
+cols=31 rows=31
+Required pixels=961
+Available pixels=1
+MAX_LOCAL: 31x31
+--- Logging error ---
+Traceback (most recent call last):
+  File "logging\__init__.py", line 1103, in emit
+  File "F:\Vitis\2024.2\vcxx\libexec\slxcmd.py", line 22, in write
+    res = self.stream.write(data)
+UnicodeEncodeError: 'gbk' codec can't encode character '\u274c' in position 0: illegal multibyte sequence
+Call stack:
+  File "F:\Vitis\2024.2\vcxx\libexec\slxcmd.py", line 38, in <module>
+    sys.exit(slx.main.main())
+  File "F:\Vitis\2024.2\vcxx\python\slx\main.py", line 138, in main
+    return args.func(args, logger)
+  File "F:\Vitis\2024.2\vcxx\python\slx\code_analyzer.py", line 572, in cmd_code_analyzer
+    common.run(
+  File "F:\Vitis\2024.2\vcxx\python\slx\common.py", line 44, in run
+    return asyncio.get_event_loop().run_until_complete(coroutine)
+  File "asyncio\base_events.py", line 636, in run_until_complete
+  File "asyncio\windows_events.py", line 321, in run_forever
+  File "asyncio\base_events.py", line 603, in run_forever
+  File "asyncio\base_events.py", line 1909, in _run_once
+  File "asyncio\events.py", line 80, in _run
+  File "F:\Vitis\2024.2\vcxx\python\slx\rule.py", line 954, in _async_tee
+    f(line)
+  File "F:\Vitis\2024.2\vcxx\python\slx\rule.py", line 889, in log_out_as_stream_write
+    self._logger.log(SUBPROCESS_OUT, msg.rstrip("\r\n"))
+  File "logging\__init__.py", line 1879, in log
+  File "logging\__init__.py", line 1547, in log
+  File "logging\__init__.py", line 1624, in _log
+  File "logging\__init__.py", line 1634, in handle
+  File "logging\__init__.py", line 1696, in callHandlers
+  File "logging\__init__.py", line 968, in handle
+  File "logging\__init__.py", line 1108, in emit
+Message: '\u274c FAIL: Required pixels (961) > available (1)'
+Arguments: ()
+--- Logging error ---
+Traceback (most recent call last):
+  File "logging\__init__.py", line 1103, in emit
+  File "F:\Vitis\2024.2\vcxx\libexec\slxcmd.py", line 22, in write
+    res = self.stream.write(data)
+UnicodeEncodeError: 'gbk' codec can't encode character '\u274c' in position 0: illegal multibyte sequence
+Call stack:
+  File "F:\Vitis\2024.2\vcxx\libexec\slxcmd.py", line 38, in <module>
+    sys.exit(slx.main.main())
+  File "F:\Vitis\2024.2\vcxx\python\slx\main.py", line 138, in main
+    return args.func(args, logger)
+  File "F:\Vitis\2024.2\vcxx\python\slx\code_analyzer.py", line 572, in cmd_code_analyzer
+    common.run(
+  File "F:\Vitis\2024.2\vcxx\python\slx\common.py", line 44, in run
+    return asyncio.get_event_loop().run_until_complete(coroutine)
+  File "asyncio\base_events.py", line 636, in run_until_complete
+  File "asyncio\windows_events.py", line 321, in run_forever
+  File "asyncio\base_events.py", line 603, in run_forever
+  File "asyncio\base_events.py", line 1909, in _run_once
+  File "asyncio\events.py", line 80, in _run
+  File "F:\Vitis\2024.2\vcxx\python\slx\rule.py", line 954, in _async_tee
+    f(line)
+  File "F:\Vitis\2024.2\vcxx\python\slx\rule.py", line 889, in log_out_as_stream_write
+    self._logger.log(SUBPROCESS_OUT, msg.rstrip("\r\n"))
+  File "logging\__init__.py", line 1879, in log
+  File "logging\__init__.py", line 1547, in log
+  File "logging\__init__.py", line 1624, in _log
+  File "logging\__init__.py", line 1634, in handle
+  File "logging\__init__.py", line 1696, in callHandlers
+  File "logging\__init__.py", line 968, in handle
+  File "logging\__init__.py", line 1108, in emit
+Message: '\u274c FAIL: Atom 17 failed validation'
+Arguments: ()
+=================================
+=== ATOM 18 VALIDATION ===
+Region: (688,409) to (718,439)
+dx=0 dy=0
+xidx=0 yidx=0
+proj_offset=0 (max allowed=1)
+cols=31 rows=31
+Required pixels=961
+Available pixels=1
+MAX_LOCAL: 31x31
+--- Logging error ---
+Traceback (most recent call last):
+  File "logging\__init__.py", line 1103, in emit
+  File "F:\Vitis\2024.2\vcxx\libexec\slxcmd.py", line 22, in write
+    res = self.stream.write(data)
+UnicodeEncodeError: 'gbk' codec can't encode character '\u274c' in position 0: illegal multibyte sequence
+Call stack:
+  File "F:\Vitis\2024.2\vcxx\libexec\slxcmd.py", line 38, in <module>
+    sys.exit(slx.main.main())
+  File "F:\Vitis\2024.2\vcxx\python\slx\main.py", line 138, in main
+    return args.func(args, logger)
+  File "F:\Vitis\2024.2\vcxx\python\slx\code_analyzer.py", line 572, in cmd_code_analyzer
+    common.run(
+  File "F:\Vitis\2024.2\vcxx\python\slx\common.py", line 44, in run
+    return asyncio.get_event_loop().run_until_complete(coroutine)
+  File "asyncio\base_events.py", line 636, in run_until_complete
+  File "asyncio\windows_events.py", line 321, in run_forever
+  File "asyncio\base_events.py", line 603, in run_forever
+  File "asyncio\base_events.py", line 1909, in _run_once
+  File "asyncio\events.py", line 80, in _run
+  File "F:\Vitis\2024.2\vcxx\python\slx\rule.py", line 954, in _async_tee
+    f(line)
+  File "F:\Vitis\2024.2\vcxx\python\slx\rule.py", line 889, in log_out_as_stream_write
+    self._logger.log(SUBPROCESS_OUT, msg.rstrip("\r\n"))
+  File "logging\__init__.py", line 1879, in log
+  File "logging\__init__.py", line 1547, in log
+  File "logging\__init__.py", line 1624, in _log
+  File "logging\__init__.py", line 1634, in handle
+  File "logging\__init__.py", line 1696, in callHandlers
+  File "logging\__init__.py", line 968, in handle
+  File "logging\__init__.py", line 1108, in emit
+Message: '\u274c FAIL: Required pixels (961) > available (1)'
+Arguments: ()
+--- Logging error ---
+Traceback (most recent call last):
+  File "logging\__init__.py", line 1103, in emit
+  File "F:\Vitis\2024.2\vcxx\libexec\slxcmd.py", line 22, in write
+    res = self.stream.write(data)
+UnicodeEncodeError: 'gbk' codec can't encode character '\u274c' in position 0: illegal multibyte sequence
+Call stack:
+  File "F:\Vitis\2024.2\vcxx\libexec\slxcmd.py", line 38, in <module>
+    sys.exit(slx.main.main())
+  File "F:\Vitis\2024.2\vcxx\python\slx\main.py", line 138, in main
+    return args.func(args, logger)
+  File "F:\Vitis\2024.2\vcxx\python\slx\code_analyzer.py", line 572, in cmd_code_analyzer
+    common.run(
+  File "F:\Vitis\2024.2\vcxx\python\slx\common.py", line 44, in run
+    return asyncio.get_event_loop().run_until_complete(coroutine)
+  File "asyncio\base_events.py", line 636, in run_until_complete
+  File "asyncio\windows_events.py", line 321, in run_forever
+  File "asyncio\base_events.py", line 603, in run_forever
+  File "asyncio\base_events.py", line 1909, in _run_once
+  File "asyncio\events.py", line 80, in _run
+  File "F:\Vitis\2024.2\vcxx\python\slx\rule.py", line 954, in _async_tee
+    f(line)
+  File "F:\Vitis\2024.2\vcxx\python\slx\rule.py", line 889, in log_out_as_stream_write
+    self._logger.log(SUBPROCESS_OUT, msg.rstrip("\r\n"))
+  File "logging\__init__.py", line 1879, in log
+  File "logging\__init__.py", line 1547, in log
+  File "logging\__init__.py", line 1624, in _log
+  File "logging\__init__.py", line 1634, in handle
+  File "logging\__init__.py", line 1696, in callHandlers
+  File "logging\__init__.py", line 968, in handle
+  File "logging\__init__.py", line 1108, in emit
+Message: '\u274c FAIL: Atom 18 failed validation'
+Arguments: ()
+=================================
+=== ATOM 19 VALIDATION ===
+Region: (688,428) to (718,458)
+dx=0 dy=0
+xidx=0 yidx=0
+proj_offset=0 (max allowed=1)
+cols=31 rows=31
+Required pixels=961
+Available pixels=1
+MAX_LOCAL: 31x31
+--- Logging error ---
+Traceback (most recent call last):
+  File "logging\__init__.py", line 1103, in emit
+  File "F:\Vitis\2024.2\vcxx\libexec\slxcmd.py", line 22, in write
+    res = self.stream.write(data)
+UnicodeEncodeError: 'gbk' codec can't encode character '\u274c' in position 0: illegal multibyte sequence
+Call stack:
+  File "F:\Vitis\2024.2\vcxx\libexec\slxcmd.py", line 38, in <module>
+    sys.exit(slx.main.main())
+  File "F:\Vitis\2024.2\vcxx\python\slx\main.py", line 138, in main
+    return args.func(args, logger)
+  File "F:\Vitis\2024.2\vcxx\python\slx\code_analyzer.py", line 572, in cmd_code_analyzer
+    common.run(
+  File "F:\Vitis\2024.2\vcxx\python\slx\common.py", line 44, in run
+    return asyncio.get_event_loop().run_until_complete(coroutine)
+  File "asyncio\base_events.py", line 636, in run_until_complete
+  File "asyncio\windows_events.py", line 321, in run_forever
+  File "asyncio\base_events.py", line 603, in run_forever
+  File "asyncio\base_events.py", line 1909, in _run_once
+  File "asyncio\events.py", line 80, in _run
+  File "F:\Vitis\2024.2\vcxx\python\slx\rule.py", line 954, in _async_tee
+    f(line)
+  File "F:\Vitis\2024.2\vcxx\python\slx\rule.py", line 889, in log_out_as_stream_write
+    self._logger.log(SUBPROCESS_OUT, msg.rstrip("\r\n"))
+  File "logging\__init__.py", line 1879, in log
+  File "logging\__init__.py", line 1547, in log
+  File "logging\__init__.py", line 1624, in _log
+  File "logging\__init__.py", line 1634, in handle
+  File "logging\__init__.py", line 1696, in callHandlers
+  File "logging\__init__.py", line 968, in handle
+  File "logging\__init__.py", line 1108, in emit
+Message: '\u274c FAIL: Required pixels (961) > available (1)'
+Arguments: ()
+--- Logging error ---
+Traceback (most recent call last):
+  File "logging\__init__.py", line 1103, in emit
+  File "F:\Vitis\2024.2\vcxx\libexec\slxcmd.py", line 22, in write
+    res = self.stream.write(data)
+UnicodeEncodeError: 'gbk' codec can't encode character '\u274c' in position 0: illegal multibyte sequence
+Call stack:
+  File "F:\Vitis\2024.2\vcxx\libexec\slxcmd.py", line 38, in <module>
+    sys.exit(slx.main.main())
+  File "F:\Vitis\2024.2\vcxx\python\slx\main.py", line 138, in main
+    return args.func(args, logger)
+  File "F:\Vitis\2024.2\vcxx\python\slx\code_analyzer.py", line 572, in cmd_code_analyzer
+    common.run(
+  File "F:\Vitis\2024.2\vcxx\python\slx\common.py", line 44, in run
+    return asyncio.get_event_loop().run_until_complete(coroutine)
+  File "asyncio\base_events.py", line 636, in run_until_complete
+  File "asyncio\windows_events.py", line 321, in run_forever
+  File "asyncio\base_events.py", line 603, in run_forever
+  File "asyncio\base_events.py", line 1909, in _run_once
+  File "asyncio\events.py", line 80, in _run
+  File "F:\Vitis\2024.2\vcxx\python\slx\rule.py", line 954, in _async_tee
+    f(line)
+  File "F:\Vitis\2024.2\vcxx\python\slx\rule.py", line 889, in log_out_as_stream_write
+    self._logger.log(SUBPROCESS_OUT, msg.rstrip("\r\n"))
+  File "logging\__init__.py", line 1879, in log
+  File "logging\__init__.py", line 1547, in log
+  File "logging\__init__.py", line 1624, in _log
+  File "logging\__init__.py", line 1634, in handle
+  File "logging\__init__.py", line 1696, in callHandlers
+  File "logging\__init__.py", line 968, in handle
+  File "logging\__init__.py", line 1108, in emit
+Message: '\u274c FAIL: Atom 19 failed validation'
+Arguments: ()
+=================================
+=== ATOM 20 VALIDATION ===
+Region: (689,448) to (719,478)
+dx=0 dy=0
+xidx=0 yidx=0
+proj_offset=0 (max allowed=1)
+cols=31 rows=31
+Required pixels=961
+Available pixels=1
+MAX_LOCAL: 31x31
+--- Logging error ---
+Traceback (most recent call last):
+  File "logging\__init__.py", line 1103, in emit
+  File "F:\Vitis\2024.2\vcxx\libexec\slxcmd.py", line 22, in write
+    res = self.stream.write(data)
+UnicodeEncodeError: 'gbk' codec can't encode character '\u274c' in position 0: illegal multibyte sequence
+Call stack:
+  File "F:\Vitis\2024.2\vcxx\libexec\slxcmd.py", line 38, in <module>
+    sys.exit(slx.main.main())
+  File "F:\Vitis\2024.2\vcxx\python\slx\main.py", line 138, in main
+    return args.func(args, logger)
+  File "F:\Vitis\2024.2\vcxx\python\slx\code_analyzer.py", line 572, in cmd_code_analyzer
+    common.run(
+  File "F:\Vitis\2024.2\vcxx\python\slx\common.py", line 44, in run
+    return asyncio.get_event_loop().run_until_complete(coroutine)
+  File "asyncio\base_events.py", line 636, in run_until_complete
+  File "asyncio\windows_events.py", line 321, in run_forever
+  File "asyncio\base_events.py", line 603, in run_forever
+  File "asyncio\base_events.py", line 1909, in _run_once
+  File "asyncio\events.py", line 80, in _run
+  File "F:\Vitis\2024.2\vcxx\python\slx\rule.py", line 954, in _async_tee
+    f(line)
+  File "F:\Vitis\2024.2\vcxx\python\slx\rule.py", line 889, in log_out_as_stream_write
+    self._logger.log(SUBPROCESS_OUT, msg.rstrip("\r\n"))
+  File "logging\__init__.py", line 1879, in log
+  File "logging\__init__.py", line 1547, in log
+  File "logging\__init__.py", line 1624, in _log
+  File "logging\__init__.py", line 1634, in handle
+  File "logging\__init__.py", line 1696, in callHandlers
+  File "logging\__init__.py", line 968, in handle
+  File "logging\__init__.py", line 1108, in emit
+Message: '\u274c FAIL: Required pixels (961) > available (1)'
+Arguments: ()
+--- Logging error ---
+Traceback (most recent call last):
+  File "logging\__init__.py", line 1103, in emit
+  File "F:\Vitis\2024.2\vcxx\libexec\slxcmd.py", line 22, in write
+    res = self.stream.write(data)
+UnicodeEncodeError: 'gbk' codec can't encode character '\u274c' in position 0: illegal multibyte sequence
+Call stack:
+  File "F:\Vitis\2024.2\vcxx\libexec\slxcmd.py", line 38, in <module>
+    sys.exit(slx.main.main())
+  File "F:\Vitis\2024.2\vcxx\python\slx\main.py", line 138, in main
+    return args.func(args, logger)
+  File "F:\Vitis\2024.2\vcxx\python\slx\code_analyzer.py", line 572, in cmd_code_analyzer
+    common.run(
+  File "F:\Vitis\2024.2\vcxx\python\slx\common.py", line 44, in run
+    return asyncio.get_event_loop().run_until_complete(coroutine)
+  File "asyncio\base_events.py", line 636, in run_until_complete
+  File "asyncio\windows_events.py", line 321, in run_forever
+  File "asyncio\base_events.py", line 603, in run_forever
+  File "asyncio\base_events.py", line 1909, in _run_once
+  File "asyncio\events.py", line 80, in _run
+  File "F:\Vitis\2024.2\vcxx\python\slx\rule.py", line 954, in _async_tee
+    f(line)
+  File "F:\Vitis\2024.2\vcxx\python\slx\rule.py", line 889, in log_out_as_stream_write
+    self._logger.log(SUBPROCESS_OUT, msg.rstrip("\r\n"))
+  File "logging\__init__.py", line 1879, in log
+  File "logging\__init__.py", line 1547, in log
+  File "logging\__init__.py", line 1624, in _log
+  File "logging\__init__.py", line 1634, in handle
+  File "logging\__init__.py", line 1696, in callHandlers
+  File "logging\__init__.py", line 968, in handle
+  File "logging\__init__.py", line 1108, in emit
+Message: '\u274c FAIL: Atom 20 failed validation'
+Arguments: ()
+=================================
+=== ATOM 21 VALIDATION ===
+Region: (689,467) to (719,497)
+dx=0 dy=0
+xidx=0 yidx=0
+proj_offset=0 (max allowed=1)
+cols=31 rows=31
+Required pixels=961
+Available pixels=1
+MAX_LOCAL: 31x31
+--- Logging error ---
+Traceback (most recent call last):
+  File "logging\__init__.py", line 1103, in emit
+  File "F:\Vitis\2024.2\vcxx\libexec\slxcmd.py", line 22, in write
+    res = self.stream.write(data)
+UnicodeEncodeError: 'gbk' codec can't encode character '\u274c' in position 0: illegal multibyte sequence
+Call stack:
+  File "F:\Vitis\2024.2\vcxx\libexec\slxcmd.py", line 38, in <module>
+    sys.exit(slx.main.main())
+  File "F:\Vitis\2024.2\vcxx\python\slx\main.py", line 138, in main
+    return args.func(args, logger)
+  File "F:\Vitis\2024.2\vcxx\python\slx\code_analyzer.py", line 572, in cmd_code_analyzer
+    common.run(
+  File "F:\Vitis\2024.2\vcxx\python\slx\common.py", line 44, in run
+    return asyncio.get_event_loop().run_until_complete(coroutine)
+  File "asyncio\base_events.py", line 636, in run_until_complete
+  File "asyncio\windows_events.py", line 321, in run_forever
+  File "asyncio\base_events.py", line 603, in run_forever
+  File "asyncio\base_events.py", line 1909, in _run_once
+  File "asyncio\events.py", line 80, in _run
+  File "F:\Vitis\2024.2\vcxx\python\slx\rule.py", line 954, in _async_tee
+    f(line)
+  File "F:\Vitis\2024.2\vcxx\python\slx\rule.py", line 889, in log_out_as_stream_write
+    self._logger.log(SUBPROCESS_OUT, msg.rstrip("\r\n"))
+  File "logging\__init__.py", line 1879, in log
+  File "logging\__init__.py", line 1547, in log
+  File "logging\__init__.py", line 1624, in _log
+  File "logging\__init__.py", line 1634, in handle
+  File "logging\__init__.py", line 1696, in callHandlers
+  File "logging\__init__.py", line 968, in handle
+  File "logging\__init__.py", line 1108, in emit
+Message: '\u274c FAIL: Required pixels (961) > available (1)'
+Arguments: ()
+--- Logging error ---
+Traceback (most recent call last):
+  File "logging\__init__.py", line 1103, in emit
+  File "F:\Vitis\2024.2\vcxx\libexec\slxcmd.py", line 22, in write
+    res = self.stream.write(data)
+UnicodeEncodeError: 'gbk' codec can't encode character '\u274c' in position 0: illegal multibyte sequence
+Call stack:
+  File "F:\Vitis\2024.2\vcxx\libexec\slxcmd.py", line 38, in <module>
+    sys.exit(slx.main.main())
+  File "F:\Vitis\2024.2\vcxx\python\slx\main.py", line 138, in main
+    return args.func(args, logger)
+  File "F:\Vitis\2024.2\vcxx\python\slx\code_analyzer.py", line 572, in cmd_code_analyzer
+    common.run(
+  File "F:\Vitis\2024.2\vcxx\python\slx\common.py", line 44, in run
+    return asyncio.get_event_loop().run_until_complete(coroutine)
+  File "asyncio\base_events.py", line 636, in run_until_complete
+  File "asyncio\windows_events.py", line 321, in run_forever
+  File "asyncio\base_events.py", line 603, in run_forever
+  File "asyncio\base_events.py", line 1909, in _run_once
+  File "asyncio\events.py", line 80, in _run
+  File "F:\Vitis\2024.2\vcxx\python\slx\rule.py", line 954, in _async_tee
+    f(line)
+  File "F:\Vitis\2024.2\vcxx\python\slx\rule.py", line 889, in log_out_as_stream_write
+    self._logger.log(SUBPROCESS_OUT, msg.rstrip("\r\n"))
+  File "logging\__init__.py", line 1879, in log
+  File "logging\__init__.py", line 1547, in log
+  File "logging\__init__.py", line 1624, in _log
+  File "logging\__init__.py", line 1634, in handle
+  File "logging\__init__.py", line 1696, in callHandlers
+  File "logging\__init__.py", line 968, in handle
+  File "logging\__init__.py", line 1108, in emit
+Message: '\u274c FAIL: Atom 21 failed validation'
+Arguments: ()
+=================================
+=== ATOM 22 VALIDATION ===
+Region: (690,486) to (720,516)
+dx=0 dy=0
+xidx=0 yidx=0
+proj_offset=0 (max allowed=1)
+cols=31 rows=31
+Required pixels=961
+Available pixels=1
+MAX_LOCAL: 31x31
+--- Logging error ---
+Traceback (most recent call last):
+  File "logging\__init__.py", line 1103, in emit
+  File "F:\Vitis\2024.2\vcxx\libexec\slxcmd.py", line 22, in write
+    res = self.stream.write(data)
+UnicodeEncodeError: 'gbk' codec can't encode character '\u274c' in position 0: illegal multibyte sequence
+Call stack:
+  File "F:\Vitis\2024.2\vcxx\libexec\slxcmd.py", line 38, in <module>
+    sys.exit(slx.main.main())
+  File "F:\Vitis\2024.2\vcxx\python\slx\main.py", line 138, in main
+    return args.func(args, logger)
+  File "F:\Vitis\2024.2\vcxx\python\slx\code_analyzer.py", line 572, in cmd_code_analyzer
+    common.run(
+  File "F:\Vitis\2024.2\vcxx\python\slx\common.py", line 44, in run
+    return asyncio.get_event_loop().run_until_complete(coroutine)
+  File "asyncio\base_events.py", line 636, in run_until_complete
+  File "asyncio\windows_events.py", line 321, in run_forever
+  File "asyncio\base_events.py", line 603, in run_forever
+  File "asyncio\base_events.py", line 1909, in _run_once
+  File "asyncio\events.py", line 80, in _run
+  File "F:\Vitis\2024.2\vcxx\python\slx\rule.py", line 954, in _async_tee
+    f(line)
+  File "F:\Vitis\2024.2\vcxx\python\slx\rule.py", line 889, in log_out_as_stream_write
+    self._logger.log(SUBPROCESS_OUT, msg.rstrip("\r\n"))
+  File "logging\__init__.py", line 1879, in log
+  File "logging\__init__.py", line 1547, in log
+  File "logging\__init__.py", line 1624, in _log
+  File "logging\__init__.py", line 1634, in handle
+  File "logging\__init__.py", line 1696, in callHandlers
+  File "logging\__init__.py", line 968, in handle
+  File "logging\__init__.py", line 1108, in emit
+Message: '\u274c FAIL: Required pixels (961) > available (1)'
+Arguments: ()
+--- Logging error ---
+Traceback (most recent call last):
+  File "logging\__init__.py", line 1103, in emit
+  File "F:\Vitis\2024.2\vcxx\libexec\slxcmd.py", line 22, in write
+    res = self.stream.write(data)
+UnicodeEncodeError: 'gbk' codec can't encode character '\u274c' in position 0: illegal multibyte sequence
+Call stack:
+  File "F:\Vitis\2024.2\vcxx\libexec\slxcmd.py", line 38, in <module>
+    sys.exit(slx.main.main())
+  File "F:\Vitis\2024.2\vcxx\python\slx\main.py", line 138, in main
+    return args.func(args, logger)
+  File "F:\Vitis\2024.2\vcxx\python\slx\code_analyzer.py", line 572, in cmd_code_analyzer
+    common.run(
+  File "F:\Vitis\2024.2\vcxx\python\slx\common.py", line 44, in run
+    return asyncio.get_event_loop().run_until_complete(coroutine)
+  File "asyncio\base_events.py", line 636, in run_until_complete
+  File "asyncio\windows_events.py", line 321, in run_forever
+  File "asyncio\base_events.py", line 603, in run_forever
+  File "asyncio\base_events.py", line 1909, in _run_once
+  File "asyncio\events.py", line 80, in _run
+  File "F:\Vitis\2024.2\vcxx\python\slx\rule.py", line 954, in _async_tee
+    f(line)
+  File "F:\Vitis\2024.2\vcxx\python\slx\rule.py", line 889, in log_out_as_stream_write
+    self._logger.log(SUBPROCESS_OUT, msg.rstrip("\r\n"))
+  File "logging\__init__.py", line 1879, in log
+  File "logging\__init__.py", line 1547, in log
+  File "logging\__init__.py", line 1624, in _log
+  File "logging\__init__.py", line 1634, in handle
+  File "logging\__init__.py", line 1696, in callHandlers
+  File "logging\__init__.py", line 968, in handle
+  File "logging\__init__.py", line 1108, in emit
+Message: '\u274c FAIL: Atom 22 failed validation'
+Arguments: ()
+=================================
+=== ATOM 23 VALIDATION ===
+Region: (690,506) to (720,536)
+dx=0 dy=0
+xidx=0 yidx=0
+proj_offset=0 (max allowed=1)
+cols=31 rows=31
+Required pixels=961
+Available pixels=1
+MAX_LOCAL: 31x31
+--- Logging error ---
+Traceback (most recent call last):
+  File "logging\__init__.py", line 1103, in emit
+  File "F:\Vitis\2024.2\vcxx\libexec\slxcmd.py", line 22, in write
+    res = self.stream.write(data)
+UnicodeEncodeError: 'gbk' codec can't encode character '\u274c' in position 0: illegal multibyte sequence
+Call stack:
+  File "F:\Vitis\2024.2\vcxx\libexec\slxcmd.py", line 38, in <module>
+    sys.exit(slx.main.main())
+  File "F:\Vitis\2024.2\vcxx\python\slx\main.py", line 138, in main
+    return args.func(args, logger)
+  File "F:\Vitis\2024.2\vcxx\python\slx\code_analyzer.py", line 572, in cmd_code_analyzer
+    common.run(
+  File "F:\Vitis\2024.2\vcxx\python\slx\common.py", line 44, in run
+    return asyncio.get_event_loop().run_until_complete(coroutine)
+  File "asyncio\base_events.py", line 636, in run_until_complete
+  File "asyncio\windows_events.py", line 321, in run_forever
+  File "asyncio\base_events.py", line 603, in run_forever
+  File "asyncio\base_events.py", line 1909, in _run_once
+  File "asyncio\events.py", line 80, in _run
+  File "F:\Vitis\2024.2\vcxx\python\slx\rule.py", line 954, in _async_tee
+    f(line)
+  File "F:\Vitis\2024.2\vcxx\python\slx\rule.py", line 889, in log_out_as_stream_write
+    self._logger.log(SUBPROCESS_OUT, msg.rstrip("\r\n"))
+  File "logging\__init__.py", line 1879, in log
+  File "logging\__init__.py", line 1547, in log
+  File "logging\__init__.py", line 1624, in _log
+  File "logging\__init__.py", line 1634, in handle
+  File "logging\__init__.py", line 1696, in callHandlers
+  File "logging\__init__.py", line 968, in handle
+  File "logging\__init__.py", line 1108, in emit
+Message: '\u274c FAIL: Required pixels (961) > available (1)'
+Arguments: ()
+--- Logging error ---
+Traceback (most recent call last):
+  File "logging\__init__.py", line 1103, in emit
+  File "F:\Vitis\2024.2\vcxx\libexec\slxcmd.py", line 22, in write
+    res = self.stream.write(data)
+UnicodeEncodeError: 'gbk' codec can't encode character '\u274c' in position 0: illegal multibyte sequence
+Call stack:
+  File "F:\Vitis\2024.2\vcxx\libexec\slxcmd.py", line 38, in <module>
+    sys.exit(slx.main.main())
+  File "F:\Vitis\2024.2\vcxx\python\slx\main.py", line 138, in main
+    return args.func(args, logger)
+  File "F:\Vitis\2024.2\vcxx\python\slx\code_analyzer.py", line 572, in cmd_code_analyzer
+    common.run(
+  File "F:\Vitis\2024.2\vcxx\python\slx\common.py", line 44, in run
+    return asyncio.get_event_loop().run_until_complete(coroutine)
+  File "asyncio\base_events.py", line 636, in run_until_complete
+  File "asyncio\windows_events.py", line 321, in run_forever
+  File "asyncio\base_events.py", line 603, in run_forever
+  File "asyncio\base_events.py", line 1909, in _run_once
+  File "asyncio\events.py", line 80, in _run
+  File "F:\Vitis\2024.2\vcxx\python\slx\rule.py", line 954, in _async_tee
+    f(line)
+  File "F:\Vitis\2024.2\vcxx\python\slx\rule.py", line 889, in log_out_as_stream_write
+    self._logger.log(SUBPROCESS_OUT, msg.rstrip("\r\n"))
+  File "logging\__init__.py", line 1879, in log
+  File "logging\__init__.py", line 1547, in log
+  File "logging\__init__.py", line 1624, in _log
+  File "logging\__init__.py", line 1634, in handle
+  File "logging\__init__.py", line 1696, in callHandlers
+  File "logging\__init__.py", line 968, in handle
+  File "logging\__init__.py", line 1108, in emit
+Message: '\u274c FAIL: Atom 23 failed validation'
+Arguments: ()
+=================================
+=== ATOM 24 VALIDATION ===
+Region: (691,525) to (721,555)
+dx=0 dy=0
+xidx=0 yidx=0
+proj_offset=0 (max allowed=1)
+cols=31 rows=31
+Required pixels=961
+Available pixels=1
+MAX_LOCAL: 31x31
+--- Logging error ---
+Traceback (most recent call last):
+  File "logging\__init__.py", line 1103, in emit
+  File "F:\Vitis\2024.2\vcxx\libexec\slxcmd.py", line 22, in write
+    res = self.stream.write(data)
+UnicodeEncodeError: 'gbk' codec can't encode character '\u274c' in position 0: illegal multibyte sequence
+Call stack:
+  File "F:\Vitis\2024.2\vcxx\libexec\slxcmd.py", line 38, in <module>
+    sys.exit(slx.main.main())
+  File "F:\Vitis\2024.2\vcxx\python\slx\main.py", line 138, in main
+    return args.func(args, logger)
+  File "F:\Vitis\2024.2\vcxx\python\slx\code_analyzer.py", line 572, in cmd_code_analyzer
+    common.run(
+  File "F:\Vitis\2024.2\vcxx\python\slx\common.py", line 44, in run
+    return asyncio.get_event_loop().run_until_complete(coroutine)
+  File "asyncio\base_events.py", line 636, in run_until_complete
+  File "asyncio\windows_events.py", line 321, in run_forever
+  File "asyncio\base_events.py", line 603, in run_forever
+  File "asyncio\base_events.py", line 1909, in _run_once
+  File "asyncio\events.py", line 80, in _run
+  File "F:\Vitis\2024.2\vcxx\python\slx\rule.py", line 954, in _async_tee
+    f(line)
+  File "F:\Vitis\2024.2\vcxx\python\slx\rule.py", line 889, in log_out_as_stream_write
+    self._logger.log(SUBPROCESS_OUT, msg.rstrip("\r\n"))
+  File "logging\__init__.py", line 1879, in log
+  File "logging\__init__.py", line 1547, in log
+  File "logging\__init__.py", line 1624, in _log
+  File "logging\__init__.py", line 1634, in handle
+  File "logging\__init__.py", line 1696, in callHandlers
+  File "logging\__init__.py", line 968, in handle
+  File "logging\__init__.py", line 1108, in emit
+Message: '\u274c FAIL: Required pixels (961) > available (1)'
+Arguments: ()
+--- Logging error ---
+Traceback (most recent call last):
+  File "logging\__init__.py", line 1103, in emit
+  File "F:\Vitis\2024.2\vcxx\libexec\slxcmd.py", line 22, in write
+    res = self.stream.write(data)
+UnicodeEncodeError: 'gbk' codec can't encode character '\u274c' in position 0: illegal multibyte sequence
+Call stack:
+  File "F:\Vitis\2024.2\vcxx\libexec\slxcmd.py", line 38, in <module>
+    sys.exit(slx.main.main())
+  File "F:\Vitis\2024.2\vcxx\python\slx\main.py", line 138, in main
+    return args.func(args, logger)
+  File "F:\Vitis\2024.2\vcxx\python\slx\code_analyzer.py", line 572, in cmd_code_analyzer
+    common.run(
+  File "F:\Vitis\2024.2\vcxx\python\slx\common.py", line 44, in run
+    return asyncio.get_event_loop().run_until_complete(coroutine)
+  File "asyncio\base_events.py", line 636, in run_until_complete
+  File "asyncio\windows_events.py", line 321, in run_forever
+  File "asyncio\base_events.py", line 603, in run_forever
+  File "asyncio\base_events.py", line 1909, in _run_once
+  File "asyncio\events.py", line 80, in _run
+  File "F:\Vitis\2024.2\vcxx\python\slx\rule.py", line 954, in _async_tee
+    f(line)
+  File "F:\Vitis\2024.2\vcxx\python\slx\rule.py", line 889, in log_out_as_stream_write
+    self._logger.log(SUBPROCESS_OUT, msg.rstrip("\r\n"))
+  File "logging\__init__.py", line 1879, in log
+  File "logging\__init__.py", line 1547, in log
+  File "logging\__init__.py", line 1624, in _log
+  File "logging\__init__.py", line 1634, in handle
+  File "logging\__init__.py", line 1696, in callHandlers
+  File "logging\__init__.py", line 968, in handle
+  File "logging\__init__.py", line 1108, in emit
+Message: '\u274c FAIL: Atom 24 failed validation'
+Arguments: ()
+=================================
+=== ATOM 25 VALIDATION ===
+Region: (691,545) to (721,575)
+dx=0 dy=0
+xidx=0 yidx=0
+proj_offset=0 (max allowed=1)
+cols=31 rows=31
+Required pixels=961
+Available pixels=1
+MAX_LOCAL: 31x31
+--- Logging error ---
+Traceback (most recent call last):
+  File "logging\__init__.py", line 1103, in emit
+  File "F:\Vitis\2024.2\vcxx\libexec\slxcmd.py", line 22, in write
+    res = self.stream.write(data)
+UnicodeEncodeError: 'gbk' codec can't encode character '\u274c' in position 0: illegal multibyte sequence
+Call stack:
+  File "F:\Vitis\2024.2\vcxx\libexec\slxcmd.py", line 38, in <module>
+    sys.exit(slx.main.main())
+  File "F:\Vitis\2024.2\vcxx\python\slx\main.py", line 138, in main
+    return args.func(args, logger)
+  File "F:\Vitis\2024.2\vcxx\python\slx\code_analyzer.py", line 572, in cmd_code_analyzer
+    common.run(
+  File "F:\Vitis\2024.2\vcxx\python\slx\common.py", line 44, in run
+    return asyncio.get_event_loop().run_until_complete(coroutine)
+  File "asyncio\base_events.py", line 636, in run_until_complete
+  File "asyncio\windows_events.py", line 321, in run_forever
+  File "asyncio\base_events.py", line 603, in run_forever
+  File "asyncio\base_events.py", line 1909, in _run_once
+  File "asyncio\events.py", line 80, in _run
+  File "F:\Vitis\2024.2\vcxx\python\slx\rule.py", line 954, in _async_tee
+    f(line)
+  File "F:\Vitis\2024.2\vcxx\python\slx\rule.py", line 889, in log_out_as_stream_write
+    self._logger.log(SUBPROCESS_OUT, msg.rstrip("\r\n"))
+  File "logging\__init__.py", line 1879, in log
+  File "logging\__init__.py", line 1547, in log
+  File "logging\__init__.py", line 1624, in _log
+  File "logging\__init__.py", line 1634, in handle
+  File "logging\__init__.py", line 1696, in callHandlers
+  File "logging\__init__.py", line 968, in handle
+  File "logging\__init__.py", line 1108, in emit
+Message: '\u274c FAIL: Required pixels (961) > available (1)'
+Arguments: ()
+--- Logging error ---
+Traceback (most recent call last):
+  File "logging\__init__.py", line 1103, in emit
+  File "F:\Vitis\2024.2\vcxx\libexec\slxcmd.py", line 22, in write
+    res = self.stream.write(data)
+UnicodeEncodeError: 'gbk' codec can't encode character '\u274c' in position 0: illegal multibyte sequence
+Call stack:

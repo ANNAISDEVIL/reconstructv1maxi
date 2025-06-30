@@ -1,0 +1,504 @@
+  **** HLS Build v2024.2 5238294
+INFO: [HLS 200-2005] Using work_dir F:/LMU/quantumMA/opimization/reconstructv1maxi/hls_component/reconstruct 
+INFO: [HLS 200-1505] Using default flow_target 'vivado'
+Resolution: For help on HLS 200-1505 see docs.xilinx.com/access/sources/dita/topic?Doc_Version=2024.2%20English&url=ug1448-hls-guidance&resourceid=200-1505.html
+INFO: [HLS 200-1465] Applying ini 'syn.file=F:/LMU/quantumMA/opimization/reconstructv1maxi/image_analysis.cpp' from F:/LMU/quantumMA/opimization/reconstructv1maxi/hls_component/hls_config.cfg(13)
+INFO: [HLS 200-10] Adding design file 'F:/LMU/quantumMA/opimization/reconstructv1maxi/image_analysis.cpp' to the project
+INFO: [HLS 200-1465] Applying ini 'syn.file=F:/LMU/quantumMA/opimization/reconstructv1maxi/image_analysis.hpp' from F:/LMU/quantumMA/opimization/reconstructv1maxi/hls_component/hls_config.cfg(14)
+INFO: [HLS 200-10] Adding design file 'F:/LMU/quantumMA/opimization/reconstructv1maxi/image_analysis.hpp' to the project
+INFO: [HLS 200-1465] Applying ini 'tb.file=F:/LMU/quantumMA/opimization/reconstructv1maxi/test.cpp' from F:/LMU/quantumMA/opimization/reconstructv1maxi/hls_component/hls_config.cfg(10)
+INFO: [HLS 200-10] Adding test bench file 'F:/LMU/quantumMA/opimization/reconstructv1maxi/test.cpp' to the project
+INFO: [HLS 200-1465] Applying ini 'tb.file=F:/LMU/quantumMA/opimization/reconstructv1maxi/fullImage_output.txt' from F:/LMU/quantumMA/opimization/reconstructv1maxi/hls_component/hls_config.cfg(11)
+INFO: [HLS 200-10] Adding test bench file 'F:/LMU/quantumMA/opimization/reconstructv1maxi/fullImage_output.txt' to the project
+INFO: [HLS 200-1465] Applying ini 'tb.file=F:/LMU/quantumMA/opimization/reconstructv1maxi/restoutput.txt' from F:/LMU/quantumMA/opimization/reconstructv1maxi/hls_component/hls_config.cfg(12)
+INFO: [HLS 200-10] Adding test bench file 'F:/LMU/quantumMA/opimization/reconstructv1maxi/restoutput.txt' to the project
+INFO: [HLS 200-1465] Applying ini 'syn.top=reconstruct' from F:/LMU/quantumMA/opimization/reconstructv1maxi/hls_component/hls_config.cfg(7)
+INFO: [HLS 200-1465] Applying ini 'flow_target=vivado' from F:/LMU/quantumMA/opimization/reconstructv1maxi/hls_component/hls_config.cfg(4)
+INFO: [HLS 200-1505] Using flow_target 'vivado'
+Resolution: For help on HLS 200-1505 see docs.xilinx.com/access/sources/dita/topic?Doc_Version=2024.2%20English&url=ug1448-hls-guidance&resourceid=200-1505.html
+INFO: [HLS 200-1465] Applying ini 'part=xczu49dr-ffvf1760-2-e' from F:/LMU/quantumMA/opimization/reconstructv1maxi/hls_component/hls_config.cfg(1)
+INFO: [HLS 200-1611] Setting target device to 'xczu49dr-ffvf1760-2-e'
+INFO: [HLS 200-1465] Applying ini 'csim.clean=1' from F:/LMU/quantumMA/opimization/reconstructv1maxi/hls_component/hls_config.cfg(8)
+INFO: [HLS 200-1465] Applying ini 'csim.code_analyzer=1' from F:/LMU/quantumMA/opimization/reconstructv1maxi/hls_component/hls_config.cfg(9)
+INFO: [HLS 200-1465] Applying ini 'package.output.format=ip_catalog' from F:/LMU/quantumMA/opimization/reconstructv1maxi/hls_component/hls_config.cfg(5)
+INFO: [SIM 211-200] Executing Code Analyzer instead of classic HLS C simulation
+INFO: [SIM 211-200] Cleaning
+slxcmd:0:0: info: [ Cleaned build and execution files ]
+INFO: [HLS 211-200] Compiling source code ../image_analysis.cpp as hardware code with instrumentation
+INFO: [HLS 211-200] Compiling source code F:/LMU/quantumMA/opimization/reconstructv1maxi/test.cpp as test bench code with instrumentation
+INFO: [HLS 211-200] Compiling source code ../image_analysis.cpp as test bench code with instrumentation
+INFO: [HLS 211-200] Linking hardware code
+INFO: [HLS 211-200] Transforming hardware bitcode
+INFO: [HLS 211-200] Linking executable
+INFO: [HLS 211-200] Computing HLS IR Information
+INFO: [HLS 211-200] Determining source code dependencies
+INFO: [SIM 211-200] Running executable
+#1 x_int 38 x_min 23 x_max 53 y_int 218 y_min 203 y_max 233
+  -- curr idx 0 xmin 23 ymin 203
+  ---- proj_offset 0 idx 186 xmin 23 ymin 203 i 6 j 0 imageProjs_local 0 fullImage 196
+  ---- proj_offset 0 idx 187 xmin 23 ymin 203 i 6 j 1 imageProjs_local 0 fullImage 198
+  ---- proj_offset 0 idx 188 xmin 23 ymin 203 i 6 j 2 imageProjs_local 0 fullImage 198
+  ---- proj_offset 0 idx 189 xmin 23 ymin 203 i 6 j 3 imageProjs_local 0 fullImage 197
+  ---- proj_offset 0 idx 190 xmin 23 ymin 203 i 6 j 4 imageProjs_local 0 fullImage 192
+  ---- proj_offset 0 idx 191 xmin 23 ymin 203 i 6 j 5 imageProjs_local 0 fullImage 202
+  ---- proj_offset 0 idx 192 xmin 23 ymin 203 i 6 j 6 imageProjs_local 0.067272 fullImage 192
+  ---- proj_offset 0 idx 193 xmin 23 ymin 203 i 6 j 7 imageProjs_local 0.0730237 fullImage 193
+  ---- proj_offset 0 idx 194 xmin 23 ymin 203 i 6 j 8 imageProjs_local 0.0990797 fullImage 199
+  ---- proj_offset 0 idx 195 xmin 23 ymin 203 i 6 j 9 imageProjs_local 0.0691891 fullImage 201
+  ---- proj_offset 0 idx 196 xmin 23 ymin 203 i 6 j 10 imageProjs_local 0.0438253 fullImage 198
+  ---- proj_offset 0 idx 197 xmin 23 ymin 203 i 6 j 11 imageProjs_local 0.0507204 fullImage 199
+  ---- proj_offset 0 idx 198 xmin 23 ymin 203 i 6 j 12 imageProjs_local 0.0295239 fullImage 200
+  ---- proj_offset 0 idx 199 xmin 23 ymin 203 i 6 j 13 imageProjs_local -0.00579935 fullImage 193
+  ---- proj_offset 0 idx 200 xmin 23 ymin 203 i 6 j 14 imageProjs_local -0.00810784 fullImage 202
+  ---- proj_offset 0 idx 201 xmin 23 ymin 203 i 6 j 15 imageProjs_local -0.0272058 fullImage 203
+  ---- proj_offset 0 idx 202 xmin 23 ymin 203 i 6 j 16 imageProjs_local -0.0347744 fullImage 193
+  ---- proj_offset 0 idx 203 xmin 23 ymin 203 i 6 j 17 imageProjs_local 0.00270398 fullImage 198
+  ---- proj_offset 0 idx 204 xmin 23 ymin 203 i 6 j 18 imageProjs_local 0.0135916 fullImage 211
+  ---- proj_offset 0 idx 205 xmin 23 ymin 203 i 6 j 19 imageProjs_local 0.0323144 fullImage 204
+  ---- proj_offset 0 idx 206 xmin 23 ymin 203 i 6 j 20 imageProjs_local 0.034363 fullImage 198
+  ---- proj_offset 0 idx 207 xmin 23 ymin 203 i 6 j 21 imageProjs_local 0.032132 fullImage 202
+  ---- proj_offset 0 idx 208 xmin 23 ymin 203 i 6 j 22 imageProjs_local 0.0522436 fullImage 198
+  ---- proj_offset 0 idx 209 xmin 23 ymin 203 i 6 j 23 imageProjs_local 0.0689792 fullImage 198
+  ---- proj_offset 0 idx 210 xmin 23 ymin 203 i 6 j 24 imageProjs_local 0.0462574 fullImage 200
+  ---- proj_offset 0 idx 211 xmin 23 ymin 203 i 6 j 25 imageProjs_local 0 fullImage 199
+  ---- proj_offset 0 idx 212 xmin 23 ymin 203 i 6 j 26 imageProjs_local 0 fullImage 203
+  ---- proj_offset 0 idx 213 xmin 23 ymin 203 i 6 j 27 imageProjs_local 0 fullImage 202
+  ---- proj_offset 0 idx 214 xmin 23 ymin 203 i 6 j 28 imageProjs_local 0 fullImage 204
+  ---- proj_offset 0 idx 215 xmin 23 ymin 203 i 6 j 29 imageProjs_local 0 fullImage 207
+  ---- proj_offset 0 idx 216 xmin 23 ymin 203 i 6 j 30 imageProjs_local 0 fullImage 202
+#2 idx 0 curr_localImage 0 curr_fullImage 197
+#3 sum 22412.6 curr_localImage 0 projSumUsed 112.119
+#1 x_int 58 x_min 43 x_max 73 y_int 218 y_min 203 y_max 233
+  -- curr idx 1 xmin 43 ymin 203
+  ---- proj_offset 0 idx 186 xmin 43 ymin 203 i 6 j 0 imageProjs_local 0 fullImage 198
+  ---- proj_offset 0 idx 187 xmin 43 ymin 203 i 6 j 1 imageProjs_local 0 fullImage 202
+  ---- proj_offset 0 idx 188 xmin 43 ymin 203 i 6 j 2 imageProjs_local 0 fullImage 198
+  ---- proj_offset 0 idx 189 xmin 43 ymin 203 i 6 j 3 imageProjs_local 0 fullImage 198
+  ---- proj_offset 0 idx 190 xmin 43 ymin 203 i 6 j 4 imageProjs_local 0 fullImage 200
+  ---- proj_offset 0 idx 191 xmin 43 ymin 203 i 6 j 5 imageProjs_local 0 fullImage 199
+  ---- proj_offset 0 idx 192 xmin 43 ymin 203 i 6 j 6 imageProjs_local 0.067272 fullImage 203
+  ---- proj_offset 0 idx 193 xmin 43 ymin 203 i 6 j 7 imageProjs_local 0.0730237 fullImage 202
+  ---- proj_offset 0 idx 194 xmin 43 ymin 203 i 6 j 8 imageProjs_local 0.0990797 fullImage 204
+  ---- proj_offset 0 idx 195 xmin 43 ymin 203 i 6 j 9 imageProjs_local 0.0691891 fullImage 207
+  ---- proj_offset 0 idx 196 xmin 43 ymin 203 i 6 j 10 imageProjs_local 0.0438253 fullImage 202
+  ---- proj_offset 0 idx 197 xmin 43 ymin 203 i 6 j 11 imageProjs_local 0.0507204 fullImage 201
+  ---- proj_offset 0 idx 198 xmin 43 ymin 203 i 6 j 12 imageProjs_local 0.0295239 fullImage 202
+  ---- proj_offset 0 idx 199 xmin 43 ymin 203 i 6 j 13 imageProjs_local -0.00579935 fullImage 197
+  ---- proj_offset 0 idx 200 xmin 43 ymin 203 i 6 j 14 imageProjs_local -0.00810784 fullImage 216
+  ---- proj_offset 0 idx 201 xmin 43 ymin 203 i 6 j 15 imageProjs_local -0.0272058 fullImage 196
+  ---- proj_offset 0 idx 202 xmin 43 ymin 203 i 6 j 16 imageProjs_local -0.0347744 fullImage 205
+  ---- proj_offset 0 idx 203 xmin 43 ymin 203 i 6 j 17 imageProjs_local 0.00270398 fullImage 206
+  ---- proj_offset 0 idx 204 xmin 43 ymin 203 i 6 j 18 imageProjs_local 0.0135916 fullImage 196
+  ---- proj_offset 0 idx 205 xmin 43 ymin 203 i 6 j 19 imageProjs_local 0.0323144 fullImage 199
+  ---- proj_offset 0 idx 206 xmin 43 ymin 203 i 6 j 20 imageProjs_local 0.034363 fullImage 205
+  ---- proj_offset 0 idx 207 xmin 43 ymin 203 i 6 j 21 imageProjs_local 0.032132 fullImage 204
+  ---- proj_offset 0 idx 208 xmin 43 ymin 203 i 6 j 22 imageProjs_local 0.0522436 fullImage 203
+  ---- proj_offset 0 idx 209 xmin 43 ymin 203 i 6 j 23 imageProjs_local 0.0689792 fullImage 209
+  ---- proj_offset 0 idx 210 xmin 43 ymin 203 i 6 j 24 imageProjs_local 0.0462574 fullImage 200
+  ---- proj_offset 0 idx 211 xmin 43 ymin 203 i 6 j 25 imageProjs_local 0 fullImage 196
+  ---- proj_offset 0 idx 212 xmin 43 ymin 203 i 6 j 26 imageProjs_local 0 fullImage 212
+  ---- proj_offset 0 idx 213 xmin 43 ymin 203 i 6 j 27 imageProjs_local 0 fullImage 196
+  ---- proj_offset 0 idx 214 xmin 43 ymin 203 i 6 j 28 imageProjs_local 0 fullImage 201
+  ---- proj_offset 0 idx 215 xmin 43 ymin 203 i 6 j 29 imageProjs_local 0 fullImage 190
+  ---- proj_offset 0 idx 216 xmin 43 ymin 203 i 6 j 30 imageProjs_local 0 fullImage 200
+#2 idx 1 curr_localImage 0 curr_fullImage 196
+#3 sum 23723.3 curr_localImage 0 projSumUsed 112.119
+#1 x_int 78 x_min 63 x_max 93 y_int 218 y_min 203 y_max 233
+  -- curr idx 2 xmin 63 ymin 203
+#2 idx 2 curr_localImage 0 curr_fullImage 200
+#3 sum 23655.2 curr_localImage 0 projSumUsed 112.119
+#1 x_int 98 x_min 83 x_max 113 y_int 218 y_min 203 y_max 233
+  -- curr idx 3 xmin 83 ymin 203
+#2 idx 3 curr_localImage 0 curr_fullImage 209
+#3 sum 22505 curr_localImage 0 projSumUsed 112.119
+#1 x_int 118 x_min 103 x_max 133 y_int 218 y_min 203 y_max 233
+  -- curr idx 4 xmin 103 ymin 203
+#2 idx 4 curr_localImage 0 curr_fullImage 206
+#3 sum 22475.2 curr_localImage 0 projSumUsed 112.119
+#1 x_int 138 x_min 123 x_max 153 y_int 218 y_min 203 y_max 233
+  -- curr idx 5 xmin 123 ymin 203
+#2 idx 5 curr_localImage 0 curr_fullImage 196
+#3 sum 23620.4 curr_localImage 0 projSumUsed 112.119
+#1 x_int 158 x_min 143 x_max 173 y_int 218 y_min 203 y_max 233
+  -- curr idx 6 xmin 143 ymin 203
+#2 idx 6 curr_localImage 0 curr_fullImage 202
+#3 sum 24036 curr_localImage 0 projSumUsed 112.119
+#1 x_int 178 x_min 163 x_max 193 y_int 218 y_min 203 y_max 233
+  -- curr idx 7 xmin 163 ymin 203
+#2 idx 7 curr_localImage 0 curr_fullImage 193
+#3 sum 22500.6 curr_localImage 0 projSumUsed 112.119
+#1 x_int 198 x_min 183 x_max 213 y_int 218 y_min 203 y_max 233
+  -- curr idx 8 xmin 183 ymin 203
+#2 idx 8 curr_localImage 0 curr_fullImage 207
+#3 sum 23844.3 curr_localImage 0 projSumUsed 112.119
+#1 x_int 218 x_min 203 x_max 233 y_int 218 y_min 203 y_max 233
+  -- curr idx 9 xmin 203 ymin 203
+#2 idx 9 curr_localImage 0 curr_fullImage 201
+#3 sum 22389.7 curr_localImage 0 projSumUsed 112.119
+#1 x_int 38 x_min 23 x_max 53 y_int 198 y_min 183 y_max 213
+  -- curr idx 10 xmin 23 ymin 183
+#2 idx 10 curr_localImage 0 curr_fullImage 200
+#3 sum 23729.2 curr_localImage 0 projSumUsed 112.119
+#1 x_int 58 x_min 43 x_max 73 y_int 198 y_min 183 y_max 213
+  -- curr idx 11 xmin 43 ymin 183
+#2 idx 11 curr_localImage 0 curr_fullImage 198
+#3 sum 22538.5 curr_localImage 0 projSumUsed 112.119
+#1 x_int 78 x_min 63 x_max 93 y_int 198 y_min 183 y_max 213
+  -- curr idx 12 xmin 63 ymin 183
+#2 idx 12 curr_localImage 0 curr_fullImage 191
+#3 sum 22511.8 curr_localImage 0 projSumUsed 112.119
+#1 x_int 98 x_min 83 x_max 113 y_int 198 y_min 183 y_max 213
+  -- curr idx 13 xmin 83 ymin 183
+#2 idx 13 curr_localImage 0 curr_fullImage 200
+#3 sum 23726.1 curr_localImage 0 projSumUsed 112.119
+#1 x_int 118 x_min 103 x_max 133 y_int 198 y_min 183 y_max 213
+  -- curr idx 14 xmin 103 ymin 183
+#2 idx 14 curr_localImage 0 curr_fullImage 195
+#3 sum 22535.4 curr_localImage 0 projSumUsed 112.119
+#1 x_int 138 x_min 123 x_max 153 y_int 198 y_min 183 y_max 213
+  -- curr idx 15 xmin 123 ymin 183
+#2 idx 15 curr_localImage 0 curr_fullImage 198
+#3 sum 22506.3 curr_localImage 0 projSumUsed 112.119
+#1 x_int 158 x_min 143 x_max 173 y_int 198 y_min 183 y_max 213
+  -- curr idx 16 xmin 143 ymin 183
+#2 idx 16 curr_localImage 0 curr_fullImage 210
+#3 sum 22618.2 curr_localImage 0 projSumUsed 112.119
+#1 x_int 178 x_min 163 x_max 193 y_int 198 y_min 183 y_max 213
+  -- curr idx 17 xmin 163 ymin 183
+#2 idx 17 curr_localImage 0 curr_fullImage 197
+#3 sum 23830.8 curr_localImage 0 projSumUsed 112.119
+#1 x_int 198 x_min 183 x_max 213 y_int 198 y_min 183 y_max 213
+  -- curr idx 18 xmin 183 ymin 183
+#2 idx 18 curr_localImage 0 curr_fullImage 198
+#3 sum 22542 curr_localImage 0 projSumUsed 112.119
+#1 x_int 218 x_min 203 x_max 233 y_int 198 y_min 183 y_max 213
+  -- curr idx 19 xmin 203 ymin 183
+#2 idx 19 curr_localImage 0 curr_fullImage 213
+#3 sum 23485.8 curr_localImage 0 projSumUsed 112.119
+#1 x_int 38 x_min 23 x_max 53 y_int 178 y_min 163 y_max 193
+  -- curr idx 20 xmin 23 ymin 163
+#2 idx 20 curr_localImage 0 curr_fullImage 194
+#3 sum 23887.4 curr_localImage 0 projSumUsed 112.119
+#1 x_int 58 x_min 43 x_max 73 y_int 178 y_min 163 y_max 193
+  -- curr idx 21 xmin 43 ymin 163
+#2 idx 21 curr_localImage 0 curr_fullImage 196
+#3 sum 22479 curr_localImage 0 projSumUsed 112.119
+#1 x_int 78 x_min 63 x_max 93 y_int 178 y_min 163 y_max 193
+  -- curr idx 22 xmin 63 ymin 163
+#2 idx 22 curr_localImage 0 curr_fullImage 210
+#3 sum 22601.9 curr_localImage 0 projSumUsed 112.119
+#1 x_int 98 x_min 83 x_max 113 y_int 178 y_min 163 y_max 193
+  -- curr idx 23 xmin 83 ymin 163
+#2 idx 23 curr_localImage 0 curr_fullImage 200
+#3 sum 23802.4 curr_localImage 0 projSumUsed 112.119
+#1 x_int 118 x_min 103 x_max 133 y_int 178 y_min 163 y_max 193
+  -- curr idx 24 xmin 103 ymin 163
+#2 idx 24 curr_localImage 0 curr_fullImage 202
+#3 sum 22513.5 curr_localImage 0 projSumUsed 112.119
+#1 x_int 138 x_min 123 x_max 153 y_int 178 y_min 163 y_max 193
+  -- curr idx 25 xmin 123 ymin 163
+#2 idx 25 curr_localImage 0 curr_fullImage 210
+#3 sum 22438.9 curr_localImage 0 projSumUsed 112.119
+#1 x_int 158 x_min 143 x_max 173 y_int 178 y_min 163 y_max 193
+  -- curr idx 26 xmin 143 ymin 163
+#2 idx 26 curr_localImage 0 curr_fullImage 203
+#3 sum 22508.8 curr_localImage 0 projSumUsed 112.119
+#1 x_int 178 x_min 163 x_max 193 y_int 178 y_min 163 y_max 193
+  -- curr idx 27 xmin 163 ymin 163
+#2 idx 27 curr_localImage 0 curr_fullImage 210
+#3 sum 23985 curr_localImage 0 projSumUsed 112.119
+#1 x_int 198 x_min 183 x_max 213 y_int 178 y_min 163 y_max 193
+  -- curr idx 28 xmin 183 ymin 163
+#2 idx 28 curr_localImage 0 curr_fullImage 207
+#3 sum 23749.4 curr_localImage 0 projSumUsed 112.119
+#1 x_int 218 x_min 203 x_max 233 y_int 178 y_min 163 y_max 193
+  -- curr idx 29 xmin 203 ymin 163
+#2 idx 29 curr_localImage 0 curr_fullImage 207
+#3 sum 24145.9 curr_localImage 0 projSumUsed 112.119
+#1 x_int 38 x_min 23 x_max 53 y_int 158 y_min 143 y_max 173
+  -- curr idx 30 xmin 23 ymin 143
+#2 idx 30 curr_localImage 0 curr_fullImage 199
+#3 sum 22507.7 curr_localImage 0 projSumUsed 112.119
+#1 x_int 58 x_min 43 x_max 73 y_int 158 y_min 143 y_max 173
+  -- curr idx 31 xmin 43 ymin 143
+#2 idx 31 curr_localImage 0 curr_fullImage 198
+#3 sum 23786.7 curr_localImage 0 projSumUsed 112.119
+#1 x_int 78 x_min 63 x_max 93 y_int 158 y_min 143 y_max 173
+  -- curr idx 32 xmin 63 ymin 143
+#2 idx 32 curr_localImage 0 curr_fullImage 204
+#3 sum 23870.3 curr_localImage 0 projSumUsed 112.119
+#1 x_int 98 x_min 83 x_max 113 y_int 158 y_min 143 y_max 173
+  -- curr idx 33 xmin 83 ymin 143
+#2 idx 33 curr_localImage 0 curr_fullImage 200
+#3 sum 23508.4 curr_localImage 0 projSumUsed 112.119
+#1 x_int 118 x_min 103 x_max 133 y_int 158 y_min 143 y_max 173
+  -- curr idx 34 xmin 103 ymin 143
+#2 idx 34 curr_localImage 0 curr_fullImage 201
+#3 sum 23894.8 curr_localImage 0 projSumUsed 112.119
+#1 x_int 138 x_min 123 x_max 153 y_int 158 y_min 143 y_max 173
+  -- curr idx 35 xmin 123 ymin 143
+#2 idx 35 curr_localImage 0 curr_fullImage 198
+#3 sum 22542.4 curr_localImage 0 projSumUsed 112.119
+#1 x_int 158 x_min 143 x_max 173 y_int 158 y_min 143 y_max 173
+  -- curr idx 36 xmin 143 ymin 143
+#2 idx 36 curr_localImage 0 curr_fullImage 200
+#3 sum 23740.4 curr_localImage 0 projSumUsed 112.119
+#1 x_int 178 x_min 163 x_max 193 y_int 158 y_min 143 y_max 173
+  -- curr idx 37 xmin 163 ymin 143
+#2 idx 37 curr_localImage 0 curr_fullImage 213
+#3 sum 22609.3 curr_localImage 0 projSumUsed 112.119
+#1 x_int 198 x_min 183 x_max 213 y_int 158 y_min 143 y_max 173
+  -- curr idx 38 xmin 183 ymin 143
+#2 idx 38 curr_localImage 0 curr_fullImage 211
+#3 sum 23763.4 curr_localImage 0 projSumUsed 112.119
+#1 x_int 218 x_min 203 x_max 233 y_int 158 y_min 143 y_max 173
+  -- curr idx 39 xmin 203 ymin 143
+#2 idx 39 curr_localImage 0 curr_fullImage 202
+#3 sum 22619.6 curr_localImage 0 projSumUsed 112.119
+#1 x_int 38 x_min 23 x_max 53 y_int 138 y_min 123 y_max 153
+  -- curr idx 40 xmin 23 ymin 123
+#2 idx 40 curr_localImage 0 curr_fullImage 195
+#3 sum 22471.3 curr_localImage 0 projSumUsed 112.119
+#1 x_int 58 x_min 43 x_max 73 y_int 138 y_min 123 y_max 153
+  -- curr idx 41 xmin 43 ymin 123
+#2 idx 41 curr_localImage 0 curr_fullImage 209
+#3 sum 22564.9 curr_localImage 0 projSumUsed 112.119
+#1 x_int 78 x_min 63 x_max 93 y_int 138 y_min 123 y_max 153
+  -- curr idx 42 xmin 63 ymin 123
+#2 idx 42 curr_localImage 0 curr_fullImage 202
+#3 sum 23694.3 curr_localImage 0 projSumUsed 112.119
+#1 x_int 98 x_min 83 x_max 113 y_int 138 y_min 123 y_max 153
+  -- curr idx 43 xmin 83 ymin 123
+#2 idx 43 curr_localImage 0 curr_fullImage 199
+#3 sum 22635.3 curr_localImage 0 projSumUsed 112.119
+#1 x_int 118 x_min 103 x_max 133 y_int 138 y_min 123 y_max 153
+  -- curr idx 44 xmin 103 ymin 123
+#2 idx 44 curr_localImage 0 curr_fullImage 197
+#3 sum 23486.4 curr_localImage 0 projSumUsed 112.119
+#1 x_int 138 x_min 123 x_max 153 y_int 138 y_min 123 y_max 153
+  -- curr idx 45 xmin 123 ymin 123
+#2 idx 45 curr_localImage 0 curr_fullImage 191
+#3 sum 22538.6 curr_localImage 0 projSumUsed 112.119
+#1 x_int 158 x_min 143 x_max 173 y_int 138 y_min 123 y_max 153
+  -- curr idx 46 xmin 143 ymin 123
+#2 idx 46 curr_localImage 0 curr_fullImage 202
+#3 sum 23859.1 curr_localImage 0 projSumUsed 112.119
+#1 x_int 178 x_min 163 x_max 193 y_int 138 y_min 123 y_max 153
+  -- curr idx 47 xmin 163 ymin 123
+#2 idx 47 curr_localImage 0 curr_fullImage 198
+#3 sum 22587.6 curr_localImage 0 projSumUsed 112.119
+#1 x_int 198 x_min 183 x_max 213 y_int 138 y_min 123 y_max 153
+  -- curr idx 48 xmin 183 ymin 123
+#2 idx 48 curr_localImage 0 curr_fullImage 201
+#3 sum 23648.5 curr_localImage 0 projSumUsed 112.119
+#1 x_int 218 x_min 203 x_max 233 y_int 138 y_min 123 y_max 153
+  -- curr idx 49 xmin 203 ymin 123
+#2 idx 49 curr_localImage 0 curr_fullImage 190
+#3 sum 23826.5 curr_localImage 0 projSumUsed 112.119
+#1 x_int 38 x_min 23 x_max 53 y_int 118 y_min 103 y_max 133
+  -- curr idx 50 xmin 23 ymin 103
+#2 idx 50 curr_localImage 0 curr_fullImage 206
+#3 sum 22507.8 curr_localImage 0 projSumUsed 112.119
+#1 x_int 58 x_min 43 x_max 73 y_int 118 y_min 103 y_max 133
+  -- curr idx 51 xmin 43 ymin 103
+#2 idx 51 curr_localImage 0 curr_fullImage 205
+#3 sum 23772.4 curr_localImage 0 projSumUsed 112.119
+#1 x_int 78 x_min 63 x_max 93 y_int 118 y_min 103 y_max 133
+  -- curr idx 52 xmin 63 ymin 103
+#2 idx 52 curr_localImage 0 curr_fullImage 198
+#3 sum 23535.8 curr_localImage 0 projSumUsed 112.119
+#1 x_int 98 x_min 83 x_max 113 y_int 118 y_min 103 y_max 133
+  -- curr idx 53 xmin 83 ymin 103
+#2 idx 53 curr_localImage 0 curr_fullImage 206
+#3 sum 23998.5 curr_localImage 0 projSumUsed 112.119
+#1 x_int 118 x_min 103 x_max 133 y_int 118 y_min 103 y_max 133
+  -- curr idx 54 xmin 103 ymin 103
+#2 idx 54 curr_localImage 0 curr_fullImage 210
+#3 sum 23787.1 curr_localImage 0 projSumUsed 112.119
+#1 x_int 138 x_min 123 x_max 153 y_int 118 y_min 103 y_max 133
+  -- curr idx 55 xmin 123 ymin 103
+#2 idx 55 curr_localImage 0 curr_fullImage 199
+#3 sum 23663.9 curr_localImage 0 projSumUsed 112.119
+#1 x_int 158 x_min 143 x_max 173 y_int 118 y_min 103 y_max 133
+  -- curr idx 56 xmin 143 ymin 103
+#2 idx 56 curr_localImage 0 curr_fullImage 208
+#3 sum 22544.5 curr_localImage 0 projSumUsed 112.119
+#1 x_int 178 x_min 163 x_max 193 y_int 118 y_min 103 y_max 133
+  -- curr idx 57 xmin 163 ymin 103
+#2 idx 57 curr_localImage 0 curr_fullImage 198
+#3 sum 24008.7 curr_localImage 0 projSumUsed 112.119
+#1 x_int 198 x_min 183 x_max 213 y_int 118 y_min 103 y_max 133
+  -- curr idx 58 xmin 183 ymin 103
+#2 idx 58 curr_localImage 0 curr_fullImage 193
+#3 sum 22513.7 curr_localImage 0 projSumUsed 112.119
+#1 x_int 218 x_min 203 x_max 233 y_int 118 y_min 103 y_max 133
+  -- curr idx 59 xmin 203 ymin 103
+#2 idx 59 curr_localImage 0 curr_fullImage 209
+#3 sum 22490.9 curr_localImage 0 projSumUsed 112.119
+#1 x_int 38 x_min 23 x_max 53 y_int 98 y_min 83 y_max 113
+  -- curr idx 60 xmin 23 ymin 83
+#2 idx 60 curr_localImage 0 curr_fullImage 197
+#3 sum 23785.6 curr_localImage 0 projSumUsed 112.119
+#1 x_int 58 x_min 43 x_max 73 y_int 98 y_min 83 y_max 113
+  -- curr idx 61 xmin 43 ymin 83
+#2 idx 61 curr_localImage 0 curr_fullImage 199
+#3 sum 22628.8 curr_localImage 0 projSumUsed 112.119
+#1 x_int 78 x_min 63 x_max 93 y_int 98 y_min 83 y_max 113
+  -- curr idx 62 xmin 63 ymin 83
+#2 idx 62 curr_localImage 0 curr_fullImage 192
+#3 sum 24016.2 curr_localImage 0 projSumUsed 112.119
+#1 x_int 98 x_min 83 x_max 113 y_int 98 y_min 83 y_max 113
+  -- curr idx 63 xmin 83 ymin 83
+#2 idx 63 curr_localImage 0 curr_fullImage 204
+#3 sum 24044 curr_localImage 0 projSumUsed 112.119
+#1 x_int 118 x_min 103 x_max 133 y_int 98 y_min 83 y_max 113
+  -- curr idx 64 xmin 103 ymin 83
+#2 idx 64 curr_localImage 0 curr_fullImage 204
+#3 sum 23727 curr_localImage 0 projSumUsed 112.119
+#1 x_int 138 x_min 123 x_max 153 y_int 98 y_min 83 y_max 113
+  -- curr idx 65 xmin 123 ymin 83
+#2 idx 65 curr_localImage 0 curr_fullImage 206
+#3 sum 22671 curr_localImage 0 projSumUsed 112.119
+#1 x_int 158 x_min 143 x_max 173 y_int 98 y_min 83 y_max 113
+  -- curr idx 66 xmin 143 ymin 83
+#2 idx 66 curr_localImage 0 curr_fullImage 196
+#3 sum 23893.7 curr_localImage 0 projSumUsed 112.119
+#1 x_int 178 x_min 163 x_max 193 y_int 98 y_min 83 y_max 113
+  -- curr idx 67 xmin 163 ymin 83
+#2 idx 67 curr_localImage 0 curr_fullImage 196
+#3 sum 22482.3 curr_localImage 0 projSumUsed 112.119
+#1 x_int 198 x_min 183 x_max 213 y_int 98 y_min 83 y_max 113
+  -- curr idx 68 xmin 183 ymin 83
+#2 idx 68 curr_localImage 0 curr_fullImage 203
+#3 sum 23806.4 curr_localImage 0 projSumUsed 112.119
+#1 x_int 218 x_min 203 x_max 233 y_int 98 y_min 83 y_max 113
+  -- curr idx 69 xmin 203 ymin 83
+#2 idx 69 curr_localImage 0 curr_fullImage 197
+#3 sum 23932.3 curr_localImage 0 projSumUsed 112.119
+#1 x_int 38 x_min 23 x_max 53 y_int 78 y_min 63 y_max 93
+  -- curr idx 70 xmin 23 ymin 63
+#2 idx 70 curr_localImage 0 curr_fullImage 207
+#3 sum 23883.8 curr_localImage 0 projSumUsed 112.119
+#1 x_int 58 x_min 43 x_max 73 y_int 78 y_min 63 y_max 93
+  -- curr idx 71 xmin 43 ymin 63
+#2 idx 71 curr_localImage 0 curr_fullImage 203
+#3 sum 22566.8 curr_localImage 0 projSumUsed 112.119
+#1 x_int 78 x_min 63 x_max 93 y_int 78 y_min 63 y_max 93
+  -- curr idx 72 xmin 63 ymin 63
+#2 idx 72 curr_localImage 0 curr_fullImage 195
+#3 sum 23864.3 curr_localImage 0 projSumUsed 112.119
+#1 x_int 98 x_min 83 x_max 113 y_int 78 y_min 63 y_max 93
+  -- curr idx 73 xmin 83 ymin 63
+#2 idx 73 curr_localImage 0 curr_fullImage 196
+#3 sum 23954.7 curr_localImage 0 projSumUsed 112.119
+#1 x_int 118 x_min 103 x_max 133 y_int 78 y_min 63 y_max 93
+  -- curr idx 74 xmin 103 ymin 63
+#2 idx 74 curr_localImage 0 curr_fullImage 204
+#3 sum 23666.5 curr_localImage 0 projSumUsed 112.119
+#1 x_int 138 x_min 123 x_max 153 y_int 78 y_min 63 y_max 93
+  -- curr idx 75 xmin 123 ymin 63
+#2 idx 75 curr_localImage 0 curr_fullImage 204
+#3 sum 23731.3 curr_localImage 0 projSumUsed 112.119
+#1 x_int 158 x_min 143 x_max 173 y_int 78 y_min 63 y_max 93
+  -- curr idx 76 xmin 143 ymin 63
+#2 idx 76 curr_localImage 0 curr_fullImage 202
+#3 sum 22471.8 curr_localImage 0 projSumUsed 112.119
+#1 x_int 178 x_min 163 x_max 193 y_int 78 y_min 63 y_max 93
+  -- curr idx 77 xmin 163 ymin 63
+#2 idx 77 curr_localImage 0 curr_fullImage 198
+#3 sum 22512.8 curr_localImage 0 projSumUsed 112.119
+#1 x_int 198 x_min 183 x_max 213 y_int 78 y_min 63 y_max 93
+  -- curr idx 78 xmin 183 ymin 63
+#2 idx 78 curr_localImage 0 curr_fullImage 205
+#3 sum 23659.3 curr_localImage 0 projSumUsed 112.119
+#1 x_int 218 x_min 203 x_max 233 y_int 78 y_min 63 y_max 93
+  -- curr idx 79 xmin 203 ymin 63
+#2 idx 79 curr_localImage 0 curr_fullImage 203
+#3 sum 23742 curr_localImage 0 projSumUsed 112.119
+#1 x_int 38 x_min 23 x_max 53 y_int 58 y_min 43 y_max 73
+  -- curr idx 80 xmin 23 ymin 43
+#2 idx 80 curr_localImage 0 curr_fullImage 192
+#3 sum 22430.6 curr_localImage 0 projSumUsed 112.119
+#1 x_int 58 x_min 43 x_max 73 y_int 58 y_min 43 y_max 73
+  -- curr idx 81 xmin 43 ymin 43
+#2 idx 81 curr_localImage 0 curr_fullImage 200
+#3 sum 22507 curr_localImage 0 projSumUsed 112.119
+#1 x_int 78 x_min 63 x_max 93 y_int 58 y_min 43 y_max 73
+  -- curr idx 82 xmin 63 ymin 43
+#2 idx 82 curr_localImage 0 curr_fullImage 204
+#3 sum 22531.5 curr_localImage 0 projSumUsed 112.119
+#1 x_int 98 x_min 83 x_max 113 y_int 58 y_min 43 y_max 73
+  -- curr idx 83 xmin 83 ymin 43
+#2 idx 83 curr_localImage 0 curr_fullImage 198
+#3 sum 23747.8 curr_localImage 0 projSumUsed 112.119
+#1 x_int 118 x_min 103 x_max 133 y_int 58 y_min 43 y_max 73
+  -- curr idx 84 xmin 103 ymin 43
+#2 idx 84 curr_localImage 0 curr_fullImage 213
+#3 sum 22572.4 curr_localImage 0 projSumUsed 112.119
+#1 x_int 138 x_min 123 x_max 153 y_int 58 y_min 43 y_max 73
+  -- curr idx 85 xmin 123 ymin 43
+#2 idx 85 curr_localImage 0 curr_fullImage 201
+#3 sum 22505.7 curr_localImage 0 projSumUsed 112.119
+#1 x_int 158 x_min 143 x_max 173 y_int 58 y_min 43 y_max 73
+  -- curr idx 86 xmin 143 ymin 43
+#2 idx 86 curr_localImage 0 curr_fullImage 201
+#3 sum 23920.7 curr_localImage 0 projSumUsed 112.119
+#1 x_int 178 x_min 163 x_max 193 y_int 58 y_min 43 y_max 73
+  -- curr idx 87 xmin 163 ymin 43
+#2 idx 87 curr_localImage 0 curr_fullImage 201
+#3 sum 23634.6 curr_localImage 0 projSumUsed 112.119
+#1 x_int 198 x_min 183 x_max 213 y_int 58 y_min 43 y_max 73
+  -- curr idx 88 xmin 183 ymin 43
+#2 idx 88 curr_localImage 0 curr_fullImage 193
+#3 sum 22479.7 curr_localImage 0 projSumUsed 112.119
+#1 x_int 218 x_min 203 x_max 233 y_int 58 y_min 43 y_max 73
+  -- curr idx 89 xmin 203 ymin 43
+#2 idx 89 curr_localImage 0 curr_fullImage 196
+#3 sum 22367.8 curr_localImage 0 projSumUsed 112.119
+#1 x_int 38 x_min 23 x_max 53 y_int 38 y_min 23 y_max 53
+  -- curr idx 90 xmin 23 ymin 23
+#2 idx 90 curr_localImage 0 curr_fullImage 196
+#3 sum 24044.8 curr_localImage 0 projSumUsed 112.119
+#1 x_int 58 x_min 43 x_max 73 y_int 38 y_min 23 y_max 53
+  -- curr idx 91 xmin 43 ymin 23
+#2 idx 91 curr_localImage 0 curr_fullImage 200
+#3 sum 23735.5 curr_localImage 0 projSumUsed 112.119
+#1 x_int 78 x_min 63 x_max 93 y_int 38 y_min 23 y_max 53
+  -- curr idx 92 xmin 63 ymin 23
+#2 idx 92 curr_localImage 0 curr_fullImage 197
+#3 sum 22464.5 curr_localImage 0 projSumUsed 112.119
+#1 x_int 98 x_min 83 x_max 113 y_int 38 y_min 23 y_max 53
+  -- curr idx 93 xmin 83 ymin 23
+#2 idx 93 curr_localImage 0 curr_fullImage 195
+#3 sum 22476.8 curr_localImage 0 projSumUsed 112.119
+#1 x_int 118 x_min 103 x_max 133 y_int 38 y_min 23 y_max 53
+  -- curr idx 94 xmin 103 ymin 23
+#2 idx 94 curr_localImage 0 curr_fullImage 198
+#3 sum 23903.6 curr_localImage 0 projSumUsed 112.119
+#1 x_int 138 x_min 123 x_max 153 y_int 38 y_min 23 y_max 53
+  -- curr idx 95 xmin 123 ymin 23
+#2 idx 95 curr_localImage 0 curr_fullImage 204
+#3 sum 23616.5 curr_localImage 0 projSumUsed 112.119
+#1 x_int 158 x_min 143 x_max 173 y_int 38 y_min 23 y_max 53
+  -- curr idx 96 xmin 143 ymin 23
+#2 idx 96 curr_localImage 0 curr_fullImage 209
+#3 sum 23743.9 curr_localImage 0 projSumUsed 112.119
+#1 x_int 178 x_min 163 x_max 193 y_int 38 y_min 23 y_max 53
+  -- curr idx 97 xmin 163 ymin 23
+#2 idx 97 curr_localImage 0 curr_fullImage 202
+#3 sum 22570.8 curr_localImage 0 projSumUsed 112.119
+#1 x_int 198 x_min 183 x_max 213 y_int 38 y_min 23 y_max 53
+  -- curr idx 98 xmin 183 ymin 23
+#2 idx 98 curr_localImage 0 curr_fullImage 197
+#3 sum 23468.5 curr_localImage 0 projSumUsed 112.119
+#1 x_int 218 x_min 203 x_max 233 y_int 38 y_min 23 y_max 53
+  -- curr idx 99 xmin 203 ymin 23
+#2 idx 99 curr_localImage 0 curr_fullImage 202
+#3 sum 22435.2 curr_localImage 0 projSumUsed 112.119
+emissions: 22412.6|23723.3|23655.3|22505.1|22475.3|23620.5|24036.1|22500.7|23844.4|22389.7|23729.3|22538.6|22511.9|23726.1|22535.5|22506.3|22618.2|23830.8|22542|23485.8|23887.5|22479|22601.9|23802.4|22513.6|22439|22508.8|23985.1|23749.4|24145.9|22507.8|23786.8|23870.3|23508.4|23894.9|22542.5|23740.5|22609.4|23763.5|22619.6|22471.4|22565|23694.3|22635.4|23486.5|22538.7|23859.1|22587.7|23648.5|23826.5|22507.8|23772.5|23535.9|23998.6|23787.2|23663.9|22544.6|24008.8|22513.8|22490.9|23785.7|22628.9|24016.3|24044|23727.1|22671.1|23893.7|22482.3|23806.5|23932.4|23883.9|22566.8|23864.4|23954.7|23666.6|23731.4|22471.9|22512.8|23659.4|23742.1|22430.6|22507.1|22531.6|23747.9|22572.5|22505.7|23920.7|23634.7|22479.8|22367.9|24044.9|23735.6|22464.6|22476.9|23903.7|23616.6|23744|22570.8|23468.5|22435.2|
+INFO: [SIM 211-200] Analyzing trace data
+INFO: [SIM 211-208] Running Code Analyzer
+WARNING: [HLS 211-200] F:\LMU\quantumMA\opimization\reconstructv1maxi\image_analysis.cpp:151:9: Pragma 'tripcount' has been kept but may be incorrect: The minimum tripcount in the pragma (1024) is greater than the mininum dynamic tripcount computed for the loop (100)
+INFO: [SIM 211-210] Code Analyzer finished
+INFO: [HLS 200-112] Total CPU user time: 7 seconds. Total CPU system time: 2 seconds. Total elapsed time: 49.646 seconds; peak allocated memory: 619.754 MB.
+INFO: [vitis-run 60-791] Total elapsed time: 0h 0m 57s

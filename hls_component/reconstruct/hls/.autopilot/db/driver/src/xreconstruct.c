@@ -77,6 +77,25 @@ void XReconstruct_DisableAutoRestart(XReconstruct *InstancePtr) {
     XReconstruct_WriteReg(InstancePtr->Control_BaseAddress, XRECONSTRUCT_CONTROL_ADDR_AP_CTRL, 0);
 }
 
+void XReconstruct_Set_atomLocations_offset(XReconstruct *InstancePtr, u64 Data) {
+    Xil_AssertVoid(InstancePtr != NULL);
+    Xil_AssertVoid(InstancePtr->IsReady == XIL_COMPONENT_IS_READY);
+
+    XReconstruct_WriteReg(InstancePtr->Control_BaseAddress, XRECONSTRUCT_CONTROL_ADDR_ATOMLOCATIONS_OFFSET_DATA, (u32)(Data));
+    XReconstruct_WriteReg(InstancePtr->Control_BaseAddress, XRECONSTRUCT_CONTROL_ADDR_ATOMLOCATIONS_OFFSET_DATA + 4, (u32)(Data >> 32));
+}
+
+u64 XReconstruct_Get_atomLocations_offset(XReconstruct *InstancePtr) {
+    u64 Data;
+
+    Xil_AssertNonvoid(InstancePtr != NULL);
+    Xil_AssertNonvoid(InstancePtr->IsReady == XIL_COMPONENT_IS_READY);
+
+    Data = XReconstruct_ReadReg(InstancePtr->Control_BaseAddress, XRECONSTRUCT_CONTROL_ADDR_ATOMLOCATIONS_OFFSET_DATA);
+    Data += (u64)XReconstruct_ReadReg(InstancePtr->Control_BaseAddress, XRECONSTRUCT_CONTROL_ADDR_ATOMLOCATIONS_OFFSET_DATA + 4) << 32;
+    return Data;
+}
+
 void XReconstruct_Set_imageProjs_local_offset(XReconstruct *InstancePtr, u64 Data) {
     Xil_AssertVoid(InstancePtr != NULL);
     Xil_AssertVoid(InstancePtr->IsReady == XIL_COMPONENT_IS_READY);
@@ -289,26 +308,6 @@ u32 XReconstruct_Get_fullImage_cols(XReconstruct *InstancePtr) {
 
     Data = XReconstruct_ReadReg(InstancePtr->Scalar_data_BaseAddress, XRECONSTRUCT_SCALAR_DATA_ADDR_FULLIMAGE_COLS_DATA);
     return Data;
-}
-
-u32 XReconstruct_Get_emission_cnt(XReconstruct *InstancePtr) {
-    u32 Data;
-
-    Xil_AssertNonvoid(InstancePtr != NULL);
-    Xil_AssertNonvoid(InstancePtr->IsReady == XIL_COMPONENT_IS_READY);
-
-    Data = XReconstruct_ReadReg(InstancePtr->Scalar_data_BaseAddress, XRECONSTRUCT_SCALAR_DATA_ADDR_EMISSION_CNT_DATA);
-    return Data;
-}
-
-u32 XReconstruct_Get_emission_cnt_vld(XReconstruct *InstancePtr) {
-    u32 Data;
-
-    Xil_AssertNonvoid(InstancePtr != NULL);
-    Xil_AssertNonvoid(InstancePtr->IsReady == XIL_COMPONENT_IS_READY);
-
-    Data = XReconstruct_ReadReg(InstancePtr->Scalar_data_BaseAddress, XRECONSTRUCT_SCALAR_DATA_ADDR_EMISSION_CNT_CTRL);
-    return Data & 0x1;
 }
 
 void XReconstruct_InterruptGlobalEnable(XReconstruct *InstancePtr) {

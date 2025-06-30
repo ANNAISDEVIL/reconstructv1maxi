@@ -1,0 +1,800 @@
+  **** HLS Build v2024.2 5238294
+INFO: [HLS 200-2005] Using work_dir F:/LMU/quantumMA/opimization/reconstructv1maxi/hls_component/reconstruct 
+INFO: [HLS 200-1505] Using default flow_target 'vivado'
+Resolution: For help on HLS 200-1505 see docs.xilinx.com/access/sources/dita/topic?Doc_Version=2024.2%20English&url=ug1448-hls-guidance&resourceid=200-1505.html
+INFO: [HLS 200-1465] Applying ini 'syn.file=F:/LMU/quantumMA/opimization/reconstructv1maxi/image_analysis.cpp' from F:/LMU/quantumMA/opimization/reconstructv1maxi/hls_component/hls_config.cfg(10)
+INFO: [HLS 200-10] Adding design file 'F:/LMU/quantumMA/opimization/reconstructv1maxi/image_analysis.cpp' to the project
+INFO: [HLS 200-1465] Applying ini 'syn.file=F:/LMU/quantumMA/opimization/reconstructv1maxi/image_analysis.hpp' from F:/LMU/quantumMA/opimization/reconstructv1maxi/hls_component/hls_config.cfg(11)
+INFO: [HLS 200-10] Adding design file 'F:/LMU/quantumMA/opimization/reconstructv1maxi/image_analysis.hpp' to the project
+INFO: [HLS 200-1465] Applying ini 'tb.file=F:/LMU/quantumMA/opimization/reconstructv1maxi/test.cpp' from F:/LMU/quantumMA/opimization/reconstructv1maxi/hls_component/hls_config.cfg(12)
+INFO: [HLS 200-10] Adding test bench file 'F:/LMU/quantumMA/opimization/reconstructv1maxi/test.cpp' to the project
+INFO: [HLS 200-1465] Applying ini 'tb.file=F:/LMU/quantumMA/naia/reconstructv1/sf25fram/fullImage_output.txt' from F:/LMU/quantumMA/opimization/reconstructv1maxi/hls_component/hls_config.cfg(13)
+INFO: [HLS 200-10] Adding test bench file 'F:/LMU/quantumMA/naia/reconstructv1/sf25fram/fullImage_output.txt' to the project
+INFO: [HLS 200-1465] Applying ini 'tb.file=F:/LMU/quantumMA/naia/reconstructv1/sf25fram/restoutput.txt' from F:/LMU/quantumMA/opimization/reconstructv1maxi/hls_component/hls_config.cfg(14)
+INFO: [HLS 200-10] Adding test bench file 'F:/LMU/quantumMA/naia/reconstructv1/sf25fram/restoutput.txt' to the project
+INFO: [HLS 200-1465] Applying ini 'syn.top=reconstruct' from F:/LMU/quantumMA/opimization/reconstructv1maxi/hls_component/hls_config.cfg(7)
+INFO: [HLS 200-1465] Applying ini 'flow_target=vivado' from F:/LMU/quantumMA/opimization/reconstructv1maxi/hls_component/hls_config.cfg(4)
+INFO: [HLS 200-1505] Using flow_target 'vivado'
+Resolution: For help on HLS 200-1505 see docs.xilinx.com/access/sources/dita/topic?Doc_Version=2024.2%20English&url=ug1448-hls-guidance&resourceid=200-1505.html
+INFO: [HLS 200-1465] Applying ini 'part=xczu7ev-ffvc1156-2-e' from F:/LMU/quantumMA/opimization/reconstructv1maxi/hls_component/hls_config.cfg(1)
+INFO: [HLS 200-1611] Setting target device to 'xczu7ev-ffvc1156-2-e'
+INFO: [HLS 200-1465] Applying ini 'csim.clean=1' from F:/LMU/quantumMA/opimization/reconstructv1maxi/hls_component/hls_config.cfg(8)
+INFO: [HLS 200-1465] Applying ini 'csim.code_analyzer=1' from F:/LMU/quantumMA/opimization/reconstructv1maxi/hls_component/hls_config.cfg(9)
+INFO: [HLS 200-1465] Applying ini 'package.output.format=ip_catalog' from F:/LMU/quantumMA/opimization/reconstructv1maxi/hls_component/hls_config.cfg(5)
+INFO: [SIM 211-200] Executing Code Analyzer instead of classic HLS C simulation
+INFO: [SIM 211-200] Cleaning
+slxcmd:0:0: info: [ Cleaned build and execution files ]
+INFO: [HLS 211-200] Compiling source code ../image_analysis.cpp as hardware code with instrumentation
+INFO: [HLS 211-200] Compiling source code F:/LMU/quantumMA/opimization/reconstructv1maxi/test.cpp as test bench code with instrumentation
+INFO: [HLS 211-200] Compiling source code ../image_analysis.cpp as test bench code with instrumentation
+../image_analysis.cpp:66:39: warning: The 'enable_flush' option of the 'HLS pipeline' directive or pragma is deprecated, use style=flp instead [-Wignored-hls-pragmas]
+#pragma HLS PIPELINE II=1 enable_flush
+                                      ^
+../image_analysis.cpp:380:98: warning: unexpected pragma parameter 'storage_type' [-Winvalid-hls-pragmas]
+#pragma HLS INTERFACE port=atomLocations mode=m_axi bundle=atomLocations depth=1024 storage_type=RAM_2P // 
+                                                                                                 ^
+2 warnings generated.
+../image_analysis.cpp:66:39: warning: The 'enable_flush' option of the 'HLS pipeline' directive or pragma is deprecated, use style=flp instead [-Wignored-hls-pragmas]
+#pragma HLS PIPELINE II=1 enable_flush
+                                      ^
+../image_analysis.cpp:380:98: warning: unexpected pragma parameter 'storage_type' [-Winvalid-hls-pragmas]
+#pragma HLS INTERFACE port=atomLocations mode=m_axi bundle=atomLocations depth=1024 storage_type=RAM_2P // 
+                                                                                                 ^
+2 warnings generated.
+INFO: [HLS 211-200] Linking hardware code
+INFO: [HLS 211-200] Transforming hardware bitcode
+INFO: [HLS 211-200] Linking executable
+INFO: [HLS 211-200] Computing HLS IR Information
+INFO: [HLS 211-200] Determining source code dependencies
+INFO: [SIM 211-200] Running executable
+Projection 0 has 961 valid elements
+About to call getLocalImages...
+=== getLocalImages FINISHED ===
+About to call applyProjectors...
+Starting pipeline with 1024 atoms
+=== ATOM 0 STAGE 1 ===
+Region: (680,60) to (710,90)
+dx=0 dy=0
+xidx=0 yidx=0 psfSupersample=1
+proj_offset=0 (max=1)
+cols=31 rows=31
+Required pixels=961
+Available pixels=961
+MAX_LOCAL: 31x31
+PASS: Atom 0 passed Stage 1 validation
+=== ATOM STAGE 2 (from cycle -1) ===
+proj_scale=116.47
+Copied 961 pixels to buffers
+PASS: Stage 2 completed
+=== ATOM STAGE 3 (from cycle -2) ===
+Accumulation: sum=24529.7 projSumUsed=116.47
+PASS: Stage 3 completed
+=== ATOM STAGE 4 (from cycle -3) ===
+WRITING Atom 0: sum=24529.7 projSumUsed=116.47 proj_scale=116.47 result=24529.7
+=== ATOM 1 STAGE 1 ===
+Region: (680,79) to (710,109)
+dx=0 dy=0
+xidx=0 yidx=0 psfSupersample=1
+proj_offset=0 (max=1)
+cols=31 rows=31
+Required pixels=961
+Available pixels=961
+MAX_LOCAL: 31x31
+PASS: Atom 1 passed Stage 1 validation
+=== ATOM STAGE 2 (from cycle 0) ===
+proj_scale=116.47
+Copied 961 pixels to buffers
+PASS: Stage 2 completed
+=== ATOM STAGE 3 (from cycle -1) ===
+Accumulation: sum=23430.2 projSumUsed=116.47
+PASS: Stage 3 completed
+=== ATOM STAGE 4 (from cycle -2) ===
+WRITING Atom 1: sum=23430.2 projSumUsed=116.47 proj_scale=116.47 result=23430.3
+=== ATOM 2 STAGE 1 ===
+Region: (681,98) to (711,128)
+dx=0 dy=0
+xidx=0 yidx=0 psfSupersample=1
+proj_offset=0 (max=1)
+cols=31 rows=31
+Required pixels=961
+Available pixels=961
+MAX_LOCAL: 31x31
+PASS: Atom 2 passed Stage 1 validation
+=== ATOM STAGE 2 (from cycle 1) ===
+proj_scale=116.47
+Copied 961 pixels to buffers
+PASS: Stage 2 completed
+=== ATOM STAGE 3 (from cycle 0) ===
+Accumulation: sum=24513.7 projSumUsed=116.47
+PASS: Stage 3 completed
+=== ATOM STAGE 4 (from cycle -1) ===
+WRITING Atom 2: sum=24513.7 projSumUsed=116.47 proj_scale=116.47 result=24513.7
+=== ATOM 3 STAGE 1 ===
+Region: (681,118) to (711,148)
+dx=0 dy=0
+xidx=0 yidx=0 psfSupersample=1
+proj_offset=0 (max=1)
+cols=31 rows=31
+Required pixels=961
+Available pixels=961
+MAX_LOCAL: 31x31
+PASS: Atom 3 passed Stage 1 validation
+=== ATOM STAGE 2 (from cycle 2) ===
+proj_scale=116.47
+Copied 961 pixels to buffers
+PASS: Stage 2 completed
+=== ATOM STAGE 3 (from cycle 1) ===
+Accumulation: sum=24834.6 projSumUsed=116.47
+PASS: Stage 3 completed
+=== ATOM STAGE 4 (from cycle 0) ===
+WRITING Atom 3: sum=24834.6 projSumUsed=116.47 proj_scale=116.47 result=24834.6
+=== ATOM 4 STAGE 1 ===
+Region: (682,137) to (712,167)
+dx=0 dy=0
+xidx=0 yidx=0 psfSupersample=1
+proj_offset=0 (max=1)
+cols=31 rows=31
+Required pixels=961
+Available pixels=961
+MAX_LOCAL: 31x31
+PASS: Atom 4 passed Stage 1 validation
+=== ATOM STAGE 2 (from cycle 3) ===
+proj_scale=116.47
+Copied 961 pixels to buffers
+PASS: Stage 2 completed
+=== ATOM STAGE 3 (from cycle 2) ===
+Accumulation: sum=23442.2 projSumUsed=116.47
+PASS: Stage 3 completed
+=== ATOM STAGE 4 (from cycle 1) ===
+WRITING Atom 4: sum=23442.2 projSumUsed=116.47 proj_scale=116.47 result=23442.2
+=== ATOM 5 STAGE 1 ===
+Region: (682,157) to (712,187)
+dx=0 dy=0
+xidx=0 yidx=0 psfSupersample=1
+proj_offset=0 (max=1)
+cols=31 rows=31
+Required pixels=961
+Available pixels=961
+MAX_LOCAL: 31x31
+PASS: Atom 5 passed Stage 1 validation
+=== ATOM STAGE 2 (from cycle 4) ===
+proj_scale=116.47
+Copied 961 pixels to buffers
+PASS: Stage 2 completed
+=== ATOM STAGE 3 (from cycle 3) ===
+Accumulation: sum=24562.4 projSumUsed=116.47
+PASS: Stage 3 completed
+=== ATOM STAGE 4 (from cycle 2) ===
+WRITING Atom 5: sum=24562.4 projSumUsed=116.47 proj_scale=116.47 result=24562.5
+=== ATOM 6 STAGE 1 ===
+Region: (683,176) to (713,206)
+dx=0 dy=0
+xidx=0 yidx=0 psfSupersample=1
+proj_offset=0 (max=1)
+cols=31 rows=31
+Required pixels=961
+Available pixels=961
+MAX_LOCAL: 31x31
+PASS: Atom 6 passed Stage 1 validation
+=== ATOM STAGE 2 (from cycle 5) ===
+proj_scale=116.47
+Copied 961 pixels to buffers
+PASS: Stage 2 completed
+=== ATOM STAGE 3 (from cycle 4) ===
+Accumulation: sum=24710.5 projSumUsed=116.47
+PASS: Stage 3 completed
+=== ATOM STAGE 4 (from cycle 3) ===
+WRITING Atom 6: sum=24710.5 projSumUsed=116.47 proj_scale=116.47 result=24710.6
+=== ATOM 7 STAGE 1 ===
+Region: (683,195) to (713,225)
+dx=0 dy=0
+xidx=0 yidx=0 psfSupersample=1
+proj_offset=0 (max=1)
+cols=31 rows=31
+Required pixels=961
+Available pixels=961
+MAX_LOCAL: 31x31
+PASS: Atom 7 passed Stage 1 validation
+=== ATOM STAGE 2 (from cycle 6) ===
+proj_scale=116.47
+Copied 961 pixels to buffers
+PASS: Stage 2 completed
+=== ATOM STAGE 3 (from cycle 5) ===
+Accumulation: sum=23309.9 projSumUsed=116.47
+PASS: Stage 3 completed
+=== ATOM STAGE 4 (from cycle 4) ===
+WRITING Atom 7: sum=23309.9 projSumUsed=116.47 proj_scale=116.47 result=23309.9
+=== ATOM 8 STAGE 1 ===
+Region: (683,215) to (713,245)
+dx=0 dy=0
+xidx=0 yidx=0 psfSupersample=1
+proj_offset=0 (max=1)
+cols=31 rows=31
+Required pixels=961
+Available pixels=961
+MAX_LOCAL: 31x31
+PASS: Atom 8 passed Stage 1 validation
+=== ATOM STAGE 2 (from cycle 7) ===
+proj_scale=116.47
+Copied 961 pixels to buffers
+PASS: Stage 2 completed
+=== ATOM STAGE 3 (from cycle 6) ===
+Accumulation: sum=23360.1 projSumUsed=116.47
+PASS: Stage 3 completed
+=== ATOM STAGE 4 (from cycle 5) ===
+WRITING Atom 8: sum=23360.1 projSumUsed=116.47 proj_scale=116.47 result=23360.1
+=== ATOM 9 STAGE 1 ===
+Region: (684,234) to (714,264)
+dx=0 dy=0
+xidx=0 yidx=0 psfSupersample=1
+proj_offset=0 (max=1)
+cols=31 rows=31
+Required pixels=961
+Available pixels=961
+MAX_LOCAL: 31x31
+PASS: Atom 9 passed Stage 1 validation
+=== ATOM STAGE 2 (from cycle 8) ===
+proj_scale=116.47
+Copied 961 pixels to buffers
+PASS: Stage 2 completed
+=== ATOM STAGE 3 (from cycle 7) ===
+Accumulation: sum=24631.9 projSumUsed=116.47
+PASS: Stage 3 completed
+=== ATOM STAGE 4 (from cycle 6) ===
+WRITING Atom 9: sum=24631.9 projSumUsed=116.47 proj_scale=116.47 result=24631.9
+=== ATOM 10 STAGE 1 ===
+Region: (684,254) to (714,284)
+dx=0 dy=0
+xidx=0 yidx=0 psfSupersample=1
+proj_offset=0 (max=1)
+cols=31 rows=31
+Required pixels=961
+Available pixels=961
+MAX_LOCAL: 31x31
+PASS: Atom 10 passed Stage 1 validation
+=== ATOM STAGE 2 (from cycle 9) ===
+proj_scale=116.47
+Copied 961 pixels to buffers
+PASS: Stage 2 completed
+=== ATOM STAGE 3 (from cycle 8) ===
+Accumulation: sum=23423.3 projSumUsed=116.47
+PASS: Stage 3 completed
+=== ATOM STAGE 4 (from cycle 7) ===
+WRITING Atom 10: sum=23423.3 projSumUsed=116.47 proj_scale=116.47 result=23423.3
+=== ATOM 11 STAGE 1 ===
+Region: (685,273) to (715,303)
+dx=0 dy=0
+xidx=0 yidx=0 psfSupersample=1
+proj_offset=0 (max=1)
+cols=31 rows=31
+Required pixels=961
+Available pixels=961
+MAX_LOCAL: 31x31
+PASS: Atom 11 passed Stage 1 validation
+=== ATOM STAGE 2 (from cycle 10) ===
+proj_scale=116.47
+Copied 961 pixels to buffers
+PASS: Stage 2 completed
+=== ATOM STAGE 3 (from cycle 9) ===
+Accumulation: sum=24844.1 projSumUsed=116.47
+PASS: Stage 3 completed
+=== ATOM STAGE 4 (from cycle 8) ===
+WRITING Atom 11: sum=24844.1 projSumUsed=116.47 proj_scale=116.47 result=24844.1
+=== ATOM 12 STAGE 1 ===
+Region: (685,292) to (715,322)
+dx=0 dy=0
+xidx=0 yidx=0 psfSupersample=1
+proj_offset=0 (max=1)
+cols=31 rows=31
+Required pixels=961
+Available pixels=961
+MAX_LOCAL: 31x31
+PASS: Atom 12 passed Stage 1 validation
+=== ATOM STAGE 2 (from cycle 11) ===
+proj_scale=116.47
+Copied 961 pixels to buffers
+PASS: Stage 2 completed
+=== ATOM STAGE 3 (from cycle 10) ===
+Accumulation: sum=24651.8 projSumUsed=116.47
+PASS: Stage 3 completed
+=== ATOM STAGE 4 (from cycle 9) ===
+WRITING Atom 12: sum=24651.8 projSumUsed=116.47 proj_scale=116.47 result=24651.9
+=== ATOM 13 STAGE 1 ===
+Region: (686,312) to (716,342)
+dx=0 dy=0
+xidx=0 yidx=0 psfSupersample=1
+proj_offset=0 (max=1)
+cols=31 rows=31
+Required pixels=961
+Available pixels=961
+MAX_LOCAL: 31x31
+PASS: Atom 13 passed Stage 1 validation
+=== ATOM STAGE 2 (from cycle 12) ===
+proj_scale=116.47
+Copied 961 pixels to buffers
+PASS: Stage 2 completed
+=== ATOM STAGE 3 (from cycle 11) ===
+Accumulation: sum=24533.1 projSumUsed=116.47
+PASS: Stage 3 completed
+=== ATOM STAGE 4 (from cycle 10) ===
+WRITING Atom 13: sum=24533.1 projSumUsed=116.47 proj_scale=116.47 result=24533.2
+=== ATOM 14 STAGE 1 ===
+Region: (686,331) to (716,361)
+dx=0 dy=0
+xidx=0 yidx=0 psfSupersample=1
+proj_offset=0 (max=1)
+cols=31 rows=31
+Required pixels=961
+Available pixels=961
+MAX_LOCAL: 31x31
+PASS: Atom 14 passed Stage 1 validation
+=== ATOM STAGE 2 (from cycle 13) ===
+proj_scale=116.47
+Copied 961 pixels to buffers
+PASS: Stage 2 completed
+=== ATOM STAGE 3 (from cycle 12) ===
+Accumulation: sum=23444.2 projSumUsed=116.47
+PASS: Stage 3 completed
+=== ATOM STAGE 4 (from cycle 11) ===
+WRITING Atom 14: sum=23444.2 projSumUsed=116.47 proj_scale=116.47 result=23444.3
+=== ATOM 15 STAGE 1 ===
+Region: (687,351) to (717,381)
+dx=0 dy=0
+xidx=0 yidx=0 psfSupersample=1
+proj_offset=0 (max=1)
+cols=31 rows=31
+Required pixels=961
+Available pixels=961
+MAX_LOCAL: 31x31
+PASS: Atom 15 passed Stage 1 validation
+=== ATOM STAGE 2 (from cycle 14) ===
+proj_scale=116.47
+Copied 961 pixels to buffers
+PASS: Stage 2 completed
+=== ATOM STAGE 3 (from cycle 13) ===
+Accumulation: sum=24596.3 projSumUsed=116.47
+PASS: Stage 3 completed
+=== ATOM STAGE 4 (from cycle 12) ===
+WRITING Atom 15: sum=24596.3 projSumUsed=116.47 proj_scale=116.47 result=24596.3
+=== ATOM 16 STAGE 1 ===
+Region: (687,370) to (717,400)
+dx=0 dy=0
+xidx=0 yidx=0 psfSupersample=1
+proj_offset=0 (max=1)
+cols=31 rows=31
+Required pixels=961
+Available pixels=961
+MAX_LOCAL: 31x31
+PASS: Atom 16 passed Stage 1 validation
+=== ATOM STAGE 2 (from cycle 15) ===
+proj_scale=116.47
+Copied 961 pixels to buffers
+PASS: Stage 2 completed
+=== ATOM STAGE 3 (from cycle 14) ===
+Accumulation: sum=23339.8 projSumUsed=116.47
+PASS: Stage 3 completed
+=== ATOM STAGE 4 (from cycle 13) ===
+WRITING Atom 16: sum=23339.8 projSumUsed=116.47 proj_scale=116.47 result=23339.8
+=== ATOM 17 STAGE 1 ===
+Region: (687,389) to (717,419)
+dx=0 dy=0
+xidx=0 yidx=0 psfSupersample=1
+proj_offset=0 (max=1)
+cols=31 rows=31
+Required pixels=961
+Available pixels=961
+MAX_LOCAL: 31x31
+PASS: Atom 17 passed Stage 1 validation
+=== ATOM STAGE 2 (from cycle 16) ===
+proj_scale=116.47
+Copied 961 pixels to buffers
+PASS: Stage 2 completed
+=== ATOM STAGE 3 (from cycle 15) ===
+Accumulation: sum=24526 projSumUsed=116.47
+PASS: Stage 3 completed
+=== ATOM STAGE 4 (from cycle 14) ===
+WRITING Atom 17: sum=24526 projSumUsed=116.47 proj_scale=116.47 result=24526
+=== ATOM 18 STAGE 1 ===
+Region: (688,409) to (718,439)
+dx=0 dy=0
+xidx=0 yidx=0 psfSupersample=1
+proj_offset=0 (max=1)
+cols=31 rows=31
+Required pixels=961
+Available pixels=961
+MAX_LOCAL: 31x31
+PASS: Atom 18 passed Stage 1 validation
+=== ATOM STAGE 2 (from cycle 17) ===
+proj_scale=116.47
+Copied 961 pixels to buffers
+PASS: Stage 2 completed
+=== ATOM STAGE 3 (from cycle 16) ===
+Accumulation: sum=23324.8 projSumUsed=116.47
+PASS: Stage 3 completed
+=== ATOM STAGE 4 (from cycle 15) ===
+WRITING Atom 18: sum=23324.8 projSumUsed=116.47 proj_scale=116.47 result=23324.8
+=== ATOM 19 STAGE 1 ===
+Region: (688,428) to (718,458)
+dx=0 dy=0
+xidx=0 yidx=0 psfSupersample=1
+proj_offset=0 (max=1)
+cols=31 rows=31
+Required pixels=961
+Available pixels=961
+MAX_LOCAL: 31x31
+PASS: Atom 19 passed Stage 1 validation
+=== ATOM STAGE 2 (from cycle 18) ===
+proj_scale=116.47
+Copied 961 pixels to buffers
+PASS: Stage 2 completed
+=== ATOM STAGE 3 (from cycle 17) ===
+Accumulation: sum=24578.4 projSumUsed=116.47
+PASS: Stage 3 completed
+=== ATOM STAGE 4 (from cycle 16) ===
+WRITING Atom 19: sum=24578.4 projSumUsed=116.47 proj_scale=116.47 result=24578.4
+=== ATOM 20 STAGE 1 ===
+Region: (689,448) to (719,478)
+dx=0 dy=0
+xidx=0 yidx=0 psfSupersample=1
+proj_offset=0 (max=1)
+cols=31 rows=31
+Required pixels=961
+Available pixels=961
+MAX_LOCAL: 31x31
+PASS: Atom 20 passed Stage 1 validation
+=== ATOM STAGE 2 (from cycle 19) ===
+proj_scale=116.47
+Copied 961 pixels to buffers
+PASS: Stage 2 completed
+=== ATOM STAGE 3 (from cycle 18) ===
+Accumulation: sum=24524.9 projSumUsed=116.47
+PASS: Stage 3 completed
+=== ATOM STAGE 4 (from cycle 17) ===
+WRITING Atom 20: sum=24524.9 projSumUsed=116.47 proj_scale=116.47 result=24525
+=== ATOM 21 STAGE 1 ===
+Region: (689,467) to (719,497)
+dx=0 dy=0
+xidx=0 yidx=0 psfSupersample=1
+proj_offset=0 (max=1)
+cols=31 rows=31
+Required pixels=961
+Available pixels=961
+MAX_LOCAL: 31x31
+PASS: Atom 21 passed Stage 1 validation
+=== ATOM STAGE 2 (from cycle 20) ===
+proj_scale=116.47
+Copied 961 pixels to buffers
+PASS: Stage 2 completed
+=== ATOM STAGE 3 (from cycle 19) ===
+Accumulation: sum=24543 projSumUsed=116.47
+PASS: Stage 3 completed
+=== ATOM STAGE 4 (from cycle 18) ===
+WRITING Atom 21: sum=24543 projSumUsed=116.47 proj_scale=116.47 result=24543
+=== ATOM 22 STAGE 1 ===
+Region: (690,486) to (720,516)
+dx=0 dy=0
+xidx=0 yidx=0 psfSupersample=1
+proj_offset=0 (max=1)
+cols=31 rows=31
+Required pixels=961
+Available pixels=961
+MAX_LOCAL: 31x31
+PASS: Atom 22 passed Stage 1 validation
+=== ATOM STAGE 2 (from cycle 21) ===
+proj_scale=116.47
+Copied 961 pixels to buffers
+PASS: Stage 2 completed
+=== ATOM STAGE 3 (from cycle 20) ===
+Accumulation: sum=23367.4 projSumUsed=116.47
+PASS: Stage 3 completed
+=== ATOM STAGE 4 (from cycle 19) ===
+WRITING Atom 22: sum=23367.4 projSumUsed=116.47 proj_scale=116.47 result=23367.4
+=== ATOM 23 STAGE 1 ===
+Region: (690,506) to (720,536)
+dx=0 dy=0
+xidx=0 yidx=0 psfSupersample=1
+proj_offset=0 (max=1)
+cols=31 rows=31
+Required pixels=961
+Available pixels=961
+MAX_LOCAL: 31x31
+PASS: Atom 23 passed Stage 1 validation
+=== ATOM STAGE 2 (from cycle 22) ===
+proj_scale=116.47
+Copied 961 pixels to buffers
+PASS: Stage 2 completed
+=== ATOM STAGE 3 (from cycle 21) ===
+Accumulation: sum=24560.3 projSumUsed=116.47
+PASS: Stage 3 completed
+=== ATOM STAGE 4 (from cycle 20) ===
+WRITING Atom 23: sum=24560.3 projSumUsed=116.47 proj_scale=116.47 result=24560.4
+=== ATOM 24 STAGE 1 ===
+Region: (691,525) to (721,555)
+dx=0 dy=0
+xidx=0 yidx=0 psfSupersample=1
+proj_offset=0 (max=1)
+cols=31 rows=31
+Required pixels=961
+Available pixels=961
+MAX_LOCAL: 31x31
+PASS: Atom 24 passed Stage 1 validation
+=== ATOM STAGE 2 (from cycle 23) ===
+proj_scale=116.47
+Copied 961 pixels to buffers
+PASS: Stage 2 completed
+=== ATOM STAGE 3 (from cycle 22) ===
+Accumulation: sum=24623.1 projSumUsed=116.47
+PASS: Stage 3 completed
+=== ATOM STAGE 4 (from cycle 21) ===
+WRITING Atom 24: sum=24623.1 projSumUsed=116.47 proj_scale=116.47 result=24623.1
+=== ATOM 25 STAGE 1 ===
+Region: (691,545) to (721,575)
+dx=0 dy=0
+xidx=0 yidx=0 psfSupersample=1
+proj_offset=0 (max=1)
+cols=31 rows=31
+Required pixels=961
+Available pixels=961
+MAX_LOCAL: 31x31
+PASS: Atom 25 passed Stage 1 validation
+=== ATOM STAGE 2 (from cycle 24) ===
+proj_scale=116.47
+Copied 961 pixels to buffers
+PASS: Stage 2 completed
+=== ATOM STAGE 3 (from cycle 23) ===
+Accumulation: sum=23343.3 projSumUsed=116.47
+PASS: Stage 3 completed
+=== ATOM STAGE 4 (from cycle 22) ===
+WRITING Atom 25: sum=23343.3 projSumUsed=116.47 proj_scale=116.47 result=23343.3
+=== ATOM 26 STAGE 1 ===
+Region: (691,564) to (721,594)
+dx=0 dy=0
+xidx=0 yidx=0 psfSupersample=1
+proj_offset=0 (max=1)
+cols=31 rows=31
+Required pixels=961
+Available pixels=961
+MAX_LOCAL: 31x31
+PASS: Atom 26 passed Stage 1 validation
+=== ATOM STAGE 2 (from cycle 25) ===
+proj_scale=116.47
+Copied 961 pixels to buffers
+PASS: Stage 2 completed
+=== ATOM STAGE 3 (from cycle 24) ===
+Accumulation: sum=23292.5 projSumUsed=116.47
+PASS: Stage 3 completed
+=== ATOM STAGE 4 (from cycle 23) ===
+WRITING Atom 26: sum=23292.5 projSumUsed=116.47 proj_scale=116.47 result=23292.5
+=== ATOM 27 STAGE 1 ===
+Region: (692,583) to (722,613)
+dx=0 dy=0
+xidx=0 yidx=0 psfSupersample=1
+proj_offset=0 (max=1)
+cols=31 rows=31
+Required pixels=961
+Available pixels=961
+MAX_LOCAL: 31x31
+PASS: Atom 27 passed Stage 1 validation
+=== ATOM STAGE 2 (from cycle 26) ===
+proj_scale=116.47
+Copied 961 pixels to buffers
+PASS: Stage 2 completed
+=== ATOM STAGE 3 (from cycle 25) ===
+Accumulation: sum=23355.4 projSumUsed=116.47
+PASS: Stage 3 completed
+=== ATOM STAGE 4 (from cycle 24) ===
+WRITING Atom 27: sum=23355.4 projSumUsed=116.47 proj_scale=116.47 result=23355.4
+=== ATOM 28 STAGE 1 ===
+Region: (692,603) to (722,633)
+dx=0 dy=0
+xidx=0 yidx=0 psfSupersample=1
+proj_offset=0 (max=1)
+cols=31 rows=31
+Required pixels=961
+Available pixels=961
+MAX_LOCAL: 31x31
+PASS: Atom 28 passed Stage 1 validation
+=== ATOM STAGE 2 (from cycle 27) ===
+proj_scale=116.47
+Copied 961 pixels to buffers
+PASS: Stage 2 completed
+=== ATOM STAGE 3 (from cycle 26) ===
+Accumulation: sum=24804.3 projSumUsed=116.47
+PASS: Stage 3 completed
+=== ATOM STAGE 4 (from cycle 25) ===
+WRITING Atom 28: sum=24804.3 projSumUsed=116.47 proj_scale=116.47 result=24804.4
+=== ATOM 29 STAGE 1 ===
+Region: (693,622) to (723,652)
+dx=0 dy=0
+xidx=0 yidx=0 psfSupersample=1
+proj_offset=0 (max=1)
+cols=31 rows=31
+Required pixels=961
+Available pixels=961
+MAX_LOCAL: 31x31
+PASS: Atom 29 passed Stage 1 validation
+=== ATOM STAGE 2 (from cycle 28) ===
+proj_scale=116.47
+Copied 961 pixels to buffers
+PASS: Stage 2 completed
+=== ATOM STAGE 3 (from cycle 27) ===
+Accumulation: sum=24516.3 projSumUsed=116.47
+PASS: Stage 3 completed
+=== ATOM STAGE 4 (from cycle 26) ===
+WRITING Atom 29: sum=24516.3 projSumUsed=116.47 proj_scale=116.47 result=24516.4
+=== ATOM 30 STAGE 1 ===
+Region: (693,642) to (723,672)
+dx=0 dy=0
+xidx=0 yidx=0 psfSupersample=1
+proj_offset=0 (max=1)
+cols=31 rows=31
+Required pixels=961
+Available pixels=961
+MAX_LOCAL: 31x31
+PASS: Atom 30 passed Stage 1 validation
+=== ATOM STAGE 2 (from cycle 29) ===
+proj_scale=116.47
+Copied 961 pixels to buffers
+PASS: Stage 2 completed
+=== ATOM STAGE 3 (from cycle 28) ===
+Accumulation: sum=23510.5 projSumUsed=116.47
+PASS: Stage 3 completed
+=== ATOM STAGE 4 (from cycle 27) ===
+WRITING Atom 30: sum=23510.5 projSumUsed=116.47 proj_scale=116.47 result=23510.6
+=== ATOM 31 STAGE 1 ===
+Region: (694,661) to (724,691)
+dx=0 dy=0
+xidx=0 yidx=0 psfSupersample=1
+proj_offset=0 (max=1)
+cols=31 rows=31
+Required pixels=961
+Available pixels=961
+MAX_LOCAL: 31x31
+PASS: Atom 31 passed Stage 1 validation
+=== ATOM STAGE 2 (from cycle 30) ===
+proj_scale=116.47
+Copied 961 pixels to buffers
+PASS: Stage 2 completed
+=== ATOM STAGE 3 (from cycle 29) ===
+Accumulation: sum=24755.3 projSumUsed=116.47
+PASS: Stage 3 completed
+=== ATOM STAGE 4 (from cycle 28) ===
+WRITING Atom 31: sum=24755.3 projSumUsed=116.47 proj_scale=116.47 result=24755.4
+=== ATOM 32 STAGE 1 ===
+Region: (660,60) to (690,90)
+dx=0 dy=0
+xidx=0 yidx=0 psfSupersample=1
+proj_offset=0 (max=1)
+cols=31 rows=31
+Required pixels=961
+Available pixels=961
+MAX_LOCAL: 31x31
+PASS: Atom 32 passed Stage 1 validation
+=== ATOM STAGE 2 (from cycle 31) ===
+proj_scale=116.47
+Copied 961 pixels to buffers
+PASS: Stage 2 completed
+=== ATOM STAGE 3 (from cycle 30) ===
+Accumulation: sum=23393.2 projSumUsed=116.47
+PASS: Stage 3 completed
+=== ATOM STAGE 4 (from cycle 29) ===
+WRITING Atom 32: sum=23393.2 projSumUsed=116.47 proj_scale=116.47 result=23393.2
+=== ATOM 33 STAGE 1 ===
+Region: (660,79) to (690,109)
+dx=0 dy=0
+xidx=0 yidx=0 psfSupersample=1
+proj_offset=0 (max=1)
+cols=31 rows=31
+Required pixels=961
+Available pixels=961
+MAX_LOCAL: 31x31
+PASS: Atom 33 passed Stage 1 validation
+=== ATOM STAGE 2 (from cycle 32) ===
+proj_scale=116.47
+Copied 961 pixels to buffers
+PASS: Stage 2 completed
+=== ATOM STAGE 3 (from cycle 31) ===
+Accumulation: sum=23388.4 projSumUsed=116.47
+PASS: Stage 3 completed
+=== ATOM STAGE 4 (from cycle 30) ===
+WRITING Atom 33: sum=23388.4 projSumUsed=116.47 proj_scale=116.47 result=23388.5
+=== ATOM 34 STAGE 1 ===
+Region: (661,99) to (691,129)
+dx=0 dy=0
+xidx=0 yidx=0 psfSupersample=1
+proj_offset=0 (max=1)
+cols=31 rows=31
+Required pixels=961
+Available pixels=961
+MAX_LOCAL: 31x31
+PASS: Atom 34 passed Stage 1 validation
+=== ATOM STAGE 2 (from cycle 33) ===
+proj_scale=116.47
+Copied 961 pixels to buffers
+PASS: Stage 2 completed
+=== ATOM STAGE 3 (from cycle 32) ===
+Accumulation: sum=24510.8 projSumUsed=116.47
+PASS: Stage 3 completed
+=== ATOM STAGE 4 (from cycle 31) ===
+WRITING Atom 34: sum=24510.8 projSumUsed=116.47 proj_scale=116.47 result=24510.8
+=== ATOM 35 STAGE 1 ===
+Region: (661,118) to (691,148)
+dx=0 dy=0
+xidx=0 yidx=0 psfSupersample=1
+proj_offset=0 (max=1)
+cols=31 rows=31
+Required pixels=961
+Available pixels=961
+MAX_LOCAL: 31x31
+PASS: Atom 35 passed Stage 1 validation
+=== ATOM STAGE 2 (from cycle 34) ===
+proj_scale=116.47
+Copied 961 pixels to buffers
+PASS: Stage 2 completed
+=== ATOM STAGE 3 (from cycle 33) ===
+Accumulation: sum=24536.3 projSumUsed=116.47
+PASS: Stage 3 completed
+=== ATOM STAGE 4 (from cycle 32) ===
+WRITING Atom 35: sum=24536.3 projSumUsed=116.47 proj_scale=116.47 result=24536.3
+=== ATOM 36 STAGE 1 ===
+Region: (662,138) to (692,168)
+dx=0 dy=0
+xidx=0 yidx=0 psfSupersample=1
+proj_offset=0 (max=1)
+cols=31 rows=31
+Required pixels=961
+Available pixels=961
+MAX_LOCAL: 31x31
+PASS: Atom 36 passed Stage 1 validation
+=== ATOM STAGE 2 (from cycle 35) ===
+proj_scale=116.47
+Copied 961 pixels to buffers
+PASS: Stage 2 completed
+=== ATOM STAGE 3 (from cycle 34) ===
+Accumulation: sum=24735.3 projSumUsed=116.47
+PASS: Stage 3 completed
+=== ATOM STAGE 4 (from cycle 33) ===
+WRITING Atom 36: sum=24735.3 projSumUsed=116.47 proj_scale=116.47 result=24735.3
+=== ATOM 37 STAGE 1 ===
+Region: (662,157) to (692,187)
+dx=0 dy=0
+xidx=0 yidx=0 psfSupersample=1
+proj_offset=0 (max=1)
+cols=31 rows=31
+Required pixels=961
+Available pixels=961
+MAX_LOCAL: 31x31
+PASS: Atom 37 passed Stage 1 validation
+=== ATOM STAGE 2 (from cycle 36) ===
+proj_scale=116.47
+Copied 961 pixels to buffers
+PASS: Stage 2 completed
+=== ATOM STAGE 3 (from cycle 35) ===
+Accumulation: sum=23505 projSumUsed=116.47
+PASS: Stage 3 completed
+=== ATOM STAGE 4 (from cycle 34) ===
+WRITING Atom 37: sum=23505 projSumUsed=116.47 proj_scale=116.47 result=23505.1
+=== ATOM 38 STAGE 1 ===
+Region: (662,176) to (692,206)
+dx=0 dy=0
+xidx=0 yidx=0 psfSupersample=1
+proj_offset=0 (max=1)
+cols=31 rows=31
+Required pixels=961
+Available pixels=961
+MAX_LOCAL: 31x31
+PASS: Atom 38 passed Stage 1 validation
+=== ATOM STAGE 2 (from cycle 37) ===
+proj_scale=116.47
+Copied 961 pixels to buffers
+PASS: Stage 2 completed
+=== ATOM STAGE 3 (from cycle 36) ===
+Accumulation: sum=24572.2 projSumUsed=116.47
+PASS: Stage 3 completed
+=== ATOM STAGE 4 (from cycle 35) ===
+WRITING Atom 38: sum=24572.2 projSumUsed=116.47 proj_scale=116.47 result=24572.2
+=== ATOM 39 STAGE 1 ===
+Region: (663,196) to (693,226)
+dx=0 dy=0
+xidx=0 yidx=0 psfSupersample=1
+proj_offset=0 (max=1)

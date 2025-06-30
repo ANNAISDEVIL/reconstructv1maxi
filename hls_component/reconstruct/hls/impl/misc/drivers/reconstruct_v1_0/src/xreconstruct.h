@@ -101,6 +101,8 @@ u32 XReconstruct_IsReady(XReconstruct *InstancePtr);
 void XReconstruct_EnableAutoRestart(XReconstruct *InstancePtr);
 void XReconstruct_DisableAutoRestart(XReconstruct *InstancePtr);
 
+void XReconstruct_Set_atomLocations_offset(XReconstruct *InstancePtr, u64 Data);
+u64 XReconstruct_Get_atomLocations_offset(XReconstruct *InstancePtr);
 void XReconstruct_Set_imageProjs_local_offset(XReconstruct *InstancePtr, u64 Data);
 u64 XReconstruct_Get_imageProjs_local_offset(XReconstruct *InstancePtr);
 void XReconstruct_Set_imageProjs_offset(XReconstruct *InstancePtr, u64 Data);
@@ -125,8 +127,6 @@ void XReconstruct_Set_fullImage_rows(XReconstruct *InstancePtr, u32 Data);
 u32 XReconstruct_Get_fullImage_rows(XReconstruct *InstancePtr);
 void XReconstruct_Set_fullImage_cols(XReconstruct *InstancePtr, u32 Data);
 u32 XReconstruct_Get_fullImage_cols(XReconstruct *InstancePtr);
-u32 XReconstruct_Get_emission_cnt(XReconstruct *InstancePtr);
-u32 XReconstruct_Get_emission_cnt_vld(XReconstruct *InstancePtr);
 
 void XReconstruct_InterruptGlobalEnable(XReconstruct *InstancePtr);
 void XReconstruct_InterruptGlobalDisable(XReconstruct *InstancePtr);

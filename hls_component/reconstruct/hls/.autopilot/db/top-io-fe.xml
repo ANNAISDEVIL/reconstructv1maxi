@@ -16,9 +16,13 @@
           <constraint constraint_type="pragma interface" mode="s_axilite" register_option="0" offset="32"/>
         </hw>
       </arg>
-      <arg id="3" access_type="r" src_name="atomLocations" src_type="*" src_isptr="1" src_bitwidth="128" src_size_or_depth="100">
-        <hw hw_usage="data" hw_interface="BRAM" hw_name="atomLocations" hw_bitwidth="128" hw_size_or_depth="100" hw_kernel_support="false">
-          <constraint constraint_type="pragma interface" mode="ap_memory" register_option="0"/>
+      <arg id="3" access_type="r" src_name="atomLocations" src_type="*" src_isptr="1" src_bitwidth="64" src_size_or_depth="1024">
+        <hw hw_usage="data" hw_interface="MAXI" hw_name="atomLocations" hw_bitwidth="64" hw_size_or_depth="0" hw_kernel_support="true">
+          <constraint constraint_type="pragma interface" mode="m_axi" register_option="0" offset="slave" latency="0" num_read_outstanding="16" num_write_outstanding="16" max_read_burst_length="16" max_write_burst_length="16" max_widen_bitwidth="0" channel_id="0"/>
+          <constraint constraint_type="bitwidth" orig_bitwidth="64" final_bitwidth="64"/>
+        </hw>
+        <hw hw_usage="address" hw_interface="S_AXILite" hw_name="control" hw_bitwidth="64" hw_size_or_depth="0" hw_kernel_support="true">
+          <constraint constraint_type="pragma interface" mode="s_axilite" register_option="0" offset="16"/>
         </hw>
       </arg>
       <arg id="4" access_type="r" src_name="psfSupersample" src_type="int" src_isptr="0" src_bitwidth="32" src_size_or_depth="1">
@@ -31,26 +35,17 @@
           <constraint constraint_type="pragma interface" mode="s_axilite" register_option="0" offset="48"/>
         </hw>
       </arg>
-      <arg id="6" access_type="r" src_name="imageProjs_local" src_type="double*" src_isptr="1" src_bitwidth="64" src_size_or_depth="100000">
-        <hw hw_usage="data" hw_interface="MAXI" hw_name="imageProjs_local" hw_bitwidth="64" hw_size_or_depth="0" hw_kernel_support="true">
+      <arg id="6" access_type="r" src_name="imageProjs_local" src_type="float*" src_isptr="1" src_bitwidth="32" src_size_or_depth="1048576">
+        <hw hw_usage="data" hw_interface="MAXI" hw_name="imageProjs_local" hw_bitwidth="32" hw_size_or_depth="0" hw_kernel_support="true">
           <constraint constraint_type="pragma interface" mode="m_axi" register_option="0" offset="slave" latency="0" num_read_outstanding="16" num_write_outstanding="16" max_read_burst_length="16" max_write_burst_length="16" max_widen_bitwidth="0" channel_id="0"/>
-          <constraint constraint_type="bitwidth" orig_bitwidth="64" final_bitwidth="64"/>
+          <constraint constraint_type="bitwidth" orig_bitwidth="32" final_bitwidth="32"/>
         </hw>
-        <hw hw_usage="address" hw_interface="S_AXILite" hw_name="control" hw_bitwidth="64" hw_size_or_depth="0" hw_kernel_support="true">
-          <constraint constraint_type="pragma interface" mode="s_axilite" register_option="0" offset="16"/>
-        </hw>
-      </arg>
-      <arg id="7" access_type="r" src_name="imageProjs" src_type="double*" src_isptr="1" src_bitwidth="64" src_size_or_depth="100">
-        <hw hw_usage="data" hw_interface="MAXI" hw_name="imageProjs" hw_bitwidth="64" hw_size_or_depth="0" hw_kernel_support="true">
-          <constraint constraint_type="pragma interface" mode="m_axi" register_option="0" offset="slave" latency="0" num_read_outstanding="16" num_write_outstanding="16" max_read_burst_length="16" max_write_burst_length="16" max_widen_bitwidth="0" channel_id="0"/>
-          <constraint constraint_type="bitwidth" orig_bitwidth="64" final_bitwidth="64"/>
-        </hw>
-        <hw hw_usage="address" hw_interface="S_AXILite" hw_name="control" hw_bitwidth="64" hw_size_or_depth="0" hw_kernel_support="true">
+        <hw hw_usage="address" hw_interface="S_AXILite" hw_name="control" hw_bitwidth="32" hw_size_or_depth="0" hw_kernel_support="true">
           <constraint constraint_type="pragma interface" mode="s_axilite" register_option="0" offset="28"/>
         </hw>
       </arg>
-      <arg id="8" access_type="r" src_name="imageProjs_local_size" src_type="int*" src_isptr="1" src_bitwidth="32" src_size_or_depth="100">
-        <hw hw_usage="data" hw_interface="MAXI" hw_name="imageProjs_local_size" hw_bitwidth="32" hw_size_or_depth="0" hw_kernel_support="true">
+      <arg id="7" access_type="r" src_name="imageProjs" src_type="float*" src_isptr="1" src_bitwidth="32" src_size_or_depth="1024">
+        <hw hw_usage="data" hw_interface="MAXI" hw_name="imageProjs" hw_bitwidth="32" hw_size_or_depth="0" hw_kernel_support="true">
           <constraint constraint_type="pragma interface" mode="m_axi" register_option="0" offset="slave" latency="0" num_read_outstanding="16" num_write_outstanding="16" max_read_burst_length="16" max_write_burst_length="16" max_widen_bitwidth="0" channel_id="0"/>
           <constraint constraint_type="bitwidth" orig_bitwidth="32" final_bitwidth="32"/>
         </hw>
@@ -58,13 +53,22 @@
           <constraint constraint_type="pragma interface" mode="s_axilite" register_option="0" offset="40"/>
         </hw>
       </arg>
-      <arg id="9" access_type="r" src_name="fullImage" src_type="double*" src_isptr="1" src_bitwidth="64" src_size_or_depth="65536">
-        <hw hw_usage="data" hw_interface="MAXI" hw_name="fullImage" hw_bitwidth="64" hw_size_or_depth="0" hw_kernel_support="true">
+      <arg id="8" access_type="" src_name="imageProjs_local_size" src_type="int*" src_isptr="1" src_bitwidth="32" src_size_or_depth="1024">
+        <hw hw_usage="data" hw_interface="MAXI" hw_name="imageProjs_local_size" hw_bitwidth="32" hw_size_or_depth="0" hw_kernel_support="true">
           <constraint constraint_type="pragma interface" mode="m_axi" register_option="0" offset="slave" latency="0" num_read_outstanding="16" num_write_outstanding="16" max_read_burst_length="16" max_write_burst_length="16" max_widen_bitwidth="0" channel_id="0"/>
-          <constraint constraint_type="bitwidth" orig_bitwidth="64" final_bitwidth="64"/>
+          <constraint constraint_type="bitwidth" orig_bitwidth="32" final_bitwidth="32"/>
         </hw>
-        <hw hw_usage="address" hw_interface="S_AXILite" hw_name="control" hw_bitwidth="64" hw_size_or_depth="0" hw_kernel_support="true">
+        <hw hw_usage="address" hw_interface="S_AXILite" hw_name="control" hw_bitwidth="32" hw_size_or_depth="0" hw_kernel_support="true">
           <constraint constraint_type="pragma interface" mode="s_axilite" register_option="0" offset="52"/>
+        </hw>
+      </arg>
+      <arg id="9" access_type="r" src_name="fullImage" src_type="float*" src_isptr="1" src_bitwidth="32" src_size_or_depth="589824">
+        <hw hw_usage="data" hw_interface="MAXI" hw_name="fullImage" hw_bitwidth="32" hw_size_or_depth="0" hw_kernel_support="true">
+          <constraint constraint_type="pragma interface" mode="m_axi" register_option="0" offset="slave" latency="0" num_read_outstanding="16" num_write_outstanding="16" max_read_burst_length="16" max_write_burst_length="16" max_widen_bitwidth="0" channel_id="0"/>
+          <constraint constraint_type="bitwidth" orig_bitwidth="32" final_bitwidth="32"/>
+        </hw>
+        <hw hw_usage="address" hw_interface="S_AXILite" hw_name="control" hw_bitwidth="32" hw_size_or_depth="0" hw_kernel_support="true">
+          <constraint constraint_type="pragma interface" mode="s_axilite" register_option="0" offset="64"/>
         </hw>
       </arg>
       <arg id="10" access_type="r" src_name="fullImage_rows" src_type="int" src_isptr="0" src_bitwidth="32" src_size_or_depth="1">
@@ -77,18 +81,13 @@
           <constraint constraint_type="pragma interface" mode="s_axilite" register_option="0" offset="64"/>
         </hw>
       </arg>
-      <arg id="12" access_type="w" src_name="emissions" src_type="double*" src_isptr="1" src_bitwidth="64" src_size_or_depth="1000">
-        <hw hw_usage="data" hw_interface="MAXI" hw_name="emissions" hw_bitwidth="64" hw_size_or_depth="0" hw_kernel_support="true">
+      <arg id="12" access_type="w" src_name="emissions" src_type="float*" src_isptr="1" src_bitwidth="32" src_size_or_depth="1024">
+        <hw hw_usage="data" hw_interface="MAXI" hw_name="emissions" hw_bitwidth="32" hw_size_or_depth="0" hw_kernel_support="true">
           <constraint constraint_type="pragma interface" mode="m_axi" register_option="0" offset="slave" latency="0" num_read_outstanding="16" num_write_outstanding="16" max_read_burst_length="16" max_write_burst_length="16" max_widen_bitwidth="0" channel_id="0"/>
-          <constraint constraint_type="bitwidth" orig_bitwidth="64" final_bitwidth="64"/>
+          <constraint constraint_type="bitwidth" orig_bitwidth="32" final_bitwidth="32"/>
         </hw>
-        <hw hw_usage="address" hw_interface="S_AXILite" hw_name="control" hw_bitwidth="64" hw_size_or_depth="0" hw_kernel_support="true">
-          <constraint constraint_type="pragma interface" mode="s_axilite" register_option="0" offset="64"/>
-        </hw>
-      </arg>
-      <arg id="13" access_type="w" src_name="emission_cnt" src_type="unsigned int&amp;" src_isptr="1" src_bitwidth="32" src_size_or_depth="1">
-        <hw hw_usage="data" hw_interface="S_AXILite" hw_name="scalar_data" hw_bitwidth="32" hw_size_or_depth="1" hw_kernel_support="true">
-          <constraint constraint_type="pragma interface" mode="s_axilite" register_option="0" offset="72"/>
+        <hw hw_usage="address" hw_interface="S_AXILite" hw_name="control" hw_bitwidth="32" hw_size_or_depth="0" hw_kernel_support="true">
+          <constraint constraint_type="pragma interface" mode="s_axilite" register_option="0" offset="76"/>
         </hw>
       </arg>
     </args>
