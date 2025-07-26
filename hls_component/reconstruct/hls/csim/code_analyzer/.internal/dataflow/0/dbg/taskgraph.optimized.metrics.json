@@ -1,7 +1,7 @@
 [
     {
         "name": "_Z11reconstructiiiP13atom_locationiiPfS1_PiS1_iiS1_",
-        "df_function": "%F358",
+        "df_function": "%F361",
         "df_type": "Function",
         "project": "SLX",
         "processes": {
@@ -11,12 +11,12 @@
                 "src_range": {
                     "start_loc": {
                         "file": "F:\\LMU\\quantumMA\\opimization\\reconstructv1maxi\\image_analysis.cpp",
-                        "line": 116,
+                        "line": 207,
                         "column": 1
                     },
                     "end_loc": {
                         "file": "F:\\LMU\\quantumMA\\opimization\\reconstructv1maxi\\image_analysis.cpp",
-                        "line": 171,
+                        "line": 265,
                         "column": 1
                     }
                 },
@@ -29,12 +29,12 @@
                 "src_range": {
                     "start_loc": {
                         "file": "F:\\LMU\\quantumMA\\opimization\\reconstructv1maxi\\image_analysis.cpp",
-                        "line": 116,
+                        "line": 207,
                         "column": 1
                     },
                     "end_loc": {
                         "file": "F:\\LMU\\quantumMA\\opimization\\reconstructv1maxi\\image_analysis.cpp",
-                        "line": 171,
+                        "line": 265,
                         "column": 1
                     }
                 },
@@ -43,16 +43,16 @@
             },
             "3": {
                 "id": "3",
-                "name": "Region<OutlineCall(R2 reconstruct) BB 'codeRepl' [Switch,Atomic] 'Outline_T3_F358_R2_Loop'>",
+                "name": "Region<OutlineCall(R2 reconstruct) BB 'codeRepl' [Switch,Atomic] 'Outline_T3_F361_R2_Loop'>",
                 "src_range": {
                     "start_loc": {
                         "file": "F:\\LMU\\quantumMA\\opimization\\reconstructv1maxi\\image_analysis.cpp",
-                        "line": 149,
+                        "line": 241,
                         "column": 5
                     },
                     "end_loc": {
                         "file": "F:\\LMU\\quantumMA\\opimization\\reconstructv1maxi\\image_analysis.cpp",
-                        "line": 170,
+                        "line": 264,
                         "column": 5
                     }
                 },
@@ -64,10 +64,10 @@
                             "variable": {
                                 "location": {
                                     "file": "F:\\LMU\\quantumMA\\opimization\\reconstructv1maxi\\image_analysis.cpp",
-                                    "line": 116,
+                                    "line": 207,
                                     "column": 0
                                 },
-                                "id": "VId_433_[?(?,64)]dc.A0(0,32)",
+                                "id": "VId_457_[?(?,64)]dc.A0(0,32)",
                                 "name": "atomLocations[*].x",
                                 "display_name": "float atom_location::x"
                             },
@@ -82,7 +82,7 @@
                                     "src_loc": {
                                         "file": "F:\\LMU\\quantumMA\\opimization\\reconstructv1maxi\\image_analysis.cpp",
                                         "line": 8,
-                                        "column": 17
+                                        "column": 25
                                     },
                                     "access_type": "float",
                                     "access_bit_width": 32,
@@ -98,10 +98,10 @@
                             "variable": {
                                 "location": {
                                     "file": "F:\\LMU\\quantumMA\\opimization\\reconstructv1maxi\\image_analysis.cpp",
-                                    "line": 116,
+                                    "line": 207,
                                     "column": 0
                                 },
-                                "id": "VId_433_[?(?,64)]dc.A1(32,32)",
+                                "id": "VId_457_[?(?,64)]dc.A1(32,32)",
                                 "name": "atomLocations[*].y",
                                 "display_name": "float atom_location::y"
                             },
@@ -116,7 +116,7 @@
                                     "src_loc": {
                                         "file": "F:\\LMU\\quantumMA\\opimization\\reconstructv1maxi\\image_analysis.cpp",
                                         "line": 8,
-                                        "column": 17
+                                        "column": 25
                                     },
                                     "access_type": "float",
                                     "access_bit_width": 32,
@@ -132,12 +132,12 @@
                             "variable": {
                                 "location": {
                                     "file": "F:\\LMU\\quantumMA\\opimization\\reconstructv1maxi\\image_analysis.cpp",
-                                    "line": 122,
+                                    "line": 213,
                                     "column": 0
                                 },
-                                "id": "VId_439_[?(?,32)]dc",
+                                "id": "VId_463_[?(?,32)]dc",
                                 "name": "fullImage[*]",
-                                "display_name": "float fullImage[589824]"
+                                "display_name": "float fullImage[65536]"
                             },
                             "reads": [
                                 {
@@ -149,7 +149,7 @@
                                     "instr": "load",
                                     "src_loc": {
                                         "file": "F:\\LMU\\quantumMA\\opimization\\reconstructv1maxi\\image_analysis.cpp",
-                                        "line": 81,
+                                        "line": 87,
                                         "column": 36
                                     },
                                     "access_type": "float",
@@ -166,12 +166,12 @@
                             "variable": {
                                 "location": {
                                     "file": "F:\\LMU\\quantumMA\\opimization\\reconstructv1maxi\\image_analysis.cpp",
-                                    "line": 119,
+                                    "line": 210,
                                     "column": 0
                                 },
-                                "id": "VId_436_[?(?,32)]dc",
+                                "id": "VId_460_[?(?,32)]dc",
                                 "name": "imageProjs_local[*]",
-                                "display_name": "float imageProjs_local[1048576]"
+                                "display_name": "float imageProjs_local[100000]"
                             },
                             "reads": [
                                 {
@@ -188,7 +188,7 @@
                                     "instr": "load",
                                     "src_loc": {
                                         "file": "F:\\LMU\\quantumMA\\opimization\\reconstructv1maxi\\image_analysis.cpp",
-                                        "line": 80,
+                                        "line": 86,
                                         "column": 37
                                     },
                                     "access_type": "float",
@@ -205,12 +205,12 @@
                             "variable": {
                                 "location": {
                                     "file": "F:\\LMU\\quantumMA\\opimization\\reconstructv1maxi\\image_analysis.cpp",
-                                    "line": 120,
+                                    "line": 211,
                                     "column": 0
                                 },
-                                "id": "VId_437_[?(?,32)]dc",
+                                "id": "VId_461_[?(?,32)]dc",
                                 "name": "imageProjs[*]",
-                                "display_name": "float imageProjs[1024]"
+                                "display_name": "float imageProjs[100]"
                             },
                             "reads": [
                                 {
@@ -227,7 +227,7 @@
                                     "instr": "load",
                                     "src_loc": {
                                         "file": "F:\\LMU\\quantumMA\\opimization\\reconstructv1maxi\\image_analysis.cpp",
-                                        "line": 94,
+                                        "line": 100,
                                         "column": 23
                                     },
                                     "access_type": "float",
@@ -244,10 +244,10 @@
                             "variable": {
                                 "location": {
                                     "file": "F:\\LMU\\quantumMA\\opimization\\reconstructv1maxi\\image_analysis.cpp",
-                                    "line": 123,
+                                    "line": 214,
                                     "column": 0
                                 },
-                                "id": "VId_442_*0(0,32)arg+?(?,32)",
+                                "id": "VId_466_*0(0,32)arg+?(?,32)",
                                 "name": "(*emissions)",
                                 "display_name": "float *emissions"
                             },
@@ -262,7 +262,7 @@
                                     "instr": "store",
                                     "src_loc": {
                                         "file": "F:\\LMU\\quantumMA\\opimization\\reconstructv1maxi\\image_analysis.cpp",
-                                        "line": 113,
+                                        "line": 204,
                                         "column": 10
                                     },
                                     "access_type": "float",
@@ -278,10 +278,10 @@
                             "variable": {
                                 "location": {
                                     "file": "F:\\LMU\\quantumMA\\opimization\\reconstructv1maxi\\image_analysis.cpp",
-                                    "line": 116,
+                                    "line": 207,
                                     "column": 0
                                 },
-                                "id": "VId_430_!c?(?,?)",
+                                "id": "VId_454_!c?(?,?)",
                                 "name": "atomLocationsSize",
                                 "display_name": "int atomLocationsSize"
                             },
@@ -310,10 +310,10 @@
                             "variable": {
                                 "location": {
                                     "file": "F:\\LMU\\quantumMA\\opimization\\reconstructv1maxi\\image_analysis.cpp",
-                                    "line": 117,
+                                    "line": 208,
                                     "column": 0
                                 },
-                                "id": "VId_434_!c?(?,?)",
+                                "id": "VId_458_!c?(?,?)",
                                 "name": "psfSupersample",
                                 "display_name": "int psfSupersample"
                             },
@@ -342,10 +342,10 @@
                             "variable": {
                                 "location": {
                                     "file": "F:\\LMU\\quantumMA\\opimization\\reconstructv1maxi\\image_analysis.cpp",
-                                    "line": 116,
+                                    "line": 207,
                                     "column": 0
                                 },
-                                "id": "VId_431_!c?(?,?)",
+                                "id": "VId_455_!c?(?,?)",
                                 "name": "projShape0",
                                 "display_name": "int projShape0"
                             },
@@ -374,10 +374,10 @@
                             "variable": {
                                 "location": {
                                     "file": "F:\\LMU\\quantumMA\\opimization\\reconstructv1maxi\\image_analysis.cpp",
-                                    "line": 116,
+                                    "line": 207,
                                     "column": 0
                                 },
-                                "id": "VId_432_!c?(?,?)",
+                                "id": "VId_456_!c?(?,?)",
                                 "name": "projShape1",
                                 "display_name": "int projShape1"
                             },
@@ -405,91 +405,91 @@
                     ]
                 },
                 "metrics": {
-                    "initiation_interval": 7544836
+                    "initiation_interval": 1319940
                 },
                 "subregions": [
                     {
-                        "id": "%F365_R1",
+                        "id": "%F370_R1",
                         "description": "<switch>",
                         "src_range": {
                             "start_loc": {
                                 "file": "F:\\LMU\\quantumMA\\opimization\\reconstructv1maxi\\image_analysis.cpp",
-                                "line": 149,
+                                "line": 241,
                                 "column": 5
                             },
                             "end_loc": {
                                 "file": "F:\\LMU\\quantumMA\\opimization\\reconstructv1maxi\\image_analysis.cpp",
-                                "line": 170,
+                                "line": 264,
                                 "column": 5
                             }
                         }
                     },
                     {
-                        "id": "%F365_R15",
+                        "id": "%F370_R15",
                         "description": "<function exit>"
                     }
                 ],
                 "subdataflow": [
-                    {
-                        "id": "%F359",
-                        "region_type": "Function",
-                        "src_range": {
-                            "start_loc": {
-                                "file": "F:\\LMU\\quantumMA\\opimization\\reconstructv1maxi\\image_analysis.cpp",
-                                "line": 165,
-                                "column": 9
-                            },
-                            "end_loc": {
-                                "file": "F:\\LMU\\quantumMA\\opimization\\reconstructv1maxi\\image_analysis.cpp",
-                                "line": 165,
-                                "column": 102
-                            }
-                        }
-                    },
-                    {
-                        "id": "%F360",
-                        "region_type": "Function",
-                        "src_range": {
-                            "start_loc": {
-                                "file": "F:\\LMU\\quantumMA\\opimization\\reconstructv1maxi\\image_analysis.cpp",
-                                "line": 166,
-                                "column": 9
-                            },
-                            "end_loc": {
-                                "file": "F:\\LMU\\quantumMA\\opimization\\reconstructv1maxi\\image_analysis.cpp",
-                                "line": 167,
-                                "column": 75
-                            }
-                        }
-                    },
-                    {
-                        "id": "%F361",
-                        "region_type": "Function",
-                        "src_range": {
-                            "start_loc": {
-                                "file": "F:\\LMU\\quantumMA\\opimization\\reconstructv1maxi\\image_analysis.cpp",
-                                "line": 168,
-                                "column": 9
-                            },
-                            "end_loc": {
-                                "file": "F:\\LMU\\quantumMA\\opimization\\reconstructv1maxi\\image_analysis.cpp",
-                                "line": 168,
-                                "column": 70
-                            }
-                        }
-                    },
                     {
                         "id": "%F362",
                         "region_type": "Function",
                         "src_range": {
                             "start_loc": {
                                 "file": "F:\\LMU\\quantumMA\\opimization\\reconstructv1maxi\\image_analysis.cpp",
-                                "line": 169,
+                                "line": 258,
                                 "column": 9
                             },
                             "end_loc": {
                                 "file": "F:\\LMU\\quantumMA\\opimization\\reconstructv1maxi\\image_analysis.cpp",
-                                "line": 169,
+                                "line": 258,
+                                "column": 102
+                            }
+                        }
+                    },
+                    {
+                        "id": "%F363",
+                        "region_type": "Function",
+                        "src_range": {
+                            "start_loc": {
+                                "file": "F:\\LMU\\quantumMA\\opimization\\reconstructv1maxi\\image_analysis.cpp",
+                                "line": 259,
+                                "column": 9
+                            },
+                            "end_loc": {
+                                "file": "F:\\LMU\\quantumMA\\opimization\\reconstructv1maxi\\image_analysis.cpp",
+                                "line": 260,
+                                "column": 75
+                            }
+                        }
+                    },
+                    {
+                        "id": "%F364",
+                        "region_type": "Function",
+                        "src_range": {
+                            "start_loc": {
+                                "file": "F:\\LMU\\quantumMA\\opimization\\reconstructv1maxi\\image_analysis.cpp",
+                                "line": 262,
+                                "column": 9
+                            },
+                            "end_loc": {
+                                "file": "F:\\LMU\\quantumMA\\opimization\\reconstructv1maxi\\image_analysis.cpp",
+                                "line": 262,
+                                "column": 74
+                            }
+                        }
+                    },
+                    {
+                        "id": "%F365",
+                        "region_type": "Function",
+                        "src_range": {
+                            "start_loc": {
+                                "file": "F:\\LMU\\quantumMA\\opimization\\reconstructv1maxi\\image_analysis.cpp",
+                                "line": 263,
+                                "column": 9
+                            },
+                            "end_loc": {
+                                "file": "F:\\LMU\\quantumMA\\opimization\\reconstructv1maxi\\image_analysis.cpp",
+                                "line": 263,
                                 "column": 71
                             }
                         }
@@ -499,12 +499,12 @@
                     {
                         "type": "LoopGuidance",
                         "ti": {
-                            "min": 7544832,
-                            "max": 7544832
+                            "min": 1319936,
+                            "max": 1319936
                         },
                         "ii": {
-                            "min": 7368,
-                            "max": 7368
+                            "min": 1289,
+                            "max": 1289
                         },
                         "effective_tc": {
                             "min": 1024,
@@ -514,20 +514,60 @@
                             "min": 1024,
                             "max": 1024
                         },
-                        "ureg_id": "%L16",
+                        "ureg_id": "%L22",
                         "src_range": {
                             "start_loc": {
                                 "file": "F:\\LMU\\quantumMA\\opimization\\reconstructv1maxi\\image_analysis.cpp",
-                                "line": 149,
+                                "line": 241,
                                 "column": 5
                             },
                             "end_loc": {
                                 "file": "F:\\LMU\\quantumMA\\opimization\\reconstructv1maxi\\image_analysis.cpp",
-                                "line": 170,
+                                "line": 264,
                                 "column": 5
                             }
                         },
                         "details": [
+                            {
+                                "type": "MemPortContention",
+                                "available_ports": {
+                                    "min": 2,
+                                    "max": 2
+                                },
+                                "required_ports": {
+                                    "min": 2,
+                                    "max": 2
+                                },
+                                "ii_lower_bound": {
+                                    "min": 1,
+                                    "max": 1
+                                },
+                                "variable": {
+                                    "name": "unnamed",
+                                    "display_name": "unnamed",
+                                    "id": "472"
+                                }
+                            },
+                            {
+                                "type": "MemPortContention",
+                                "available_ports": {
+                                    "min": 2,
+                                    "max": 2
+                                },
+                                "required_ports": {
+                                    "min": 2,
+                                    "max": 2
+                                },
+                                "ii_lower_bound": {
+                                    "min": 1,
+                                    "max": 1
+                                },
+                                "variable": {
+                                    "name": "unnamed",
+                                    "display_name": "unnamed",
+                                    "id": "473"
+                                }
+                            },
                             {
                                 "type": "CyclicDependence",
                                 "ii_lower_bound": {
@@ -544,7 +584,7 @@
                                         "id": "<unknown>",
                                         "location": {
                                             "file": "F:\\LMU\\quantumMA\\opimization\\reconstructv1maxi\\image_analysis.cpp",
-                                            "line": 149,
+                                            "line": 241,
                                             "column": 61
                                         }
                                     }
@@ -558,16 +598,16 @@
                             "min": 31,
                             "max": 31
                         },
-                        "ureg_id": "%F359",
+                        "ureg_id": "%F362",
                         "src_range": {
                             "start_loc": {
                                 "file": "F:\\LMU\\quantumMA\\opimization\\reconstructv1maxi\\image_analysis.cpp",
-                                "line": 165,
+                                "line": 258,
                                 "column": 9
                             },
                             "end_loc": {
                                 "file": "F:\\LMU\\quantumMA\\opimization\\reconstructv1maxi\\image_analysis.cpp",
-                                "line": 165,
+                                "line": 258,
                                 "column": 102
                             }
                         }
@@ -575,19 +615,19 @@
                     {
                         "type": "CallGuidance",
                         "ti": {
-                            "min": 2886,
-                            "max": 2886
+                            "min": 995,
+                            "max": 995
                         },
-                        "ureg_id": "%F360",
+                        "ureg_id": "%F363",
                         "src_range": {
                             "start_loc": {
                                 "file": "F:\\LMU\\quantumMA\\opimization\\reconstructv1maxi\\image_analysis.cpp",
-                                "line": 166,
+                                "line": 259,
                                 "column": 9
                             },
                             "end_loc": {
                                 "file": "F:\\LMU\\quantumMA\\opimization\\reconstructv1maxi\\image_analysis.cpp",
-                                "line": 167,
+                                "line": 260,
                                 "column": 75
                             }
                         }
@@ -595,20 +635,20 @@
                     {
                         "type": "CallGuidance",
                         "ti": {
-                            "min": 4435,
-                            "max": 4435
+                            "min": 247,
+                            "max": 247
                         },
-                        "ureg_id": "%F361",
+                        "ureg_id": "%F364",
                         "src_range": {
                             "start_loc": {
                                 "file": "F:\\LMU\\quantumMA\\opimization\\reconstructv1maxi\\image_analysis.cpp",
-                                "line": 168,
+                                "line": 262,
                                 "column": 9
                             },
                             "end_loc": {
                                 "file": "F:\\LMU\\quantumMA\\opimization\\reconstructv1maxi\\image_analysis.cpp",
-                                "line": 168,
-                                "column": 70
+                                "line": 262,
+                                "column": 74
                             }
                         }
                     },
@@ -618,16 +658,16 @@
                             "min": 13,
                             "max": 13
                         },
-                        "ureg_id": "%F362",
+                        "ureg_id": "%F365",
                         "src_range": {
                             "start_loc": {
                                 "file": "F:\\LMU\\quantumMA\\opimization\\reconstructv1maxi\\image_analysis.cpp",
-                                "line": 169,
+                                "line": 263,
                                 "column": 9
                             },
                             "end_loc": {
                                 "file": "F:\\LMU\\quantumMA\\opimization\\reconstructv1maxi\\image_analysis.cpp",
-                                "line": 169,
+                                "line": 263,
                                 "column": 71
                             }
                         }
@@ -638,7 +678,7 @@
         "channels": {
             "atomLocationsSize_RAW_1_3_#0": {
                 "name": "atomLocationsSize_RAW_1_3_#0",
-                "variable_id": "VId_430_!c?(?,?)",
+                "variable_id": "VId_454_!c?(?,?)",
                 "variable_name": "atomLocationsSize",
                 "declaration": "int atomLocationsSize",
                 "kind": "SSA",
@@ -646,19 +686,19 @@
                 "channel_width": 32,
                 "src_loc": {
                     "file": "F:\\LMU\\quantumMA\\opimization\\reconstructv1maxi\\image_analysis.cpp",
-                    "line": 116,
+                    "line": 207,
                     "column": 0
                 },
                 "metrics": {
                     "volume": 32,
-                    "channel_rate": 4.241311540767752E-6
+                    "channel_rate": 2.424352622088883E-5
                 },
                 "source": "1",
                 "sink": "3"
             },
             "projShape0_RAW_1_3_#1": {
                 "name": "projShape0_RAW_1_3_#1",
-                "variable_id": "VId_431_!c?(?,?)",
+                "variable_id": "VId_455_!c?(?,?)",
                 "variable_name": "projShape0",
                 "declaration": "int projShape0",
                 "kind": "SSA",
@@ -666,19 +706,19 @@
                 "channel_width": 32,
                 "src_loc": {
                     "file": "F:\\LMU\\quantumMA\\opimization\\reconstructv1maxi\\image_analysis.cpp",
-                    "line": 116,
+                    "line": 207,
                     "column": 0
                 },
                 "metrics": {
                     "volume": 32,
-                    "channel_rate": 4.241311540767752E-6
+                    "channel_rate": 2.424352622088883E-5
                 },
                 "source": "1",
                 "sink": "3"
             },
             "projShape1_RAW_1_3_#2": {
                 "name": "projShape1_RAW_1_3_#2",
-                "variable_id": "VId_432_!c?(?,?)",
+                "variable_id": "VId_456_!c?(?,?)",
                 "variable_name": "projShape1",
                 "declaration": "int projShape1",
                 "kind": "SSA",
@@ -686,19 +726,19 @@
                 "channel_width": 32,
                 "src_loc": {
                     "file": "F:\\LMU\\quantumMA\\opimization\\reconstructv1maxi\\image_analysis.cpp",
-                    "line": 116,
+                    "line": 207,
                     "column": 0
                 },
                 "metrics": {
                     "volume": 32,
-                    "channel_rate": 4.241311540767752E-6
+                    "channel_rate": 2.424352622088883E-5
                 },
                 "source": "1",
                 "sink": "3"
             },
             "atomLocations[*].x_RAW_1_3_#3": {
                 "name": "atomLocations[*].x_RAW_1_3_#3",
-                "variable_id": "VId_433_[?(?,64)]dc.A0(0,32)",
+                "variable_id": "VId_457_[?(?,64)]dc.A0(0,32)",
                 "variable_name": "atomLocations[*].x",
                 "declaration": "float atom_location::x",
                 "kind": "Ptr",
@@ -706,19 +746,19 @@
                 "channel_width": 32,
                 "src_loc": {
                     "file": "F:\\LMU\\quantumMA\\opimization\\reconstructv1maxi\\image_analysis.cpp",
-                    "line": 116,
+                    "line": 207,
                     "column": 0
                 },
                 "metrics": {
                     "volume": 3200,
-                    "channel_rate": 4.2413115407677516E-4
+                    "channel_rate": 2.424352622088883E-3
                 },
                 "source": "1",
                 "sink": "3"
             },
             "atomLocations[*].y_RAW_1_3_#4": {
                 "name": "atomLocations[*].y_RAW_1_3_#4",
-                "variable_id": "VId_433_[?(?,64)]dc.A1(32,32)",
+                "variable_id": "VId_457_[?(?,64)]dc.A1(32,32)",
                 "variable_name": "atomLocations[*].y",
                 "declaration": "float atom_location::y",
                 "kind": "Ptr",
@@ -726,19 +766,19 @@
                 "channel_width": 32,
                 "src_loc": {
                     "file": "F:\\LMU\\quantumMA\\opimization\\reconstructv1maxi\\image_analysis.cpp",
-                    "line": 116,
+                    "line": 207,
                     "column": 0
                 },
                 "metrics": {
                     "volume": 3200,
-                    "channel_rate": 4.2413115407677516E-4
+                    "channel_rate": 2.424352622088883E-3
                 },
                 "source": "1",
                 "sink": "3"
             },
             "psfSupersample_RAW_1_3_#5": {
                 "name": "psfSupersample_RAW_1_3_#5",
-                "variable_id": "VId_434_!c?(?,?)",
+                "variable_id": "VId_458_!c?(?,?)",
                 "variable_name": "psfSupersample",
                 "declaration": "int psfSupersample",
                 "kind": "SSA",
@@ -746,79 +786,79 @@
                 "channel_width": 32,
                 "src_loc": {
                     "file": "F:\\LMU\\quantumMA\\opimization\\reconstructv1maxi\\image_analysis.cpp",
-                    "line": 117,
+                    "line": 208,
                     "column": 0
                 },
                 "metrics": {
                     "volume": 32,
-                    "channel_rate": 4.241311540767752E-6
+                    "channel_rate": 2.424352622088883E-5
                 },
                 "source": "1",
                 "sink": "3"
             },
             "imageProjs_local[*]_RAW_1_3_#6": {
                 "name": "imageProjs_local[*]_RAW_1_3_#6",
-                "variable_id": "VId_436_[?(?,32)]dc",
+                "variable_id": "VId_460_[?(?,32)]dc",
                 "variable_name": "imageProjs_local[*]",
-                "declaration": "float imageProjs_local[1048576]",
+                "declaration": "float imageProjs_local[100000]",
                 "kind": "Ptr",
                 "dependence": "RAW",
                 "channel_width": 32,
                 "src_loc": {
                     "file": "F:\\LMU\\quantumMA\\opimization\\reconstructv1maxi\\image_analysis.cpp",
-                    "line": 119,
+                    "line": 210,
                     "column": 0
                 },
                 "metrics": {
                     "volume": 3075200,
-                    "channel_rate": 4.075900390677809E-1
+                    "channel_rate": 2.3298028698274162E0
                 },
                 "source": "1",
                 "sink": "3"
             },
             "imageProjs[*]_RAW_1_3_#7": {
                 "name": "imageProjs[*]_RAW_1_3_#7",
-                "variable_id": "VId_437_[?(?,32)]dc",
+                "variable_id": "VId_461_[?(?,32)]dc",
                 "variable_name": "imageProjs[*]",
-                "declaration": "float imageProjs[1024]",
+                "declaration": "float imageProjs[100]",
                 "kind": "Ptr",
                 "dependence": "RAW",
                 "channel_width": 32,
                 "src_loc": {
                     "file": "F:\\LMU\\quantumMA\\opimization\\reconstructv1maxi\\image_analysis.cpp",
-                    "line": 120,
+                    "line": 211,
                     "column": 0
                 },
                 "metrics": {
                     "volume": 3200,
-                    "channel_rate": 4.2413115407677516E-4
+                    "channel_rate": 2.424352622088883E-3
                 },
                 "source": "1",
                 "sink": "3"
             },
             "fullImage[*]_RAW_1_3_#8": {
                 "name": "fullImage[*]_RAW_1_3_#8",
-                "variable_id": "VId_439_[?(?,32)]dc",
+                "variable_id": "VId_463_[?(?,32)]dc",
                 "variable_name": "fullImage[*]",
-                "declaration": "float fullImage[589824]",
+                "declaration": "float fullImage[65536]",
                 "kind": "Ptr",
                 "dependence": "RAW",
                 "channel_width": 32,
                 "src_loc": {
                     "file": "F:\\LMU\\quantumMA\\opimization\\reconstructv1maxi\\image_analysis.cpp",
-                    "line": 122,
+                    "line": 213,
                     "column": 0
                 },
                 "metrics": {
                     "volume": 3075200,
-                    "channel_rate": 4.075900390677809E-1
+                    "channel_rate": 2.3298028698274162E0
                 },
                 "source": "1",
                 "sink": "3"
             },
             "(*emissions)_RAW_3_2_#9": {
                 "name": "(*emissions)_RAW_3_2_#9",
-                "variable_id": "VId_442_*0(0,32)arg+?(?,32)",
+                "variable_id": "VId_466_*0(0,32)arg+?(?,32)",
                 "variable_name": "(*emissions)",
                 "declaration": "float *emissions",
                 "kind": "Ptr",
@@ -826,12 +866,12 @@
                 "channel_width": 32,
                 "src_loc": {
                     "file": "F:\\LMU\\quantumMA\\opimization\\reconstructv1maxi\\image_analysis.cpp",
-                    "line": 123,
+                    "line": 214,
                     "column": 0
                 },
                 "metrics": {
                     "volume": 3200,
-                    "channel_rate": 4.2413115407677516E-4
+                    "channel_rate": 2.424352622088883E-3
                 },
                 "source": "3",
                 "sink": "2"

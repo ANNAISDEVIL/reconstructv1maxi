@@ -8,7 +8,6 @@
 `timescale 1ns/1ps
 `default_nettype none
 
-
 module reconstruct_fullImage_m_axi
 #(parameter
     CONSERVATIVE            = 0,
@@ -26,15 +25,23 @@ module reconstruct_fullImage_m_axi
     C_USER_VALUE            = 1'b0,
     C_PROT_VALUE            = 3'b000,
     C_CACHE_VALUE           = 4'b0011,
-    NUM_READ_OUTSTANDING    = 16,
-    NUM_WRITE_OUTSTANDING   = 16,
+    NUM_READ_OUTSTANDING    = 16,  // global read outstanding value
+    NUM_WRITE_OUTSTANDING   = 16,  // global write outstanding value
     USER_MAXREQS            = 16,
-    // channel configuration
-    CH0_USER_DW             = 32,
-    CH0_USER_AW             = 32,
-    CH0_USER_RFIFONUM_WIDTH = 6,
-    MAXI_BUFFER_IMPL        = "block"
+    // channel configurations 
+    CH0_USER_DW               = 32,
+    CH0_USER_AW               = 32,
+    CH0_NUM_READ_OUTSTANDING  = 2,
+    CH0_NUM_WRITE_OUTSTANDING = 2,
+    CH0_USER_RFIFONUM_WIDTH   = 6,
+    CH0_MAXI_CACHE_IMPL       = "auto",
+    CH0_NUM_CACHE_LINE        = 64,
+    CH0_CACHE_LINE_DEPTH      = 64,
+    
+    MAXI_BUFFER_IMPL                = "block"
 )(
+    
+    input  wire                               cache_flush,
     // system signal
     input  wire                               ACLK,
     input  wire                               ARESET,
@@ -89,7 +96,8 @@ module reconstruct_fullImage_m_axi
     input  wire [C_M_AXI_RUSER_WIDTH-1:0]     RUSER,
     input  wire                               RVALID,
     output wire                               RREADY,
-    // internal channel 0 READ-ONLY 
+    // multiple internal channels 
+    // channel 0
     input  wire [CH0_USER_AW-1:0]             I_CH0_AWADDR,
     input  wire [31:0]                        I_CH0_AWLEN,
     input  wire                               I_CH0_AWVALID,
@@ -109,18 +117,42 @@ module reconstruct_fullImage_m_axi
     input  wire                               I_CH0_RREADY,
     output wire [CH0_USER_RFIFONUM_WIDTH-1:0] I_CH0_RFIFONUM
     );
+//------------------------Parameter----------------------
+    localparam
+        NUM_READ_PORTS  = 1,
+        NUM_WRITE_PORTS = 0;
+
+
 //------------------------Local signal-------------------
     // AW/W/B channel signals 
     // AR/R channel signals 
-    wire [C_M_AXI_ADDR_WIDTH-1:0]   ARADDR_Dummy;
-    wire [31:0]                     ARLEN_Dummy;
-    wire                            ARVALID_Dummy;
-    wire                            ARREADY_Dummy;
-    wire [C_M_AXI_DATA_WIDTH-1:0]   RDATA_Dummy;
-    wire [1:0]                      RLAST_Dummy;
-    wire                            RVALID_Dummy;
-    wire                            RREADY_Dummy;
-    wire                            RBURST_READY_Dummy;
+    wire [C_M_AXI_ID_WIDTH-1:0]     ARID_FromArbiterToBus;
+    wire [C_M_AXI_ADDR_WIDTH-1:0]   ARADDR_FromArbiter;
+    wire [31:0]                     ARLEN_FromArbiter;
+    wire                            ARVALID_FromArbiter;
+    wire [NUM_READ_PORTS-1:0]       ARREADY_ToArbiter;
+    wire [C_M_AXI_ADDR_WIDTH-1:0]   ARADDR_ToBus;
+    wire [31:0]                     ARLEN_ToBus;
+    wire                            ARVALID_ToBus;
+    wire [NUM_READ_PORTS-1:0]       ARREADY_FromBus;
+    
+    wire [C_M_AXI_ID_WIDTH-1:0]     RID_FromBusToChan;
+    wire [C_M_AXI_DATA_WIDTH-1:0]   RDATA_FromBus;
+    wire [1:0]                      RLAST_FromBus;
+    wire                            RVALID_FromBus;
+    wire [NUM_READ_PORTS-1:0]       RREADY_ToBus;
+    wire [NUM_READ_PORTS-1:0]       RBURST_READY_ToBus;
+    wire [C_M_AXI_DATA_WIDTH-1:0]   RDATA_ToChan;
+    wire [1:0]                      RLAST_ToChan;
+    wire                            RVALID_ToChan;
+    wire [NUM_READ_PORTS-1:0]       RREADY_FromChan;
+    wire [NUM_READ_PORTS-1:0]       RBURST_READY_FromChan;
+    wire [C_M_AXI_ID_WIDTH-1:0]     arid_index;
+    wire [C_M_AXI_ID_WIDTH-1:0]     AXI_ARID_FromChanToArbiter    [0 : NUM_READ_PORTS-1];
+    wire [C_M_AXI_ADDR_WIDTH-1:0]   AXI_ARADDR_FromChanToArbiter  [0 : NUM_READ_PORTS-1];
+    wire [31:0]                     AXI_ARLEN_FromChanToArbiter   [0 : NUM_READ_PORTS-1];
+    wire [NUM_READ_PORTS-1:0]       AXI_ARVALID_FromChanToArbiter;
+    wire [NUM_READ_PORTS-1:0]       AXI_ARREADY_FromArbiterToChan;
     // flush logic 
 
     // AXI Ports Initialization 
@@ -146,16 +178,23 @@ module reconstruct_fullImage_m_axi
     // Kernel Ports Initialization 
     assign I_CH0_AWREADY    = 1'b0;
     assign I_CH0_WREADY     = 1'b0;
-    assign I_CH0_BVALID     = 1'b0; 
+    assign I_CH0_BVALID     = 1'b1; 
+    // Internal Ports Mapping 
+    assign ARID_FromArbiterToBus   = AXI_ARID_FromChanToArbiter[arid_index];
+    assign ARADDR_FromArbiter      = AXI_ARADDR_FromChanToArbiter[arid_index];
+    assign ARLEN_FromArbiter       = AXI_ARLEN_FromChanToArbiter[arid_index]; 
     // flush logic 
-//------------------------Instantiation------------------
-    // ================== STORE UNITS ================== 
 
-    // ================== LOAD UNITS ================== 
+//------------------------Instantiation------------------
+    // ================== STORE UNITS ==================  
+    
+    // ================== LOAD UNITS ==================  
     // load_unit for channel 0
-    reconstruct_fullImage_m_axi_load #(
+    reconstruct_fullImage_m_axi_load_with_cache #(
         .C_TARGET_ADDR           ( C_TARGET_ADDR ),
-        .NUM_READ_OUTSTANDING    ( NUM_READ_OUTSTANDING ),
+        .C_M_AXI_ID_WIDTH        ( C_M_AXI_ID_WIDTH ),
+        .C_ID_VALUE              ( 0 ),
+        .NUM_READ_OUTSTANDING    ( CH0_NUM_READ_OUTSTANDING ),
         .MAX_READ_BURST_LENGTH   ( MAX_READ_BURST_LENGTH ),
         .BUS_ADDR_WIDTH          ( C_M_AXI_ADDR_WIDTH ),
         .BUS_DATA_WIDTH          ( C_M_AXI_DATA_WIDTH ),
@@ -163,30 +202,40 @@ module reconstruct_fullImage_m_axi
         .USER_AW                 ( CH0_USER_AW ),
         .USER_MAXREQS            ( USER_MAXREQS ),
         .USER_RFIFONUM_WIDTH     ( CH0_USER_RFIFONUM_WIDTH ),
-        .BUFFER_IMPL             ( MAXI_BUFFER_IMPL )
+        .NUM_CACHE_LINE          ( CH0_NUM_CACHE_LINE ),
+        .CACHE_LINE_DEPTH        ( CH0_CACHE_LINE_DEPTH ),
+        .CACHE_IMPL              ( CH0_MAXI_CACHE_IMPL )
     ) load_unit_0 (
         .ACLK                    ( ACLK ),
         .ARESET                  ( ARESET ),
         .ACLK_EN                 ( ACLK_EN ),
-        .out_AXI_ARADDR          ( ARADDR_Dummy ),
-        .out_AXI_ARLEN           ( ARLEN_Dummy ),
-        .out_AXI_ARVALID         ( ARVALID_Dummy ),
-        .in_AXI_ARREADY          ( ARREADY_Dummy ),
-        .in_AXI_RDATA            ( RDATA_Dummy ),
-        .in_AXI_RLAST            ( RLAST_Dummy ),
-        .in_AXI_RVALID           ( RVALID_Dummy ),
-        .out_AXI_RREADY          ( RREADY_Dummy ),
-        .out_AXI_RBURST_READY    ( RBURST_READY_Dummy),
-        .in_HLS_ARADDR           ( I_CH0_ARADDR ),
-        .in_HLS_ARLEN            ( I_CH0_ARLEN ),
-        .in_HLS_ARVALID          ( I_CH0_ARVALID ),
-        .out_HLS_ARREADY         ( I_CH0_ARREADY ),
-        .out_HLS_RDATA           ( I_CH0_RDATA ),
-        .out_HLS_RVALID          ( I_CH0_RVALID ),
-        .in_HLS_RREADY           ( I_CH0_RREADY ),
-        .out_HLS_RFIFONUM        ( I_CH0_RFIFONUM )
-    );
-
+        .cache_flush             ( cache_flush ),
+        .cache_flush_done        (  ),
+        .out_AXI_ARID            ( AXI_ARID_FromChanToArbiter[0]    ),
+        .out_AXI_ARADDR          ( AXI_ARADDR_FromChanToArbiter[0]  ),
+        .out_AXI_ARLEN           ( AXI_ARLEN_FromChanToArbiter[0]   ),
+        .out_AXI_ARVALID         ( AXI_ARVALID_FromChanToArbiter[0] ),
+        .in_AXI_ARREADY          ( AXI_ARREADY_FromArbiterToChan[0] ),
+        .in_AXI_RID              ( RID_FromBusToChan    ),
+        .in_AXI_RDATA            ( RDATA_ToChan  ),
+        .in_AXI_RLAST            ( RLAST_ToChan  ),
+        .in_AXI_RVALID           ( RVALID_ToChan ),
+        .out_AXI_RREADY          ( RREADY_FromChan[0] ),
+        .out_AXI_RBURST_READY    ( RBURST_READY_FromChan[0] ),
+        .in_HLS_ARADDR           ( I_CH0_ARADDR   ),
+        .in_HLS_ARLEN            ( I_CH0_ARLEN    ),
+        .in_HLS_ARVALID          ( I_CH0_ARVALID  ),
+        .out_HLS_ARREADY         ( I_CH0_ARREADY  ),
+        .out_HLS_RDATA           ( I_CH0_RDATA    ),
+        .out_HLS_RVALID          ( I_CH0_RVALID   ),
+        .in_HLS_RREADY           ( I_CH0_RREADY   ),
+        .out_HLS_RFIFONUM        ( I_CH0_RFIFONUM ));
+    
+    assign arid_index                    = 0;
+    assign AXI_ARREADY_FromArbiterToChan = ARREADY_ToArbiter;
+    assign ARVALID_FromArbiter           = AXI_ARVALID_FromChanToArbiter[0];
+    
+    
     // ================== AXI BUS READ/WRITE ================== 
     // reconstruct_fullImage_m_axi_read
     reconstruct_fullImage_m_axi_read #(
@@ -199,7 +248,10 @@ module reconstruct_fullImage_m_axi
         .BUS_ADDR_WIDTH           ( C_M_AXI_ADDR_WIDTH ),
         .BUS_DATA_WIDTH           ( C_M_AXI_DATA_WIDTH ),
         .MAX_READ_BURST_LENGTH    ( MAX_READ_BURST_LENGTH ),
-        .NUM_READ_OUTSTANDING     ( NUM_READ_OUTSTANDING )
+        .NUM_READ_OUTSTANDING     ( NUM_READ_OUTSTANDING ), // global outstanding value
+        // outstanding control for channels
+        .ID0_NUM_READ_OUTSTANDING     ( CH0_NUM_READ_OUTSTANDING ), 
+        .NUM_READ_PORTS           ( NUM_READ_PORTS )
     ) bus_read (
         .ACLK                     ( ACLK ),
         .ARESET                   ( ARESET ),
@@ -224,16 +276,29 @@ module reconstruct_fullImage_m_axi
         .in_BUS_RUSER             ( RUSER ),
         .in_BUS_RVALID            ( RVALID ),
         .out_BUS_RREADY           ( RREADY ),
-        .in_HLS_ARVALID           ( ARVALID_Dummy ),
-        .out_HLS_ARREADY          ( ARREADY_Dummy ),
-        .in_HLS_ARADDR            ( ARADDR_Dummy ),
-        .in_HLS_ARLEN             ( ARLEN_Dummy ),
-        .out_HLS_RVALID           ( RVALID_Dummy ),
-        .in_HLS_RREADY            ( RREADY_Dummy ),
-        .in_HLS_RBUST_READY       ( RBURST_READY_Dummy),
-        .out_HLS_RDATA            ( RDATA_Dummy ),
-        .out_HLS_RLAST            ( RLAST_Dummy )
+        .in_AXI_ARID              ( ARID_FromArbiterToBus ),
+        .in_AXI_ARVALID           ( ARVALID_ToBus ),
+        .out_AXI_ARREADY          ( ARREADY_FromBus ),
+        .in_AXI_ARADDR            ( ARADDR_ToBus ),
+        .in_AXI_ARLEN             ( ARLEN_ToBus ),
+        .out_AXI_RID              ( RID_FromBusToChan ),
+        .out_AXI_RVALID           ( RVALID_FromBus ),
+        .in_AXI_RREADY            ( RREADY_ToBus ),
+        .in_AXI_RBURST_READY      ( RBURST_READY_ToBus ),
+        .out_AXI_RDATA            ( RDATA_FromBus ),
+        .out_AXI_RLAST            ( RLAST_FromBus )
     );
+    assign ARREADY_ToArbiter  = ARREADY_FromBus;
+    assign ARADDR_ToBus       = ARADDR_FromArbiter;
+    assign ARLEN_ToBus        = ARLEN_FromArbiter;
+    assign ARVALID_ToBus      = ARVALID_FromArbiter;
+
+    assign RDATA_ToChan       = RDATA_FromBus;
+    assign RLAST_ToChan       = RLAST_FromBus;
+    assign RVALID_ToChan      = RVALID_FromBus;
+    assign RREADY_ToBus       = RREADY_FromChan;
+    assign RBURST_READY_ToBus = RBURST_READY_FromChan;
+    
 
     
 
@@ -245,6 +310,8 @@ endmodule
 module reconstruct_fullImage_m_axi_load
 #(parameter
     C_TARGET_ADDR                         = 32'h00000000,
+    C_M_AXI_ID_WIDTH                      = 1,
+    C_ID_VALUE                            = 1'b0,
     NUM_READ_OUTSTANDING                  = 2,
     MAX_READ_BURST_LENGTH                 = 16,
     BUS_ADDR_WIDTH                        = 32,
@@ -261,11 +328,13 @@ module reconstruct_fullImage_m_axi_load
     input  wire                           ACLK_EN,
 
     // read address channel
+    output wire [C_M_AXI_ID_WIDTH-1:0]    out_AXI_ARID,
     output wire [BUS_ADDR_WIDTH-1:0]      out_AXI_ARADDR,
     output wire [31:0]                    out_AXI_ARLEN,
     output wire                           out_AXI_ARVALID,
     input  wire                           in_AXI_ARREADY,
     // read data channel
+    input  wire [C_M_AXI_ID_WIDTH-1:0]    in_AXI_RID,
     input  wire [BUS_DATA_WIDTH-1:0]      in_AXI_RDATA,
     input  wire [1:0]                     in_AXI_RLAST,
     input  wire                           in_AXI_RVALID,
@@ -344,7 +413,7 @@ module reconstruct_fullImage_m_axi_load
     wire [log2(RBUFF_DEPTH) : 0]   beat_nvalid;
 
     reg                            ready_for_outstanding;
-    
+
     // regslice io ?  no 
     
     // enable regslice on R channel  no 
@@ -376,6 +445,7 @@ module reconstruct_fullImage_m_axi_load
     assign ready_for_rreq  = ~tmp_valid || (in_AXI_ARREADY && rreq_ready);
     assign valid_length    = (rreq_len != 32'b0) && !rreq_len[31];
 
+    assign out_AXI_ARID    = C_ID_VALUE;
     assign out_AXI_ARLEN   = tmp_len;   // Byte length
     assign out_AXI_ARADDR  = tmp_addr;  // Byte address
     assign out_AXI_ARVALID = tmp_valid && rreq_ready;
@@ -422,7 +492,7 @@ module reconstruct_fullImage_m_axi_load
         .reset             (ARESET),
         .clk_en            (ACLK_EN),
         .if_full_n         (out_AXI_RREADY),
-        .if_write          (in_AXI_RVALID),
+        .if_write          (in_AXI_RVALID && (in_AXI_RID == C_ID_VALUE)),
         .if_din            ({in_AXI_RLAST, in_AXI_RDATA}),
         .if_empty_n        (beat_valid),
         .if_read           (next_beat),
@@ -447,7 +517,7 @@ module reconstruct_fullImage_m_axi_load
     generate
     if (USER_DATA_WIDTH == BUS_DATA_WIDTH) begin : bus_equal_gen
 
-        assign rreq_ready       = 1'b1; 
+        assign rreq_ready       = 1'b1;
         // regslice io ?  no
         assign next_beat        = in_HLS_RREADY;
         assign out_HLS_RDATA    = beat_data[USER_DW-1 : 0];
@@ -488,7 +558,7 @@ module reconstruct_fullImage_m_axi_load
         reg  [USER_RFIFONUM_WIDTH-1:0] rdata_nvalid; 
         reg  [SPLIT_ALIGN : 0]      data_nvalid;
         wire [SPLIT_ALIGN : 0]      split_nvalid;
-        
+
         wire [SPLIT_ALIGN-1 : 0]    split_cnt_end;
         wire [SPLIT_ALIGN-1 : 0]    split_cnt;
         reg  [SPLIT_ALIGN-1 : 0]    split_cnt_buf;
@@ -737,6 +807,8 @@ endmodule
 module reconstruct_fullImage_m_axi_store
 #(parameter
     C_TARGET_ADDR           = 32'h00000000,
+    C_M_AXI_ID_WIDTH        = 1,
+    C_ID_VALUE              = 1'b0,
     NUM_WRITE_OUTSTANDING   = 2,
     MAX_WRITE_BURST_LENGTH  = 16,
     BUS_ADDR_WIDTH          = 32,
@@ -751,16 +823,24 @@ module reconstruct_fullImage_m_axi_store
     input  wire                        ARESET,
     input  wire                        ACLK_EN,
     // write address channel
+    output wire [C_M_AXI_ID_WIDTH-1:0] out_AXI_AWID,
     output wire [BUS_ADDR_WIDTH-1:0]   out_AXI_AWADDR,
     output wire [31:0]                 out_AXI_AWLEN,
     output wire                        out_AXI_AWVALID,
     input  wire                        in_AXI_AWREADY,
+    // write burst throttle
+    input  wire [C_M_AXI_ID_WIDTH-1:0] in_AXI_BURST_ID,
+    input  wire [7:0]                  in_AXI_BURST_LEN,
+    input  wire                        in_AXI_BURST_ACK,
+    output wire                        out_AXI_BURST_REQ,
     // write data channel
+    output wire [C_M_AXI_ID_WIDTH-1:0] out_AXI_WID,
     output wire [BUS_DATA_WIDTH-1:0]   out_AXI_WDATA,
     output wire [BUS_DATA_WIDTH/8-1:0] out_AXI_WSTRB,
     output wire                        out_AXI_WVALID,
     input  wire                        in_AXI_WREADY,
     // write response channel
+    input  wire [C_M_AXI_ID_WIDTH-1:0] in_AXI_BID,
     input  wire                        in_AXI_BVALID,
     output wire                        out_AXI_BREADY,
 
@@ -788,7 +868,12 @@ module reconstruct_fullImage_m_axi_store
         BUS_DATA_BYTES  = BUS_DATA_WIDTH / 8,
         BUS_ADDR_ALIGN  = log2(BUS_DATA_BYTES),
         // wdata buffer size 
-        WBUFF_DEPTH     = max(MAX_WRITE_BURST_LENGTH * BUS_DATA_WIDTH / USER_DATA_WIDTH, 1), 
+        WBUFF_DEPTH     = (USER_DATA_WIDTH == BUS_DATA_WIDTH) ? 
+                                2 * MAX_WRITE_BURST_LENGTH :
+                                max(MAX_WRITE_BURST_LENGTH * BUS_DATA_WIDTH / USER_DATA_WIDTH, 1), 
+        BURST_LEN_WIDTH = (USER_DATA_WIDTH == BUS_DATA_WIDTH) ? 
+                                max(log2(WBUFF_DEPTH), 8)     : 
+                                max(log2(MAX_WRITE_BURST_LENGTH), 8),
         TARGET_ADDR     = C_TARGET_ADDR & (32'hffffffff << USER_ADDR_ALIGN); 
 
 //------------------------Task and function--------------
@@ -843,8 +928,16 @@ module reconstruct_fullImage_m_axi_store
 
     wire                                next_wdata;
     wire                                wdata_valid;
+    wire                                wdata_ready;
     wire [USER_DW-1 : 0]                tmp_wdata;
     wire [USER_DW/8-1 : 0]              tmp_wstrb;
+    
+    wire [BUS_DATA_BYTES*9-1 : 0]       beat_pack;
+    wire                                beat_ready;
+    wire                                beat_write;
+
+    reg  [BURST_LEN_WIDTH : 0]          beat_nvalid;
+    wire [BURST_LEN_WIDTH : 0]          beat_nvalid_cnt;
 
     wire                                wrsp_ready;
     wire                                wrsp_valid;
@@ -880,6 +973,7 @@ module reconstruct_fullImage_m_axi_store
 
     assign valid_length    = (wreq_len != 32'b0) && !wreq_len[31];
 
+    assign out_AXI_AWID    = C_ID_VALUE;
     assign out_AXI_AWLEN   = tmp_len;   // Byte length
     assign out_AXI_AWADDR  = tmp_addr;  // Byte address
     assign out_AXI_AWVALID = tmp_valid && wreq_ready;
@@ -922,7 +1016,7 @@ module reconstruct_fullImage_m_axi_store
         .clk               (ACLK),
         .reset             (ARESET),
         .clk_en            (ACLK_EN),
-        .if_full_n         (out_HLS_WREADY),
+        .if_full_n         (wdata_ready),
         .if_write          (in_HLS_WVALID),
         .if_din            ({in_HLS_WSTRB , in_HLS_WDATA}),
         .if_empty_n        (wdata_valid),
@@ -930,12 +1024,32 @@ module reconstruct_fullImage_m_axi_store
         .if_dout           ({tmp_wstrb, tmp_wdata}),
         .if_num_data_valid ());
 
+    // burst (beat) number data valid check
+    assign out_AXI_BURST_REQ = ((C_ID_VALUE != in_AXI_BURST_ID) || (beat_nvalid > in_AXI_BURST_LEN)) ? 1'b1 : 1'b0;
+    assign beat_nvalid_cnt   = ((C_ID_VALUE == in_AXI_BURST_ID) && in_AXI_BURST_ACK) ? (beat_nvalid - in_AXI_BURST_LEN - 1) : beat_nvalid;
+
+    always @(posedge ACLK) 
+    begin
+        if (ARESET)
+            beat_nvalid <= 0;
+        else if (beat_ready && beat_write)
+            beat_nvalid <= beat_nvalid_cnt + 1'b1;
+        else
+            beat_nvalid <= beat_nvalid_cnt; 
+    end
+
+    assign out_HLS_WREADY    = wdata_ready;
+    assign out_AXI_WID       = C_ID_VALUE;
+
     generate
     if (USER_DATA_WIDTH == BUS_DATA_WIDTH) begin : bus_equal_gen
         assign next_wdata       = in_AXI_WREADY;
         assign out_AXI_WVALID   = wdata_valid;
         assign out_AXI_WDATA    = tmp_wdata;
         assign out_AXI_WSTRB    = tmp_wstrb;
+
+        assign beat_ready       = wdata_ready;
+        assign beat_write       = in_HLS_WVALID;
 
         assign wreq_ready   = 1'b1;
 
@@ -1020,6 +1134,22 @@ module reconstruct_fullImage_m_axi_store
             .if_dout                (offset_pack),
             .if_num_data_valid      ());
 
+        reconstruct_fullImage_m_axi_fifo #(
+            .DATA_WIDTH        (BUS_DATA_WIDTH + BUS_DATA_WIDTH/8),
+            .ADDR_WIDTH        (log2(MAX_WRITE_BURST_LENGTH)),
+            .DEPTH             (MAX_WRITE_BURST_LENGTH)
+        ) buff_burst (
+            .clk               (ACLK),
+            .reset             (ARESET),
+            .clk_en            (ACLK_EN),
+            .if_full_n         (beat_ready),
+            .if_write          (beat_write),
+            .if_din            (beat_pack),
+            .if_empty_n        (out_AXI_WVALID),
+            .if_read           (in_AXI_WREADY),
+            .if_dout           ({out_AXI_WSTRB, out_AXI_WDATA}),
+            .if_num_data_valid ());
+
         assign wreq_ready     = offset_full_n | ~offset_write;
         assign tmp_addr_end   = tmp_addr + tmp_len;
 
@@ -1032,13 +1162,12 @@ module reconstruct_fullImage_m_axi_store
 
         assign {head_offset, tail_offset, beat_len} = offset_pack_reg;
 
-        assign out_AXI_WDATA  = data_buf;
-        assign out_AXI_WSTRB  = strb_buf;
-        assign out_AXI_WVALID = data_valid;
+        assign beat_pack      = {strb_buf, data_buf};
+        assign beat_write     = data_valid;
 
         assign next_wdata     = next_pad;
         assign next_offset    = last_beat && next_beat;
-        assign ready_for_data = ~data_valid || in_AXI_WREADY;
+        assign ready_for_data = ~data_valid || beat_ready;
 
         assign len_cnt_tmp    = first_beat ? beat_len : len_cnt_buf;
         assign first_beat     = first_beat_set && offset_valid;
@@ -1081,7 +1210,7 @@ module reconstruct_fullImage_m_axi_store
         begin
             if (ARESET)
                 len_cnt_buf <= 0;
-            else if (ACLK_EN) begin
+                else if (ACLK_EN) begin
                 if (next_beat)
                     len_cnt_buf <= len_cnt_tmp - 1;
             end
@@ -1223,18 +1352,33 @@ module reconstruct_fullImage_m_axi_store
             .if_dout           (beat_len),
             .if_num_data_valid ());
 
+        reconstruct_fullImage_m_axi_fifo #(
+            .DATA_WIDTH        (BUS_DATA_WIDTH + BUS_DATA_WIDTH/8),
+            .ADDR_WIDTH        (log2(MAX_WRITE_BURST_LENGTH)),
+            .DEPTH             (MAX_WRITE_BURST_LENGTH)
+        ) buff_burst (
+            .clk               (ACLK),
+            .reset             (ARESET),
+            .clk_en            (ACLK_EN),
+            .if_full_n         (beat_ready),
+            .if_write          (beat_write),
+            .if_din            (beat_pack),
+            .if_empty_n        (out_AXI_WVALID),
+            .if_read           (in_AXI_WREADY),
+            .if_dout           ({out_AXI_WSTRB, out_AXI_WDATA}),
+            .if_num_data_valid ());
+
         assign wreq_ready     = offset_full_n | ~offset_write;
         assign beat_total     = (tmp_len + tmp_addr[BUS_ADDR_ALIGN-1 : 0]) >> BUS_ADDR_ALIGN;
 
         assign offset_write   = tmp_valid & in_AXI_AWREADY;
 
-        assign out_AXI_WDATA  = data_buf[BUS_DATA_WIDTH - 1:0];
-        assign out_AXI_WSTRB  = strb_buf[BUS_DATA_BYTES - 1:0];
-        assign out_AXI_WVALID = data_valid;
+        assign beat_pack      = {strb_buf[BUS_DATA_BYTES - 1:0], data_buf[BUS_DATA_WIDTH - 1:0]};
+        assign beat_write     = data_valid;
 
         assign next_wdata     = first_split;
         assign next_offset    = (len_cnt == beat_len) && offset_valid && last_split;
-        assign ready_for_data = ~data_valid | in_AXI_WREADY;
+        assign ready_for_data = ~data_valid | beat_ready;
 
         assign first_split    = (split_cnt == 0) && wdata_valid && offset_valid && ready_for_data;
         assign last_split     = (split_cnt == (TOTAL_SPLIT - 1)) && ready_for_data;
@@ -1339,12 +1483,113 @@ module reconstruct_fullImage_m_axi_store
 
     
 
-    assign ursp_write  = wrsp_valid && (!wrsp_type || in_AXI_BVALID);
+    assign ursp_write  = wrsp_valid && (!wrsp_type || (in_AXI_BVALID && (in_AXI_BID == C_ID_VALUE)));
     assign wrsp_read   = ursp_ready && ursp_write;
 
     assign out_AXI_BREADY = wrsp_type && ursp_ready;
 
 endmodule
+
+
+module reconstruct_fullImage_m_axi_arbiter
+#(parameter
+    STRATEGY    = "load_balance",
+    PORTS_WIDTH = 2,
+    PORTS       = 4
+)(
+    input  wire                     clk,
+    input  wire                     reset,
+    input  wire [PORTS-1 : 0]       s_ready,
+    output wire                     s_valid,
+    output wire [PORTS_WIDTH-1 : 0] s_index,
+    input  wire [PORTS-1 : 0]       m_valid,
+    output wire [PORTS-1 : 0]       m_ready
+);
+//------------------------Task and function--------------
+    function  [PORTS-1 : 0] arbiter_grant;
+        input [PORTS-1 : 0] req;
+        input [PORTS-1 : 0] base;
+        reg   [2*PORTS - 1 : 0] double_req;
+        reg   [2*PORTS - 1 : 0] double_grant;
+
+        begin
+            double_req    = {req, req};
+            double_grant  = double_req & ~(double_req - base);
+            arbiter_grant = double_grant[PORTS-1 : 0] | double_grant[2*PORTS-1 : PORTS];
+        end
+    endfunction
+
+    function [PORTS_WIDTH-1 : 0] onehot_bin2dec;
+        input [PORTS-1 : 0] bin;
+        integer i, j;
+        reg [PORTS-1 : 0] mask;
+        reg [PORTS_WIDTH-1 : 0] res;
+        begin
+            for (i = 0; i < PORTS_WIDTH ; i = i + 1) begin
+                for (j = 0; j < PORTS; j = j + 1) begin
+                    mask[j] = (j >> i) % 2;
+                end
+                res[i] = |(bin & mask);
+            end
+            onehot_bin2dec = res;
+        end
+    endfunction
+    //-----------------------Local signal-------------------
+    reg  [PORTS-1 : 0] base = 1'b1;
+    wire [PORTS-1 : 0] req, gnt;
+    //------------------------Body--------------------------
+    assign m_ready = gnt;
+    assign s_valid = |gnt;
+
+    assign req = s_ready & m_valid;
+    assign s_index = onehot_bin2dec(gnt); 
+
+    generate 
+        if (STRATEGY == "round_robin") begin
+            assign gnt = req & base;
+        end
+        else begin // load-balance
+            assign gnt = arbiter_grant(req, base);
+        end
+    endgenerate
+
+    always @(posedge clk) begin
+        if (reset) 
+            base <= 1;
+        else if (|gnt)
+            base <= { gnt[PORTS-2 : 0] , gnt[PORTS-1] }; 
+    end
+
+endmodule
+
+
+module reconstruct_fullImage_m_axi_crossbar
+#(parameter
+    DATA_WIDTH     = 8,
+    PORTS_WIDTH    = 2,
+    PORTS          = 4
+)(
+    input  wire                     s_ready,
+    output wire                     s_valid,
+    input  wire [PORTS_WIDTH-1 : 0] s_index,
+    input  wire [PORTS-1 : 0]       m_valid,
+    output reg  [PORTS-1 : 0]       m_ready
+);
+
+    integer i;
+
+    assign s_valid   = m_valid[s_index];
+
+    always @(*) begin
+        m_ready <= {PORTS{1'b0}};
+        for (i = 0; i < PORTS; i = i + 1) begin
+            if (i == s_index)
+                m_ready[i] <= s_ready;
+        end
+    end
+
+endmodule
+
 // 67d7842dbbe25473c3c32b93c0da8047785f30d78e8a024de1b57352245f9689
 
 `timescale 1ns/1ps
@@ -1362,8 +1607,10 @@ module reconstruct_fullImage_m_axi_read
     C_CACHE_VALUE             = 4'b0011,
     BUS_ADDR_WIDTH            = 32,
     BUS_DATA_WIDTH            = 32,
+    MAX_READ_BURST_LENGTH     = 16,
     NUM_READ_OUTSTANDING      = 2,
-    MAX_READ_BURST_LENGTH     = 16
+    ID0_NUM_READ_OUTSTANDING = 2,
+    NUM_READ_PORTS            = 1
 )(
     // system signal
     input  wire                            ACLK,
@@ -1392,16 +1639,19 @@ module reconstruct_fullImage_m_axi_read
     input  wire                            in_BUS_RVALID,
     output wire                            out_BUS_RREADY,
 
-    // HLS internal read request channel
-    input  wire [BUS_ADDR_WIDTH-1:0]       in_HLS_ARADDR,
-    input  wire [31:0]                     in_HLS_ARLEN,
-    input  wire                            in_HLS_ARVALID,
-    output wire                            out_HLS_ARREADY,
-    output wire [BUS_DATA_WIDTH-1:0]       out_HLS_RDATA,
-    output wire [1:0]                      out_HLS_RLAST,
-    output wire                            out_HLS_RVALID,
-    input  wire                            in_HLS_RREADY,
-    input  wire                            in_HLS_RBUST_READY);
+    // internal read request channel
+    input  wire [C_M_AXI_ID_WIDTH-1:0]     in_AXI_ARID,
+    input  wire [BUS_ADDR_WIDTH-1:0]       in_AXI_ARADDR,
+    input  wire [31:0]                     in_AXI_ARLEN,
+    input  wire                            in_AXI_ARVALID,
+    output wire [NUM_READ_PORTS-1:0]       out_AXI_ARREADY,
+    output wire [C_M_AXI_ID_WIDTH-1:0]     out_AXI_RID,
+    output wire [BUS_DATA_WIDTH-1:0]       out_AXI_RDATA,
+    output wire [1:0]                      out_AXI_RLAST,
+    output wire                            out_AXI_RVALID,
+    input  wire [NUM_READ_PORTS-1:0]       in_AXI_RREADY,
+    input  wire [NUM_READ_PORTS-1:0]       in_AXI_RBURST_READY
+);
 
 //------------------------Parameter----------------------
     localparam
@@ -1412,69 +1662,100 @@ module reconstruct_fullImage_m_axi_read
     function integer log2;
         input integer x;
         integer n, m;
-    begin
-        n = 0;
-        m = 1;
-        while (m < x) begin
-            n = n + 1;
-            m = m * 2;
+        begin
+            n = 0;
+            m = 1;
+            while (m < x) begin
+                n = n + 1;
+                m = m * 2;
+            end
+            log2 = n;
         end
-        log2 = n;
-    end
-    endfunction
+        endfunction
+
+    // Convert the actual AXI ID to the ID locally used by the read module
+    function [C_M_AXI_ID_WIDTH-1:0] compress_axi_id;
+        input [C_M_AXI_ID_WIDTH-1:0] axi_id;
+        case (axi_id)
+            'd0 : compress_axi_id = 'd0;
+            default : compress_axi_id = 'd0;
+        endcase
+        endfunction
+
+    // Convert the ID locally used by the read module to the actual AXI ID
+    function [C_M_AXI_ID_WIDTH-1:0] decompress_axi_id;
+        input [C_M_AXI_ID_WIDTH-1:0] local_id;
+        case (local_id)
+            'd0 : decompress_axi_id = 'd0;
+            default : decompress_axi_id = 'd0;
+        endcase
+        endfunction
 
 //------------------------Local signal-------------------
     // AR channel
+    wire [C_M_AXI_ID_WIDTH-1:0]   ost_ctrl_id;
     wire                          ost_ctrl_info;
     wire                          ost_ctrl_valid;
-    wire                          ost_ctrl_ready;
+    wire [NUM_READ_PORTS-1:0]     ost_ctrl_ready;
+
+    wire [C_M_AXI_ID_WIDTH-1:0]   BUS_ARID;
 
     // R channel
-    wire [BUS_DATA_WIDTH-1:0]     tmp_data;
-    wire                          tmp_last;
-    wire                          data_valid;
-    wire                          data_ready;
-    wire                          next_ctrl;
-    wire                          need_rlast;
-    wire                          burst_valid;
-    wire                          last_burst;
-    wire                          fifo_rctl_ready;
+    wire [C_M_AXI_ID_WIDTH-1:0]   beat_id;
+    wire [BUS_DATA_WIDTH-1:0]     beat_data;
+    wire                          beat_last;
+    wire                          beat_valid;
+    wire                          beat_ready;
+
+    wire [NUM_READ_PORTS-1:0]     next_ctrl;
+    wire [NUM_READ_PORTS-1:0]     ost_ctrl_empty_n;
+    
     wire                          next_burst;
-    wire                          burst_end;
+    wire [NUM_READ_PORTS-1:0]     ost_burst_empty_n;
+    wire [NUM_READ_PORTS-1:0]     ost_burst_info;
+    wire                          last_beat;
+    wire                          last_burst;
+
+    wire [C_M_AXI_ID_WIDTH-1:0]   BUS_RID;
 
     // regslice io ?  no 
 
 //------------------------AR channel begin---------------
 //------------------------Instantiation------------------
     reconstruct_fullImage_m_axi_burst_converter #(
+        .ID_WIDTH          (C_M_AXI_ID_WIDTH),
         .DATA_WIDTH        (BUS_DATA_WIDTH),
         .ADDR_WIDTH        (BUS_ADDR_WIDTH),
+        .NUM_PORTS         (NUM_READ_PORTS),
         .MAX_BURST_LEN     (MAX_READ_BURST_LENGTH)
     ) rreq_burst_conv (
         .clk               (ACLK),
         .reset             (ARESET),
         .clk_en            (ACLK_EN),
 
-        .in_REQ_ADDR       (in_HLS_ARADDR),
-        .in_REQ_LEN        (in_HLS_ARLEN),
-        .in_REQ_VALID      (in_HLS_ARVALID),
-        .out_REQ_READY     (out_HLS_ARREADY),
+        .in_REQ_ID         (in_AXI_ARID),
+        .in_REQ_ADDR       (in_AXI_ARADDR),
+        .in_REQ_LEN        (in_AXI_ARLEN),
+        .in_REQ_VALID      (in_AXI_ARVALID),
+        .out_REQ_READY     (out_AXI_ARREADY),
          
+        .out_BURST_ID      (BUS_ARID),
         .out_BURST_ADDR    (out_BUS_ARADDR),
         .out_BURST_LEN     (out_BUS_ARLEN),
         .out_BURST_VALID   (out_BUS_ARVALID),
         .in_BURST_READY    (in_BUS_ARREADY),
 
+        .out_CTRL_ID       (ost_ctrl_id),
         .out_CTRL_INFO     (ost_ctrl_info),
         .out_CTRL_LEN      (),
         .out_CTRL_VALID    (ost_ctrl_valid),
         .in_CTRL_READY     (ost_ctrl_ready)
     );
-    
-    
-//------------------------Body---------------------------
 
-    assign out_BUS_ARID     = 0;
+    
+//------------------------Body---------------------------   
+
+    assign out_BUS_ARID     = decompress_axi_id(BUS_ARID);
     assign out_BUS_ARSIZE   = BUS_ADDR_ALIGN;
     assign out_BUS_ARBURST  = 2'b01;
     assign out_BUS_ARLOCK   = 2'b00;
@@ -1489,60 +1770,68 @@ module reconstruct_fullImage_m_axi_read
 //------------------------R channel begin----------------
 //------------------------Instantiation------------------
     reconstruct_fullImage_m_axi_reg_slice #(
-        .DATA_WIDTH     (BUS_DATA_WIDTH + 1)
+        .DATA_WIDTH     (C_M_AXI_ID_WIDTH + BUS_DATA_WIDTH + 1)
     ) rs_rdata (
         .clk            (ACLK),
         .reset          (ARESET),
-        .s_data         ({in_BUS_RLAST, in_BUS_RDATA}),
+        .s_data         ({BUS_RID, in_BUS_RLAST, in_BUS_RDATA}),
         .s_valid        (in_BUS_RVALID),
         .s_ready        (out_BUS_RREADY),
-        .m_data         ({tmp_last, tmp_data}),
-        .m_valid        (data_valid),
-        .m_ready        (data_ready));
+        .m_data         ({beat_id, beat_last, beat_data}),
+        .m_valid        (beat_valid),
+        .m_ready        (beat_ready));
 
+    // channel 0 outstanding control
     reconstruct_fullImage_m_axi_fifo #(
         .DATA_WIDTH     (1),
-        .ADDR_WIDTH     (log2(NUM_READ_OUTSTANDING)),
-        .DEPTH          (NUM_READ_OUTSTANDING)
-    ) fifo_rctl (
+        .ADDR_WIDTH     (log2(ID0_NUM_READ_OUTSTANDING)),
+        .DEPTH          (ID0_NUM_READ_OUTSTANDING)
+    ) fifo_rctl_0 (
         .clk            (ACLK),
         .reset          (ARESET),
         .clk_en         (ACLK_EN),
-        .if_full_n      (ost_ctrl_ready),
-        .if_write       (ost_ctrl_valid),
+        .if_full_n      (ost_ctrl_ready[0]),
+        .if_write       (ost_ctrl_valid && (ost_ctrl_id == 0)),
         .if_din         (ost_ctrl_info),
-        .if_empty_n     (need_rlast),
-        .if_read        (next_ctrl),
+        .if_empty_n     (ost_ctrl_empty_n[0]),
+        .if_read        (next_ctrl[0]),
         .if_dout        (),
         .if_num_data_valid());
 
     reconstruct_fullImage_m_axi_fifo #(
         .DATA_WIDTH     (1),
-        .ADDR_WIDTH     (log2(NUM_READ_OUTSTANDING)),
-        .DEPTH          (NUM_READ_OUTSTANDING)
-    ) fifo_burst (
+        .ADDR_WIDTH     (log2(ID0_NUM_READ_OUTSTANDING)),
+        .DEPTH          (ID0_NUM_READ_OUTSTANDING)
+    ) fifo_burst_0 (
         .clk            (ACLK),
         .reset          (ARESET),
         .clk_en         (ACLK_EN),
         .if_full_n      (),
-        .if_write       (ost_ctrl_valid),
+        .if_write       (ost_ctrl_valid && (ost_ctrl_id == 0)),
         .if_din         (ost_ctrl_info),
-        .if_empty_n     (burst_valid),
-        .if_read        (next_burst),
-        .if_dout        (last_burst),
+        .if_empty_n     (ost_burst_empty_n[0]),
+        .if_read        (next_burst && (beat_id === 0)),
+        .if_dout        (ost_burst_info[0]),
         .if_num_data_valid());
-
+    
 //------------------------Body---------------------------
-    assign next_ctrl      = in_HLS_RBUST_READY && need_rlast;
-    assign next_burst     = burst_end && data_valid && data_ready;
+    assign next_ctrl      = in_AXI_RBURST_READY & ost_ctrl_empty_n;
+    assign next_burst     = last_beat && beat_valid && beat_ready;
 
-    assign burst_end      = tmp_last === 1'b1;
-    assign out_HLS_RLAST  = {burst_end, burst_end && last_burst && burst_valid};
-    assign out_HLS_RDATA  = tmp_data;
-    assign out_HLS_RVALID = data_valid;
-    assign data_ready     = in_HLS_RREADY;
+    // “===” prevent unkown state("X") transmission
+    assign last_beat      = beat_last === 1'b1; 
+    assign last_burst     = (ost_burst_info[beat_id] === 1'b1) && (ost_burst_empty_n[beat_id] === 1'b1);
+
+    assign out_AXI_RLAST  = {last_beat, last_beat && last_burst};
+    assign out_AXI_RID    = beat_id;
+    assign out_AXI_RDATA  = beat_data;
+    assign out_AXI_RVALID = beat_valid;
+    assign beat_ready     = (in_AXI_RREADY[beat_id] === 1'b1);
+
+    assign BUS_RID        = compress_axi_id(in_BUS_RID);
 //------------------------R channel end------------------
 endmodule
+
 
 module reconstruct_fullImage_m_axi_write
 #(parameter
@@ -1556,8 +1845,9 @@ module reconstruct_fullImage_m_axi_write
     C_CACHE_VALUE             = 4'b0011,
     BUS_ADDR_WIDTH            = 32,
     BUS_DATA_WIDTH            = 32,
+    MAX_WRITE_BURST_LENGTH    = 16,
     NUM_WRITE_OUTSTANDING     = 2,
-    MAX_WRITE_BURST_LENGTH    = 16
+    NUM_WRITE_PORTS           = 1
 )(
     // system signal
     input  wire                             ACLK,
@@ -1592,17 +1882,28 @@ module reconstruct_fullImage_m_axi_write
     input  wire                             in_BUS_BVALID,
     output wire                             out_BUS_BREADY,
     // write request
-    input  wire [BUS_ADDR_WIDTH-1:0]        in_HLS_AWADDR,
-    input  wire [31:0]                      in_HLS_AWLEN,
-    input  wire                             in_HLS_AWVALID,
-    output wire                             out_HLS_AWREADY,
+    input  wire [C_M_AXI_ID_WIDTH-1:0]      in_AXI_AWID,
+    input  wire [BUS_ADDR_WIDTH-1:0]        in_AXI_AWADDR,
+    input  wire [31:0]                      in_AXI_AWLEN,
+    input  wire                             in_AXI_AWVALID,
+    output wire [NUM_WRITE_PORTS-1:0]       out_AXI_AWREADY,
 
-    input  wire [BUS_DATA_WIDTH-1:0]        in_HLS_WDATA,
-    input  wire [BUS_DATA_WIDTH/8-1:0]      in_HLS_WSTRB,
-    input  wire                             in_HLS_WVALID,
-    output wire                             out_HLS_WREADY,
-    output wire                             out_HLS_BVALID,
-    input  wire                             in_HLS_BREADY);
+    output wire [C_M_AXI_ID_WIDTH-1:0]      out_AXI_WID,
+    input  wire [BUS_DATA_WIDTH-1:0]        in_AXI_WDATA,
+    input  wire [BUS_DATA_WIDTH/8-1:0]      in_AXI_WSTRB,
+    input  wire                             in_AXI_WVALID,
+    output wire                             out_AXI_WREADY,
+
+    output wire [C_M_AXI_ID_WIDTH-1:0]      out_AXI_BID,
+    output wire                             out_AXI_BVALID,
+    input  wire [NUM_WRITE_PORTS-1:0]       in_AXI_BREADY,
+
+    // store unit num data valid check
+    output wire [C_M_AXI_ID_WIDTH-1:0]      out_AXI_BURST_ID,
+    output wire [7:0]                       out_AXI_BURST_LEN,
+    output wire                             out_AXI_BURST_ACK,
+    input  wire [NUM_WRITE_PORTS-1:0]       in_AXI_BURST_REQ
+);
 
 //------------------------Parameter----------------------
     localparam
@@ -1624,6 +1925,22 @@ module reconstruct_fullImage_m_axi_write
     end
     endfunction
 
+    // Convert the actual AXI ID to the ID locally used by the write module
+    function [C_M_AXI_ID_WIDTH-1:0] compress_axi_id;
+        input [C_M_AXI_ID_WIDTH-1:0] axi_id;
+        case (axi_id)
+            default : compress_axi_id = 'd0;
+        endcase
+        endfunction
+
+    // Convert the ID locally used by the write module to the actual AXI ID
+    function [C_M_AXI_ID_WIDTH-1:0] decompress_axi_id;
+        input [C_M_AXI_ID_WIDTH-1:0] local_id;
+        case (local_id)
+            default : decompress_axi_id = 'd0;
+        endcase
+        endfunction
+
 //------------------------Local signal-------------------
     // AW channel
     wire [C_M_AXI_ID_WIDTH-1:0]         AWID_Dummy;
@@ -1632,65 +1949,33 @@ module reconstruct_fullImage_m_axi_write
     wire                                AWVALID_Dummy;
     wire                                AWREADY_Dummy;
  
+    wire [C_M_AXI_ID_WIDTH-1:0]         ost_ctrl_id;
     wire                                ost_ctrl_info;
     wire [7:0]                          ost_ctrl_len;
     wire                                ost_ctrl_valid;
-    wire                                ost_ctrl_ready;
+    wire [NUM_WRITE_PORTS-1:0]          ost_ctrl_ready;
+
+    wire [C_M_AXI_ID_WIDTH-1:0]         BUS_AWID;
 
     // W channel
-    wire                                next_data;
-    wire                                data_valid;
-    wire                                data_ready;
-    reg  [BUS_DATA_WIDTH - 1:0]         data_buf;
-    reg  [BUS_DATA_BYTES - 1:0]         strb_buf;
-    wire                                ready_for_data;
+    wire [C_M_AXI_ID_WIDTH-1:0]         BUS_WID;
 
-    reg  [7:0]                          len_cnt;
-    wire [7:0]                          burst_len;
-    wire                                fifo_burst_ready;
-    wire                                next_burst;
-    wire                                burst_valid;
-    reg                                 WVALID_Dummy;
-    wire                                WREADY_Dummy;
-    reg                                 WLAST_Dummy;
     //B channel
-    wire                                next_resp;
-    wire                                last_resp;
-    wire                                need_wrsp;
+    wire [C_M_AXI_ID_WIDTH-1:0]         resp_id;
     wire                                resp_valid;
     wire                                resp_ready;
+    wire                                next_resp;
+
+    wire [NUM_WRITE_PORTS-1:0]          ost_resp_ready;
+    wire [NUM_WRITE_PORTS-1:0]          ost_resp_valid;
+    wire [NUM_WRITE_PORTS-1:0]          ost_resp_info;
 
     // regslice io ?  no 
 
-//------------------------AW channel begin---------------
-//------------------------Instantiation------------------
-    reconstruct_fullImage_m_axi_burst_converter #(
-        .DATA_WIDTH        (BUS_DATA_WIDTH),
-        .ADDR_WIDTH        (BUS_ADDR_WIDTH),
-        .MAX_BURST_LEN     (MAX_WRITE_BURST_LENGTH)
-    ) wreq_burst_conv (
-        .clk               (ACLK),
-        .reset             (ARESET),
-        .clk_en            (ACLK_EN),
-        
-        .in_REQ_ADDR       (in_HLS_AWADDR),
-        .in_REQ_LEN        (in_HLS_AWLEN),
-        .in_REQ_VALID      (in_HLS_AWVALID),
-        .out_REQ_READY     (out_HLS_AWREADY),
+    wire [C_M_AXI_ID_WIDTH-1:0]         BUS_BID;
 
-        .out_BURST_ADDR    (AWADDR_Dummy),
-        .out_BURST_LEN     (AWLEN_Dummy),
-        .out_BURST_VALID   (AWVALID_Dummy),
-        .in_BURST_READY    (AWREADY_Dummy),
+// -----------------------BUS global config -------------
 
-        .out_CTRL_INFO     (ost_ctrl_info),
-        .out_CTRL_LEN      (ost_ctrl_len),
-        .out_CTRL_VALID    (ost_ctrl_valid),
-        .in_CTRL_READY     (ost_ctrl_ready)
-    );
-
-    // burst converter
-    assign out_BUS_AWID     = 0;
     assign out_BUS_AWSIZE   = BUS_ADDR_ALIGN;
     assign out_BUS_AWBURST  = 2'b01;
     assign out_BUS_AWLOCK   = 2'b00;
@@ -1700,121 +1985,83 @@ module reconstruct_fullImage_m_axi_write
     assign out_BUS_AWQOS    = 4'b0000;
     assign out_BUS_AWREGION = 4'b0000;
 
+    assign out_BUS_WUSER    = C_USER_VALUE;
+
+//------------------------AW channel begin---------------
+//------------------------Instantiation------------------
+    reconstruct_fullImage_m_axi_burst_converter #(
+        .ID_WIDTH          (C_M_AXI_ID_WIDTH),
+        .DATA_WIDTH        (BUS_DATA_WIDTH),
+        .ADDR_WIDTH        (BUS_ADDR_WIDTH),
+        .NUM_PORTS         (NUM_WRITE_PORTS),
+        .MAX_BURST_LEN     (MAX_WRITE_BURST_LENGTH)
+    ) wreq_burst_conv (
+        .clk               (ACLK),
+        .reset             (ARESET),
+        .clk_en            (ACLK_EN),
+        
+        .in_REQ_ID         (in_AXI_AWID),
+        .in_REQ_ADDR       (in_AXI_AWADDR),
+        .in_REQ_LEN        (in_AXI_AWLEN),
+        .in_REQ_VALID      (in_AXI_AWVALID),
+        .out_REQ_READY     (out_AXI_AWREADY),
+
+        .out_BURST_ID      (AWID_Dummy),
+        .out_BURST_ADDR    (AWADDR_Dummy),
+        .out_BURST_LEN     (AWLEN_Dummy),
+        .out_BURST_VALID   (AWVALID_Dummy),
+        .in_BURST_READY    (AWREADY_Dummy),
+
+        .out_CTRL_ID       (ost_ctrl_id),
+        .out_CTRL_INFO     (ost_ctrl_info),
+        .out_CTRL_LEN      (ost_ctrl_len),
+        .out_CTRL_VALID    (ost_ctrl_valid),
+        .in_CTRL_READY     (ost_ctrl_ready)
+    );
+    //------------------------Body---------------------------
+
+    assign out_AXI_BURST_ID    = ost_ctrl_id;
+    assign out_AXI_BURST_LEN   = ost_ctrl_len;
+    assign out_AXI_BURST_ACK   = ost_ctrl_valid;
+    assign ost_ctrl_ready      = ost_resp_ready & in_AXI_BURST_REQ;
+
+    assign out_BUS_AWID        = decompress_axi_id(BUS_AWID);
 //------------------------AW channel end-----------------
 
 //------------------------W channel begin----------------
 //------------------------Instantiation------------------
-
-    reconstruct_fullImage_m_axi_fifo #(
-        .DATA_WIDTH     (8),
-        .ADDR_WIDTH     (log2(NUM_WRITE_OUTSTANDING)),
-        .DEPTH          (NUM_WRITE_OUTSTANDING)
-    ) fifo_burst (
-        .clk            (ACLK),
-        .reset          (ARESET),
-        .clk_en         (ACLK_EN),
-        .if_full_n      (),
-        .if_write       (ost_ctrl_valid),
-        .if_din         (ost_ctrl_len),
-        .if_empty_n     (burst_valid),
-        .if_read        (next_burst),
-        .if_dout        (burst_len),
-        .if_num_data_valid());
-
-//------------------------Body---------------------------
-
-    assign out_BUS_WUSER    = C_USER_VALUE;
-    assign out_BUS_WID      = 0;
-    assign out_HLS_WREADY   = data_ready;
-
-    assign data_valid       = in_HLS_WVALID;
-    assign data_ready       = burst_valid && ready_for_data;
-    assign next_data        = data_ready && data_valid;
-    assign next_burst       = (len_cnt == burst_len) && next_data;
-    assign ready_for_data   = ~WVALID_Dummy || WREADY_Dummy;
-
-    always @(posedge ACLK)
-    begin
-        if (ARESET) begin
-            strb_buf <= 0;
-            data_buf <= 0;
-        end
-        if (ACLK_EN) begin
-            if (next_data) begin
-                data_buf <= in_HLS_WDATA;
-                strb_buf <= in_HLS_WSTRB;
-            end
-        end
-    end
-
-    always @(posedge ACLK)
-    begin
-        if (ARESET)
-            WVALID_Dummy <= 1'b0;
-        else if (ACLK_EN) begin
-            if (next_data)
-                WVALID_Dummy <= 1'b1;
-            else if (ready_for_data)
-                WVALID_Dummy <= 1'b0;
-        end
-    end
-
-    always @(posedge ACLK)
-    begin
-        if (ARESET)
-            WLAST_Dummy <= 0;
-        else if (ACLK_EN) begin
-            if (next_burst)
-                WLAST_Dummy <= 1;
-            else if (ready_for_data)
-                WLAST_Dummy <= 0;
-        end
-    end
-
-    always @(posedge ACLK)
-    begin
-        if (ARESET)
-            len_cnt <= 0;
-        else if (ACLK_EN) begin
-            if (next_burst)
-                len_cnt <= 0;
-            else if (next_data)
-                len_cnt <= len_cnt + 1;
-        end
-    end
-//------------------------W channel end------------------
-
     // Write throttling unit
     reconstruct_fullImage_m_axi_throttle #(
         .CONSERVATIVE    (CONSERVATIVE),
-        .USED_FIX        (0),
+        .ID_WIDTH        (C_M_AXI_ID_WIDTH),
         .ADDR_WIDTH      (BUS_ADDR_WIDTH),
         .DATA_WIDTH      (BUS_DATA_WIDTH),
-        .DEPTH           (MAX_WRITE_BURST_LENGTH),
-        .MAXREQS         (NUM_WRITE_OUTSTANDING),
-        .AVERAGE_MODE    (0)
+        .NUM_OUTSTANDING (NUM_WRITE_OUTSTANDING)
     ) wreq_throttle (
         .clk             (ACLK),
         .reset           (ARESET),
         .clk_en          (ACLK_EN),
         // internal 
+        .in_TOP_AWID     (AWID_Dummy),
         .in_TOP_AWADDR   (AWADDR_Dummy),
         .in_TOP_AWLEN    (AWLEN_Dummy),
         .in_TOP_AWVALID  (AWVALID_Dummy),
         .out_TOP_AWREADY (AWREADY_Dummy),
+        
+        .out_TOP_WID     (out_AXI_WID),
+        .in_TOP_WDATA    (in_AXI_WDATA),
+        .in_TOP_WSTRB    (in_AXI_WSTRB),
+        .in_TOP_WVALID   (in_AXI_WVALID),
+        .out_TOP_WREADY  (out_AXI_WREADY),
 
-        .in_TOP_WDATA    (data_buf),
-        .in_TOP_WSTRB    (strb_buf),
-        .in_TOP_WLAST    (WLAST_Dummy),
-        .in_TOP_WVALID   (WVALID_Dummy),
-        .out_TOP_WREADY  (WREADY_Dummy),
-
-        // AXI BUS 
+        // AXI BUS
+        .out_BUS_AWID    (BUS_AWID),
         .out_BUS_AWADDR  (out_BUS_AWADDR),
         .out_BUS_AWLEN   (out_BUS_AWLEN),
         .out_BUS_AWVALID (out_BUS_AWVALID),
         .in_BUS_AWREADY  (in_BUS_AWREADY),
 
+        .out_BUS_WID     (BUS_WID),
         .out_BUS_WDATA   (out_BUS_WDATA),
         .out_BUS_WSTRB   (out_BUS_WSTRB),
         .out_BUS_WLAST   (out_BUS_WLAST),
@@ -1824,41 +2071,35 @@ module reconstruct_fullImage_m_axi_write
 
     
     
+//------------------------Body---------------------------
+    assign out_BUS_WID  = decompress_axi_id(BUS_WID);
+    
+//------------------------W channel end------------------
+
 //------------------------B channel begin----------------
 //------------------------Instantiation------------------
     reconstruct_fullImage_m_axi_reg_slice #(
-        .DATA_WIDTH     (1)
+        .DATA_WIDTH     (C_M_AXI_ID_WIDTH)
     ) rs_resp (
         .clk            (ACLK),
         .reset          (ARESET),
-        .s_data         (1'b1),
+        .s_data         (BUS_BID),
         .s_valid        (in_BUS_BVALID),
         .s_ready        (out_BUS_BREADY),
-        .m_data         (),
+        .m_data         (resp_id),
         .m_valid        (resp_valid),
         .m_ready        (resp_ready));
 
-    reconstruct_fullImage_m_axi_fifo #(
-        .DATA_WIDTH     (1),
-        .ADDR_WIDTH     (log2(NUM_WRITE_OUTSTANDING)),
-        .DEPTH          (NUM_WRITE_OUTSTANDING)
-    ) fifo_resp (
-        .clk            (ACLK),
-        .reset          (ARESET),
-        .clk_en         (ACLK_EN),
-        .if_full_n      (ost_ctrl_ready),
-        .if_write       (ost_ctrl_valid),
-        .if_din         (ost_ctrl_info),
-        .if_empty_n     (need_wrsp),
-        .if_read        (next_resp),
-        .if_dout        (last_resp),
-        .if_num_data_valid());
+    
 //------------------------Body---------------------------
 
-    assign resp_ready = need_wrsp && (in_HLS_BREADY || (last_resp === 1'b0));
+    assign resp_ready = (ost_resp_valid[resp_id] === 1'b1) && ((in_AXI_BREADY[resp_id] === 1'b1) || (ost_resp_info[resp_id] === 1'b0));
     assign next_resp  = resp_ready && resp_valid;
 
-    assign out_HLS_BVALID = resp_valid && (last_resp === 1'b1 ) ;
+    assign out_AXI_BVALID = resp_valid && (ost_resp_info[resp_id] === 1'b1 ) ;
+    assign out_AXI_BID = resp_id;
+
+    assign BUS_BID = compress_axi_id(in_BUS_BID);
 
 //------------------------B channel end------------------
 endmodule
@@ -1866,31 +2107,139 @@ endmodule
 
 module reconstruct_fullImage_m_axi_burst_converter
 #(parameter
+    INTERLEAVE                   = 1,
+    ID_WIDTH                     = 1,
     DATA_WIDTH                   = 32,
     ADDR_WIDTH                   = 32,
+    NUM_PORTS                    = 1,
     MAX_BURST_LEN                = 16
 )(
     input  wire                  clk,
     input  wire                  reset,
     input  wire                  clk_en,
 
+    input  wire [ID_WIDTH-1:0]   in_REQ_ID,
     input  wire [ADDR_WIDTH-1:0] in_REQ_ADDR,
     input  wire [31:0]           in_REQ_LEN,
     input  wire                  in_REQ_VALID,
-    output wire                  out_REQ_READY,
+    output wire [NUM_PORTS-1:0]  out_REQ_READY,
 
+    output wire [ID_WIDTH-1:0]   out_BURST_ID,
     output wire [ADDR_WIDTH-1:0] out_BURST_ADDR,
     output wire [7:0]            out_BURST_LEN,
     output wire                  out_BURST_VALID,
     input  wire                  in_BURST_READY,
 
+    output wire [ID_WIDTH-1:0]   out_CTRL_ID,
     output wire                  out_CTRL_INFO,
     output wire [7:0]            out_CTRL_LEN,
     output wire                  out_CTRL_VALID,
-    input  wire                  in_CTRL_READY
+    input  wire [NUM_PORTS-1:0]  in_CTRL_READY
+);
+
+    generate
+    if ((INTERLEAVE == 1) && (NUM_PORTS > 1)) begin
+        reconstruct_fullImage_m_axi_burst_interleave #(
+            .ID_WIDTH          (ID_WIDTH),
+            .DATA_WIDTH        (DATA_WIDTH),
+            .ADDR_WIDTH        (ADDR_WIDTH),
+            .NUM_PORTS         (NUM_PORTS),
+            .MAX_BURST_LEN     (MAX_BURST_LEN)
+        ) burst_interleave (
+            .clk               (clk),
+            .reset             (reset),
+            .clk_en            (clk_en),
+
+            .in_REQ_ID         (in_REQ_ID),
+            .in_REQ_ADDR       (in_REQ_ADDR),
+            .in_REQ_LEN        (in_REQ_LEN),
+            .in_REQ_VALID      (in_REQ_VALID),
+            .out_REQ_READY     (out_REQ_READY),
+
+            .out_BURST_ID      (out_BURST_ID),
+            .out_BURST_ADDR    (out_BURST_ADDR),
+            .out_BURST_LEN     (out_BURST_LEN),
+            .out_BURST_VALID   (out_BURST_VALID),
+            .in_BURST_READY    (in_BURST_READY),
+
+            .out_CTRL_ID       (out_CTRL_ID),
+            .out_CTRL_INFO     (out_CTRL_INFO),
+            .out_CTRL_LEN      (out_CTRL_LEN),
+            .out_CTRL_VALID    (out_CTRL_VALID),
+            .in_CTRL_READY     (in_CTRL_READY)
+        );
+
+    end
+    else begin
+        reconstruct_fullImage_m_axi_burst_sequential #(
+            .ID_WIDTH          (ID_WIDTH),
+            .DATA_WIDTH        (DATA_WIDTH),
+            .ADDR_WIDTH        (ADDR_WIDTH),
+            .NUM_PORTS         (NUM_PORTS),
+            .MAX_BURST_LEN     (MAX_BURST_LEN)
+        ) burst_sequential (
+            .clk               (clk),
+            .reset             (reset),
+            .clk_en            (clk_en),
+
+            .in_REQ_ID         (in_REQ_ID),
+            .in_REQ_ADDR       (in_REQ_ADDR),
+            .in_REQ_LEN        (in_REQ_LEN),
+            .in_REQ_VALID      (in_REQ_VALID),
+            .out_REQ_READY     (out_REQ_READY),
+
+            .out_BURST_ID      (out_BURST_ID),
+            .out_BURST_ADDR    (out_BURST_ADDR),
+            .out_BURST_LEN     (out_BURST_LEN),
+            .out_BURST_VALID   (out_BURST_VALID),
+            .in_BURST_READY    (in_BURST_READY),
+
+            .out_CTRL_ID       (out_CTRL_ID),
+            .out_CTRL_INFO     (out_CTRL_INFO),
+            .out_CTRL_LEN      (out_CTRL_LEN),
+            .out_CTRL_VALID    (out_CTRL_VALID),
+            .in_CTRL_READY     (in_CTRL_READY)
+        );
+
+    end
+    endgenerate
+
+endmodule
+
+
+module reconstruct_fullImage_m_axi_burst_interleave
+#(parameter
+    ID_WIDTH                     = 1,
+    DATA_WIDTH                   = 32,
+    ADDR_WIDTH                   = 32,
+    NUM_PORTS                    = 1,
+    MAX_BURST_LEN                = 16
+)(
+    input  wire                  clk,
+    input  wire                  reset,
+    input  wire                  clk_en,
+
+    input  wire [ID_WIDTH-1:0]   in_REQ_ID,
+    input  wire [ADDR_WIDTH-1:0] in_REQ_ADDR,
+    input  wire [31:0]           in_REQ_LEN,
+    input  wire                  in_REQ_VALID,
+    output wire [NUM_PORTS-1:0]  out_REQ_READY,
+
+    output wire [ID_WIDTH-1:0]   out_BURST_ID,
+    output wire [ADDR_WIDTH-1:0] out_BURST_ADDR,
+    output wire [7:0]            out_BURST_LEN,
+    output wire                  out_BURST_VALID,
+    input  wire                  in_BURST_READY,
+
+    output wire [ID_WIDTH-1:0]   out_CTRL_ID,
+    output wire                  out_CTRL_INFO,
+    output wire [7:0]            out_CTRL_LEN,
+    output wire                  out_CTRL_VALID,
+    input  wire [NUM_PORTS-1:0]  in_CTRL_READY
 );
 //------------------------Parameter----------------------
     localparam
+        PACK_WIDTH      = ID_WIDTH+ADDR_WIDTH+32,
         DATA_BYTES      = DATA_WIDTH / 8,
         ADDR_ALIGN      = log2(DATA_BYTES),
         BOUNDARY_BEATS  = {12-ADDR_ALIGN{1'b1}},
@@ -1910,16 +2259,506 @@ module reconstruct_fullImage_m_axi_burst_converter
         end
     endfunction
 //------------------------Local signal-------------------
-    wire [ADDR_WIDTH-1:0]       tmp_addr;
-    wire [31:0]                 tmp_len;
+    wire [PACK_WIDTH-1:0]       req_pack_in;
+    wire [PACK_WIDTH-1:0]       req_pack_out;
+    wire [ID_WIDTH-1:0]         req_id_tmp;
+    wire [ADDR_WIDTH-1:0]       req_addr_tmp;
+    wire [31:0]                 req_len_tmp;
 
-    wire                        req_valid;
+    wire                        req_full_n;
+    wire                        req_empty_n;
+    wire                        write_req;
+    wire                        read_req;
+    reg  [NUM_PORTS-1:0]        req_ready;
+    wire                        next_req;
+
+    reg  [ADDR_WIDTH - 1:0]     start_addr;
+    reg  [ADDR_WIDTH - 1:0]     end_addr;
+    wire [ADDR_WIDTH - 1:0]     sect_addr;
+    reg  [ADDR_WIDTH - 1:0]     sect_addr_buf;
+    reg  [ID_WIDTH-1:0]         req_id;
+    reg  [ID_WIDTH-1:0]         req_id_buf;
+
+    reg  [31:0]                 beat_len;
+    reg  [31:0]                 beat_len_buf;
+    reg  [11 - ADDR_ALIGN:0]    start_to_4k;
+    wire [11 - ADDR_ALIGN:0]    sect_len;
+    reg  [11 - ADDR_ALIGN:0]    sect_len_buf;
+    reg  [ADDR_WIDTH - 13:0]    sect_cnt;
+    
+    reg                         req_handling;
+    wire                        first_sect;
+    wire                        last_sect;
+    reg                         last_sect_buf;
+    wire                        ready_for_sect;
+    wire                        next_sect;
+
+    reg                         burst_valid;
+
+    wire [ID_WIDTH-1:0]         ost_ctrl_id;
+    wire                        ost_ctrl_info;
+    wire [7:0]                  ost_ctrl_len;
+    wire                        ost_ctrl_valid;
+    wire                        ost_ctrl_ready;
+
+    wire [PACK_WIDTH-1:0]       rem_req_pack;
+    reg                         rem_req_valid;
+    reg  [ID_WIDTH-1:0]         rem_req_id;
+    reg  [ADDR_WIDTH - 1:0]     rem_req_addr;
+    reg  [31:0]                 rem_req_len;
+
+//------------------------Instantiation------------------
+    generate 
+    if (NUM_PORTS > 2) begin
+        reconstruct_fullImage_m_axi_fifo #(
+            .DATA_WIDTH        (PACK_WIDTH),
+            .ADDR_WIDTH        (log2(NUM_PORTS)),
+            .DEPTH             (NUM_PORTS)
+        ) req_buffer (
+            .clk               (clk),
+            .reset             (reset),
+            .clk_en            (clk_en),
+            .if_full_n         (req_full_n),
+            .if_write          (write_req),
+            .if_din            (req_pack_in),
+            .if_empty_n        (req_empty_n),
+            .if_read           (read_req),
+            .if_dout           (req_pack_out),
+            .if_num_data_valid ());
+    end
+    else begin
+        reconstruct_fullImage_m_axi_reg_slice #(
+            .DATA_WIDTH     (PACK_WIDTH)
+        ) rs_req (
+            .clk            (clk),
+            .reset          (reset),
+            .s_ready        (req_full_n),
+            .s_valid        (write_req),
+            .s_data         (req_pack_in),
+            .m_valid        (req_empty_n),
+            .m_ready        (read_req),
+            .m_data         (req_pack_out));
+    end
+    endgenerate
+        
+//------------------------Body--------------------------- 
+    assign out_REQ_READY = (req_full_n && ~rem_req_valid) ? req_ready     : {NUM_PORTS{1'b0}};
+    assign req_pack_in   = rem_req_valid ? rem_req_pack  : {in_REQ_ID, in_REQ_LEN, in_REQ_ADDR};
+    assign write_req     = rem_req_valid || in_REQ_VALID;
+    
+    always @(posedge clk) 
+    begin
+        if (reset)
+            req_ready <= {NUM_PORTS{1'b1}};
+        else if (clk_en) begin
+            if (in_REQ_VALID && req_full_n && ~rem_req_valid)
+                req_ready[in_REQ_ID] = 1'b0;
+            if (ost_ctrl_info && ost_ctrl_valid)
+                req_ready[ost_ctrl_id] = 1'b1;
+        end
+    end
+
+    assign req_id_tmp    = req_pack_out[PACK_WIDTH-1  : ADDR_WIDTH+32];
+    assign req_len_tmp   = req_pack_out[ADDR_WIDTH+31 : ADDR_WIDTH];
+    assign req_addr_tmp  = req_pack_out[ADDR_WIDTH-1  : 0];
+
+    assign next_req      = read_req && req_empty_n;
+
+    always @(posedge clk)
+    begin
+        if (reset) begin
+            req_id      <= 0;
+            start_addr  <= 0;
+            end_addr    <= 0;
+            start_to_4k <= 0;
+        end
+        else if (clk_en) begin
+            if(next_req) begin
+                req_id      <= req_id_tmp;
+                start_addr  <= {req_addr_tmp[ADDR_WIDTH-1:ADDR_ALIGN], {ADDR_ALIGN{1'b0}}}; // addr align
+                end_addr    <= req_addr_tmp + req_len_tmp;
+                start_to_4k <= BOUNDARY_BEATS - req_addr_tmp[11:ADDR_ALIGN];
+            end
+        end
+    end
+
+    always @(posedge clk)
+    begin
+        if (reset)
+            req_handling <= 1'b0;
+        else if (clk_en) begin
+            if (next_req)
+                req_handling <= 1'b1;
+            else if (~req_empty_n && last_sect && next_sect)
+                req_handling <= 1'b0;
+        end
+    end
+
+    always @(posedge clk)
+    begin
+        if (reset) begin
+            sect_cnt <= 0;
+            beat_len <= 0;
+        end
+        else if (clk_en) begin
+            if (next_req) begin
+                sect_cnt <= req_addr_tmp[ADDR_WIDTH-1:12];
+                beat_len <= (req_len_tmp + req_addr_tmp[ADDR_ALIGN-1:0]) >> ADDR_ALIGN;  // beat align
+            end
+            else if (next_sect) begin
+                sect_cnt <= sect_cnt + 1;
+                beat_len <= beat_len - sect_len - 1;
+            end
+        end
+    end
+
+    assign first_sect = (sect_cnt == start_addr[ADDR_WIDTH-1:12]);
+    assign last_sect  = (sect_cnt == end_addr[ADDR_WIDTH-1:12]);
+
+    assign sect_addr  = first_sect? start_addr : {sect_cnt, {12{1'b0}}};
+    assign sect_len   = ( first_sect &&  last_sect)? beat_len[11-ADDR_ALIGN:0]:
+                        ( first_sect && ~last_sect)? start_to_4k:
+                        (~first_sect &&  last_sect)? end_addr[11:ADDR_ALIGN] :
+                                                     BOUNDARY_BEATS;
+
+    always @(posedge clk)
+    begin
+        if (reset) begin
+            req_id_buf    <= 0;
+            sect_addr_buf <= 0;
+            sect_len_buf  <= 0;
+            last_sect_buf <= 1'b0;
+            beat_len_buf  <= 0;
+        end
+        else if (clk_en) begin
+            if (next_sect) begin
+                req_id_buf      <= req_id;
+                sect_addr_buf   <= sect_addr;
+                sect_len_buf    <= sect_len;
+                last_sect_buf   <= last_sect;
+                beat_len_buf    <= beat_len;
+            end
+        end
+    end
+
+    assign out_CTRL_VALID     = ost_ctrl_valid;
+    assign out_CTRL_INFO      = ost_ctrl_info;
+    assign out_CTRL_ID        = ost_ctrl_id;
+    assign out_CTRL_LEN       = ost_ctrl_len;
+
+    generate
+    if (DATA_BYTES >= 4096/MAX_BURST_LEN) begin : must_one_burst
+        wire                      read_sect;
+
+        assign out_BURST_ADDR     = sect_addr_buf;
+        assign out_BURST_LEN      = sect_len_buf;
+        assign out_BURST_VALID    = burst_valid;
+        assign out_BURST_ID       = req_id_buf;
+
+        assign ost_ctrl_valid     = next_sect;
+        assign ost_ctrl_info      = last_sect;
+        assign ost_ctrl_id        = req_id;
+        assign ost_ctrl_len       = sect_len;
+        assign ost_ctrl_ready     = in_CTRL_READY[req_id];
+
+        assign next_sect          = read_sect && ost_ctrl_ready;
+        assign ready_for_sect     = ~(burst_valid && ~in_BURST_READY) && req_full_n && |in_CTRL_READY;
+        assign read_sect          = req_handling & ready_for_sect;
+        assign read_req           = ~req_handling || ready_for_sect;
+
+        always @(posedge clk)
+        begin
+            if (reset)
+                burst_valid <= 1'b0;
+            else if (clk_en) begin
+                if (next_sect)
+                    burst_valid <= 1'b1;
+                else if (in_BURST_READY)
+                    burst_valid <= 1'b0;
+            end
+        end
+
+        // calculate remaining request, for interleaved burst handling.
+        assign rem_req_pack    = {rem_req_id, {rem_req_len[31-ADDR_ALIGN:0], {ADDR_ALIGN{1'b1}}}, rem_req_addr};
+
+        always @(posedge clk)
+        begin
+            if (reset) begin
+                rem_req_id   <= 0;
+                rem_req_addr <= 0;
+                rem_req_len <= 0;
+            end
+            else if (clk_en) begin
+                if (next_sect) begin
+                    rem_req_id   <= req_id;
+                    rem_req_addr <= {sect_cnt+1, {12{1'b0}}};
+                    rem_req_len  <= beat_len - sect_len - 1;
+                end
+                else if (read_sect) begin
+                    rem_req_id   <= req_id;
+                    rem_req_addr <= sect_addr;
+                    rem_req_len  <= beat_len;
+                end
+            end
+        end
+
+        always @(posedge clk)
+        begin
+            if (reset)
+                rem_req_valid <= 1'b0;
+            else if (clk_en) begin
+                if (next_sect && last_sect)
+                    rem_req_valid <= 1'b0;
+                else if (req_empty_n && read_sect)
+                    rem_req_valid <= 1'b1;
+                else if (req_full_n)
+                    rem_req_valid <= 1'b0;
+            end
+        end
+    end
+    else begin : could_multi_bursts
+        wire [ADDR_WIDTH - 1:0]                   addr_tmp;
+        reg  [ADDR_WIDTH - 1:0]                   addr_buf;
+        reg  [7:0]                                len_tmp;
+        reg  [7:0]                                len_buf;
+        reg  [ID_WIDTH-1:0]                       id_buf;
+        wire [31:0]                               rem_len_tmp;
+        reg                                       next_req_ready;
+        reg                                       sect_handling;
+        reg  [11 - NUM_BEAT_WIDTH - ADDR_ALIGN:0] loop_cnt;
+        reg                                       first_loop;
+        reg                                       last_loop;
+        wire                                      next_loop;
+        wire                                      read_loop;
+        wire                                      ready_for_loop;
+
+        wire                                      last_loop_when_next_loop;
+        wire                                      last_loop_when_next_sect;
+        wire [7:0]                                len_tmp_when_next_loop;
+        wire [7:0]                                len_tmp_when_next_sect;
+
+        assign out_BURST_ADDR  = addr_buf;
+        assign out_BURST_LEN   = len_buf;
+        assign out_BURST_VALID = burst_valid;
+        assign out_BURST_ID    = id_buf;
+
+        assign ost_ctrl_valid  = next_loop;
+        assign ost_ctrl_info   = last_loop && last_sect_buf;
+        assign ost_ctrl_id     = req_id_buf;
+        assign ost_ctrl_len    = len_tmp;
+        assign ost_ctrl_ready  = in_CTRL_READY[req_id_buf];
+
+        assign ready_for_loop  = ~(burst_valid && ~in_BURST_READY) && req_full_n && |in_CTRL_READY; 
+        assign read_loop       = sect_handling && ready_for_loop;
+        assign next_loop       = read_loop & ost_ctrl_ready;
+
+        assign next_sect       = req_handling & ready_for_sect;
+        assign ready_for_sect  = ~sect_handling  || (read_loop && next_req_ready) || (next_loop && last_loop);
+        assign read_req        = ~next_req_ready || ready_for_sect;
+
+        always @(posedge clk)
+        begin
+            if (reset)
+                burst_valid <= 1'b0;
+            else if (clk_en) begin
+                if (next_loop)
+                    burst_valid <= 1'b1;
+                else if (in_BURST_READY)
+                    burst_valid <= 1'b0;
+            end
+        end
+
+        always @(posedge clk)
+        begin
+            if (reset)
+                sect_handling <= 1'b0;
+            else if (clk_en) begin
+                if (req_handling && ~sect_handling)
+                    sect_handling <= 1'b1;
+                else if (~req_handling && last_loop && next_loop)
+                    sect_handling <= 1'b0;
+            end
+        end
+
+        always @(posedge clk)
+        begin
+            if (reset) begin
+                loop_cnt   <= 0;
+                first_loop <= 1'b1;
+                last_loop  <= 1'b1;
+            end
+            else if (clk_en) begin
+                if (next_sect) begin
+                    loop_cnt   <= 0;
+                    first_loop <= 1'b1;
+                    last_loop  <= last_loop_when_next_sect;
+                end
+                else if (next_loop) begin
+                    loop_cnt   <= loop_cnt + 1;
+                    first_loop <= 1'b0;
+                    last_loop  <= last_loop_when_next_loop;
+                end
+            end
+        end
+
+        assign last_loop_when_next_sect = (sect_len[11 - ADDR_ALIGN : NUM_BEAT_WIDTH] == 0); 
+        assign last_loop_when_next_loop = (sect_len_buf[11 - ADDR_ALIGN : NUM_BEAT_WIDTH] == (loop_cnt+1));
+        assign len_tmp_when_next_sect   = last_loop_when_next_sect ? sect_len[NUM_BEAT_WIDTH - 1:0]     : {NUM_BEAT_WIDTH{1'b1} }; 
+        assign len_tmp_when_next_loop   = last_loop_when_next_loop ? sect_len_buf[NUM_BEAT_WIDTH - 1:0] : {NUM_BEAT_WIDTH{1'b1} }; 
+
+        assign addr_tmp     = first_loop ? sect_addr_buf  : (addr_buf + ((len_buf + 1) << ADDR_ALIGN));
+        assign rem_len_tmp  = first_loop ? beat_len_buf   : rem_req_len;
+        assign rem_req_pack = {rem_req_id, {rem_req_len[31-ADDR_ALIGN:0], {ADDR_ALIGN{1'b1}}}, rem_req_addr};
+        
+        always @(posedge clk)
+        begin
+            if (reset)
+                len_tmp <= {NUM_BEAT_WIDTH{1'b1} };
+            else if (clk_en) begin
+                if (next_sect)
+                    len_tmp <= len_tmp_when_next_sect;
+                else if (next_loop)
+                    len_tmp <= len_tmp_when_next_loop;
+            end
+        end 
+    
+        always @(posedge clk)
+        begin
+            if (reset) begin
+                addr_buf  <= 0;
+                len_buf   <= 0;
+                id_buf    <= 0;
+            end
+            else if (clk_en) begin
+                if (next_loop) begin
+                    addr_buf  <= addr_tmp;
+                    len_buf   <= len_tmp;
+                    id_buf    <= req_id_buf;
+                end
+            end
+        end
+
+        always @(posedge clk)
+        begin
+            if (reset) begin
+                rem_req_id   <= 0;
+                rem_req_addr <= 0;
+                rem_req_len  <= 0;
+            end
+            else if (clk_en) begin
+                if (next_loop) begin
+                    rem_req_id   <= req_id_buf;
+                    rem_req_addr <= addr_tmp + ((len_tmp + 1) << ADDR_ALIGN);
+                    rem_req_len  <= rem_len_tmp - len_tmp - 1;
+                end
+                else if (read_loop) begin
+                    rem_req_id   <= req_id_buf;
+                    rem_req_addr <= addr_tmp;
+                    rem_req_len  <= rem_len_tmp;
+                end
+            end
+        end
+
+        always @(posedge clk)
+        begin
+            if (reset)
+                next_req_ready <= 1'b0;
+            else if (clk_en) begin
+                if (next_req)
+                    next_req_ready <= 1'b1;
+                else if (next_sect)
+                    next_req_ready <= 1'b0;
+            end
+        end
+
+        always @(posedge clk)
+        begin
+            if (reset)
+                rem_req_valid <= 1'b0;
+            else if (clk_en) begin
+                if (next_loop && last_loop && last_sect_buf)
+                    rem_req_valid <= 1'b0;
+                else if (next_req_ready && read_loop)
+                    rem_req_valid <= 1'b1;
+                else if (req_full_n)
+                    rem_req_valid <= 1'b0;
+            end
+        end
+    end
+    endgenerate
+
+endmodule
+
+module reconstruct_fullImage_m_axi_burst_sequential
+#(parameter
+    ID_WIDTH                     = 1,
+    DATA_WIDTH                   = 32,
+    ADDR_WIDTH                   = 32,
+    NUM_PORTS                    = 1,
+    MAX_BURST_LEN                = 16
+)(
+    input  wire                  clk,
+    input  wire                  reset,
+    input  wire                  clk_en,
+
+    input  wire [ID_WIDTH-1:0]   in_REQ_ID,
+    input  wire [ADDR_WIDTH-1:0] in_REQ_ADDR,
+    input  wire [31:0]           in_REQ_LEN,
+    input  wire                  in_REQ_VALID,
+    output wire [NUM_PORTS-1:0]  out_REQ_READY,
+
+    output wire [ID_WIDTH-1:0]   out_BURST_ID,
+    output wire [ADDR_WIDTH-1:0] out_BURST_ADDR,
+    output wire [7:0]            out_BURST_LEN,
+    output wire                  out_BURST_VALID,
+    input  wire                  in_BURST_READY,
+
+    output wire [ID_WIDTH-1:0]   out_CTRL_ID,
+    output wire                  out_CTRL_INFO,
+    output wire [7:0]            out_CTRL_LEN,
+    output wire                  out_CTRL_VALID,
+    input  wire [NUM_PORTS-1:0]  in_CTRL_READY
+);
+//------------------------Parameter----------------------
+    localparam
+        PACK_WIDTH      = ID_WIDTH+ADDR_WIDTH+32,
+        DATA_BYTES      = DATA_WIDTH / 8,
+        ADDR_ALIGN      = log2(DATA_BYTES),
+        BOUNDARY_BEATS  = {12-ADDR_ALIGN{1'b1}},
+        NUM_BEAT_WIDTH  = log2(MAX_BURST_LEN);
+//------------------------Task and function--------------
+    function integer log2;
+        input integer x;
+        integer n, m;
+        begin
+            n = 0;
+            m = 1;
+            while (m < x) begin
+                n = n + 1;
+                m = m * 2;
+            end
+            log2 = n;
+        end
+    endfunction
+//------------------------Local signal-------------------
+    wire [PACK_WIDTH-1:0]       req_pack_in;
+    wire [PACK_WIDTH-1:0]       req_pack_out;
+    wire [ID_WIDTH-1:0]         req_id_tmp;
+    wire [ADDR_WIDTH-1:0]       req_addr_tmp;
+    wire [31:0]                 req_len_tmp;
+
+    wire                        req_full_n;
+    wire                        req_empty_n;
+    wire                        write_req;
     wire                        read_req;
     wire                        next_req;
 
     reg  [ADDR_WIDTH - 1:0]     start_addr;
+    reg  [ADDR_WIDTH - 1:0]     end_addr;
     wire [ADDR_WIDTH - 1:0]     sect_addr;
     reg  [ADDR_WIDTH - 1:0]     sect_addr_buf;
+    reg  [ID_WIDTH-1:0]         req_id;
+    reg  [ID_WIDTH-1:0]         req_id_buf;
     reg                         req_handling;
 
     reg  [11 - ADDR_ALIGN:0]    start_to_4k;
@@ -1933,7 +2772,7 @@ module reconstruct_fullImage_m_axi_burst_converter
     reg  [19:0]                 sect_total_buf;
     wire [19:0]                 sect_total_tmp;
     wire                        ready_for_sect;
-
+    
     wire                        single_sect;
     reg                         first_sect;
     reg                         last_sect;
@@ -1943,29 +2782,41 @@ module reconstruct_fullImage_m_axi_burst_converter
 
     reg                         burst_valid;
 
+    wire [ID_WIDTH-1:0]         ost_ctrl_id;
     wire                        ost_ctrl_info;
     wire [7:0]                  ost_ctrl_len;
     wire                        ost_ctrl_valid;
+
 //------------------------Instantiation------------------
     reconstruct_fullImage_m_axi_reg_slice #(
-        .DATA_WIDTH     (ADDR_WIDTH + 32)
+        .DATA_WIDTH     (PACK_WIDTH)
     ) rs_req (
         .clk            (clk),
         .reset          (reset),
-        .s_data         ({in_REQ_LEN, in_REQ_ADDR}),
-        .s_valid        (in_REQ_VALID),
-        .s_ready        (out_REQ_READY),
-        .m_data         ({tmp_len, tmp_addr}),
-        .m_valid        (req_valid),
-        .m_ready        (next_req));
+        .s_data         (req_pack_in),
+        .s_valid        (write_req),
+        .s_ready        (req_full_n),
+        .m_data         (req_pack_out),
+        .m_valid        (req_empty_n),
+        .m_ready        (read_req));
+    
+//------------------------Body--------------------------- 
 
-//------------------------Body---------------------------
+    assign out_REQ_READY = req_full_n ? {NUM_PORTS{1'b1}} : {NUM_PORTS{1'b0}};
+    assign req_pack_in   = {in_REQ_ID, in_REQ_LEN, in_REQ_ADDR};
+    assign write_req     = in_REQ_VALID;
+
+    assign req_id_tmp    = req_pack_out[PACK_WIDTH-1  : ADDR_WIDTH+32];
+    assign req_len_tmp   = req_pack_out[ADDR_WIDTH+31 : ADDR_WIDTH];
+    assign req_addr_tmp  = req_pack_out[ADDR_WIDTH-1  : 0];
+
     assign read_req      = last_sect_tmp & next_sect | ~req_handling;
-    assign next_req      = req_valid & read_req;
+    assign next_req      = read_req & req_empty_n;
 
     always @(posedge clk)
     begin
         if (reset) begin
+            req_id      <= 0;
             start_addr  <= 0;
             beat_len    <= 0;
             sect_total  <= 0;
@@ -1974,11 +2825,12 @@ module reconstruct_fullImage_m_axi_burst_converter
         end
         else if (clk_en) begin
             if (next_req) begin
-                start_addr  <= {tmp_addr[ADDR_WIDTH-1:ADDR_ALIGN], {ADDR_ALIGN{1'b0}}};
-                beat_len    <= (tmp_len[11:0] + tmp_addr[ADDR_ALIGN-1:0]) >> ADDR_ALIGN;
-                sect_total  <= (tmp_len + tmp_addr[11:0]) >> 12;
-                end_from_4k <= (tmp_addr[11:0] + tmp_len[11:0]) >> ADDR_ALIGN; 
-                start_to_4k <= BOUNDARY_BEATS - tmp_addr[11:ADDR_ALIGN];
+                req_id      <= req_id_tmp;
+                start_addr  <= {req_addr_tmp[ADDR_WIDTH-1:ADDR_ALIGN], {ADDR_ALIGN{1'b0}}};
+                beat_len    <= (req_len_tmp[11:0] + req_addr_tmp[ADDR_ALIGN-1:0]) >> ADDR_ALIGN;
+                sect_total  <= (req_len_tmp + req_addr_tmp[11:0]) >> 12;
+                end_from_4k <= (req_addr_tmp[11:0] + req_len_tmp[11:0]) >> ADDR_ALIGN;
+                start_to_4k <= BOUNDARY_BEATS - req_addr_tmp[11:ADDR_ALIGN];
             end
         end
     end
@@ -1990,7 +2842,7 @@ module reconstruct_fullImage_m_axi_burst_converter
         else if (clk_en) begin
             if (next_req)
                 req_handling <= 1'b1;
-            else if (~req_valid && last_sect_tmp & next_sect)
+            else if (~req_empty_n && last_sect_tmp & next_sect)
                 req_handling <= 1'b0;
         end
     end
@@ -2011,7 +2863,7 @@ module reconstruct_fullImage_m_axi_burst_converter
                         (~first_sect &&  last_sect)? end_from_4k :
                                                      BOUNDARY_BEATS;
 
-    always @(posedge clk)
+   always @(posedge clk)
     begin
         if (reset) begin
             first_sect <= 1'b0;
@@ -2022,7 +2874,7 @@ module reconstruct_fullImage_m_axi_burst_converter
             if (next_req) begin
                 first_sect <= 1'b1;
                 last_sect <= 1'b0;
-                sect_cnt <= tmp_addr[ADDR_WIDTH-1:12];
+                sect_cnt <= req_addr_tmp[ADDR_WIDTH-1:12];
             end
             else if (next_sect) begin
                 first_sect <= 1'b0;
@@ -2035,6 +2887,7 @@ module reconstruct_fullImage_m_axi_burst_converter
     always @(posedge clk)
     begin
         if (reset) begin
+            req_id_buf     <= 0;
             sect_addr_buf  <= 0;
             sect_len_buf   <= 0;
             last_sect_buf  <= 1'b0;
@@ -2042,6 +2895,7 @@ module reconstruct_fullImage_m_axi_burst_converter
         end
         else if (clk_en) begin
             if (next_sect) begin
+                req_id_buf     <= req_id;
                 sect_addr_buf  <= sect_addr;
                 sect_len_buf   <= sect_len;
                 last_sect_buf  <= last_sect_tmp;
@@ -2050,17 +2904,24 @@ module reconstruct_fullImage_m_axi_burst_converter
         end
     end
 
+    assign out_CTRL_VALID     = ost_ctrl_valid;
+    assign out_CTRL_INFO      = ost_ctrl_info;
+    assign out_CTRL_ID        = ost_ctrl_id;
+    assign out_CTRL_LEN       = ost_ctrl_len;
+
     generate
     if (DATA_BYTES >= 4096/MAX_BURST_LEN) begin : must_one_burst
         assign out_BURST_ADDR  = sect_addr_buf;
         assign out_BURST_LEN   = sect_len_buf;
         assign out_BURST_VALID = burst_valid;
+        assign out_BURST_ID    = req_id_buf;
 
-        assign out_CTRL_VALID  = next_sect;
-        assign out_CTRL_INFO   = last_sect_tmp;
-        assign out_CTRL_LEN    = sect_len;
+        assign ost_ctrl_valid  = next_sect;
+        assign ost_ctrl_info   = last_sect_tmp;
+        assign ost_ctrl_id     = req_id;
+        assign ost_ctrl_len    = sect_len;
 
-        assign ready_for_sect = ~(burst_valid && ~in_BURST_READY) && in_CTRL_READY;
+        assign ready_for_sect  = ~(burst_valid && ~in_BURST_READY) && in_CTRL_READY[req_id];
 
         always @(posedge clk)
         begin
@@ -2073,7 +2934,7 @@ module reconstruct_fullImage_m_axi_burst_converter
                     burst_valid <= 1'b0;
             end
         end
-
+    
     end
     else begin : could_multi_bursts
         wire [ADDR_WIDTH - 1:0]                   addr_tmp;
@@ -2081,6 +2942,7 @@ module reconstruct_fullImage_m_axi_burst_converter
         reg  [ADDR_ALIGN + 8:0]                   addr_step;
         wire [7:0]                                len_tmp;
         reg  [7:0]                                len_buf;
+        reg  [ID_WIDTH-1:0]                       id_buf;
         reg                                       sect_handling;
         reg  [11 - NUM_BEAT_WIDTH - ADDR_ALIGN:0] loop_cnt;
         reg                                       first_loop;
@@ -2091,14 +2953,16 @@ module reconstruct_fullImage_m_axi_burst_converter
         assign out_BURST_ADDR  = addr_buf;
         assign out_BURST_LEN   = len_buf;
         assign out_BURST_VALID = burst_valid;
+        assign out_BURST_ID    = id_buf;
 
-        assign out_CTRL_VALID  = next_loop;
-        assign out_CTRL_INFO   = last_loop && last_sect_buf;
-        assign out_CTRL_LEN    = len_tmp;
+        assign ost_ctrl_valid  = next_loop;
+        assign ost_ctrl_info   = last_loop && last_sect_buf;
+        assign ost_ctrl_id     = req_id_buf;
+        assign ost_ctrl_len    = len_tmp;
 
         assign next_loop       = sect_handling && ready_for_loop;
         assign ready_for_sect  = ~sect_handling || (last_loop && next_loop);
-        assign ready_for_loop  = ~(burst_valid && ~in_BURST_READY) && in_CTRL_READY;
+        assign ready_for_loop  = ~(burst_valid && ~in_BURST_READY) && in_CTRL_READY[req_id_buf];
 
         always @(posedge clk)
         begin
@@ -2147,20 +3011,22 @@ module reconstruct_fullImage_m_axi_burst_converter
 
         assign addr_tmp = first_loop ? sect_addr_buf : (addr_buf + addr_step);
         assign len_tmp  = (NUM_BEAT_WIDTH == 0) ? 0 :
-                          last_loop ? sect_len_buf[NUM_BEAT_WIDTH - 1:0] : 
-                                      { NUM_BEAT_WIDTH{1'b1} };
+                           last_loop ? sect_len_buf[NUM_BEAT_WIDTH - 1:0] : 
+                                                   { NUM_BEAT_WIDTH{1'b1} };
         always @(posedge clk)
         begin
             if (reset) begin
                 addr_buf  <= 0;
                 addr_step <= 0;
                 len_buf   <= 0;
+                id_buf    <= 0;
             end
             else if (clk_en) begin
                 if (next_loop) begin
                     addr_buf  <= addr_tmp;
                     addr_step <= (len_tmp + 1) << ADDR_ALIGN;
                     len_buf   <= len_tmp;
+                    id_buf    <= req_id_buf;
                 end
             end
         end
@@ -2170,41 +3036,46 @@ module reconstruct_fullImage_m_axi_burst_converter
 
 endmodule
 
+
 module reconstruct_fullImage_m_axi_throttle
 #(parameter
-    CONSERVATIVE   = 0,
-    USED_FIX       = 0,
-    FIX_VALUE      = 4,
-    ADDR_WIDTH     = 32,
-    DATA_WIDTH     = 32,
-    DEPTH          = 16,
-    MAXREQS        = 16,
-    AVERAGE_MODE   = 0 
+    CONSERVATIVE    = 0,
+    ID_WIDTH        = 1,
+    ADDR_WIDTH      = 32,
+    DATA_WIDTH      = 32,
+    NUM_OUTSTANDING = 16
 )(
-    input  wire                      clk,
-    input  wire                      reset,
-    input  wire                      clk_en,
+    input  wire                        clk,
+    input  wire                        reset,
+    input  wire                        clk_en,
 
-    input  wire [ADDR_WIDTH-1:0]     in_TOP_AWADDR,
-    input  wire [7:0]                in_TOP_AWLEN,
-    input  wire                      in_TOP_AWVALID,
-    output wire                      out_TOP_AWREADY,
-    input  wire [DATA_WIDTH-1:0]     in_TOP_WDATA,
-    input  wire [DATA_WIDTH/8-1:0]   in_TOP_WSTRB,
-    input  wire                      in_TOP_WLAST,
-    input  wire                      in_TOP_WVALID,
-    output wire                      out_TOP_WREADY,
+    // internal ports
+    input  wire [ID_WIDTH-1:0]         in_TOP_AWID,
+    input  wire [ADDR_WIDTH-1:0]       in_TOP_AWADDR,
+    input  wire [7:0]                  in_TOP_AWLEN,
+    input  wire                        in_TOP_AWVALID,
+    output wire                        out_TOP_AWREADY,
+    output wire [ID_WIDTH-1:0]         out_TOP_WID,
+    input  wire [DATA_WIDTH-1:0]       in_TOP_WDATA,
+    input  wire [DATA_WIDTH/8-1:0]     in_TOP_WSTRB,
+    input  wire                        in_TOP_WVALID,
+    output wire                        out_TOP_WREADY,
 
-    output wire [ADDR_WIDTH-1:0]     out_BUS_AWADDR,
-    output wire [7:0]                out_BUS_AWLEN,
-    output wire                      out_BUS_AWVALID,
-    input  wire                      in_BUS_AWREADY,
-    output wire [DATA_WIDTH-1:0]     out_BUS_WDATA,
-    output wire [DATA_WIDTH/8-1:0]   out_BUS_WSTRB,
-    output wire                      out_BUS_WLAST,
-    output wire                      out_BUS_WVALID,
-    input  wire                      in_BUS_WREADY);
+    // axi bus ports
+    output wire [ID_WIDTH-1:0]         out_BUS_AWID,
+    output wire [ADDR_WIDTH-1:0]       out_BUS_AWADDR,
+    output wire [7:0]                  out_BUS_AWLEN,
+    output wire                        out_BUS_AWVALID,
+    input  wire                        in_BUS_AWREADY,
+    output wire [ID_WIDTH-1:0]         out_BUS_WID,
+    output wire [DATA_WIDTH-1:0]       out_BUS_WDATA,
+    output wire [DATA_WIDTH/8-1:0]     out_BUS_WSTRB,
+    output wire                        out_BUS_WLAST,
+    output wire                        out_BUS_WVALID,
+    input  wire                        in_BUS_WREADY
+);
 
+//------------------------Task and function--------------
     function integer log2;
         input integer x;
         integer n, m;
@@ -2218,182 +3089,237 @@ module reconstruct_fullImage_m_axi_throttle
         log2 = n;
     end
     endfunction
-// aggressive mode
-    generate
-    if (CONSERVATIVE == 0) begin
-        localparam threshold = (USED_FIX)? FIX_VALUE-1 : 0;
+//------------------------Local signal-------------------
+    // AW Channel
 
-        wire                req_en;
-        wire                handshake;
-        wire  [7:0]         load_init;
-        reg   [8:0]         throttl_cnt;
+    wire [ID_WIDTH-1 : 0]      burst_id;
+    wire [7 : 0]               burst_len;
+    wire [ADDR_WIDTH-1 : 0]    burst_addr;
+
+    wire                       burst_valid;
+    wire                       read_burst;
+
+    wire                       next_burst;
+    reg  [7:0]                 burst_len_cnt;
+
+    reg                        ost_burst;
+    reg  [ID_WIDTH-1 : 0]      ost_burst_id;
+    reg  [7 : 0]               ost_burst_len;
+
+    // W channel
+    reg  [ID_WIDTH-1 : 0]      WID_Dummy;
+    reg  [DATA_WIDTH-1 : 0]    WDATA_Dummy;
+    reg  [DATA_WIDTH/8-1 : 0]  WSTRB_Dummy;
+    reg                        WVALID_Dummy;
+    reg                        WLAST_Dummy;
+
+    wire                       ready_for_beat;
+    wire                       next_beat;
+    wire                       last_beat;
+                 
+    reg                        throttling  = 1'b0;
+//------------------------Body---------------------------
+    // aggressive mode
+    generate if (CONSERVATIVE == 0) begin
+
+        wire                   burst_ready;
+        wire                   write_burst;
+
+        reconstruct_fullImage_m_axi_fifo #(
+            .DATA_WIDTH        (ID_WIDTH + 8),
+            .ADDR_WIDTH        (log2(NUM_OUTSTANDING)),
+            .DEPTH             (NUM_OUTSTANDING)
+        ) fifo_burst (
+            .clk               (clk),
+            .reset             (reset),
+            .clk_en            (clk_en),
+            .if_full_n         (burst_ready),
+            .if_write          (write_burst),
+            .if_din            ({in_TOP_AWID, in_TOP_AWLEN}),
+            .if_empty_n        (burst_valid),
+            .if_read           (read_burst),
+            .if_dout           ({burst_id, burst_len}),
+            .if_num_data_valid ());
 
         // AW Channel
-        assign out_BUS_AWADDR = in_TOP_AWADDR;
-        assign out_BUS_AWLEN  = in_TOP_AWLEN;
+        assign out_BUS_AWID    = in_TOP_AWID;
+        assign out_BUS_AWADDR  = in_TOP_AWADDR;
+        assign out_BUS_AWLEN   = in_TOP_AWLEN;
+        assign out_BUS_AWVALID = in_TOP_AWVALID && burst_ready;
+        assign out_TOP_AWREADY = in_BUS_AWREADY && burst_ready;
 
-        // W Channel
-        assign out_BUS_WDATA  = in_TOP_WDATA;
-        assign out_BUS_WSTRB  = in_TOP_WSTRB;
-        assign out_BUS_WLAST  = in_TOP_WLAST;
-        assign out_BUS_WVALID = in_TOP_WVALID & (throttl_cnt > 0);
-        assign out_TOP_WREADY = in_BUS_WREADY & (throttl_cnt > 0);
+        assign write_burst     = in_TOP_AWVALID && in_BUS_AWREADY;
+        assign read_burst      = next_burst;
 
-        if (USED_FIX) begin
-            assign load_init = FIX_VALUE-1;
-            assign handshake = 1'b1;
-        end else if (AVERAGE_MODE) begin
-            assign load_init = in_TOP_AWLEN;
-            assign handshake = 1'b1;
-        end else begin
-            assign load_init = in_TOP_AWLEN;
-            assign handshake = out_BUS_WVALID & in_BUS_WREADY;
+        always @(*)
+        begin
+            ost_burst          <= burst_valid;
+            ost_burst_id       <= burst_id;
+            ost_burst_len      <= burst_len;
         end
-
-        assign out_BUS_AWVALID = in_TOP_AWVALID & req_en;
-        assign out_TOP_AWREADY = in_BUS_AWREADY & req_en;
-        assign req_en = (throttl_cnt == 0) | (throttl_cnt == 1 & handshake);
 
         always @(posedge clk)
         begin
             if (reset)
-                throttl_cnt <= 0;
+                throttling <= 1'b0;
             else if (clk_en) begin
-                if (in_TOP_AWLEN >= threshold && req_en && in_TOP_AWVALID && in_BUS_AWREADY)
-                    throttl_cnt <= load_init + 1'b1; //load
-                else if (throttl_cnt > 0 && handshake)
-                    throttl_cnt <= throttl_cnt - 1'b1;
+                throttling <= 1'b1;
             end
         end
 
     end
-// conservative mode
+    // conservative mode
     else begin
-        localparam CNT_WIDTH = ((DEPTH < 4)? 2 : log2(DEPTH)) + 1;
 
-        // Instantiation for reg slice for AW channel
-        wire                        rs_req_ready;
-        wire                        rs_req_valid;
-        wire [ADDR_WIDTH + 7 : 0]   rs_req_in;
-        wire [ADDR_WIDTH + 7 : 0]   rs_req_out;
-
-        reconstruct_fullImage_m_axi_reg_slice #(
-            .DATA_WIDTH     (ADDR_WIDTH + 8)
-        ) rs_req (
-            .clk            (clk),
-            .reset          (reset),
-            .s_data         (rs_req_in),
-            .s_valid        (rs_req_valid),
-            .s_ready        (rs_req_ready),
-            .m_data         (rs_req_out),
-            .m_valid        (out_BUS_AWVALID),
-            .m_ready        (in_BUS_AWREADY));
-
-        wire  [DATA_WIDTH + DATA_WIDTH/8 : 0]   data_in;
-        wire  [DATA_WIDTH + DATA_WIDTH/8 : 0]   data_out;
-        wire  [ADDR_WIDTH + 7 : 0]              req_in;
-        reg                                     req_en;
-        wire                                    data_en;
-        wire                                    fifo_valid;
-        wire                                    read_fifo;
-        wire                                    req_fifo_valid;
-        wire                                    read_req;
-        wire                                    data_push;
-        wire                                    data_pop;
-        reg                                     flying_req;
-        reg   [CNT_WIDTH-1 : 0]                 last_cnt;
-
-        //AW Channel
-        assign req_in   = {in_TOP_AWLEN, in_TOP_AWADDR};
-        assign out_BUS_AWADDR = rs_req_out[ADDR_WIDTH-1 : 0];
-        assign out_BUS_AWLEN  = rs_req_out[ADDR_WIDTH+7 : ADDR_WIDTH];
-        assign rs_req_valid = req_fifo_valid & req_en;
-
-        assign read_req      = rs_req_ready & req_en;
-
-        always @(*)
-        begin
-            if (~flying_req & data_en)
-                req_en <= 1;
-            else if (flying_req & (out_BUS_WLAST & data_pop) & (last_cnt[CNT_WIDTH-1:1] != 0))
-                req_en <= 1;
-            else
-                req_en <= 0;
-        end
-
-        always @(posedge clk)
-        begin
-            if (reset)
-                flying_req <= 0;
-            else if (clk_en) begin
-                if (rs_req_valid & rs_req_ready)
-                    flying_req <= 1;
-                else if (out_BUS_WLAST & data_pop)
-                    flying_req <= 0;
-            end
-        end
+        wire                rs_in_ready;
+        wire                rs_in_valid;
+        wire                rs_out_ready;
+        wire                rs_out_valid;
 
         reconstruct_fullImage_m_axi_fifo #(
-            .DATA_WIDTH     (ADDR_WIDTH + 8),
-            .ADDR_WIDTH     (log2(MAXREQS)),
-            .DEPTH          (MAXREQS)
-        ) req_fifo (
+            .DATA_WIDTH     (ID_WIDTH + ADDR_WIDTH + 8),
+            .ADDR_WIDTH     (log2(NUM_OUTSTANDING)),
+            .DEPTH          (NUM_OUTSTANDING)
+        ) fifo_burst (
             .clk            (clk),
             .reset          (reset),
             .clk_en         (clk_en),
             .if_full_n      (out_TOP_AWREADY),
             .if_write       (in_TOP_AWVALID),
-            .if_din         (req_in),
-            .if_empty_n     (req_fifo_valid),
-            .if_read        (read_req),
-            .if_dout        (rs_req_in),
+            .if_din         ({in_TOP_AWID, in_TOP_AWLEN, in_TOP_AWADDR}),
+            .if_empty_n     (burst_valid),
+            .if_read        (read_burst),
+            .if_dout        ({burst_id, burst_len, burst_addr}),
             .if_num_data_valid());
+        
+        reconstruct_fullImage_m_axi_reg_slice #(
+            .DATA_WIDTH     (ID_WIDTH + ADDR_WIDTH + 8)
+        ) rs_burst (
+            .clk            (clk),
+            .reset          (reset),
+            .s_data         ({burst_id, burst_len, burst_addr}),
+            .s_valid        (rs_in_valid),
+            .s_ready        (rs_in_ready),
+            .m_data         ({out_BUS_AWID, out_BUS_AWLEN, out_BUS_AWADDR}),
+            .m_valid        (rs_out_valid),
+            .m_ready        (rs_out_ready));
 
-        //W Channel
-        assign data_in  = {in_TOP_WLAST, in_TOP_WSTRB, in_TOP_WDATA};
-        assign out_BUS_WDATA = data_out[DATA_WIDTH-1 : 0];
-        assign out_BUS_WSTRB = data_out[DATA_WIDTH+DATA_WIDTH/8-1 : DATA_WIDTH];
-        assign out_BUS_WLAST = data_out[DATA_WIDTH+DATA_WIDTH/8];
-        assign out_BUS_WVALID = fifo_valid & data_en & flying_req;
+        // AW Channel
+        assign out_BUS_AWVALID = rs_out_valid   & ~throttling;
+        assign rs_out_ready    = in_BUS_AWREADY & ~throttling;
 
-        assign data_en   = last_cnt != 0;
-        assign data_push = in_TOP_WVALID & out_TOP_WREADY;
-        assign data_pop  = fifo_valid & read_fifo;
-        assign read_fifo = in_BUS_WREADY & data_en & flying_req;
+        assign rs_in_valid     = burst_valid    & ~ost_burst;
+        assign read_burst      = rs_in_ready    & ~ost_burst;
 
         always @(posedge clk)
         begin
             if (reset)
-                last_cnt <= 0;
+                ost_burst <= 1'b0;
             else if (clk_en) begin
-                if ((in_TOP_WLAST & data_push) && ~(out_BUS_WLAST & data_pop))
-                    last_cnt <= last_cnt + 1;
-                else if (~(in_TOP_WLAST & data_push) && (out_BUS_WLAST & data_pop))
-                    last_cnt <= last_cnt - 1;
+                if ((burst_valid & read_burst) && ~next_burst)
+                    ost_burst <= 1'b1;
+                else if (~(burst_valid & read_burst) && next_burst)
+                    ost_burst <= 1'b0;
             end
         end
-            
-        reconstruct_fullImage_m_axi_fifo #(
-            .DATA_WIDTH     (DATA_WIDTH + DATA_WIDTH/8 + 1),
-            .ADDR_WIDTH     (log2(DEPTH)),
-            .DEPTH          (DEPTH)
-        ) data_fifo (
-            .clk            (clk),
-            .reset          (reset),
-            .clk_en         (clk_en),
-            .if_full_n      (out_TOP_WREADY),
-            .if_write       (in_TOP_WVALID),
-            .if_din         (data_in),
-            .if_empty_n     (fifo_valid),
-            .if_read        (read_fifo),
-            .if_dout        (data_out),
-            .if_num_data_valid());
 
+        always @(posedge clk)
+        begin
+            if (reset) begin
+                ost_burst_id  <= 0;
+                ost_burst_len <= 0;
+            end
+            else if (clk_en) begin
+                if (burst_valid & read_burst) begin
+                    ost_burst_id  <= burst_id;
+                    ost_burst_len <= burst_len;
+                end
+            end
         end
+
+        always @(posedge clk)
+        begin
+            if (reset)
+                throttling <= 1'b0;
+            else if (clk_en) begin
+                if ((rs_out_valid && rs_out_ready) && ~last_beat)
+                    throttling <= 1'b1;
+                else if (~(rs_out_valid && rs_out_ready) && last_beat)
+                    throttling <= 1'b0;
+            end
+        end
+
+    end
     endgenerate
 
-endmodule
+    // W Channel
+    assign out_BUS_WID    = WID_Dummy;
+    assign out_BUS_WDATA  = WDATA_Dummy;
+    assign out_BUS_WSTRB  = WSTRB_Dummy;
+    assign out_BUS_WLAST  = WLAST_Dummy;
+    assign out_BUS_WVALID = WVALID_Dummy; 
 
+    assign out_TOP_WID    = ost_burst_id;
+    assign out_TOP_WREADY = ost_burst && ready_for_beat;
+
+    assign ready_for_beat = ~WVALID_Dummy || (in_BUS_WREADY && throttling );
+    assign next_beat      = ready_for_beat && ost_burst && in_TOP_WVALID;
+    assign next_burst     = (burst_len_cnt == ost_burst_len) && next_beat;
+    assign last_beat      = WLAST_Dummy && WVALID_Dummy && (in_BUS_WREADY && throttling );
+
+    always @(posedge clk)
+    begin
+        if (reset) begin
+            WDATA_Dummy <= 0;
+            WSTRB_Dummy <= 0;
+            WID_Dummy   <= 0;
+        end
+        if (clk_en) begin
+            if (next_beat) begin
+                WID_Dummy   <= ost_burst_id;
+                WDATA_Dummy <= in_TOP_WDATA;
+                WSTRB_Dummy <= in_TOP_WSTRB;
+            end
+        end
+    end
+
+    always @(posedge clk)
+    begin
+        if (reset)
+            WVALID_Dummy <= 1'b0;
+        else if (clk_en) begin
+            if (next_beat)
+                WVALID_Dummy <= 1'b1;
+            else if (ready_for_beat)
+                WVALID_Dummy <= 1'b0;
+        end
+    end
+
+    always @(posedge clk)
+    begin
+        if (reset)
+            WLAST_Dummy <= 1'b0;
+        else if (clk_en) begin
+            if (next_burst)
+                WLAST_Dummy <= 1'b1;
+            else if (ready_for_beat)
+                WLAST_Dummy <= 1'b0;
+        end
+    end
+
+    always @(posedge clk)
+    begin
+        if (reset)
+            burst_len_cnt <= 0;
+        else if (clk_en) begin
+            if (next_burst)
+                burst_len_cnt <= 0;
+            else if (next_beat)
+                burst_len_cnt <= burst_len_cnt + 1;
+        end
+    end
+
+endmodule
 
 
 module reconstruct_fullImage_m_axi_reg_slice
@@ -2410,14 +3336,15 @@ module reconstruct_fullImage_m_axi_reg_slice
     // master side
     output wire [DATA_WIDTH-1:0] m_data,
     output wire                  m_valid,
-    input  wire                  m_ready);
-    //------------------------Parameter----------------------
+    input  wire                  m_ready
+);
+//------------------------Parameter----------------------
     // state
     localparam [1:0]
         ZERO = 2'b10,
         ONE  = 2'b11,
         TWO  = 2'b01;
-    //------------------------Local signal-------------------
+//------------------------Local signal-------------------
     reg  [DATA_WIDTH-1:0] data_p1;
     reg  [DATA_WIDTH-1:0] data_p2;
     wire         load_p1;
@@ -2426,7 +3353,7 @@ module reconstruct_fullImage_m_axi_reg_slice
     reg          s_ready_t;
     reg  [1:0]   state;
     reg  [1:0]   next;
-    //------------------------Body---------------------------
+//------------------------Body---------------------------
     assign s_ready = s_ready_t;
     assign m_data  = data_p1;
     assign m_valid = state[0];
@@ -2497,6 +3424,7 @@ module reconstruct_fullImage_m_axi_reg_slice
         endcase
     end
 endmodule
+
 
 module reconstruct_fullImage_m_axi_fifo
 #(parameter
@@ -2676,6 +3604,7 @@ module reconstruct_fullImage_m_axi_fifo
 
 endmodule
 
+
 module reconstruct_fullImage_m_axi_srl
 #(parameter
         DATA_WIDTH  = 32,
@@ -2730,6 +3659,7 @@ module reconstruct_fullImage_m_axi_srl
 
 endmodule
 
+
 module reconstruct_fullImage_m_axi_mem
 #(parameter
     MEM_STYLE   = "auto",
@@ -2770,4 +3700,856 @@ module reconstruct_fullImage_m_axi_mem
         else if (clk_en & re)
             dout <= mem[raddr_reg];
     end
+endmodule
+// 67d7842dbbe25473c3c32b93c0da8047785f30d78e8a024de1b57352245f9689
+
+`timescale 1ns/1ps
+
+module reconstruct_fullImage_m_axi_load_with_cache
+#(parameter
+    C_TARGET_ADDR                         = 32'h00000000,
+    C_M_AXI_ID_WIDTH                      = 1,
+    C_ID_VALUE                            = 1'b0,
+    NUM_READ_OUTSTANDING                  = 2,
+    MAX_READ_BURST_LENGTH                 = 16,
+    BUS_ADDR_WIDTH                        = 32,
+    BUS_DATA_WIDTH                        = 32,
+    USER_DW                               = 16,
+    USER_AW                               = 32,
+    USER_MAXREQS                          = 16,
+    USER_RFIFONUM_WIDTH                   = 6,
+    //for cache
+    CACHE_IMPL                            = "auto",
+    NUM_CACHE_LINE                        = 1,
+    CACHE_LINE_DEPTH                      = 16
+)(
+    // system signal
+    input  wire                           ACLK,
+    input  wire                           ARESET,
+    input  wire                           ACLK_EN,
+
+    input  wire                           cache_flush,
+    output wire                           cache_flush_done,
+
+    // read address channel
+    output wire [C_M_AXI_ID_WIDTH-1:0]    out_AXI_ARID,
+    output wire [BUS_ADDR_WIDTH-1:0]      out_AXI_ARADDR,
+    output wire [31:0]                    out_AXI_ARLEN,
+    output wire                           out_AXI_ARVALID,
+    input  wire                           in_AXI_ARREADY,
+    // read data channel
+    input  wire [C_M_AXI_ID_WIDTH-1:0]    in_AXI_RID,
+    input  wire [BUS_DATA_WIDTH-1:0]      in_AXI_RDATA,
+    input  wire [1:0]                     in_AXI_RLAST,
+    input  wire                           in_AXI_RVALID,
+    output wire                           out_AXI_RREADY,
+    output wire                           out_AXI_RBURST_READY,
+
+    // internal bus ports
+    // read address
+    input  wire [USER_AW-1:0]             in_HLS_ARADDR,
+    input  wire [31:0]                    in_HLS_ARLEN,
+    input  wire                           in_HLS_ARVALID,
+    output wire                           out_HLS_ARREADY,
+    // read data
+    output wire [USER_DW-1:0]             out_HLS_RDATA,
+    output wire                           out_HLS_RVALID,
+    input  wire                           in_HLS_RREADY,
+    output wire [USER_RFIFONUM_WIDTH-1:0] out_HLS_RFIFONUM);
+
+//------------------------Parameter----------------------
+    localparam
+        USER_DATA_WIDTH   = calc_data_width(USER_DW),
+        USER_DATA_BYTES   = (USER_DATA_WIDTH / 8),
+        USER_ADDR_ALIGN   = log2(USER_DATA_WIDTH / 8),
+        TARGET_ADDR       = ((C_TARGET_ADDR / USER_DATA_BYTES)
+                                * USER_DATA_BYTES);
+
+//------------------------Task and function--------------
+    function integer log2;
+        input integer x;
+        integer n, m;
+    begin
+        n = 0;
+        m = 1;
+        while (m < x) begin
+            n = n + 1;
+            m = m * 2;
+        end
+        log2 = n;
+    end
+    endfunction
+
+    function integer calc_data_width;
+        input integer x;
+        integer y;
+    begin
+        y = 8;
+        while (y < x) y = y * 2;
+        calc_data_width = y;
+    end
+    endfunction
+
+//------------------------Local signal-------------------
+    wire                   local_AXI_RVALID;
+    wire                   rdata_valid;
+    reg                    ready_for_outstanding;
+    wire [USER_AW-1:0]     HLS_ARADDR_byte;
+
+//------------------------Instantiation------------------
+    // read-only cache unit
+    reconstruct_fullImage_m_axi_cache #(
+        .CACHE_IMPL            (CACHE_IMPL),
+        .USER_AW               (USER_AW),
+        .USER_DW               (USER_DW),
+        .BUS_ADDR_WIDTH        (BUS_ADDR_WIDTH),
+        .BUS_DATA_WIDTH        (BUS_DATA_WIDTH),
+        .NUM_CACHE_LINE        (NUM_CACHE_LINE),
+        .CACHE_LINE_DEPTH      (CACHE_LINE_DEPTH),
+        .MAX_READ_BURST_LENGTH (0),
+        .USER_MAXREQS          (USER_MAXREQS)
+    ) read_cache (
+        .ACLK              (ACLK),
+        .ARESET            (ARESET),
+        .ACLK_EN           (ACLK_EN),
+
+        .cache_flush       (cache_flush),
+        .cache_flush_done  (cache_flush_done),
+
+        .out_AXI_ARADDR    (out_AXI_ARADDR),
+        .out_AXI_ARLEN     (out_AXI_ARLEN),
+        .out_AXI_ARVALID   (out_AXI_ARVALID),
+        .in_AXI_ARREADY    (in_AXI_ARREADY),
+
+        .in_AXI_RDATA      (in_AXI_RDATA),
+        .in_AXI_RLAST      (in_AXI_RLAST[0]),
+        .in_AXI_RVALID     (local_AXI_RVALID),
+        .out_AXI_RREADY    (out_AXI_RREADY),
+
+        .in_HLS_ARADDR     (HLS_ARADDR_byte),
+        .in_HLS_ARLEN      (0),
+        .in_HLS_ARVALID    (in_HLS_ARVALID),
+        .out_HLS_ARREADY   (out_HLS_ARREADY),
+
+        .out_HLS_RDATA     (out_HLS_RDATA),
+        .out_HLS_RLAST     (),
+        .out_HLS_RVALID    (rdata_valid),
+        .in_HLS_RREADY     (in_HLS_RREADY)
+    );
+
+    // Convert in_HLS_ARADDR (addressing words of USER_DW bits) to
+    // HLS_ARADDR_byte (addressing words of 8 bits).
+    assign HLS_ARADDR_byte  = (TARGET_ADDR + (in_HLS_ARADDR << USER_ADDR_ALIGN));
+
+    assign local_AXI_RVALID = (in_AXI_RVALID && (in_AXI_RID == C_ID_VALUE)) ? 1'b1 : 1'b0;
+    assign out_AXI_ARID    = C_ID_VALUE;
+    assign out_HLS_RFIFONUM = rdata_valid;
+    assign out_HLS_RVALID   = rdata_valid;
+
+    // outstanding control
+    assign out_AXI_RBURST_READY = ready_for_outstanding;
+    always @(posedge ACLK) 
+    begin
+        if (ARESET)
+            ready_for_outstanding <= 1'b0;
+        else if (ACLK_EN) begin
+            if (in_AXI_RVALID && (in_AXI_RID == C_ID_VALUE))
+                ready_for_outstanding <= in_AXI_RLAST[1];
+            else
+                ready_for_outstanding <= 1'b0;
+        end
+    end
+    // ===================================================================
+
+endmodule
+
+`timescale 1ns/1ps
+
+module reconstruct_fullImage_m_axi_cache_mem
+#(parameter
+    MEM_STYLE   = "auto",
+    DATA_WIDTH  = 32,
+    ADDR_WIDTH  = 6,
+    DEPTH       = 63
+)(
+    input  wire                  clk,
+    input  wire                  reset,
+    input  wire                  clk_en,
+    input  wire                  we,
+    input  wire [ADDR_WIDTH-1:0] waddr,
+    input  wire [DATA_WIDTH-1:0] din,
+    input  wire                  re,
+    input  wire [ADDR_WIDTH-1:0] raddr,
+    output wire [DATA_WIDTH-1:0] dout);
+
+    (* ram_style = MEM_STYLE *)
+    reg [DATA_WIDTH-1:0] mem[0:DEPTH-1];
+    reg [DATA_WIDTH-1:0] mem_reg;
+
+    always @(posedge clk) begin
+        if (clk_en & we)
+            mem[waddr] <= din;
+    end
+
+    always @(posedge clk) begin
+        if (reset)
+            mem_reg <= 0;
+        else if (clk_en & re)
+            mem_reg <= mem[raddr];
+    end
+
+    assign dout = mem_reg;
+endmodule
+
+module reconstruct_fullImage_m_axi_cache_preprocessor
+#(parameter
+    MAX_READ_BURST_LENGTH     = 0, // 0 -- non-burst / > 0 -- burst
+    USER_AW                   = 32,
+    USER_DW                   = 16,
+    USER_MAXREQS              = 16,
+    NUM_READ_OUTSTANDING      = 2
+)(
+    // system signal
+    input  wire               ACLK,
+    input  wire               ARESET,
+    input  wire               ACLK_EN,
+
+    // read address
+    input  wire [USER_AW-1:0] in_HLS_ARADDR,
+    input  wire [31:0]        in_HLS_ARLEN,
+    input  wire               in_HLS_ARVALID,
+    output wire               out_HLS_ARREADY,
+
+    output wire [USER_AW-1:0] out_CACHE_ARADDR,
+    output wire               out_CACHE_ARVALID,
+    input  wire               in_CACHE_ARREADY,
+
+    input  wire               in_HLS_RREADY,
+    output wire               out_HLS_RLAST,
+
+    input  wire               in_CACHE_RVALID
+);
+
+//------------------------Parameter----------------------
+    localparam
+        USER_DATA_BYTES = (calc_data_width(USER_DW) / 8),
+        DATA_WIDTH      = (MAX_READ_BURST_LENGTH > 1) ? USER_AW + 32 : USER_AW; 
+//------------------------Task and function--------------
+    function integer log2;
+        input integer x;
+        integer n, m;
+    begin
+        n = 0;
+        m = 1;
+        while (m < x) begin
+            n = n + 1;
+            m = m * 2;
+        end
+        log2 = n;
+    end
+    endfunction
+
+    function integer calc_data_width;
+        input integer x;
+        integer y;
+    begin
+        y = 8;
+        while (y < x) y = y * 2;
+        calc_data_width = y;
+    end
+    endfunction
+
+//------------------------Local signal-------------------
+    wire [DATA_WIDTH-1 : 0] rreq_in;
+    wire [DATA_WIDTH-1 : 0] rreq_out;
+    wire                    rreq_valid;
+    wire                    rreq_ready;
+
+//------------------------Instantiation------------------
+    // pipeling request fifo
+    reconstruct_fullImage_m_axi_fifo #(
+        .DATA_WIDTH        (DATA_WIDTH),
+        .ADDR_WIDTH        (log2(USER_MAXREQS)),
+        .DEPTH             (USER_MAXREQS)
+    ) fifo_rreq (
+        .clk               (ACLK),
+        .reset             (ARESET),
+        .clk_en            (ACLK_EN),
+        .if_full_n         (out_HLS_ARREADY),
+        .if_write          (in_HLS_ARVALID),
+        .if_din            (rreq_in),
+        .if_empty_n        (rreq_valid),
+        .if_read           (rreq_ready),
+        .if_dout           (rreq_out),
+        .if_num_data_valid ());
+
+    // request preprocessor, to split burst requests into multiple non-burst request if working in "burst" mode.
+    generate if (MAX_READ_BURST_LENGTH > 0) begin
+        wire                     next_rreq;
+        wire [USER_AW-1 : 0]     rreq_addr;
+        wire [31:0]              rreq_len;
+        wire [31:0]              rreq_len_words;
+
+        reg  [USER_AW-1 : 0]     tmp_addr;
+        reg  [31:0]              tmp_cnt;
+        reg                      tmp_valid;
+        wire                     tmp_ready;
+        wire                     last_addr;
+        wire                     next_addr;
+
+        wire                     requesting;
+        wire                     responding;
+        wire [0:0]               req_rlast;
+        wire [0:0]               resp_rlast;
+
+        reconstruct_fullImage_m_axi_fifo #(
+            .DATA_WIDTH        (1),
+            .ADDR_WIDTH        (log2(NUM_READ_OUTSTANDING * MAX_READ_BURST_LENGTH)),
+            .DEPTH             (NUM_READ_OUTSTANDING * MAX_READ_BURST_LENGTH)
+        ) fifo_rlast (
+            .clk               (ACLK),
+            .reset             (ARESET),
+            .clk_en            (ACLK_EN),
+            .if_full_n         (),
+            .if_write          (requesting),
+            .if_din            (req_rlast),
+            .if_empty_n        (),
+            .if_read           (responding),
+            .if_dout           (resp_rlast),
+            .if_num_data_valid ());
+
+        assign requesting    =
+            (((tmp_valid == 1) && (in_CACHE_ARREADY == 1)) ? 1 : 0);
+        assign responding    =
+            (((in_CACHE_RVALID == 1) && (in_HLS_RREADY == 1)) ? 1 : 0);
+        assign req_rlast[0]  = last_addr;
+        assign out_HLS_RLAST = resp_rlast[0];
+
+        assign rreq_in       = {in_HLS_ARADDR, in_HLS_ARLEN}; 
+        assign {rreq_addr, rreq_len} = rreq_out;
+
+        assign out_CACHE_ARADDR  = tmp_addr;
+        assign out_CACHE_ARVALID = tmp_valid;
+        assign tmp_ready         = in_CACHE_ARREADY;
+
+        assign next_addr         = (tmp_ready && tmp_valid);
+        assign last_addr         = (tmp_cnt == 1) && next_addr;
+        assign rreq_ready        = ~tmp_valid || last_addr; 
+        assign next_rreq         = rreq_valid && rreq_ready; 
+        // Convert rreq_len (expressing the burst length in bytes) to
+        // rreq_len_words (expressing the burst lenght in words of
+        // USER_DATA_BYTES bytes).
+        // This is useful because the tmp_cnt counts the number of
+        // transactions of USER_DATA_BYTES bytes.
+        assign rreq_len_words    = ((rreq_len + 1) / USER_DATA_BYTES);
+
+        always @(posedge ACLK) 
+        begin
+            if (ARESET) begin
+                tmp_addr <= 0; 
+                tmp_cnt  <= 0;
+            end
+            else if (ACLK_EN) begin
+                if (next_rreq) begin
+                    tmp_addr <= rreq_addr;
+                    if (rreq_len_words > 0)
+                        tmp_cnt  <= rreq_len_words;
+                    else
+                        tmp_cnt <= 1;
+                end
+                else if (next_addr) begin
+                    tmp_addr <= (tmp_addr + USER_DATA_BYTES);
+                    tmp_cnt  <= tmp_cnt - 1;
+                end
+            end
+        end
+                
+        always @(posedge ACLK)
+        begin
+            if (ARESET)
+                tmp_valid <= 0;
+            else if (ACLK_EN) begin
+                if (next_rreq)
+                    tmp_valid <= 1'b1;
+                else if (last_addr)
+                    tmp_valid <= 1'b0;
+            end
+        end
+
+    end
+    else begin
+
+        assign rreq_in           = in_HLS_ARADDR;
+        assign out_CACHE_ARADDR  = rreq_out;
+        assign out_CACHE_ARVALID = rreq_valid;
+        assign rreq_ready        = in_CACHE_ARREADY;
+
+        assign out_HLS_RLAST     = 1'b0;
+    end
+    endgenerate
+
+endmodule
+
+module reconstruct_fullImage_m_axi_cache_unit
+#(parameter 
+    MODE                              = "READ-ONLY",
+    CACHE_IMPL                        = "auto",
+    USER_AW                           = 64,
+    USER_DW                           = 32,
+    BUS_ADDR_WIDTH                    = 64,
+    BUS_DATA_WIDTH                    = 512,
+    NUM_CACHE_LINE                    = 1,
+    CACHE_LINE_DEPTH                  = 16
+)(
+    // system signal
+    input  wire                       ACLK,
+    input  wire                       ARESET,
+    input  wire                       ACLK_EN,
+
+    input  wire                       cache_flush,
+    output wire                       cache_flush_done,
+
+    output wire [BUS_ADDR_WIDTH-1:0]  out_AXI_ARADDR,
+    output wire [31:0]                out_AXI_ARLEN,
+    output wire                       out_AXI_ARVALID,
+    input  wire                       in_AXI_ARREADY,
+
+    input  wire [BUS_DATA_WIDTH-1:0]  in_AXI_RDATA,
+    input  wire                       in_AXI_RLAST,
+    input  wire                       in_AXI_RVALID,
+    output wire                       out_AXI_RREADY,
+
+    // read request
+    input  wire [USER_AW-1:0]         in_HLS_ARADDR,
+    input  wire                       in_HLS_ARVALID,
+    output wire                       out_HLS_ARREADY,
+
+    output wire [USER_DW-1:0]         out_HLS_RDATA,
+    output wire                       out_HLS_RVALID,
+    input  wire                       in_HLS_RREADY
+);
+
+//------------------------Parameter----------------------
+    localparam
+        USER_DATA_WIDTH   = calc_data_width(USER_DW),
+        USER_ADDR_ALIGN   = log2(USER_DATA_WIDTH/8),
+        // for cache
+        CACHE_BURST_LEN   = max(CACHE_LINE_DEPTH * USER_DATA_WIDTH / BUS_DATA_WIDTH, 1),
+        BUS_ADDR_ALIGN    = log2(BUS_DATA_WIDTH/8),
+        CACHE_ADDR_ALIGN  = max(log2(CACHE_BURST_LEN), 1),
+        CACHE_LINE_ALIGN  = BUS_ADDR_ALIGN + log2(CACHE_BURST_LEN),
+        CACHE_INDEX_WIDTH = max(log2(NUM_CACHE_LINE),1),
+        CACHE_TAG_WIDTH   = BUS_ADDR_WIDTH - log2(NUM_CACHE_LINE) - CACHE_LINE_ALIGN,
+        CACHE_DATA_ALIGN  = max(1, BUS_ADDR_ALIGN - USER_ADDR_ALIGN),
+        CACHE_ADDR_WIDTH  = CACHE_INDEX_WIDTH + log2(CACHE_BURST_LEN);
+
+//------------------------Task and function--------------
+    function integer max;
+        input integer x;
+        input integer y;
+    begin
+        max = (x > y) ? x : y;
+    end
+    endfunction 
+
+    function integer calc_data_width;
+        input integer x;
+        integer y;
+    begin
+        y = 8;
+        while (y < x) y = y * 2;
+        calc_data_width = y;
+    end
+    endfunction
+
+    function integer log2;
+        input integer x;
+        integer n, m;
+    begin
+        n = 0;
+        m = 1;
+        while (m < x) begin
+            n = n + 1;
+            m = m * 2;
+        end
+        log2 = n;
+    end
+    endfunction
+//------------------------Local signal------------------- 
+    reg  [CACHE_TAG_WIDTH - 1 : 0]   tag_array  [0 : NUM_CACHE_LINE - 1];
+    reg  [NUM_CACHE_LINE  - 1 : 0]   valid_array;
+
+    wire                             next_rreq;
+    wire                             ready_for_rreq;
+
+    reg  [BUS_ADDR_WIDTH - 1 : 0]    tmp_addr;
+    reg                              tmp_valid;
+    wire [CACHE_DATA_ALIGN  - 1 : 0] tmp_align;
+    wire [CACHE_ADDR_ALIGN  - 1 : 0] tmp_offset;
+    wire [CACHE_INDEX_WIDTH - 1 : 0] tmp_index;
+    wire [CACHE_ADDR_WIDTH - 1: 0]   tmp_raddr;
+    wire [CACHE_TAG_WIDTH   - 1 : 0] tmp_tag;
+
+    wire [BUS_DATA_WIDTH - 1 : 0]    tmp_data;
+
+    wire                             cache_hit;
+    reg                              cache_in_update;
+    wire                             update_cache;
+    wire                             update_done;
+    wire                             ready_for_update;
+    reg  [CACHE_ADDR_ALIGN - 1 : 0]  update_offset;
+    reg  [CACHE_BURST_LEN - 1 : 0]   update_status;
+    reg  [CACHE_INDEX_WIDTH - 1: 0]  update_index;
+    wire [CACHE_ADDR_WIDTH - 1: 0]   update_waddr;
+
+    reg                              cache_in_flush;
+    reg                              flush_done;
+
+    reg  [CACHE_INDEX_WIDTH - 1 : 0] data_index;
+    reg  [CACHE_DATA_ALIGN  - 1 : 0] data_align;
+    reg  [USER_DATA_WIDTH - 1 : 0]   data_buf;
+    reg                              data_valid;
+
+    wire                             read_data;
+    reg                              next_data;
+    wire                             ready_for_read;
+    wire                             ready_for_data;
+
+    assign out_HLS_ARREADY = ready_for_rreq; 
+    assign next_rreq       = in_HLS_ARVALID && ready_for_rreq; 
+    assign ready_for_rreq  = (~tmp_valid || (cache_hit && ready_for_read)) && ~cache_in_flush;
+
+    always @(posedge ACLK)
+    begin
+        if (ARESET) 
+            tmp_addr <= 0;
+        else if (ACLK_EN) 
+            if (next_rreq)
+                tmp_addr <= in_HLS_ARADDR;
+    end
+
+    always @(posedge ACLK) 
+    begin
+        if (ARESET)
+            tmp_valid <= 1'b0;
+        else if (ACLK_EN)
+            if (next_rreq)
+                tmp_valid <= 1'b1;
+            else if (cache_hit && ready_for_read)
+                tmp_valid <= 1'b0;
+    end
+
+    assign tmp_align      = (BUS_ADDR_ALIGN <= USER_ADDR_ALIGN) ? 1'b0 : tmp_addr[BUS_ADDR_ALIGN - 1 : USER_ADDR_ALIGN];
+    assign tmp_index      = (NUM_CACHE_LINE == 1) ? 1'b0 : 
+                            tmp_addr[CACHE_LINE_ALIGN + log2(NUM_CACHE_LINE) - 1 : CACHE_LINE_ALIGN];
+    assign tmp_tag        = tmp_addr[BUS_ADDR_WIDTH - 1 : CACHE_LINE_ALIGN + log2(NUM_CACHE_LINE)];
+    assign cache_hit      = (tag_array[tmp_index] == tmp_tag ) && (valid_array[tmp_index] || ((tmp_index == update_index) && update_status[tmp_offset]));
+
+    // read output data from cache when cache hit.
+    assign out_HLS_RDATA  = data_buf[USER_DW-1 : 0];
+    assign out_HLS_RVALID = data_valid;
+
+    assign read_data      = tmp_valid && cache_hit && ready_for_read;
+    assign ready_for_read = ~next_data || ready_for_data;
+    assign ready_for_data = ~data_valid || in_HLS_RREADY;
+
+    always @(posedge ACLK)
+    begin
+        if (ARESET)
+            next_data <= 1'b0;
+        else if (ACLK_EN) 
+            if(read_data)
+                next_data <= 1'b1;
+            else if (ready_for_data)
+                next_data <= 1'b0;
+    end 
+
+    always @(posedge ACLK)
+    begin
+        if (ARESET) begin
+            data_index <= 0;
+            data_align <= 0;
+        end
+        else if (ACLK_EN)
+            if(read_data) begin
+                data_index <= tmp_index;
+                data_align <= tmp_align;
+            end
+    end 
+
+    always @(posedge ACLK)
+    begin
+        if (ARESET)
+            data_buf <= 0;
+        else if (ACLK_EN) 
+            if(next_data && ready_for_data)
+                data_buf <= tmp_data[data_align * USER_DATA_WIDTH +: USER_DATA_WIDTH];
+    end
+
+    always @(posedge ACLK)
+    begin
+        if (ARESET)
+            data_valid <= 1'b0;
+        else if (ACLK_EN) 
+            if(next_data && ready_for_data)
+                data_valid <= 1'b1;
+            else if (in_HLS_RREADY)
+                data_valid <= 1'b0;
+    end 
+
+    // flush cache.
+    assign cache_flush_done = flush_done;
+
+    always @(posedge ACLK) 
+    begin
+        if (ARESET)
+            cache_in_flush <= 1'b0;
+        else if (ACLK_EN)
+            if (flush_done)
+                cache_in_flush <= 1'b0;
+            else if (cache_flush)
+                cache_in_flush <= 1'b1;
+    end
+
+    always @(posedge ACLK) 
+    begin
+        if (ARESET)
+            flush_done <= 1'b0;
+        else if (ACLK_EN)
+            if (cache_in_flush & ~cache_in_update)
+                flush_done <= 1'b1;
+            else
+                flush_done <= 1'b0;
+    end
+
+    // update cache when cache is not hit.
+    assign out_AXI_ARLEN    = {CACHE_LINE_ALIGN{1'b1}};
+    assign out_AXI_ARADDR   = {tmp_addr[BUS_ADDR_WIDTH-1 : CACHE_LINE_ALIGN], {CACHE_LINE_ALIGN{1'b0}}};
+    assign out_AXI_ARVALID  = tmp_valid && ready_for_update;
+    
+    assign update_cache     = tmp_valid && in_AXI_ARREADY && ready_for_update;
+    assign update_done      = in_AXI_RLAST && in_AXI_RVALID && cache_in_update;
+    assign ready_for_update = ~(cache_hit || cache_in_update);
+    assign out_AXI_RREADY   = cache_in_update;
+
+    always @(posedge ACLK) 
+    begin
+        if (ARESET)
+            cache_in_update <= 1'b0;
+        else if (ACLK_EN)
+            if (update_cache)
+                cache_in_update <= 1'b1;
+            else if (update_done)
+                cache_in_update <= 1'b0;
+    end
+
+    always @(posedge ACLK) 
+    begin
+        if (ARESET)
+            update_index <= 0;
+        else if (ACLK_EN)
+            if (update_cache)
+                update_index <= tmp_index;
+    end
+
+    always @(posedge ACLK) 
+    begin
+        if (ARESET)
+            update_status <= {CACHE_BURST_LEN{1'b0}};
+        else if (ACLK_EN)
+            if (update_cache || update_done)
+                update_status <= {CACHE_BURST_LEN{1'b0}}; 
+            else if (cache_in_update && in_AXI_RVALID)
+                update_status[update_offset] <= 1'b1;
+    end
+
+    generate
+        if (CACHE_BURST_LEN > 1) begin : many_bursts
+            assign tmp_raddr    = {tmp_index, tmp_offset};
+            assign update_waddr = {update_index, update_offset};
+            assign tmp_offset   = tmp_addr[CACHE_LINE_ALIGN - 1 : BUS_ADDR_ALIGN];
+            always @(posedge ACLK) 
+            begin
+                if (ARESET)
+                    update_offset <= 0;
+                else if (ACLK_EN)
+                    if (update_cache)
+                        update_offset <= 0;
+                    else if (cache_in_update && in_AXI_RVALID)
+                        update_offset <= update_offset + 1;
+            end
+        end
+    endgenerate
+    generate
+        if (CACHE_BURST_LEN == 1) begin : one_burst
+            assign tmp_raddr    = tmp_index;
+            assign update_waddr = update_index;
+            assign tmp_offset   = 0;
+            always @* update_offset <= 0;
+        end
+    endgenerate
+
+    // data array
+    reconstruct_fullImage_m_axi_cache_mem
+    #(  .MEM_STYLE  (CACHE_IMPL),
+        .DATA_WIDTH (BUS_DATA_WIDTH),
+        .ADDR_WIDTH (CACHE_ADDR_WIDTH),
+        .DEPTH      (CACHE_BURST_LEN * NUM_CACHE_LINE))
+    cache_mem(
+        .clk        (ACLK),
+        .reset      (ARESET),
+        .clk_en     (ACLK_EN),
+        .we         (cache_in_update && in_AXI_RVALID),
+        .waddr      (update_waddr),
+        .din        (in_AXI_RDATA),
+        .re         (read_data),
+        .raddr      (tmp_raddr),
+        .dout       (tmp_data)
+    );
+
+    // tag array
+    integer i;
+    always @(posedge ACLK) 
+    begin
+        if (ARESET)
+            for (i = 0; i < NUM_CACHE_LINE; i = i + 1) begin
+                tag_array[i] <= 0;
+            end
+        else if (ACLK_EN)
+            if (update_cache)
+                tag_array[tmp_index] <= tmp_tag;
+    end
+
+    // valid array
+    always @(posedge ACLK) 
+    begin
+        if (ARESET)
+            valid_array <= {NUM_CACHE_LINE{1'b0}};
+        else if (ACLK_EN)
+            if (cache_in_flush)
+                valid_array <= {NUM_CACHE_LINE{1'b0}}; 
+            else if (update_cache)
+                valid_array[tmp_index] <= 1'b0;
+            else if (update_done)
+                valid_array[update_index] <= 1'b1;
+    end
+
+endmodule
+
+module reconstruct_fullImage_m_axi_cache
+#(parameter 
+    MODE                              = "READ-ONLY",
+    CACHE_IMPL                        = "auto",
+    USER_AW                           = 64,
+    USER_DW                           = 32,
+    BUS_ADDR_WIDTH                    = 64,
+    BUS_DATA_WIDTH                    = 512,
+    NUM_CACHE_LINE                    = 1,
+    CACHE_LINE_DEPTH                  = 16,
+    MAX_READ_BURST_LENGTH             = 0,
+    USER_MAXREQS                      = 16,
+    NUM_READ_OUTSTANDING              = 2
+)(
+    // system signal
+    input  wire                       ACLK,
+    input  wire                       ARESET,
+    input  wire                       ACLK_EN,
+
+    input  wire                       cache_flush,
+    output wire                       cache_flush_done,
+
+    output wire [BUS_ADDR_WIDTH-1:0]  out_AXI_ARADDR,
+    output wire [31:0]                out_AXI_ARLEN,
+    output wire                       out_AXI_ARVALID,
+    input  wire                       in_AXI_ARREADY,
+
+    input  wire [BUS_DATA_WIDTH-1:0]  in_AXI_RDATA,
+    input  wire                       in_AXI_RLAST,
+    input  wire                       in_AXI_RVALID,
+    output wire                       out_AXI_RREADY,
+
+    // read request
+    input  wire [USER_AW-1:0]         in_HLS_ARADDR,
+    input  wire [31:0]                in_HLS_ARLEN,
+    input  wire                       in_HLS_ARVALID,
+    output wire                       out_HLS_ARREADY,
+
+    output wire [USER_DW-1:0]         out_HLS_RDATA,
+    output wire                       out_HLS_RLAST,
+    output wire                       out_HLS_RVALID,
+    input  wire                       in_HLS_RREADY
+);
+//------------------------Local signal-------------------
+    wire [USER_AW-1 : 0]   rreq_addr;
+    wire                   rreq_ready;
+    wire                   rreq_valid;
+
+    wire                   rresp_valid;
+
+//------------------------Instantiation------------------
+    // pipeling request fifo
+    reconstruct_fullImage_m_axi_cache_preprocessor #(
+        .MAX_READ_BURST_LENGTH (MAX_READ_BURST_LENGTH), 
+        .USER_AW               (USER_AW), 
+        .USER_DW               (USER_DW), 
+        .USER_MAXREQS          (USER_MAXREQS),
+        .NUM_READ_OUTSTANDING  (NUM_READ_OUTSTANDING)
+    ) cache_preprocessor (
+        
+        .ACLK              (ACLK),
+        .ARESET            (ARESET),
+        .ACLK_EN           (ACLK_EN),
+
+        .in_HLS_ARADDR     (in_HLS_ARADDR),
+        .in_HLS_ARLEN      (in_HLS_ARLEN),
+        .in_HLS_ARVALID    (in_HLS_ARVALID),
+        .out_HLS_ARREADY   (out_HLS_ARREADY),
+
+        .out_CACHE_ARADDR  (rreq_addr),
+        .out_CACHE_ARVALID (rreq_valid),
+        .in_CACHE_ARREADY  (rreq_ready),
+
+        .in_HLS_RREADY     (in_HLS_RREADY),
+        .out_HLS_RLAST     (out_HLS_RLAST),
+
+        .in_CACHE_RVALID   (rresp_valid)
+    );
+
+    // read-only cache unit
+    reconstruct_fullImage_m_axi_cache_unit #(
+        .CACHE_IMPL        (CACHE_IMPL),
+        .USER_AW           (USER_AW),
+        .USER_DW           (USER_DW),
+        .BUS_ADDR_WIDTH    (BUS_ADDR_WIDTH),
+        .BUS_DATA_WIDTH    (BUS_DATA_WIDTH),
+        .NUM_CACHE_LINE    (NUM_CACHE_LINE),
+        .CACHE_LINE_DEPTH  (CACHE_LINE_DEPTH)
+    ) cache_unit (
+        .ACLK              (ACLK),
+        .ARESET            (ARESET),
+        .ACLK_EN           (ACLK_EN),
+
+        .cache_flush       (cache_flush),
+        .cache_flush_done  (cache_flush_done),
+
+        .out_AXI_ARADDR    (out_AXI_ARADDR),
+        .out_AXI_ARLEN     (out_AXI_ARLEN),
+        .out_AXI_ARVALID   (out_AXI_ARVALID),
+        .in_AXI_ARREADY    (in_AXI_ARREADY),
+
+        .in_AXI_RDATA      (in_AXI_RDATA),
+        .in_AXI_RLAST      (in_AXI_RLAST),
+        .in_AXI_RVALID     (in_AXI_RVALID),
+        .out_AXI_RREADY    (out_AXI_RREADY),
+
+        .in_HLS_ARADDR     (rreq_addr),
+        .in_HLS_ARVALID    (rreq_valid),
+        .out_HLS_ARREADY   (rreq_ready),
+
+        .out_HLS_RDATA     (out_HLS_RDATA),
+        .out_HLS_RVALID    (rresp_valid),
+        .in_HLS_RREADY     (in_HLS_RREADY)
+    );
+
+    assign out_HLS_RVALID = rresp_valid;
 endmodule

@@ -9,7 +9,6 @@ library IEEE;
 use IEEE.STD_LOGIC_1164.all;
 use IEEE.NUMERIC_STD.all;
 
-
 entity reconstruct_fullImage_m_axi is
     generic (
         CONSERVATIVE              : INTEGER := 0;
@@ -30,11 +29,19 @@ entity reconstruct_fullImage_m_axi is
         NUM_READ_OUTSTANDING      : INTEGER := 2;
         NUM_WRITE_OUTSTANDING     : INTEGER := 2;
         USER_MAXREQS              : INTEGER := 16;
-        CH0_USER_DW               : INTEGER := 16;
+        -- channel configurations 
+        CH0_USER_DW               : INTEGER := 32;
         CH0_USER_AW               : INTEGER := 32;
+        CH0_NUM_READ_OUTSTANDING  : INTEGER := 2;
+        CH0_NUM_WRITE_OUTSTANDING : INTEGER := 2;
         CH0_USER_RFIFONUM_WIDTH   : INTEGER := 6;
-        MAXI_BUFFER_IMPL          : STRING  := "block");
+        CH0_MAXI_CACHE_IMPL       : STRING  := "auto";
+        CH0_NUM_CACHE_LINE        : INTEGER := 64;
+        CH0_CACHE_LINE_DEPTH      : INTEGER := 64;
+        
+        MAXI_BUFFER_IMPL                : STRING  := "block");
     port (
+        cache_flush     : in  STD_LOGIC;
         -- system signal
         ACLK            : in  STD_LOGIC;
         ARESET          : in  STD_LOGIC;
@@ -89,7 +96,8 @@ entity reconstruct_fullImage_m_axi is
         RUSER           : in  STD_LOGIC_VECTOR(C_M_AXI_RUSER_WIDTH-1 downto 0);
         RVALID          : in  STD_LOGIC;
         RREADY          : out STD_LOGIC;
-        -- internal channel 0
+        -- multiple internal channels 
+        -- channel 0
         I_CH0_AWADDR    : in  STD_LOGIC_VECTOR(CH0_USER_AW-1 downto 0);
         I_CH0_AWLEN     : in  STD_LOGIC_VECTOR(31 downto 0);
         I_CH0_AWVALID   : in  STD_LOGIC;
@@ -112,11 +120,15 @@ entity reconstruct_fullImage_m_axi is
 end entity reconstruct_fullImage_m_axi;
 
 architecture behave of reconstruct_fullImage_m_axi is
+    
+
     --========================Component======================== 
     
     component reconstruct_fullImage_m_axi_load is
         generic (
             C_TARGET_ADDR          : INTEGER := 16#00000000#;
+            C_M_AXI_ID_WIDTH       : INTEGER := 1;
+            C_ID_VALUE             : INTEGER := 0;
             NUM_READ_OUTSTANDING   : INTEGER := 2;
             MAX_READ_BURST_LENGTH  : INTEGER := 16;
             BUS_ADDR_WIDTH         : INTEGER := 32;
@@ -130,10 +142,12 @@ architecture behave of reconstruct_fullImage_m_axi is
             ACLK                   : in  STD_LOGIC;
             ARESET                 : in  STD_LOGIC;
             ACLK_EN                : in  STD_LOGIC;
+            out_AXI_ARID           : out UNSIGNED(C_M_AXI_ID_WIDTH-1 downto 0);
             out_AXI_ARADDR         : out UNSIGNED(BUS_ADDR_WIDTH-1 downto 0);
             out_AXI_ARLEN          : out UNSIGNED(31 downto 0);
             out_AXI_ARVALID        : out STD_LOGIC;
             in_AXI_ARREADY         : in  STD_LOGIC;
+            in_AXI_RID             : in  UNSIGNED(C_M_AXI_ID_WIDTH-1 downto 0);
             in_AXI_RDATA           : in  UNSIGNED(BUS_DATA_WIDTH-1 downto 0);
             in_AXI_RLAST           : in  UNSIGNED(1 downto 0);
             in_AXI_RVALID          : in  STD_LOGIC;
@@ -148,9 +162,55 @@ architecture behave of reconstruct_fullImage_m_axi is
             in_HLS_RREADY          : in  STD_LOGIC;
             out_HLS_RFIFONUM       : out UNSIGNED(USER_RFIFONUM_WIDTH-1 downto 0));
     end component reconstruct_fullImage_m_axi_load;
+    
+    
+    component reconstruct_fullImage_m_axi_load_with_cache is
+        generic (
+            C_TARGET_ADDR          : INTEGER := 16#00000000#;
+            C_M_AXI_ID_WIDTH       : INTEGER := 1;
+            C_ID_VALUE             : INTEGER := 0;
+            NUM_READ_OUTSTANDING   : INTEGER := 2;
+            MAX_READ_BURST_LENGTH  : INTEGER := 16;
+            BUS_ADDR_WIDTH         : INTEGER := 32;
+            BUS_DATA_WIDTH         : INTEGER := 32;
+            USER_DW                : INTEGER := 16;
+            USER_AW                : INTEGER := 32;
+            USER_MAXREQS           : INTEGER := 16;
+            USER_RFIFONUM_WIDTH    : INTEGER := 6;
+            CACHE_IMPL             : STRING  := "auto";
+            NUM_CACHE_LINE         : INTEGER := 1;
+            CACHE_LINE_DEPTH       : INTEGER := 16);
+        port (
+            ACLK                   : in  STD_LOGIC;
+            ARESET                 : in  STD_LOGIC;
+            ACLK_EN                : in  STD_LOGIC;
+            cache_flush            : in  STD_LOGIC;
+            cache_flush_done       : out STD_LOGIC;
+            out_AXI_ARID           : out UNSIGNED(C_M_AXI_ID_WIDTH-1 downto 0);
+            out_AXI_ARADDR         : out UNSIGNED(BUS_ADDR_WIDTH-1 downto 0);
+            out_AXI_ARLEN          : out UNSIGNED(31 downto 0);
+            out_AXI_ARVALID        : out STD_LOGIC;
+            in_AXI_ARREADY         : in  STD_LOGIC;
+            in_AXI_RID             : in  UNSIGNED(C_M_AXI_ID_WIDTH-1 downto 0);
+            in_AXI_RDATA           : in  UNSIGNED(BUS_DATA_WIDTH-1 downto 0);
+            in_AXI_RLAST           : in  UNSIGNED(1 downto 0);
+            in_AXI_RVALID          : in  STD_LOGIC;
+            out_AXI_RREADY         : out STD_LOGIC;
+            out_AXI_RBURST_READY   : out STD_LOGIC;
+            in_HLS_ARADDR          : in  UNSIGNED(USER_AW-1 downto 0);
+            in_HLS_ARLEN           : in  UNSIGNED(31 downto 0);
+            in_HLS_ARVALID         : in  STD_LOGIC;
+            out_HLS_ARREADY        : out STD_LOGIC;
+            out_HLS_RDATA          : out UNSIGNED(USER_DW-1 downto 0);
+            out_HLS_RVALID         : out STD_LOGIC;
+            in_HLS_RREADY          : in  STD_LOGIC;
+            out_HLS_RFIFONUM       : out UNSIGNED(USER_RFIFONUM_WIDTH-1 downto 0));
+    end component reconstruct_fullImage_m_axi_load_with_cache;
+    
 
     component reconstruct_fullImage_m_axi_read is
         generic (
+            INTERLEAVE             : INTEGER := 1;
             C_M_AXI_ID_WIDTH       : INTEGER := 1;
             C_M_AXI_ARUSER_WIDTH   : INTEGER := 1;
             C_M_AXI_RUSER_WIDTH    : INTEGER := 1;
@@ -160,7 +220,9 @@ architecture behave of reconstruct_fullImage_m_axi is
             BUS_ADDR_WIDTH         : INTEGER := 32;
             BUS_DATA_WIDTH         : INTEGER := 32;
             MAX_READ_BURST_LENGTH  : INTEGER := 1;
-            NUM_READ_OUTSTANDING   : INTEGER := 1);
+            NUM_READ_OUTSTANDING   : INTEGER := 2;
+            ID0_NUM_READ_OUTSTANDING : INTEGER := 2;
+            NUM_READ_PORTS         : INTEGER := 1);
         port (
             ACLK                   : in  STD_LOGIC;
             ARESET                 : in  STD_LOGIC;
@@ -185,31 +247,64 @@ architecture behave of reconstruct_fullImage_m_axi is
             in_BUS_RUSER           : in  UNSIGNED(C_M_AXI_RUSER_WIDTH-1 downto 0);
             in_BUS_RVALID          : in  STD_LOGIC;
             out_BUS_RREADY         : out STD_LOGIC;
-            in_HLS_ARVALID         : in  STD_LOGIC;
-            out_HLS_ARREADY        : out STD_LOGIC;
-            in_HLS_ARADDR          : in  UNSIGNED(BUS_ADDR_WIDTH-1 downto 0);
-            in_HLS_ARLEN           : in  UNSIGNED(31 downto 0);
-            out_HLS_RVALID         : out STD_LOGIC;
-            in_HLS_RREADY          : in  STD_LOGIC;
-            in_HLS_RBURST_READY    : in  STD_LOGIC;
-            out_HLS_RLAST          : out UNSIGNED(1 downto 0);
-            out_HLS_RDATA          : out UNSIGNED(BUS_DATA_WIDTH-1 downto 0));
+            in_AXI_ARID            : in  UNSIGNED(C_M_AXI_ID_WIDTH-1 downto 0);
+            in_AXI_ARADDR          : in  UNSIGNED(BUS_ADDR_WIDTH-1 downto 0);
+            in_AXI_ARLEN           : in  UNSIGNED(31 downto 0);
+            in_AXI_ARVALID         : in  STD_LOGIC;
+            out_AXI_ARREADY        : out UNSIGNED(NUM_READ_PORTS-1 downto 0);
+            out_AXI_RID            : out UNSIGNED(C_M_AXI_ID_WIDTH-1 downto 0);
+            out_AXI_RDATA          : out UNSIGNED(BUS_DATA_WIDTH-1 downto 0);
+            out_AXI_RLAST          : out UNSIGNED(1 downto 0);
+            out_AXI_RVALID         : out STD_LOGIC;
+            in_AXI_RREADY          : in  UNSIGNED(NUM_READ_PORTS-1 downto 0);
+            in_AXI_RBURST_READY    : in  UNSIGNED(NUM_READ_PORTS-1 downto 0));
     end component reconstruct_fullImage_m_axi_read;
+    
+     
     
 
     
+
+    
+
+    --========================Constant========================
+    constant NUM_READ_PORTS  : INTEGER := 1;
+    constant NUM_WRITE_PORTS : INTEGER := 0;
     --========================Local Signals===================
     -- AW/W/B channel signals 
     -- AR/R channel signals 
-    signal ARADDR_Dummy   : UNSIGNED(C_M_AXI_ADDR_WIDTH-1 downto 0);
-    signal ARLEN_Dummy    : UNSIGNED(31 downto 0);
-    signal ARVALID_Dummy  : STD_LOGIC;
-    signal ARREADY_Dummy  : STD_LOGIC;
-    signal RDATA_Dummy    : UNSIGNED(C_M_AXI_DATA_WIDTH-1 downto 0);
-    signal RLAST_Dummy    : UNSIGNED(1 downto 0);
-    signal RVALID_Dummy   : STD_LOGIC;
-    signal RREADY_Dummy   : STD_LOGIC;
-    signal RBURST_READY_Dummy   : STD_LOGIC;
+    signal ARID_FromArbiterToBus      : UNSIGNED(C_M_AXI_ID_WIDTH-1 downto 0);
+    signal ARADDR_FromArbiter         : UNSIGNED(C_M_AXI_ADDR_WIDTH-1 downto 0);
+    signal ARLEN_FromArbiter          : UNSIGNED(31 downto 0);
+    signal ARVALID_FromArbiter        : STD_LOGIC;
+    signal ARREADY_ToArbiter          : UNSIGNED(NUM_READ_PORTS-1 downto 0);
+    signal ARADDR_ToBus               : UNSIGNED(C_M_AXI_ADDR_WIDTH-1 downto 0);
+    signal ARLEN_ToBus                : UNSIGNED(31 downto 0);
+    signal ARVALID_ToBus              : STD_LOGIC;
+    signal ARREADY_FromBus            : UNSIGNED(NUM_READ_PORTS-1 downto 0);
+    
+    signal RID_FromBusToChan          : UNSIGNED(C_M_AXI_ID_WIDTH-1 downto 0);
+    signal RDATA_FromBus              : UNSIGNED(C_M_AXI_DATA_WIDTH-1 downto 0);
+    signal RLAST_FromBus              : UNSIGNED(1 downto 0);
+    signal RVALID_FromBus             : STD_LOGIC;
+    signal RREADY_ToBus               : UNSIGNED(NUM_READ_PORTS-1 downto 0);
+    signal RBURST_READY_ToBus         : UNSIGNED(NUM_READ_PORTS-1 downto 0);
+    signal RDATA_ToChan               : UNSIGNED(C_M_AXI_DATA_WIDTH-1 downto 0);
+    signal RLAST_ToChan               : UNSIGNED(1 downto 0);
+    signal RVALID_ToChan              : STD_LOGIC;
+    signal RREADY_FromChan            : UNSIGNED(NUM_READ_PORTS-1 downto 0);
+    signal RBURST_READY_FromChan      : UNSIGNED(NUM_READ_PORTS-1 downto 0);
+
+    type ARID_ARRAY   is array (0 to NUM_READ_PORTS-1) of UNSIGNED(C_M_AXI_ID_WIDTH-1 downto 0);
+    type ARADDR_ARRAY is array (0 to NUM_READ_PORTS-1) of UNSIGNED(C_M_AXI_ADDR_WIDTH-1 downto 0);
+    type ARLEN_ARRAY  is array (0 to NUM_READ_PORTS-1) of UNSIGNED(31 downto 0);
+    signal arid_index                    : UNSIGNED(C_M_AXI_ID_WIDTH-1 downto 0);
+    signal AXI_ARID_FromChanToArbiter    : ARID_ARRAY;
+    signal AXI_ARADDR_FromChanToArbiter  : ARADDR_ARRAY;
+    signal AXI_ARLEN_FromChanToArbiter   : ARLEN_ARRAY;
+    signal AXI_ARVALID_FromChanToArbiter : UNSIGNED(NUM_READ_PORTS-1 downto 0);
+    signal AXI_ARREADY_FromArbiterToChan : UNSIGNED(NUM_READ_PORTS-1 downto 0);
+
     
 begin
     -- AXI Ports Initialization 
@@ -236,16 +331,22 @@ begin
     I_CH0_AWREADY   <= '0';
     I_CH0_WREADY    <= '0';
     I_CH0_BVALID    <= '0';
+    -- Internal Ports Mapping 
+    ARID_FromArbiterToBus         <= AXI_ARID_FromChanToArbiter(TO_INTEGER(arid_index)); 
+    ARADDR_FromArbiter            <= AXI_ARADDR_FromChanToArbiter(TO_INTEGER(arid_index));
+    ARLEN_FromArbiter             <= AXI_ARLEN_FromChanToArbiter(TO_INTEGER(arid_index));
     -- flush logic 
     --========================Instantiation========================
-    -- ++++++++++++++++++++++ STORE UNITS ++++++++++++++++++++++ 
-
-    -- ++++++++++++++++++++++ LOAD UNITS ++++++++++++++++++++++ 
+    -- ++++++++++++++++++++++ STORE UNITS ++++++++++++++++++++++  
+        
+    -- ++++++++++++++++++++++ LOAD UNITS ++++++++++++++++++++++  
     -- load_unit for channel 0
-    load_unit_0 : reconstruct_fullImage_m_axi_load
+    load_unit_0 : reconstruct_fullImage_m_axi_load_with_cache
     generic map(
         C_TARGET_ADDR          => C_TARGET_ADDR,
-        NUM_READ_OUTSTANDING   => NUM_READ_OUTSTANDING,
+        C_M_AXI_ID_WIDTH       => C_M_AXI_ID_WIDTH,
+        C_ID_VALUE             => 0,
+        NUM_READ_OUTSTANDING   => CH0_NUM_READ_OUTSTANDING,
         MAX_READ_BURST_LENGTH  => MAX_READ_BURST_LENGTH,
         BUS_ADDR_WIDTH         => C_M_AXI_ADDR_WIDTH,
         BUS_DATA_WIDTH         => C_M_AXI_DATA_WIDTH,
@@ -253,20 +354,26 @@ begin
         USER_AW                => CH0_USER_AW,
         USER_MAXREQS           => USER_MAXREQS,
         USER_RFIFONUM_WIDTH    => CH0_USER_RFIFONUM_WIDTH,
-        BUFFER_IMPL            => MAXI_BUFFER_IMPL)
+        NUM_CACHE_LINE         => CH0_NUM_CACHE_LINE,
+        CACHE_LINE_DEPTH       => CH0_CACHE_LINE_DEPTH,
+        CACHE_IMPL             => CH0_MAXI_CACHE_IMPL)
     port map(
         ACLK                   => ACLK,
         ARESET                 => ARESET,
         ACLK_EN                => ACLK_EN,
-        out_AXI_ARADDR         => ARADDR_Dummy,
-        out_AXI_ARLEN          => ARLEN_Dummy,
-        out_AXI_ARVALID        => ARVALID_Dummy,
-        in_AXI_ARREADY         => ARREADY_Dummy,
-        in_AXI_RDATA           => RDATA_Dummy,
-        in_AXI_RLAST           => RLAST_Dummy,
-        in_AXI_RVALID          => RVALID_Dummy,
-        out_AXI_RREADY         => RREADY_Dummy,
-        out_AXI_RBURST_READY   => RBURST_READY_Dummy,
+        cache_flush            => cache_flush,
+        cache_flush_done       => open,
+        out_AXI_ARID           => AXI_ARID_FromChanToArbiter(0),
+        out_AXI_ARADDR         => AXI_ARADDR_FromChanToArbiter(0),
+        out_AXI_ARLEN          => AXI_ARLEN_FromChanToArbiter(0),
+        out_AXI_ARVALID        => AXI_ARVALID_FromChanToArbiter(0),
+        in_AXI_ARREADY         => AXI_ARREADY_FromArbiterToChan(0),
+        in_AXI_RID             => RID_FromBusToChan,
+        in_AXI_RDATA           => RDATA_ToChan,
+        in_AXI_RLAST           => RLAST_ToChan,
+        in_AXI_RVALID          => RVALID_ToChan,
+        out_AXI_RREADY         => RREADY_FromChan(0),
+        out_AXI_RBURST_READY   => RBURST_READY_FromChan(0),
         in_HLS_ARADDR          => UNSIGNED(I_CH0_ARADDR),
         in_HLS_ARLEN           => UNSIGNED(I_CH0_ARLEN),
         in_HLS_ARVALID         => I_CH0_ARVALID,
@@ -274,22 +381,29 @@ begin
         out_HLS_RVALID         => I_CH0_RVALID,
         in_HLS_RREADY          => I_CH0_RREADY,
         STD_LOGIC_VECTOR(out_HLS_RDATA)    => I_CH0_RDATA,
-        STD_LOGIC_VECTOR(out_HLS_RFIFONUM) => I_CH0_RFIFONUM);
+        STD_LOGIC_VECTOR(out_HLS_RFIFONUM) => I_CH0_RFIFONUM ); 
+    arid_index                    <= TO_UNSIGNED(0, arid_index'length);
+    AXI_ARREADY_FromArbiterToChan <= ARREADY_ToArbiter;
+    ARVALID_FromArbiter           <= AXI_ARVALID_FromChanToArbiter(0);
+    
 
     -- ++++++++++++++++++++++ AXI BUS READ/WRITE ++++++++++++++++++++++ 
     -- reconstruct_fullImage_m_axi_read
     bus_read : reconstruct_fullImage_m_axi_read
     generic map (
-        C_M_AXI_ID_WIDTH       => C_M_AXI_ID_WIDTH,
-        C_M_AXI_ARUSER_WIDTH   => C_M_AXI_ARUSER_WIDTH,
-        C_M_AXI_RUSER_WIDTH    => C_M_AXI_RUSER_WIDTH,
-        C_USER_VALUE           => C_USER_VALUE,
-        C_PROT_VALUE           => C_PROT_VALUE,
-        C_CACHE_VALUE          => C_CACHE_VALUE,
-        BUS_ADDR_WIDTH         => C_M_AXI_ADDR_WIDTH,
-        BUS_DATA_WIDTH         => C_M_AXI_DATA_WIDTH,
-        MAX_READ_BURST_LENGTH  => MAX_READ_BURST_LENGTH,
-        NUM_READ_OUTSTANDING   => NUM_READ_OUTSTANDING)
+        C_M_AXI_ID_WIDTH                   => C_M_AXI_ID_WIDTH,
+        C_M_AXI_ARUSER_WIDTH               => C_M_AXI_ARUSER_WIDTH,
+        C_M_AXI_RUSER_WIDTH                => C_M_AXI_RUSER_WIDTH,
+        C_USER_VALUE                       => C_USER_VALUE,
+        C_PROT_VALUE                       => C_PROT_VALUE,
+        C_CACHE_VALUE                      => C_CACHE_VALUE,
+        BUS_ADDR_WIDTH                     => C_M_AXI_ADDR_WIDTH,
+        BUS_DATA_WIDTH                     => C_M_AXI_DATA_WIDTH,
+        MAX_READ_BURST_LENGTH              => MAX_READ_BURST_LENGTH,
+        NUM_READ_OUTSTANDING               => NUM_READ_OUTSTANDING,
+        -- outstanding control for channels
+        ID0_NUM_READ_OUTSTANDING           => CH0_NUM_READ_OUTSTANDING, 
+        NUM_READ_PORTS                     =>  NUM_READ_PORTS )
     port map (
         ACLK                               => ACLK,
         ARESET                             => ARESET,
@@ -314,16 +428,30 @@ begin
         in_BUS_RUSER                       => UNSIGNED(RUSER),
         in_BUS_RVALID                      => RVALID,
         out_BUS_RREADY                     => RREADY,
-        in_HLS_ARVALID                     => ARVALID_Dummy,
-        out_HLS_ARREADY                    => ARREADY_Dummy,
-        in_HLS_ARADDR                      => ARADDR_Dummy,
-        in_HLS_ARLEN                       => ARLEN_Dummy,
-        out_HLS_RVALID                     => RVALID_Dummy,
-        in_HLS_RREADY                      => RREADY_Dummy,
-        in_HLS_RBURST_READY                => RBURST_READY_Dummy,
-        out_HLS_RLAST                      => RLAST_Dummy,
-        out_HLS_RDATA                      => RDATA_Dummy
-    );
+        in_AXI_ARID                        => ARID_FromArbiterToBus,
+        in_AXI_ARVALID                     => ARVALID_ToBus,
+        out_AXI_ARREADY                    => ARREADY_FromBus,
+        in_AXI_ARADDR                      => ARADDR_ToBus,
+        in_AXI_ARLEN                       => ARLEN_ToBus,
+        out_AXI_RID                        => RID_FromBusToChan,
+        out_AXI_RVALID                     => RVALID_FromBus,
+        in_AXI_RREADY                      => RREADY_ToBus,
+        in_AXI_RBURST_READY                => RBURST_READY_ToBus,
+        out_AXI_RDATA                      => RDATA_FromBus,
+        out_AXI_RLAST                      => RLAST_FromBus
+        );
+        
+        ARREADY_ToArbiter  <= ARREADY_FromBus;
+        ARADDR_ToBus       <= ARADDR_FromArbiter;
+        ARLEN_ToBus        <= ARLEN_FromArbiter;
+        ARVALID_ToBus      <= ARVALID_FromArbiter;
+
+        RDATA_ToChan       <= RDATA_FromBus;
+        RLAST_ToChan       <= RLAST_FromBus;
+        RVALID_ToChan      <= RVALID_FromBus;
+        RREADY_ToBus       <= RREADY_FromChan;
+        RBURST_READY_ToBus <= RBURST_READY_FromChan;
+        
 
     
 end architecture behave;
@@ -337,6 +465,8 @@ use IEEE.NUMERIC_STD.all;
 entity reconstruct_fullImage_m_axi_load is
     generic (
         C_TARGET_ADDR         : INTEGER := 16#00000000#;
+        C_M_AXI_ID_WIDTH      : INTEGER := 1;
+        C_ID_VALUE            : INTEGER := 0;
         NUM_READ_OUTSTANDING  : INTEGER := 2;
         MAX_READ_BURST_LENGTH : INTEGER := 16;
         BUS_ADDR_WIDTH        : INTEGER := 32;
@@ -351,10 +481,12 @@ entity reconstruct_fullImage_m_axi_load is
         ARESET                : in  STD_LOGIC;
         ACLK_EN               : in  STD_LOGIC;
 
+        out_AXI_ARID          : out UNSIGNED(C_M_AXI_ID_WIDTH-1 downto 0);
         out_AXI_ARADDR        : out UNSIGNED(BUS_ADDR_WIDTH-1 downto 0);
         out_AXI_ARLEN         : out UNSIGNED(31 downto 0);
         out_AXI_ARVALID       : out STD_LOGIC;
         in_AXI_ARREADY        : in  STD_LOGIC;
+        in_AXI_RID            : in  UNSIGNED(C_M_AXI_ID_WIDTH-1 downto 0);
         in_AXI_RDATA          : in  UNSIGNED(BUS_DATA_WIDTH-1 downto 0);
         in_AXI_RLAST          : in  UNSIGNED(1 downto 0);
         in_AXI_RVALID         : in  STD_LOGIC;
@@ -418,7 +550,7 @@ architecture behave of reconstruct_fullImage_m_axi_load is
     signal tmp_addr       : UNSIGNED(BUS_ADDR_WIDTH-1 downto 0);
     signal tmp_len        : UNSIGNED(31 downto 0);
     signal tmp_valid      : STD_LOGIC;
-
+    
     signal valid_length   : STD_LOGIC;
     
     signal beat_valid     : STD_LOGIC;
@@ -426,11 +558,12 @@ architecture behave of reconstruct_fullImage_m_axi_load is
     signal last_beat      : STD_LOGIC;
     signal beat_data      : UNSIGNED(BUS_DATA_WIDTH-1 downto 0);
     signal in_beat_pack   : UNSIGNED(BUS_DATA_WIDTH+1 downto 0); 
+    signal in_beat_valid  : STD_LOGIC;
     signal beat_pack      : UNSIGNED(BUS_DATA_WIDTH+1 downto 0);
     signal beat_nvalid    : UNSIGNED(log2(RBUFF_DEPTH) downto 0);
     signal burst_ready    : STD_LOGIC;
     signal ready_for_outstanding : STD_LOGIC; 
-    
+
     -- regslice io ?  no 
 
     -- enable regslice on R channel  no 
@@ -500,6 +633,7 @@ begin
 
     valid_length    <= '1' when rreq_len /= 0 and rreq_len(31) = '0' else '0';
 
+    out_AXI_ARID    <= TO_UNSIGNED(C_ID_VALUE, C_M_AXI_ID_WIDTH);
     out_AXI_ARLEN   <= tmp_len;   -- Byte length
     out_AXI_ARADDR  <= tmp_addr;  -- Byte address
     out_AXI_ARVALID <= tmp_valid and rreq_ready;
@@ -551,34 +685,35 @@ begin
         reset             => ARESET,
         clk_en            => ACLK_EN,
         if_full_n         => out_AXI_RREADY,
-        if_write          => in_AXI_RVALID,
+        if_write          => in_beat_valid,
         if_din            => in_beat_pack,
         if_empty_n        => beat_valid,
         if_read           => next_beat,
         if_dout           => beat_pack,
         if_num_data_valid => beat_nvalid);
         
-    in_beat_pack          <= in_AXI_RLAST & in_AXI_RDATA;
-    beat_data             <= beat_pack(BUS_DATA_WIDTH-1 downto 0);
-    last_beat             <= beat_pack(BUS_DATA_WIDTH);
-    burst_ready           <= beat_pack(BUS_DATA_WIDTH+1);
+        in_beat_pack     <= in_AXI_RLAST & in_AXI_RDATA;
+        in_beat_valid    <= '1' when (in_AXI_RVALID = '1') and (in_AXI_RID = C_ID_VALUE) else '0';
+        beat_data        <= beat_pack(BUS_DATA_WIDTH-1 downto 0);
+        last_beat        <= beat_pack(BUS_DATA_WIDTH);
+        burst_ready      <= beat_pack(BUS_DATA_WIDTH+1);
 
-    out_AXI_RBURST_READY  <= ready_for_outstanding;
+        out_AXI_RBURST_READY <= ready_for_outstanding;
 
-    process (ACLK)
-    begin
-        if (ACLK'event and ACLK = '1') then
-            if (ARESET = '1') then
-                ready_for_outstanding  <= '1';
-            elsif ACLK_EN = '1' then
-                if (next_beat = '1' and beat_valid = '1') then
-                    ready_for_outstanding <= burst_ready;
-                else
-                    ready_for_outstanding <= '0';
+        process (ACLK)
+        begin
+            if (ACLK'event and ACLK = '1') then
+                if (ARESET = '1') then
+                    ready_for_outstanding  <= '1';
+                elsif ACLK_EN = '1' then
+                    if (next_beat = '1' and beat_valid = '1') then
+                        ready_for_outstanding <= burst_ready;
+                    else
+                        ready_for_outstanding <= '0';
+                    end if;
                 end if;
             end if;
-        end if;
-    end process;
+        end process;
 
     -- ===================================================================
     -- start of RDATA PREPROCESSOR
@@ -927,6 +1062,8 @@ use IEEE.NUMERIC_STD.all;
 entity reconstruct_fullImage_m_axi_store is
     generic (
         C_TARGET_ADDR          : INTEGER := 16#00000000#;
+        C_M_AXI_ID_WIDTH       : INTEGER := 1;
+        C_ID_VALUE             : INTEGER := 0;
         NUM_WRITE_OUTSTANDING  : INTEGER := 2;
         MAX_WRITE_BURST_LENGTH : INTEGER := 16;
         BUS_ADDR_WIDTH         : INTEGER := 32;
@@ -940,14 +1077,21 @@ entity reconstruct_fullImage_m_axi_store is
         ARESET                 : in  STD_LOGIC;
         ACLK_EN                : in  STD_LOGIC;
 
+        out_AXI_AWID           : out UNSIGNED(C_M_AXI_ID_WIDTH-1 downto 0);
         out_AXI_AWADDR         : out UNSIGNED(BUS_ADDR_WIDTH-1 downto 0);
         out_AXI_AWLEN          : out UNSIGNED(31 downto 0);
         out_AXI_AWVALID        : out STD_LOGIC;
         in_AXI_AWREADY         : in  STD_LOGIC;
+        out_AXI_BURST_REQ      : out STD_LOGIC;
+        in_AXI_BURST_ID        : in  UNSIGNED(C_M_AXI_ID_WIDTH-1 downto 0);
+        in_AXI_BURST_LEN       : in  UNSIGNED(7 downto 0);
+        in_AXI_BURST_ACK       : in  STD_LOGIC;
+        out_AXI_WID            : out UNSIGNED(C_M_AXI_ID_WIDTH-1 downto 0);
         out_AXI_WDATA          : out UNSIGNED(BUS_DATA_WIDTH-1 downto 0);
         out_AXI_WSTRB          : out UNSIGNED(BUS_DATA_WIDTH/8-1 downto 0);
         out_AXI_WVALID         : out STD_LOGIC;
         in_AXI_WREADY          : in  STD_LOGIC;
+        in_AXI_BID             : in  UNSIGNED(C_M_AXI_ID_WIDTH-1 downto 0);
         in_AXI_BVALID          : in  STD_LOGIC;
         out_AXI_BREADY         : out STD_LOGIC;
     
@@ -997,6 +1141,17 @@ architecture behave of reconstruct_fullImage_m_axi_store is
         end loop;
         return n;
     end function log2;
+
+    function cond_sel (cond : BOOLEAN; x : INTEGER; y : INTEGER) return INTEGER is
+        variable ret : INTEGER;
+    begin
+        if (cond) then
+            ret := x;
+        else
+            ret := y;
+        end if;
+        return ret;
+    end function cond_sel;
     ------------------------Parameter----------------------
     constant USER_DATA_WIDTH  : INTEGER := calc_data_width(USER_DW);
     constant USER_DATA_BYTES  : INTEGER := USER_DATA_WIDTH / 8;
@@ -1004,7 +1159,12 @@ architecture behave of reconstruct_fullImage_m_axi_store is
     constant BUS_DATA_BYTES   : INTEGER := BUS_DATA_WIDTH / 8;
     constant BUS_ADDR_ALIGN   : INTEGER := log2(BUS_DATA_BYTES);
     -- wdata buffer size 
-    constant WBUFF_DEPTH      : INTEGER := max(MAX_WRITE_BURST_LENGTH * BUS_DATA_WIDTH / USER_DATA_WIDTH, 1); 
+    constant WBUFF_DEPTH      : INTEGER := cond_sel((USER_DATA_WIDTH = BUS_DATA_WIDTH),
+                                                    2 * MAX_WRITE_BURST_LENGTH,
+                                                    max(MAX_WRITE_BURST_LENGTH * BUS_DATA_WIDTH / USER_DATA_WIDTH, 1) ); 
+    constant BURST_LEN_WIDTH  : INTEGER := cond_sel((USER_DATA_WIDTH = BUS_DATA_WIDTH),
+                                                    max(log2(WBUFF_DEPTH), 8),
+                                                    max(log2(MAX_WRITE_BURST_LENGTH), 8));
     constant TARGET_ADDR      : INTEGER := (C_TARGET_ADDR/USER_DATA_BYTES)*USER_DATA_BYTES;
     ------------------------Local signal-------------------
     signal next_wreq      : STD_LOGIC;
@@ -1022,19 +1182,22 @@ architecture behave of reconstruct_fullImage_m_axi_store is
     signal tmp_valid      : STD_LOGIC;
 
     signal valid_length   : STD_LOGIC;
-
-    signal beat_valid     : STD_LOGIC;
-    signal beat_ready     : STD_LOGIC;
-    signal beat_data      : UNSIGNED(BUS_DATA_WIDTH-1 downto 0);
-    signal beat_strb      : UNSIGNED(BUS_DATA_BYTES-1 downto 0);
-
     signal next_wdata     : STD_LOGIC;
     signal wdata_valid    : STD_LOGIC;
+    signal wdata_ready    : STD_LOGIC;
     signal in_wdata_pack  : UNSIGNED(USER_DW+USER_DW/8-1 downto 0);
     signal wdata_pack     : UNSIGNED(USER_DW+USER_DW/8-1 downto 0);
     signal tmp_wdata      : UNSIGNED(USER_DW-1 downto 0);
     signal tmp_wstrb      : UNSIGNED(USER_DW/8-1 downto 0);
 
+    signal beat_pack      : UNSIGNED(BUS_DATA_WIDTH + BUS_DATA_WIDTH/8-1 downto 0);
+    signal out_beat_pack  : UNSIGNED(BUS_DATA_WIDTH + BUS_DATA_WIDTH/8-1 downto 0);
+    signal beat_ready     : STD_LOGIC;
+    signal beat_write     : STD_LOGIC;
+    signal beat_nvalid    : UNSIGNED(BURST_LEN_WIDTH downto 0);
+    signal beat_nvalid_cnt: UNSIGNED(BURST_LEN_WIDTH downto 0);
+
+    signal resp_valid     : STD_LOGIC;
     signal wrsp_ready     : STD_LOGIC;
     signal wrsp_valid     : STD_LOGIC;
     signal wrsp_read      : STD_LOGIC;
@@ -1097,7 +1260,8 @@ begin
     wreq_addr       <= wreq_pack(USER_AW - 1 downto 0);
 
     valid_length    <= '1' when wreq_len /= 0 and wreq_len(31) = '0' else '0';
-    
+   
+    out_AXI_AWID    <= TO_UNSIGNED(C_ID_VALUE, C_M_AXI_ID_WIDTH);
     out_AXI_AWLEN   <= tmp_len;   -- Byte length
     out_AXI_AWADDR  <= tmp_addr;  -- Byte address
     out_AXI_AWVALID <= tmp_valid and wreq_ready;
@@ -1148,7 +1312,7 @@ begin
         clk               => ACLK,
         reset             => ARESET,
         clk_en            => ACLK_EN,
-        if_full_n         => out_HLS_WREADY,
+        if_full_n         => wdata_ready,
         if_write          => in_HLS_WVALID,
         if_din            => in_wdata_pack,
         if_empty_n        => wdata_valid,
@@ -1156,12 +1320,32 @@ begin
         if_dout           => wdata_pack,
         if_num_data_valid => open);
     
-    in_wdata_pack <= in_HLS_WSTRB & in_HLS_WDATA;
-    tmp_wdata     <= wdata_pack(USER_DW-1 downto 0);
-    tmp_wstrb     <= wdata_pack(USER_DW+USER_DW/8-1 downto USER_DW);
+    -- burst (beat) number data valid check
+    out_AXI_BURST_REQ <= '1'         when (in_AXI_BURST_ID /= C_ID_VALUE) or (beat_nvalid > in_AXI_BURST_LEN) else '0';
+    beat_nvalid_cnt   <= beat_nvalid when (in_AXI_BURST_ID /= C_ID_VALUE) or (in_AXI_BURST_ACK = '0')         else (beat_nvalid - RESIZE(in_AXI_BURST_LEN, BURST_LEN_WIDTH+1) - 1);
+
     
+    process (ACLK)
+    begin
+        if (ACLK'event and ACLK = '1') then
+            if (ARESET = '1') then
+                beat_nvalid <= (others=>'0');
+            elsif ACLK_EN = '1' then
+                if (beat_ready and beat_write) = '1' then
+                    beat_nvalid <= beat_nvalid_cnt + 1;
+                else
+                    beat_nvalid <= beat_nvalid_cnt;
+                end if;
+            end if;
+        end if;
+    end process;
     -- ===================================================================
     -- start of WDATA PREPROCESSOR
+    in_wdata_pack      <= in_HLS_WSTRB & in_HLS_WDATA;
+    tmp_wdata          <= wdata_pack(USER_DW-1 downto 0);
+    tmp_wstrb          <= wdata_pack(USER_DW+USER_DW/8-1 downto USER_DW);
+    out_HLS_WREADY     <= wdata_ready;
+    out_AXI_WID        <= TO_UNSIGNED(C_ID_VALUE, C_M_AXI_ID_WIDTH);
     bus_equal_gen : if (USER_DATA_WIDTH = BUS_DATA_WIDTH) generate
     begin
         wreq_ready     <= '1';
@@ -1169,6 +1353,9 @@ begin
         out_AXI_WVALID <= wdata_valid;
         out_AXI_WDATA  <= tmp_wdata;
         out_AXI_WSTRB  <= tmp_wstrb;
+
+        beat_ready     <= wdata_ready;
+        beat_write     <= in_HLS_WVALID;
     end generate bus_equal_gen;
 
     bus_wide_gen : if (USER_DATA_WIDTH < BUS_DATA_WIDTH) generate
@@ -1251,6 +1438,23 @@ begin
             if_read           => offset_read,
             if_dout           => offset_pack,
             if_num_data_valid => open);            
+
+        buff_burst : reconstruct_fullImage_m_axi_fifo
+        generic map (
+            DATA_WIDTH        => BUS_DATA_WIDTH + BUS_DATA_WIDTH/8,
+            ADDR_WIDTH        => log2(MAX_WRITE_BURST_LENGTH),
+            DEPTH             => MAX_WRITE_BURST_LENGTH)
+        port map (
+            clk               => ACLK,
+            reset             => ARESET,
+            clk_en            => ACLK_EN,
+            if_full_n         => beat_ready,
+            if_write          => beat_write,
+            if_din            => beat_pack,
+            if_empty_n        => out_AXI_WVALID,
+            if_read           => in_AXI_WREADY,
+            if_dout           => out_beat_pack,
+            if_num_data_valid => open);
         
         wreq_ready       <= '1' when offset_full_n = '1' or offset_write = '0' else '0';
         tmp_addr_end     <= tmp_addr + tmp_len;
@@ -1267,13 +1471,14 @@ begin
         tail_offset      <= offset_pack_reg(BEAT_LEN_WIDTH+PAD_ALIGN-1 downto BEAT_LEN_WIDTH);
         beat_len         <= offset_pack_reg(BEAT_LEN_WIDTH-1 downto 0);
 
-        out_AXI_WDATA    <= data_buf;
-        out_AXI_WSTRB    <= strb_buf;
-        out_AXI_WVALID   <= data_valid;
+        beat_pack        <= strb_buf & data_buf;
+        beat_write       <= data_valid;
+        out_AXI_WDATA    <= out_beat_pack(BUS_DATA_WIDTH-1 downto 0);
+        out_AXI_WSTRB    <= out_beat_pack(BUS_DATA_WIDTH+BUS_DATA_WIDTH/8-1 downto BUS_DATA_WIDTH);
         
         next_wdata       <= '1' when next_pad else '0';
         next_offset      <= '1' when last_beat and next_beat else '0';
-        ready_for_data   <= data_valid = '0' or in_AXI_WREADY = '1';
+        ready_for_data   <= data_valid = '0' or beat_ready = '1';
 
         len_cnt_tmp      <= beat_len when first_beat else len_cnt_buf;
             
@@ -1293,7 +1498,7 @@ begin
                             TO_UNSIGNED(1, TOTAL_PADS)                                      when first_pad else
                             pad_oh_reg;
 
-        process (ACLK)
+process (ACLK)
         begin
             if (ACLK'event and ACLK = '1') then
                 if (ARESET = '1') then
@@ -1495,24 +1700,42 @@ begin
             if_empty_n        => offset_valid,
             if_read           => next_offset,
             if_dout           => beat_len,
-            if_num_data_valid => open);    
+            if_num_data_valid => open);
+
+        buff_burst : reconstruct_fullImage_m_axi_fifo
+        generic map (
+            DATA_WIDTH        => BUS_DATA_WIDTH + BUS_DATA_WIDTH/8,
+            ADDR_WIDTH        => log2(MAX_WRITE_BURST_LENGTH),
+            DEPTH             => MAX_WRITE_BURST_LENGTH)
+        port map (
+            clk               => ACLK,
+            reset             => ARESET,
+            clk_en            => ACLK_EN,
+            if_full_n         => beat_ready,
+            if_write          => beat_write,
+            if_din            => beat_pack,
+            if_empty_n        => out_AXI_WVALID,
+            if_read           => in_AXI_WREADY,
+            if_dout           => out_beat_pack,
+            if_num_data_valid => open);
 
         wreq_ready       <= offset_full_n and not offset_write;
         tmp_addr_end     <= tmp_addr + tmp_len;
         beat_total       <= RESIZE(SHIFT_RIGHT(tmp_len + tmp_addr(BUS_ADDR_ALIGN-1 downto 0), BUS_ADDR_ALIGN), BEAT_LEN_WIDTH);
         offset_write     <= tmp_valid and in_AXI_AWREADY;
 
-        out_AXI_WDATA    <= data_buf;
-        out_AXI_WSTRB    <= strb_buf;
-        out_AXI_WVALID   <= data_valid;
+        beat_pack        <= strb_buf & data_buf;
+        beat_write       <= data_valid;
+        out_AXI_WDATA    <= out_beat_pack(BUS_DATA_WIDTH-1 downto 0);
+        out_AXI_WSTRB    <= out_beat_pack(BUS_DATA_WIDTH+BUS_DATA_WIDTH/8-1 downto BUS_DATA_WIDTH);
 
-        next_wdata      <= '1' when first_split else '0';
-        next_offset     <= '1' when len_cnt = beat_len and offset_valid = '1' and last_split else '0';
-        ready_for_data  <= data_valid = '0' or in_AXI_WREADY = '1';
+        next_wdata       <= '1' when first_split else '0';
+        next_offset      <= '1' when len_cnt = beat_len and offset_valid = '1' and last_split else '0';
+        ready_for_data   <= data_valid = '0' or beat_ready = '1';
 
-        first_split     <= split_cnt = 0  and wdata_valid = '1' and offset_valid ='1' and ready_for_data;
-        next_split      <= split_cnt /= 0 and ready_for_data;
-        last_split      <= split_cnt = (TOTAL_SPLIT - 1) and ready_for_data;
+        first_split      <= split_cnt = 0  and wdata_valid = '1' and offset_valid ='1' and ready_for_data;
+        next_split       <= split_cnt /= 0 and ready_for_data;
+        last_split       <= split_cnt = (TOTAL_SPLIT - 1) and ready_for_data;
 
         process (ACLK)
         begin
@@ -1609,7 +1832,7 @@ begin
         if_read           => wrsp_read,
         if_dout           => wrsp_type,  -- "1" for valid length request, "0" for invalid length request
         if_num_data_valid => open);
-
+    
     user_resp : reconstruct_fullImage_m_axi_fifo
     generic map (
         DATA_WIDTH        => 1,
@@ -1629,13 +1852,131 @@ begin
 
     
 
+    resp_valid <= '1' when (in_AXI_BVALID = '1') and (in_AXI_BID = C_ID_VALUE) else '0';
     out_AXI_BREADY <= wrsp_type(0) and ursp_ready;
-    
+
     in_wrsp_type   <= "1" when valid_length = '1' else "0";
-    ursp_write     <= wrsp_valid and (not wrsp_type(0) or in_AXI_BVALID);
+    ursp_write     <= wrsp_valid and (not wrsp_type(0) or resp_valid);
     wrsp_read      <= ursp_ready and ursp_write;
 
 end architecture behave;
+
+
+library IEEE;
+use IEEE.STD_LOGIC_1164.all;
+use IEEE.NUMERIC_STD.all;
+
+entity reconstruct_fullImage_m_axi_arbiter is
+    generic(
+        STRATEGY      : STRING := "load_balance";
+        PORTS_WIDTH   : INTEGER := 2;
+        PORTS         : INTEGER := 4);
+    port (
+        clk           : in  STD_LOGIC;
+        reset         : in  STD_LOGIC;
+        s_ready       : in  UNSIGNED(PORTS-1 downto 0);
+        s_valid       : out STD_LOGIC;
+        s_index       : out UNSIGNED(PORTS_WIDTH-1 downto 0);
+        m_valid       : in  UNSIGNED(PORTS-1 downto 0);
+        m_ready       : out UNSIGNED(PORTS-1 downto 0));
+end entity reconstruct_fullImage_m_axi_arbiter;
+
+architecture behave of reconstruct_fullImage_m_axi_arbiter is
+    function or_reduce(a : UNSIGNED(PORTS-1 downto 0)) return STD_LOGIC is
+        variable ret : STD_LOGIC := '0';
+    begin
+        for i in a'range loop
+            ret := ret or a(i);
+        end loop;
+    
+        return ret;
+    end function or_reduce;
+
+    function arbiter_grant(req  : UNSIGNED(PORTS-1 downto 0);
+                           base : UNSIGNED(PORTS-1 downto 0)) return UNSIGNED is
+        variable req_buff : UNSIGNED(2*PORTS-1 downto 0);
+        variable gnt_buff : UNSIGNED(2*PORTS-1 downto 0);
+        variable gnt : UNSIGNED(PORTS-1 downto 0);
+    begin
+        req_buff := req & req;
+        gnt_buff := req_buff AND (not(req_buff - base));
+        gnt := gnt_buff(2*PORTS-1 downto PORTS) OR gnt_buff(PORTS-1 downto 0);
+
+        return gnt;
+    end function arbiter_grant;
+
+    function onehot_bin2dec(bin : UNSIGNED(PORTS-1 downto 0)) return UNSIGNED is
+        variable mask : UNSIGNED(PORTS-1 downto 0);
+        variable dec  : UNSIGNED(PORTS_WIDTH-1 downto 0);
+        variable tmp  : UNSIGNED(PORTS_WIDTH-1 downto 0);
+    begin
+        for i in 0 to PORTS_WIDTH-1 loop
+            for j in 0 to PORTS-1 loop
+                tmp    := TO_UNSIGNED(j, PORTS_WIDTH);
+                mask(j) := tmp(i);
+            end loop;
+            dec(i) := or_reduce(bin and mask);
+        end loop;
+    
+        return dec;
+    end function onehot_bin2dec;
+
+    signal base  : UNSIGNED(PORTS-1 downto 0) := TO_UNSIGNED(1, PORTS);
+    signal req   : UNSIGNED(PORTS-1 downto 0);
+    signal gnt   : UNSIGNED(PORTS-1 downto 0);
+begin
+    m_ready  <= gnt;
+    s_valid  <= or_reduce(gnt);
+
+    req      <= m_valid AND s_ready;
+    s_index  <= onehot_bin2dec(gnt);
+
+    process ( clk )
+    begin
+        if (clk'event and clk = '1') then
+            if (reset = '1') then
+                base <= TO_UNSIGNED(1, PORTS);
+            elsif (or_reduce(gnt) = '1') then
+                base <= gnt(PORTS-2 downto 0) & gnt(PORTS-1);
+            end if;
+        end if;
+    end process;
+
+    round_robin_gen : if (STRATEGY = "round_robin") generate
+        gnt <= req AND base;
+    end generate round_robin_gen;
+
+    load_balance_gen : if (STRATEGY /= "round_robin") generate
+        gnt <= arbiter_grant(req, base);
+    end generate load_balance_gen;
+
+end architecture behave;
+
+
+library IEEE;
+use IEEE.STD_LOGIC_1164.all;
+use IEEE.NUMERIC_STD.all;
+
+entity reconstruct_fullImage_m_axi_crossbar is
+    generic(
+        PORTS_WIDTH   : INTEGER := 2;
+        PORTS         : INTEGER := 4);
+    port (
+        s_ready       : in  STD_LOGIC;
+        s_valid       : out STD_LOGIC;
+        s_index       : in  UNSIGNED(PORTS_WIDTH-1 downto 0);
+        m_valid       : in  UNSIGNED(PORTS-1 downto 0);
+        m_ready       : out UNSIGNED(PORTS-1 downto 0));
+end entity reconstruct_fullImage_m_axi_crossbar;
+
+architecture behave of reconstruct_fullImage_m_axi_crossbar is
+begin
+
+    s_valid <= m_valid(TO_INTEGER(s_index));
+    m_ready <= SHIFT_LEFT( TO_UNSIGNED(1, PORTS), TO_INTEGER(s_index)) when s_ready = '1' else (others=>'0');
+
+end architecture behave;
+
 
 -- 67d7842dbbe25473c3c32b93c0da8047785f30d78e8a024de1b57352245f9689
 
@@ -1648,6 +1989,7 @@ use IEEE.NUMERIC_STD.all;
 
 entity reconstruct_fullImage_m_axi_read is
     generic (
+        INTERLEAVE              : INTEGER := 1;
         C_M_AXI_ID_WIDTH        : INTEGER := 1;
         C_M_AXI_ARUSER_WIDTH    : INTEGER := 1;
         C_M_AXI_RUSER_WIDTH     : INTEGER := 1;
@@ -1656,8 +1998,10 @@ entity reconstruct_fullImage_m_axi_read is
         C_CACHE_VALUE           : INTEGER := 2#0011#;
         BUS_ADDR_WIDTH          : INTEGER := 32;
         BUS_DATA_WIDTH          : INTEGER := 32;
+        MAX_READ_BURST_LENGTH   : INTEGER := 16;
         NUM_READ_OUTSTANDING    : INTEGER := 2;
-        MAX_READ_BURST_LENGTH   : INTEGER := 16);
+        ID0_NUM_READ_OUTSTANDING : INTEGER := 2;
+        NUM_READ_PORTS          : INTEGER := 1);
     port (
         ACLK                    : in  STD_LOGIC;
         ARESET                  : in  STD_LOGIC;
@@ -1682,16 +2026,17 @@ entity reconstruct_fullImage_m_axi_read is
         in_BUS_RUSER            : in  UNSIGNED(C_M_AXI_RUSER_WIDTH-1 downto 0);
         in_BUS_RVALID           : in  STD_LOGIC;
         out_BUS_RREADY          : out STD_LOGIC;
-        in_HLS_ARVALID          : in  STD_LOGIC;
-        out_HLS_ARREADY         : out STD_LOGIC;
-        in_HLS_ARADDR           : in  UNSIGNED(BUS_ADDR_WIDTH-1 downto 0);
-        in_HLS_ARLEN            : in  UNSIGNED(31 downto 0);
-        out_HLS_RVALID          : out STD_LOGIC;
-        in_HLS_RREADY           : in  STD_LOGIC;
-        in_HLS_RBURST_READY     : in  STD_LOGIC;
-        out_HLS_RLAST           : out UNSIGNED(1 downto 0);
-        out_HLS_RDATA           : out UNSIGNED(BUS_DATA_WIDTH-1 downto 0));
-
+        in_AXI_ARID             : in  UNSIGNED(C_M_AXI_ID_WIDTH-1 downto 0);
+        in_AXI_ARADDR           : in  UNSIGNED(BUS_ADDR_WIDTH-1 downto 0);
+        in_AXI_ARLEN            : in  UNSIGNED(31 downto 0);
+        in_AXI_ARVALID          : in  STD_LOGIC;
+        out_AXI_ARREADY         : out UNSIGNED(NUM_READ_PORTS-1 downto 0);
+        out_AXI_RID             : out UNSIGNED(C_M_AXI_ID_WIDTH-1 downto 0);
+        out_AXI_RDATA           : out UNSIGNED(BUS_DATA_WIDTH-1 downto 0);
+        out_AXI_RLAST           : out UNSIGNED(1 downto 0);
+        out_AXI_RVALID          : out STD_LOGIC;
+        in_AXI_RREADY           : in  UNSIGNED(NUM_READ_PORTS-1 downto 0);
+        in_AXI_RBURST_READY     : in  UNSIGNED(NUM_READ_PORTS-1 downto 0));
 end entity reconstruct_fullImage_m_axi_read;
 
 architecture behave of reconstruct_fullImage_m_axi_read is
@@ -1708,53 +2053,97 @@ architecture behave of reconstruct_fullImage_m_axi_read is
         return n;
     end function log2;
 
+    -- Convert the actual AXI ID to the ID locally used by the read module
+    function compress_axi_id (axi_id : UNSIGNED(C_M_AXI_ID_WIDTH-1 downto 0))
+    return UNSIGNED is
+        variable local_id : INTEGER;
+    begin
+        case TO_INTEGER(axi_id) is
+            when 0 =>
+                local_id := 0;
+            when others =>
+                local_id := 0;
+        end case;
+        return TO_UNSIGNED(local_id, C_M_AXI_ID_WIDTH);
+    end function compress_axi_id;
+
+    -- Convert the ID locally used by the read module to the actual AXI ID
+    function decompress_axi_id (local_id : UNSIGNED(C_M_AXI_ID_WIDTH-1 downto 0))
+    return UNSIGNED is
+        variable axi_id : INTEGER;
+    begin
+        case TO_INTEGER(local_id) is
+            when 0 =>
+                axi_id := 0;
+            when others =>
+                axi_id := 0;
+        end case;
+        return TO_UNSIGNED(axi_id, C_M_AXI_ID_WIDTH);
+    end function decompress_axi_id;
+
     --common
     constant BUS_DATA_BYTES       : INTEGER := BUS_DATA_WIDTH / 8;
     constant BUS_ADDR_ALIGN       : INTEGER := log2(BUS_DATA_BYTES);
 
     --AR channel
+    signal  ost_ctrl_id           : UNSIGNED(C_M_AXI_ID_WIDTH-1 downto 0);
     signal  ost_ctrl_info         : UNSIGNED(0 downto 0);
     signal  ost_ctrl_valid        : STD_LOGIC;
-    signal  ost_ctrl_ready        : STD_LOGIC;
+    signal  ost_ctrl_ready        : UNSIGNED(NUM_READ_PORTS-1 downto 0);
+    signal  ost_ctrl_write        : UNSIGNED(NUM_READ_PORTS-1 downto 0);
+    signal  ost_ctrl_empty_n      : UNSIGNED(NUM_READ_PORTS-1 downto 0);
+    signal  next_ctrl             : UNSIGNED(NUM_READ_PORTS-1 downto 0);
+
+    signal  BUS_ARID              : UNSIGNED(C_M_AXI_ID_WIDTH-1 downto 0);
 
     --R channel
-    signal  in_data_pack          : UNSIGNED(BUS_DATA_WIDTH downto 0);
-    signal  data_pack             : UNSIGNED(BUS_DATA_WIDTH downto 0);
-    signal  tmp_data              : UNSIGNED(BUS_DATA_WIDTH-1 downto 0);
-    signal  tmp_last              : STD_LOGIC;
-    signal  data_valid            : STD_LOGIC;
-    signal  data_ready            : STD_LOGIC;
-    signal  next_ctrl             : STD_LOGIC;
-    signal  need_rlast            : STD_LOGIC;
+    signal  data_pack_in          : UNSIGNED(C_M_AXI_ID_WIDTH + BUS_DATA_WIDTH downto 0);
+    signal  data_pack_out         : UNSIGNED(C_M_AXI_ID_WIDTH + BUS_DATA_WIDTH downto 0);
+    signal  beat_id               : UNSIGNED(C_M_AXI_ID_WIDTH-1 downto 0);
+    signal  beat_data             : UNSIGNED(BUS_DATA_WIDTH-1 downto 0);
+    signal  beat_last             : STD_LOGIC;
+    signal  beat_valid            : STD_LOGIC;
+    signal  beat_ready            : STD_LOGIC;
+
+    signal  ost_burst_read        : UNSIGNED(NUM_READ_PORTS-1 downto 0);
+    signal  ost_burst_empty_n     : UNSIGNED(NUM_READ_PORTS-1 downto 0);
+    signal  ost_burst_info        : UNSIGNED(NUM_READ_PORTS-1 downto 0);
     signal  next_burst            : STD_LOGIC;
-    signal  burst_valid           : STD_LOGIC;
-    signal  last_burst            : UNSIGNED(0 downto 0);
-    signal  last_burst_tmp        : STD_LOGIC;
+    signal  last_beat             : STD_LOGIC;
+    signal  last_burst            : STD_LOGIC;
+
+    signal  BUS_RID               : UNSIGNED(C_M_AXI_ID_WIDTH-1 downto 0);
 
     -- regslice io ? 
 
     -- component
     component reconstruct_fullImage_m_axi_burst_converter is
         generic (
+            INTERLEAVE        : INTEGER := 1;
+            ID_WIDTH          : INTEGER := 1;
             DATA_WIDTH        : INTEGER := 32;
             ADDR_WIDTH        : INTEGER := 32;
-            MAX_BURST_LENGTH  : INTEGER := 16);
+            MAX_BURST_LENGTH  : INTEGER := 16;
+            NUM_PORTS         : INTEGER := 1);
         port (
             clk               : in  STD_LOGIC;
             reset             : in  STD_LOGIC;
             clk_en            : in  STD_LOGIC;
+            in_REQ_ID         : in  UNSIGNED(ID_WIDTH-1 downto 0);
             in_REQ_ADDR       : in  UNSIGNED(ADDR_WIDTH-1 downto 0);
             in_REQ_LEN        : in  UNSIGNED(31 downto 0);
             in_REQ_VALID      : in  STD_LOGIC;
-            out_REQ_READY     : out STD_LOGIC;
+            out_REQ_READY     : out UNSIGNED(NUM_PORTS-1 downto 0); 
+            out_BURST_ID      : out UNSIGNED(ID_WIDTH-1 downto 0);
             out_BURST_ADDR    : out UNSIGNED(ADDR_WIDTH-1 downto 0);
             out_BURST_LEN     : out UNSIGNED(7 downto 0);
             out_BURST_VALID   : out STD_LOGIC;
             in_BURST_READY    : in  STD_LOGIC;
+            out_CTRL_ID       : out UNSIGNED(ID_WIDTH-1 downto 0);
             out_CTRL_INFO     : out UNSIGNED(0 downto 0);
             out_CTRL_LEN      : out UNSIGNED(7 downto 0);
             out_CTRL_VALID    : out STD_LOGIC;
-            in_CTRL_READY     : in  STD_LOGIC);
+            in_CTRL_READY     : in  UNSIGNED(NUM_PORTS-1 downto 0));
     end component reconstruct_fullImage_m_axi_burst_converter;
 
     component reconstruct_fullImage_m_axi_fifo is
@@ -1795,31 +2184,37 @@ begin
     -- Instantiation
     rreq_burst_conv : reconstruct_fullImage_m_axi_burst_converter
     generic map (
+        INTERLEAVE       => INTERLEAVE,
+        ID_WIDTH         => C_M_AXI_ID_WIDTH,
         DATA_WIDTH       => BUS_DATA_WIDTH,
         ADDR_WIDTH       => BUS_ADDR_WIDTH,
-        MAX_BURST_LENGTH => MAX_READ_BURST_LENGTH)
+        MAX_BURST_LENGTH => MAX_READ_BURST_LENGTH,
+        NUM_PORTS        => NUM_READ_PORTS)
     port map (
         clk              => ACLK,
         reset            => ARESET,
         clk_en           => ACLK_EN,
-        in_REQ_ADDR      => in_HLS_ARADDR,
-        in_REQ_LEN       => in_HLS_ARLEN,
-        in_REQ_VALID     => in_HLS_ARVALID,
-        out_REQ_READY    => out_HLS_ARREADY,
+        in_REQ_ID        => in_AXI_ARID,
+        in_REQ_ADDR      => in_AXI_ARADDR,
+        in_REQ_LEN       => in_AXI_ARLEN,
+        in_REQ_VALID     => in_AXI_ARVALID,
+        out_REQ_READY    => out_AXI_ARREADY,
         
-        out_BURST_ADDR   => out_BUS_ARADDR,
+        out_BURST_ID     => BUS_ARID,
+        out_BURST_ADDR   => out_BUS_ARADDR ,
         out_BURST_LEN    => out_BUS_ARLEN,
         out_BURST_VALID  => out_BUS_ARVALID,
         in_BURST_READY   => in_BUS_ARREADY,
-
+        out_CTRL_ID      => ost_ctrl_id,
         out_CTRL_INFO    => ost_ctrl_info,
         out_CTRL_LEN     => open,
         out_CTRL_VALID   => ost_ctrl_valid,
         in_CTRL_READY    => ost_ctrl_ready);
-
+    
     
 
-    out_BUS_ARID      <= (others => '0');
+    out_BUS_ARID      <= decompress_axi_id(BUS_ARID);
+
     out_BUS_ARSIZE    <= TO_UNSIGNED(BUS_ADDR_ALIGN, out_BUS_ARSIZE'length);
     out_BUS_ARBURST   <= "01";
     out_BUS_ARLOCK    <= "00";
@@ -1834,65 +2229,75 @@ begin
     -- Instantiation
     rs_rdata : reconstruct_fullImage_m_axi_reg_slice
         generic map (
-            DATA_WIDTH        => BUS_DATA_WIDTH + 1)
+            DATA_WIDTH        => C_M_AXI_ID_WIDTH + BUS_DATA_WIDTH + 1)
         port map (
             clk               => ACLK,
             reset             => ARESET,
-            s_data            => in_data_pack,
+            s_data            => data_pack_in,
             s_valid           => in_BUS_RVALID,
             s_ready           => out_BUS_RREADY,
-            m_data            => data_pack,
-            m_valid           => data_valid,
-            m_ready           => data_ready);
+            m_data            => data_pack_out,
+            m_valid           => beat_valid,
+            m_ready           => beat_ready);
 
-    fifo_rctl : reconstruct_fullImage_m_axi_fifo
+     -- channel outstanding control
+    fifo_rctl_0 : reconstruct_fullImage_m_axi_fifo
         generic map (
             DATA_WIDTH        => 1,
-            DEPTH             => NUM_READ_OUTSTANDING,
-            ADDR_WIDTH        => log2(NUM_READ_OUTSTANDING))
+            DEPTH             => ID0_NUM_READ_OUTSTANDING,
+            ADDR_WIDTH        => log2(ID0_NUM_READ_OUTSTANDING))
         port map (
             clk               => ACLK,
             reset             => ARESET,
             clk_en            => ACLK_EN,
-            if_full_n         => ost_ctrl_ready,
-            if_write          => ost_ctrl_valid,
+            if_full_n         => ost_ctrl_ready(0),
+            if_write          => ost_ctrl_write(0),
             if_din            => ost_ctrl_info,
-            if_empty_n        => need_rlast,
-            if_read           => next_ctrl,
+            if_empty_n        => ost_ctrl_empty_n(0),
+            if_read           => next_ctrl(0),
             if_dout           => open,
             if_num_data_valid => open);
     
-    fifo_burst : reconstruct_fullImage_m_axi_fifo
+    fifo_burst_0 : reconstruct_fullImage_m_axi_fifo
         generic map (
             DATA_WIDTH        => 1,
-            DEPTH             => NUM_READ_OUTSTANDING,
-            ADDR_WIDTH        => log2(NUM_READ_OUTSTANDING))
+            DEPTH             => ID0_NUM_READ_OUTSTANDING,
+            ADDR_WIDTH        => log2(ID0_NUM_READ_OUTSTANDING))
         port map (
             clk               => ACLK,
             reset             => ARESET,
             clk_en            => ACLK_EN,
             if_full_n         => open,
-            if_write          => ost_ctrl_valid,
+            if_write          => ost_ctrl_write(0),
             if_din            => ost_ctrl_info,
-            if_empty_n        => burst_valid,
-            if_read           => next_burst,
-            if_dout           => last_burst,
+            if_empty_n        => ost_burst_empty_n(0),
+            if_read           => ost_burst_read(0),
+            if_dout           => ost_burst_info(0 downto 0),
             if_num_data_valid => open);
+    
 
+    ost_ctrl_write <= SHIFT_LEFT( TO_UNSIGNED(1, NUM_READ_PORTS), TO_INTEGER(ost_ctrl_id)) when (ost_ctrl_valid = '1') else (others=>'0');
+    ost_burst_read <= SHIFT_LEFT( TO_UNSIGNED(1, NUM_READ_PORTS), TO_INTEGER(beat_id)) when (next_burst = '1') else (others=>'0');
 
-    in_data_pack   <= in_BUS_RLAST & in_BUS_RDATA;
-    tmp_data       <= data_pack(BUS_DATA_WIDTH-1 downto 0);
-    tmp_last       <= '1' when data_pack(BUS_DATA_WIDTH) = '1' else '0';
+    data_pack_in   <= BUS_RID & in_BUS_RLAST & in_BUS_RDATA;
+    beat_data      <= data_pack_out(BUS_DATA_WIDTH-1 downto 0);
+    beat_last      <= data_pack_out(BUS_DATA_WIDTH);
+    beat_id        <= data_pack_out(C_M_AXI_ID_WIDTH + BUS_DATA_WIDTH downto BUS_DATA_WIDTH+1);
 
-    next_ctrl      <= in_HLS_RBURST_READY and need_rlast;
-    next_burst     <= tmp_last and data_valid and data_ready;
- 
-    last_burst_tmp <= '1' when last_burst = "1" and burst_valid = '1' else '0';
-    out_HLS_RLAST  <= tmp_last & ( tmp_last and last_burst_tmp );
-    out_HLS_RDATA  <= tmp_data;
-    out_HLS_RVALID <= data_valid;
-    data_ready     <= in_HLS_RREADY;
-    --------------------------- R channel end --------------------------------------
+    last_beat      <= '1' when beat_last = '1' else '0';
+    last_burst     <= '1' when ost_burst_info(TO_INTEGER(beat_id)) = '1' and ost_burst_empty_n(TO_INTEGER(beat_id)) = '1' else '0';
+    beat_ready     <= '1' when in_AXI_RREADY(TO_INTEGER(beat_id)) = '1' else '0';
+
+    next_ctrl      <= in_AXI_RBURST_READY and ost_ctrl_empty_n;
+    next_burst     <= last_beat and beat_valid and beat_ready;
+
+    BUS_RID        <= compress_axi_id(in_BUS_RID);
+
+    out_AXI_RID    <= beat_id;
+    out_AXI_RDATA  <= beat_data;
+    out_AXI_RVALID <= beat_valid;
+    out_AXI_RLAST  <= last_beat & ( last_beat and last_burst );
+--------------------------- R channel end --------------------------------------
 end architecture behave;
 
 
@@ -1903,6 +2308,7 @@ use IEEE.NUMERIC_STD.all;
 entity reconstruct_fullImage_m_axi_write is
     generic (
         CONSERVATIVE              : INTEGER := 0;
+        INTERLEAVE                : INTEGER := 1;
         C_M_AXI_ID_WIDTH          : INTEGER := 1;
         C_M_AXI_AWUSER_WIDTH      : INTEGER := 1;
         C_M_AXI_WUSER_WIDTH       : INTEGER := 1;
@@ -1912,8 +2318,9 @@ entity reconstruct_fullImage_m_axi_write is
         C_CACHE_VALUE             : INTEGER := 2#0011#;
         BUS_ADDR_WIDTH            : INTEGER := 32;
         BUS_DATA_WIDTH            : INTEGER := 32;
+        MAX_WRITE_BURST_LENGTH    : INTEGER := 16;
         NUM_WRITE_OUTSTANDING     : INTEGER := 2;
-        MAX_WRITE_BURST_LENGTH    : INTEGER := 16);
+        NUM_WRITE_PORTS           : INTEGER := 1);
     port (
         ACLK                      : in  STD_LOGIC;
         ARESET                    : in  STD_LOGIC;
@@ -1943,17 +2350,23 @@ entity reconstruct_fullImage_m_axi_write is
         in_BUS_BUSER              : in  UNSIGNED(C_M_AXI_BUSER_WIDTH-1 downto 0);
         in_BUS_BVALID             : in  STD_LOGIC;
         out_BUS_BREADY            : out STD_LOGIC;
-        in_HLS_AWVALID            : in  STD_LOGIC;
-        out_HLS_AWREADY           : out STD_LOGIC;
-        in_HLS_AWADDR             : in  UNSIGNED(BUS_ADDR_WIDTH-1 downto 0);
-        in_HLS_AWLEN              : in  UNSIGNED(31 downto 0);
-        in_HLS_WVALID             : in  STD_LOGIC;
-        out_HLS_WREADY            : out STD_LOGIC;
-        in_HLS_WSTRB              : in  UNSIGNED(BUS_DATA_WIDTH/8-1 downto 0);
-        in_HLS_WDATA              : in  UNSIGNED(BUS_DATA_WIDTH-1 downto 0);
-        out_HLS_BVALID            : out STD_LOGIC;
-        in_HLS_BREADY             : in  STD_LOGIC;
-        out_HLS_BRESP             : out UNSIGNED(1 downto 0));
+        in_AXI_AWID               : in  UNSIGNED(C_M_AXI_ID_WIDTH-1 downto 0);
+        in_AXI_AWADDR             : in  UNSIGNED(BUS_ADDR_WIDTH-1 downto 0);
+        in_AXI_AWLEN              : in  UNSIGNED(31 downto 0);
+        in_AXI_AWVALID            : in  STD_LOGIC;
+        in_AXI_BURST_REQ          : in  UNSIGNED(NUM_WRITE_PORTS-1 downto 0);
+        out_AXI_BURST_ID          : out UNSIGNED(C_M_AXI_ID_WIDTH-1 downto 0);
+        out_AXI_BURST_LEN         : out UNSIGNED(7 downto 0);
+        out_AXI_BURST_ACK         : out STD_LOGIC;
+        out_AXI_AWREADY           : out UNSIGNED(NUM_WRITE_PORTS-1 downto 0);
+        out_AXI_WID               : out UNSIGNED(C_M_AXI_ID_WIDTH-1 downto 0);
+        in_AXI_WDATA              : in  UNSIGNED(BUS_DATA_WIDTH-1 downto 0);
+        in_AXI_WSTRB              : in  UNSIGNED(BUS_DATA_WIDTH/8-1 downto 0);
+        in_AXI_WVALID             : in  STD_LOGIC;
+        out_AXI_WREADY            : out STD_LOGIC;
+        out_AXI_BID               : out UNSIGNED(C_M_AXI_ID_WIDTH-1 downto 0);
+        out_AXI_BVALID            : out STD_LOGIC;
+        in_AXI_BREADY             : in  UNSIGNED(NUM_WRITE_PORTS-1 downto 0));
 end entity reconstruct_fullImage_m_axi_write;
 
 architecture behave of reconstruct_fullImage_m_axi_write is
@@ -1969,45 +2382,70 @@ architecture behave of reconstruct_fullImage_m_axi_write is
         end loop;
         return n;
     end function log2;
+
+    -- Convert the actual AXI ID to the ID locally used by the write module
+    function compress_axi_id (axi_id : UNSIGNED(C_M_AXI_ID_WIDTH-1 downto 0))
+    return UNSIGNED is
+        variable local_id : INTEGER;
+    begin
+        case TO_INTEGER(axi_id) is
+            when others =>
+                local_id := 0;
+        end case;
+        return TO_UNSIGNED(local_id, C_M_AXI_ID_WIDTH);
+    end function compress_axi_id;
+
+    -- Convert the ID locally used by the write module to the actual AXI ID
+    function decompress_axi_id (local_id : UNSIGNED(C_M_AXI_ID_WIDTH-1 downto 0))
+    return UNSIGNED is
+        variable axi_id : INTEGER;
+    begin
+        case TO_INTEGER(local_id) is
+            when others =>
+                axi_id := 0;
+        end case;
+        return TO_UNSIGNED(axi_id, C_M_AXI_ID_WIDTH);
+    end function decompress_axi_id;
+
     --common
     constant BUS_DATA_BYTES       : INTEGER := BUS_DATA_WIDTH / 8;
     constant BUS_ADDR_ALIGN       : INTEGER := log2(BUS_DATA_BYTES);
     --AW channel
+    signal  AWID_Dummy            : UNSIGNED(C_M_AXI_ID_WIDTH-1 downto 0);
     signal  AWADDR_Dummy          : UNSIGNED(BUS_ADDR_WIDTH - 1 downto 0);
     signal  AWLEN_Dummy           : UNSIGNED(7 downto 0);
     signal  AWVALID_Dummy         : STD_LOGIC;
     signal  AWREADY_Dummy         : STD_LOGIC;
 
+    signal  ost_ctrl_id           : UNSIGNED(C_M_AXI_ID_WIDTH-1 downto 0);
     signal  ost_ctrl_len          : UNSIGNED(7 downto 0);
     signal  ost_ctrl_info         : UNSIGNED(0 downto 0);
     signal  ost_ctrl_valid        : STD_LOGIC;
-    signal  ost_ctrl_ready        : STD_LOGIC;
-    --W channel
-    signal  data_buf              : UNSIGNED(BUS_DATA_WIDTH - 1 downto 0);
-    signal  strb_buf              : UNSIGNED(BUS_DATA_BYTES - 1 downto 0);
-    signal  next_data             : STD_LOGIC;
-    signal  data_valid            : STD_LOGIC;
-    signal  data_ready            : STD_LOGIC;
-    signal  ready_for_data        : BOOLEAN;
 
-    signal  len_cnt               : UNSIGNED(7 downto 0);
-    signal  burst_len             : UNSIGNED(7 downto 0);
-    signal  ost_burst_ready       : STD_LOGIC;
-    signal  next_burst            : STD_LOGIC;
-    signal  burst_valid           : STD_LOGIC;
-    signal  WVALID_Dummy          : STD_LOGIC;
-    signal  WREADY_Dummy          : STD_LOGIC;
-    signal  WLAST_Dummy           : STD_LOGIC;
+    signal  ost_ctrl_pack         : UNSIGNED(C_M_AXI_ID_WIDTH+7 downto 0); 
+    signal  ost_ctrl_write        : UNSIGNED(NUM_WRITE_PORTS-1 downto 0);
+    signal  ost_ctrl_ready        : UNSIGNED(NUM_WRITE_PORTS-1 downto 0);
+
+    signal  BUS_AWID              : UNSIGNED(C_M_AXI_ID_WIDTH-1 downto 0);
+
     --B channel
-    signal  next_resp             : STD_LOGIC;
-    signal  last_resp             : UNSIGNED(0 downto 0);
-    signal  ost_resp_ready        : STD_LOGIC;
-    signal  need_wrsp             : STD_LOGIC;
+    signal  resp_id               : UNSIGNED(C_M_AXI_ID_WIDTH-1 downto 0);
     signal  resp_valid            : STD_LOGIC;
     signal  resp_ready            : STD_LOGIC;
+    signal  next_resp             : STD_LOGIC;
+
+    signal  ost_resp_ready        : UNSIGNED(NUM_WRITE_PORTS-1 downto 0);
+    signal  ost_resp_valid        : UNSIGNED(NUM_WRITE_PORTS-1 downto 0);
+    signal  ost_resp_info         : UNSIGNED(NUM_WRITE_PORTS-1 downto 0);
+    signal  ost_resp_read         : UNSIGNED(NUM_WRITE_PORTS-1 downto 0);
+
+    signal  BUS_BID               : UNSIGNED(C_M_AXI_ID_WIDTH-1 downto 0);
+
+    --W channel
+    signal  BUS_WID               : UNSIGNED(C_M_AXI_ID_WIDTH-1 downto 0);
 
     -- regslice io ?  no 
-
+    
     -- component
     component reconstruct_fullImage_m_axi_fifo is
         generic (
@@ -2044,54 +2482,61 @@ architecture behave of reconstruct_fullImage_m_axi_write is
 
     component reconstruct_fullImage_m_axi_burst_converter is
         generic (
+            INTERLEAVE        : INTEGER := 1;
+            ID_WIDTH          : INTEGER := 1;
             DATA_WIDTH        : INTEGER := 32;
             ADDR_WIDTH        : INTEGER := 32;
-            MAX_BURST_LENGTH  : INTEGER := 16);
-        port (
-            clk               : in  STD_LOGIC;
-            reset             : in  STD_LOGIC;
-            clk_en            : in  STD_LOGIC; 
-            in_REQ_ADDR       : in  UNSIGNED(ADDR_WIDTH-1 downto 0);
-            in_REQ_LEN        : in  UNSIGNED(31 downto 0);
-            in_REQ_VALID      : in  STD_LOGIC;
-            out_REQ_READY     : out STD_LOGIC;
-            out_BURST_ADDR    : out UNSIGNED(ADDR_WIDTH-1 downto 0);
-            out_BURST_LEN     : out UNSIGNED(7 downto 0);
-            out_BURST_VALID   : out STD_LOGIC;
-            in_BURST_READY    : in  STD_LOGIC;
-            out_CTRL_INFO     : out UNSIGNED(0 downto 0);
-            out_CTRL_LEN      : out UNSIGNED(7 downto 0);
-            out_CTRL_VALID    : out STD_LOGIC;
-            in_CTRL_READY     : in  STD_LOGIC);
-    end component reconstruct_fullImage_m_axi_burst_converter;
-
-    component reconstruct_fullImage_m_axi_throttle is
-        generic (
-            CONSERVATIVE  : INTEGER := 0;
-            USED_FIX      : BOOLEAN := true;
-            FIX_VALUE     : INTEGER := 4;
-            ADDR_WIDTH    : INTEGER := 32;
-            DATA_WIDTH    : INTEGER := 32;
-            DEPTH         : INTEGER := 16;
-            MAXREQS       : INTEGER := 16;
-            AVERAGE_MODE  : BOOLEAN := false);
+            MAX_BURST_LENGTH  : INTEGER := 16;
+            NUM_PORTS         : INTEGER := 1);
         port (
             clk               : in  STD_LOGIC;
             reset             : in  STD_LOGIC;
             clk_en            : in  STD_LOGIC;
+            in_REQ_ID         : in  UNSIGNED(ID_WIDTH-1 downto 0);
+            in_REQ_ADDR       : in  UNSIGNED(ADDR_WIDTH-1 downto 0);
+            in_REQ_LEN        : in  UNSIGNED(31 downto 0);
+            in_REQ_VALID      : in  STD_LOGIC;
+            out_REQ_READY     : out UNSIGNED(NUM_PORTS-1 downto 0); 
+            out_BURST_ID      : out UNSIGNED(ID_WIDTH-1 downto 0);
+            out_BURST_ADDR    : out UNSIGNED(ADDR_WIDTH-1 downto 0);
+            out_BURST_LEN     : out UNSIGNED(7 downto 0);
+            out_BURST_VALID   : out STD_LOGIC;
+            in_BURST_READY    : in  STD_LOGIC;
+            out_CTRL_ID       : out UNSIGNED(ID_WIDTH-1 downto 0);
+            out_CTRL_INFO     : out UNSIGNED(0 downto 0);
+            out_CTRL_LEN      : out UNSIGNED(7 downto 0);
+            out_CTRL_VALID    : out STD_LOGIC;
+            in_CTRL_READY     : in  UNSIGNED(NUM_PORTS-1 downto 0));
+    end component reconstruct_fullImage_m_axi_burst_converter;
+
+    component reconstruct_fullImage_m_axi_throttle is
+        generic (
+            CONSERVATIVE      : INTEGER := 0;
+            ADDR_WIDTH        : INTEGER := 32;
+            DATA_WIDTH        : INTEGER := 32;
+            ID_WIDTH          : INTEGER := 1;
+            NUM_OUTSTANDING   : INTEGER := 16);
+        port (
+            clk               : in  STD_LOGIC;
+            reset             : in  STD_LOGIC;
+            clk_en            : in  STD_LOGIC;
+            in_TOP_AWID       : in  UNSIGNED;
             in_TOP_AWADDR     : in  UNSIGNED;
             in_TOP_AWLEN      : in  UNSIGNED;
             in_TOP_AWVALID    : in  STD_LOGIC;
             out_TOP_AWREADY   : out STD_LOGIC;
+            out_BUS_AWID      : out UNSIGNED;
             out_BUS_AWADDR    : out UNSIGNED;
             out_BUS_AWLEN     : out UNSIGNED;
             out_BUS_AWVALID   : out STD_LOGIC;
             in_BUS_AWREADY    : in  STD_LOGIC;
+
+            out_TOP_WID       : out UNSIGNED;
             in_TOP_WDATA      : in  UNSIGNED;
             in_TOP_WSTRB      : in  UNSIGNED;
-            in_TOP_WLAST      : in  STD_LOGIC;
             in_TOP_WVALID     : in  STD_LOGIC;
             out_TOP_WREADY    : out STD_LOGIC;
+            out_BUS_WID       : out UNSIGNED;
             out_BUS_WDATA     : out UNSIGNED;
             out_BUS_WSTRB     : out UNSIGNED;
             out_BUS_WLAST     : out STD_LOGIC;
@@ -2103,209 +2548,122 @@ begin
     --------------------------- AW channel begin -----------------------------------
     -- Instantiation
     wreq_burst_conv : reconstruct_fullImage_m_axi_burst_converter
-    generic map (
-        DATA_WIDTH       => BUS_DATA_WIDTH,
-        ADDR_WIDTH       => BUS_ADDR_WIDTH,
-        MAX_BURST_LENGTH => MAX_WRITE_BURST_LENGTH)
-    port map (
-        clk              => ACLK,
-        reset            => ARESET,
-        clk_en           => ACLK_EN,
-        in_REQ_ADDR      => in_HLS_AWADDR,
-        in_REQ_LEN       => in_HLS_AWLEN,
-        in_REQ_VALID     => in_HLS_AWVALID,
-        out_REQ_READY    => out_HLS_AWREADY,
-        out_BURST_ADDR   => AWADDR_Dummy ,
-        out_BURST_LEN    => AWLEN_Dummy,
-        out_BURST_VALID  => AWVALID_Dummy,
-        in_BURST_READY   => AWREADY_Dummy,
-        out_CTRL_INFO    => ost_ctrl_info,
-        out_CTRL_LEN     => ost_ctrl_len,
-        out_CTRL_VALID   => ost_ctrl_valid,
-        in_CTRL_READY    => ost_ctrl_ready);
+        generic map (
+            INTERLEAVE       => INTERLEAVE,
+            ID_WIDTH         => C_M_AXI_ID_WIDTH,
+            DATA_WIDTH       => BUS_DATA_WIDTH,
+            ADDR_WIDTH       => BUS_ADDR_WIDTH,
+            MAX_BURST_LENGTH => MAX_WRITE_BURST_LENGTH,
+            NUM_PORTS        => NUM_WRITE_PORTS)
+        port map (
+            clk              => ACLK,
+            reset            => ARESET,
+            clk_en           => ACLK_EN,
+            in_REQ_ID        => in_AXI_AWID,
+            in_REQ_ADDR      => in_AXI_AWADDR,
+            in_REQ_LEN       => in_AXI_AWLEN,
+            in_REQ_VALID     => in_AXI_AWVALID,
+            out_REQ_READY    => out_AXI_AWREADY,
+            out_BURST_ID     => AWID_Dummy,
+            out_BURST_ADDR   => AWADDR_Dummy ,
+            out_BURST_LEN    => AWLEN_Dummy,
+            out_BURST_VALID  => AWVALID_Dummy,
+            in_BURST_READY   => AWREADY_Dummy,
+            out_CTRL_ID      => ost_ctrl_id,
+            out_CTRL_INFO    => ost_ctrl_info,
+            out_CTRL_LEN     => ost_ctrl_len,
+            out_CTRL_VALID   => ost_ctrl_valid,
+            in_CTRL_READY    => ost_ctrl_ready);
 
-    ost_ctrl_ready   <= ost_burst_ready and ost_resp_ready;
+    ost_ctrl_ready    <= ost_resp_ready AND in_AXI_BURST_REQ;
+    
+    out_AXI_BURST_ID  <= ost_ctrl_id;
+    out_AXI_BURST_LEN <= ost_ctrl_len;
+    out_AXI_BURST_ACK <= ost_ctrl_valid;
 
-    -- burst converter
-    out_BUS_AWID     <= (others => '0');
-    out_BUS_AWSIZE   <= TO_UNSIGNED(BUS_ADDR_ALIGN, out_BUS_AWSIZE'length);
-    out_BUS_AWBURST  <= "01";
-    out_BUS_AWLOCK   <= "00";
-    out_BUS_AWCACHE  <= TO_UNSIGNED(C_CACHE_VALUE, out_BUS_AWCACHE'length);
-    out_BUS_AWPROT   <= TO_UNSIGNED(C_PROT_VALUE, out_BUS_AWPROT'length);
-    out_BUS_AWUSER   <= TO_UNSIGNED(C_USER_VALUE, out_BUS_AWUSER'length);
-    out_BUS_AWQOS    <= "0000";
-    out_BUS_AWREGION <= "0000";
+    out_BUS_AWID      <= decompress_axi_id(BUS_AWID);
+    out_BUS_AWSIZE    <= TO_UNSIGNED(BUS_ADDR_ALIGN, out_BUS_AWSIZE'length);
+    out_BUS_AWBURST   <= "01";
+    out_BUS_AWLOCK    <= "00";
+    out_BUS_AWCACHE   <= TO_UNSIGNED(C_CACHE_VALUE, out_BUS_AWCACHE'length);
+    out_BUS_AWPROT    <= TO_UNSIGNED(C_PROT_VALUE, out_BUS_AWPROT'length);
+    out_BUS_AWUSER    <= TO_UNSIGNED(C_USER_VALUE, out_BUS_AWUSER'length);
+    out_BUS_AWQOS     <= "0000";
+    out_BUS_AWREGION  <= "0000";
+    --------------------------- AW channel end -------------------------------------
 
     --------------------------- W channel begin ------------------------------------
-    -- Instantiation
-
-    fifo_burst : reconstruct_fullImage_m_axi_fifo
-        generic map (
-            DATA_WIDTH        => 8,
-            DEPTH             => NUM_WRITE_OUTSTANDING,
-            ADDR_WIDTH        => log2(NUM_WRITE_OUTSTANDING))
-        port map (
-            clk               => ACLK,
-            reset             => ARESET,
-            clk_en            => ACLK_EN,
-            if_full_n         => ost_burst_ready,
-            if_write          => ost_ctrl_valid,
-            if_din            => ost_ctrl_len,
-            if_empty_n        => burst_valid,
-            if_read           => next_burst,
-            if_dout           => burst_len,
-            if_num_data_valid => open);
-    
-    out_BUS_WID    <= (others => '0');
-    out_BUS_WUSER  <= TO_UNSIGNED(C_USER_VALUE, out_BUS_WUSER'length);
-    out_HLS_WREADY <= data_ready;
-
-    data_valid     <= in_HLS_WVALID;
-    data_ready     <= '1' when burst_valid = '1' and ready_for_data else '0';
-
-    next_data      <= '1' when data_ready = '1' and data_valid = '1' else '0';
-    next_burst     <= '1' when len_cnt = burst_len and next_data = '1' else '0';
-    ready_for_data <= not (WVALID_Dummy = '1' and WREADY_Dummy = '0');
-
-    data_buf_proc : process (ACLK)
-    begin
-        if (ACLK'event and ACLK = '1') then
-            if (ARESET = '1') then
-                data_buf <= (others => '0');
-                strb_buf <= (others => '0');
-            elsif ACLK_EN = '1' then
-                if next_data = '1' then
-                    data_buf <= in_HLS_WDATA;
-                    strb_buf <= in_HLS_WSTRB;
-                end if;
-            end if;
-        end if;
-    end process data_buf_proc;
-
-    wvalid_proc : process (ACLK)
-    begin
-        if (ACLK'event and ACLK = '1') then
-            if (ARESET = '1') then
-                WVALID_Dummy <= '0';
-            elsif ACLK_EN = '1' then
-                if next_data = '1' then
-                    WVALID_Dummy <= '1';
-                elsif ready_for_data then
-                    WVALID_Dummy <= '0';
-                end if;
-            end if;
-        end if;
-    end process wvalid_proc;
-
-    wlast_proc : process (ACLK)
-    begin
-        if (ACLK'event and ACLK = '1') then
-            if (ARESET = '1') then
-                WLAST_Dummy <= '0';
-            elsif ACLK_EN = '1' then
-                if next_burst = '1' then
-                    WLAST_Dummy <= '1';
-                elsif ready_for_data then
-                    WLAST_Dummy <= '0';
-                end if;
-            end if;
-        end if;
-    end process wlast_proc;
-
-    len_cnt_proc : process (ACLK)
-    begin
-        if (ACLK'event and ACLK = '1') then
-            if (ARESET = '1') then
-                len_cnt <= (others => '0');
-            elsif ACLK_EN = '1' then
-                if next_burst = '1' then
-                    len_cnt <= (others => '0');
-                elsif next_data = '1' then
-                    len_cnt <= len_cnt + 1;
-                end if;
-            end if;
-        end if;
-    end process len_cnt_proc;
-
-    --------------------------- W channel end --------------------------------------
     -- Write throttling instantiation
     wreq_throttl : reconstruct_fullImage_m_axi_throttle
-        generic map (
-            CONSERVATIVE      => CONSERVATIVE,
-            USED_FIX          => false,
-            ADDR_WIDTH        => BUS_ADDR_WIDTH,
-            DATA_WIDTH        => BUS_DATA_WIDTH,
-            DEPTH             => MAX_WRITE_BURST_LENGTH,
-            MAXREQS           => NUM_WRITE_OUTSTANDING,
-            AVERAGE_MODE      => false)
-        port map (
-            clk               => ACLK,
-            reset             => ARESET,
-            clk_en            => ACLK_EN,
-            -- internal
-            in_TOP_AWADDR     => AWADDR_Dummy,
-            in_TOP_AWLEN      => AWLEN_Dummy,
-            in_TOP_AWVALID    => AWVALID_Dummy,
-            out_TOP_AWREADY   => AWREADY_Dummy,
-            in_TOP_WDATA      => data_buf,
-            in_TOP_WSTRB      => strb_buf,
-            in_TOP_WLAST      => WLAST_Dummy,
-            in_TOP_WVALID     => WVALID_Dummy,
-            out_TOP_WREADY    => WREADY_Dummy,
-            -- AXI BUS 
-            out_BUS_AWADDR    => out_BUS_AWADDR,
-            out_BUS_AWLEN     => out_BUS_AWLEN,
-            out_BUS_AWVALID   => out_BUS_AWVALID,
-            in_BUS_AWREADY    => in_BUS_AWREADY,
-            out_BUS_WDATA     => out_BUS_WDATA,
-            out_BUS_WSTRB     => out_BUS_WSTRB,
-            out_BUS_WLAST     => out_BUS_WLAST,
-            out_BUS_WVALID    => out_BUS_WVALID,
-            in_BUS_WREADY     => in_BUS_WREADY 
-        );
+    generic map (
+        CONSERVATIVE      => CONSERVATIVE,
+        ADDR_WIDTH        => BUS_ADDR_WIDTH,
+        DATA_WIDTH        => BUS_DATA_WIDTH,
+        ID_WIDTH          => C_M_AXI_ID_WIDTH,
+        NUM_OUTSTANDING   => NUM_WRITE_OUTSTANDING)
+    port map (
+        clk               => ACLK,
+        reset             => ARESET,
+        clk_en            => ACLK_EN,
+        -- internal
+        in_TOP_AWID       => AWID_Dummy,
+        in_TOP_AWADDR     => AWADDR_Dummy,
+        in_TOP_AWLEN      => AWLEN_Dummy,
+        in_TOP_AWVALID    => AWVALID_Dummy,
+        out_TOP_AWREADY   => AWREADY_Dummy,
+        out_TOP_WID       => out_AXI_WID,
+        in_TOP_WDATA      => in_AXI_WDATA,
+        in_TOP_WSTRB      => in_AXI_WSTRB,
+        in_TOP_WVALID     => in_AXI_WVALID,
+        out_TOP_WREADY    => out_AXI_WREADY,
+        -- AXI BUS 
+        out_BUS_AWID      => BUS_AWID,
+        out_BUS_AWADDR    => out_BUS_AWADDR,
+        out_BUS_AWLEN     => out_BUS_AWLEN,
+        out_BUS_AWVALID   => out_BUS_AWVALID,
+        in_BUS_AWREADY    => in_BUS_AWREADY,
+        out_BUS_WID       => BUS_WID,
+        out_BUS_WDATA     => out_BUS_WDATA,
+        out_BUS_WSTRB     => out_BUS_WSTRB,
+        out_BUS_WLAST     => out_BUS_WLAST,
+        out_BUS_WVALID    => out_BUS_WVALID,
+        in_BUS_WREADY     => in_BUS_WREADY
+    );
 
-     
+    
+
+    out_BUS_WID      <= decompress_axi_id(BUS_WID);
+    out_BUS_WUSER    <= TO_UNSIGNED(C_USER_VALUE, out_BUS_WUSER'length);
+    --------------------------- W channel end --------------------------------------
     --------------------------- B channel begin ------------------------------------
     -- Instantiation
     rs_resp : reconstruct_fullImage_m_axi_reg_slice
         generic map (
-            DATA_WIDTH        => 1)
+            DATA_WIDTH        => C_M_AXI_ID_WIDTH)
         port map (
             clk               => ACLK,
             reset             => ARESET,
-            s_data            => "1",
+            s_data            => BUS_BID,
             s_valid           => in_BUS_BVALID,
             s_ready           => out_BUS_BREADY,
-            m_data            => open,
+            m_data            => resp_id,
             m_valid           => resp_valid,
             m_ready           => resp_ready);
 
-    fifo_resp : reconstruct_fullImage_m_axi_fifo
-        generic map (
-            DATA_WIDTH        => 1,
-            DEPTH             => NUM_WRITE_OUTSTANDING,
-            ADDR_WIDTH        => log2(NUM_WRITE_OUTSTANDING))
-        port map (
-            clk               => ACLK,
-            reset             => ARESET,
-            clk_en            => ACLK_EN,
-            if_full_n         => ost_resp_ready,
-            if_write          => ost_ctrl_valid,
-            if_din            => ost_ctrl_info,
-            if_empty_n        => need_wrsp,
-            if_read           => next_resp,
-            if_dout           => last_resp,
-            if_num_data_valid => open);
+    
 
-    resp_ready <= need_wrsp when in_HLS_BREADY = '1' or last_resp = "0" else '0';
+    ost_ctrl_write <= SHIFT_LEFT( TO_UNSIGNED(1, NUM_WRITE_PORTS), TO_INTEGER(ost_ctrl_id)) when (ost_ctrl_valid = '1') else (others=>'0');
+    ost_resp_read  <= SHIFT_LEFT( TO_UNSIGNED(1, NUM_WRITE_PORTS), TO_INTEGER(resp_id)) when (next_resp = '1') else (others=>'0');
+
+    resp_ready <= '1' when ost_resp_valid(TO_INTEGER(resp_id)) = '1' and (in_AXI_BREADY(TO_INTEGER(resp_id)) = '1' or ost_resp_info(TO_INTEGER(resp_id)) = '0') else '0';
     next_resp  <= resp_valid and resp_ready;
     
-    out_HLS_BVALID <= resp_valid when last_resp = "1" else '0';
-    out_HLS_BRESP  <= "00";
-    --------------------------- B channel end --------------------------------------
-end architecture behave;
+    out_AXI_BVALID <= resp_valid when ost_resp_info(TO_INTEGER(resp_id)) = '1' else '0';
+    out_AXI_BID    <= resp_id;
 
+    BUS_BID        <= compress_axi_id(in_BUS_BID);
+--------------------------- B channel end --------------------------------------
+end architecture behave;
 
 
 library IEEE;
@@ -2314,32 +2672,207 @@ use IEEE.NUMERIC_STD.all;
 
 entity reconstruct_fullImage_m_axi_burst_converter is
     generic (
+        INTERLEAVE        : INTEGER := 1;
+        ID_WIDTH          : INTEGER := 1;
         DATA_WIDTH        : INTEGER := 32;
         ADDR_WIDTH        : INTEGER := 32;
-        MAX_BURST_LENGTH  : INTEGER := 16);
+        MAX_BURST_LENGTH  : INTEGER := 16;
+        NUM_PORTS         : INTEGER := 1);
     port (
         clk               : in  STD_LOGIC;
         reset             : in  STD_LOGIC;
         clk_en            : in  STD_LOGIC;
 
+        in_REQ_ID         : in  UNSIGNED(ID_WIDTH-1 downto 0);
         in_REQ_ADDR       : in  UNSIGNED(ADDR_WIDTH-1 downto 0);
         in_REQ_LEN        : in  UNSIGNED(31 downto 0);
         in_REQ_VALID      : in  STD_LOGIC;
-        out_REQ_READY     : out STD_LOGIC;
+        out_REQ_READY     : out UNSIGNED(NUM_PORTS-1 downto 0);
 
+        out_BURST_ID      : out UNSIGNED(ID_WIDTH-1 downto 0);
         out_BURST_ADDR    : out UNSIGNED(ADDR_WIDTH-1 downto 0);
         out_BURST_LEN     : out UNSIGNED(7 downto 0);
         out_BURST_VALID   : out STD_LOGIC;
         in_BURST_READY    : in  STD_LOGIC;
 
+        out_CTRL_ID       : out UNSIGNED(ID_WIDTH-1 downto 0);
         out_CTRL_INFO     : out UNSIGNED(0 downto 0);
         out_CTRL_LEN      : out UNSIGNED(7 downto 0);
         out_CTRL_VALID    : out STD_LOGIC;
-        in_CTRL_READY     : in  STD_LOGIC);
+        in_CTRL_READY     : in  UNSIGNED(NUM_PORTS-1 downto 0));
 
 end entity reconstruct_fullImage_m_axi_burst_converter;
 
 architecture behave of reconstruct_fullImage_m_axi_burst_converter is
+
+    -- component
+    component reconstruct_fullImage_m_axi_burst_interleave is
+        generic (
+            ID_WIDTH          : INTEGER := 1;
+            DATA_WIDTH        : INTEGER := 32;
+            ADDR_WIDTH        : INTEGER := 32;
+            MAX_BURST_LENGTH  : INTEGER := 16;
+            NUM_PORTS         : INTEGER := 1);
+        port (
+            clk               : in  STD_LOGIC;
+            reset             : in  STD_LOGIC;
+            clk_en            : in  STD_LOGIC;
+            in_REQ_ID         : in  UNSIGNED(ID_WIDTH-1 downto 0);
+            in_REQ_ADDR       : in  UNSIGNED(ADDR_WIDTH-1 downto 0);
+            in_REQ_LEN        : in  UNSIGNED(31 downto 0);
+            in_REQ_VALID      : in  STD_LOGIC;
+            out_REQ_READY     : out UNSIGNED(NUM_PORTS-1 downto 0); 
+            out_BURST_ID      : out UNSIGNED(ID_WIDTH-1 downto 0);
+            out_BURST_ADDR    : out UNSIGNED(ADDR_WIDTH-1 downto 0);
+            out_BURST_LEN     : out UNSIGNED(7 downto 0);
+            out_BURST_VALID   : out STD_LOGIC;
+            in_BURST_READY    : in  STD_LOGIC;
+            out_CTRL_ID       : out UNSIGNED(ID_WIDTH-1 downto 0);
+            out_CTRL_INFO     : out UNSIGNED(0 downto 0);
+            out_CTRL_LEN      : out UNSIGNED(7 downto 0);
+            out_CTRL_VALID    : out STD_LOGIC;
+            in_CTRL_READY     : in  UNSIGNED(NUM_PORTS-1 downto 0));
+    end component reconstruct_fullImage_m_axi_burst_interleave;
+
+    component reconstruct_fullImage_m_axi_burst_sequential is
+        generic (
+            ID_WIDTH          : INTEGER := 1;
+            DATA_WIDTH        : INTEGER := 32;
+            ADDR_WIDTH        : INTEGER := 32;
+            MAX_BURST_LENGTH  : INTEGER := 16;
+            NUM_PORTS         : INTEGER := 1);
+        port (
+            clk               : in  STD_LOGIC;
+            reset             : in  STD_LOGIC;
+            clk_en            : in  STD_LOGIC;
+            in_REQ_ID         : in  UNSIGNED(ID_WIDTH-1 downto 0);
+            in_REQ_ADDR       : in  UNSIGNED(ADDR_WIDTH-1 downto 0);
+            in_REQ_LEN        : in  UNSIGNED(31 downto 0);
+            in_REQ_VALID      : in  STD_LOGIC;
+            out_REQ_READY     : out UNSIGNED(NUM_PORTS-1 downto 0); 
+            out_BURST_ID      : out UNSIGNED(ID_WIDTH-1 downto 0);
+            out_BURST_ADDR    : out UNSIGNED(ADDR_WIDTH-1 downto 0);
+            out_BURST_LEN     : out UNSIGNED(7 downto 0);
+            out_BURST_VALID   : out STD_LOGIC;
+            in_BURST_READY    : in  STD_LOGIC;
+            out_CTRL_ID       : out UNSIGNED(ID_WIDTH-1 downto 0);
+            out_CTRL_INFO     : out UNSIGNED(0 downto 0);
+            out_CTRL_LEN      : out UNSIGNED(7 downto 0);
+            out_CTRL_VALID    : out STD_LOGIC;
+            in_CTRL_READY     : in  UNSIGNED(NUM_PORTS-1 downto 0));
+    end component reconstruct_fullImage_m_axi_burst_sequential;
+
+begin
+    -- Instantiation 
+    interleaved_bursts : if ((INTERLEAVE = 1) and (NUM_PORTS /= 1)) generate
+    begin
+        burst_interleave : reconstruct_fullImage_m_axi_burst_interleave
+        generic map (
+            ID_WIDTH         => ID_WIDTH,
+            DATA_WIDTH       => DATA_WIDTH,
+            ADDR_WIDTH       => ADDR_WIDTH,
+            MAX_BURST_LENGTH => MAX_BURST_LENGTH,
+            NUM_PORTS        => NUM_PORTS)
+        port map (
+            clk              => clk,
+            reset            => reset,
+            clk_en           => clk_en,
+            in_REQ_ID        => in_REQ_ID,
+            in_REQ_ADDR      => in_REQ_ADDR,
+            in_REQ_LEN       => in_REQ_LEN,
+            in_REQ_VALID     => in_REQ_VALID,
+            out_REQ_READY    => out_REQ_READY,
+            out_BURST_ID     => out_BURST_ID,
+            out_BURST_ADDR   => out_BURST_ADDR ,
+            out_BURST_LEN    => out_BURST_LEN,
+            out_BURST_VALID  => out_BURST_VALID,
+            in_BURST_READY   => in_BURST_READY,
+            out_CTRL_ID      => out_CTRL_ID,
+            out_CTRL_INFO    => out_CTRL_INFO,
+            out_CTRL_LEN     => out_CTRL_LEN,
+            out_CTRL_VALID   => out_CTRL_VALID,
+            in_CTRL_READY    => in_CTRL_READY);
+    end generate interleaved_bursts;
+
+    sequential_bursts : if ((INTERLEAVE /= 1) or (NUM_PORTS = 1)) generate
+    begin
+        burst_sequential : reconstruct_fullImage_m_axi_burst_sequential
+        generic map (
+            ID_WIDTH         => ID_WIDTH,
+            DATA_WIDTH       => DATA_WIDTH,
+            ADDR_WIDTH       => ADDR_WIDTH,
+            MAX_BURST_LENGTH => MAX_BURST_LENGTH,
+            NUM_PORTS        => NUM_PORTS)
+        port map (
+            clk              => clk,
+            reset            => reset,
+            clk_en           => clk_en,
+            in_REQ_ID        => in_REQ_ID,
+            in_REQ_ADDR      => in_REQ_ADDR,
+            in_REQ_LEN       => in_REQ_LEN,
+            in_REQ_VALID     => in_REQ_VALID,
+            out_REQ_READY    => out_REQ_READY,
+            out_BURST_ID     => out_BURST_ID,
+            out_BURST_ADDR   => out_BURST_ADDR ,
+            out_BURST_LEN    => out_BURST_LEN,
+            out_BURST_VALID  => out_BURST_VALID,
+            in_BURST_READY   => in_BURST_READY,
+            out_CTRL_ID      => out_CTRL_ID,
+            out_CTRL_INFO    => out_CTRL_INFO,
+            out_CTRL_LEN     => out_CTRL_LEN,
+            out_CTRL_VALID   => out_CTRL_VALID,
+            in_CTRL_READY    => in_CTRL_READY);
+    end generate sequential_bursts;
+end architecture behave;
+
+
+library IEEE;
+use IEEE.STD_LOGIC_1164.all;
+use IEEE.NUMERIC_STD.all;
+
+entity reconstruct_fullImage_m_axi_burst_interleave is
+    generic (
+        ID_WIDTH          : INTEGER := 1;
+        DATA_WIDTH        : INTEGER := 32;
+        ADDR_WIDTH        : INTEGER := 32;
+        MAX_BURST_LENGTH  : INTEGER := 16;
+        NUM_PORTS         : INTEGER := 1);
+    port (
+        clk               : in  STD_LOGIC;
+        reset             : in  STD_LOGIC;
+        clk_en            : in  STD_LOGIC;
+
+        in_REQ_ID         : in  UNSIGNED(ID_WIDTH-1 downto 0);
+        in_REQ_ADDR       : in  UNSIGNED(ADDR_WIDTH-1 downto 0);
+        in_REQ_LEN        : in  UNSIGNED(31 downto 0);
+        in_REQ_VALID      : in  STD_LOGIC;
+        out_REQ_READY     : out UNSIGNED(NUM_PORTS-1 downto 0);
+
+        out_BURST_ID      : out UNSIGNED(ID_WIDTH-1 downto 0);
+        out_BURST_ADDR    : out UNSIGNED(ADDR_WIDTH-1 downto 0);
+        out_BURST_LEN     : out UNSIGNED(7 downto 0);
+        out_BURST_VALID   : out STD_LOGIC;
+        in_BURST_READY    : in  STD_LOGIC;
+
+        out_CTRL_ID       : out UNSIGNED(ID_WIDTH-1 downto 0);
+        out_CTRL_INFO     : out UNSIGNED(0 downto 0);
+        out_CTRL_LEN      : out UNSIGNED(7 downto 0);
+        out_CTRL_VALID    : out STD_LOGIC;
+        in_CTRL_READY     : in  UNSIGNED(NUM_PORTS-1 downto 0));
+
+end entity reconstruct_fullImage_m_axi_burst_interleave;
+
+architecture behave of reconstruct_fullImage_m_axi_burst_interleave is
+
+    function or_reduce(a : UNSIGNED(NUM_PORTS-1 downto 0)) return STD_LOGIC is
+        variable ret : STD_LOGIC := '0';
+    begin
+        for i in a'range loop
+            ret := ret or a(i);
+        end loop;
+    
+        return ret;
+    end function or_reduce;
 
     function log2 (x : INTEGER) return INTEGER is
         variable n, m : INTEGER;
@@ -2354,7 +2887,7 @@ architecture behave of reconstruct_fullImage_m_axi_burst_converter is
     end function log2;
 
     --common
-    constant PACK_WIDTH           : INTEGER := ADDR_WIDTH + 32;
+    constant PACK_WIDTH           : INTEGER := ID_WIDTH + ADDR_WIDTH + 32;
     constant DATA_BYTES           : INTEGER := DATA_WIDTH / 8;
     constant ADDR_ALIGN           : INTEGER := log2(DATA_BYTES);
     constant BOUNDARY_BEATS       : UNSIGNED(11-ADDR_ALIGN downto 0) := (others => '1');
@@ -2363,11 +2896,568 @@ architecture behave of reconstruct_fullImage_m_axi_burst_converter is
     --local signals
     signal  req_pack_in           : UNSIGNED(PACK_WIDTH-1 downto 0);
     signal  req_pack_out          : UNSIGNED(PACK_WIDTH-1 downto 0);
-
-    signal  tmp_addr              : UNSIGNED(ADDR_WIDTH-1 downto 0);
-    signal  tmp_len               : UNSIGNED(31 downto 0);
+    signal  req_id_tmp            : UNSIGNED(ID_WIDTH-1 downto 0);
+    signal  req_addr_tmp          : UNSIGNED(ADDR_WIDTH-1 downto 0);
+    signal  req_len_tmp           : UNSIGNED(31 downto 0);
+    signal  req_ready             : UNSIGNED(NUM_PORTS-1 downto 0);
     
-    signal  req_valid             : STD_LOGIC;
+    signal  req_full_n            : STD_LOGIC;
+    signal  req_empty_n           : STD_LOGIC;
+    signal  write_req             : STD_LOGIC;
+    signal  read_req              : STD_LOGIC;
+    signal  next_req              : STD_LOGIC;
+
+    signal  start_addr            : UNSIGNED(ADDR_WIDTH-1 downto 0);
+    signal  end_addr              : UNSIGNED(ADDR_WIDTH-1 downto 0);
+    signal  sect_addr             : UNSIGNED(ADDR_WIDTH-1 downto 0);
+    signal  sect_addr_buf         : UNSIGNED(ADDR_WIDTH-1 downto 0);
+    signal  req_id                : UNSIGNED(ID_WIDTH-1 downto 0);
+    signal  req_id_buf            : UNSIGNED(ID_WIDTH-1 downto 0);
+
+    signal  beat_len              : UNSIGNED(31 downto 0);
+    signal  beat_len_buf          : UNSIGNED(31 downto 0);
+    signal  start_to_4k           : UNSIGNED(11-ADDR_ALIGN downto 0);
+    signal  sect_len              : UNSIGNED(11-ADDR_ALIGN downto 0);
+    signal  sect_len_buf          : UNSIGNED(11-ADDR_ALIGN downto 0);
+    signal  sect_cnt              : UNSIGNED(ADDR_WIDTH-13 downto 0);
+
+    signal  req_handling          : BOOLEAN;
+    signal  first_sect            : BOOLEAN;
+    signal  last_sect             : BOOLEAN;
+    signal  last_sect_buf         : BOOLEAN;
+    signal  ready_for_sect        : BOOLEAN;
+    signal  next_sect             : BOOLEAN;
+
+    signal  burst_valid           : STD_LOGIC;
+
+    signal  ost_ctrl_id           : UNSIGNED(ID_WIDTH-1 downto 0);
+    signal  ost_ctrl_info         : UNSIGNED(0 downto 0);
+    signal  ost_ctrl_len          : UNSIGNED(7 downto 0);
+    signal  ost_ctrl_valid        : STD_LOGIC;
+    signal  ost_ctrl_ready        : STD_LOGIC;
+
+    signal  rem_req_pack          : UNSIGNED(PACK_WIDTH-1 downto 0);
+    signal  rem_req_valid         : STD_LOGIC;
+    signal  rem_req_id            : UNSIGNED(ID_WIDTH-1 downto 0);
+    signal  rem_req_addr          : UNSIGNED(ADDR_WIDTH-1 downto 0);
+    signal  rem_req_len           : UNSIGNED(31 downto 0);
+
+    component reconstruct_fullImage_m_axi_fifo is
+        generic (
+            MEM_STYLE         : STRING  := "shiftreg";
+            DATA_WIDTH        : INTEGER := 8;
+            ADDR_WIDTH        : INTEGER := 4;
+            DEPTH             : INTEGER := 16);
+        port (
+            clk               : in  STD_LOGIC;
+            reset             : in  STD_LOGIC;
+            clk_en            : in  STD_LOGIC;
+            if_full_n         : out STD_LOGIC;
+            if_write          : in  STD_LOGIC;
+            if_din            : in  UNSIGNED(DATA_WIDTH-1 downto 0);
+            if_empty_n        : out STD_LOGIC;
+            if_read           : in  STD_LOGIC;
+            if_dout           : out UNSIGNED(DATA_WIDTH-1 downto 0);
+            if_num_data_valid : out UNSIGNED(ADDR_WIDTH downto 0));
+    end component reconstruct_fullImage_m_axi_fifo;
+
+    component reconstruct_fullImage_m_axi_reg_slice is
+        generic (
+            DATA_WIDTH  : INTEGER := 8);
+        port (
+            clk         : in  STD_LOGIC;
+            reset       : in  STD_LOGIC;
+            s_data      : in  UNSIGNED(DATA_WIDTH-1 downto 0);
+            s_valid     : in  STD_LOGIC;
+            s_ready     : out STD_LOGIC;
+            m_data      : out UNSIGNED(DATA_WIDTH-1 downto 0);
+            m_valid     : out STD_LOGIC;
+            m_ready     : in  STD_LOGIC);
+    end component reconstruct_fullImage_m_axi_reg_slice;
+
+begin
+    --------------------------- AR channel begin -----------------------------------
+    -- Instantiation
+    num_ports_gt2 : if (NUM_PORTS > 2) generate 
+        req_buffer : reconstruct_fullImage_m_axi_fifo
+        generic map (
+            DATA_WIDTH => PACK_WIDTH,
+            DEPTH      => NUM_PORTS,
+            ADDR_WIDTH => log2(NUM_PORTS))
+        port map (
+            clk        => clk,
+            reset      => reset,
+            clk_en     => clk_en,
+            if_full_n  => req_full_n,
+            if_write   => write_req,
+            if_din     => req_pack_in,
+            if_empty_n => req_empty_n,
+            if_read    => read_req,
+            if_dout    => req_pack_out,
+            if_num_data_valid => open);
+    end generate num_ports_gt2;
+    
+    num_ports_ngt2 : if (NUM_PORTS <= 2) generate 
+        rs_req : reconstruct_fullImage_m_axi_reg_slice
+        generic map (
+            DATA_WIDTH =>  PACK_WIDTH)
+        port map (
+            clk        =>  clk,
+            reset      =>  reset,
+            s_data     =>  req_pack_in,
+            s_valid    =>  write_req,
+            s_ready    =>  req_full_n,
+            m_data     =>  req_pack_out,
+            m_valid    =>  req_empty_n,
+            m_ready    =>  read_req);
+    end generate num_ports_ngt2;
+
+    out_REQ_READY      <= req_ready    when req_full_n = '1' and rem_req_valid = '0'   else (others=>'0');
+    req_pack_in        <= rem_req_pack when rem_req_valid = '1' else (in_REQ_ID & in_REQ_LEN & in_REQ_ADDR);
+    write_req          <= rem_req_valid or in_REQ_VALID;
+
+    process (clk)
+    begin
+        if (clk'event and clk = '1') then
+            if (reset = '1') then
+                req_ready <= (others=>'1');
+            elsif clk_en = '1' then
+                if in_REQ_VALID = '1' and req_full_n = '1' and rem_req_valid = '0' then
+                    req_ready(TO_INTEGER(in_REQ_ID)) <= '0';
+                end if;
+                if ost_ctrl_info = "1" and ost_ctrl_valid = '1' then
+                    req_ready(TO_INTEGER(ost_ctrl_id)) <= '1';
+                end if;
+            end if;
+        end if;
+    end process;    
+
+    req_addr_tmp       <= req_pack_out(ADDR_WIDTH-1  downto 0);
+    req_len_tmp        <= req_pack_out(ADDR_WIDTH+31 downto ADDR_WIDTH);
+    req_id_tmp         <= req_pack_out(PACK_WIDTH-1  downto ADDR_WIDTH+32);
+ 
+    next_req           <= read_req and req_empty_n;
+
+    process (clk)
+    begin
+        if (clk'event and clk = '1') then
+            if (reset = '1') then
+                req_id      <= (others => '0');
+                start_addr  <= (others => '0');
+                end_addr    <= (others => '0');
+                start_to_4k <= (others => '0');
+            elsif clk_en = '1' then
+                if next_req = '1' then
+                    req_id      <= req_id_tmp;
+                    start_addr  <= req_addr_tmp(ADDR_WIDTH-1 downto ADDR_ALIGN) & (ADDR_ALIGN-1 downto 0 => '0');
+                    end_addr    <= req_addr_tmp + req_len_tmp;
+                    start_to_4k <= BOUNDARY_BEATS - req_addr_tmp(11 downto ADDR_ALIGN);
+                end if;
+            end if;
+        end if;
+    end process;
+
+    process (clk)
+    begin
+        if (clk'event and clk = '1') then
+            if (reset = '1') then
+                req_handling <= false;
+            elsif clk_en = '1' then
+                if next_req = '1' then
+                    req_handling <= true;
+                elsif req_empty_n = '0' and last_sect and next_sect then
+                    req_handling <= false;
+                end if;
+            end if;
+        end if;
+    end process;
+        
+    process (clk)
+    begin
+        if (clk'event and clk = '1') then
+            if (reset = '1') then
+                sect_cnt <= (others => '0');
+                beat_len <= (others => '0');
+            elsif clk_en = '1' then
+                if next_req = '1' then
+                    sect_cnt <= req_addr_tmp(ADDR_WIDTH - 1 downto 12);
+                    beat_len <= SHIFT_RIGHT(req_len_tmp + req_addr_tmp(ADDR_ALIGN-1 downto 0), ADDR_ALIGN);
+                elsif next_sect then
+                    sect_cnt <= sect_cnt + 1;
+                    beat_len <= beat_len - sect_len - 1;
+                end if;
+            end if;
+        end if;
+    end process;
+
+    first_sect <= (sect_cnt = start_addr(ADDR_WIDTH - 1 downto 12));
+    last_sect  <= (sect_cnt = end_addr(ADDR_WIDTH -1 downto 12));
+
+    sect_addr  <= start_addr when first_sect else
+                  sect_cnt & (11 downto 0 => '0');
+    sect_len   <= beat_len(11-ADDR_ALIGN downto 0) when     first_sect and     last_sect else
+                  start_to_4k                      when     first_sect and not last_sect else
+                  end_addr(11 downto ADDR_ALIGN)   when not first_sect and     last_sect else
+                  BOUNDARY_BEATS;
+
+    process (clk)
+    begin
+        if (clk'event and clk = '1') then
+            if (reset = '1') then
+                req_id_buf    <= (others => '0');
+                sect_addr_buf <= (others => '0');
+                sect_len_buf  <= (others => '0');
+                last_sect_buf <= false;
+                beat_len_buf  <= (others => '0');
+            elsif clk_en = '1' then
+                if next_sect then
+                    req_id_buf    <= req_id;
+                    sect_addr_buf <= sect_addr;
+                    sect_len_buf  <= sect_len;
+                    last_sect_buf <= last_sect;
+                    beat_len_buf  <= beat_len;
+                end if;
+            end if;
+        end if;
+    end process; 
+
+    out_CTRL_VALID      <= ost_ctrl_valid;
+    out_CTRL_ID         <= ost_ctrl_id;
+    out_CTRL_INFO       <= ost_ctrl_info;
+    out_CTRL_LEN        <= ost_ctrl_len;
+
+    must_one_burst : if (DATA_BYTES >= 4096/MAX_BURST_LENGTH) generate
+        signal  read_sect    : BOOLEAN;
+    begin
+        out_BURST_ID    <= req_id_buf;
+        out_BURST_ADDR  <= sect_addr_buf;
+        out_BURST_LEN   <= RESIZE(sect_len_buf, 8);
+        out_BURST_VALID <= burst_valid;
+
+        ost_ctrl_id     <= req_id;
+        ost_ctrl_len    <= RESIZE(sect_len, 8);
+        ost_ctrl_info   <= "1" when last_sect else "0";
+        ost_ctrl_valid  <= '1' when next_sect else '0';
+        ost_ctrl_ready  <= in_CTRL_READY(TO_INTEGER(req_id));
+
+        next_sect       <= read_sect and ost_ctrl_ready = '1';
+        ready_for_sect  <= not (burst_valid = '1' and in_BURST_READY = '0') and req_full_n = '1' and or_reduce(in_CTRL_READY) = '1';
+        read_sect       <= req_handling and ready_for_sect;
+        read_req        <= '1' when not req_handling or ready_for_sect else '0';
+
+        process (clk)
+        begin
+            if (clk'event and clk = '1') then
+                if (reset = '1') then
+                    burst_valid <= '0';
+                elsif clk_en = '1' then
+                    if next_sect then
+                        burst_valid <= '1';
+                    elsif in_BURST_READY = '1' then
+                        burst_valid <= '0';
+                    end if;
+                end if;
+            end if;
+        end process;
+
+        -- calculate remaining request, for interleaved burst handling.
+        rem_req_pack  <= rem_req_id & (rem_req_len(31-ADDR_ALIGN downto 0) & (ADDR_ALIGN-1 downto 0 => '1')) & rem_req_addr;
+
+        process (clk)
+        begin
+            if (clk'event and clk = '1') then
+                if (reset = '1') then
+                    rem_req_id   <= (others => '0'); 
+                    rem_req_addr <= (others => '0');
+                    rem_req_len  <= (others => '0');
+                elsif clk_en = '1' then
+                    if next_sect then
+                        rem_req_id   <= req_id;
+                        rem_req_addr <= (sect_cnt+1) & (11 downto 0 => '0');
+                        rem_req_len <= beat_len - sect_len - 1;
+                    elsif read_sect then
+                        rem_req_id   <= req_id;
+                        rem_req_addr <= sect_addr;
+                        rem_req_len  <= beat_len;
+                    end if;
+                end if;
+            end if;
+        end process;
+
+        process (clk)
+        begin
+            if (clk'event and clk = '1') then
+                if (reset = '1') then
+                    rem_req_valid <= '0';
+                elsif clk_en = '1' then
+                    if next_sect and last_sect then
+                        rem_req_valid <= '0';
+                    elsif req_empty_n = '1' and read_sect then
+                        rem_req_valid <= '1';
+                    elsif req_full_n = '1' then
+                        rem_req_valid <= '0';
+                    end if;
+                end if;
+            end if;
+        end process;
+    end generate must_one_burst;
+
+    could_multi_bursts : if (DATA_BYTES < 4096/MAX_BURST_LENGTH) generate
+        signal  addr_tmp        : UNSIGNED(ADDR_WIDTH - 1 downto 0);
+        signal  addr_buf        : UNSIGNED(ADDR_WIDTH - 1 downto 0);
+        signal  len_tmp         : UNSIGNED(7 downto 0);
+        signal  len_buf         : UNSIGNED(7 downto 0);
+        signal  id_buf          : UNSIGNED(ID_WIDTH-1 downto 0); 
+        signal  rem_len_tmp     : UNSIGNED(31 downto 0);
+        signal  loop_cnt        : UNSIGNED(11 - NUM_BEAT_WIDTH - ADDR_ALIGN downto 0);
+        signal  first_loop      : BOOLEAN;
+        signal  last_loop       : BOOLEAN;
+        signal  next_loop       : BOOLEAN;
+        signal  read_loop       : BOOLEAN;
+        signal  ready_for_loop  : BOOLEAN;
+        signal  sect_handling   : BOOLEAN;
+        signal  next_req_ready  : BOOLEAN;
+
+        signal  last_loop_when_next_loop : BOOLEAN;
+        signal  last_loop_when_next_sect : BOOLEAN;
+        signal  len_tmp_when_next_loop   : UNSIGNED(7 downto 0); 
+        signal  len_tmp_when_next_sect   : UNSIGNED(7 downto 0); 
+    begin
+        out_BURST_ID    <= id_buf;
+        out_BURST_ADDR  <= addr_buf;
+        out_BURST_LEN   <= len_buf;
+        out_BURST_VALID <= burst_valid;
+
+        ost_ctrl_id     <= req_id_buf;
+        ost_ctrl_len    <= len_tmp;
+        ost_ctrl_info   <= "1" when last_sect_buf and last_loop else "0";
+        ost_ctrl_valid  <= '1' when next_loop else '0';
+        ost_ctrl_ready  <= in_CTRL_READY(TO_INTEGER(req_id_buf));
+        
+        read_req        <= '1' when not next_req_ready or ready_for_sect else '0';
+
+        next_sect       <= req_handling and ready_for_sect;
+        ready_for_sect  <= not sect_handling or (read_loop and next_req_ready) or (next_loop and last_loop);
+        
+        next_loop       <= read_loop and ost_ctrl_ready = '1';
+        read_loop       <= sect_handling and ready_for_loop;
+        ready_for_loop  <= not (burst_valid = '1' and in_BURST_READY = '0') and req_full_n = '1' and or_reduce(in_CTRL_READY) = '1'; 
+
+        process (clk)
+        begin
+            if (clk'event and clk = '1') then
+                if (reset = '1') then
+                    burst_valid <= '0';
+                elsif clk_en = '1' then
+                    if next_loop then
+                        burst_valid <= '1';
+                    elsif in_BURST_READY = '1' then
+                        burst_valid <= '0';
+                    end if;
+                end if;
+            end if;
+        end process;
+
+        process (clk)
+        begin
+            if (clk'event and clk = '1') then
+                if (reset = '1') then
+                    sect_handling <= false;
+                elsif clk_en = '1' then
+                    if req_handling and not sect_handling then
+                        sect_handling <= true;
+                    elsif not req_handling and last_loop and next_loop then
+                        sect_handling <= false;
+                    end if;
+                end if;
+            end if;
+        end process;
+
+        process (clk)
+        begin
+            if (clk'event and clk = '1') then
+                if (reset = '1') then
+                    loop_cnt   <= (others => '0');
+                    first_loop <= true;
+                    last_loop  <= true;
+                elsif clk_en = '1' then
+                    if next_sect then
+                        loop_cnt   <= (others => '0');
+                        first_loop <= true;
+                        last_loop  <= last_loop_when_next_sect;
+                    elsif next_loop then
+                        loop_cnt   <= loop_cnt + 1;
+                        first_loop <= false;
+                        last_loop  <= last_loop_when_next_loop;
+                    end if;
+                end if;
+            end if;
+        end process;
+
+        last_loop_when_next_sect <= (sect_len(11 - ADDR_ALIGN downto NUM_BEAT_WIDTH) = 0);
+        last_loop_when_next_loop <= (sect_len_buf(11 - ADDR_ALIGN downto NUM_BEAT_WIDTH) = (loop_cnt+1));
+
+        len_tmp_when_next_sect <= RESIZE(sect_len(NUM_BEAT_WIDTH-1 downto 0), 8)     when last_loop_when_next_sect else TO_UNSIGNED(2**NUM_BEAT_WIDTH-1, 8);
+        len_tmp_when_next_loop <= RESIZE(sect_len_buf(NUM_BEAT_WIDTH-1 downto 0), 8) when last_loop_when_next_loop else TO_UNSIGNED(2**NUM_BEAT_WIDTH-1, 8);
+
+        addr_tmp     <= sect_addr_buf when first_loop else (addr_buf + SHIFT_LEFT(RESIZE(len_buf, 32) + 1, ADDR_ALIGN));
+        rem_len_tmp  <= beat_len_buf  when first_loop else rem_req_len;
+        rem_req_pack <= rem_req_id & (rem_req_len(31-ADDR_ALIGN downto 0) & (ADDR_ALIGN-1 downto 0 => '1')) & rem_req_addr; 
+
+        process (clk)
+        begin
+            if (clk'event and clk = '1') then
+                if (reset = '1') then
+                    len_tmp <= TO_UNSIGNED(2**NUM_BEAT_WIDTH-1, 8);
+                elsif clk_en = '1' then
+                    if next_sect then
+                        len_tmp <= len_tmp_when_next_sect;
+                    elsif next_loop then
+                        len_tmp <= len_tmp_when_next_loop;
+                    end if;
+                end if;
+            end if;
+        end process;
+
+        process (clk)
+        begin
+            if (clk'event and clk = '1') then
+                if (reset = '1') then
+                    addr_buf <= (others => '0');
+                    len_buf  <= (others => '0');
+                    id_buf   <= (others => '0');
+                elsif clk_en = '1' then
+                    if next_loop then
+                        addr_buf <= addr_tmp;
+                        len_buf  <= len_tmp;
+                        id_buf   <= req_id_buf;
+                    end if;
+                end if;
+            end if;
+        end process;
+
+        process (clk)
+        begin
+            if (clk'event and clk = '1') then
+                if (reset = '1') then
+                    rem_req_id   <= (others => '0');
+                    rem_req_addr <= (others => '0');
+                    rem_req_len  <= (others => '0');
+                elsif clk_en = '1' then
+                    if next_loop then
+                        rem_req_id   <= req_id_buf;
+                        rem_req_addr <= addr_tmp + SHIFT_LEFT(RESIZE(len_tmp, 32) + 1, ADDR_ALIGN);
+                        rem_req_len  <= rem_len_tmp - len_tmp - 1;
+                    elsif read_loop then
+                        rem_req_id   <= req_id_buf;
+                        rem_req_addr <= addr_tmp;
+                        rem_req_len  <= rem_len_tmp;
+                    end if;
+                end if;
+            end if;
+        end process;
+
+        process (clk)
+        begin
+            if (clk'event and clk = '1') then
+                if (reset = '1') then
+                    next_req_ready   <= false;
+                elsif clk_en = '1' then
+                    if next_req = '1' then
+                        next_req_ready   <= true;
+                    elsif next_sect then
+                        next_req_ready   <= false;
+                    end if;
+                end if;
+            end if;
+        end process;
+
+        process (clk)
+        begin
+            if (clk'event and clk = '1') then
+                if (reset = '1') then
+                    rem_req_valid <= '0';
+                elsif clk_en = '1' then
+                    if next_loop and last_loop and last_sect_buf then
+                        rem_req_valid <= '0';
+                    elsif next_req_ready and read_loop then
+                        rem_req_valid <= '1';
+                    elsif req_full_n = '1' then
+                        rem_req_valid <= '0';
+                    end if;
+                end if;
+            end if;
+        end process; 
+    end generate could_multi_bursts;
+end architecture behave;
+
+
+library IEEE;
+use IEEE.STD_LOGIC_1164.all;
+use IEEE.NUMERIC_STD.all;
+
+entity reconstruct_fullImage_m_axi_burst_sequential is
+    generic (
+        ID_WIDTH          : INTEGER := 1;
+        DATA_WIDTH        : INTEGER := 32;
+        ADDR_WIDTH        : INTEGER := 32;
+        MAX_BURST_LENGTH  : INTEGER := 16;
+        NUM_PORTS         : INTEGER := 1);
+    port (
+        clk               : in  STD_LOGIC;
+        reset             : in  STD_LOGIC;
+        clk_en            : in  STD_LOGIC;
+
+        in_REQ_ID         : in  UNSIGNED(ID_WIDTH-1 downto 0);
+        in_REQ_ADDR       : in  UNSIGNED(ADDR_WIDTH-1 downto 0);
+        in_REQ_LEN        : in  UNSIGNED(31 downto 0);
+        in_REQ_VALID      : in  STD_LOGIC;
+        out_REQ_READY     : out UNSIGNED(NUM_PORTS-1 downto 0);
+
+        out_BURST_ID      : out UNSIGNED(ID_WIDTH-1 downto 0);
+        out_BURST_ADDR    : out UNSIGNED(ADDR_WIDTH-1 downto 0);
+        out_BURST_LEN     : out UNSIGNED(7 downto 0);
+        out_BURST_VALID   : out STD_LOGIC;
+        in_BURST_READY    : in  STD_LOGIC;
+
+        out_CTRL_ID       : out UNSIGNED(ID_WIDTH-1 downto 0);
+        out_CTRL_INFO     : out UNSIGNED(0 downto 0);
+        out_CTRL_LEN      : out UNSIGNED(7 downto 0);
+        out_CTRL_VALID    : out STD_LOGIC;
+        in_CTRL_READY     : in  UNSIGNED(NUM_PORTS-1 downto 0));
+
+end entity reconstruct_fullImage_m_axi_burst_sequential;
+
+architecture behave of reconstruct_fullImage_m_axi_burst_sequential is
+
+    function log2 (x : INTEGER) return INTEGER is
+        variable n, m : INTEGER;
+    begin
+        n := 0;
+        m := 1;
+        while m < x loop
+            n := n + 1;
+            m := m * 2;
+        end loop;
+        return n;
+    end function log2;
+
+    --common
+    constant PACK_WIDTH           : INTEGER := ID_WIDTH + ADDR_WIDTH + 32;
+    constant DATA_BYTES           : INTEGER := DATA_WIDTH / 8;
+    constant ADDR_ALIGN           : INTEGER := log2(DATA_BYTES);
+    constant BOUNDARY_BEATS       : UNSIGNED(11-ADDR_ALIGN downto 0) := (others => '1');
+    constant NUM_BEAT_WIDTH       : INTEGER := log2(MAX_BURST_LENGTH);
+
+    --local signals
+    signal  req_pack_in           : UNSIGNED(PACK_WIDTH-1 downto 0);
+    signal  req_pack_out          : UNSIGNED(PACK_WIDTH-1 downto 0);
+    signal  req_id_tmp            : UNSIGNED(ID_WIDTH-1 downto 0);
+    signal  req_addr_tmp          : UNSIGNED(ADDR_WIDTH-1 downto 0);
+    signal  req_len_tmp           : UNSIGNED(31 downto 0);
+    
+    signal  req_full_n            : STD_LOGIC;
+    signal  req_empty_n           : STD_LOGIC;
     signal  write_req             : STD_LOGIC;
     signal  read_req              : STD_LOGIC;
     signal  next_req              : STD_LOGIC;
@@ -2375,6 +3465,8 @@ architecture behave of reconstruct_fullImage_m_axi_burst_converter is
     signal  start_addr            : UNSIGNED(ADDR_WIDTH-1 downto 0);
     signal  sect_addr             : UNSIGNED(ADDR_WIDTH-1 downto 0);
     signal  sect_addr_buf         : UNSIGNED(ADDR_WIDTH-1 downto 0);
+    signal  req_id                : UNSIGNED(ID_WIDTH-1 downto 0);
+    signal  req_id_buf            : UNSIGNED(ID_WIDTH-1 downto 0);
 
     signal  beat_len              : UNSIGNED(11-ADDR_ALIGN downto 0);
     signal  start_to_4k           : UNSIGNED(11-ADDR_ALIGN downto 0);
@@ -2387,11 +3479,10 @@ architecture behave of reconstruct_fullImage_m_axi_burst_converter is
     signal  sect_total_tmp        : UNSIGNED(19 downto 0);
 
     signal  req_handling          : BOOLEAN;
-    signal  single_sect         : BOOLEAN;
+    signal  single_sect           : BOOLEAN;
     signal  first_sect            : BOOLEAN;
     signal  last_sect             : BOOLEAN;
     signal  last_sect_buf         : BOOLEAN;
-    signal  penult_sect           : BOOLEAN;
     signal  last_sect_tmp         : BOOLEAN;
     signal  ready_for_sect        : BOOLEAN;
     signal  next_sect             : BOOLEAN;
@@ -2417,28 +3508,33 @@ begin
     -- Instantiation
     rs_req : reconstruct_fullImage_m_axi_reg_slice
         generic map (
-            DATA_WIDTH =>  ADDR_WIDTH+32)
+            DATA_WIDTH =>  PACK_WIDTH)
         port map (
             clk        =>  clk,
             reset      =>  reset,
             s_data     =>  req_pack_in,
-            s_valid    =>  in_REQ_VALID,
-            s_ready    =>  out_REQ_READY,
+            s_valid    =>  write_req,
+            s_ready    =>  req_full_n,
             m_data     =>  req_pack_out,
-            m_valid    =>  req_valid,
+            m_valid    =>  req_empty_n,
             m_ready    =>  read_req);
 
-    req_pack_in        <= in_REQ_LEN & in_REQ_ADDR;
-    tmp_addr           <= req_pack_out(ADDR_WIDTH-1  downto 0);
-    tmp_len            <= req_pack_out(ADDR_WIDTH+31 downto ADDR_WIDTH);
+    out_REQ_READY      <= (others=>'1') when req_full_n = '1' else (others=>'0');
+    req_pack_in        <= in_REQ_ID & in_REQ_LEN & in_REQ_ADDR;
+    write_req          <= in_REQ_VALID;
 
-    read_req           <= '1' when (last_sect_tmp and next_sect) or (not req_handling) else '0';
-    next_req           <= read_req and req_valid;
+    req_addr_tmp       <= req_pack_out(ADDR_WIDTH-1  downto 0);
+    req_len_tmp        <= req_pack_out(ADDR_WIDTH+31 downto ADDR_WIDTH);
+    req_id_tmp         <= req_pack_out(PACK_WIDTH-1  downto ADDR_WIDTH+32);
+
+    read_req           <= '1' when not req_handling or (last_sect_tmp and next_sect) else '0';
+    next_req           <= read_req and req_empty_n;
 
     process (clk)
     begin
         if (clk'event and clk = '1') then
             if (reset = '1') then
+                req_id      <= (others => '0');
                 start_addr  <= (others => '0');
                 beat_len    <= (others => '0');
                 start_to_4k <= (others => '0');
@@ -2446,11 +3542,12 @@ begin
                 sect_total  <= (others => '0');
             elsif clk_en = '1' then
                 if next_req = '1' then
-                    start_addr  <= tmp_addr(ADDR_WIDTH-1 downto ADDR_ALIGN) & (ADDR_ALIGN-1 downto 0 => '0');
-                    beat_len    <= RESIZE(SHIFT_RIGHT(tmp_len(11 downto 0) + tmp_addr(ADDR_ALIGN-1 downto 0), ADDR_ALIGN), 12-ADDR_ALIGN);
-                    end_from_4k <= RESIZE(SHIFT_RIGHT(tmp_len(11 downto 0) + tmp_addr(11 downto 0)          , ADDR_ALIGN), 12-ADDR_ALIGN);
-                    start_to_4k <= BOUNDARY_BEATS - tmp_addr(11 downto ADDR_ALIGN);
-                    sect_total  <= RESIZE(SHIFT_RIGHT(tmp_len + tmp_addr(11 downto 0) , 12), 20);
+                    req_id      <= req_id_tmp;
+                    start_addr  <= req_addr_tmp(ADDR_WIDTH-1 downto ADDR_ALIGN) & (ADDR_ALIGN-1 downto 0 => '0');
+                    beat_len    <= RESIZE(SHIFT_RIGHT(req_len_tmp(11 downto 0) + req_addr_tmp(ADDR_ALIGN-1 downto 0), ADDR_ALIGN), 12-ADDR_ALIGN);
+                    end_from_4k <= RESIZE(SHIFT_RIGHT(req_len_tmp(11 downto 0) + req_addr_tmp(11 downto 0)          , ADDR_ALIGN), 12-ADDR_ALIGN);
+                    start_to_4k <= BOUNDARY_BEATS - req_addr_tmp(11 downto ADDR_ALIGN);
+                    sect_total  <= RESIZE(SHIFT_RIGHT(req_len_tmp + req_addr_tmp(11 downto 0) , 12), 20);
                 end if;
             end if;
         end if;
@@ -2464,7 +3561,7 @@ begin
             elsif clk_en = '1' then
                 if next_req = '1' then
                     req_handling <= true;
-                elsif req_valid = '0' and last_sect_tmp and next_sect then
+                elsif req_empty_n = '0' and last_sect_tmp and next_sect then
                     req_handling <= false;
                 end if;
             end if;
@@ -2480,9 +3577,9 @@ begin
 
     next_sect  <= req_handling and ready_for_sect;
 
-    sect_addr  <= start_addr   when     first_sect                 else 
+    sect_addr  <= start_addr when first_sect else
                   sect_cnt & (11 downto 0 => '0');
-    sect_len   <= beat_len     when     single_sect                else
+    sect_len   <= beat_len     when     single_sect else
                   start_to_4k  when     first_sect and not last_sect else
                   end_from_4k  when not first_sect and     last_sect else
                   BOUNDARY_BEATS;
@@ -2498,7 +3595,7 @@ begin
                 if next_req = '1' then
                     first_sect <= true;
                     last_sect <= false;
-                    sect_cnt <= tmp_addr(ADDR_WIDTH - 1 downto 12);
+                    sect_cnt <= req_addr_tmp(ADDR_WIDTH - 1 downto 12);
                 elsif next_sect then
                     first_sect <= false;
                     last_sect <= (sect_total_tmp = 1);
@@ -2512,15 +3609,17 @@ begin
     begin
         if (clk'event and clk = '1') then
             if (reset = '1') then
-                sect_addr_buf <= (others => '0');
-                sect_len_buf  <= (others => '0');
-                last_sect_buf <= false;
+                req_id_buf     <= (others=>'0');
+                sect_addr_buf  <= (others => '0');
+                sect_len_buf   <= (others => '0');
+                last_sect_buf  <= false;
                 sect_total_buf <= (others => '0');
             elsif clk_en = '1' then
                 if next_sect then
-                    sect_addr_buf <= sect_addr;
-                    sect_len_buf  <= sect_len;
-                    last_sect_buf <= last_sect_tmp;
+                    req_id_buf     <= req_id;
+                    sect_addr_buf  <= sect_addr;
+                    sect_len_buf   <= sect_len;
+                    last_sect_buf  <= last_sect_tmp;
                     sect_total_buf <= sect_total_tmp - 1;
                 end if;
             end if;
@@ -2529,15 +3628,17 @@ begin
 
     must_one_burst : if (DATA_BYTES >= 4096/MAX_BURST_LENGTH) generate
     begin
+        out_BURST_ID    <= req_id_buf;
         out_BURST_ADDR  <= sect_addr_buf;
         out_BURST_LEN   <= RESIZE(sect_len_buf, 8);
         out_BURST_VALID <= burst_valid;
 
+        out_CTRL_ID     <= req_id;
         out_CTRL_INFO   <= "1" when last_sect_tmp else "0";
         out_CTRL_LEN    <= RESIZE(sect_len, 8);
         out_CTRL_VALID  <= '1' when next_sect else '0';
 
-        ready_for_sect  <= not (burst_valid = '1' and in_BURST_READY = '0') and in_CTRL_READY = '1';
+        ready_for_sect  <= not (burst_valid = '1' and in_BURST_READY = '0') and in_CTRL_READY(TO_INTEGER(req_id)) = '1';
 
         process (clk)
         begin
@@ -2561,6 +3662,7 @@ begin
         signal  addr_step       : UNSIGNED(ADDR_ALIGN + 8 downto 0);
         signal  len_tmp         : UNSIGNED(7 downto 0);
         signal  len_buf         : UNSIGNED(7 downto 0);
+        signal  id_buf          : UNSIGNED(ID_WIDTH-1 downto 0);
         signal  loop_cnt        : UNSIGNED(11 - NUM_BEAT_WIDTH - ADDR_ALIGN downto 0);
         signal  first_loop      : BOOLEAN;
         signal  last_loop       : BOOLEAN;
@@ -2568,16 +3670,18 @@ begin
         signal  ready_for_loop  : BOOLEAN;
         signal  sect_handling   : BOOLEAN;
     begin
+        out_BURST_ID    <= id_buf;
         out_BURST_ADDR  <= addr_buf;
         out_BURST_LEN   <= len_buf;
         out_BURST_VALID <= burst_valid;
 
+        out_CTRL_ID     <= req_id_buf;
         out_CTRL_INFO   <= "1" when last_sect_buf and last_loop else "0";
         out_CTRL_LEN    <= len_tmp;
         out_CTRL_VALID  <= '1' when next_loop else '0';
 
         next_loop       <= sect_handling and ready_for_loop;
-        ready_for_loop  <= not (burst_valid = '1' and in_BURST_READY = '0') and in_CTRL_READY = '1';
+        ready_for_loop  <= not (burst_valid = '1' and in_BURST_READY = '0') and in_CTRL_READY(TO_INTEGER(req_id_buf)) = '1';
         ready_for_sect  <= not sect_handling or (last_loop and next_loop);
 
         process (clk)
@@ -2644,11 +3748,13 @@ begin
                     addr_buf  <= (others => '0');
                     addr_step <= (others => '0');
                     len_buf   <= (others => '0');
+                    id_buf    <= (others => '0');
                 elsif clk_en = '1' then
                     if next_loop then
                         addr_buf  <= addr_tmp;
                         addr_step <= (RESIZE(len_tmp, 9) + 1) & (ADDR_ALIGN-1 downto 0 => '0');
                         len_buf   <= len_tmp;
+                        id_buf    <= req_id_buf;
                     end if;
                 end if;
             end if;
@@ -2663,31 +3769,31 @@ use IEEE.NUMERIC_STD.all;
 
 entity reconstruct_fullImage_m_axi_throttle is
     generic (
-        CONSERVATIVE  : INTEGER := 0;
-        USED_FIX      : BOOLEAN := false;
-        FIX_VALUE     : INTEGER := 4;
-        ADDR_WIDTH    : INTEGER := 32;
-        DATA_WIDTH    : INTEGER := 32;
-        DEPTH         : INTEGER := 16;
-        MAXREQS       : INTEGER := 16;
-        AVERAGE_MODE  : BOOLEAN := false);
+        CONSERVATIVE    : INTEGER := 0;
+        ADDR_WIDTH      : INTEGER := 32;
+        DATA_WIDTH      : INTEGER := 32;
+        ID_WIDTH        : INTEGER := 1;
+        NUM_OUTSTANDING : INTEGER := 16);
     port (
         clk             : in  STD_LOGIC;
         reset           : in  STD_LOGIC;
-        clk_en              : in  STD_LOGIC;
+        clk_en          : in  STD_LOGIC;
+        in_TOP_AWID     : in  UNSIGNED(ID_WIDTH-1 downto 0);
         in_TOP_AWADDR   : in  UNSIGNED(ADDR_WIDTH-1 downto 0);
         in_TOP_AWLEN    : in  UNSIGNED(7 downto 0);
         in_TOP_AWVALID  : in  STD_LOGIC;
         out_TOP_AWREADY : out STD_LOGIC;
+        out_BUS_AWID    : out UNSIGNED(ID_WIDTH-1 downto 0);
         out_BUS_AWADDR  : out UNSIGNED(ADDR_WIDTH-1 downto 0);
         out_BUS_AWLEN   : out UNSIGNED(7 downto 0);
         out_BUS_AWVALID : out STD_LOGIC;
         in_BUS_AWREADY  : in  STD_LOGIC;
+        out_TOP_WID     : out UNSIGNED(ID_WIDTH-1 downto 0);
         in_TOP_WDATA    : in  UNSIGNED(DATA_WIDTH-1 downto 0);
         in_TOP_WSTRB    : in  UNSIGNED(DATA_WIDTH/8-1 downto 0);
-        in_TOP_WLAST    : in  STD_LOGIC;
         in_TOP_WVALID   : in  STD_LOGIC;
         out_TOP_WREADY  : out STD_LOGIC;
+        out_BUS_WID     : out UNSIGNED(ID_WIDTH-1 downto 0);
         out_BUS_WDATA   : out UNSIGNED(DATA_WIDTH-1 downto 0);
         out_BUS_WSTRB   : out UNSIGNED(DATA_WIDTH/8-1 downto 0);
         out_BUS_WLAST   : out STD_LOGIC;
@@ -2719,224 +3825,288 @@ entity reconstruct_fullImage_m_axi_throttle is
 end entity reconstruct_fullImage_m_axi_throttle;
 
 architecture behav of reconstruct_fullImage_m_axi_throttle is
+    -- component
+    component reconstruct_fullImage_m_axi_reg_slice is
+        generic (
+            DATA_WIDTH  : integer := 8);
+        port (
+            clk         : in  std_logic;
+            reset       : in  std_logic;
+            s_data      : in  UNSIGNED(DATA_WIDTH-1 downto 0);
+            s_valid     : in  std_logic;
+            s_ready     : out std_logic;
+            m_data      : out UNSIGNED(DATA_WIDTH-1 downto 0);
+            m_valid     : out std_logic;
+            m_ready     : in  std_logic);
+    end component reconstruct_fullImage_m_axi_reg_slice;
+
+    component reconstruct_fullImage_m_axi_fifo is
+        generic (
+            MEM_STYLE         : STRING  := "shiftreg";
+            DATA_WIDTH        : INTEGER := 8;
+            ADDR_WIDTH        : INTEGER := 4;
+            DEPTH             : INTEGER := 16);
+        port (
+            clk               : in  STD_LOGIC;
+            reset             : in  STD_LOGIC;
+            clk_en            : in  STD_LOGIC;
+            if_full_n         : out STD_LOGIC;
+            if_write          : in  STD_LOGIC;
+            if_din            : in  UNSIGNED(DATA_WIDTH-1 downto 0);
+            if_empty_n        : out STD_LOGIC;
+            if_read           : in  STD_LOGIC;
+            if_dout           : out UNSIGNED(DATA_WIDTH-1 downto 0);
+            if_num_data_valid : out UNSIGNED(ADDR_WIDTH downto 0));
+    end component reconstruct_fullImage_m_axi_fifo;
+
+    --local signal
+    -- AW channel
+    signal ost_burst_len      : UNSIGNED(7 downto 0);
+    signal ost_burst_id       : UNSIGNED(ID_WIDTH-1 downto 0);
+    signal ost_burst          : STD_LOGIC;
+
+    signal next_burst         : STD_LOGIC;
+    signal burst_len_cnt      : UNSIGNED(7 downto 0);
+
+    -- W channel
+    signal WID_Dummy          : UNSIGNED(ID_WIDTH-1 downto 0);
+    signal WDATA_Dummy        : UNSIGNED(DATA_WIDTH - 1 downto 0);
+    signal WSTRB_Dummy        : UNSIGNED(DATA_WIDTH/8 - 1 downto 0);
+    signal WLAST_Dummy        : STD_LOGIC;
+    signal WVALID_Dummy       : STD_LOGIC;
+
+    signal ready_for_beat     : STD_LOGIC;
+    signal next_beat          : STD_LOGIC;
+    signal last_beat          : STD_LOGIC;
+
+    signal throttling         : STD_LOGIC;
 begin
 
-    conservative_gen : if (CONSERVATIVE = 0) generate
-        type     switch_t   is array(boolean) of integer;
-        constant switch         : switch_t  := (true => FIX_VALUE-1, false => 0);
-        constant threshold      : INTEGER   := switch(USED_FIX);
-        signal   req_en         : STD_LOGIC;
-        signal   handshake      : STD_LOGIC;
-        signal   load_init      : UNSIGNED(7 downto 0);
-        signal   throttl_cnt    : UNSIGNED(8 downto 0);
+    aggressive_gen : if (CONSERVATIVE = 0) generate
+        signal burst_ready    : STD_LOGIC;
+        signal write_burst    : STD_LOGIC;
+        signal burst_pack     : UNSIGNED(ID_WIDTH+7 downto 0); 
+        signal ost_burst_pack : UNSIGNED(ID_WIDTH+7 downto 0);
     begin
-        -- AW Channel
-        out_BUS_AWADDR  <= in_TOP_AWADDR;
-        out_BUS_AWLEN   <= in_TOP_AWLEN;
-
-        -- W Channel
-        out_BUS_WDATA   <= in_TOP_WDATA;
-        out_BUS_WSTRB   <= in_TOP_WSTRB;
-        out_BUS_WLAST   <= in_TOP_WLAST;
-        out_BUS_WVALID  <= in_TOP_WVALID when (throttl_cnt > 0) else '0';
-        out_TOP_WREADY  <= in_BUS_WREADY when (throttl_cnt > 0) else '0';
-
-        fix_gen : if USED_FIX generate
-            load_init <= TO_UNSIGNED(FIX_VALUE-1, 8);
-            handshake <= '1';
-        end generate;
-
-        average_gen : if not USED_FIX and AVERAGE_MODE generate
-            load_init <= in_TOP_AWLEN;
-            handshake <= '1';
-        end generate;
-
-        no_fix_gen : if not USED_FIX and not AVERAGE_MODE generate
-            load_init <= in_TOP_AWLEN;
-            handshake <= in_TOP_WVALID and in_BUS_WREADY;
-        end generate;
-
-        out_BUS_AWVALID <= in_TOP_AWVALID and req_en;
-        out_TOP_AWREADY <= in_BUS_AWREADY and req_en;
-        req_en          <= '1'        when throttl_cnt = 0 else
-                            handshake when throttl_cnt = 1 else '0';
-
-        process (clk)
-        begin
-            if (clk'event and clk = '1') then
-                if reset = '1' then
-                    throttl_cnt <= (others => '0');
-                elsif clk_en = '1' then
-                    if in_TOP_AWLEN >= threshold and req_en = '1' and in_TOP_AWVALID = '1' and in_BUS_AWREADY = '1' then
-                        throttl_cnt <= RESIZE(load_init, 9) + 1;--load
-                    elsif throttl_cnt > 0 and handshake = '1' then
-                        throttl_cnt <= throttl_cnt - 1;
-                    end if;
-                end if;
-            end if;
-        end process;
-    end generate;
-
-    aggressive_gen : if (CONSERVATIVE /= 0) generate
-
-        component reconstruct_fullImage_m_axi_reg_slice is
-            generic (
-                DATA_WIDTH  : integer := 8);
-            port (
-                clk         : in  std_logic;
-                reset       : in  std_logic;
-                s_data      : in  UNSIGNED(DATA_WIDTH-1 downto 0);
-                s_valid     : in  std_logic;
-                s_ready     : out std_logic;
-                m_data      : out UNSIGNED(DATA_WIDTH-1 downto 0);
-                m_valid     : out std_logic;
-                m_ready     : in  std_logic);
-        end component reconstruct_fullImage_m_axi_reg_slice;
-
-        component reconstruct_fullImage_m_axi_fifo is
-            generic (
-                MEM_STYLE         : STRING  := "shiftreg";
-                DATA_WIDTH        : INTEGER := 8;
-                ADDR_WIDTH        : INTEGER := 4;
-                DEPTH             : INTEGER := 16);
-            port (
-                clk               : in  STD_LOGIC;
-                reset             : in  STD_LOGIC;
-                clk_en            : in  STD_LOGIC;
-                if_full_n         : out STD_LOGIC;
-                if_write          : in  STD_LOGIC;
-                if_din            : in  UNSIGNED(DATA_WIDTH-1 downto 0);
-                if_empty_n        : out STD_LOGIC;
-                if_read           : in  STD_LOGIC;
-                if_dout           : out UNSIGNED(DATA_WIDTH-1 downto 0);
-                if_num_data_valid : out UNSIGNED(ADDR_WIDTH downto 0));
-        end component reconstruct_fullImage_m_axi_fifo;
-
-        -- Instantiation for reg slice for AW channel
-        signal   rs_req_ready   : STD_LOGIC;
-        signal   rs_req_valid   : STD_LOGIC;
-        signal   rs_req_in      : UNSIGNED(ADDR_WIDTH + 7 downto 0);
-        signal   rs_req_out     : UNSIGNED(ADDR_WIDTH + 7 downto 0);
-
-        constant CNT_WIDTH      : INTEGER := (log2(gt_4(DEPTH)) + 1);
-        signal   data_in        : UNSIGNED(DATA_WIDTH + DATA_WIDTH/8 downto 0);
-        signal   data_out       : UNSIGNED(DATA_WIDTH + DATA_WIDTH/8 downto 0);
-        signal   req_in         : UNSIGNED(ADDR_WIDTH + 7 downto 0);
-        signal   req_en         : STD_LOGIC;
-        signal   data_en        : STD_LOGIC;
-        signal   fifo_valid     : STD_LOGIC;
-        signal   read_fifo      : STD_LOGIC;
-        signal   req_fifo_valid : STD_LOGIC;
-        signal   read_req       : STD_LOGIC;
-        signal   data_push      : STD_LOGIC;
-        signal   out_last_dup   : STD_LOGIC;
-        signal   data_pop       : STD_LOGIC;
-        signal   flying_req     : STD_LOGIC;
-        signal   last_cnt       : UNSIGNED(CNT_WIDTH-1 downto 0);
-
-        signal   out_data_ready_tmp : STD_LOGIC;
-    begin
-        --AW Channel
-        req_in          <= in_TOP_AWLEN & in_TOP_AWADDR;
-        out_BUS_AWADDR  <= rs_req_out(ADDR_WIDTH-1 downto 0);
-        out_BUS_AWLEN   <= rs_req_out(ADDR_WIDTH+7 downto ADDR_WIDTH);
-        rs_req_valid    <= req_fifo_valid and req_en;
-
-        req_en          <= '1' when ((flying_req = '0' and data_en = '1') or (flying_req = '1' and (out_last_dup = '1' and data_pop = '1') and (last_cnt(CNT_WIDTH-1 downto 1) /= "0"))) else '0';
-        read_req        <= rs_req_ready and req_en;
-
-        process (clk)
-        begin
-            if (clk'event and clk = '1') then
-                if reset = '1' then
-                    flying_req <= '0';
-                elsif clk_en = '1' then
-                    if rs_req_valid = '1' and rs_req_ready = '1' then
-                        flying_req <= '1';
-                    elsif out_last_dup = '1' and data_pop = '1' then
-                        flying_req <= '0';
-                    end if;
-                end if;
-            end if;
-        end process;
-
-        req_fifo : reconstruct_fullImage_m_axi_fifo
-            generic map (
-                DATA_WIDTH        => ADDR_WIDTH + 8,
-                DEPTH             => MAXREQS,
-                ADDR_WIDTH        => log2(MAXREQS))
-            port map (
-                clk               => clk,
-                reset             => reset,
-                clk_en            => clk_en,
-                if_full_n         => out_TOP_AWREADY,
-                if_write          => in_TOP_AWVALID,
-                if_din            => req_in,
-                if_empty_n        => req_fifo_valid,
-                if_read           => read_req,
-                if_dout           => rs_req_in,
-                if_num_data_valid => open);
-
-        rs_req : reconstruct_fullImage_m_axi_reg_slice
-            generic map (
-                DATA_WIDTH      =>  ADDR_WIDTH + 8)
-            port map (
-                clk             =>  clk,
-                reset           =>  reset,
-                s_data          =>  rs_req_in,
-                s_valid         =>  rs_req_valid,
-                s_ready         =>  rs_req_ready,
-                m_data          =>  rs_req_out,
-                m_valid         =>  out_BUS_AWVALID,
-                m_ready         =>  in_BUS_AWREADY);
-
-        --W Channel
-        data_in         <= in_TOP_WLAST & in_TOP_WSTRB & in_TOP_WDATA;
-        out_BUS_WDATA   <= data_out(DATA_WIDTH-1 downto 0);
-        out_BUS_WSTRB   <= data_out(DATA_WIDTH+DATA_WIDTH/8-1 downto DATA_WIDTH);
-        out_BUS_WLAST   <= data_out(DATA_WIDTH+DATA_WIDTH/8);
-        out_last_dup    <= data_out(DATA_WIDTH+DATA_WIDTH/8);
-        out_BUS_WVALID  <= fifo_valid and data_en and flying_req;
-        out_TOP_WREADY  <= out_data_ready_tmp;
-
-        data_en         <= '1' when last_cnt /= "0" else '0';
-        data_push       <= in_TOP_WVALID and out_data_ready_tmp;
-        data_pop        <= fifo_valid and read_fifo;
-        read_fifo       <= in_BUS_WREADY and data_en and flying_req;
-
-        process (clk)
-        begin
-            if (clk'event and clk = '1') then
-                if reset = '1' then
-                    last_cnt <= (others => '0');
-                elsif clk_en = '1' then
-                    if (in_TOP_WLAST and data_push) = '1' and (out_last_dup and data_pop) = '0' then
-                        last_cnt <= last_cnt + 1;
-                    elsif (in_TOP_WLAST and data_push) = '0' and (out_last_dup and data_pop) = '1' then
-                        last_cnt <= last_cnt - 1;
-                    end if;
-                end if;
-            end if;
-        end process;
-
-        data_fifo : reconstruct_fullImage_m_axi_fifo
+        
+        fifo_burst : reconstruct_fullImage_m_axi_fifo
         generic map (
-            DATA_WIDTH        => DATA_WIDTH + DATA_WIDTH/8 + 1,
-            ADDR_WIDTH        => log2(DEPTH),
-            DEPTH             => DEPTH)
+            DATA_WIDTH        => ID_WIDTH + 8,
+            DEPTH             => NUM_OUTSTANDING,
+            ADDR_WIDTH        => log2(NUM_OUTSTANDING))
         port map (
             clk               => clk,
             reset             => reset,
             clk_en            => clk_en,
-            if_full_n         => out_data_ready_tmp,
-            if_write          => in_TOP_WVALID,
-            if_din            => data_in,
-            if_empty_n        => fifo_valid,
-            if_read           => read_fifo,
-            if_dout           => data_out,
+            if_full_n         => burst_ready,
+            if_write          => write_burst,
+            if_din            => burst_pack,
+            if_empty_n        => ost_burst,
+            if_read           => next_burst,
+            if_dout           => ost_burst_pack,
             if_num_data_valid => open);
 
+        -- AW Channel
+        out_BUS_AWID    <= in_TOP_AWID;
+        out_BUS_AWADDR  <= in_TOP_AWADDR;
+        out_BUS_AWLEN   <= in_TOP_AWLEN;
+        out_BUS_AWVALID <= in_TOP_AWVALID AND burst_ready;
+        out_TOP_AWREADY <= in_BUS_AWREADY AND burst_ready;
+
+        write_burst     <= in_TOP_AWVALID AND in_BUS_AWREADY;
+        burst_pack      <= in_TOP_AWID & in_TOP_AWLEN;
+        ost_burst_id    <= ost_burst_pack(ID_WIDTH+7 downto 8);
+        ost_burst_len   <= ost_burst_pack(7 downto 0);
+        
+        process (clk)
+        begin
+            if (clk'event and clk = '1') then
+                if reset = '1' then
+                    throttling <= '0';
+                elsif clk_en = '1' then
+                    throttling <= '1';
+                end if;
+            end if;
+        end process;
     end generate;
+
+    conservative_gen : if (CONSERVATIVE /= 0) generate
+        signal burst_valid    : STD_LOGIC;
+        signal read_burst     : STD_LOGIC;
+
+        signal rs_in_ready    : STD_LOGIC;
+        signal rs_in_valid    : STD_LOGIC;
+        signal rs_out_ready   : STD_LOGIC;
+        signal rs_out_valid   : STD_LOGIC;
+
+        signal burst_pack     : UNSIGNED(ID_WIDTH + ADDR_WIDTH + 7 downto 0); 
+        signal ost_burst_pack : UNSIGNED(ID_WIDTH + ADDR_WIDTH + 7 downto 0);
+        signal rs_out_pack    : UNSIGNED(ID_WIDTH + ADDR_WIDTH + 7 downto 0);
+    begin
+
+        fifo_burst : reconstruct_fullImage_m_axi_fifo
+        generic map (
+            DATA_WIDTH        => ID_WIDTH + ADDR_WIDTH + 8,
+            DEPTH             => NUM_OUTSTANDING,
+            ADDR_WIDTH        => log2(NUM_OUTSTANDING))
+        port map (
+            clk               => clk,
+            reset             => reset,
+            clk_en            => clk_en,
+            if_full_n         => out_TOP_AWREADY,
+            if_write          => in_TOP_AWVALID,
+            if_din            => burst_pack,
+            if_empty_n        => burst_valid,
+            if_read           => read_burst,
+            if_dout           => ost_burst_pack,
+            if_num_data_valid => open);
+
+        rs_burst : reconstruct_fullImage_m_axi_reg_slice
+        generic map (
+            DATA_WIDTH      =>  ID_WIDTH + ADDR_WIDTH + 8)
+        port map (
+            clk             =>  clk,
+            reset           =>  reset,
+            s_data          =>  ost_burst_pack,
+            s_valid         =>  rs_in_valid,
+            s_ready         =>  rs_in_ready,
+            m_data          =>  rs_out_pack,
+            m_valid         =>  rs_out_valid,
+            m_ready         =>  rs_out_ready);
+
+        --AW Channel
+        burst_pack          <= in_TOP_AWID & in_TOP_AWLEN & in_TOP_AWADDR;
+        out_BUS_AWADDR      <= rs_out_pack(ADDR_WIDTH-1 downto 0);
+        out_BUS_AWLEN       <= rs_out_pack(ADDR_WIDTH+7 downto ADDR_WIDTH);
+        out_BUS_AWID        <= rs_out_pack(ID_WIDTH+ADDR_WIDTH+7 downto ADDR_WIDTH+8);
+        out_BUS_AWVALID     <= '1' when rs_out_valid = '1' AND throttling = '0' else '0';
+        rs_out_ready        <= '1' when in_BUS_AWREADY = '1' AND throttling = '0' else '0';
+
+        rs_in_valid         <= '1' when burst_valid = '1' and ost_burst = '0' else '0';
+        read_burst          <= '1' when rs_in_ready = '1' and ost_burst = '0' else '0';
+
+        process (clk)
+        begin
+            if (clk'event and clk = '1') then
+                if reset = '1' then
+                    ost_burst <= '0';
+                elsif clk_en = '1' then
+                    if (burst_valid and read_burst) = '1' and next_burst = '0' then
+                        ost_burst <= '1';
+                    elsif (burst_valid and read_burst) = '0' and next_burst = '1' then
+                        ost_burst <= '0';
+                    end if;
+                end if;
+            end if;
+        end process;
+
+        process (clk)
+        begin
+            if (clk'event and clk = '1') then
+                if reset = '1' then
+                    ost_burst_id  <= (others=>'0');
+                    ost_burst_len <= (others=>'0');
+                elsif clk_en = '1' then
+                    if (burst_valid and read_burst) = '1'then
+                        ost_burst_id  <= ost_burst_pack(ID_WIDTH+ADDR_WIDTH+7 downto ADDR_WIDTH+8);
+                        ost_burst_len <= ost_burst_pack(ADDR_WIDTH+7 downto ADDR_WIDTH);
+                    end if;
+                end if;
+            end if;
+        end process;
+
+        process (clk)
+        begin
+            if (clk'event and clk = '1') then
+                if reset = '1' then
+                    throttling <= '0';
+                elsif clk_en = '1' then
+                    if (rs_out_valid and rs_out_ready) = '1' and last_beat = '0' then
+                        throttling <= '1';
+                    elsif (rs_out_valid and rs_out_ready) = '0' and last_beat = '1' then
+                        throttling <= '0';
+                    end if;
+                end if;
+            end if;
+        end process;
+    end generate;
+
+    -- W channel 
+    out_BUS_WID    <= WID_Dummy;
+    out_BUS_WDATA  <= WDATA_Dummy;
+    out_BUS_WSTRB  <= WSTRB_Dummy;
+    out_BUS_WLAST  <= WLAST_Dummy;
+    out_BUS_WVALID <= WVALID_Dummy; 
+
+    out_TOP_WID    <= ost_burst_id;
+    out_TOP_WREADY <= ost_burst and ready_for_beat;
+
+    ready_for_beat <= '1' when WVALID_Dummy = '0' or (in_BUS_WREADY and throttling) = '1' else '0';
+    next_beat      <= ready_for_beat and ost_burst and in_TOP_WVALID;
+    next_burst     <= '1' when (burst_len_cnt = ost_burst_len) and next_beat = '1' else '0';
+    last_beat      <=  WLAST_Dummy and WVALID_Dummy and (in_BUS_WREADY and throttling);
+
+    process (clk)
+    begin
+        if (clk'event and clk = '1') then
+            if (reset = '1') then
+                WDATA_Dummy <= (others => '0');
+                WSTRB_Dummy <= (others => '0');
+                WID_Dummy   <= (others => '0');
+            elsif clk_en = '1' then
+                if next_beat = '1' then
+                    WDATA_Dummy <= in_TOP_WDATA;
+                    WSTRB_Dummy <= in_TOP_WSTRB;
+                    WID_Dummy   <= ost_burst_id;
+                end if;
+            end if;
+        end if;
+    end process;
+
+    process (clk)
+    begin
+        if (clk'event and clk = '1') then
+            if (reset = '1') then
+                WVALID_Dummy <= '0';
+            elsif clk_en = '1' then
+                if next_beat = '1' then
+                    WVALID_Dummy <= '1';
+                elsif ready_for_beat = '1' then
+                    WVALID_Dummy <= '0';
+                end if;
+            end if;
+        end if;
+    end process;
+
+    process (clk)
+    begin
+        if (clk'event and clk = '1') then
+            if (reset = '1') then
+                WLAST_Dummy <= '0';
+            elsif clk_en = '1' then
+                if next_burst = '1' then
+                    WLAST_Dummy <= '1';
+                elsif ready_for_beat = '1' then
+                    WLAST_Dummy <= '0';
+                end if;
+            end if;
+        end if;
+    end process;
+
+    process (clk)
+    begin
+        if (clk'event and clk = '1') then
+            if (reset = '1') then
+                burst_len_cnt <= (others => '0');
+            elsif clk_en = '1' then
+                if next_burst = '1' then
+                    burst_len_cnt <= (others => '0');
+                elsif next_beat = '1' then
+                    burst_len_cnt <= burst_len_cnt + 1;
+                end if;
+            end if;
+        end if;
+    end process;
 
 end architecture behav;
 
@@ -3434,4 +4604,1094 @@ begin
             end if;
         end if;
     end process;
+end architecture behav;
+-- 67d7842dbbe25473c3c32b93c0da8047785f30d78e8a024de1b57352245f9689
+
+library IEEE;
+use IEEE.STD_LOGIC_1164.all;
+use IEEE.NUMERIC_STD.all;
+
+entity reconstruct_fullImage_m_axi_load_with_cache is
+    generic (
+        C_TARGET_ADDR         : INTEGER := 16#00000000#;
+        C_M_AXI_ID_WIDTH      : INTEGER := 1;
+        C_ID_VALUE            : INTEGER := 0;
+        NUM_READ_OUTSTANDING  : INTEGER := 2;
+        MAX_READ_BURST_LENGTH : INTEGER := 16;
+        BUS_ADDR_WIDTH        : INTEGER := 32;
+        BUS_DATA_WIDTH        : INTEGER := 32;
+        USER_DW               : INTEGER := 16;
+        USER_AW               : INTEGER := 32;
+        USER_MAXREQS          : INTEGER := 16;
+        USER_RFIFONUM_WIDTH   : INTEGER := 6;
+        -- for cache
+        CACHE_IMPL            : STRING  := "auto";
+        NUM_CACHE_LINE        : INTEGER := 1;
+        CACHE_LINE_DEPTH      : INTEGER := 16);
+    port (
+        ACLK                  : in  STD_LOGIC;
+        ARESET                : in  STD_LOGIC;
+        ACLK_EN               : in  STD_LOGIC;
+
+        cache_flush           : in  STD_LOGIC;
+        cache_flush_done      : out STD_LOGIC;
+
+        out_AXI_ARID          : out UNSIGNED(C_M_AXI_ID_WIDTH-1 downto 0);
+        out_AXI_ARADDR        : out UNSIGNED(BUS_ADDR_WIDTH-1 downto 0);
+        out_AXI_ARLEN         : out UNSIGNED(31 downto 0);
+        out_AXI_ARVALID       : out STD_LOGIC;
+        in_AXI_ARREADY        : in  STD_LOGIC;
+        in_AXI_RID            : in  UNSIGNED(C_M_AXI_ID_WIDTH-1 downto 0);
+        in_AXI_RDATA          : in  UNSIGNED(BUS_DATA_WIDTH-1 downto 0);
+        in_AXI_RLAST          : in  UNSIGNED(1 downto 0);
+        in_AXI_RVALID         : in  STD_LOGIC;
+        out_AXI_RREADY        : out STD_LOGIC;
+        out_AXI_RBURST_READY  : out STD_LOGIC;
+        
+        in_HLS_ARADDR         : in  UNSIGNED(USER_AW-1 downto 0);
+        in_HLS_ARLEN          : in  UNSIGNED(31 downto 0);
+        in_HLS_ARVALID        : in  STD_LOGIC;
+        out_HLS_ARREADY       : out STD_LOGIC;
+        out_HLS_RDATA         : out UNSIGNED(USER_DW-1 downto 0);
+        out_HLS_RVALID        : out STD_LOGIC;
+        in_HLS_RREADY         : in  STD_LOGIC;
+        out_HLS_RFIFONUM      : out UNSIGNED(USER_RFIFONUM_WIDTH-1 downto 0));
+end entity reconstruct_fullImage_m_axi_load_with_cache;
+
+architecture behave of reconstruct_fullImage_m_axi_load_with_cache is
+    ------------------------Task and function--------------
+    function log2 (x : INTEGER) return INTEGER is
+        variable n, m : INTEGER;
+    begin
+        n := 0;
+        m := 1;
+        while m < x loop
+            n := n + 1;
+            m := m * 2;
+        end loop;
+        return n;
+    end function log2;
+
+    function calc_data_width (x : INTEGER) return INTEGER is
+        variable y : INTEGER;
+    begin
+        y := 8;
+        while y < x loop
+            y := y * 2;
+        end loop;
+        return y;
+    end function calc_data_width;
+
+    ------------------------Parameter----------------------
+    constant USER_DATA_WIDTH : INTEGER := calc_data_width(USER_DW);
+    constant USER_DATA_BYTES : INTEGER := (USER_DATA_WIDTH / 8);
+    constant USER_ADDR_ALIGN : INTEGER := log2(USER_DATA_WIDTH / 8);
+    constant TARGET_ADDR     : INTEGER := ((C_TARGET_ADDR / USER_DATA_BYTES) *
+                                            USER_DATA_BYTES);
+    ------------------------Local signal-------------------    
+    signal local_AXI_RVALID      : STD_LOGIC;
+     
+    signal rdata_valid           : STD_LOGIC;
+    signal ready_for_outstanding : STD_LOGIC; 
+
+    signal HLS_ARADDR_byte       : UNSIGNED((USER_AW - 1) downto 0);
+
+    component reconstruct_fullImage_m_axi_cache is
+        generic (
+            MODE                  : STRING  := "READ-ONLY";
+            CACHE_IMPL            : STRING  := "auto";
+            USER_AW               : INTEGER := 64;
+            USER_DW               : INTEGER := 32;
+            BUS_ADDR_WIDTH        : INTEGER := 64;
+            BUS_DATA_WIDTH        : INTEGER := 512;
+            NUM_CACHE_LINE        : INTEGER := 1;
+            CACHE_LINE_DEPTH      : INTEGER := 16;
+            MAX_READ_BURST_LENGTH : INTEGER := 0;
+            USER_MAXREQS          : INTEGER := 16;
+            NUM_READ_OUTSTANDING  : INTEGER := 2);
+        port (
+            ACLK                  : in  STD_LOGIC;
+            ARESET                : in  STD_LOGIC;
+            ACLK_EN               : in  STD_LOGIC;
+
+            cache_flush           : in  STD_LOGIC;
+            cache_flush_done      : out STD_LOGIC;
+
+            out_AXI_ARADDR        : out UNSIGNED(BUS_ADDR_WIDTH-1 downto 0);
+            out_AXI_ARLEN         : out UNSIGNED(31 downto 0);
+            out_AXI_ARVALID       : out STD_LOGIC;
+            in_AXI_ARREADY        : in  STD_LOGIC;
+
+            in_AXI_RDATA          : in  UNSIGNED(BUS_DATA_WIDTH-1 downto 0);
+            in_AXI_RLAST          : in  STD_LOGIC;
+            in_AXI_RVALID         : in  STD_LOGIC;
+            out_AXI_RREADY        : out STD_LOGIC;
+            
+            in_HLS_ARADDR         : in  UNSIGNED(USER_AW-1 downto 0);
+            in_HLS_ARLEN          : in  UNSIGNED(31 downto 0);
+            in_HLS_ARVALID        : in  STD_LOGIC;
+            out_HLS_ARREADY       : out STD_LOGIC;
+
+            out_HLS_RDATA         : out UNSIGNED(USER_DW-1 downto 0);
+            out_HLS_RLAST         : out STD_LOGIC;
+            out_HLS_RVALID        : out STD_LOGIC;
+            in_HLS_RREADY         : in  STD_LOGIC);
+    end component reconstruct_fullImage_m_axi_cache;
+
+begin
+    ------------------------Instantiation------------------
+    read_cache : reconstruct_fullImage_m_axi_cache
+    generic map (
+        CACHE_IMPL            => CACHE_IMPL,
+        USER_AW               => USER_AW,
+        USER_DW               => USER_DW,
+        BUS_ADDR_WIDTH        => BUS_ADDR_WIDTH,
+        BUS_DATA_WIDTH        => BUS_DATA_WIDTH,
+        NUM_CACHE_LINE        => NUM_CACHE_LINE,
+        CACHE_LINE_DEPTH      => CACHE_LINE_DEPTH,
+        MAX_READ_BURST_LENGTH => 0,
+        USER_MAXREQS          => USER_MAXREQS)
+    port map (
+        ACLK              => ACLK,
+        ARESET            => ARESET,
+        ACLK_EN           => ACLK_EN,
+
+        cache_flush       => cache_flush,
+        cache_flush_done  => cache_flush_done,
+
+        out_AXI_ARADDR    => out_AXI_ARADDR,
+        out_AXI_ARLEN     => out_AXI_ARLEN,
+        out_AXI_ARVALID   => out_AXI_ARVALID,
+        in_AXI_ARREADY    => in_AXI_ARREADY,
+
+        in_AXI_RDATA      => in_AXI_RDATA,
+        in_AXI_RLAST      => in_AXI_RLAST(0),
+        in_AXI_RVALID     => local_AXI_RVALID,
+        out_AXI_RREADY    => out_AXI_RREADY,
+        
+        in_HLS_ARADDR     => HLS_ARADDR_byte,
+        in_HLS_ARLEN      => (others => '0'),
+        in_HLS_ARVALID    => in_HLS_ARVALID,
+        out_HLS_ARREADY   => out_HLS_ARREADY,
+
+        out_HLS_RDATA     => out_HLS_RDATA,
+        out_HLS_RLAST     => open,
+        out_HLS_RVALID    => rdata_valid,
+        in_HLS_RREADY     => in_HLS_RREADY);
+
+    -- ===================================================================
+    -- Convert in_HLS_ARADDR (addressing words of USER_DW bits) to
+    -- HLS_ARADDR_byte (addressing words of 8 bits).
+    HLS_ARADDR_byte      <= (TARGET_ADDR +
+                            SHIFT_LEFT(RESIZE(in_HLS_ARADDR, BUS_ADDR_WIDTH),
+                            USER_ADDR_ALIGN));
+
+    local_AXI_RVALID     <= '1' when ((in_AXI_RVALID = '1') and (in_AXI_RID = C_ID_VALUE)) else '0';
+    out_AXI_ARID         <= to_unsigned(C_ID_VALUE, C_M_AXI_ID_WIDTH);
+    out_HLS_RFIFONUM     <= to_unsigned(1, USER_RFIFONUM_WIDTH) when rdata_valid = '1' else (others=>'0');
+    out_HLS_RVALID       <= rdata_valid;
+    out_AXI_RBURST_READY <= ready_for_outstanding;
+
+    process (ACLK)
+    begin
+        if (ACLK'event and ACLK = '1') then
+            if (ARESET = '1') then
+                ready_for_outstanding  <= '1';
+            elsif ACLK_EN = '1' then
+                if (local_AXI_RVALID and in_AXI_RLAST(1)) = '1' then
+                    ready_for_outstanding <= '1';
+                else
+                    ready_for_outstanding <= '0';
+                end if;
+            end if;
+        end if;
+    end process;
+    -- ===================================================================
+end architecture behave;
+
+library IEEE;
+use IEEE.STD_LOGIC_1164.all;
+use IEEE.NUMERIC_STD.all;
+
+entity reconstruct_fullImage_m_axi_cache_mem is
+    generic (
+        MEM_STYLE   : string  := "auto";
+        DATA_WIDTH  : integer := 32;
+        ADDR_WIDTH  : integer := 6;
+        DEPTH       : integer := 63);
+    port (
+        clk         : in  std_logic;
+        reset       : in  std_logic;
+        clk_en      : in  std_logic;
+        we          : in  std_logic;
+        waddr       : in  UNSIGNED(ADDR_WIDTH-1 downto 0);
+        din         : in  UNSIGNED(DATA_WIDTH-1 downto 0);
+        re          : in  std_logic;
+        raddr       : in  UNSIGNED(ADDR_WIDTH-1 downto 0);
+        dout        : out UNSIGNED(DATA_WIDTH-1 downto 0));
+end entity reconstruct_fullImage_m_axi_cache_mem;
+
+architecture behav of reconstruct_fullImage_m_axi_cache_mem is
+    type MEM_ARRAY is array (0 to DEPTH - 1) of UNSIGNED(DATA_WIDTH - 1 downto 0);
+    signal mem : MEM_ARRAY;
+    signal mem_reg : UNSIGNED(DATA_WIDTH - 1 downto 0);
+    -- read write collision attribute settings.
+    attribute ram_style: string;
+    attribute ram_style of mem: signal is MEM_STYLE;
+
+begin
+    dout <= mem_reg;
+
+    process (clk) begin
+        if clk'event and clk = '1' then
+            if (reset = '1') then
+                mem_reg <= (others => '0');
+            elsif clk_en = '1' and re = '1' then
+                mem_reg <= mem(to_integer(raddr));
+            end if;
+        end if;
+    end process;
+
+    process (clk) begin
+        if clk'event and clk = '1' then
+            if clk_en = '1' and we = '1' then
+                mem(to_integer(waddr)) <= din;
+            end if;
+        end if;
+    end process;
+end architecture behav;
+
+library IEEE;
+use IEEE.STD_LOGIC_1164.all;
+use IEEE.NUMERIC_STD.all;
+
+entity reconstruct_fullImage_m_axi_cache_preprocessor is
+    generic (
+        MAX_READ_BURST_LENGTH : INTEGER := 0; -- 0 -- non-burst / > 0 -- burst
+        USER_AW               : INTEGER := 32;
+        USER_DW               : INTEGER := 16;
+        USER_MAXREQS          : INTEGER := 16;
+        NUM_READ_OUTSTANDING  : INTEGER := 2);
+    port (
+        ACLK                  : in  STD_LOGIC;
+        ARESET                : in  STD_LOGIC;
+        ACLK_EN               : in  STD_LOGIC;
+
+        in_HLS_ARADDR         : in  UNSIGNED(USER_AW-1 downto 0);
+        in_HLS_ARLEN          : in  UNSIGNED(31 downto 0);
+        in_HLS_ARVALID        : in  STD_LOGIC;
+        out_HLS_ARREADY       : out STD_LOGIC;
+
+        out_CACHE_ARADDR      : out UNSIGNED(USER_AW-1 downto 0);
+        out_CACHE_ARVALID     : out STD_LOGIC;
+        in_CACHE_ARREADY      : in  STD_LOGIC;
+
+        in_HLS_RREADY         : in STD_LOGIC;
+        out_HLS_RLAST         : out STD_LOGIC;
+
+        in_CACHE_RVALID       : in  STD_LOGIC);
+end entity reconstruct_fullImage_m_axi_cache_preprocessor;
+
+architecture behave of reconstruct_fullImage_m_axi_cache_preprocessor is
+    ------------------------Task and function--------------
+    function log2 (x : INTEGER) return INTEGER is
+        variable n, m : INTEGER;
+    begin
+        n := 0;
+        m := 1;
+        while m < x loop
+            n := n + 1;
+            m := m * 2;
+        end loop;
+        return n;
+    end function log2;
+
+    function sel (a, b, cond : INTEGER) return INTEGER is
+        variable ret : INTEGER;
+    begin
+        if (cond = 0) then
+            ret := b;
+        else
+            ret := a;
+        end if;
+        return ret;
+    end function sel;
+
+    function calc_data_width (x : INTEGER) return INTEGER is
+        variable y : INTEGER;
+    begin
+        y := 8;
+        while y < x loop
+            y := y * 2;
+        end loop;
+        return y;
+    end function calc_data_width;
+
+    ------------------------Parameter----------------------
+    constant USER_DATA_BYTES : INTEGER := (calc_data_width(USER_DW) / 8);
+    constant DATA_WIDTH      : INTEGER := sel(USER_AW + 32, USER_AW,
+                                            MAX_READ_BURST_LENGTH);
+
+    ------------------------Local signal-------------------
+    signal rreq_in         : UNSIGNED(DATA_WIDTH - 1 downto 0);
+    signal rreq_out        : UNSIGNED(DATA_WIDTH - 1 downto 0);
+    signal rreq_valid      : STD_LOGIC;
+    signal rreq_ready      : STD_LOGIC;
+
+    component reconstruct_fullImage_m_axi_fifo is
+        generic (
+            MEM_STYLE             : STRING  := "shiftreg";
+            DATA_WIDTH            : INTEGER := 8;
+            ADDR_WIDTH            : INTEGER := 4;
+            DEPTH                 : INTEGER := 16);
+        port (
+            clk                   : in  STD_LOGIC;
+            reset                 : in  STD_LOGIC;
+            clk_en                : in  STD_LOGIC;
+            if_full_n             : out STD_LOGIC;
+            if_write              : in  STD_LOGIC;
+            if_din                : in  UNSIGNED(DATA_WIDTH-1 downto 0);
+            if_empty_n            : out STD_LOGIC;
+            if_read               : in  STD_LOGIC;
+            if_dout               : out UNSIGNED(DATA_WIDTH-1 downto 0);
+            if_num_data_valid     : out UNSIGNED(ADDR_WIDTH downto 0));
+    end component reconstruct_fullImage_m_axi_fifo;
+
+begin
+    ------------------------Instantiation------------------
+    fifo_rreq: reconstruct_fullImage_m_axi_fifo
+    generic map (
+        DATA_WIDTH        => DATA_WIDTH,
+        ADDR_WIDTH        => log2(USER_MAXREQS),
+        DEPTH             => USER_MAXREQS)
+    port map (
+        clk               => ACLK,
+        reset             => ARESET,
+        clk_en            => ACLK_EN,
+        if_full_n         => out_HLS_ARREADY,
+        if_write          => in_HLS_ARVALID,
+        if_din            => rreq_in,
+        if_empty_n        => rreq_valid,
+        if_read           => rreq_ready,
+        if_dout           => rreq_out,
+        if_num_data_valid => open);
+
+    burst_gen: if (MAX_READ_BURST_LENGTH > 0) generate
+        signal next_rreq      : STD_LOGIC;
+        signal rreq_addr      : UNSIGNED(USER_AW - 1 downto 0);
+        signal rreq_len       : UNSIGNED(31 downto 0);
+        signal rreq_len_words : UNSIGNED(31 downto 0);
+
+        signal tmp_addr       : UNSIGNED(USER_AW - 1 downto 0);
+        signal tmp_cnt        : UNSIGNED(31 downto 0);
+        signal tmp_valid      : STD_LOGIC;
+        signal tmp_ready      : STD_LOGIC;
+        signal last_addr      : STD_LOGIC;
+        signal next_addr      : STD_LOGIC;
+
+        signal requesting     : STD_LOGIC;
+        signal responding     : STD_LOGIC;
+        signal req_rlast      : UNSIGNED(0 downto 0);
+        signal resp_rlast     : UNSIGNED(0 downto 0);
+    begin
+        fifo_rlast: reconstruct_fullImage_m_axi_fifo
+        generic map (
+            DATA_WIDTH        => 1,
+            ADDR_WIDTH        => log2(USER_MAXREQS),
+            DEPTH             => USER_MAXREQS)
+        port map (
+            clk               => ACLK,
+            reset             => ARESET,
+            clk_en            => ACLK_EN,
+            if_full_n         => open,
+            if_write          => requesting,
+            if_din            => req_rlast,
+            if_empty_n        => open,
+            if_read           => responding,
+            if_dout           => resp_rlast,
+            if_num_data_valid => open);
+
+        requesting        <= '1' when
+                             (tmp_valid = '1') and (in_CACHE_ARREADY = '1')
+                              else '0';
+        responding        <= '1' when
+                             (in_CACHE_RVALID = '1') and (in_HLS_RREADY = '1')
+                              else '0';
+        req_rlast(0)      <= last_addr;
+        out_HLS_RLAST     <= resp_rlast(0);
+
+        rreq_in           <= in_HLS_ARLEN & in_HLS_ARADDR;
+        rreq_addr         <= rreq_out(USER_AW - 1  downto 0);
+        rreq_len          <= rreq_out(USER_AW + 31 downto USER_AW);
+
+        out_CACHE_ARADDR  <= tmp_addr;
+        out_CACHE_ARVALID <= tmp_valid;
+        tmp_ready         <= in_CACHE_ARREADY;
+
+        next_addr         <= tmp_ready and tmp_valid;
+        last_addr         <= '1' when (tmp_cnt = 1) and next_addr = '1' else '0';
+        rreq_ready        <= (not tmp_valid) or last_addr;
+        next_rreq         <= rreq_valid and rreq_ready; 
+        -- Convert rreq_len (expressing the burst length in bytes) to
+        -- rreq_len_words (expressing the burst lenght in words of
+        -- USER_DATA_BYTES bytes).
+        -- This is useful because the tmp_cnt counts the number of
+        -- transactions of USER_DATA_BYTES bytes.
+        rreq_len_words    <= ((rreq_len + 1) / USER_DATA_BYTES);
+        
+        process (ACLK)
+        begin
+            if (ACLK'event and ACLK = '1') then
+                if (ARESET = '1') then
+                    tmp_addr <= (others => '0');
+                    tmp_cnt  <= (others => '0');
+                elsif ACLK_EN = '1' then
+                    if (next_rreq = '1') then
+                        tmp_addr <= rreq_addr;
+                        if (rreq_len_words > 0) then
+                            tmp_cnt <= rreq_len_words;
+                        else
+                            tmp_cnt <= TO_UNSIGNED(1, tmp_cnt'length);
+                        end if;
+                    elsif (next_addr = '1') then
+                        tmp_addr <= (tmp_addr + USER_DATA_BYTES);
+                        tmp_cnt  <= tmp_cnt  - 1;
+                    end if;
+                end if;
+            end if;
+        end process;
+    
+        process (ACLK)
+        begin
+            if (ACLK'event and ACLK = '1') then
+                if (ARESET = '1') then
+                    tmp_valid  <= '0';
+                elsif ACLK_EN = '1' then
+                    if (next_rreq = '1') then
+                        tmp_valid <= '1';
+                    elsif (last_addr = '1') then
+                        tmp_valid <= '0';
+                    end if;
+                end if;
+            end if;
+        end process;
+
+    end generate;
+
+    non_burst_gen: if (MAX_READ_BURST_LENGTH = 0) generate
+    begin
+        rreq_in           <= in_HLS_ARADDR;
+        out_CACHE_ARADDR  <= rreq_out;
+        out_CACHE_ARVALID <= rreq_valid;
+        rreq_ready        <= in_CACHE_ARREADY;
+
+        out_HLS_RLAST     <= '0';
+    end generate;
+
+end architecture behave;
+
+library IEEE;
+use IEEE.STD_LOGIC_1164.all;
+use IEEE.NUMERIC_STD.all;
+
+entity reconstruct_fullImage_m_axi_cache_unit is
+    generic (
+        MODE                  : STRING  := "READ-ONLY";
+        CACHE_IMPL            : STRING  := "auto";
+        USER_AW               : INTEGER := 64;
+        USER_DW               : INTEGER := 32;
+        BUS_ADDR_WIDTH        : INTEGER := 64;
+        BUS_DATA_WIDTH        : INTEGER := 512;
+        NUM_CACHE_LINE        : INTEGER := 1;
+        CACHE_LINE_DEPTH      : INTEGER := 16);
+    port (
+        ACLK                  : in  STD_LOGIC;
+        ARESET                : in  STD_LOGIC;
+        ACLK_EN               : in  STD_LOGIC;
+
+        cache_flush           : in  STD_LOGIC;
+        cache_flush_done      : out STD_LOGIC;
+
+        out_AXI_ARADDR        : out UNSIGNED(BUS_ADDR_WIDTH-1 downto 0);
+        out_AXI_ARLEN         : out UNSIGNED(31 downto 0);
+        out_AXI_ARVALID       : out STD_LOGIC;
+        in_AXI_ARREADY        : in  STD_LOGIC;
+
+        in_AXI_RDATA          : in  UNSIGNED(BUS_DATA_WIDTH-1 downto 0);
+        in_AXI_RLAST          : in  STD_LOGIC;
+        in_AXI_RVALID         : in  STD_LOGIC;
+        out_AXI_RREADY        : out STD_LOGIC;
+        
+        in_HLS_ARADDR         : in  UNSIGNED(USER_AW-1 downto 0);
+        in_HLS_ARVALID        : in  STD_LOGIC;
+        out_HLS_ARREADY       : out STD_LOGIC;
+
+        out_HLS_RDATA         : out UNSIGNED(USER_DW-1 downto 0);
+        out_HLS_RVALID        : out STD_LOGIC;
+        in_HLS_RREADY         : in  STD_LOGIC);
+end entity reconstruct_fullImage_m_axi_cache_unit;
+
+architecture behave of reconstruct_fullImage_m_axi_cache_unit is
+    ------------------------Task and function--------------
+    function max (x : INTEGER;
+                  y : INTEGER) return INTEGER is
+        variable r : INTEGER;
+    begin
+        r := y;
+        if (x > y) then
+            r := x;
+        end if;
+        return r;
+    end function max;
+
+    function calc_data_width (x : INTEGER) return INTEGER is
+        variable y : INTEGER;
+    begin
+        y := 8;
+        while y < x loop
+            y := y * 2;
+        end loop;
+        return y;
+    end function calc_data_width;
+
+    function log2 (x : INTEGER) return INTEGER is
+        variable n, m : INTEGER;
+    begin
+        n := 0;
+        m := 1;
+        while m < x loop
+            n := n + 1;
+            m := m * 2;
+        end loop;
+        return n;
+    end function log2;
+    ------------------------Parameter----------------------
+    constant USER_DATA_WIDTH   : INTEGER := calc_data_width(USER_DW);
+    constant USER_DATA_BYTES   : INTEGER := USER_DATA_WIDTH/8;
+    constant USER_ADDR_ALIGN   : INTEGER := log2(USER_DATA_BYTES);
+    -- for cache 
+    constant CACHE_BURST_LEN   : INTEGER := max(CACHE_LINE_DEPTH * USER_DATA_WIDTH / BUS_DATA_WIDTH, 1);
+    constant BUS_ADDR_ALIGN    : INTEGER := log2(BUS_DATA_WIDTH/8);
+    constant CACHE_ADDR_ALIGN  : INTEGER := max(log2(CACHE_BURST_LEN), 1);
+    constant CACHE_LINE_ALIGN  : INTEGER := BUS_ADDR_ALIGN + log2(CACHE_BURST_LEN);
+    constant CACHE_INDEX_WIDTH : INTEGER := max(log2(NUM_CACHE_LINE), 1);
+    constant CACHE_TAG_WIDTH   : INTEGER := BUS_ADDR_WIDTH - log2(NUM_CACHE_LINE) - CACHE_LINE_ALIGN;
+    constant CACHE_DATA_ALIGN  : INTEGER := max(1, BUS_ADDR_ALIGN - USER_ADDR_ALIGN);
+    constant CACHE_ADDR_WIDTH  : INTEGER := CACHE_INDEX_WIDTH + log2(CACHE_BURST_LEN);
+
+    ------------------------Local signal-------------------
+    type DATA_ARRAYS_1D is array (0 to CACHE_BURST_LEN - 1) of UNSIGNED(BUS_DATA_WIDTH - 1 downto 0);
+    type DATA_ARRAYS_2D is array (0 to NUM_CACHE_LINE - 1)  of DATA_ARRAYS_1D;
+    type TAG_ARRAYS     is array (0 to NUM_CACHE_LINE - 1)  of UNSIGNED(CACHE_TAG_WIDTH - 1 downto 0);
+
+    signal data_array      : DATA_ARRAYS_2D;
+    signal tag_array       : TAG_ARRAYS;
+    signal valid_array     : UNSIGNED(NUM_CACHE_LINE - 1 downto 0);
+
+    signal next_rreq       : STD_LOGIC;
+    signal ready_for_rreq  : STD_LOGIC; 
+
+    signal tmp_addr        : UNSIGNED(BUS_ADDR_WIDTH - 1 downto 0);
+    signal tmp_valid       : STD_LOGIC;
+    signal tmp_align       : UNSIGNED(CACHE_DATA_ALIGN - 1 downto 0);
+    signal tmp_offset      : UNSIGNED(CACHE_ADDR_ALIGN - 1 downto 0);
+    signal tmp_index       : UNSIGNED(CACHE_INDEX_WIDTH - 1 downto 0);
+    signal tmp_raddr       : UNSIGNED(CACHE_ADDR_WIDTH - 1 downto 0);
+    signal tmp_tag         : UNSIGNED(CACHE_TAG_WIDTH - 1 downto 0);
+    signal tmp_data        : UNSIGNED(BUS_DATA_WIDTH - 1 downto 0);
+
+    signal cache_hit       : STD_LOGIC;
+    signal cache_in_update : STD_LOGIC;
+    signal update_cache    : STD_LOGIC;
+    signal update_done     : STD_LOGIC;
+    signal ready_for_update: STD_LOGIC;
+    signal update_we       : STD_LOGIC;
+    signal update_offset   : UNSIGNED(CACHE_ADDR_ALIGN - 1 downto 0);
+    signal update_status   : UNSIGNED(CACHE_BURST_LEN - 1 downto 0);
+    signal update_index    : UNSIGNED(CACHE_INDEX_WIDTH - 1 downto 0);
+    signal update_waddr    : UNSIGNED(CACHE_ADDR_WIDTH - 1 downto 0);
+
+    signal cache_in_flush  : STD_LOGIC;
+    signal flush_done      : STD_LOGIC;
+
+    signal data_index      : UNSIGNED(CACHE_INDEX_WIDTH - 1 downto 0);
+    signal data_align      : UNSIGNED(CACHE_DATA_ALIGN - 1 downto 0);
+    signal data_buf        : UNSIGNED(USER_DATA_WIDTH - 1 downto 0);
+    signal data_valid      : STD_LOGIC;
+    
+    signal read_data       : STD_LOGIC;
+    signal next_data       : STD_LOGIC;
+    signal ready_for_read  : STD_LOGIC;
+    signal ready_for_data  : STD_LOGIC;
+ 
+    component reconstruct_fullImage_m_axi_cache_mem is
+        generic (
+            MEM_STYLE   : string  := "auto";
+            DATA_WIDTH  : integer := 32;
+            ADDR_WIDTH  : integer := 6;
+            DEPTH       : integer := 63);
+        port (
+            clk         : in  std_logic;
+            reset       : in  std_logic;
+            clk_en      : in  std_logic;
+            we          : in  std_logic;
+            waddr       : in  UNSIGNED(ADDR_WIDTH-1 downto 0);
+            din         : in  UNSIGNED(DATA_WIDTH-1 downto 0);
+            re          : in  std_logic;
+            raddr       : in  UNSIGNED(ADDR_WIDTH-1 downto 0);
+            dout        : out UNSIGNED(DATA_WIDTH-1 downto 0));
+    end component reconstruct_fullImage_m_axi_cache_mem;
+
+begin
+
+    out_HLS_ARREADY   <= ready_for_rreq; 
+    next_rreq         <= in_HLS_ARVALID and ready_for_rreq;
+    ready_for_rreq    <= ((not tmp_valid) or (cache_hit and ready_for_read) ) and not cache_in_flush;
+
+    process (ACLK)
+    begin
+        if (ACLK'event and ACLK = '1') then
+            if (ARESET = '1') then
+                tmp_addr <= (others => '0');
+            elsif ACLK_EN = '1' then
+                if (next_rreq = '1') then
+                    tmp_addr <= in_HLS_ARADDR;
+                end if;
+            end if;
+        end if;
+    end process;
+
+    process (ACLK)
+    begin
+        if (ACLK'event and ACLK = '1') then
+            if (ARESET = '1') then
+                tmp_valid  <= '0';
+            elsif ACLK_EN = '1' then
+                if (next_rreq= '1') then
+                    tmp_valid <= '1';
+                elsif (cache_hit and ready_for_read) = '1' then
+                    tmp_valid <= '0';
+                end if;
+            end if;
+        end if;
+    end process;
+
+    tmp_align       <= "0" when (BUS_ADDR_ALIGN <= USER_ADDR_ALIGN) else
+                       tmp_addr(BUS_ADDR_ALIGN - 1   downto USER_ADDR_ALIGN);
+    tmp_index       <= "0" when (NUM_CACHE_LINE = 1) else
+                       tmp_addr(CACHE_LINE_ALIGN + log2(NUM_CACHE_LINE) - 1 downto CACHE_LINE_ALIGN);
+    tmp_tag         <= tmp_addr(BUS_ADDR_WIDTH - 1                          downto CACHE_LINE_ALIGN + log2(NUM_CACHE_LINE));
+    cache_hit       <= '1' when (tag_array(to_integer(tmp_index)) = tmp_tag) and (valid_array(to_integer(tmp_index)) = '1' or (tmp_index = update_index and update_status(to_integer(tmp_offset)) = '1')) else '0';
+
+    -- read output data from cache when cache hit.
+    out_HLS_RDATA   <= data_buf(USER_DW-1 downto 0);
+    out_HLS_RVALID  <= data_valid;
+
+    read_data       <= tmp_valid and cache_hit and ready_for_read;
+    ready_for_read  <= (not next_data) or ready_for_data;
+    ready_for_data  <= (not data_valid) or in_HLS_RREADY;
+
+    process (ACLK)
+    begin
+        if (ACLK'event and ACLK = '1') then
+            if (ARESET = '1') then
+                next_data <= '0';
+            elsif ACLK_EN = '1' then
+                if (read_data = '1') then
+                    next_data <= '1';
+                elsif (ready_for_data = '1') then
+                    next_data <= '0';
+                end if;
+            end if;
+        end if;
+    end process;
+
+    process (ACLK)
+    begin
+        if (ACLK'event and ACLK = '1') then
+            if (ARESET = '1') then
+                data_index <= (others => '0');
+                data_align <= (others => '0');
+            elsif ACLK_EN = '1' then
+                if (read_data = '1') then
+                    data_index <= tmp_index;
+                    data_align <= tmp_align;
+                end if;
+            end if;
+        end if;
+    end process;
+
+    process (ACLK)
+    begin
+        if (ACLK'event and ACLK = '1') then
+            if (ARESET = '1') then
+                data_buf <= (others=>'0');
+            elsif ACLK_EN = '1' then
+                if (next_data and ready_for_data) = '1' then
+                    data_buf <= tmp_data((to_integer(data_align)+1)*USER_DATA_WIDTH-1 downto to_integer(data_align)*USER_DATA_WIDTH);
+                end if;
+            end if;
+        end if;
+    end process;
+
+    process (ACLK)
+    begin
+        if (ACLK'event and ACLK = '1') then
+            if (ARESET = '1') then
+                data_valid <= '0';
+            elsif ACLK_EN = '1' then
+                if (next_data and ready_for_data) = '1' then
+                    data_valid <= '1';
+                elsif (in_HLS_RREADY = '1') then
+                    data_valid <= '0';
+                end if;
+            end if;
+        end if;
+    end process;
+
+    -- flush cache.
+    cache_flush_done <= flush_done;
+    
+    process (ACLK)
+    begin
+        if (ACLK'event and ACLK = '1') then
+            if (ARESET = '1') then
+                cache_in_flush <= '0';
+            elsif ACLK_EN = '1' then
+                if flush_done = '1' then
+                    cache_in_flush <= '0';
+                elsif cache_flush = '1' then
+                    cache_in_flush <= '1';
+                end if;
+            end if;
+        end if;
+    end process;
+
+    process (ACLK)
+    begin
+        if (ACLK'event and ACLK = '1') then
+            if (ARESET = '1') then
+                flush_done <= '0';
+            elsif ACLK_EN = '1' then
+                if (cache_in_flush and not cache_in_update) = '1' then
+                    flush_done <= '1';
+                else
+                    flush_done <= '0';
+                end if;
+            end if;
+        end if;
+    end process;
+
+    -- update cache when cache is not hit.
+    out_AXI_ARLEN   <= TO_UNSIGNED(2**CACHE_LINE_ALIGN - 1, 32);
+    out_AXI_ARADDR  <= tmp_addr(BUS_ADDR_WIDTH-1 downto CACHE_LINE_ALIGN) & (CACHE_LINE_ALIGN - 1 downto 0 => '0');
+    out_AXI_ARVALID <= tmp_valid and not (cache_hit or cache_in_update);
+    
+    update_cache    <= tmp_valid and in_AXI_ARREADY and not (cache_hit or cache_in_update);
+    update_done     <= in_AXI_RLAST and in_AXI_RVALID and cache_in_update;
+    out_AXI_RREADY  <= cache_in_update;
+
+    process (ACLK)
+    begin
+        if (ACLK'event and ACLK = '1') then
+            if (ARESET = '1') then
+                cache_in_update <= '0';
+            elsif ACLK_EN = '1' then
+                if update_cache = '1' then
+                    cache_in_update <= '1';
+                elsif update_done = '1' then
+                    cache_in_update <= '0';
+                end if;
+            end if;
+        end if;
+    end process;
+
+    process (ACLK)
+    begin
+        if (ACLK'event and ACLK = '1') then
+            if (ARESET = '1') then
+                update_index <= (others=>'0');
+            elsif ACLK_EN = '1' then
+                if update_cache = '1' then
+                    update_index <= tmp_index;
+                end if;
+            end if;
+        end if;
+    end process;
+
+    process (ACLK)
+    begin
+        if (ACLK'event and ACLK = '1') then
+            if (ARESET = '1') then
+                update_status <= (others=>'0');
+            elsif ACLK_EN = '1' then
+                if (update_cache or update_done) = '1' then
+                    update_status <= (others=>'0');
+                elsif (cache_in_update and in_AXI_RVALID) = '1' then
+                    update_status(to_integer(update_offset)) <= '1';
+                end if;
+            end if;
+        end if;
+    end process;
+
+    many_bursts : if (CACHE_BURST_LEN > 1) generate
+    begin
+        tmp_raddr    <= (tmp_index & tmp_offset);
+        update_waddr <= (update_index & update_offset);
+        tmp_offset   <= tmp_addr(CACHE_LINE_ALIGN - 1 downto BUS_ADDR_ALIGN);
+        process (ACLK)
+        begin
+            if (ACLK'event and ACLK = '1') then
+                if (ARESET = '1') then
+                    update_offset <= (others=>'0');
+                elsif ACLK_EN = '1' then
+                    if update_cache = '1' then
+                        update_offset <= (others=>'0');
+                    elsif (cache_in_update and in_AXI_RVALID) = '1' then
+                        update_offset <= update_offset + 1;
+                    end if;
+                end if;
+            end if;
+        end process;
+    end generate many_bursts;
+    one_burst : if (CACHE_BURST_LEN = 1) generate
+    begin
+        tmp_raddr     <= tmp_index;
+        update_waddr  <= update_index;
+        tmp_offset    <= (others => '0');
+        update_offset <= (others => '0');
+    end generate one_burst;
+
+    -- data array
+    cache_mem: reconstruct_fullImage_m_axi_cache_mem
+    generic map (
+        MEM_STYLE   => CACHE_IMPL,
+        DATA_WIDTH  => BUS_DATA_WIDTH,
+        ADDR_WIDTH  => (CACHE_ADDR_WIDTH),
+        DEPTH       => (CACHE_BURST_LEN * NUM_CACHE_LINE))
+    port map (
+        clk         => ACLK,
+        reset       => ARESET,
+        clk_en      => ACLK_EN,
+        we          => update_we,
+        waddr       => update_waddr,
+        din         => in_AXI_RDATA,
+        re          => read_data,
+        raddr       => tmp_raddr,
+        dout        => tmp_data);
+
+    update_we <= (cache_in_update and in_AXI_RVALID);
+
+    -- tag array
+    process (ACLK)
+    begin
+        if (ACLK'event and ACLK = '1') then
+            if (ARESET = '1') then
+                tag_array <= (others=>(others=>'0'));
+            elsif (ACLK_EN = '1') then
+                if (update_cache = '1') then
+                    tag_array(to_integer(tmp_index)) <= tmp_tag;
+                end if;
+            end if;
+        end if;
+    end process;
+
+    -- valid array
+    process (ACLK)
+    begin
+        if (ACLK'event and ACLK = '1') then
+            if (ARESET = '1') then
+                valid_array <= (others=>'0');
+            elsif (ACLK_EN = '1') then
+                if (cache_in_flush = '1') then
+                    valid_array <= (others=>'0'); 
+                elsif (update_cache = '1') then
+                    valid_array(to_integer(tmp_index)) <= '0';
+                elsif (update_done = '1') then
+                    valid_array(to_integer(update_index)) <= '1';
+                end if;
+            end if;
+        end if;
+    end process;
+
+end architecture behave;
+
+library IEEE;
+use IEEE.STD_LOGIC_1164.all;
+use IEEE.NUMERIC_STD.all;
+
+entity reconstruct_fullImage_m_axi_cache is
+    generic (
+        MODE                  : STRING  := "READ-ONLY";
+        CACHE_IMPL            : STRING  := "auto";
+        USER_AW               : INTEGER := 64;
+        USER_DW               : INTEGER := 32;
+        BUS_ADDR_WIDTH        : INTEGER := 64;
+        BUS_DATA_WIDTH        : INTEGER := 512;
+        NUM_CACHE_LINE        : INTEGER := 1;
+        CACHE_LINE_DEPTH      : INTEGER := 16;
+        MAX_READ_BURST_LENGTH : INTEGER := 0;
+        USER_MAXREQS          : INTEGER := 16;
+        NUM_READ_OUTSTANDING  : INTEGER := 2);
+    port (
+        ACLK                  : in  STD_LOGIC;
+        ARESET                : in  STD_LOGIC;
+        ACLK_EN               : in  STD_LOGIC;
+
+        cache_flush           : in  STD_LOGIC;
+        cache_flush_done      : out STD_LOGIC;
+
+        out_AXI_ARADDR        : out UNSIGNED(BUS_ADDR_WIDTH-1 downto 0);
+        out_AXI_ARLEN         : out UNSIGNED(31 downto 0);
+        out_AXI_ARVALID       : out STD_LOGIC;
+        in_AXI_ARREADY        : in  STD_LOGIC;
+
+        in_AXI_RDATA          : in  UNSIGNED(BUS_DATA_WIDTH-1 downto 0);
+        in_AXI_RLAST          : in  STD_LOGIC;
+        in_AXI_RVALID         : in  STD_LOGIC;
+        out_AXI_RREADY        : out STD_LOGIC;
+        
+        in_HLS_ARADDR         : in  UNSIGNED(USER_AW-1 downto 0);
+        in_HLS_ARLEN          : in  UNSIGNED(31 downto 0);
+        in_HLS_ARVALID        : in  STD_LOGIC;
+        out_HLS_ARREADY       : out STD_LOGIC;
+
+        out_HLS_RDATA         : out UNSIGNED(USER_DW-1 downto 0);
+        out_HLS_RLAST         : out STD_LOGIC;
+        out_HLS_RVALID        : out STD_LOGIC;
+        in_HLS_RREADY         : in  STD_LOGIC);
+end entity reconstruct_fullImage_m_axi_cache;
+
+architecture behav of reconstruct_fullImage_m_axi_cache is
+    ------------------------Parameter----------------------
+    ------------------------Local signal-------------------    
+    signal rreq_araddr            : UNSIGNED(USER_AW-1 downto 0);
+    signal rreq_ready             : STD_LOGIC;
+    signal rreq_valid             : STD_LOGIC;
+
+    signal rresp_valid            : STD_LOGIC;
+     
+    component reconstruct_fullImage_m_axi_cache_preprocessor is
+        generic (
+            MAX_READ_BURST_LENGTH : INTEGER := 0; -- 0 -- non-burst / > 0 -- burst
+            USER_AW               : INTEGER := 32;
+            USER_DW               : INTEGER := 16;
+            USER_MAXREQS          : INTEGER := 16;
+            NUM_READ_OUTSTANDING  : INTEGER := 2);
+        port (
+            ACLK                  : in  STD_LOGIC;
+            ARESET                : in  STD_LOGIC;
+            ACLK_EN               : in  STD_LOGIC;
+
+            in_HLS_ARADDR         : in  UNSIGNED(USER_AW-1 downto 0);
+            in_HLS_ARLEN          : in  UNSIGNED(31 downto 0);
+            in_HLS_ARVALID        : in  STD_LOGIC;
+            out_HLS_ARREADY       : out STD_LOGIC;
+
+            out_CACHE_ARADDR      : out UNSIGNED(USER_AW-1 downto 0);
+            out_CACHE_ARVALID     : out STD_LOGIC;
+            in_CACHE_ARREADY      : in  STD_LOGIC;
+
+            in_HLS_RREADY         : in STD_LOGIC;
+            out_HLS_RLAST         : out STD_LOGIC;
+
+            in_CACHE_RVALID       : in  STD_LOGIC);
+    end component reconstruct_fullImage_m_axi_cache_preprocessor;
+
+    component reconstruct_fullImage_m_axi_cache_unit is
+    generic (
+        MODE                  : STRING  := "READ-ONLY";
+        CACHE_IMPL            : STRING  := "auto";
+        USER_AW               : INTEGER := 64;
+        USER_DW               : INTEGER := 32;
+        BUS_ADDR_WIDTH        : INTEGER := 64;
+        BUS_DATA_WIDTH        : INTEGER := 512;
+        NUM_CACHE_LINE        : INTEGER := 1;
+        CACHE_LINE_DEPTH      : INTEGER := 16);
+    port (
+        ACLK                  : in  STD_LOGIC;
+        ARESET                : in  STD_LOGIC;
+        ACLK_EN               : in  STD_LOGIC;
+
+        cache_flush           : in  STD_LOGIC;
+        cache_flush_done      : out STD_LOGIC;
+
+        out_AXI_ARADDR        : out UNSIGNED(BUS_ADDR_WIDTH-1 downto 0);
+        out_AXI_ARLEN         : out UNSIGNED(31 downto 0);
+        out_AXI_ARVALID       : out STD_LOGIC;
+        in_AXI_ARREADY        : in  STD_LOGIC;
+
+        in_AXI_RDATA          : in  UNSIGNED(BUS_DATA_WIDTH-1 downto 0);
+        in_AXI_RLAST          : in  STD_LOGIC;
+        in_AXI_RVALID         : in  STD_LOGIC;
+        out_AXI_RREADY        : out STD_LOGIC;
+        
+        in_HLS_ARADDR         : in  UNSIGNED(USER_AW-1 downto 0);
+        in_HLS_ARVALID        : in  STD_LOGIC;
+        out_HLS_ARREADY       : out STD_LOGIC;
+
+        out_HLS_RDATA         : out UNSIGNED(USER_DW-1 downto 0);
+        out_HLS_RVALID        : out STD_LOGIC;
+        in_HLS_RREADY         : in  STD_LOGIC);
+    end component reconstruct_fullImage_m_axi_cache_unit;
+begin
+    ------------------------Instantiation------------------
+    cache_preprocessor : reconstruct_fullImage_m_axi_cache_preprocessor
+    generic map (
+        MAX_READ_BURST_LENGTH => MAX_READ_BURST_LENGTH,
+        USER_AW               => USER_AW,
+        USER_DW               => USER_DW,
+        USER_MAXREQS          => USER_MAXREQS,
+        NUM_READ_OUTSTANDING  => NUM_READ_OUTSTANDING)
+    port map (
+        ACLK                  => ACLK,
+        ARESET                => ARESET,
+        ACLK_EN               => ACLK_EN,
+        in_HLS_ARADDR         => in_HLS_ARADDR,
+        in_HLS_ARLEN          => in_HLS_ARLEN,
+        in_HLS_ARVALID        => in_HLS_ARVALID,
+        out_HLS_ARREADY       => out_HLS_ARREADY,
+        out_CACHE_ARADDR      => rreq_araddr,
+        out_CACHE_ARVALID     => rreq_valid,
+        in_CACHE_ARREADY      => rreq_ready,
+        in_HLS_RREADY         => in_HLS_RREADY,
+        out_HLS_RLAST         => out_HLS_RLAST,
+        in_CACHE_RVALID       => rresp_valid);
+
+    cache_unit : reconstruct_fullImage_m_axi_cache_unit
+    generic map (
+        CACHE_IMPL        => CACHE_IMPL,
+        USER_AW           => USER_AW,
+        USER_DW           => USER_DW,
+        BUS_ADDR_WIDTH    => BUS_ADDR_WIDTH,
+        BUS_DATA_WIDTH    => BUS_DATA_WIDTH,
+        NUM_CACHE_LINE    => NUM_CACHE_LINE,
+        CACHE_LINE_DEPTH  => CACHE_LINE_DEPTH)
+    port map (
+        ACLK              => ACLK,
+        ARESET            => ARESET,
+        ACLK_EN           => ACLK_EN,
+
+        cache_flush       => cache_flush,
+        cache_flush_done  => cache_flush_done,
+
+        out_AXI_ARADDR    => out_AXI_ARADDR,
+        out_AXI_ARLEN     => out_AXI_ARLEN,
+        out_AXI_ARVALID   => out_AXI_ARVALID,
+        in_AXI_ARREADY    => in_AXI_ARREADY,
+
+        in_AXI_RDATA      => in_AXI_RDATA,
+        in_AXI_RLAST      => in_AXI_RLAST,
+        in_AXI_RVALID     => in_AXI_RVALID,
+        out_AXI_RREADY    => out_AXI_RREADY,
+        
+        in_HLS_ARADDR     => rreq_araddr,
+        in_HLS_ARVALID    => rreq_valid,
+        out_HLS_ARREADY   => rreq_ready,
+
+        out_HLS_RDATA     => out_HLS_RDATA,
+        out_HLS_RVALID    => rresp_valid,
+        in_HLS_RREADY     => in_HLS_RREADY);
+
+    out_HLS_RVALID <= rresp_valid;
 end architecture behav;

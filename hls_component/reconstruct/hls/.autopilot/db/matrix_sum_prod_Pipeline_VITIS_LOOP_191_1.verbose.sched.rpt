@@ -1,0 +1,283 @@
+
+
+================================================================
+== Vitis HLS Report for 'matrix_sum_prod_Pipeline_VITIS_LOOP_191_1'
+================================================================
+* Date:           Sat Jul 26 18:27:31 2025
+
+* Version:        2024.2 (Build 5238294 on Nov  8 2024)
+* Project:        reconstruct
+* Solution:       hls (Vivado IP Flow Target)
+* Product family: zynquplusRFSOC
+* Target device:  xczu49dr-ffvf1760-2-e
+
+
+================================================================
+== Performance Estimates
+================================================================
++ Timing: 
+    * Summary: 
+    +--------+----------+----------+------------+
+    |  Clock |  Target  | Estimated| Uncertainty|
+    +--------+----------+----------+------------+
+    |ap_clk  |  10.00 ns|  1.643 ns|     2.70 ns|
+    +--------+----------+----------+------------+
+
++ Latency: 
+    * Summary: 
+    +---------+---------+-----------+-----------+-----+-----+------------------------------------------------+
+    |  Latency (cycles) |   Latency (absolute)  |  Interval |                    Pipeline                    |
+    |   min   |   max   |    min    |    max    | min | max |                      Type                      |
+    +---------+---------+-----------+-----------+-----+-----+------------------------------------------------+
+    |        4|        4|  40.000 ns|  40.000 ns|    3|    3|  loop auto-rewind stp (delay=0 clock cycles(s))|
+    +---------+---------+-----------+-----------+-----+-----+------------------------------------------------+
+
+    + Detail: 
+        * Instance: 
+        N/A
+
+        * Loop: 
+        +--------------------+---------+---------+----------+-----------+-----------+------+----------+
+        |                    |  Latency (cycles) | Iteration|  Initiation Interval  | Trip |          |
+        |      Loop Name     |   min   |   max   |  Latency |  achieved |   target  | Count| Pipelined|
+        +--------------------+---------+---------+----------+-----------+-----------+------+----------+
+        |- VITIS_LOOP_191_1  |        2|        2|         1|          1|          1|     2|       yes|
+        +--------------------+---------+---------+----------+-----------+-----------+------+----------+
+
+============================================================
++ Verbose Summary: Synthesis Manager
+============================================================
+InlineROM: 1
+ExposeGlobal: 0
+============================================================
++ Verbose Summary: CDFG Model
+============================================================
+IsTopModel: 0
+ResetActiveHigh: 1
+IsCombinational: 0
+IsDatapathOnly: 0
+HasWiredReturn: 1
+HasMFsm: 2
+HasVarLatency: 1
+IsPipeline: 0
+IsRtlPipelined: 0
+IsInstanceOverlapped: 0
+IsDontTouch: 0
+HasImplIP: 0
+IsGatedGlobalClock: 0
+
++ Individual pipeline summary: 
+  * Pipeline-0: initiation interval (II) = 1, depth = 1
+
+
+============================================================
++ Verbose Summary: Schedule
+============================================================
+* Number of FSM states : 1
+* Pipeline : 1
+  Pipeline-0 : II = 1, D = 1, States = { 1 }
+* Dataflow Pipeline: 0
+
+* FSM state transitions: 
+1 --> 
+
+* FSM state operations: 
+
+State 1 <SV = 0> <Delay = 1.64>
+ST_1 : Operation 4 [1/1] (0.00ns)   --->   "%i = alloca i32 1" [../image_analysis.cpp:191->../image_analysis.cpp:262]   --->   Operation 4 'alloca' 'i' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 5 [1/1] (0.00ns)   --->   "%sum_val_15 = alloca i32 1"   --->   Operation 5 'alloca' 'sum_val_15' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 6 [1/1] (0.00ns)   --->   "%prod_val_15 = alloca i32 1"   --->   Operation 6 'alloca' 'prod_val_15' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 7 [1/1] (0.00ns)   --->   "%sum_val_16 = alloca i32 1"   --->   Operation 7 'alloca' 'sum_val_16' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 8 [1/1] (0.00ns)   --->   "%prod_val_16 = alloca i32 1"   --->   Operation 8 'alloca' 'prod_val_16' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 9 [1/1] (0.00ns)   --->   "%sum_val_17 = alloca i32 1"   --->   Operation 9 'alloca' 'sum_val_17' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 10 [1/1] (0.00ns)   --->   "%prod_val_17 = alloca i32 1"   --->   Operation 10 'alloca' 'prod_val_17' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 11 [1/1] (0.00ns)   --->   "%sum_val_18 = alloca i32 1"   --->   Operation 11 'alloca' 'sum_val_18' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 12 [1/1] (0.00ns)   --->   "%prod_val_18 = alloca i32 1"   --->   Operation 12 'alloca' 'prod_val_18' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 13 [1/1] (0.00ns)   --->   "%sum_val_19 = alloca i32 1"   --->   Operation 13 'alloca' 'sum_val_19' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 14 [1/1] (0.00ns)   --->   "%prod_val_19 = alloca i32 1"   --->   Operation 14 'alloca' 'prod_val_19' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 15 [1/1] (0.00ns)   --->   "%sum_val_20 = alloca i32 1"   --->   Operation 15 'alloca' 'sum_val_20' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 16 [1/1] (0.00ns)   --->   "%prod_val_20 = alloca i32 1"   --->   Operation 16 'alloca' 'prod_val_20' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 17 [1/1] (0.00ns)   --->   "%sum_val_21 = alloca i32 1"   --->   Operation 17 'alloca' 'sum_val_21' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 18 [1/1] (0.00ns)   --->   "%prod_val_21 = alloca i32 1"   --->   Operation 18 'alloca' 'prod_val_21' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 19 [1/1] (0.00ns)   --->   "%sum_val_22 = alloca i32 1"   --->   Operation 19 'alloca' 'sum_val_22' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 20 [1/1] (0.00ns)   --->   "%prod_val_22 = alloca i32 1"   --->   Operation 20 'alloca' 'prod_val_22' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 21 [1/1] (0.00ns)   --->   "%sum_val_23 = alloca i32 1"   --->   Operation 21 'alloca' 'sum_val_23' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 22 [1/1] (0.00ns)   --->   "%prod_val_23 = alloca i32 1"   --->   Operation 22 'alloca' 'prod_val_23' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 23 [1/1] (0.00ns)   --->   "%sum_val_24 = alloca i32 1"   --->   Operation 23 'alloca' 'sum_val_24' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 24 [1/1] (0.00ns)   --->   "%prod_val_24 = alloca i32 1"   --->   Operation 24 'alloca' 'prod_val_24' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 25 [1/1] (0.00ns)   --->   "%sum_val_25 = alloca i32 1"   --->   Operation 25 'alloca' 'sum_val_25' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 26 [1/1] (0.00ns)   --->   "%prod_val_25 = alloca i32 1"   --->   Operation 26 'alloca' 'prod_val_25' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 27 [1/1] (0.00ns)   --->   "%sum_val_26 = alloca i32 1"   --->   Operation 27 'alloca' 'sum_val_26' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 28 [1/1] (0.00ns)   --->   "%prod_val_26 = alloca i32 1"   --->   Operation 28 'alloca' 'prod_val_26' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 29 [1/1] (0.00ns)   --->   "%sum_val_27 = alloca i32 1"   --->   Operation 29 'alloca' 'sum_val_27' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 30 [1/1] (0.00ns)   --->   "%prod_val_27 = alloca i32 1"   --->   Operation 30 'alloca' 'prod_val_27' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 31 [1/1] (0.00ns)   --->   "%sum_val_28 = alloca i32 1"   --->   Operation 31 'alloca' 'sum_val_28' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 32 [1/1] (0.00ns)   --->   "%prod_val_28 = alloca i32 1"   --->   Operation 32 'alloca' 'prod_val_28' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 33 [1/1] (0.00ns)   --->   "%sum_val_29 = alloca i32 1"   --->   Operation 33 'alloca' 'sum_val_29' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 34 [1/1] (0.00ns)   --->   "%prod_val_29 = alloca i32 1"   --->   Operation 34 'alloca' 'prod_val_29' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 35 [1/1] (0.00ns)   --->   "%add76_i1_i_read = read i32 @_ssdm_op_Read.ap_auto.float, i32 %add76_i1_i"   --->   Operation 35 'read' 'add76_i1_i_read' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 36 [1/1] (0.00ns)   --->   "%add76_i2_i_read = read i32 @_ssdm_op_Read.ap_auto.float, i32 %add76_i2_i"   --->   Operation 36 'read' 'add76_i2_i_read' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 37 [1/1] (0.00ns)   --->   "%add76_i3_i_read = read i32 @_ssdm_op_Read.ap_auto.float, i32 %add76_i3_i"   --->   Operation 37 'read' 'add76_i3_i_read' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 38 [1/1] (0.00ns)   --->   "%add76_i4_i_read = read i32 @_ssdm_op_Read.ap_auto.float, i32 %add76_i4_i"   --->   Operation 38 'read' 'add76_i4_i_read' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 39 [1/1] (0.00ns)   --->   "%add76_i5_i_read = read i32 @_ssdm_op_Read.ap_auto.float, i32 %add76_i5_i"   --->   Operation 39 'read' 'add76_i5_i_read' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 40 [1/1] (0.00ns)   --->   "%add76_i6_i_read = read i32 @_ssdm_op_Read.ap_auto.float, i32 %add76_i6_i"   --->   Operation 40 'read' 'add76_i6_i_read' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 41 [1/1] (0.00ns)   --->   "%add76_i7_i_read = read i32 @_ssdm_op_Read.ap_auto.float, i32 %add76_i7_i"   --->   Operation 41 'read' 'add76_i7_i_read' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 42 [1/1] (0.00ns)   --->   "%add76_i8_i_read = read i32 @_ssdm_op_Read.ap_auto.float, i32 %add76_i8_i"   --->   Operation 42 'read' 'add76_i8_i_read' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 43 [1/1] (0.00ns)   --->   "%add76_i9_i_read = read i32 @_ssdm_op_Read.ap_auto.float, i32 %add76_i9_i"   --->   Operation 43 'read' 'add76_i9_i_read' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 44 [1/1] (0.00ns)   --->   "%add76_i_i_read = read i32 @_ssdm_op_Read.ap_auto.float, i32 %add76_i_i"   --->   Operation 44 'read' 'add76_i_i_read' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 45 [1/1] (0.00ns)   --->   "%add76_i10_i_read = read i32 @_ssdm_op_Read.ap_auto.float, i32 %add76_i10_i"   --->   Operation 45 'read' 'add76_i10_i_read' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 46 [1/1] (0.00ns)   --->   "%add76_i11_i_read = read i32 @_ssdm_op_Read.ap_auto.float, i32 %add76_i11_i"   --->   Operation 46 'read' 'add76_i11_i_read' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 47 [1/1] (0.00ns)   --->   "%add76_i12_i_read = read i32 @_ssdm_op_Read.ap_auto.float, i32 %add76_i12_i"   --->   Operation 47 'read' 'add76_i12_i_read' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 48 [1/1] (0.00ns)   --->   "%add76_i13_i_read = read i32 @_ssdm_op_Read.ap_auto.float, i32 %add76_i13_i"   --->   Operation 48 'read' 'add76_i13_i_read' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 49 [1/1] (0.00ns)   --->   "%add76_i14_i_read = read i32 @_ssdm_op_Read.ap_auto.float, i32 %add76_i14_i"   --->   Operation 49 'read' 'add76_i14_i_read' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 50 [1/1] (0.00ns)   --->   "%add76_i15_i_read = read i32 @_ssdm_op_Read.ap_auto.float, i32 %add76_i15_i"   --->   Operation 50 'read' 'add76_i15_i_read' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 51 [1/1] (0.00ns)   --->   "%add76_i16_i_read = read i32 @_ssdm_op_Read.ap_auto.float, i32 %add76_i16_i"   --->   Operation 51 'read' 'add76_i16_i_read' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 52 [1/1] (0.00ns)   --->   "%add76_i17_i_read = read i32 @_ssdm_op_Read.ap_auto.float, i32 %add76_i17_i"   --->   Operation 52 'read' 'add76_i17_i_read' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 53 [1/1] (0.00ns)   --->   "%add76_i18_i_read = read i32 @_ssdm_op_Read.ap_auto.float, i32 %add76_i18_i"   --->   Operation 53 'read' 'add76_i18_i_read' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 54 [1/1] (0.00ns)   --->   "%add76_i19_i_read = read i32 @_ssdm_op_Read.ap_auto.float, i32 %add76_i19_i"   --->   Operation 54 'read' 'add76_i19_i_read' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 55 [1/1] (0.00ns)   --->   "%add76_i20_i_read = read i32 @_ssdm_op_Read.ap_auto.float, i32 %add76_i20_i"   --->   Operation 55 'read' 'add76_i20_i_read' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 56 [1/1] (0.00ns)   --->   "%add76_i21_i_read = read i32 @_ssdm_op_Read.ap_auto.float, i32 %add76_i21_i"   --->   Operation 56 'read' 'add76_i21_i_read' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 57 [1/1] (0.00ns)   --->   "%add76_i22_i_read = read i32 @_ssdm_op_Read.ap_auto.float, i32 %add76_i22_i"   --->   Operation 57 'read' 'add76_i22_i_read' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 58 [1/1] (0.00ns)   --->   "%add76_i23_i_read = read i32 @_ssdm_op_Read.ap_auto.float, i32 %add76_i23_i"   --->   Operation 58 'read' 'add76_i23_i_read' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 59 [1/1] (0.00ns)   --->   "%add76_i24_i_read = read i32 @_ssdm_op_Read.ap_auto.float, i32 %add76_i24_i"   --->   Operation 59 'read' 'add76_i24_i_read' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 60 [1/1] (0.00ns)   --->   "%add76_i25_i_read = read i32 @_ssdm_op_Read.ap_auto.float, i32 %add76_i25_i"   --->   Operation 60 'read' 'add76_i25_i_read' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 61 [1/1] (0.00ns)   --->   "%add76_i26_i_read = read i32 @_ssdm_op_Read.ap_auto.float, i32 %add76_i26_i"   --->   Operation 61 'read' 'add76_i26_i_read' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 62 [1/1] (0.00ns)   --->   "%add76_i27_i_read = read i32 @_ssdm_op_Read.ap_auto.float, i32 %add76_i27_i"   --->   Operation 62 'read' 'add76_i27_i_read' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 63 [1/1] (0.00ns)   --->   "%add76_i28_i_read = read i32 @_ssdm_op_Read.ap_auto.float, i32 %add76_i28_i"   --->   Operation 63 'read' 'add76_i28_i_read' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 64 [1/1] (0.00ns)   --->   "%add76_i29_i_read = read i32 @_ssdm_op_Read.ap_auto.float, i32 %add76_i29_i"   --->   Operation 64 'read' 'add76_i29_i_read' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 65 [1/1] (0.42ns)   --->   "%store_ln191 = store i5 0, i5 %i" [../image_analysis.cpp:191->../image_analysis.cpp:262]   --->   Operation 65 'store' 'store_ln191' <Predicate = true> <Delay = 0.42>
+ST_1 : Operation 66 [1/1] (0.00ns)   --->   "%br_ln0 = br void %for.inc.0.i"   --->   Operation 66 'br' 'br_ln0' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 67 [1/1] (0.00ns)   --->   "%i_1 = load i5 %i" [../image_analysis.cpp:191->../image_analysis.cpp:262]   --->   Operation 67 'load' 'i_1' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 68 [1/1] (0.00ns)   --->   "%specpipeline_ln192 = specpipeline void @_ssdm_op_SpecPipeline, i32 1, i32 0, i32 0, i32 0, void @empty_24" [../image_analysis.cpp:192->../image_analysis.cpp:262]   --->   Operation 68 'specpipeline' 'specpipeline_ln192' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 69 [1/1] (0.00ns)   --->   "%speclooptripcount_ln194 = speclooptripcount void @_ssdm_op_SpecLoopTripCount, i64 2, i64 2, i64 2" [../image_analysis.cpp:194->../image_analysis.cpp:262]   --->   Operation 69 'speclooptripcount' 'speclooptripcount_ln194' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 70 [1/1] (0.00ns)   --->   "%specloopname_ln191 = specloopname void @_ssdm_op_SpecLoopName, void @empty_20" [../image_analysis.cpp:191->../image_analysis.cpp:262]   --->   Operation 70 'specloopname' 'specloopname_ln191' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 71 [1/1] (0.78ns)   --->   "%icmp_ln195 = icmp_eq  i5 %i_1, i5 0" [../image_analysis.cpp:195->../image_analysis.cpp:262]   --->   Operation 71 'icmp' 'icmp_ln195' <Predicate = true> <Delay = 0.78> <CoreInst = "Cmp">   --->   Core 9 'Cmp' <Latency = 0> <II = 1> <Delay = 0.78> <FuncUnit> <Opcode : 'seteq' 'setne' 'setle' 'setge' 'setlt' 'setgt'> <InPorts = 2> <OutPorts = 1>
+ST_1 : Operation 72 [1/1] (0.00ns)   --->   "%tmp = bitselect i1 @_ssdm_op_BitSelect.i1.i5.i32, i5 %i_1, i32 4" [../image_analysis.cpp:191->../image_analysis.cpp:262]   --->   Operation 72 'bitselect' 'tmp' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 73 [1/1] (0.00ns)   --->   "%or_ln = bitconcatenate i5 @_ssdm_op_BitConcatenate.i5.i1.i4, i1 %tmp, i4 15" [../image_analysis.cpp:191->../image_analysis.cpp:262]   --->   Operation 73 'bitconcatenate' 'or_ln' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 74 [1/1] (0.78ns)   --->   "%icmp_ln191 = icmp_eq  i5 %or_ln, i5 31" [../image_analysis.cpp:191->../image_analysis.cpp:262]   --->   Operation 74 'icmp' 'icmp_ln191' <Predicate = true> <Delay = 0.78> <CoreInst = "Cmp">   --->   Core 9 'Cmp' <Latency = 0> <II = 1> <Delay = 0.78> <FuncUnit> <Opcode : 'seteq' 'setne' 'setle' 'setge' 'setlt' 'setgt'> <InPorts = 2> <OutPorts = 1>
+ST_1 : Operation 75 [1/1] (0.00ns)   --->   "%br_ln195 = br i1 %icmp_ln195, void %.exit98.i, void %for.inc.0.i.for.inc.15.i_crit_edge" [../image_analysis.cpp:195->../image_analysis.cpp:262]   --->   Operation 75 'br' 'br_ln195' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 76 [1/1] (0.00ns)   --->   "%br_ln191 = br i1 %icmp_ln191, void %for.inc.15.i, void %matrix_sum_prod.exit.exitStub" [../image_analysis.cpp:191->../image_analysis.cpp:262]   --->   Operation 76 'br' 'br_ln191' <Predicate = (!icmp_ln195)> <Delay = 0.00>
+ST_1 : Operation 77 [1/1] (0.00ns)   --->   "%store_ln0 = store i32 %add76_i29_i_read, i32 %prod_val_29"   --->   Operation 77 'store' 'store_ln0' <Predicate = (icmp_ln195)> <Delay = 0.00>
+ST_1 : Operation 78 [1/1] (0.00ns)   --->   "%store_ln0 = store i32 %add76_i28_i_read, i32 %sum_val_29"   --->   Operation 78 'store' 'store_ln0' <Predicate = (icmp_ln195)> <Delay = 0.00>
+ST_1 : Operation 79 [1/1] (0.00ns)   --->   "%store_ln0 = store i32 %add76_i27_i_read, i32 %prod_val_28"   --->   Operation 79 'store' 'store_ln0' <Predicate = (icmp_ln195)> <Delay = 0.00>
+ST_1 : Operation 80 [1/1] (0.00ns)   --->   "%store_ln0 = store i32 %add76_i26_i_read, i32 %sum_val_28"   --->   Operation 80 'store' 'store_ln0' <Predicate = (icmp_ln195)> <Delay = 0.00>
+ST_1 : Operation 81 [1/1] (0.00ns)   --->   "%store_ln0 = store i32 %add76_i25_i_read, i32 %prod_val_27"   --->   Operation 81 'store' 'store_ln0' <Predicate = (icmp_ln195)> <Delay = 0.00>
+ST_1 : Operation 82 [1/1] (0.00ns)   --->   "%store_ln0 = store i32 %add76_i24_i_read, i32 %sum_val_27"   --->   Operation 82 'store' 'store_ln0' <Predicate = (icmp_ln195)> <Delay = 0.00>
+ST_1 : Operation 83 [1/1] (0.00ns)   --->   "%store_ln0 = store i32 %add76_i23_i_read, i32 %prod_val_26"   --->   Operation 83 'store' 'store_ln0' <Predicate = (icmp_ln195)> <Delay = 0.00>
+ST_1 : Operation 84 [1/1] (0.00ns)   --->   "%store_ln0 = store i32 %add76_i22_i_read, i32 %sum_val_26"   --->   Operation 84 'store' 'store_ln0' <Predicate = (icmp_ln195)> <Delay = 0.00>
+ST_1 : Operation 85 [1/1] (0.00ns)   --->   "%store_ln0 = store i32 %add76_i21_i_read, i32 %prod_val_25"   --->   Operation 85 'store' 'store_ln0' <Predicate = (icmp_ln195)> <Delay = 0.00>
+ST_1 : Operation 86 [1/1] (0.00ns)   --->   "%store_ln0 = store i32 %add76_i20_i_read, i32 %sum_val_25"   --->   Operation 86 'store' 'store_ln0' <Predicate = (icmp_ln195)> <Delay = 0.00>
+ST_1 : Operation 87 [1/1] (0.00ns)   --->   "%store_ln0 = store i32 %add76_i19_i_read, i32 %prod_val_24"   --->   Operation 87 'store' 'store_ln0' <Predicate = (icmp_ln195)> <Delay = 0.00>
+ST_1 : Operation 88 [1/1] (0.00ns)   --->   "%store_ln0 = store i32 %add76_i18_i_read, i32 %sum_val_24"   --->   Operation 88 'store' 'store_ln0' <Predicate = (icmp_ln195)> <Delay = 0.00>
+ST_1 : Operation 89 [1/1] (0.00ns)   --->   "%store_ln0 = store i32 %add76_i17_i_read, i32 %prod_val_23"   --->   Operation 89 'store' 'store_ln0' <Predicate = (icmp_ln195)> <Delay = 0.00>
+ST_1 : Operation 90 [1/1] (0.00ns)   --->   "%store_ln0 = store i32 %add76_i16_i_read, i32 %sum_val_23"   --->   Operation 90 'store' 'store_ln0' <Predicate = (icmp_ln195)> <Delay = 0.00>
+ST_1 : Operation 91 [1/1] (0.00ns)   --->   "%store_ln0 = store i32 %add76_i15_i_read, i32 %prod_val_22"   --->   Operation 91 'store' 'store_ln0' <Predicate = (icmp_ln195)> <Delay = 0.00>
+ST_1 : Operation 92 [1/1] (0.00ns)   --->   "%store_ln0 = store i32 %add76_i14_i_read, i32 %sum_val_22"   --->   Operation 92 'store' 'store_ln0' <Predicate = (icmp_ln195)> <Delay = 0.00>
+ST_1 : Operation 93 [1/1] (0.00ns)   --->   "%store_ln0 = store i32 %add76_i13_i_read, i32 %prod_val_21"   --->   Operation 93 'store' 'store_ln0' <Predicate = (icmp_ln195)> <Delay = 0.00>
+ST_1 : Operation 94 [1/1] (0.00ns)   --->   "%store_ln0 = store i32 %add76_i12_i_read, i32 %sum_val_21"   --->   Operation 94 'store' 'store_ln0' <Predicate = (icmp_ln195)> <Delay = 0.00>
+ST_1 : Operation 95 [1/1] (0.00ns)   --->   "%store_ln0 = store i32 %add76_i11_i_read, i32 %prod_val_20"   --->   Operation 95 'store' 'store_ln0' <Predicate = (icmp_ln195)> <Delay = 0.00>
+ST_1 : Operation 96 [1/1] (0.00ns)   --->   "%store_ln0 = store i32 %add76_i10_i_read, i32 %sum_val_20"   --->   Operation 96 'store' 'store_ln0' <Predicate = (icmp_ln195)> <Delay = 0.00>
+ST_1 : Operation 97 [1/1] (0.00ns)   --->   "%store_ln0 = store i32 %add76_i_i_read, i32 %prod_val_19"   --->   Operation 97 'store' 'store_ln0' <Predicate = (icmp_ln195)> <Delay = 0.00>
+ST_1 : Operation 98 [1/1] (0.00ns)   --->   "%store_ln0 = store i32 %add76_i9_i_read, i32 %sum_val_19"   --->   Operation 98 'store' 'store_ln0' <Predicate = (icmp_ln195)> <Delay = 0.00>
+ST_1 : Operation 99 [1/1] (0.00ns)   --->   "%store_ln0 = store i32 %add76_i8_i_read, i32 %prod_val_18"   --->   Operation 99 'store' 'store_ln0' <Predicate = (icmp_ln195)> <Delay = 0.00>
+ST_1 : Operation 100 [1/1] (0.00ns)   --->   "%store_ln0 = store i32 %add76_i7_i_read, i32 %sum_val_18"   --->   Operation 100 'store' 'store_ln0' <Predicate = (icmp_ln195)> <Delay = 0.00>
+ST_1 : Operation 101 [1/1] (0.00ns)   --->   "%store_ln0 = store i32 %add76_i6_i_read, i32 %prod_val_17"   --->   Operation 101 'store' 'store_ln0' <Predicate = (icmp_ln195)> <Delay = 0.00>
+ST_1 : Operation 102 [1/1] (0.00ns)   --->   "%store_ln0 = store i32 %add76_i5_i_read, i32 %sum_val_17"   --->   Operation 102 'store' 'store_ln0' <Predicate = (icmp_ln195)> <Delay = 0.00>
+ST_1 : Operation 103 [1/1] (0.00ns)   --->   "%store_ln0 = store i32 %add76_i4_i_read, i32 %prod_val_16"   --->   Operation 103 'store' 'store_ln0' <Predicate = (icmp_ln195)> <Delay = 0.00>
+ST_1 : Operation 104 [1/1] (0.00ns)   --->   "%store_ln0 = store i32 %add76_i3_i_read, i32 %sum_val_16"   --->   Operation 104 'store' 'store_ln0' <Predicate = (icmp_ln195)> <Delay = 0.00>
+ST_1 : Operation 105 [1/1] (0.00ns)   --->   "%store_ln0 = store i32 %add76_i2_i_read, i32 %prod_val_15"   --->   Operation 105 'store' 'store_ln0' <Predicate = (icmp_ln195)> <Delay = 0.00>
+ST_1 : Operation 106 [1/1] (0.00ns)   --->   "%store_ln0 = store i32 %add76_i1_i_read, i32 %sum_val_15"   --->   Operation 106 'store' 'store_ln0' <Predicate = (icmp_ln195)> <Delay = 0.00>
+ST_1 : Operation 107 [1/1] (0.00ns)   --->   "%br_ln195 = br void %for.inc.15.i" [../image_analysis.cpp:195->../image_analysis.cpp:262]   --->   Operation 107 'br' 'br_ln195' <Predicate = (icmp_ln195)> <Delay = 0.00>
+ST_1 : Operation 108 [1/1] (0.42ns)   --->   "%store_ln191 = store i5 16, i5 %i" [../image_analysis.cpp:191->../image_analysis.cpp:262]   --->   Operation 108 'store' 'store_ln191' <Predicate = (!icmp_ln191) | (icmp_ln195)> <Delay = 0.42>
+ST_1 : Operation 109 [1/1] (0.00ns)   --->   "%br_ln191 = br void %for.inc.0.i" [../image_analysis.cpp:191->../image_analysis.cpp:262]   --->   Operation 109 'br' 'br_ln191' <Predicate = (!icmp_ln191) | (icmp_ln195)> <Delay = 0.00>
+ST_1 : Operation 110 [1/1] (0.00ns)   --->   "%sum_val_15_load = load i32 %sum_val_15"   --->   Operation 110 'load' 'sum_val_15_load' <Predicate = (!icmp_ln195 & icmp_ln191)> <Delay = 0.00>
+ST_1 : Operation 111 [1/1] (0.00ns)   --->   "%prod_val_15_load = load i32 %prod_val_15"   --->   Operation 111 'load' 'prod_val_15_load' <Predicate = (!icmp_ln195 & icmp_ln191)> <Delay = 0.00>
+ST_1 : Operation 112 [1/1] (0.00ns)   --->   "%sum_val_16_load = load i32 %sum_val_16"   --->   Operation 112 'load' 'sum_val_16_load' <Predicate = (!icmp_ln195 & icmp_ln191)> <Delay = 0.00>
+ST_1 : Operation 113 [1/1] (0.00ns)   --->   "%prod_val_16_load = load i32 %prod_val_16"   --->   Operation 113 'load' 'prod_val_16_load' <Predicate = (!icmp_ln195 & icmp_ln191)> <Delay = 0.00>
+ST_1 : Operation 114 [1/1] (0.00ns)   --->   "%sum_val_17_load = load i32 %sum_val_17"   --->   Operation 114 'load' 'sum_val_17_load' <Predicate = (!icmp_ln195 & icmp_ln191)> <Delay = 0.00>
+ST_1 : Operation 115 [1/1] (0.00ns)   --->   "%prod_val_17_load = load i32 %prod_val_17"   --->   Operation 115 'load' 'prod_val_17_load' <Predicate = (!icmp_ln195 & icmp_ln191)> <Delay = 0.00>
+ST_1 : Operation 116 [1/1] (0.00ns)   --->   "%sum_val_18_load = load i32 %sum_val_18"   --->   Operation 116 'load' 'sum_val_18_load' <Predicate = (!icmp_ln195 & icmp_ln191)> <Delay = 0.00>
+ST_1 : Operation 117 [1/1] (0.00ns)   --->   "%prod_val_18_load = load i32 %prod_val_18"   --->   Operation 117 'load' 'prod_val_18_load' <Predicate = (!icmp_ln195 & icmp_ln191)> <Delay = 0.00>
+ST_1 : Operation 118 [1/1] (0.00ns)   --->   "%sum_val_19_load = load i32 %sum_val_19"   --->   Operation 118 'load' 'sum_val_19_load' <Predicate = (!icmp_ln195 & icmp_ln191)> <Delay = 0.00>
+ST_1 : Operation 119 [1/1] (0.00ns)   --->   "%prod_val_19_load = load i32 %prod_val_19"   --->   Operation 119 'load' 'prod_val_19_load' <Predicate = (!icmp_ln195 & icmp_ln191)> <Delay = 0.00>
+ST_1 : Operation 120 [1/1] (0.00ns)   --->   "%sum_val_20_load = load i32 %sum_val_20"   --->   Operation 120 'load' 'sum_val_20_load' <Predicate = (!icmp_ln195 & icmp_ln191)> <Delay = 0.00>
+ST_1 : Operation 121 [1/1] (0.00ns)   --->   "%prod_val_20_load = load i32 %prod_val_20"   --->   Operation 121 'load' 'prod_val_20_load' <Predicate = (!icmp_ln195 & icmp_ln191)> <Delay = 0.00>
+ST_1 : Operation 122 [1/1] (0.00ns)   --->   "%sum_val_21_load = load i32 %sum_val_21"   --->   Operation 122 'load' 'sum_val_21_load' <Predicate = (!icmp_ln195 & icmp_ln191)> <Delay = 0.00>
+ST_1 : Operation 123 [1/1] (0.00ns)   --->   "%prod_val_21_load = load i32 %prod_val_21"   --->   Operation 123 'load' 'prod_val_21_load' <Predicate = (!icmp_ln195 & icmp_ln191)> <Delay = 0.00>
+ST_1 : Operation 124 [1/1] (0.00ns)   --->   "%sum_val_22_load = load i32 %sum_val_22"   --->   Operation 124 'load' 'sum_val_22_load' <Predicate = (!icmp_ln195 & icmp_ln191)> <Delay = 0.00>
+ST_1 : Operation 125 [1/1] (0.00ns)   --->   "%prod_val_22_load = load i32 %prod_val_22"   --->   Operation 125 'load' 'prod_val_22_load' <Predicate = (!icmp_ln195 & icmp_ln191)> <Delay = 0.00>
+ST_1 : Operation 126 [1/1] (0.00ns)   --->   "%sum_val_23_load = load i32 %sum_val_23"   --->   Operation 126 'load' 'sum_val_23_load' <Predicate = (!icmp_ln195 & icmp_ln191)> <Delay = 0.00>
+ST_1 : Operation 127 [1/1] (0.00ns)   --->   "%prod_val_23_load = load i32 %prod_val_23"   --->   Operation 127 'load' 'prod_val_23_load' <Predicate = (!icmp_ln195 & icmp_ln191)> <Delay = 0.00>
+ST_1 : Operation 128 [1/1] (0.00ns)   --->   "%sum_val_24_load = load i32 %sum_val_24"   --->   Operation 128 'load' 'sum_val_24_load' <Predicate = (!icmp_ln195 & icmp_ln191)> <Delay = 0.00>
+ST_1 : Operation 129 [1/1] (0.00ns)   --->   "%prod_val_24_load = load i32 %prod_val_24"   --->   Operation 129 'load' 'prod_val_24_load' <Predicate = (!icmp_ln195 & icmp_ln191)> <Delay = 0.00>
+ST_1 : Operation 130 [1/1] (0.00ns)   --->   "%sum_val_25_load = load i32 %sum_val_25"   --->   Operation 130 'load' 'sum_val_25_load' <Predicate = (!icmp_ln195 & icmp_ln191)> <Delay = 0.00>
+ST_1 : Operation 131 [1/1] (0.00ns)   --->   "%prod_val_25_load = load i32 %prod_val_25"   --->   Operation 131 'load' 'prod_val_25_load' <Predicate = (!icmp_ln195 & icmp_ln191)> <Delay = 0.00>
+ST_1 : Operation 132 [1/1] (0.00ns)   --->   "%sum_val_26_load = load i32 %sum_val_26"   --->   Operation 132 'load' 'sum_val_26_load' <Predicate = (!icmp_ln195 & icmp_ln191)> <Delay = 0.00>
+ST_1 : Operation 133 [1/1] (0.00ns)   --->   "%prod_val_26_load = load i32 %prod_val_26"   --->   Operation 133 'load' 'prod_val_26_load' <Predicate = (!icmp_ln195 & icmp_ln191)> <Delay = 0.00>
+ST_1 : Operation 134 [1/1] (0.00ns)   --->   "%sum_val_27_load = load i32 %sum_val_27"   --->   Operation 134 'load' 'sum_val_27_load' <Predicate = (!icmp_ln195 & icmp_ln191)> <Delay = 0.00>
+ST_1 : Operation 135 [1/1] (0.00ns)   --->   "%prod_val_27_load = load i32 %prod_val_27"   --->   Operation 135 'load' 'prod_val_27_load' <Predicate = (!icmp_ln195 & icmp_ln191)> <Delay = 0.00>
+ST_1 : Operation 136 [1/1] (0.00ns)   --->   "%sum_val_28_load = load i32 %sum_val_28"   --->   Operation 136 'load' 'sum_val_28_load' <Predicate = (!icmp_ln195 & icmp_ln191)> <Delay = 0.00>
+ST_1 : Operation 137 [1/1] (0.00ns)   --->   "%prod_val_28_load = load i32 %prod_val_28"   --->   Operation 137 'load' 'prod_val_28_load' <Predicate = (!icmp_ln195 & icmp_ln191)> <Delay = 0.00>
+ST_1 : Operation 138 [1/1] (0.00ns)   --->   "%sum_val_29_load = load i32 %sum_val_29"   --->   Operation 138 'load' 'sum_val_29_load' <Predicate = (!icmp_ln195 & icmp_ln191)> <Delay = 0.00>
+ST_1 : Operation 139 [1/1] (0.00ns)   --->   "%prod_val_29_load = load i32 %prod_val_29"   --->   Operation 139 'load' 'prod_val_29_load' <Predicate = (!icmp_ln195 & icmp_ln191)> <Delay = 0.00>
+ST_1 : Operation 140 [1/1] (0.00ns)   --->   "%write_ln0 = write void @_ssdm_op_Write.ap_auto.floatP0A, i32 %prod_val_29_out, i32 %prod_val_29_load"   --->   Operation 140 'write' 'write_ln0' <Predicate = (!icmp_ln195 & icmp_ln191)> <Delay = 0.00>
+ST_1 : Operation 141 [1/1] (0.00ns)   --->   "%write_ln0 = write void @_ssdm_op_Write.ap_auto.floatP0A, i32 %sum_val_29_out, i32 %sum_val_29_load"   --->   Operation 141 'write' 'write_ln0' <Predicate = (!icmp_ln195 & icmp_ln191)> <Delay = 0.00>
+ST_1 : Operation 142 [1/1] (0.00ns)   --->   "%write_ln0 = write void @_ssdm_op_Write.ap_auto.floatP0A, i32 %prod_val_28_out, i32 %prod_val_28_load"   --->   Operation 142 'write' 'write_ln0' <Predicate = (!icmp_ln195 & icmp_ln191)> <Delay = 0.00>
+ST_1 : Operation 143 [1/1] (0.00ns)   --->   "%write_ln0 = write void @_ssdm_op_Write.ap_auto.floatP0A, i32 %sum_val_28_out, i32 %sum_val_28_load"   --->   Operation 143 'write' 'write_ln0' <Predicate = (!icmp_ln195 & icmp_ln191)> <Delay = 0.00>
+ST_1 : Operation 144 [1/1] (0.00ns)   --->   "%write_ln0 = write void @_ssdm_op_Write.ap_auto.floatP0A, i32 %prod_val_27_out, i32 %prod_val_27_load"   --->   Operation 144 'write' 'write_ln0' <Predicate = (!icmp_ln195 & icmp_ln191)> <Delay = 0.00>
+ST_1 : Operation 145 [1/1] (0.00ns)   --->   "%write_ln0 = write void @_ssdm_op_Write.ap_auto.floatP0A, i32 %sum_val_27_out, i32 %sum_val_27_load"   --->   Operation 145 'write' 'write_ln0' <Predicate = (!icmp_ln195 & icmp_ln191)> <Delay = 0.00>
+ST_1 : Operation 146 [1/1] (0.00ns)   --->   "%write_ln0 = write void @_ssdm_op_Write.ap_auto.floatP0A, i32 %prod_val_26_out, i32 %prod_val_26_load"   --->   Operation 146 'write' 'write_ln0' <Predicate = (!icmp_ln195 & icmp_ln191)> <Delay = 0.00>
+ST_1 : Operation 147 [1/1] (0.00ns)   --->   "%write_ln0 = write void @_ssdm_op_Write.ap_auto.floatP0A, i32 %sum_val_26_out, i32 %sum_val_26_load"   --->   Operation 147 'write' 'write_ln0' <Predicate = (!icmp_ln195 & icmp_ln191)> <Delay = 0.00>
+ST_1 : Operation 148 [1/1] (0.00ns)   --->   "%write_ln0 = write void @_ssdm_op_Write.ap_auto.floatP0A, i32 %prod_val_25_out, i32 %prod_val_25_load"   --->   Operation 148 'write' 'write_ln0' <Predicate = (!icmp_ln195 & icmp_ln191)> <Delay = 0.00>
+ST_1 : Operation 149 [1/1] (0.00ns)   --->   "%write_ln0 = write void @_ssdm_op_Write.ap_auto.floatP0A, i32 %sum_val_25_out, i32 %sum_val_25_load"   --->   Operation 149 'write' 'write_ln0' <Predicate = (!icmp_ln195 & icmp_ln191)> <Delay = 0.00>
+ST_1 : Operation 150 [1/1] (0.00ns)   --->   "%write_ln0 = write void @_ssdm_op_Write.ap_auto.floatP0A, i32 %prod_val_24_out, i32 %prod_val_24_load"   --->   Operation 150 'write' 'write_ln0' <Predicate = (!icmp_ln195 & icmp_ln191)> <Delay = 0.00>
+ST_1 : Operation 151 [1/1] (0.00ns)   --->   "%write_ln0 = write void @_ssdm_op_Write.ap_auto.floatP0A, i32 %sum_val_24_out, i32 %sum_val_24_load"   --->   Operation 151 'write' 'write_ln0' <Predicate = (!icmp_ln195 & icmp_ln191)> <Delay = 0.00>
+ST_1 : Operation 152 [1/1] (0.00ns)   --->   "%write_ln0 = write void @_ssdm_op_Write.ap_auto.floatP0A, i32 %prod_val_23_out, i32 %prod_val_23_load"   --->   Operation 152 'write' 'write_ln0' <Predicate = (!icmp_ln195 & icmp_ln191)> <Delay = 0.00>
+ST_1 : Operation 153 [1/1] (0.00ns)   --->   "%write_ln0 = write void @_ssdm_op_Write.ap_auto.floatP0A, i32 %sum_val_23_out, i32 %sum_val_23_load"   --->   Operation 153 'write' 'write_ln0' <Predicate = (!icmp_ln195 & icmp_ln191)> <Delay = 0.00>
+ST_1 : Operation 154 [1/1] (0.00ns)   --->   "%write_ln0 = write void @_ssdm_op_Write.ap_auto.floatP0A, i32 %prod_val_22_out, i32 %prod_val_22_load"   --->   Operation 154 'write' 'write_ln0' <Predicate = (!icmp_ln195 & icmp_ln191)> <Delay = 0.00>
+ST_1 : Operation 155 [1/1] (0.00ns)   --->   "%write_ln0 = write void @_ssdm_op_Write.ap_auto.floatP0A, i32 %sum_val_22_out, i32 %sum_val_22_load"   --->   Operation 155 'write' 'write_ln0' <Predicate = (!icmp_ln195 & icmp_ln191)> <Delay = 0.00>
+ST_1 : Operation 156 [1/1] (0.00ns)   --->   "%write_ln0 = write void @_ssdm_op_Write.ap_auto.floatP0A, i32 %prod_val_21_out, i32 %prod_val_21_load"   --->   Operation 156 'write' 'write_ln0' <Predicate = (!icmp_ln195 & icmp_ln191)> <Delay = 0.00>
+ST_1 : Operation 157 [1/1] (0.00ns)   --->   "%write_ln0 = write void @_ssdm_op_Write.ap_auto.floatP0A, i32 %sum_val_21_out, i32 %sum_val_21_load"   --->   Operation 157 'write' 'write_ln0' <Predicate = (!icmp_ln195 & icmp_ln191)> <Delay = 0.00>
+ST_1 : Operation 158 [1/1] (0.00ns)   --->   "%write_ln0 = write void @_ssdm_op_Write.ap_auto.floatP0A, i32 %prod_val_20_out, i32 %prod_val_20_load"   --->   Operation 158 'write' 'write_ln0' <Predicate = (!icmp_ln195 & icmp_ln191)> <Delay = 0.00>
+ST_1 : Operation 159 [1/1] (0.00ns)   --->   "%write_ln0 = write void @_ssdm_op_Write.ap_auto.floatP0A, i32 %sum_val_20_out, i32 %sum_val_20_load"   --->   Operation 159 'write' 'write_ln0' <Predicate = (!icmp_ln195 & icmp_ln191)> <Delay = 0.00>
+ST_1 : Operation 160 [1/1] (0.00ns)   --->   "%write_ln0 = write void @_ssdm_op_Write.ap_auto.floatP0A, i32 %prod_val_19_out, i32 %prod_val_19_load"   --->   Operation 160 'write' 'write_ln0' <Predicate = (!icmp_ln195 & icmp_ln191)> <Delay = 0.00>
+ST_1 : Operation 161 [1/1] (0.00ns)   --->   "%write_ln0 = write void @_ssdm_op_Write.ap_auto.floatP0A, i32 %sum_val_19_out, i32 %sum_val_19_load"   --->   Operation 161 'write' 'write_ln0' <Predicate = (!icmp_ln195 & icmp_ln191)> <Delay = 0.00>
+ST_1 : Operation 162 [1/1] (0.00ns)   --->   "%write_ln0 = write void @_ssdm_op_Write.ap_auto.floatP0A, i32 %prod_val_18_out, i32 %prod_val_18_load"   --->   Operation 162 'write' 'write_ln0' <Predicate = (!icmp_ln195 & icmp_ln191)> <Delay = 0.00>
+ST_1 : Operation 163 [1/1] (0.00ns)   --->   "%write_ln0 = write void @_ssdm_op_Write.ap_auto.floatP0A, i32 %sum_val_18_out, i32 %sum_val_18_load"   --->   Operation 163 'write' 'write_ln0' <Predicate = (!icmp_ln195 & icmp_ln191)> <Delay = 0.00>
+ST_1 : Operation 164 [1/1] (0.00ns)   --->   "%write_ln0 = write void @_ssdm_op_Write.ap_auto.floatP0A, i32 %prod_val_17_out, i32 %prod_val_17_load"   --->   Operation 164 'write' 'write_ln0' <Predicate = (!icmp_ln195 & icmp_ln191)> <Delay = 0.00>
+ST_1 : Operation 165 [1/1] (0.00ns)   --->   "%write_ln0 = write void @_ssdm_op_Write.ap_auto.floatP0A, i32 %sum_val_17_out, i32 %sum_val_17_load"   --->   Operation 165 'write' 'write_ln0' <Predicate = (!icmp_ln195 & icmp_ln191)> <Delay = 0.00>
+ST_1 : Operation 166 [1/1] (0.00ns)   --->   "%write_ln0 = write void @_ssdm_op_Write.ap_auto.floatP0A, i32 %prod_val_16_out, i32 %prod_val_16_load"   --->   Operation 166 'write' 'write_ln0' <Predicate = (!icmp_ln195 & icmp_ln191)> <Delay = 0.00>
+ST_1 : Operation 167 [1/1] (0.00ns)   --->   "%write_ln0 = write void @_ssdm_op_Write.ap_auto.floatP0A, i32 %sum_val_16_out, i32 %sum_val_16_load"   --->   Operation 167 'write' 'write_ln0' <Predicate = (!icmp_ln195 & icmp_ln191)> <Delay = 0.00>
+ST_1 : Operation 168 [1/1] (0.00ns)   --->   "%write_ln0 = write void @_ssdm_op_Write.ap_auto.floatP0A, i32 %prod_val_15_out, i32 %prod_val_15_load"   --->   Operation 168 'write' 'write_ln0' <Predicate = (!icmp_ln195 & icmp_ln191)> <Delay = 0.00>
+ST_1 : Operation 169 [1/1] (0.00ns)   --->   "%write_ln0 = write void @_ssdm_op_Write.ap_auto.floatP0A, i32 %sum_val_15_out, i32 %sum_val_15_load"   --->   Operation 169 'write' 'write_ln0' <Predicate = (!icmp_ln195 & icmp_ln191)> <Delay = 0.00>
+ST_1 : Operation 170 [1/1] (0.42ns)   --->   "%ret_ln0 = ret"   --->   Operation 170 'ret' 'ret_ln0' <Predicate = (!icmp_ln195 & icmp_ln191)> <Delay = 0.42>
+
+
+============================================================
++ Verbose Summary: Timing violations
+============================================================
+Target clock period: 10.000ns, clock uncertainty: 2.700ns.
+
+ <State 1>: 1.643ns
+The critical path consists of the following:
+	'store' operation 0 bit ('store_ln191', ../image_analysis.cpp:191->../image_analysis.cpp:262) of constant 0 on local variable 'i', ../image_analysis.cpp:191->../image_analysis.cpp:262 [122]  (0.427 ns)
+	'load' operation 5 bit ('i', ../image_analysis.cpp:191->../image_analysis.cpp:262) on local variable 'i', ../image_analysis.cpp:191->../image_analysis.cpp:262 [125]  (0.000 ns)
+	'icmp' operation 1 bit ('icmp_ln195', ../image_analysis.cpp:195->../image_analysis.cpp:262) [129]  (0.789 ns)
+	blocking operation 0.427 ns on control path)
+
+
+============================================================
++ Verbose Summary: Binding
+============================================================
+N/A
+* FSMD analyzer results:
+  - Output states:
+ - Input state : 
+  - Chain level:
+	State 1
+
+
+============================================================
++ Verbose Summary: Datapath Resource usage 
+============================================================
+N/A

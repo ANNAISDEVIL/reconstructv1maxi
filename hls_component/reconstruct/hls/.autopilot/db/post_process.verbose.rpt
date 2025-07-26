@@ -3,7 +3,7 @@
 ================================================================
 == Vitis HLS Report for 'post_process'
 ================================================================
-* Date:           Mon Jun 30 08:26:05 2025
+* Date:           Sat Jul 26 18:44:20 2025
 
 * Version:        2024.2 (Build 5238294 on Nov  8 2024)
 * Project:        reconstruct
@@ -29,7 +29,7 @@
     |  Latency (cycles) |  Latency (absolute) |  Interval | Pipeline|
     |   min   |   max   |    min   |    max   | min | max |   Type  |
     +---------+---------+----------+----------+-----+-----+---------+
-    |       18|       18|  0.180 us|  0.180 us|   18|   18|       no|
+    |       18|       18|  0.180 us|  0.180 us|    1|    1|      yes|
     +---------+---------+----------+----------+-----+-----+---------+
 
     + Detail: 
@@ -49,14 +49,14 @@
 |       Name      | BRAM_18K|  DSP |   FF   |   LUT  | URAM|
 +-----------------+---------+------+--------+--------+-----+
 |DSP              |        -|     -|       -|       -|    -|
-|Expression       |        -|     -|       0|       2|    -|
+|Expression       |        -|     -|       0|       8|    -|
 |FIFO             |        -|     -|       -|       -|    -|
 |Instance         |        -|     3|     128|     135|    -|
 |Memory           |        -|     -|       -|       -|    -|
-|Multiplexer      |        -|     -|       0|     137|    -|
-|Register         |        -|     -|     244|       -|    -|
+|Multiplexer      |        -|     -|       0|      36|    -|
+|Register         |        -|     -|     372|      64|    -|
 +-----------------+---------+------+--------+--------+-----+
-|Total            |        0|     3|     372|     274|    0|
+|Total            |        0|     3|     500|     243|    0|
 +-----------------+---------+------+--------+--------+-----+
 |Available        |     2160|  4272|  850560|  425280|   80|
 +-----------------+---------+------+--------+--------+-----+
@@ -68,8 +68,8 @@
     +-------------------------------------+-------------------------------+---------+----+-----+-----+-----+
     |               Instance              |             Module            | BRAM_18K| DSP|  FF | LUT | URAM|
     +-------------------------------------+-------------------------------+---------+----+-----+-----+-----+
-    |fdiv_32ns_32ns_32_9_no_dsp_1_U2216   |fdiv_32ns_32ns_32_9_no_dsp_1   |        0|   0|    0|    0|    0|
-    |fmul_32ns_32ns_32_3_max_dsp_1_U2215  |fmul_32ns_32ns_32_3_max_dsp_1  |        0|   3|  128|  135|    0|
+    |fdiv_32ns_32ns_32_9_no_dsp_1_U4741   |fdiv_32ns_32ns_32_9_no_dsp_1   |        0|   0|    0|    0|    0|
+    |fmul_32ns_32ns_32_3_max_dsp_1_U4740  |fmul_32ns_32ns_32_3_max_dsp_1  |        0|   3|  128|  135|    0|
     +-------------------------------------+-------------------------------+---------+----+-----+-----+-----+
     |Total                                |                               |        0|   3|  128|  135|    0|
     +-------------------------------------+-------------------------------+---------+----+-----+-----+-----+
@@ -84,41 +84,63 @@
     N/A
 
     * Expression: 
-    +-----------------+----------+----+---+----+------------+------------+
-    |  Variable Name  | Operation| DSP| FF| LUT| Bitwidth P0| Bitwidth P1|
-    +-----------------+----------+----+---+----+------------+------------+
-    |ap_block_state1  |        or|   0|  0|   2|           1|           1|
-    +-----------------+----------+----+---+----+------------+------------+
-    |Total            |          |   0|  0|   2|           1|           1|
-    +-----------------+----------+----+---+----+------------+------------+
+    +--------------------------------+----------+----+---+----+------------+------------+
+    |          Variable Name         | Operation| DSP| FF| LUT| Bitwidth P0| Bitwidth P1|
+    +--------------------------------+----------+----+---+----+------------+------------+
+    |ap_block_pp0_stage0_01001_grp1  |        or|   0|  0|   2|           1|           1|
+    |ap_block_pp0_stage0_11001       |        or|   0|  0|   2|           1|           1|
+    |ap_block_pp0_stage0_subdone     |        or|   0|  0|   2|           1|           1|
+    |ap_enable_pp0                   |       xor|   0|  0|   2|           1|           2|
+    +--------------------------------+----------+----+---+----+------------+------------+
+    |Total                           |          |   0|  0|   8|           4|           5|
+    +--------------------------------+----------+----+---+----+------------+------------+
 
     * Multiplexer: 
-    +--------------------+-----+-----------+-----+-----------+
-    |        Name        | LUT | Input Size| Bits| Total Bits|
-    +--------------------+-----+-----------+-----+-----------+
-    |ap_NS_fsm           |  101|         20|    1|         20|
-    |ap_done             |    9|          2|    1|          2|
-    |emissions_blk_n_AW  |    9|          2|    1|          2|
-    |emissions_blk_n_B   |    9|          2|    1|          2|
-    |emissions_blk_n_W   |    9|          2|    1|          2|
-    +--------------------+-----+-----------+-----+-----------+
-    |Total               |  137|         28|    5|         28|
-    +--------------------+-----+-----------+-----+-----------+
+    +--------------------+----+-----------+-----+-----------+
+    |        Name        | LUT| Input Size| Bits| Total Bits|
+    +--------------------+----+-----------+-----+-----------+
+    |ap_done             |   9|          2|    1|          2|
+    |emissions_blk_n_AW  |   9|          2|    1|          2|
+    |emissions_blk_n_B   |   9|          2|    1|          2|
+    |emissions_blk_n_W   |   9|          2|    1|          2|
+    +--------------------+----+-----------+-----+-----------+
+    |Total               |  36|          8|    4|          8|
+    +--------------------+----+-----------+-----+-----------+
 
     * Register: 
     +------------------------------+----+----+-----+-----------+
     |             Name             | FF | LUT| Bits| Const Bits|
     +------------------------------+----+----+-----+-----------+
-    |ap_CS_fsm                     |  19|   0|   19|          0|
+    |ap_CS_fsm                     |   1|   0|    1|          0|
     |ap_done_reg                   |   1|   0|    1|          0|
-    |curr_imageProjs_read_reg_120  |  32|   0|   32|          0|
-    |div_i_reg_135                 |  32|   0|   32|          0|
-    |emissions_addr_reg_140        |  64|   0|   64|          0|
-    |mul_i_reg_146                 |  32|   0|   32|          0|
-    |projSumUsed_read_reg_125      |  32|   0|   32|          0|
-    |sum_read_reg_130              |  32|   0|   32|          0|
+    |ap_enable_reg_pp0_iter1       |   1|   0|    1|          0|
+    |ap_enable_reg_pp0_iter10      |   1|   0|    1|          0|
+    |ap_enable_reg_pp0_iter11      |   1|   0|    1|          0|
+    |ap_enable_reg_pp0_iter12      |   1|   0|    1|          0|
+    |ap_enable_reg_pp0_iter13      |   1|   0|    1|          0|
+    |ap_enable_reg_pp0_iter14      |   1|   0|    1|          0|
+    |ap_enable_reg_pp0_iter15      |   1|   0|    1|          0|
+    |ap_enable_reg_pp0_iter16      |   1|   0|    1|          0|
+    |ap_enable_reg_pp0_iter17      |   1|   0|    1|          0|
+    |ap_enable_reg_pp0_iter18      |   1|   0|    1|          0|
+    |ap_enable_reg_pp0_iter2       |   1|   0|    1|          0|
+    |ap_enable_reg_pp0_iter3       |   1|   0|    1|          0|
+    |ap_enable_reg_pp0_iter4       |   1|   0|    1|          0|
+    |ap_enable_reg_pp0_iter5       |   1|   0|    1|          0|
+    |ap_enable_reg_pp0_iter6       |   1|   0|    1|          0|
+    |ap_enable_reg_pp0_iter7       |   1|   0|    1|          0|
+    |ap_enable_reg_pp0_iter8       |   1|   0|    1|          0|
+    |ap_enable_reg_pp0_iter9       |   1|   0|    1|          0|
+    |curr_imageProjs_read_reg_124  |  32|   0|   32|          0|
+    |div_i_reg_145                 |  32|   0|   32|          0|
+    |emissions_addr_reg_139        |  64|   0|   64|          0|
+    |mul_i_reg_150                 |  32|   0|   32|          0|
+    |projSumUsed_read_reg_134      |  32|   0|   32|          0|
+    |sum_read_reg_129              |  32|   0|   32|          0|
+    |emissions_addr_reg_139        |  64|  32|   64|          0|
+    |sum_read_reg_129              |  64|  32|   32|          0|
     +------------------------------+----+----+-----+-----------+
-    |Total                         | 244|   0|  244|          0|
+    |Total                         | 372|  64|  340|          0|
     +------------------------------+----+----+-----+-----------+
 
 
@@ -137,9 +159,7 @@
 |ap_continue                 |   in|    1|  ap_ctrl_hs|     post_process|  return value|
 |ap_idle                     |  out|    1|  ap_ctrl_hs|     post_process|  return value|
 |ap_ready                    |  out|    1|  ap_ctrl_hs|     post_process|  return value|
-|projSumUsed                 |   in|   32|     ap_none|      projSumUsed|        scalar|
-|sum                         |   in|   32|     ap_none|              sum|        scalar|
-|curr_imageProjs             |   in|   32|     ap_none|  curr_imageProjs|        scalar|
+|ap_ce                       |   in|    1|  ap_ctrl_hs|     post_process|  return value|
 |m_axi_emissions_0_AWVALID   |  out|    1|       m_axi|        emissions|       pointer|
 |m_axi_emissions_0_AWREADY   |   in|    1|       m_axi|        emissions|       pointer|
 |m_axi_emissions_0_AWADDR    |  out|   64|       m_axi|        emissions|       pointer|
@@ -186,6 +206,9 @@
 |m_axi_emissions_0_BRESP     |   in|    2|       m_axi|        emissions|       pointer|
 |m_axi_emissions_0_BID       |   in|    1|       m_axi|        emissions|       pointer|
 |m_axi_emissions_0_BUSER     |   in|    1|       m_axi|        emissions|       pointer|
+|projSumUsed                 |   in|   32|     ap_none|      projSumUsed|        scalar|
+|sum                         |   in|   32|     ap_none|              sum|        scalar|
+|curr_imageProjs             |   in|   32|     ap_none|  curr_imageProjs|        scalar|
 |dout                        |   in|   64|     ap_none|             dout|        scalar|
 +----------------------------+-----+-----+------------+-----------------+--------------+
 
@@ -202,21 +225,25 @@ ResetActiveHigh: 1
 IsCombinational: 2
 IsDatapathOnly: 0
 HasWiredReturn: 1
-HasMFsm: 0
-HasVarLatency: 1
-IsPipeline: 0
-IsRtlPipelined: 0
+HasMFsm: 2
+HasVarLatency: 0
+IsPipeline: 1
+IsRtlPipelined: 1
 IsInstanceOverlapped: 0
 IsDontTouch: 0
 HasImplIP: 0
 IsGatedGlobalClock: 0
+
++ Individual pipeline summary: 
+  * Pipeline-0: initiation interval (II) = 1, depth = 19
 
 
 ============================================================
 + Verbose Summary: Schedule
 ============================================================
 * Number of FSM states : 19
-* Pipeline : 0
+* Pipeline : 1
+  Pipeline-0 : II = 1, D = 19, States = { 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 }
 * Dataflow Pipeline: 0
 
 * FSM state transitions: 
@@ -243,71 +270,72 @@ IsGatedGlobalClock: 0
 * FSM state operations: 
 
 State 1 <SV = 0> <Delay = 1.83>
-ST_1 : Operation 20 [1/1] (1.83ns)   --->   "%curr_imageProjs_read = read i32 @_ssdm_op_Read.ap_auto.float, i32 %curr_imageProjs" [../image_analysis.cpp:112->../image_analysis.cpp:169]   --->   Operation 20 'read' 'curr_imageProjs_read' <Predicate = true> <Delay = 1.83> <CoreInst = "FIFO_SRL">   --->   Core 80 'FIFO_SRL' <Latency = 0> <II = 1> <Delay = 1.83> <Storage> <Opcode : 'read' 'write' 'nbread' 'nbwrite'> <Ports = 0> <Width = -1> <Depth = -1> <FIFO>
-ST_1 : Operation 21 [1/1] (1.83ns)   --->   "%projSumUsed_read = read i32 @_ssdm_op_Read.ap_auto.float, i32 %projSumUsed" [../image_analysis.cpp:112->../image_analysis.cpp:169]   --->   Operation 21 'read' 'projSumUsed_read' <Predicate = true> <Delay = 1.83> <CoreInst = "FIFO_SRL">   --->   Core 80 'FIFO_SRL' <Latency = 0> <II = 1> <Delay = 1.83> <Storage> <Opcode : 'read' 'write' 'nbread' 'nbwrite'> <Ports = 0> <Width = -1> <Depth = -1> <FIFO>
+ST_1 : Operation 20 [1/1] (1.83ns)   --->   "%dout_read = read i64 @_ssdm_op_Read.ap_auto.i64, i64 %dout" [../image_analysis.cpp:202->../image_analysis.cpp:263]   --->   Operation 20 'read' 'dout_read' <Predicate = true> <Delay = 1.83> <CoreInst = "FIFO_SRL">   --->   Core 80 'FIFO_SRL' <Latency = 0> <II = 1> <Delay = 1.83> <Storage> <Opcode : 'read' 'write' 'nbread' 'nbwrite'> <Ports = 0> <Width = -1> <Depth = -1> <FIFO>
+ST_1 : Operation 21 [1/1] (1.83ns)   --->   "%curr_imageProjs_read = read i32 @_ssdm_op_Read.ap_auto.float, i32 %curr_imageProjs" [../image_analysis.cpp:202->../image_analysis.cpp:263]   --->   Operation 21 'read' 'curr_imageProjs_read' <Predicate = true> <Delay = 1.83> <CoreInst = "FIFO_SRL">   --->   Core 80 'FIFO_SRL' <Latency = 0> <II = 1> <Delay = 1.83> <Storage> <Opcode : 'read' 'write' 'nbread' 'nbwrite'> <Ports = 0> <Width = -1> <Depth = -1> <FIFO>
+ST_1 : Operation 22 [1/1] (1.83ns)   --->   "%sum_read = read i32 @_ssdm_op_Read.ap_auto.float, i32 %sum" [../image_analysis.cpp:202->../image_analysis.cpp:263]   --->   Operation 22 'read' 'sum_read' <Predicate = true> <Delay = 1.83> <CoreInst = "FIFO_SRL">   --->   Core 80 'FIFO_SRL' <Latency = 0> <II = 1> <Delay = 1.83> <Storage> <Opcode : 'read' 'write' 'nbread' 'nbwrite'> <Ports = 0> <Width = -1> <Depth = -1> <FIFO>
+ST_1 : Operation 23 [1/1] (1.83ns)   --->   "%projSumUsed_read = read i32 @_ssdm_op_Read.ap_auto.float, i32 %projSumUsed" [../image_analysis.cpp:202->../image_analysis.cpp:263]   --->   Operation 23 'read' 'projSumUsed_read' <Predicate = true> <Delay = 1.83> <CoreInst = "FIFO_SRL">   --->   Core 80 'FIFO_SRL' <Latency = 0> <II = 1> <Delay = 1.83> <Storage> <Opcode : 'read' 'write' 'nbread' 'nbwrite'> <Ports = 0> <Width = -1> <Depth = -1> <FIFO>
+ST_1 : Operation 24 [1/1] (0.00ns)   --->   "%trunc_ln = partselect i62 @_ssdm_op_PartSelect.i62.i64.i32.i32, i64 %dout_read, i32 2, i32 63" [../image_analysis.cpp:204->../image_analysis.cpp:263]   --->   Operation 24 'partselect' 'trunc_ln' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 25 [1/1] (0.00ns)   --->   "%sext_ln204 = sext i62 %trunc_ln" [../image_analysis.cpp:204->../image_analysis.cpp:263]   --->   Operation 25 'sext' 'sext_ln204' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 26 [1/1] (0.00ns)   --->   "%emissions_addr = getelementptr i32 %emissions, i64 %sext_ln204" [../image_analysis.cpp:204->../image_analysis.cpp:263]   --->   Operation 26 'getelementptr' 'emissions_addr' <Predicate = true> <Delay = 0.00>
 
 State 2 <SV = 1> <Delay = 7.05>
-ST_2 : Operation 22 [9/9] (7.05ns)   --->   "%div_i = fdiv i32 %curr_imageProjs_read, i32 %projSumUsed_read" [../image_analysis.cpp:113->../image_analysis.cpp:169]   --->   Operation 22 'fdiv' 'div_i' <Predicate = true> <Delay = 7.05> <CoreInst = "FDiv">   --->   Core 20 'FDiv' <Latency = 8> <II = 1> <Delay = 7.05> <FuncUnit> <Opcode : 'fdiv' 'frem'> <InPorts = 2> <OutPorts = 1>
+ST_2 : Operation 27 [9/9] (7.05ns)   --->   "%div_i = fdiv i32 %curr_imageProjs_read, i32 %projSumUsed_read" [../image_analysis.cpp:204->../image_analysis.cpp:263]   --->   Operation 27 'fdiv' 'div_i' <Predicate = true> <Delay = 7.05> <CoreInst = "FDiv">   --->   Core 20 'FDiv' <Latency = 8> <II = 1> <Delay = 7.05> <FuncUnit> <Opcode : 'fdiv' 'frem'> <InPorts = 2> <OutPorts = 1>
 
 State 3 <SV = 2> <Delay = 7.05>
-ST_3 : Operation 23 [8/9] (7.05ns)   --->   "%div_i = fdiv i32 %curr_imageProjs_read, i32 %projSumUsed_read" [../image_analysis.cpp:113->../image_analysis.cpp:169]   --->   Operation 23 'fdiv' 'div_i' <Predicate = true> <Delay = 7.05> <CoreInst = "FDiv">   --->   Core 20 'FDiv' <Latency = 8> <II = 1> <Delay = 7.05> <FuncUnit> <Opcode : 'fdiv' 'frem'> <InPorts = 2> <OutPorts = 1>
+ST_3 : Operation 28 [8/9] (7.05ns)   --->   "%div_i = fdiv i32 %curr_imageProjs_read, i32 %projSumUsed_read" [../image_analysis.cpp:204->../image_analysis.cpp:263]   --->   Operation 28 'fdiv' 'div_i' <Predicate = true> <Delay = 7.05> <CoreInst = "FDiv">   --->   Core 20 'FDiv' <Latency = 8> <II = 1> <Delay = 7.05> <FuncUnit> <Opcode : 'fdiv' 'frem'> <InPorts = 2> <OutPorts = 1>
 
 State 4 <SV = 3> <Delay = 7.05>
-ST_4 : Operation 24 [7/9] (7.05ns)   --->   "%div_i = fdiv i32 %curr_imageProjs_read, i32 %projSumUsed_read" [../image_analysis.cpp:113->../image_analysis.cpp:169]   --->   Operation 24 'fdiv' 'div_i' <Predicate = true> <Delay = 7.05> <CoreInst = "FDiv">   --->   Core 20 'FDiv' <Latency = 8> <II = 1> <Delay = 7.05> <FuncUnit> <Opcode : 'fdiv' 'frem'> <InPorts = 2> <OutPorts = 1>
+ST_4 : Operation 29 [7/9] (7.05ns)   --->   "%div_i = fdiv i32 %curr_imageProjs_read, i32 %projSumUsed_read" [../image_analysis.cpp:204->../image_analysis.cpp:263]   --->   Operation 29 'fdiv' 'div_i' <Predicate = true> <Delay = 7.05> <CoreInst = "FDiv">   --->   Core 20 'FDiv' <Latency = 8> <II = 1> <Delay = 7.05> <FuncUnit> <Opcode : 'fdiv' 'frem'> <InPorts = 2> <OutPorts = 1>
 
 State 5 <SV = 4> <Delay = 7.05>
-ST_5 : Operation 25 [6/9] (7.05ns)   --->   "%div_i = fdiv i32 %curr_imageProjs_read, i32 %projSumUsed_read" [../image_analysis.cpp:113->../image_analysis.cpp:169]   --->   Operation 25 'fdiv' 'div_i' <Predicate = true> <Delay = 7.05> <CoreInst = "FDiv">   --->   Core 20 'FDiv' <Latency = 8> <II = 1> <Delay = 7.05> <FuncUnit> <Opcode : 'fdiv' 'frem'> <InPorts = 2> <OutPorts = 1>
+ST_5 : Operation 30 [6/9] (7.05ns)   --->   "%div_i = fdiv i32 %curr_imageProjs_read, i32 %projSumUsed_read" [../image_analysis.cpp:204->../image_analysis.cpp:263]   --->   Operation 30 'fdiv' 'div_i' <Predicate = true> <Delay = 7.05> <CoreInst = "FDiv">   --->   Core 20 'FDiv' <Latency = 8> <II = 1> <Delay = 7.05> <FuncUnit> <Opcode : 'fdiv' 'frem'> <InPorts = 2> <OutPorts = 1>
 
 State 6 <SV = 5> <Delay = 7.05>
-ST_6 : Operation 26 [5/9] (7.05ns)   --->   "%div_i = fdiv i32 %curr_imageProjs_read, i32 %projSumUsed_read" [../image_analysis.cpp:113->../image_analysis.cpp:169]   --->   Operation 26 'fdiv' 'div_i' <Predicate = true> <Delay = 7.05> <CoreInst = "FDiv">   --->   Core 20 'FDiv' <Latency = 8> <II = 1> <Delay = 7.05> <FuncUnit> <Opcode : 'fdiv' 'frem'> <InPorts = 2> <OutPorts = 1>
+ST_6 : Operation 31 [5/9] (7.05ns)   --->   "%div_i = fdiv i32 %curr_imageProjs_read, i32 %projSumUsed_read" [../image_analysis.cpp:204->../image_analysis.cpp:263]   --->   Operation 31 'fdiv' 'div_i' <Predicate = true> <Delay = 7.05> <CoreInst = "FDiv">   --->   Core 20 'FDiv' <Latency = 8> <II = 1> <Delay = 7.05> <FuncUnit> <Opcode : 'fdiv' 'frem'> <InPorts = 2> <OutPorts = 1>
 
 State 7 <SV = 6> <Delay = 7.05>
-ST_7 : Operation 27 [4/9] (7.05ns)   --->   "%div_i = fdiv i32 %curr_imageProjs_read, i32 %projSumUsed_read" [../image_analysis.cpp:113->../image_analysis.cpp:169]   --->   Operation 27 'fdiv' 'div_i' <Predicate = true> <Delay = 7.05> <CoreInst = "FDiv">   --->   Core 20 'FDiv' <Latency = 8> <II = 1> <Delay = 7.05> <FuncUnit> <Opcode : 'fdiv' 'frem'> <InPorts = 2> <OutPorts = 1>
+ST_7 : Operation 32 [4/9] (7.05ns)   --->   "%div_i = fdiv i32 %curr_imageProjs_read, i32 %projSumUsed_read" [../image_analysis.cpp:204->../image_analysis.cpp:263]   --->   Operation 32 'fdiv' 'div_i' <Predicate = true> <Delay = 7.05> <CoreInst = "FDiv">   --->   Core 20 'FDiv' <Latency = 8> <II = 1> <Delay = 7.05> <FuncUnit> <Opcode : 'fdiv' 'frem'> <InPorts = 2> <OutPorts = 1>
 
 State 8 <SV = 7> <Delay = 7.05>
-ST_8 : Operation 28 [3/9] (7.05ns)   --->   "%div_i = fdiv i32 %curr_imageProjs_read, i32 %projSumUsed_read" [../image_analysis.cpp:113->../image_analysis.cpp:169]   --->   Operation 28 'fdiv' 'div_i' <Predicate = true> <Delay = 7.05> <CoreInst = "FDiv">   --->   Core 20 'FDiv' <Latency = 8> <II = 1> <Delay = 7.05> <FuncUnit> <Opcode : 'fdiv' 'frem'> <InPorts = 2> <OutPorts = 1>
+ST_8 : Operation 33 [3/9] (7.05ns)   --->   "%div_i = fdiv i32 %curr_imageProjs_read, i32 %projSumUsed_read" [../image_analysis.cpp:204->../image_analysis.cpp:263]   --->   Operation 33 'fdiv' 'div_i' <Predicate = true> <Delay = 7.05> <CoreInst = "FDiv">   --->   Core 20 'FDiv' <Latency = 8> <II = 1> <Delay = 7.05> <FuncUnit> <Opcode : 'fdiv' 'frem'> <InPorts = 2> <OutPorts = 1>
 
 State 9 <SV = 8> <Delay = 7.05>
-ST_9 : Operation 29 [2/9] (7.05ns)   --->   "%div_i = fdiv i32 %curr_imageProjs_read, i32 %projSumUsed_read" [../image_analysis.cpp:113->../image_analysis.cpp:169]   --->   Operation 29 'fdiv' 'div_i' <Predicate = true> <Delay = 7.05> <CoreInst = "FDiv">   --->   Core 20 'FDiv' <Latency = 8> <II = 1> <Delay = 7.05> <FuncUnit> <Opcode : 'fdiv' 'frem'> <InPorts = 2> <OutPorts = 1>
+ST_9 : Operation 34 [2/9] (7.05ns)   --->   "%div_i = fdiv i32 %curr_imageProjs_read, i32 %projSumUsed_read" [../image_analysis.cpp:204->../image_analysis.cpp:263]   --->   Operation 34 'fdiv' 'div_i' <Predicate = true> <Delay = 7.05> <CoreInst = "FDiv">   --->   Core 20 'FDiv' <Latency = 8> <II = 1> <Delay = 7.05> <FuncUnit> <Opcode : 'fdiv' 'frem'> <InPorts = 2> <OutPorts = 1>
 
 State 10 <SV = 9> <Delay = 7.05>
-ST_10 : Operation 30 [1/1] (1.83ns)   --->   "%sum_read = read i32 @_ssdm_op_Read.ap_auto.float, i32 %sum" [../image_analysis.cpp:112->../image_analysis.cpp:169]   --->   Operation 30 'read' 'sum_read' <Predicate = true> <Delay = 1.83> <CoreInst = "FIFO_SRL">   --->   Core 80 'FIFO_SRL' <Latency = 0> <II = 1> <Delay = 1.83> <Storage> <Opcode : 'read' 'write' 'nbread' 'nbwrite'> <Ports = 0> <Width = -1> <Depth = -1> <FIFO>
-ST_10 : Operation 31 [1/9] (7.05ns)   --->   "%div_i = fdiv i32 %curr_imageProjs_read, i32 %projSumUsed_read" [../image_analysis.cpp:113->../image_analysis.cpp:169]   --->   Operation 31 'fdiv' 'div_i' <Predicate = true> <Delay = 7.05> <CoreInst = "FDiv">   --->   Core 20 'FDiv' <Latency = 8> <II = 1> <Delay = 7.05> <FuncUnit> <Opcode : 'fdiv' 'frem'> <InPorts = 2> <OutPorts = 1>
+ST_10 : Operation 35 [1/9] (7.05ns)   --->   "%div_i = fdiv i32 %curr_imageProjs_read, i32 %projSumUsed_read" [../image_analysis.cpp:204->../image_analysis.cpp:263]   --->   Operation 35 'fdiv' 'div_i' <Predicate = true> <Delay = 7.05> <CoreInst = "FDiv">   --->   Core 20 'FDiv' <Latency = 8> <II = 1> <Delay = 7.05> <FuncUnit> <Opcode : 'fdiv' 'frem'> <InPorts = 2> <OutPorts = 1>
 
 State 11 <SV = 10> <Delay = 7.01>
-ST_11 : Operation 32 [3/3] (7.01ns)   --->   "%mul_i = fmul i32 %div_i, i32 %sum_read" [../image_analysis.cpp:113->../image_analysis.cpp:169]   --->   Operation 32 'fmul' 'mul_i' <Predicate = true> <Delay = 7.01> <CoreInst = "FMul_maxdsp">   --->   Core 30 'FMul_maxdsp' <Latency = 2> <II = 1> <Delay = 7.01> <FuncUnit> <Opcode : 'fmul'> <InPorts = 2> <OutPorts = 1>
+ST_11 : Operation 36 [3/3] (7.01ns)   --->   "%mul_i = fmul i32 %div_i, i32 %sum_read" [../image_analysis.cpp:204->../image_analysis.cpp:263]   --->   Operation 36 'fmul' 'mul_i' <Predicate = true> <Delay = 7.01> <CoreInst = "FMul_maxdsp">   --->   Core 30 'FMul_maxdsp' <Latency = 2> <II = 1> <Delay = 7.01> <FuncUnit> <Opcode : 'fmul'> <InPorts = 2> <OutPorts = 1>
 
 State 12 <SV = 11> <Delay = 7.01>
-ST_12 : Operation 33 [1/1] (1.83ns)   --->   "%dout_read = read i64 @_ssdm_op_Read.ap_auto.i64, i64 %dout" [../image_analysis.cpp:112->../image_analysis.cpp:169]   --->   Operation 33 'read' 'dout_read' <Predicate = true> <Delay = 1.83> <CoreInst = "FIFO_SRL">   --->   Core 80 'FIFO_SRL' <Latency = 0> <II = 1> <Delay = 1.83> <Storage> <Opcode : 'read' 'write' 'nbread' 'nbwrite'> <Ports = 0> <Width = -1> <Depth = -1> <FIFO>
-ST_12 : Operation 34 [2/3] (7.01ns)   --->   "%mul_i = fmul i32 %div_i, i32 %sum_read" [../image_analysis.cpp:113->../image_analysis.cpp:169]   --->   Operation 34 'fmul' 'mul_i' <Predicate = true> <Delay = 7.01> <CoreInst = "FMul_maxdsp">   --->   Core 30 'FMul_maxdsp' <Latency = 2> <II = 1> <Delay = 7.01> <FuncUnit> <Opcode : 'fmul'> <InPorts = 2> <OutPorts = 1>
-ST_12 : Operation 35 [1/1] (0.00ns)   --->   "%trunc_ln = partselect i62 @_ssdm_op_PartSelect.i62.i64.i32.i32, i64 %dout_read, i32 2, i32 63" [../image_analysis.cpp:113->../image_analysis.cpp:169]   --->   Operation 35 'partselect' 'trunc_ln' <Predicate = true> <Delay = 0.00>
-ST_12 : Operation 36 [1/1] (0.00ns)   --->   "%sext_ln113 = sext i62 %trunc_ln" [../image_analysis.cpp:113->../image_analysis.cpp:169]   --->   Operation 36 'sext' 'sext_ln113' <Predicate = true> <Delay = 0.00>
-ST_12 : Operation 37 [1/1] (0.00ns)   --->   "%emissions_addr = getelementptr i32 %emissions, i64 %sext_ln113" [../image_analysis.cpp:113->../image_analysis.cpp:169]   --->   Operation 37 'getelementptr' 'emissions_addr' <Predicate = true> <Delay = 0.00>
+ST_12 : Operation 37 [2/3] (7.01ns)   --->   "%mul_i = fmul i32 %div_i, i32 %sum_read" [../image_analysis.cpp:204->../image_analysis.cpp:263]   --->   Operation 37 'fmul' 'mul_i' <Predicate = true> <Delay = 7.01> <CoreInst = "FMul_maxdsp">   --->   Core 30 'FMul_maxdsp' <Latency = 2> <II = 1> <Delay = 7.01> <FuncUnit> <Opcode : 'fmul'> <InPorts = 2> <OutPorts = 1>
 
 State 13 <SV = 12> <Delay = 7.30>
-ST_13 : Operation 38 [1/3] (7.01ns)   --->   "%mul_i = fmul i32 %div_i, i32 %sum_read" [../image_analysis.cpp:113->../image_analysis.cpp:169]   --->   Operation 38 'fmul' 'mul_i' <Predicate = true> <Delay = 7.01> <CoreInst = "FMul_maxdsp">   --->   Core 30 'FMul_maxdsp' <Latency = 2> <II = 1> <Delay = 7.01> <FuncUnit> <Opcode : 'fmul'> <InPorts = 2> <OutPorts = 1>
-ST_13 : Operation 39 [1/1] (7.30ns)   --->   "%emissions_addr_req = writereq i1 @_ssdm_op_WriteReq.m_axi.i32P1A, i64 %emissions_addr, i64 1" [../image_analysis.cpp:113->../image_analysis.cpp:169]   --->   Operation 39 'writereq' 'emissions_addr_req' <Predicate = true> <Delay = 7.30> <CoreInst = "m_axi">   --->   Core 119 'm_axi' <Latency = 9> <II = 1> <Delay = 1.00> <Adapter> <Opcode : 'read' 'write' 'readreq' 'writereq' 'writeresp'>
+ST_13 : Operation 38 [1/3] (7.01ns)   --->   "%mul_i = fmul i32 %div_i, i32 %sum_read" [../image_analysis.cpp:204->../image_analysis.cpp:263]   --->   Operation 38 'fmul' 'mul_i' <Predicate = true> <Delay = 7.01> <CoreInst = "FMul_maxdsp">   --->   Core 30 'FMul_maxdsp' <Latency = 2> <II = 1> <Delay = 7.01> <FuncUnit> <Opcode : 'fmul'> <InPorts = 2> <OutPorts = 1>
+ST_13 : Operation 39 [1/1] (7.30ns)   --->   "%emissions_addr_req = writereq i1 @_ssdm_op_WriteReq.m_axi.i32P1A, i64 %emissions_addr, i64 1" [../image_analysis.cpp:204->../image_analysis.cpp:263]   --->   Operation 39 'writereq' 'emissions_addr_req' <Predicate = true> <Delay = 7.30> <CoreInst = "m_axi">   --->   Core 119 'm_axi' <Latency = 9> <II = 1> <Delay = 1.00> <Adapter> <Opcode : 'read' 'write' 'readreq' 'writereq' 'writeresp'>
 
 State 14 <SV = 13> <Delay = 7.30>
-ST_14 : Operation 40 [1/1] (0.00ns)   --->   "%bitcast_ln113 = bitcast i32 %mul_i" [../image_analysis.cpp:113->../image_analysis.cpp:169]   --->   Operation 40 'bitcast' 'bitcast_ln113' <Predicate = true> <Delay = 0.00>
-ST_14 : Operation 41 [1/1] (7.30ns)   --->   "%write_ln113 = write void @_ssdm_op_Write.m_axi.i32P1A, i64 %emissions_addr, i32 %bitcast_ln113, i4 15" [../image_analysis.cpp:113->../image_analysis.cpp:169]   --->   Operation 41 'write' 'write_ln113' <Predicate = true> <Delay = 7.30> <CoreInst = "m_axi">   --->   Core 119 'm_axi' <Latency = 5> <II = 1> <Delay = 1.00> <Adapter> <Opcode : 'read' 'write' 'readreq' 'writereq' 'writeresp'>
+ST_14 : Operation 40 [1/1] (0.00ns)   --->   "%bitcast_ln204 = bitcast i32 %mul_i" [../image_analysis.cpp:204->../image_analysis.cpp:263]   --->   Operation 40 'bitcast' 'bitcast_ln204' <Predicate = true> <Delay = 0.00>
+ST_14 : Operation 41 [1/1] (7.30ns)   --->   "%write_ln204 = write void @_ssdm_op_Write.m_axi.i32P1A, i64 %emissions_addr, i32 %bitcast_ln204, i4 15" [../image_analysis.cpp:204->../image_analysis.cpp:263]   --->   Operation 41 'write' 'write_ln204' <Predicate = true> <Delay = 7.30> <CoreInst = "m_axi">   --->   Core 119 'm_axi' <Latency = 5> <II = 1> <Delay = 1.00> <Adapter> <Opcode : 'read' 'write' 'readreq' 'writereq' 'writeresp'>
 
 State 15 <SV = 14> <Delay = 7.30>
-ST_15 : Operation 42 [5/5] (7.30ns)   --->   "%emissions_addr_resp = writeresp i1 @_ssdm_op_WriteResp.m_axi.i32P1A, i64 %emissions_addr" [../image_analysis.cpp:113->../image_analysis.cpp:169]   --->   Operation 42 'writeresp' 'emissions_addr_resp' <Predicate = true> <Delay = 7.30> <CoreInst = "m_axi">   --->   Core 119 'm_axi' <Latency = 3> <II = 1> <Delay = 1.00> <Adapter> <Opcode : 'read' 'write' 'readreq' 'writereq' 'writeresp'>
+ST_15 : Operation 42 [5/5] (7.30ns)   --->   "%emissions_addr_resp = writeresp i1 @_ssdm_op_WriteResp.m_axi.i32P1A, i64 %emissions_addr" [../image_analysis.cpp:204->../image_analysis.cpp:263]   --->   Operation 42 'writeresp' 'emissions_addr_resp' <Predicate = true> <Delay = 7.30> <CoreInst = "m_axi">   --->   Core 119 'm_axi' <Latency = 3> <II = 1> <Delay = 1.00> <Adapter> <Opcode : 'read' 'write' 'readreq' 'writereq' 'writeresp'>
 
 State 16 <SV = 15> <Delay = 7.30>
-ST_16 : Operation 43 [4/5] (7.30ns)   --->   "%emissions_addr_resp = writeresp i1 @_ssdm_op_WriteResp.m_axi.i32P1A, i64 %emissions_addr" [../image_analysis.cpp:113->../image_analysis.cpp:169]   --->   Operation 43 'writeresp' 'emissions_addr_resp' <Predicate = true> <Delay = 7.30> <CoreInst = "m_axi">   --->   Core 119 'm_axi' <Latency = 3> <II = 1> <Delay = 1.00> <Adapter> <Opcode : 'read' 'write' 'readreq' 'writereq' 'writeresp'>
+ST_16 : Operation 43 [4/5] (7.30ns)   --->   "%emissions_addr_resp = writeresp i1 @_ssdm_op_WriteResp.m_axi.i32P1A, i64 %emissions_addr" [../image_analysis.cpp:204->../image_analysis.cpp:263]   --->   Operation 43 'writeresp' 'emissions_addr_resp' <Predicate = true> <Delay = 7.30> <CoreInst = "m_axi">   --->   Core 119 'm_axi' <Latency = 3> <II = 1> <Delay = 1.00> <Adapter> <Opcode : 'read' 'write' 'readreq' 'writereq' 'writeresp'>
 
 State 17 <SV = 16> <Delay = 7.30>
-ST_17 : Operation 44 [3/5] (7.30ns)   --->   "%emissions_addr_resp = writeresp i1 @_ssdm_op_WriteResp.m_axi.i32P1A, i64 %emissions_addr" [../image_analysis.cpp:113->../image_analysis.cpp:169]   --->   Operation 44 'writeresp' 'emissions_addr_resp' <Predicate = true> <Delay = 7.30> <CoreInst = "m_axi">   --->   Core 119 'm_axi' <Latency = 3> <II = 1> <Delay = 1.00> <Adapter> <Opcode : 'read' 'write' 'readreq' 'writereq' 'writeresp'>
+ST_17 : Operation 44 [3/5] (7.30ns)   --->   "%emissions_addr_resp = writeresp i1 @_ssdm_op_WriteResp.m_axi.i32P1A, i64 %emissions_addr" [../image_analysis.cpp:204->../image_analysis.cpp:263]   --->   Operation 44 'writeresp' 'emissions_addr_resp' <Predicate = true> <Delay = 7.30> <CoreInst = "m_axi">   --->   Core 119 'm_axi' <Latency = 3> <II = 1> <Delay = 1.00> <Adapter> <Opcode : 'read' 'write' 'readreq' 'writereq' 'writeresp'>
 
 State 18 <SV = 17> <Delay = 7.30>
-ST_18 : Operation 45 [2/5] (7.30ns)   --->   "%emissions_addr_resp = writeresp i1 @_ssdm_op_WriteResp.m_axi.i32P1A, i64 %emissions_addr" [../image_analysis.cpp:113->../image_analysis.cpp:169]   --->   Operation 45 'writeresp' 'emissions_addr_resp' <Predicate = true> <Delay = 7.30> <CoreInst = "m_axi">   --->   Core 119 'm_axi' <Latency = 3> <II = 1> <Delay = 1.00> <Adapter> <Opcode : 'read' 'write' 'readreq' 'writereq' 'writeresp'>
+ST_18 : Operation 45 [2/5] (7.30ns)   --->   "%emissions_addr_resp = writeresp i1 @_ssdm_op_WriteResp.m_axi.i32P1A, i64 %emissions_addr" [../image_analysis.cpp:204->../image_analysis.cpp:263]   --->   Operation 45 'writeresp' 'emissions_addr_resp' <Predicate = true> <Delay = 7.30> <CoreInst = "m_axi">   --->   Core 119 'm_axi' <Latency = 3> <II = 1> <Delay = 1.00> <Adapter> <Opcode : 'read' 'write' 'readreq' 'writereq' 'writeresp'>
 
 State 19 <SV = 18> <Delay = 7.30>
-ST_19 : Operation 46 [1/1] (0.00ns)   --->   "%specinterface_ln0 = specinterface void @_ssdm_op_SpecInterface, i32 %emissions, void @empty_16, i32 0, i32 0, void @empty_17, i32 0, i32 1024, void @empty_0, void @empty_19, void @empty_17, i32 16, i32 16, i32 16, i32 16, void @empty_17, void @empty_17, i32 4294967295, i32 0, i32 0"   --->   Operation 46 'specinterface' 'specinterface_ln0' <Predicate = true> <Delay = 0.00>
-ST_19 : Operation 47 [1/5] (7.30ns)   --->   "%emissions_addr_resp = writeresp i1 @_ssdm_op_WriteResp.m_axi.i32P1A, i64 %emissions_addr" [../image_analysis.cpp:113->../image_analysis.cpp:169]   --->   Operation 47 'writeresp' 'emissions_addr_resp' <Predicate = true> <Delay = 7.30> <CoreInst = "m_axi">   --->   Core 119 'm_axi' <Latency = 3> <II = 1> <Delay = 1.00> <Adapter> <Opcode : 'read' 'write' 'readreq' 'writereq' 'writeresp'>
-ST_19 : Operation 48 [1/1] (0.00ns)   --->   "%ret_ln169 = ret" [../image_analysis.cpp:169]   --->   Operation 48 'ret' 'ret_ln169' <Predicate = true> <Delay = 0.00>
+ST_19 : Operation 46 [1/1] (0.00ns)   --->   "%specinterface_ln0 = specinterface void @_ssdm_op_SpecInterface, i32 %emissions, void @empty_23, i32 0, i32 0, void @empty_24, i32 0, i32 1024, void @empty_2, void @empty_26, void @empty_24, i32 16, i32 16, i32 16, i32 16, void @empty_24, void @empty_24, i32 4294967295, i32 0, i32 0"   --->   Operation 46 'specinterface' 'specinterface_ln0' <Predicate = true> <Delay = 0.00>
+ST_19 : Operation 47 [1/1] (0.00ns)   --->   "%specpipeline_ln203 = specpipeline void @_ssdm_op_SpecPipeline, i32 1, i32 0, i32 0, i32 0, void @empty_24" [../image_analysis.cpp:203->../image_analysis.cpp:263]   --->   Operation 47 'specpipeline' 'specpipeline_ln203' <Predicate = true> <Delay = 0.00>
+ST_19 : Operation 48 [1/5] (7.30ns)   --->   "%emissions_addr_resp = writeresp i1 @_ssdm_op_WriteResp.m_axi.i32P1A, i64 %emissions_addr" [../image_analysis.cpp:204->../image_analysis.cpp:263]   --->   Operation 48 'writeresp' 'emissions_addr_resp' <Predicate = true> <Delay = 7.30> <CoreInst = "m_axi">   --->   Core 119 'm_axi' <Latency = 3> <II = 1> <Delay = 1.00> <Adapter> <Opcode : 'read' 'write' 'readreq' 'writereq' 'writeresp'>
+ST_19 : Operation 49 [1/1] (0.00ns)   --->   "%ret_ln263 = ret" [../image_analysis.cpp:263]   --->   Operation 49 'ret' 'ret_ln263' <Predicate = true> <Delay = 0.00>
 
 
 ============================================================
@@ -318,7 +346,7 @@ STG Binding:
 - Is combinational: 0
 - Is one-state seq: 0
 - Is datapath-only: 0
-- Is pipelined: 0
+- Is pipelined: 1
 - Is top level: 0
 Port [ Return ] is wired: 1; IO mode=ap_ctrl_hs:ce=0
 Port [ projSumUsed]:  wired=1; compound=0; hidden=0; nouse=0; global=0; static=0; extern=0; dir=0; type=0; pingpong=0; private_global=0; IO mode=ap_none:ce=0
@@ -332,21 +360,22 @@ Port [ dout]:  wired=1; compound=0; hidden=0; nouse=0; global=0; static=0; exter
 
 <LifeTime>
 <method=bitvector/>
-curr_imageProjs_read (read         ) [ 00111111111000000000]
-projSumUsed_read     (read         ) [ 00111111111000000000]
-sum_read             (read         ) [ 00000000000111000000]
-div_i                (fdiv         ) [ 00000000000111000000]
 dout_read            (read         ) [ 00000000000000000000]
+curr_imageProjs_read (read         ) [ 01111111111000000000]
+sum_read             (read         ) [ 01111111111111000000]
+projSumUsed_read     (read         ) [ 01111111111000000000]
 trunc_ln             (partselect   ) [ 00000000000000000000]
-sext_ln113           (sext         ) [ 00000000000000000000]
-emissions_addr       (getelementptr) [ 00000000000001111111]
-mul_i                (fmul         ) [ 00000000000000100000]
+sext_ln204           (sext         ) [ 00000000000000000000]
+emissions_addr       (getelementptr) [ 01111111111111111111]
+div_i                (fdiv         ) [ 01000000000111000000]
+mul_i                (fmul         ) [ 01000000000000100000]
 emissions_addr_req   (writereq     ) [ 00000000000000000000]
-bitcast_ln113        (bitcast      ) [ 00000000000000000000]
-write_ln113          (write        ) [ 00000000000000000000]
+bitcast_ln204        (bitcast      ) [ 00000000000000000000]
+write_ln204          (write        ) [ 00000000000000000000]
 specinterface_ln0    (specinterface) [ 00000000000000000000]
+specpipeline_ln203   (specpipeline ) [ 00000000000000000000]
 emissions_addr_resp  (writeresp    ) [ 00000000000000000000]
-ret_ln169            (ret          ) [ 00000000000000000000]
+ret_ln263            (ret          ) [ 00000000000000000000]
 </LifeTime>
 
 <model>
@@ -403,7 +432,7 @@ ret_ln169            (ret          ) [ 00000000000000000000]
 <pin id="11" dir="1" index="0" bw="1" slack="0"/>
 </pin_list>
 <bind>
-<StgValue><ssdm name="_ssdm_op_Read.ap_auto.float"/></StgValue>
+<StgValue><ssdm name="_ssdm_op_Read.ap_auto.i64"/></StgValue>
 </bind>
 </comp>
 
@@ -412,7 +441,7 @@ ret_ln169            (ret          ) [ 00000000000000000000]
 <pin id="13" dir="1" index="0" bw="1" slack="0"/>
 </pin_list>
 <bind>
-<StgValue><ssdm name="_ssdm_op_Read.ap_auto.i64"/></StgValue>
+<StgValue><ssdm name="_ssdm_op_Read.ap_auto.float"/></StgValue>
 </bind>
 </comp>
 
@@ -502,7 +531,7 @@ ret_ln169            (ret          ) [ 00000000000000000000]
 <pin id="33" dir="1" index="0" bw="1" slack="2147483647"/>
 </pin_list>
 <bind>
-<StgValue><ssdm name="empty_16"/></StgValue>
+<StgValue><ssdm name="empty_23"/></StgValue>
 </bind>
 </comp>
 
@@ -520,7 +549,7 @@ ret_ln169            (ret          ) [ 00000000000000000000]
 <pin id="37" dir="1" index="0" bw="1" slack="2147483647"/>
 </pin_list>
 <bind>
-<StgValue><ssdm name="empty_17"/></StgValue>
+<StgValue><ssdm name="empty_24"/></StgValue>
 </bind>
 </comp>
 
@@ -538,7 +567,7 @@ ret_ln169            (ret          ) [ 00000000000000000000]
 <pin id="41" dir="1" index="0" bw="1" slack="2147483647"/>
 </pin_list>
 <bind>
-<StgValue><ssdm name="empty_0"/></StgValue>
+<StgValue><ssdm name="empty_2"/></StgValue>
 </bind>
 </comp>
 
@@ -547,7 +576,7 @@ ret_ln169            (ret          ) [ 00000000000000000000]
 <pin id="43" dir="1" index="0" bw="1" slack="2147483647"/>
 </pin_list>
 <bind>
-<StgValue><ssdm name="empty_19"/></StgValue>
+<StgValue><ssdm name="empty_26"/></StgValue>
 </bind>
 </comp>
 
@@ -569,11 +598,41 @@ ret_ln169            (ret          ) [ 00000000000000000000]
 </bind>
 </comp>
 
-<comp id="48" class="1004" name="curr_imageProjs_read_read_fu_48">
+<comp id="48" class="1001" name="const_48">
 <pin_list>
-<pin id="49" dir="0" index="0" bw="32" slack="0"/>
-<pin id="50" dir="0" index="1" bw="32" slack="0"/>
-<pin id="51" dir="1" index="2" bw="32" slack="1"/>
+<pin id="49" dir="1" index="0" bw="1" slack="2147483647"/>
+</pin_list>
+<bind>
+<StgValue><ssdm name="_ssdm_op_SpecPipeline"/></StgValue>
+</bind>
+</comp>
+
+<comp id="50" class="1001" name="const_50">
+<pin_list>
+<pin id="51" dir="1" index="0" bw="1" slack="2147483647"/>
+</pin_list>
+<bind>
+<StgValue><ssdm name=""/></StgValue>
+</bind>
+</comp>
+
+<comp id="52" class="1004" name="dout_read_read_fu_52">
+<pin_list>
+<pin id="53" dir="0" index="0" bw="64" slack="0"/>
+<pin id="54" dir="0" index="1" bw="64" slack="0"/>
+<pin id="55" dir="1" index="2" bw="64" slack="0"/>
+</pin_list>
+<bind>
+<opcode="read(1150) " fcode="read"/>
+<opset="dout_read/1 "/>
+</bind>
+</comp>
+
+<comp id="58" class="1004" name="curr_imageProjs_read_read_fu_58">
+<pin_list>
+<pin id="59" dir="0" index="0" bw="32" slack="0"/>
+<pin id="60" dir="0" index="1" bw="32" slack="0"/>
+<pin id="61" dir="1" index="2" bw="32" slack="1"/>
 </pin_list>
 <bind>
 <opcode="read(1150) " fcode="read"/>
@@ -581,11 +640,23 @@ ret_ln169            (ret          ) [ 00000000000000000000]
 </bind>
 </comp>
 
-<comp id="54" class="1004" name="projSumUsed_read_read_fu_54">
+<comp id="64" class="1004" name="sum_read_read_fu_64">
 <pin_list>
-<pin id="55" dir="0" index="0" bw="32" slack="0"/>
-<pin id="56" dir="0" index="1" bw="32" slack="0"/>
-<pin id="57" dir="1" index="2" bw="32" slack="1"/>
+<pin id="65" dir="0" index="0" bw="32" slack="0"/>
+<pin id="66" dir="0" index="1" bw="32" slack="0"/>
+<pin id="67" dir="1" index="2" bw="32" slack="10"/>
+</pin_list>
+<bind>
+<opcode="read(1150) " fcode="read"/>
+<opset="sum_read/1 "/>
+</bind>
+</comp>
+
+<comp id="70" class="1004" name="projSumUsed_read_read_fu_70">
+<pin_list>
+<pin id="71" dir="0" index="0" bw="32" slack="0"/>
+<pin id="72" dir="0" index="1" bw="32" slack="0"/>
+<pin id="73" dir="1" index="2" bw="32" slack="1"/>
 </pin_list>
 <bind>
 <opcode="read(1150) " fcode="read"/>
@@ -593,36 +664,12 @@ ret_ln169            (ret          ) [ 00000000000000000000]
 </bind>
 </comp>
 
-<comp id="60" class="1004" name="sum_read_read_fu_60">
+<comp id="76" class="1004" name="grp_writeresp_fu_76">
 <pin_list>
-<pin id="61" dir="0" index="0" bw="32" slack="0"/>
-<pin id="62" dir="0" index="1" bw="32" slack="0"/>
-<pin id="63" dir="1" index="2" bw="32" slack="1"/>
-</pin_list>
-<bind>
-<opcode="read(1150) " fcode="read"/>
-<opset="sum_read/10 "/>
-</bind>
-</comp>
-
-<comp id="66" class="1004" name="dout_read_read_fu_66">
-<pin_list>
-<pin id="67" dir="0" index="0" bw="64" slack="0"/>
-<pin id="68" dir="0" index="1" bw="64" slack="0"/>
-<pin id="69" dir="1" index="2" bw="64" slack="0"/>
-</pin_list>
-<bind>
-<opcode="read(1150) " fcode="read"/>
-<opset="dout_read/12 "/>
-</bind>
-</comp>
-
-<comp id="72" class="1004" name="grp_writeresp_fu_72">
-<pin_list>
-<pin id="73" dir="0" index="0" bw="1" slack="0"/>
-<pin id="74" dir="0" index="1" bw="32" slack="1"/>
-<pin id="75" dir="0" index="2" bw="1" slack="0"/>
-<pin id="76" dir="1" index="3" bw="1" slack="2147483647"/>
+<pin id="77" dir="0" index="0" bw="1" slack="0"/>
+<pin id="78" dir="0" index="1" bw="32" slack="12"/>
+<pin id="79" dir="0" index="2" bw="1" slack="0"/>
+<pin id="80" dir="1" index="3" bw="1" slack="2147483647"/>
 </pin_list>
 <bind>
 <opcode="writereq(1155) writeresp(1158) " fcode="writeresp"/>
@@ -630,25 +677,25 @@ ret_ln169            (ret          ) [ 00000000000000000000]
 </bind>
 </comp>
 
-<comp id="79" class="1004" name="write_ln113_write_fu_79">
+<comp id="83" class="1004" name="write_ln204_write_fu_83">
 <pin_list>
-<pin id="80" dir="0" index="0" bw="0" slack="0"/>
-<pin id="81" dir="0" index="1" bw="32" slack="2"/>
-<pin id="82" dir="0" index="2" bw="32" slack="0"/>
-<pin id="83" dir="0" index="3" bw="1" slack="0"/>
-<pin id="84" dir="1" index="4" bw="0" slack="2147483647"/>
+<pin id="84" dir="0" index="0" bw="0" slack="0"/>
+<pin id="85" dir="0" index="1" bw="32" slack="13"/>
+<pin id="86" dir="0" index="2" bw="32" slack="0"/>
+<pin id="87" dir="0" index="3" bw="1" slack="0"/>
+<pin id="88" dir="1" index="4" bw="0" slack="2147483647"/>
 </pin_list>
 <bind>
 <opcode="write(1151) " fcode="write"/>
-<opset="write_ln113/14 "/>
+<opset="write_ln204/14 "/>
 </bind>
 </comp>
 
-<comp id="88" class="1004" name="grp_fu_88">
+<comp id="92" class="1004" name="grp_fu_92">
 <pin_list>
-<pin id="89" dir="0" index="0" bw="32" slack="1"/>
-<pin id="90" dir="0" index="1" bw="32" slack="1"/>
-<pin id="91" dir="1" index="2" bw="32" slack="1"/>
+<pin id="93" dir="0" index="0" bw="32" slack="1"/>
+<pin id="94" dir="0" index="1" bw="32" slack="10"/>
+<pin id="95" dir="1" index="2" bw="32" slack="1"/>
 </pin_list>
 <bind>
 <opcode="fmul(13) " fcode="fmul"/>
@@ -656,11 +703,11 @@ ret_ln169            (ret          ) [ 00000000000000000000]
 </bind>
 </comp>
 
-<comp id="92" class="1004" name="grp_fu_92">
+<comp id="96" class="1004" name="grp_fu_96">
 <pin_list>
-<pin id="93" dir="0" index="0" bw="32" slack="1"/>
-<pin id="94" dir="0" index="1" bw="32" slack="1"/>
-<pin id="95" dir="1" index="2" bw="32" slack="1"/>
+<pin id="97" dir="0" index="0" bw="32" slack="1"/>
+<pin id="98" dir="0" index="1" bw="32" slack="1"/>
+<pin id="99" dir="1" index="2" bw="32" slack="1"/>
 </pin_list>
 <bind>
 <opcode="fdiv(16) " fcode="fdiv"/>
@@ -668,108 +715,108 @@ ret_ln169            (ret          ) [ 00000000000000000000]
 </bind>
 </comp>
 
-<comp id="96" class="1004" name="trunc_ln_fu_96">
+<comp id="100" class="1004" name="trunc_ln_fu_100">
 <pin_list>
-<pin id="97" dir="0" index="0" bw="62" slack="0"/>
-<pin id="98" dir="0" index="1" bw="64" slack="0"/>
-<pin id="99" dir="0" index="2" bw="3" slack="0"/>
-<pin id="100" dir="0" index="3" bw="7" slack="0"/>
-<pin id="101" dir="1" index="4" bw="62" slack="0"/>
+<pin id="101" dir="0" index="0" bw="62" slack="0"/>
+<pin id="102" dir="0" index="1" bw="64" slack="0"/>
+<pin id="103" dir="0" index="2" bw="3" slack="0"/>
+<pin id="104" dir="0" index="3" bw="7" slack="0"/>
+<pin id="105" dir="1" index="4" bw="62" slack="0"/>
 </pin_list>
 <bind>
 <opcode="partselect(1002) " fcode="partselect"/>
-<opset="trunc_ln/12 "/>
+<opset="trunc_ln/1 "/>
 </bind>
 </comp>
 
-<comp id="106" class="1004" name="sext_ln113_fu_106">
+<comp id="110" class="1004" name="sext_ln204_fu_110">
 <pin_list>
-<pin id="107" dir="0" index="0" bw="62" slack="0"/>
-<pin id="108" dir="1" index="1" bw="64" slack="0"/>
+<pin id="111" dir="0" index="0" bw="62" slack="0"/>
+<pin id="112" dir="1" index="1" bw="64" slack="0"/>
 </pin_list>
 <bind>
 <opcode="sext(35) " fcode="sext"/>
-<opset="sext_ln113/12 "/>
+<opset="sext_ln204/1 "/>
 </bind>
 </comp>
 
-<comp id="110" class="1004" name="emissions_addr_fu_110">
+<comp id="114" class="1004" name="emissions_addr_fu_114">
 <pin_list>
-<pin id="111" dir="0" index="0" bw="64" slack="0"/>
-<pin id="112" dir="0" index="1" bw="64" slack="0"/>
-<pin id="113" dir="1" index="2" bw="64" slack="1"/>
+<pin id="115" dir="0" index="0" bw="64" slack="0"/>
+<pin id="116" dir="0" index="1" bw="64" slack="0"/>
+<pin id="117" dir="1" index="2" bw="64" slack="12"/>
 </pin_list>
 <bind>
 <opcode="getelementptr(29) " fcode="getelementptr"/>
-<opset="emissions_addr/12 "/>
+<opset="emissions_addr/1 "/>
 </bind>
 </comp>
 
-<comp id="116" class="1004" name="bitcast_ln113_fu_116">
+<comp id="120" class="1004" name="bitcast_ln204_fu_120">
 <pin_list>
-<pin id="117" dir="0" index="0" bw="32" slack="1"/>
-<pin id="118" dir="1" index="1" bw="32" slack="0"/>
+<pin id="121" dir="0" index="0" bw="32" slack="1"/>
+<pin id="122" dir="1" index="1" bw="32" slack="0"/>
 </pin_list>
 <bind>
 <opcode="bitcast(44) " fcode="bitcast"/>
-<opset="bitcast_ln113/14 "/>
+<opset="bitcast_ln204/14 "/>
 </bind>
 </comp>
 
-<comp id="120" class="1005" name="curr_imageProjs_read_reg_120">
+<comp id="124" class="1005" name="curr_imageProjs_read_reg_124">
 <pin_list>
-<pin id="121" dir="0" index="0" bw="32" slack="1"/>
-<pin id="122" dir="1" index="1" bw="32" slack="1"/>
+<pin id="125" dir="0" index="0" bw="32" slack="1"/>
+<pin id="126" dir="1" index="1" bw="32" slack="1"/>
 </pin_list>
 <bind>
 <opset="curr_imageProjs_read "/>
 </bind>
 </comp>
 
-<comp id="125" class="1005" name="projSumUsed_read_reg_125">
+<comp id="129" class="1005" name="sum_read_reg_129">
 <pin_list>
-<pin id="126" dir="0" index="0" bw="32" slack="1"/>
-<pin id="127" dir="1" index="1" bw="32" slack="1"/>
-</pin_list>
-<bind>
-<opset="projSumUsed_read "/>
-</bind>
-</comp>
-
-<comp id="130" class="1005" name="sum_read_reg_130">
-<pin_list>
-<pin id="131" dir="0" index="0" bw="32" slack="1"/>
-<pin id="132" dir="1" index="1" bw="32" slack="1"/>
+<pin id="130" dir="0" index="0" bw="32" slack="10"/>
+<pin id="131" dir="1" index="1" bw="32" slack="10"/>
 </pin_list>
 <bind>
 <opset="sum_read "/>
 </bind>
 </comp>
 
-<comp id="135" class="1005" name="div_i_reg_135">
+<comp id="134" class="1005" name="projSumUsed_read_reg_134">
 <pin_list>
-<pin id="136" dir="0" index="0" bw="32" slack="1"/>
-<pin id="137" dir="1" index="1" bw="32" slack="1"/>
+<pin id="135" dir="0" index="0" bw="32" slack="1"/>
+<pin id="136" dir="1" index="1" bw="32" slack="1"/>
 </pin_list>
 <bind>
-<opset="div_i "/>
+<opset="projSumUsed_read "/>
 </bind>
 </comp>
 
-<comp id="140" class="1005" name="emissions_addr_reg_140">
+<comp id="139" class="1005" name="emissions_addr_reg_139">
 <pin_list>
-<pin id="141" dir="0" index="0" bw="32" slack="1"/>
-<pin id="142" dir="1" index="1" bw="32" slack="1"/>
+<pin id="140" dir="0" index="0" bw="32" slack="12"/>
+<pin id="141" dir="1" index="1" bw="32" slack="12"/>
 </pin_list>
 <bind>
 <opset="emissions_addr "/>
 </bind>
 </comp>
 
-<comp id="146" class="1005" name="mul_i_reg_146">
+<comp id="145" class="1005" name="div_i_reg_145">
 <pin_list>
-<pin id="147" dir="0" index="0" bw="32" slack="1"/>
-<pin id="148" dir="1" index="1" bw="32" slack="1"/>
+<pin id="146" dir="0" index="0" bw="32" slack="1"/>
+<pin id="147" dir="1" index="1" bw="32" slack="1"/>
+</pin_list>
+<bind>
+<opset="div_i "/>
+</bind>
+</comp>
+
+<comp id="150" class="1005" name="mul_i_reg_150">
+<pin_list>
+<pin id="151" dir="0" index="0" bw="32" slack="1"/>
+<pin id="152" dir="1" index="1" bw="32" slack="1"/>
 </pin_list>
 <bind>
 <opset="mul_i "/>
@@ -779,73 +826,73 @@ ret_ln169            (ret          ) [ 00000000000000000000]
 </comp_list>
 
 <net_list>
-<net id="52"><net_src comp="10" pin="0"/><net_sink comp="48" pin=0"/></net>
+<net id="56"><net_src comp="10" pin="0"/><net_sink comp="52" pin=0"/></net>
 
-<net id="53"><net_src comp="4" pin="0"/><net_sink comp="48" pin=1"/></net>
+<net id="57"><net_src comp="8" pin="0"/><net_sink comp="52" pin=1"/></net>
 
-<net id="58"><net_src comp="10" pin="0"/><net_sink comp="54" pin=0"/></net>
+<net id="62"><net_src comp="12" pin="0"/><net_sink comp="58" pin=0"/></net>
 
-<net id="59"><net_src comp="0" pin="0"/><net_sink comp="54" pin=1"/></net>
+<net id="63"><net_src comp="4" pin="0"/><net_sink comp="58" pin=1"/></net>
 
-<net id="64"><net_src comp="10" pin="0"/><net_sink comp="60" pin=0"/></net>
+<net id="68"><net_src comp="12" pin="0"/><net_sink comp="64" pin=0"/></net>
 
-<net id="65"><net_src comp="2" pin="0"/><net_sink comp="60" pin=1"/></net>
+<net id="69"><net_src comp="2" pin="0"/><net_sink comp="64" pin=1"/></net>
 
-<net id="70"><net_src comp="12" pin="0"/><net_sink comp="66" pin=0"/></net>
+<net id="74"><net_src comp="12" pin="0"/><net_sink comp="70" pin=0"/></net>
 
-<net id="71"><net_src comp="8" pin="0"/><net_sink comp="66" pin=1"/></net>
+<net id="75"><net_src comp="0" pin="0"/><net_sink comp="70" pin=1"/></net>
 
-<net id="77"><net_src comp="20" pin="0"/><net_sink comp="72" pin=0"/></net>
+<net id="81"><net_src comp="20" pin="0"/><net_sink comp="76" pin=0"/></net>
 
-<net id="78"><net_src comp="22" pin="0"/><net_sink comp="72" pin=2"/></net>
+<net id="82"><net_src comp="22" pin="0"/><net_sink comp="76" pin=2"/></net>
 
-<net id="85"><net_src comp="24" pin="0"/><net_sink comp="79" pin=0"/></net>
+<net id="89"><net_src comp="24" pin="0"/><net_sink comp="83" pin=0"/></net>
 
-<net id="86"><net_src comp="26" pin="0"/><net_sink comp="79" pin=3"/></net>
+<net id="90"><net_src comp="26" pin="0"/><net_sink comp="83" pin=3"/></net>
 
-<net id="87"><net_src comp="28" pin="0"/><net_sink comp="72" pin=0"/></net>
+<net id="91"><net_src comp="28" pin="0"/><net_sink comp="76" pin=0"/></net>
 
-<net id="102"><net_src comp="14" pin="0"/><net_sink comp="96" pin=0"/></net>
+<net id="106"><net_src comp="14" pin="0"/><net_sink comp="100" pin=0"/></net>
 
-<net id="103"><net_src comp="66" pin="2"/><net_sink comp="96" pin=1"/></net>
+<net id="107"><net_src comp="52" pin="2"/><net_sink comp="100" pin=1"/></net>
 
-<net id="104"><net_src comp="16" pin="0"/><net_sink comp="96" pin=2"/></net>
+<net id="108"><net_src comp="16" pin="0"/><net_sink comp="100" pin=2"/></net>
 
-<net id="105"><net_src comp="18" pin="0"/><net_sink comp="96" pin=3"/></net>
+<net id="109"><net_src comp="18" pin="0"/><net_sink comp="100" pin=3"/></net>
 
-<net id="109"><net_src comp="96" pin="4"/><net_sink comp="106" pin=0"/></net>
+<net id="113"><net_src comp="100" pin="4"/><net_sink comp="110" pin=0"/></net>
 
-<net id="114"><net_src comp="6" pin="0"/><net_sink comp="110" pin=0"/></net>
+<net id="118"><net_src comp="6" pin="0"/><net_sink comp="114" pin=0"/></net>
 
-<net id="115"><net_src comp="106" pin="1"/><net_sink comp="110" pin=1"/></net>
+<net id="119"><net_src comp="110" pin="1"/><net_sink comp="114" pin=1"/></net>
 
-<net id="119"><net_src comp="116" pin="1"/><net_sink comp="79" pin=2"/></net>
+<net id="123"><net_src comp="120" pin="1"/><net_sink comp="83" pin=2"/></net>
 
-<net id="123"><net_src comp="48" pin="2"/><net_sink comp="120" pin=0"/></net>
+<net id="127"><net_src comp="58" pin="2"/><net_sink comp="124" pin=0"/></net>
 
-<net id="124"><net_src comp="120" pin="1"/><net_sink comp="92" pin=0"/></net>
+<net id="128"><net_src comp="124" pin="1"/><net_sink comp="96" pin=0"/></net>
 
-<net id="128"><net_src comp="54" pin="2"/><net_sink comp="125" pin=0"/></net>
+<net id="132"><net_src comp="64" pin="2"/><net_sink comp="129" pin=0"/></net>
 
-<net id="129"><net_src comp="125" pin="1"/><net_sink comp="92" pin=1"/></net>
+<net id="133"><net_src comp="129" pin="1"/><net_sink comp="92" pin=1"/></net>
 
-<net id="133"><net_src comp="60" pin="2"/><net_sink comp="130" pin=0"/></net>
+<net id="137"><net_src comp="70" pin="2"/><net_sink comp="134" pin=0"/></net>
 
-<net id="134"><net_src comp="130" pin="1"/><net_sink comp="88" pin=1"/></net>
+<net id="138"><net_src comp="134" pin="1"/><net_sink comp="96" pin=1"/></net>
 
-<net id="138"><net_src comp="92" pin="2"/><net_sink comp="135" pin=0"/></net>
+<net id="142"><net_src comp="114" pin="2"/><net_sink comp="139" pin=0"/></net>
 
-<net id="139"><net_src comp="135" pin="1"/><net_sink comp="88" pin=0"/></net>
+<net id="143"><net_src comp="139" pin="1"/><net_sink comp="76" pin=1"/></net>
 
-<net id="143"><net_src comp="110" pin="2"/><net_sink comp="140" pin=0"/></net>
+<net id="144"><net_src comp="139" pin="1"/><net_sink comp="83" pin=1"/></net>
 
-<net id="144"><net_src comp="140" pin="1"/><net_sink comp="72" pin=1"/></net>
+<net id="148"><net_src comp="96" pin="2"/><net_sink comp="145" pin=0"/></net>
 
-<net id="145"><net_src comp="140" pin="1"/><net_sink comp="79" pin=1"/></net>
+<net id="149"><net_src comp="145" pin="1"/><net_sink comp="92" pin=0"/></net>
 
-<net id="149"><net_src comp="88" pin="2"/><net_sink comp="146" pin=0"/></net>
+<net id="153"><net_src comp="92" pin="2"/><net_sink comp="150" pin=0"/></net>
 
-<net id="150"><net_src comp="146" pin="1"/><net_sink comp="116" pin=0"/></net>
+<net id="154"><net_src comp="150" pin="1"/><net_sink comp="120" pin=0"/></net>
 
 </net_list>
 
@@ -854,15 +901,21 @@ ret_ln169            (ret          ) [ 00000000000000000000]
 
 * FSMD analyzer results:
   - Output states:
+	Port: projSumUsed | {}
+	Port: sum | {}
+	Port: curr_imageProjs | {}
 	Port: emissions | {13 14 15 16 17 18 19 }
+	Port: dout | {}
  - Input state : 
 	Port: post_process : projSumUsed | {1 }
-	Port: post_process : sum | {10 }
+	Port: post_process : sum | {1 }
 	Port: post_process : curr_imageProjs | {1 }
 	Port: post_process : emissions | {}
-	Port: post_process : dout | {12 }
+	Port: post_process : dout | {1 }
   - Chain level:
 	State 1
+		sext_ln204 : 1
+		emissions_addr : 2
 	State 2
 	State 3
 	State 4
@@ -874,11 +927,9 @@ ret_ln169            (ret          ) [ 00000000000000000000]
 	State 10
 	State 11
 	State 12
-		sext_ln113 : 1
-		emissions_addr : 2
 	State 13
 	State 14
-		write_ln113 : 1
+		write_ln204 : 1
 	State 15
 	State 16
 	State 17
@@ -894,22 +945,22 @@ ret_ln169            (ret          ) [ 00000000000000000000]
 |----------|---------------------------------|---------|---------|---------|
 | Operation|         Functional Unit         |   DSP   |    FF   |   LUT   |
 |----------|---------------------------------|---------|---------|---------|
-|   fmul   |            grp_fu_88            |    3    |   128   |   135   |
+|   fmul   |            grp_fu_92            |    3    |   128   |   135   |
 |----------|---------------------------------|---------|---------|---------|
-|          | curr_imageProjs_read_read_fu_48 |    0    |    0    |    0    |
-|   read   |   projSumUsed_read_read_fu_54   |    0    |    0    |    0    |
-|          |       sum_read_read_fu_60       |    0    |    0    |    0    |
-|          |       dout_read_read_fu_66      |    0    |    0    |    0    |
+|          |       dout_read_read_fu_52      |    0    |    0    |    0    |
+|   read   | curr_imageProjs_read_read_fu_58 |    0    |    0    |    0    |
+|          |       sum_read_read_fu_64       |    0    |    0    |    0    |
+|          |   projSumUsed_read_read_fu_70   |    0    |    0    |    0    |
 |----------|---------------------------------|---------|---------|---------|
-| writeresp|       grp_writeresp_fu_72       |    0    |    0    |    0    |
+| writeresp|       grp_writeresp_fu_76       |    0    |    0    |    0    |
 |----------|---------------------------------|---------|---------|---------|
-|   write  |     write_ln113_write_fu_79     |    0    |    0    |    0    |
+|   write  |     write_ln204_write_fu_83     |    0    |    0    |    0    |
 |----------|---------------------------------|---------|---------|---------|
-|   fdiv   |            grp_fu_92            |    0    |    0    |    0    |
+|   fdiv   |            grp_fu_96            |    0    |    0    |    0    |
 |----------|---------------------------------|---------|---------|---------|
-|partselect|          trunc_ln_fu_96         |    0    |    0    |    0    |
+|partselect|         trunc_ln_fu_100         |    0    |    0    |    0    |
 |----------|---------------------------------|---------|---------|---------|
-|   sext   |        sext_ln113_fu_106        |    0    |    0    |    0    |
+|   sext   |        sext_ln204_fu_110        |    0    |    0    |    0    |
 |----------|---------------------------------|---------|---------|---------|
 |   Total  |                                 |    3    |   128   |   135   |
 |----------|---------------------------------|---------|---------|---------|
@@ -921,12 +972,12 @@ N/A
 +----------------------------+--------+
 |                            |   FF   |
 +----------------------------+--------+
-|curr_imageProjs_read_reg_120|   32   |
-|        div_i_reg_135       |   32   |
-|   emissions_addr_reg_140   |   32   |
-|        mul_i_reg_146       |   32   |
-|  projSumUsed_read_reg_125  |   32   |
-|      sum_read_reg_130      |   32   |
+|curr_imageProjs_read_reg_124|   32   |
+|        div_i_reg_145       |   32   |
+|   emissions_addr_reg_139   |   32   |
+|        mul_i_reg_150       |   32   |
+|  projSumUsed_read_reg_134  |   32   |
+|      sum_read_reg_129      |   32   |
 +----------------------------+--------+
 |            Total           |   192  |
 +----------------------------+--------+
@@ -935,7 +986,7 @@ N/A
 |---------------------|------|------|------|--------||---------|
 |         Comp        |  Pin | Size |  BW  | S x BW ||  Delay  |
 |---------------------|------|------|------|--------||---------|
-| grp_writeresp_fu_72 |  p0  |   2  |   1  |    2   |
+| grp_writeresp_fu_76 |  p0  |   2  |   1  |    2   |
 |---------------------|------|------|------|--------||---------|
 |        Total        |      |      |      |    2   ||  0.427  |
 |---------------------|------|------|------|--------||---------|

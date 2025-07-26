@@ -540,7 +540,7 @@ entry:3 %psfSupersample_read = read i32 @_ssdm_op_Read.ap_auto.i32, i32 %psfSupe
 
 <Node id="15" bw="0" op_0_bw="0" op_1_bw="256" op_2_bw="0" op_3_bw="32" op_4_bw="32" op_5_bw="0" op_6_bw="32" op_7_bw="32" op_8_bw="0" op_9_bw="0" op_10_bw="0" op_11_bw="32" op_12_bw="32" op_13_bw="32" op_14_bw="32" op_15_bw="0" op_16_bw="0" op_17_bw="32" op_18_bw="32" op_19_bw="32">
 <![CDATA[
-entry:5 %specinterface_ln0 = specinterface void @_ssdm_op_SpecInterface, i256 %localImages, void @empty_27, i32 0, i32 0, void @empty_17, i32 0, i32 0, void @empty_17, void @empty_17, void @empty_17, i32 0, i32 0, i32 0, i32 0, void @empty_17, void @empty_17, i32 4294967295, i32 0, i32 0
+entry:5 %specinterface_ln0 = specinterface void @_ssdm_op_SpecInterface, i256 %localImages, void @empty_17, i32 0, i32 0, void @empty_24, i32 0, i32 0, void @empty_24, void @empty_24, void @empty_24, i32 0, i32 0, i32 0, i32 0, void @empty_24, void @empty_24, i32 4294967295, i32 0, i32 0
 
 ]]></Node>
 <StgValue><ssdm name="specinterface_ln0"/></StgValue>
@@ -555,7 +555,7 @@ entry:5 %specinterface_ln0 = specinterface void @_ssdm_op_SpecInterface, i256 %l
 
 <Node id="16" bw="0" op_0_bw="0" op_1_bw="64" op_2_bw="0" op_3_bw="32" op_4_bw="32" op_5_bw="0" op_6_bw="32" op_7_bw="32" op_8_bw="0" op_9_bw="0" op_10_bw="0" op_11_bw="32" op_12_bw="32" op_13_bw="32" op_14_bw="32" op_15_bw="0" op_16_bw="0" op_17_bw="32" op_18_bw="32" op_19_bw="32">
 <![CDATA[
-entry:6 %specinterface_ln0 = specinterface void @_ssdm_op_SpecInterface, i64 %atomLocations, void @empty_16, i32 0, i32 0, void @empty_17, i32 0, i32 1024, void @empty_18, void @empty_19, void @empty_17, i32 16, i32 16, i32 16, i32 16, void @empty_17, void @empty_17, i32 4294967295, i32 0, i32 0
+entry:6 %specinterface_ln0 = specinterface void @_ssdm_op_SpecInterface, i64 %atomLocations, void @empty_23, i32 0, i32 0, void @empty_24, i32 0, i32 1024, void @empty_25, void @empty_26, void @empty_24, i32 16, i32 16, i32 16, i32 16, void @empty_24, void @empty_24, i32 4294967295, i32 0, i32 0
 
 ]]></Node>
 <StgValue><ssdm name="specinterface_ln0"/></StgValue>
@@ -4386,10 +4386,10 @@ entry._crit_edge:218 %p_0 = bitconcatenate i256 @_ssdm_op_BitConcatenate.i256.i3
 
 <Node id="253" bw="0" op_0_bw="0" op_1_bw="256" op_2_bw="256">
 <![CDATA[
-entry._crit_edge:219 %write_ln22 = write void @_ssdm_op_Write.ap_fifo.volatile.i256P0A, i256 %localImages, i256 %p_0
+entry._crit_edge:219 %write_ln24 = write void @_ssdm_op_Write.ap_fifo.volatile.i256P0A, i256 %localImages, i256 %p_0
 
 ]]></Node>
-<StgValue><ssdm name="write_ln22"/></StgValue>
+<StgValue><ssdm name="write_ln24"/></StgValue>
 </operation>
 
 <operation id="304" st_id="27" stage="1" lat="1">
@@ -4401,10 +4401,10 @@ entry._crit_edge:219 %write_ln22 = write void @_ssdm_op_Write.ap_fifo.volatile.i
 
 <Node id="254" bw="0">
 <![CDATA[
-entry._crit_edge:220 %ret_ln23 = ret
+entry._crit_edge:220 %ret_ln25 = ret
 
 ]]></Node>
-<StgValue><ssdm name="ret_ln23"/></StgValue>
+<StgValue><ssdm name="ret_ln25"/></StgValue>
 </operation>
 </state>
 </state_list>

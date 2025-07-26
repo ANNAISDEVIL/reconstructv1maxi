@@ -1,0 +1,130 @@
+
+
+================================================================
+== Vitis HLS Report for 'dataflow_in_loop_VITIS_LOOP_241_1_1_Block_newFuncRoot_proc'
+================================================================
+* Date:           Sat Jul 26 18:27:54 2025
+
+* Version:        2024.2 (Build 5238294 on Nov  8 2024)
+* Project:        reconstruct
+* Solution:       hls (Vivado IP Flow Target)
+* Product family: zynquplusRFSOC
+* Target device:  xczu49dr-ffvf1760-2-e
+
+
+================================================================
+== Performance Estimates
+================================================================
++ Timing: 
+    * Summary: 
+    +--------+----------+----------+------------+
+    |  Clock |  Target  | Estimated| Uncertainty|
+    +--------+----------+----------+------------+
+    |ap_clk  |  10.00 ns|  1.085 ns|     2.70 ns|
+    +--------+----------+----------+------------+
+
++ Latency: 
+    * Summary: 
+    +---------+---------+----------+----------+-----+-----+---------+
+    |  Latency (cycles) |  Latency (absolute) |  Interval | Pipeline|
+    |   min   |   max   |    min   |    max   | min | max |   Type  |
+    +---------+---------+----------+----------+-----+-----+---------+
+    |        0|        0|      0 ns|      0 ns|    0|    0|       no|
+    +---------+---------+----------+----------+-----+-----+---------+
+
+    + Detail: 
+        * Instance: 
+        N/A
+
+        * Loop: 
+        N/A
+
+
+
+================================================================
+== Utilization Estimates
+================================================================
+* Summary: 
++-----------------+---------+------+--------+--------+-----+
+|       Name      | BRAM_18K|  DSP |   FF   |   LUT  | URAM|
++-----------------+---------+------+--------+--------+-----+
+|DSP              |        -|     -|       -|       -|    -|
+|Expression       |        -|     -|       0|      73|    -|
+|FIFO             |        -|     -|       -|       -|    -|
+|Instance         |        -|     -|       -|       -|    -|
+|Memory           |        -|     -|       -|       -|    -|
+|Multiplexer      |        -|     -|       0|      18|    -|
+|Register         |        -|     -|      66|       -|    -|
++-----------------+---------+------+--------+--------+-----+
+|Total            |        0|     0|      66|      91|    0|
++-----------------+---------+------+--------+--------+-----+
+|Available        |     2160|  4272|  850560|  425280|   80|
++-----------------+---------+------+--------+--------+-----+
+|Utilization (%)  |        0|     0|      ~0|      ~0|    0|
++-----------------+---------+------+--------+--------+-----+
+
++ Detail: 
+    * Instance: 
+    N/A
+
+    * DSP: 
+    N/A
+
+    * Memory: 
+    N/A
+
+    * FIFO: 
+    N/A
+
+    * Expression: 
+    +--------------------+----------+----+---+----+------------+------------+
+    |    Variable Name   | Operation| DSP| FF| LUT| Bitwidth P0| Bitwidth P1|
+    +--------------------+----------+----+---+----+------------+------------+
+    |add_ln263_fu_36_p2  |         +|   0|  0|  71|          64|          64|
+    |ap_block_state1     |        or|   0|  0|   2|           1|           1|
+    +--------------------+----------+----+---+----+------------+------------+
+    |Total               |          |   0|  0|  73|          65|          65|
+    +--------------------+----------+----+---+----+------------+------------+
+
+    * Multiplexer: 
+    +-----------+----+-----------+-----+-----------+
+    |    Name   | LUT| Input Size| Bits| Total Bits|
+    +-----------+----+-----------+-----+-----------+
+    |ap_done    |   9|          2|    1|          2|
+    |ap_return  |   9|          2|   64|        128|
+    +-----------+----+-----------+-----+-----------+
+    |Total      |  18|          4|   65|        130|
+    +-----------+----+-----------+-----+-----------+
+
+    * Register: 
+    +----------------+----+----+-----+-----------+
+    |      Name      | FF | LUT| Bits| Const Bits|
+    +----------------+----+----+-----+-----------+
+    |ap_CS_fsm       |   1|   0|    1|          0|
+    |ap_done_reg     |   1|   0|    1|          0|
+    |ap_return_preg  |  64|   0|   64|          0|
+    +----------------+----+----+-----+-----------+
+    |Total           |  66|   0|   66|          0|
+    +----------------+----+----+-----+-----------+
+
+
+
+================================================================
+== Interface
+================================================================
+* Summary: 
++-------------+-----+-----+------------+------------------------------------------------------------+--------------+
+|  RTL Ports  | Dir | Bits|  Protocol  |                        Source Object                       |    C Type    |
++-------------+-----+-----+------------+------------------------------------------------------------+--------------+
+|ap_clk       |   in|    1|  ap_ctrl_hs|  dataflow_in_loop_VITIS_LOOP_241_1.1_Block_newFuncRoot_proc|  return value|
+|ap_rst       |   in|    1|  ap_ctrl_hs|  dataflow_in_loop_VITIS_LOOP_241_1.1_Block_newFuncRoot_proc|  return value|
+|ap_start     |   in|    1|  ap_ctrl_hs|  dataflow_in_loop_VITIS_LOOP_241_1.1_Block_newFuncRoot_proc|  return value|
+|ap_done      |  out|    1|  ap_ctrl_hs|  dataflow_in_loop_VITIS_LOOP_241_1.1_Block_newFuncRoot_proc|  return value|
+|ap_continue  |   in|    1|  ap_ctrl_hs|  dataflow_in_loop_VITIS_LOOP_241_1.1_Block_newFuncRoot_proc|  return value|
+|ap_idle      |  out|    1|  ap_ctrl_hs|  dataflow_in_loop_VITIS_LOOP_241_1.1_Block_newFuncRoot_proc|  return value|
+|ap_ready     |  out|    1|  ap_ctrl_hs|  dataflow_in_loop_VITIS_LOOP_241_1.1_Block_newFuncRoot_proc|  return value|
+|ap_return    |  out|   64|  ap_ctrl_hs|  dataflow_in_loop_VITIS_LOOP_241_1.1_Block_newFuncRoot_proc|  return value|
+|idx_0        |   in|   16|     ap_none|                                                       idx_0|        scalar|
+|emissions4   |   in|   64|     ap_none|                                                  emissions4|        scalar|
++-------------+-----+-----+------------+------------------------------------------------------------+--------------+
+

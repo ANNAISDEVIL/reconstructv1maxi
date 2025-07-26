@@ -1,12 +1,13 @@
 #include "hls_stream.h"
 
 #define IMAGE_DTYPE float
-// #define IMAGE_PROJECTION_SIZE   100
-// #define IMAGE_PROJECTION_LOCAL  1000
-// #define FULL_IMAGE_SIZE     256*256
-#define IMAGE_PROJECTION_SIZE   1024
-#define IMAGE_PROJECTION_LOCAL  1024
-#define FULL_IMAGE_SIZE     768*768
+#define IMAGE_PROJECTION_SIZE   100
+#define IMAGE_PROJECTION_LOCAL  1000
+#define FULL_IMAGE_SIZE     256*256
+#define PIXEL     256
+// #define IMAGE_PROJECTION_SIZE   1024
+// #define IMAGE_PROJECTION_LOCAL  1024
+// #define FULL_IMAGE_SIZE     768*768
 
 typedef struct {
     float x;

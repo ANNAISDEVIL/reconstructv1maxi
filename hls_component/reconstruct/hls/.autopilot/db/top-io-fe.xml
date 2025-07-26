@@ -35,7 +35,7 @@
           <constraint constraint_type="pragma interface" mode="s_axilite" register_option="0" offset="48"/>
         </hw>
       </arg>
-      <arg id="6" access_type="r" src_name="imageProjs_local" src_type="float*" src_isptr="1" src_bitwidth="32" src_size_or_depth="1048576">
+      <arg id="6" access_type="r" src_name="imageProjs_local" src_type="float*" src_isptr="1" src_bitwidth="32" src_size_or_depth="100000">
         <hw hw_usage="data" hw_interface="MAXI" hw_name="imageProjs_local" hw_bitwidth="32" hw_size_or_depth="0" hw_kernel_support="true">
           <constraint constraint_type="pragma interface" mode="m_axi" register_option="0" offset="slave" latency="0" num_read_outstanding="16" num_write_outstanding="16" max_read_burst_length="16" max_write_burst_length="16" max_widen_bitwidth="0" channel_id="0"/>
           <constraint constraint_type="bitwidth" orig_bitwidth="32" final_bitwidth="32"/>
@@ -44,7 +44,7 @@
           <constraint constraint_type="pragma interface" mode="s_axilite" register_option="0" offset="28"/>
         </hw>
       </arg>
-      <arg id="7" access_type="r" src_name="imageProjs" src_type="float*" src_isptr="1" src_bitwidth="32" src_size_or_depth="1024">
+      <arg id="7" access_type="r" src_name="imageProjs" src_type="float*" src_isptr="1" src_bitwidth="32" src_size_or_depth="100">
         <hw hw_usage="data" hw_interface="MAXI" hw_name="imageProjs" hw_bitwidth="32" hw_size_or_depth="0" hw_kernel_support="true">
           <constraint constraint_type="pragma interface" mode="m_axi" register_option="0" offset="slave" latency="0" num_read_outstanding="16" num_write_outstanding="16" max_read_burst_length="16" max_write_burst_length="16" max_widen_bitwidth="0" channel_id="0"/>
           <constraint constraint_type="bitwidth" orig_bitwidth="32" final_bitwidth="32"/>
@@ -53,7 +53,7 @@
           <constraint constraint_type="pragma interface" mode="s_axilite" register_option="0" offset="40"/>
         </hw>
       </arg>
-      <arg id="8" access_type="" src_name="imageProjs_local_size" src_type="int*" src_isptr="1" src_bitwidth="32" src_size_or_depth="1024">
+      <arg id="8" access_type="" src_name="imageProjs_local_size" src_type="int*" src_isptr="1" src_bitwidth="32" src_size_or_depth="100">
         <hw hw_usage="data" hw_interface="MAXI" hw_name="imageProjs_local_size" hw_bitwidth="32" hw_size_or_depth="0" hw_kernel_support="true">
           <constraint constraint_type="pragma interface" mode="m_axi" register_option="0" offset="slave" latency="0" num_read_outstanding="16" num_write_outstanding="16" max_read_burst_length="16" max_write_burst_length="16" max_widen_bitwidth="0" channel_id="0"/>
           <constraint constraint_type="bitwidth" orig_bitwidth="32" final_bitwidth="32"/>
@@ -62,9 +62,9 @@
           <constraint constraint_type="pragma interface" mode="s_axilite" register_option="0" offset="52"/>
         </hw>
       </arg>
-      <arg id="9" access_type="r" src_name="fullImage" src_type="float*" src_isptr="1" src_bitwidth="32" src_size_or_depth="589824">
+      <arg id="9" access_type="r" src_name="fullImage" src_type="float*" src_isptr="1" src_bitwidth="32" src_size_or_depth="65536">
         <hw hw_usage="data" hw_interface="MAXI" hw_name="fullImage" hw_bitwidth="32" hw_size_or_depth="0" hw_kernel_support="true">
-          <constraint constraint_type="pragma interface" mode="m_axi" register_option="0" offset="slave" latency="0" num_read_outstanding="16" num_write_outstanding="16" max_read_burst_length="16" max_write_burst_length="16" max_widen_bitwidth="0" channel_id="0"/>
+          <constraint constraint_type="pragma interface" mode="m_axi" register_option="0" offset="slave" latency="0" num_read_outstanding="64" num_write_outstanding="16" max_read_burst_length="64" max_write_burst_length="16" max_widen_bitwidth="0" channel_id="0"/>
           <constraint constraint_type="bitwidth" orig_bitwidth="32" final_bitwidth="32"/>
         </hw>
         <hw hw_usage="address" hw_interface="S_AXILite" hw_name="control" hw_bitwidth="32" hw_size_or_depth="0" hw_kernel_support="true">

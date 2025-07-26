@@ -1,7 +1,7 @@
 <profile>
 
 <section name = "Vitis HLS Report for 'reconstruct'" level="0">
-<item name = "Date">Mon Jun 30 08:26:18 2025
+<item name = "Date">Sat Jul 26 18:46:28 2025
 </item>
 <item name = "Version">2024.2 (Build 5238294 on Nov  8 2024)</item>
 <item name = "Project">reconstruct</item>
@@ -15,7 +15,7 @@
 <section name = "" level="1">
 <item name = "Summary"><table name="" hasTotal="0">
 <keys size="4">Clock, Target, Estimated, Uncertainty</keys>
-<column name="ap_clk">10.00 ns, 7.705 ns, 2.70 ns</column>
+<column name="ap_clk">10.00 ns, 8.275 ns, 2.70 ns</column>
 </table>
 </item>
 </section>
@@ -24,19 +24,19 @@
 <section name = "" level="1">
 <item name = "Summary"><table name="" hasTotal="0">
 <keys size="8">, min, max, min, max, min, max, Type</keys>
-<column name="">3961855, 3961855, 39.619 ms, 39.619 ms, 3961856, 3961856, no</column>
+<column name="">1004633, 1004633, 10.046 ms, 10.046 ms, 1004634, 1004634, no</column>
 </table>
 </item>
 <item name = "Detail">
 <section name = "" level="1">
 <item name = "Instance"><table name="" hasTotal="0">
 <keys size="9">Instance, Module, min, max, min, max, min, max, Type</keys>
-<column name="dataflow_in_loop_VITIS_LOOP_149_1_1_U0">dataflow_in_loop_VITIS_LOOP_149_1_1, 4888, 4888, 48.880 us, 48.880 us, 3868, 3868, dataflow</column>
+<column name="dataflow_in_loop_VITIS_LOOP_241_1_1_U0">dataflow_in_loop_VITIS_LOOP_241_1_1, 1067, 1067, 10.670 us, 10.670 us, 981, 981, dataflow</column>
 </table>
 </item>
 <item name = "Loop"><table name="" hasTotal="0">
 <keys size="8">Loop Name, min, max, Latency, achieved, target, Count, Pipelined</keys>
-<column name="- VITIS_LOOP_149_1">3961854, 3961854, 4891, -, -, 1024, no</column>
+<column name="- VITIS_LOOP_241_1">1004632, 1004632, 1070, -, -, 1024, no</column>
 </table>
 </item>
 </section>
@@ -51,12 +51,12 @@
 <column name="DSP">-, -, -, -, -</column>
 <column name="Expression">-, -, 0, 160, -</column>
 <column name="FIFO">-, -, -, -, -</column>
-<column name="Instance">12, 18, 80182, 32804, 0</column>
+<column name="Instance">39, 2053, 516786, 311248, 0</column>
 <column name="Memory">-, -, -, -, -</column>
 <column name="Multiplexer">-, -, 0, 27, -</column>
 <column name="Register">-, -, 65, -, -</column>
 <specialColumn name="Available">2160, 4272, 850560, 425280, 80</specialColumn>
-<specialColumn name="Utilization (%)">~0, ~0, 9, 7, 0</specialColumn>
+<specialColumn name="Utilization (%)">1, 48, 60, 73, 0</specialColumn>
 </table>
 </item>
 <item name = "Detail">
@@ -65,9 +65,9 @@
 <keys size="7">Instance, Module, BRAM_18K, DSP, FF, LUT, URAM</keys>
 <column name="atomLocations_m_axi_U">atomLocations_m_axi, 4, 0, 725, 823, 0</column>
 <column name="control_s_axi_U">control_s_axi, 0, 0, 456, 808, 0</column>
-<column name="dataflow_in_loop_VITIS_LOOP_149_1_1_U0">dataflow_in_loop_VITIS_LOOP_149_1_1, 0, 18, 76027, 28149, 0</column>
+<column name="dataflow_in_loop_VITIS_LOOP_241_1_1_U0">dataflow_in_loop_VITIS_LOOP_241_1_1, 0, 2053, 510742, 306650, 0</column>
 <column name="emissions_m_axi_U">emissions_m_axi, 2, 0, 665, 625, 0</column>
-<column name="fullImage_m_axi_U">fullImage_m_axi, 2, 0, 671, 637, 0</column>
+<column name="fullImage_m_axi_U">fullImage_m_axi, 29, 0, 2560, 580, 0</column>
 <column name="imageProjs_local_m_axi_U">imageProjs_local_m_axi, 2, 0, 671, 637, 0</column>
 <column name="imageProjs_m_axi_U">imageProjs_m_axi, 2, 0, 671, 637, 0</column>
 <column name="scalar_data_s_axi_U">scalar_data_s_axi, 0, 0, 296, 488, 0</column>
@@ -258,8 +258,8 @@
 <column name="m_axi_fullImage_AWUSER">out, 1, m_axi, fullImage, pointer</column>
 <column name="m_axi_fullImage_WVALID">out, 1, m_axi, fullImage, pointer</column>
 <column name="m_axi_fullImage_WREADY">in, 1, m_axi, fullImage, pointer</column>
-<column name="m_axi_fullImage_WDATA">out, 32, m_axi, fullImage, pointer</column>
-<column name="m_axi_fullImage_WSTRB">out, 4, m_axi, fullImage, pointer</column>
+<column name="m_axi_fullImage_WDATA">out, 1024, m_axi, fullImage, pointer</column>
+<column name="m_axi_fullImage_WSTRB">out, 128, m_axi, fullImage, pointer</column>
 <column name="m_axi_fullImage_WLAST">out, 1, m_axi, fullImage, pointer</column>
 <column name="m_axi_fullImage_WID">out, 1, m_axi, fullImage, pointer</column>
 <column name="m_axi_fullImage_WUSER">out, 1, m_axi, fullImage, pointer</column>
@@ -278,7 +278,7 @@
 <column name="m_axi_fullImage_ARUSER">out, 1, m_axi, fullImage, pointer</column>
 <column name="m_axi_fullImage_RVALID">in, 1, m_axi, fullImage, pointer</column>
 <column name="m_axi_fullImage_RREADY">out, 1, m_axi, fullImage, pointer</column>
-<column name="m_axi_fullImage_RDATA">in, 32, m_axi, fullImage, pointer</column>
+<column name="m_axi_fullImage_RDATA">in, 1024, m_axi, fullImage, pointer</column>
 <column name="m_axi_fullImage_RLAST">in, 1, m_axi, fullImage, pointer</column>
 <column name="m_axi_fullImage_RID">in, 1, m_axi, fullImage, pointer</column>
 <column name="m_axi_fullImage_RUSER">in, 1, m_axi, fullImage, pointer</column>

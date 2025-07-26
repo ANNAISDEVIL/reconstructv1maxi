@@ -1493,7 +1493,7 @@ void apatb_reconstruct_hw(hls::sim::Byte<4> __xlx_apatb_param_atomLocationsSize,
   };
   port15.param = { __xlx_apatb_param_fullImage };
   port15.mname = { "fullImage" };
-  port15.nbytes = { 2359296 };
+  port15.nbytes = { 262144 };
 
 #ifdef USE_BINARY_TV_FILE
   static hls::sim::Memory<hls::sim::Input, hls::sim::Output> port16 {
@@ -1517,7 +1517,7 @@ void apatb_reconstruct_hw(hls::sim::Byte<4> __xlx_apatb_param_atomLocationsSize,
   };
   port16.param = { __xlx_apatb_param_imageProjs };
   port16.mname = { "imageProjs" };
-  port16.nbytes = { 4096 };
+  port16.nbytes = { 400 };
 
 #ifdef USE_BINARY_TV_FILE
   static hls::sim::Memory<hls::sim::Input, hls::sim::Output> port17 {
@@ -1541,7 +1541,7 @@ void apatb_reconstruct_hw(hls::sim::Byte<4> __xlx_apatb_param_atomLocationsSize,
   };
   port17.param = { __xlx_apatb_param_imageProjs_local };
   port17.mname = { "imageProjs_local" };
-  port17.nbytes = { 4194304 };
+  port17.nbytes = { 400000 };
 
 #ifdef USE_BINARY_TV_FILE
   static hls::sim::Memory<hls::sim::Input, hls::sim::Output> port18 {
@@ -1565,7 +1565,7 @@ void apatb_reconstruct_hw(hls::sim::Byte<4> __xlx_apatb_param_atomLocationsSize,
   };
   port18.param = { __xlx_apatb_param_imageProjs_local_size };
   port18.mname = { "imageProjs_local_size" };
-  port18.nbytes = { 4096 };
+  port18.nbytes = { 400 };
 
   try {
 #ifdef POST_CHECK

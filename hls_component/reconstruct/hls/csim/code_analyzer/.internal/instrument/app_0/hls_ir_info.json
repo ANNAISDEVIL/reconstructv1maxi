@@ -1,5 +1,5 @@
 {
-    "top_level_hw_fn_id": 358,
+    "top_level_hw_fn_id": 361,
     "functions": {
         "200": {
             "fn_id": 200,
@@ -95,8 +95,8 @@
             "is_declaration": true,
             "supports_dataflow": false
         },
-        "355": {
-            "fn_id": 355,
+        "358": {
+            "fn_id": 358,
             "mangled_name": "_GLOBAL__sub_I_image_analysis.cpp.42",
             "fully_qualified_name": "_GLOBAL__sub_I_image_analysis",
             "is_sys": true,
@@ -108,8 +108,8 @@
                 "column": 0
             }
         },
-        "356": {
-            "fn_id": 356,
+        "359": {
+            "fn_id": 359,
             "mangled_name": "__cxx_global_var_init.43",
             "fully_qualified_name": "__cxx_global_var_init",
             "is_sys": true,
@@ -121,8 +121,8 @@
                 "column": 0
             }
         },
-        "357": {
-            "fn_id": 357,
+        "360": {
+            "fn_id": 360,
             "mangled_name": "__dtor__ZStL8__ioinit.45",
             "fully_qualified_name": "__dtor__ZStL8__ioinit",
             "is_sys": true,
@@ -134,8 +134,8 @@
                 "column": 0
             }
         },
-        "358": {
-            "fn_id": 358,
+        "361": {
+            "fn_id": 361,
             "mangled_name": "_Z11reconstructiiiP13atom_locationiiPfS1_PiS1_iiS1_",
             "fully_qualified_name": "reconstruct",
             "is_sys": false,
@@ -143,12 +143,12 @@
             "supports_dataflow": true,
             "src_loc": {
                 "file": "F:\\LMU\\quantumMA\\opimization\\reconstructv1maxi\\image_analysis.cpp",
-                "line": 116,
+                "line": 207,
                 "column": 1
             }
         },
-        "359": {
-            "fn_id": 359,
+        "362": {
+            "fn_id": 362,
             "mangled_name": "_Z21getLocalImages_singleiiiiP13atom_locationRN3hls6streamI16local_image_infoLi0EEE",
             "fully_qualified_name": "getLocalImages_single",
             "is_sys": false,
@@ -160,8 +160,8 @@
                 "column": 1
             }
         },
-        "360": {
-            "fn_id": 360,
+        "363": {
+            "fn_id": 363,
             "mangled_name": "_Z13Image_extractiRN3hls6streamI16local_image_infoLi0EEEPfPA31_fS4_S6_S4_Rf",
             "fully_qualified_name": "Image_extract",
             "is_sys": false,
@@ -169,25 +169,25 @@
             "supports_dataflow": true,
             "src_loc": {
                 "file": "F:\\LMU\\quantumMA\\opimization\\reconstructv1maxi\\image_analysis.cpp",
-                "line": 66,
+                "line": 68,
                 "column": 1
             }
         },
-        "361": {
-            "fn_id": 361,
-            "mangled_name": "_Z11conv_kernelPA31_fS0_RfS1_",
-            "fully_qualified_name": "conv_kernel",
+        "364": {
+            "fn_id": 364,
+            "mangled_name": "_Z15matrix_sum_prodPA31_fS0_RfS1_",
+            "fully_qualified_name": "matrix_sum_prod",
             "is_sys": false,
             "is_declaration": false,
             "supports_dataflow": true,
             "src_loc": {
                 "file": "F:\\LMU\\quantumMA\\opimization\\reconstructv1maxi\\image_analysis.cpp",
-                "line": 98,
+                "line": 183,
                 "column": 1
             }
         },
-        "362": {
-            "fn_id": 362,
+        "365": {
+            "fn_id": 365,
             "mangled_name": "_Z12post_processfffRf",
             "fully_qualified_name": "post_process",
             "is_sys": false,
@@ -195,12 +195,38 @@
             "supports_dataflow": true,
             "src_loc": {
                 "file": "F:\\LMU\\quantumMA\\opimization\\reconstructv1maxi\\image_analysis.cpp",
-                "line": 112,
+                "line": 202,
                 "column": 1
             }
         },
-        "364": {
-            "fn_id": 364,
+        "367": {
+            "fn_id": 367,
+            "mangled_name": "_Z15vector_sum_prodPfS_RfS0_",
+            "fully_qualified_name": "vector_sum_prod",
+            "is_sys": false,
+            "is_declaration": false,
+            "supports_dataflow": true,
+            "src_loc": {
+                "file": "F:\\LMU\\quantumMA\\opimization\\reconstructv1maxi\\image_analysis.cpp",
+                "line": 148,
+                "column": 1
+            }
+        },
+        "368": {
+            "fn_id": 368,
+            "mangled_name": "_Z10vector_sumPfRf",
+            "fully_qualified_name": "vector_sum",
+            "is_sys": false,
+            "is_declaration": false,
+            "supports_dataflow": true,
+            "src_loc": {
+                "file": "F:\\LMU\\quantumMA\\opimization\\reconstructv1maxi\\image_analysis.cpp",
+                "line": 118,
+                "column": 1
+            }
+        },
+        "369": {
+            "fn_id": 369,
             "mangled_name": "_ZSt5roundf",
             "fully_qualified_name": "std::round",
             "is_sys": true,
@@ -214,25 +240,41 @@
         }
     },
     "loops": {
-        "16": {
-            "fn_id": 358,
-            "lp_id": 16
-        },
-        "17": {
-            "fn_id": 360,
-            "lp_id": 17
-        },
-        "18": {
-            "fn_id": 360,
-            "lp_id": 18
-        },
-        "19": {
+        "22": {
             "fn_id": 361,
-            "lp_id": 19
+            "lp_id": 22
         },
-        "20": {
-            "fn_id": 361,
-            "lp_id": 20
+        "23": {
+            "fn_id": 363,
+            "lp_id": 23
+        },
+        "24": {
+            "fn_id": 363,
+            "lp_id": 24
+        },
+        "25": {
+            "fn_id": 364,
+            "lp_id": 25
+        },
+        "26": {
+            "fn_id": 367,
+            "lp_id": 26
+        },
+        "27": {
+            "fn_id": 368,
+            "lp_id": 27
+        },
+        "28": {
+            "fn_id": 368,
+            "lp_id": 28
+        },
+        "29": {
+            "fn_id": 368,
+            "lp_id": 29
+        },
+        "30": {
+            "fn_id": 368,
+            "lp_id": 30
         }
     }
 }

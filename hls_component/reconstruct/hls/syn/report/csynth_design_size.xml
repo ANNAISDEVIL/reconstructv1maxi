@@ -2,43 +2,48 @@
     <item name="Total Instructions per Compilation Phase">
         <table>
             <keys size="4">Phase, Step, Instructions, Description</keys>
-            <column name="Compile/Link">, 19372, After all functions are compiled and linked into a single design</column>
+            <column name="Compile/Link">, 19924, After all functions are compiled and linked into a single design</column>
             <column name="">, , </column>
             <column name="Unroll/Inline">, , After user unroll and inline pragmas are applied</column>
-            <column name="">(1) unroll,  1718, user unroll pragmas are applied</column>
-            <column name="">(2) simplification,  1145, simplification of applied user unroll pragmas</column>
-            <column name="">(3) inline,  1112, user inline pragmas are applied</column>
-            <column name="">(4) simplification,    624, simplification of applied user inline pragmas</column>
+            <column name="">(1) unroll, 15425, user unroll pragmas are applied</column>
+            <column name="">(2) simplification,  9102, simplification of applied user unroll pragmas</column>
+            <column name="">(3) inline,  9055, user inline pragmas are applied</column>
+            <column name="">(4) simplification,  8567, simplification of applied user inline pragmas</column>
             <column name="">, , </column>
             <column name="Array/Struct">, , After user array partition and struct aggregate/disaggregate pragmas are applied</column>
-            <column name="">(1) array partition,  5023, user array partition pragmas are applied</column>
-            <column name="">(2) simplification,  4989, simplification of applied user array partition &amp; struct aggregate/disaggregate pragmas</column>
-            <column name="">(3) aggregate/disaggregate ,  4992, user struct aggregate/disaggregate pragmas are applied</column>
-            <column name="">(4) array reshape,  5044, apply array reshape pragmas</column>
-            <column name="">(5) access patterns,  5032, array access pattern optmizations</column>
+            <column name="">(1) array partition, 27528, user array partition pragmas are applied</column>
+            <column name="">(2) simplification, 25211, simplification of applied user array partition &amp; struct aggregate/disaggregate pragmas</column>
+            <column name="">(3) aggregate/disaggregate , 25214, user struct aggregate/disaggregate pragmas are applied</column>
+            <column name="">(4) array reshape, 25266, apply array reshape pragmas</column>
+            <column name="">(5) access patterns, 25190, array access pattern optmizations</column>
             <column name="">, , </column>
             <column name="Performance">, , After transformations are applied to meet performance pragma targets</column>
-            <column name="">(1) loop simplification,  5031, loop and instruction simplification</column>
-            <column name="">(2) parallelization,  5028, loops are unrolled or pipelined to meet performance targets</column>
-            <column name="">(3) array partition,  5028, arrays are partitioned to meet performance targets</column>
-            <column name="">(4) simplification,  5028, simplification of design after performance transformations</column>
+            <column name="">(1) loop simplification, 25189, loop and instruction simplification</column>
+            <column name="">(2) parallelization, 21344, loops are unrolled or pipelined to meet performance targets</column>
+            <column name="">(3) array partition, 17584, arrays are partitioned to meet performance targets</column>
+            <column name="">(4) simplification, 17204, simplification of design after performance transformations</column>
             <column name="">, , </column>
             <column name="HW Transforms">, , After hardware transfomations</column>
-            <column name="">(1) lowering,  5088, initial conversion to HW specific instructions</column>
-            <column name="">(2) optimizations,  4916, high level synthesis optimizations</column>
+            <column name="">(1) lowering, 17415, initial conversion to HW specific instructions</column>
+            <column name="">(2) optimizations, 11726, high level synthesis optimizations</column>
         </table>
     </item>
     <item name="Instructions per Function for each Compilation Phase">
         <hiertable>
             <header size="7" col0="Function" col1="Location" col2="Compile/Link" col3="Unroll/Inline" col4="Array/Struct" col5="Performance" col6="HW Transforms"/>
             <rows>
-                <row id="0" col0="reconstruct" col1="image_analysis.cpp:116" col2="19372" col3="624" col4="5032" col5="5028" col6="4916">
-                    <row id="2" col0="getLocalImages_single" col1="image_analysis.cpp:7" col2="19093" col3="287" col4="318" col5="318" col6="">
-                        <row id="19" col0="generic_round&lt;float&gt;" col1="hls_round.h:159" col2="" col3="152" col3_disp="152 (4 calls)" col4="152" col4_disp=" 152 (4 calls)" col5="152" col5_disp=" 152 (4 calls)" col6=""/>
+                <row id="0" col0="reconstruct" col1="image_analysis.cpp:207" col2="19924" col3="8567" col4="25190" col5="17204" col6="11726">
+                    <row id="18" col0="getLocalImages_single" col1="image_analysis.cpp:7" col2="19093" col3="287" col4="318" col5="318" col6="">
+                        <row id="15" col0="generic_round&lt;float&gt;" col1="hls_round.h:159" col2="" col3="152" col3_disp=" 152 (4 calls)" col4="152" col4_disp="  152 (4 calls)" col5="152" col5_disp="  152 (4 calls)" col6=""/>
                     </row>
-                    <row id="17" col0="Image_extract" col1="image_analysis.cpp:66" col2="138" col3="35" col4="324" col5="321" col6=""/>
-                    <row id="7" col0="conv_kernel" col1="image_analysis.cpp:98" col2="55" col3="229" col4="4013" col5="4011" col6=""/>
-                    <row id="15" col0="post_process" col1="image_analysis.cpp:112" col2="4" col3="4" col4="4" col5="4" col6=""/>
+                    <row id="1" col0="Image_extract" col1="image_analysis.cpp:68" col2="142" col3="419" col4="4124" col5="4121" col6=""/>
+                    <row id="8" col0="matrix_sum_prod" col1="image_analysis.cpp:183" col2="602" col3="7783" col4="12992" col5="3086" col6="">
+                        <row id="4" col0="vector_sum_prod" col1="image_analysis.cpp:148" col2="303" col3="7488" col3_disp="7,488 (16 calls)" col4="12710" col4_disp="12,710 (31 calls)" col5="" col6="">
+                            <row id="5" col0="vector_sum" col1="image_analysis.cpp:118" col2="262" col2_disp="  262 (2 calls)" col3="2976" col3_disp="2,976 (32 calls)" col4="5828" col4_disp="5,828 (62 calls)" col5="" col6=""/>
+                        </row>
+                        <row id="5" col0="vector_sum" col1="image_analysis.cpp:118" col2="262" col2_disp="  262 (2 calls)" col3="186" col3_disp=" 186 (2 calls)" col4="188" col4_disp="  188 (2 calls)" col5="126" col5_disp="  126 (2 calls)" col6=""/>
+                    </row>
+                    <row id="10" col0="post_process" col1="image_analysis.cpp:202" col2="4" col3="4" col4="4" col5="4" col6=""/>
                 </row>
             </rows>
             <notes/>

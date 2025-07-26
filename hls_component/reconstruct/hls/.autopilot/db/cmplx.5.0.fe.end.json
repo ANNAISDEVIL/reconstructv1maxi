@@ -1,15 +1,24 @@
 {
-    "1": {
-        "name": "conv_kernel",
-        "file": "..\/image_analysis.cpp",
-        "fileloc": "98",
-        "instructions": "3852",
-        "total_instructions": "5951",
-        "calls": "3",
-        "basicblocks": "1",
-        "loads": {
-            "L": "1924"
+    "0": {
+        "name": "reconstruct",
+        "file": "image_analysis.cpp",
+        "fileloc": "207",
+        "instructions": "69",
+        "total_instructions": "21257",
+        "calls": "1",
+        "basicblocks": "4",
+        "loops": {
+            "L": "1"
         }
+    },
+    "1": {
+        "name": "_Z11reconstructiiiP13atom_locationiiPfS1_PiS1_iiS1__for.inc",
+        "file": "image_analysis.cpp",
+        "fileloc": "0",
+        "instructions": "1951",
+        "total_instructions": "21188",
+        "calls": "5 2 6 4 7",
+        "basicblocks": "1"
     },
     "2": {
         "name": "getLocalImages_single",
@@ -23,88 +32,82 @@
             "G": "8"
         }
     },
-    "0": {
-        "name": "reconstruct",
-        "file": "image_analysis.cpp",
-        "fileloc": "116",
-        "instructions": "68",
-        "total_instructions": "6607",
-        "calls": "8",
-        "basicblocks": "4",
-        "loops": {
-            "L": "1"
-        }
-    },
     "3": {
-        "name": "conv_kernel_Pipeline_VITIS_LOOP_101_1",
+        "name": "Image_extract_Pipeline_VITIS_LOOP_81_1",
         "file": "..\/image_analysis.cpp",
-        "fileloc": "101",
-        "instructions": "2099",
-        "total_instructions": "2099",
+        "fileloc": "259",
+        "instructions": "8147",
+        "total_instructions": "8147",
         "calls": "",
-        "basicblocks": "3",
+        "basicblocks": "35",
         "loads": {
-            "L": "3"
+            "L": "1923"
         },
         "stores": {
-            "L": "6"
+            "L": "1924"
         },
         "loops": {
             "L": "1"
         }
     },
     "4": {
-        "name": "Image_extract_Pipeline_VITIS_LOOP_77_1_VITIS_LOOP_78_2",
+        "name": "matrix_sum_prod",
         "file": "..\/image_analysis.cpp",
-        "fileloc": "166",
-        "instructions": "213",
-        "total_instructions": "213",
-        "calls": "",
-        "basicblocks": "37",
+        "fileloc": "262",
+        "instructions": "4867",
+        "total_instructions": "5034",
+        "calls": "8",
+        "basicblocks": "1",
         "loads": {
-            "L": "4"
-        },
-        "stores": {
-            "L": "70"
-        },
-        "loops": {
-            "L": "1"
+            "L": "30"
         }
     },
     "5": {
-        "name": "post_process",
+        "name": "dataflow_in_loop_VITIS_LOOP_241_1.1_Block_newFuncRoot_proc",
         "file": "..\/image_analysis.cpp",
-        "fileloc": "169",
-        "instructions": "15",
-        "total_instructions": "15",
-        "calls": "",
-        "basicblocks": "1"
-    },
-    "6": {
-        "name": "dataflow_in_loop_VITIS_LOOP_149_1.1_Block_newFuncRoot_proc",
-        "file": "..\/image_analysis.cpp",
-        "fileloc": "169",
+        "fileloc": "263",
         "instructions": "6",
         "total_instructions": "6",
         "calls": "",
         "basicblocks": "1"
     },
-    "7": {
+    "6": {
         "name": "Image_extract",
         "file": "..\/image_analysis.cpp",
-        "fileloc": "166",
-        "instructions": "22",
-        "total_instructions": "235",
-        "calls": "4",
+        "fileloc": "259",
+        "instructions": "5791",
+        "total_instructions": "13938",
+        "calls": "3",
+        "basicblocks": "1",
+        "loads": {
+            "L": "1922"
+        }
+    },
+    "7": {
+        "name": "post_process",
+        "file": "..\/image_analysis.cpp",
+        "fileloc": "263",
+        "instructions": "16",
+        "total_instructions": "16",
+        "calls": "",
         "basicblocks": "1"
     },
     "8": {
-        "name": "_Z11reconstructiiiP13atom_locationiiPfS1_PiS1_iiS1__for.inc",
-        "file": "image_analysis.cpp",
-        "fileloc": "0",
-        "instructions": "89",
-        "total_instructions": "6539",
-        "calls": "6 2 7 1 5",
-        "basicblocks": "1"
+        "name": "matrix_sum_prod_Pipeline_VITIS_LOOP_191_1",
+        "file": "..\/image_analysis.cpp",
+        "fileloc": "262",
+        "instructions": "167",
+        "total_instructions": "167",
+        "calls": "",
+        "basicblocks": "6",
+        "loads": {
+            "L": "31"
+        },
+        "stores": {
+            "L": "32"
+        },
+        "loops": {
+            "L": "1"
+        }
     }
 }

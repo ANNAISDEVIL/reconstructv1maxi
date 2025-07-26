@@ -1,7 +1,7 @@
 <profile>
 
 <section name = "Vitis HLS Report for 'Image_extract'" level="0">
-<item name = "Date">Mon Jun 30 08:25:24 2025
+<item name = "Date">Sat Jul 26 18:27:24 2025
 </item>
 <item name = "Version">2024.2 (Build 5238294 on Nov  8 2024)</item>
 <item name = "Project">reconstruct</item>
@@ -24,7 +24,7 @@
 <section name = "" level="1">
 <item name = "Summary"><table name="" hasTotal="0">
 <keys size="8">, min, max, min, max, min, max, Type</keys>
-<column name="">982, 982, 9.820 us, 9.820 us, 982, 982, no</column>
+<column name="">980, 980, 9.800 us, 9.800 us, 980, 980, no</column>
 </table>
 </item>
 <item name = "Detail">

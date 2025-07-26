@@ -1,21 +1,48 @@
 {
   "0": {
     "basicblocks": 4,
-    "calls": "2 3 5 4",
+    "calls": "5 2 1 7",
     "file": "image_analysis.cpp",
-    "fileloc": 116,
-    "instructions": 374,
+    "fileloc": 207,
+    "instructions": 9675,
     "loads": {
-      "L": 3,
+      "L": 1925,
       "T": 1
     },
     "name": "reconstruct",
     "stores": {
       "L": 2
     },
-    "total_instructions": 5028
+    "total_instructions": 17584
   },
   "1": {
+    "basicblocks": 160,
+    "calls": "4 4",
+    "file": "image_analysis.cpp",
+    "fileloc": 183,
+    "instructions": 3340,
+    "name": "matrix_sum_prod",
+    "stores": {
+      "L": 92
+    },
+    "total_instructions": 3466
+  },
+  "2": {
+    "basicblocks": 35,
+    "calls": "",
+    "file": "image_analysis.cpp",
+    "fileloc": 68,
+    "instructions": 4114,
+    "loads": {
+      "L": 31
+    },
+    "name": "Image_extract",
+    "stores": {
+      "L": 1923
+    },
+    "total_instructions": 4121
+  },
+  "3": {
     "basicblocks": 1,
     "calls": "",
     "file": "lib_floatconversion.cpp",
@@ -24,9 +51,24 @@
     "name": "__hls_fptosi_float_i32",
     "total_instructions": 24
   },
-  "2": {
+  "4": {
     "basicblocks": 1,
-    "calls": "6 1 6 1 6 1 6 1",
+    "calls": "",
+    "file": "image_analysis.cpp",
+    "fileloc": 118,
+    "instructions": 63,
+    "loads": {
+      "L": 31
+    },
+    "name": "vector_sum",
+    "stores": {
+      "L": 1
+    },
+    "total_instructions": 63
+  },
+  "5": {
+    "basicblocks": 1,
+    "calls": "6 3 6 3 6 3 6 3",
     "file": "image_analysis.cpp",
     "fileloc": 7,
     "instructions": 39,
@@ -35,45 +77,6 @@
     },
     "name": "getLocalImages_single",
     "total_instructions": 318
-  },
-  "3": {
-    "basicblocks": 37,
-    "calls": "",
-    "file": "image_analysis.cpp",
-    "fileloc": 66,
-    "instructions": 314,
-    "name": "Image_extract",
-    "stores": {
-      "L": 63
-    },
-    "total_instructions": 321
-  },
-  "4": {
-    "basicblocks": 1,
-    "calls": "",
-    "file": "image_analysis.cpp",
-    "fileloc": 112,
-    "instructions": 4,
-    "name": "post_process",
-    "stores": {
-      "L": 1
-    },
-    "total_instructions": 4
-  },
-  "5": {
-    "basicblocks": 3,
-    "calls": "",
-    "file": "image_analysis.cpp",
-    "fileloc": 98,
-    "instructions": 4011,
-    "loads": {
-      "L": 1924
-    },
-    "name": "conv_kernel",
-    "stores": {
-      "L": 2
-    },
-    "total_instructions": 4011
   },
   "6": {
     "basicblocks": 5,
@@ -86,5 +89,17 @@
     },
     "name": "generic_round<float>",
     "total_instructions": 38
+  },
+  "7": {
+    "basicblocks": 1,
+    "calls": "",
+    "file": "image_analysis.cpp",
+    "fileloc": 202,
+    "instructions": 4,
+    "name": "post_process",
+    "stores": {
+      "L": 1
+    },
+    "total_instructions": 4
   }
 }

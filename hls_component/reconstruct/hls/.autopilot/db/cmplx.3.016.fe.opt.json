@@ -1,16 +1,52 @@
 {
   "0": {
     "basicblocks": 4,
-    "calls": "4",
+    "calls": "9",
     "file": "image_analysis.cpp",
-    "fileloc": 116,
-    "instructions": 59,
+    "fileloc": 207,
+    "instructions": 60,
     "name": "reconstruct",
-    "total_instructions": 4916
+    "total_instructions": 11726
   },
   "1": {
+    "basicblocks": 6,
+    "calls": "8 8",
+    "file": "image_analysis.cpp",
+    "fileloc": 183,
+    "instructions": 3057,
+    "loads": {
+      "L": 32
+    },
+    "name": "matrix_sum_prod",
+    "stores": {
+      "L": 62
+    },
+    "total_instructions": 3183
+  },
+  "2": {
+    "basicblocks": 1,
+    "calls": "",
+    "file": "image_analysis.cpp",
+    "fileloc": 0,
+    "instructions": 7,
+    "name": "dataflow_in_loop_VITIS_LOOP_241_1.1_",
+    "stores": {
+      "L": 3
+    },
+    "total_instructions": 7
+  },
+  "3": {
+    "basicblocks": 1,
+    "calls": "",
+    "file": "lib_floatconversion.cpp",
+    "fileloc": 51,
+    "instructions": 24,
+    "name": "__hls_fptosi_float_i32",
+    "total_instructions": 24
+  },
+  "4": {
     "basicblocks": 3,
-    "calls": "7 2 7 2 7 2 7 2",
+    "calls": "5 3 5 3 5 3 5 3",
     "file": "image_analysis.cpp",
     "fileloc": 7,
     "instructions": 103,
@@ -20,70 +56,7 @@
     },
     "total_instructions": 351
   },
-  "2": {
-    "basicblocks": 1,
-    "calls": "",
-    "file": "lib_floatconversion.cpp",
-    "fileloc": 51,
-    "instructions": 24,
-    "name": "__hls_fptosi_float_i32",
-    "total_instructions": 24
-  },
-  "3": {
-    "basicblocks": 4,
-    "calls": "",
-    "file": "image_analysis.cpp",
-    "fileloc": 98,
-    "instructions": 4015,
-    "loads": {
-      "L": 1924
-    },
-    "name": "conv_kernel",
-    "stores": {
-      "L": 2
-    },
-    "total_instructions": 4015
-  },
-  "4": {
-    "basicblocks": 1,
-    "calls": "8 1 6 3 5",
-    "file": "image_analysis.cpp",
-    "fileloc": 0,
-    "instructions": 146,
-    "loads": {
-      "L": 5
-    },
-    "name": "_Z11reconstructiiiP13atom_locationiiPfS1_PiS1_iiS1__for.inc",
-    "total_instructions": 4857
-  },
   "5": {
-    "basicblocks": 1,
-    "calls": "",
-    "file": "image_analysis.cpp",
-    "fileloc": 112,
-    "instructions": 7,
-    "name": "post_process",
-    "stores": {
-      "L": 1
-    },
-    "total_instructions": 7
-  },
-  "6": {
-    "basicblocks": 39,
-    "calls": "",
-    "file": "image_analysis.cpp",
-    "fileloc": 66,
-    "instructions": 331,
-    "loads": {
-      "L": 1
-    },
-    "name": "Image_extract",
-    "stores": {
-      "L": 63
-    },
-    "total_instructions": 331
-  },
-  "7": {
     "basicblocks": 5,
     "calls": "",
     "file": "hls_round.h",
@@ -95,16 +68,58 @@
     "name": "generic_round<float>",
     "total_instructions": 38
   },
+  "6": {
+    "basicblocks": 1,
+    "calls": "",
+    "file": "image_analysis.cpp",
+    "fileloc": 202,
+    "instructions": 8,
+    "name": "post_process",
+    "stores": {
+      "L": 1
+    },
+    "total_instructions": 8
+  },
+  "7": {
+    "basicblocks": 36,
+    "calls": "",
+    "file": "image_analysis.cpp",
+    "fileloc": 68,
+    "instructions": 4251,
+    "loads": {
+      "L": 32
+    },
+    "name": "Image_extract",
+    "stores": {
+      "L": 1923
+    },
+    "total_instructions": 4251
+  },
   "8": {
     "basicblocks": 1,
     "calls": "",
     "file": "image_analysis.cpp",
-    "fileloc": 0,
-    "instructions": 7,
-    "name": "dataflow_in_loop_VITIS_LOOP_149_1.1_",
-    "stores": {
-      "L": 3
+    "fileloc": 118,
+    "instructions": 63,
+    "loads": {
+      "L": 31
     },
-    "total_instructions": 7
+    "name": "vector_sum",
+    "stores": {
+      "L": 1
+    },
+    "total_instructions": 63
+  },
+  "9": {
+    "basicblocks": 1,
+    "calls": "2 4 7 1 6",
+    "file": "image_analysis.cpp",
+    "fileloc": 0,
+    "instructions": 3866,
+    "loads": {
+      "L": 1927
+    },
+    "name": "_Z11reconstructiiiP13atom_locationiiPfS1_PiS1_iiS1__for.inc",
+    "total_instructions": 11666
   }
 }
