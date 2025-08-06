@@ -19,3 +19,21 @@
 
 _ide/logs
 _ide/.wsdata
+
+# Ignore cache and temporary build files
+archive.zip
+*.zip
+*.idx
+*.rpt
+*.xml
+*.log
+*.bc
+*.o
+*.tmp.bc
+*.adb
+*.json
+*.db/
+.cache/
+.autopilot/
+*.vscode/
+project_1/
