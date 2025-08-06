@@ -2,6 +2,8 @@
 == Design Size Report
 ================================================================
 
+* C-Synthesis has not completed!
+
 * Total Instructions per Compilation Phase
 +---------------+-----------------------------+--------------+----------------------------------------------------------------------------------------+
 | Phase         | Step                        | Instructions | Description                                                                            |
@@ -21,31 +23,25 @@
 |               | (4) array reshape           | 25,266       | apply array reshape pragmas                                                            |
 |               | (5) access patterns         | 25,190       | array access pattern optmizations                                                      |
 |               |                             |              |                                                                                        |
-| Performance   |                             |              | After transformations are applied to meet performance pragma targets                   |
-|               | (1) loop simplification     | 25,189       | loop and instruction simplification                                                    |
-|               | (2) parallelization         | 21,344       | loops are unrolled or pipelined to meet performance targets                            |
-|               | (3) array partition         | 17,584       | arrays are partitioned to meet performance targets                                     |
-|               | (4) simplification          | 17,204       | simplification of design after performance transformations                             |
+| Performance   |                             | 25,189       | After transformations are applied to meet performance pragma targets                   |
 |               |                             |              |                                                                                        |
-| HW Transforms |                             |              | After hardware transfomations                                                          |
-|               | (1) lowering                | 17,415       | initial conversion to HW specific instructions                                         |
-|               | (2) optimizations           | 11,726       | high level synthesis optimizations                                                     |
+| HW Transforms |                             | pending      | After hardware transfomations                                                          |
 +---------------+-----------------------------+--------------+----------------------------------------------------------------------------------------+
 
 * Instructions per Function for each Compilation Phase
-+--------------------------+------------------------+-----------------+------------------+-------------------+-----------------+---------------+
-| Function                 | Location               | Compile/Link    | Unroll/Inline    | Array/Struct      | Performance     | HW Transforms |
-+--------------------------+------------------------+-----------------+------------------+-------------------+-----------------+---------------+
-| + reconstruct            | image_analysis.cpp:207 | 19,924          | 8,567            | 25,190            | 17,204          | 11,726        |
-|  + getLocalImages_single | image_analysis.cpp:7   | 19,093          |  287             |   318             |   318           |               |
-|     generic_round<float> | hls_round.h:159        |                 |  152 (4 calls)   |   152 (4 calls)   |   152 (4 calls) |               |
-|    Image_extract         | image_analysis.cpp:68  |   142           |  419             | 4,124             | 4,121           |               |
-|  + matrix_sum_prod       | image_analysis.cpp:183 |   602           | 7,783            | 12,992            | 3,086           |               |
-|   + vector_sum_prod      | image_analysis.cpp:148 |   303           | 7,488 (16 calls) | 12,710 (31 calls) |                 |               |
-|      vector_sum          | image_analysis.cpp:118 |   262 (2 calls) | 2,976 (32 calls) | 5,828 (62 calls)  |                 |               |
-|     vector_sum           | image_analysis.cpp:118 |   262 (2 calls) |  186 (2 calls)   |   188 (2 calls)   |   126 (2 calls) |               |
-|    post_process          | image_analysis.cpp:202 |     4           |    4             |     4             |     4           |               |
-+--------------------------+------------------------+-----------------+------------------+-------------------+-----------------+---------------+
++--------------------------+------------------------+-----------------+------------------+-------------------+-------------------+
+| Function                 | Location               | Compile/Link    | Unroll/Inline    | Array/Struct      | Performance       |
++--------------------------+------------------------+-----------------+------------------+-------------------+-------------------+
+| + reconstruct            | image_analysis.cpp:207 | 19,924          | 8,567            | 25,190            | 25,189            |
+|  + getLocalImages_single | image_analysis.cpp:7   | 19,093          |  287             |   318             |   318             |
+|     generic_round<float> | hls_round.h:159        |                 |  152 (4 calls)   |   152 (4 calls)   |   152 (4 calls)   |
+|    Image_extract         | image_analysis.cpp:68  |   142           |  419             | 4,124             | 4,121             |
+|  + matrix_sum_prod       | image_analysis.cpp:183 |   602           | 7,783            | 12,992            | 11,070            |
+|   + vector_sum_prod      | image_analysis.cpp:148 |   303           | 7,488 (16 calls) | 12,710 (31 calls) | 10,788 (31 calls) |
+|      vector_sum          | image_analysis.cpp:118 |   262 (2 calls) | 2,976 (32 calls) | 5,828 (62 calls)  | 5,828 (62 calls)  |
+|     vector_sum           | image_analysis.cpp:118 |   262 (2 calls) |  186 (2 calls)   |   188 (2 calls)   |   188 (2 calls)   |
+|    post_process          | image_analysis.cpp:202 |     4           |    4             |     4             |     4             |
++--------------------------+------------------------+-----------------+------------------+-------------------+-------------------+
 
 * Design Size Message Settings
 +---------------------------------------------+--------+------------------------------------------------------------------+

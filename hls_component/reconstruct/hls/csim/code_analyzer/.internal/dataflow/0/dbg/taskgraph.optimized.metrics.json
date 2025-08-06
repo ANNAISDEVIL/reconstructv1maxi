@@ -86,7 +86,7 @@
                                     },
                                     "access_type": "float",
                                     "access_bit_width": 32,
-                                    "exec_count": 100
+                                    "exec_count": 1600
                                 }
                             ],
                             "writes": [],
@@ -120,7 +120,7 @@
                                     },
                                     "access_type": "float",
                                     "access_bit_width": 32,
-                                    "exec_count": 100
+                                    "exec_count": 1600
                                 }
                             ],
                             "writes": [],
@@ -137,7 +137,7 @@
                                 },
                                 "id": "VId_463_[?(?,32)]dc",
                                 "name": "fullImage[*]",
-                                "display_name": "float fullImage[65536]"
+                                "display_name": "float fullImage[1048576]"
                             },
                             "reads": [
                                 {
@@ -154,7 +154,7 @@
                                     },
                                     "access_type": "float",
                                     "access_bit_width": 32,
-                                    "exec_count": 96100
+                                    "exec_count": 1537600
                                 }
                             ],
                             "writes": [],
@@ -193,7 +193,7 @@
                                     },
                                     "access_type": "float",
                                     "access_bit_width": 32,
-                                    "exec_count": 96100
+                                    "exec_count": 1537600
                                 }
                             ],
                             "writes": [],
@@ -232,7 +232,7 @@
                                     },
                                     "access_type": "float",
                                     "access_bit_width": 32,
-                                    "exec_count": 100
+                                    "exec_count": 1600
                                 }
                             ],
                             "writes": [],
@@ -267,7 +267,7 @@
                                     },
                                     "access_type": "float",
                                     "access_bit_width": 32,
-                                    "exec_count": 100
+                                    "exec_count": 1600
                                 }
                             ],
                             "kind": "Ptr",
@@ -750,8 +750,8 @@
                     "column": 0
                 },
                 "metrics": {
-                    "volume": 3200,
-                    "channel_rate": 2.424352622088883E-3
+                    "volume": 51200,
+                    "channel_rate": 3.8789641953422126E-2
                 },
                 "source": "1",
                 "sink": "3"
@@ -770,8 +770,8 @@
                     "column": 0
                 },
                 "metrics": {
-                    "volume": 3200,
-                    "channel_rate": 2.424352622088883E-3
+                    "volume": 51200,
+                    "channel_rate": 3.8789641953422126E-2
                 },
                 "source": "1",
                 "sink": "3"
@@ -810,8 +810,8 @@
                     "column": 0
                 },
                 "metrics": {
-                    "volume": 3075200,
-                    "channel_rate": 2.3298028698274162E0
+                    "volume": 49203200,
+                    "channel_rate": 3.727684591723866E1
                 },
                 "source": "1",
                 "sink": "3"
@@ -830,8 +830,8 @@
                     "column": 0
                 },
                 "metrics": {
-                    "volume": 3200,
-                    "channel_rate": 2.424352622088883E-3
+                    "volume": 51200,
+                    "channel_rate": 3.8789641953422126E-2
                 },
                 "source": "1",
                 "sink": "3"
@@ -840,7 +840,7 @@
                 "name": "fullImage[*]_RAW_1_3_#8",
                 "variable_id": "VId_463_[?(?,32)]dc",
                 "variable_name": "fullImage[*]",
-                "declaration": "float fullImage[65536]",
+                "declaration": "float fullImage[1048576]",
                 "kind": "Ptr",
                 "dependence": "RAW",
                 "channel_width": 32,
@@ -850,8 +850,8 @@
                     "column": 0
                 },
                 "metrics": {
-                    "volume": 3075200,
-                    "channel_rate": 2.3298028698274162E0
+                    "volume": 49203200,
+                    "channel_rate": 3.727684591723866E1
                 },
                 "source": "1",
                 "sink": "3"
@@ -870,8 +870,8 @@
                     "column": 0
                 },
                 "metrics": {
-                    "volume": 3200,
-                    "channel_rate": 2.424352622088883E-3
+                    "volume": 51200,
+                    "channel_rate": 3.8789641953422126E-2
                 },
                 "source": "3",
                 "sink": "2"

@@ -1,13 +1,35 @@
 #include "hls_stream.h"
 
 #define IMAGE_DTYPE float
+//// 10x10
+// #define IMAGE_PROJECTION_SIZE   100
+// #define IMAGE_PROJECTION_LOCAL  1000
+// #define FULL_IMAGE_SIZE     256*256
+//// 12x12
+// #define IMAGE_PROJECTION_SIZE   100
+// #define IMAGE_PROJECTION_LOCAL  1000
+// #define FULL_IMAGE_SIZE     320*320
+//// 24x24
+// #define IMAGE_PROJECTION_SIZE   100
+// #define IMAGE_PROJECTION_LOCAL  1000
+// #define FULL_IMAGE_SIZE     560*560
+// 32x32
+// #define IMAGE_PROJECTION_SIZE   100
+// #define IMAGE_PROJECTION_LOCAL  1000
+// #define FULL_IMAGE_SIZE     768*768
+// // 40x40
+// #define IMAGE_PROJECTION_SIZE   100
+// #define IMAGE_PROJECTION_LOCAL  1000
+// #define FULL_IMAGE_SIZE     880*880
+// // 44x44
+// #define IMAGE_PROJECTION_SIZE   100
+// #define IMAGE_PROJECTION_LOCAL  1000
+// #define FULL_IMAGE_SIZE     960*960
+// 40x40
 #define IMAGE_PROJECTION_SIZE   100
 #define IMAGE_PROJECTION_LOCAL  1000
-#define FULL_IMAGE_SIZE     256*256
-#define PIXEL     256
-// #define IMAGE_PROJECTION_SIZE   1024
-// #define IMAGE_PROJECTION_LOCAL  1024
-// #define FULL_IMAGE_SIZE     768*768
+#define FULL_IMAGE_SIZE     1024*1024
+#define PIXEL    1024
 
 typedef struct {
     float x;
@@ -25,7 +47,7 @@ typedef struct {
     int dy;
 } local_image_info;
 
-void reconstruct(int atomLocationsSize,int projShape0, int projShape1, atom_location atomLocations[1024],
+void reconstruct(int atomLocationsSize,int projShape0, int projShape1, atom_location atomLocations[2000],
     int psfSupersample, 
     int imageProjectionSize, 
     IMAGE_DTYPE imageProjs_local[IMAGE_PROJECTION_LOCAL * IMAGE_PROJECTION_SIZE], 

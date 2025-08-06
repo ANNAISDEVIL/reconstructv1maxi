@@ -204,7 +204,7 @@ void post_process(IMAGE_DTYPE projSumUsed, IMAGE_DTYPE sum, IMAGE_DTYPE curr_ima
     dout = sum * (curr_imageProjs / projSumUsed);
 }
 
-void reconstruct(int atomLocationsSize,int projShape0, int projShape1, atom_location atomLocations[1024],
+void reconstruct(int atomLocationsSize,int projShape0, int projShape1, atom_location atomLocations[2000],
     int psfSupersample, 
     int imageProjectionSize, 
     IMAGE_DTYPE imageProjs_local[IMAGE_PROJECTION_LOCAL * IMAGE_PROJECTION_SIZE], 

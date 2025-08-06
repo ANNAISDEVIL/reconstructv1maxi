@@ -191,7 +191,7 @@ int main(int argc, char** argv){
     int atomLocationsSize;
     int projShape0;
     int projShape1;
-    atom_location atomLocations[1024];
+    atom_location atomLocations[2000];
     int psfSupersample;
     int imageProjectionSize;
     IMAGE_DTYPE imageProjs_local[IMAGE_PROJECTION_LOCAL * IMAGE_PROJECTION_SIZE];
@@ -200,7 +200,7 @@ int main(int argc, char** argv){
     IMAGE_DTYPE fullImage[FULL_IMAGE_SIZE];
     int fullImage_rows;
     int fullImage_cols; 
-    IMAGE_DTYPE emissions[1024];
+    IMAGE_DTYPE emissions[2000];
     unsigned emission_cnt;
 
     bool success = parse_input_file("restoutput.txt",

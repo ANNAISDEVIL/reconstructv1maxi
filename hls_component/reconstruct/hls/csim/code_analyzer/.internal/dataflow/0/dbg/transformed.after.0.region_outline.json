@@ -69,7 +69,7 @@
                                 },
                                 "id": "VId_457_[?(?,64)]dc",
                                 "name": "atomLocations[*]",
-                                "display_name": "atom_location atomLocations[1024]"
+                                "display_name": "atom_location atomLocations[2000]"
                             },
                             "reads": [
                                 {
@@ -86,7 +86,7 @@
                                     },
                                     "access_type": "%struct.atom_location",
                                     "access_bit_width": 64,
-                                    "exec_count": 100
+                                    "exec_count": 1600
                                 }
                             ],
                             "writes": [],
@@ -103,7 +103,7 @@
                                 },
                                 "id": "VId_463_[?(?,32)]dc",
                                 "name": "fullImage[*]",
-                                "display_name": "float fullImage[65536]"
+                                "display_name": "float fullImage[1048576]"
                             },
                             "reads": [
                                 {
@@ -120,7 +120,7 @@
                                     },
                                     "access_type": "float",
                                     "access_bit_width": 32,
-                                    "exec_count": 96100
+                                    "exec_count": 1537600
                                 }
                             ],
                             "writes": [],
@@ -154,7 +154,7 @@
                                     },
                                     "access_type": "float",
                                     "access_bit_width": 32,
-                                    "exec_count": 96100
+                                    "exec_count": 1537600
                                 }
                             ],
                             "writes": [],
@@ -188,7 +188,7 @@
                                     },
                                     "access_type": "float",
                                     "access_bit_width": 32,
-                                    "exec_count": 100
+                                    "exec_count": 1600
                                 }
                             ],
                             "writes": [],
@@ -223,7 +223,7 @@
                                     },
                                     "access_type": "float",
                                     "access_bit_width": 32,
-                                    "exec_count": 100
+                                    "exec_count": 1600
                                 }
                             ],
                             "kind": "Ptr",
@@ -254,7 +254,7 @@
                                         "line": 241,
                                         "column": 37
                                     },
-                                    "exec_count": 100
+                                    "exec_count": 1600
                                 }
                             ],
                             "writes": [],
@@ -286,7 +286,7 @@
                                         "line": 258,
                                         "column": 9
                                     },
-                                    "exec_count": 100
+                                    "exec_count": 1600
                                 }
                             ],
                             "writes": [],
@@ -318,7 +318,7 @@
                                         "line": 258,
                                         "column": 9
                                     },
-                                    "exec_count": 100
+                                    "exec_count": 1600
                                 }
                             ],
                             "writes": [],
@@ -350,7 +350,7 @@
                                         "line": 258,
                                         "column": 9
                                     },
-                                    "exec_count": 100
+                                    "exec_count": 1600
                                 }
                             ],
                             "writes": [],
@@ -499,7 +499,7 @@
                 "name": "atomLocations[*]_RAW_1_3_#3",
                 "variable_id": "VId_457_[?(?,64)]dc",
                 "variable_name": "atomLocations[*]",
-                "declaration": "atom_location atomLocations[1024]",
+                "declaration": "atom_location atomLocations[2000]",
                 "kind": "Ptr",
                 "dependence": "RAW",
                 "channel_width": 0,
@@ -563,7 +563,7 @@
                 "name": "fullImage[*]_RAW_1_3_#7",
                 "variable_id": "VId_463_[?(?,32)]dc",
                 "variable_name": "fullImage[*]",
-                "declaration": "float fullImage[65536]",
+                "declaration": "float fullImage[1048576]",
                 "kind": "Ptr",
                 "dependence": "RAW",
                 "channel_width": 0,

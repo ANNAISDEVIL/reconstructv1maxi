@@ -786,7 +786,7 @@
 <DisplayName>atom_location</DisplayName>
 <Location>
 <File>29</File>
-<Line>15</Line>
+<Line>37</Line>
 </Location>
 <OfTypeID>105</OfTypeID>
 </UserDataType>
@@ -794,7 +794,7 @@
 <DisplayName></DisplayName>
 <Location>
 <File>29</File>
-<Line>12</Line>
+<Line>34</Line>
 </Location>
 <LLVMTypeID>12</LLVMTypeID>
 <Size>8</Size>
@@ -1204,9 +1204,9 @@
 <UserDataType ID="163" xsi:type="staticProfResults:ArrayType" >
 <DisplayName></DisplayName>
 <LLVMTypeID>10</LLVMTypeID>
-<Size>8192</Size>
+<Size>16000</Size>
 <ElementTypeID>104</ElementTypeID>
-<Dimension Index="0" Count="1024"/>
+<Dimension Index="0" Count="2000"/>
 </UserDataType>
 <UserDataType ID="164" xsi:type="staticProfResults:ArrayType" >
 <DisplayName></DisplayName>
@@ -1232,16 +1232,16 @@
 <UserDataType ID="167" xsi:type="staticProfResults:ArrayType" >
 <DisplayName></DisplayName>
 <LLVMTypeID>10</LLVMTypeID>
-<Size>262144</Size>
+<Size>4194304</Size>
 <ElementTypeID>106</ElementTypeID>
-<Dimension Index="0" Count="65536"/>
+<Dimension Index="0" Count="1048576"/>
 </UserDataType>
 <UserDataType ID="168" xsi:type="staticProfResults:ArrayType" >
 <DisplayName></DisplayName>
 <LLVMTypeID>10</LLVMTypeID>
-<Size>4096</Size>
+<Size>8000</Size>
 <ElementTypeID>106</ElementTypeID>
-<Dimension Index="0" Count="1024"/>
+<Dimension Index="0" Count="2000"/>
 </UserDataType>
 <UserDataType ID="169" xsi:type="staticProfResults:PointerType" >
 <DisplayName></DisplayName>
@@ -1253,7 +1253,7 @@
 <DisplayName>atom_location</DisplayName>
 <Location>
 <File>29</File>
-<Line>15</Line>
+<Line>37</Line>
 </Location>
 <OfTypeID>105</OfTypeID>
 </UserDataType>
@@ -1289,7 +1289,7 @@
 <DisplayName></DisplayName>
 <Location>
 <File>29</File>
-<Line>17</Line>
+<Line>39</Line>
 </Location>
 <LLVMTypeID>12</LLVMTypeID>
 <Size>32</Size>
@@ -1340,7 +1340,7 @@
 <DisplayName>local_image_info</DisplayName>
 <Location>
 <File>29</File>
-<Line>26</Line>
+<Line>48</Line>
 </Location>
 <OfTypeID>174</OfTypeID>
 </UserDataType>
@@ -1558,8 +1558,8 @@
 </File>
 <GlobalVariable File="2" IsConstant="false" IsThreadLocal="false" IsZeroInit="false" Line="181" Name="_ZSt4cerr" NameAsWritten="_ZSt4cerr" Size="272" Type="6" global_id="2" isDeclaration="true"/>
 <GlobalVariable File="17" IsConstant="false" IsThreadLocal="false" IsZeroInit="false" Line="21" Name="_ZSt4cout" NameAsWritten="_ZSt4cout" Size="272" Type="7" global_id="5" isDeclaration="true"/>
-<GlobalVariable File="3" IsConstant="false" IsThreadLocal="false" IsZeroInit="true" Line="74" Name="_ZStL8__ioinit.44" NameAsWritten="__ioinit" Size="1" Type="2" global_id="4" isDeclaration="false"/>
 <GlobalVariable File="3" IsConstant="false" IsThreadLocal="false" IsZeroInit="true" Line="74" Name="_ZStL8__ioinit.3" NameAsWritten="__ioinit" Size="1" Type="2" global_id="3" isDeclaration="false"/>
+<GlobalVariable File="3" IsConstant="false" IsThreadLocal="false" IsZeroInit="true" Line="74" Name="_ZStL8__ioinit.44" NameAsWritten="__ioinit" Size="1" Type="2" global_id="4" isDeclaration="false"/>
 <GlobalVariable File="3" IsConstant="false" IsThreadLocal="false" IsZeroInit="true" Line="74" Name="_ZStL8__ioinit" NameAsWritten="__ioinit" Size="1" Type="2" global_id="1" isDeclaration="false"/>
 <function global_id="17" Name="llvm.memcpy.p0i8.p0i8.i64" File="1" CUFile="1" arguments="4" HasArtificialBody="false" HasArtificialDeclaration="false" SIMDInstructionsPercentage="0" FullyQualifiedName="llvm.memcpy.p0i8.p0i8.i64" isDeclaration="true">
 <SourceRange BeginLine="0" BeginColumn="0" EndLine="0" EndColumn="0"/>
@@ -7982,16 +7982,16 @@
 <LocalVariable ArgNumber="0" DeclaredElementCount="0" File="2" InstrId="2695" IsArtificial="false" IsConstant="false" Line="191" LocalIdInFunc="9" MayBeAliased="true" Name="atomLocationsSize" Size="4" Type="4" global_id="363"/>
 <LocalVariable ArgNumber="0" DeclaredElementCount="0" File="2" InstrId="2696" IsArtificial="false" IsConstant="false" Line="192" LocalIdInFunc="10" MayBeAliased="true" Name="projShape0" Size="4" Type="4" global_id="364"/>
 <LocalVariable ArgNumber="0" DeclaredElementCount="0" File="2" InstrId="2697" IsArtificial="false" IsConstant="false" Line="193" LocalIdInFunc="11" MayBeAliased="true" Name="projShape1" Size="4" Type="4" global_id="365"/>
-<LocalVariable ArgNumber="0" DeclaredElementCount="0" File="2" InstrId="2698" IsArtificial="false" IsConstant="false" Line="194" LocalIdInFunc="12" MayBeAliased="true" Name="atomLocations" Size="8192" Type="163" global_id="366"/>
+<LocalVariable ArgNumber="0" DeclaredElementCount="0" File="2" InstrId="2698" IsArtificial="false" IsConstant="false" Line="194" LocalIdInFunc="12" MayBeAliased="true" Name="atomLocations" Size="16000" Type="163" global_id="366"/>
 <LocalVariable ArgNumber="0" DeclaredElementCount="0" File="2" InstrId="2699" IsArtificial="false" IsConstant="false" Line="195" LocalIdInFunc="13" MayBeAliased="true" Name="psfSupersample" Size="4" Type="4" global_id="367"/>
 <LocalVariable ArgNumber="0" DeclaredElementCount="0" File="2" InstrId="2700" IsArtificial="false" IsConstant="false" Line="196" LocalIdInFunc="14" MayBeAliased="true" Name="imageProjectionSize" Size="4" Type="4" global_id="368"/>
 <LocalVariable ArgNumber="0" DeclaredElementCount="0" File="2" InstrId="2701" IsArtificial="false" IsConstant="false" Line="197" LocalIdInFunc="15" MayBeAliased="true" Name="imageProjs_local" Size="400000" Type="164" global_id="369"/>
 <LocalVariable ArgNumber="0" DeclaredElementCount="0" File="2" InstrId="2702" IsArtificial="false" IsConstant="false" Line="198" LocalIdInFunc="16" MayBeAliased="true" Name="imageProjs" Size="400" Type="165" global_id="370"/>
 <LocalVariable ArgNumber="0" DeclaredElementCount="0" File="2" InstrId="2703" IsArtificial="false" IsConstant="false" Line="199" LocalIdInFunc="17" MayBeAliased="true" Name="imageProjs_local_size" Size="400" Type="166" global_id="371"/>
-<LocalVariable ArgNumber="0" DeclaredElementCount="0" File="2" InstrId="2704" IsArtificial="false" IsConstant="false" Line="200" LocalIdInFunc="18" MayBeAliased="true" Name="fullImage" Size="262144" Type="167" global_id="372"/>
+<LocalVariable ArgNumber="0" DeclaredElementCount="0" File="2" InstrId="2704" IsArtificial="false" IsConstant="false" Line="200" LocalIdInFunc="18" MayBeAliased="true" Name="fullImage" Size="4194304" Type="167" global_id="372"/>
 <LocalVariable ArgNumber="0" DeclaredElementCount="0" File="2" InstrId="2705" IsArtificial="false" IsConstant="false" Line="201" LocalIdInFunc="19" MayBeAliased="true" Name="fullImage_rows" Size="4" Type="4" global_id="373"/>
 <LocalVariable ArgNumber="0" DeclaredElementCount="0" File="2" InstrId="2706" IsArtificial="false" IsConstant="false" Line="202" LocalIdInFunc="20" MayBeAliased="true" Name="fullImage_cols" Size="4" Type="4" global_id="374"/>
-<LocalVariable ArgNumber="0" DeclaredElementCount="0" File="2" InstrId="2707" IsArtificial="false" IsConstant="false" Line="203" LocalIdInFunc="21" MayBeAliased="true" Name="emissions" Size="4096" Type="168" global_id="375"/>
+<LocalVariable ArgNumber="0" DeclaredElementCount="0" File="2" InstrId="2707" IsArtificial="false" IsConstant="false" Line="203" LocalIdInFunc="21" MayBeAliased="true" Name="emissions" Size="8000" Type="168" global_id="375"/>
 <LocalVariable ArgNumber="0" DeclaredElementCount="0" File="2" InstrId="2708" IsArtificial="false" IsConstant="false" Line="206" LocalIdInFunc="22" MayBeAliased="false" Name="success" Size="1" Type="5" global_id="376"/>
 <TraceRecord Type="0" Mark="4"  StmtID="2716"  Line="190" StaticOnly="true"  MemAddressType="3" RW="1"  Size="4"  PtrUID="378"  VarUID="378" Offset="0" />
 <TraceRecord Type="0" Mark="4"  StmtID="2717"  Line="190" StaticOnly="true"  MemAddressType="3" RW="1"  Size="4"  PtrUID="361"  VarUID="361" Offset="0" />
@@ -9517,13 +9517,13 @@
 <LocalVariable ArgNumber="1" DeclaredElementCount="0" File="17" InstrId="3729" IsArtificial="false" IsConstant="false" Line="207" LlvmArgNumber="0" LocalIdInFunc="0" MayBeAliased="false" Name="atomLocationsSize" Size="4" Type="4" global_id="454"/>
 <LocalVariable ArgNumber="2" DeclaredElementCount="0" File="17" InstrId="3730" IsArtificial="false" IsConstant="false" Line="207" LlvmArgNumber="1" LocalIdInFunc="1" MayBeAliased="false" Name="projShape0" Size="4" Type="4" global_id="455"/>
 <LocalVariable ArgNumber="3" DeclaredElementCount="0" File="17" InstrId="3731" IsArtificial="false" IsConstant="false" Line="207" LlvmArgNumber="2" LocalIdInFunc="2" MayBeAliased="false" Name="projShape1" Size="4" Type="4" global_id="456"/>
-<LocalVariable ArgNumber="4" DeclaredElementCount="1024" File="17" InstrId="3732" IsArtificial="false" IsConstant="false" Line="207" LlvmArgNumber="3" LocalIdInFunc="3" MayBeAliased="false" MayPointeeBeAliasedFurther="true" Name="atomLocations" Size="8" Type="169" global_id="457"/>
+<LocalVariable ArgNumber="4" DeclaredElementCount="2000" File="17" InstrId="3732" IsArtificial="false" IsConstant="false" Line="207" LlvmArgNumber="3" LocalIdInFunc="3" MayBeAliased="false" MayPointeeBeAliasedFurther="true" Name="atomLocations" Size="8" Type="169" global_id="457"/>
 <LocalVariable ArgNumber="5" DeclaredElementCount="0" File="17" InstrId="3733" IsArtificial="false" IsConstant="false" Line="208" LlvmArgNumber="4" LocalIdInFunc="4" MayBeAliased="false" Name="psfSupersample" Size="4" Type="4" global_id="458"/>
 <LocalVariable ArgNumber="6" DeclaredElementCount="0" File="17" InstrId="3734" IsArtificial="false" IsConstant="false" Line="209" LlvmArgNumber="5" LocalIdInFunc="5" MayBeAliased="false" Name="imageProjectionSize" Size="4" Type="4" global_id="459"/>
 <LocalVariable ArgNumber="7" DeclaredElementCount="100000" File="17" InstrId="3735" IsArtificial="false" IsConstant="false" Line="210" LlvmArgNumber="6" LocalIdInFunc="6" MayBeAliased="false" MayPointeeBeAliasedFurther="true" Name="imageProjs_local" Size="8" Type="108" global_id="460"/>
 <LocalVariable ArgNumber="8" DeclaredElementCount="100" File="17" InstrId="3736" IsArtificial="false" IsConstant="false" Line="211" LlvmArgNumber="7" LocalIdInFunc="7" MayBeAliased="false" MayPointeeBeAliasedFurther="true" Name="imageProjs" Size="8" Type="108" global_id="461"/>
 <LocalVariable ArgNumber="9" DeclaredElementCount="100" File="17" InstrId="3737" IsArtificial="false" IsConstant="false" Line="212" LlvmArgNumber="8" LocalIdInFunc="8" MayBeAliased="false" MayPointeeBeAliasedFurther="false" Name="imageProjs_local_size" Size="8" Type="109" global_id="462"/>
-<LocalVariable ArgNumber="10" DeclaredElementCount="65536" File="17" InstrId="3738" IsArtificial="false" IsConstant="false" Line="213" LlvmArgNumber="9" LocalIdInFunc="9" MayBeAliased="false" MayPointeeBeAliasedFurther="true" Name="fullImage" Size="8" Type="108" global_id="463"/>
+<LocalVariable ArgNumber="10" DeclaredElementCount="1048576" File="17" InstrId="3738" IsArtificial="false" IsConstant="false" Line="213" LlvmArgNumber="9" LocalIdInFunc="9" MayBeAliased="false" MayPointeeBeAliasedFurther="true" Name="fullImage" Size="8" Type="108" global_id="463"/>
 <LocalVariable ArgNumber="11" DeclaredElementCount="0" File="17" InstrId="3739" IsArtificial="false" IsConstant="false" Line="214" LlvmArgNumber="10" LocalIdInFunc="10" MayBeAliased="false" Name="fullImage_rows" Size="4" Type="4" global_id="464"/>
 <LocalVariable ArgNumber="12" DeclaredElementCount="0" File="17" InstrId="3740" IsArtificial="false" IsConstant="false" Line="214" LlvmArgNumber="11" LocalIdInFunc="11" MayBeAliased="false" Name="fullImage_cols" Size="4" Type="4" global_id="465"/>
 <LocalVariable ArgNumber="13" DeclaredElementCount="0" File="17" InstrId="3741" IsArtificial="false" IsConstant="false" Line="214" LlvmArgNumber="12" LocalIdInFunc="12" MayBeAliased="false" MayPointeeBeAliasedFurther="true" Name="emissions" Size="8" Type="108" global_id="466"/>
@@ -9801,7 +9801,7 @@
 <LocalVariable ArgNumber="0" DeclaredElementCount="0" File="17" InstrId="4017" IsArtificial="true" IsConstant="false" Line="68" LocalIdInFunc="0" MayBeAliased="false" Name="unnamed" Size="0" Type="190" global_id="500"/>
 <LocalVariable ArgNumber="1" DeclaredElementCount="0" File="17" InstrId="4018" IsArtificial="false" IsConstant="false" Line="68" LlvmArgNumber="0" LocalIdInFunc="1" MayBeAliased="false" Name="curr_idx" Size="4" Type="4" global_id="484"/>
 <LocalVariable ArgNumber="2" DeclaredElementCount="0" File="17" InstrId="4019" IsArtificial="false" IsConstant="false" Line="68" LlvmArgNumber="1" LocalIdInFunc="2" MayBeAliased="false" MayPointeeBeAliasedFurther="true" Name="localImages" Size="8" Type="171" global_id="485"/>
-<LocalVariable ArgNumber="3" DeclaredElementCount="65536" File="17" InstrId="4020" IsArtificial="false" IsConstant="false" Line="69" LlvmArgNumber="2" LocalIdInFunc="3" MayBeAliased="false" MayPointeeBeAliasedFurther="false" Name="fullImage" Size="8" Type="108" global_id="486"/>
+<LocalVariable ArgNumber="3" DeclaredElementCount="1048576" File="17" InstrId="4020" IsArtificial="false" IsConstant="false" Line="69" LlvmArgNumber="2" LocalIdInFunc="3" MayBeAliased="false" MayPointeeBeAliasedFurther="false" Name="fullImage" Size="8" Type="108" global_id="486"/>
 <LocalVariable ArgNumber="4" DeclaredElementCount="31" File="17" InstrId="4021" IsArtificial="false" IsConstant="false" Line="69" LlvmArgNumber="3" LocalIdInFunc="4" MayBeAliased="false" MayPointeeBeAliasedFurther="false" Name="curr_fullImage" Size="8" Type="178" global_id="487"/>
 <LocalVariable ArgNumber="5" DeclaredElementCount="100000" File="17" InstrId="4022" IsArtificial="false" IsConstant="false" Line="70" LlvmArgNumber="4" LocalIdInFunc="5" MayBeAliased="false" MayPointeeBeAliasedFurther="false" Name="imageProjs_local" Size="8" Type="108" global_id="488"/>
 <LocalVariable ArgNumber="6" DeclaredElementCount="31" File="17" InstrId="4023" IsArtificial="false" IsConstant="false" Line="70" LlvmArgNumber="5" LocalIdInFunc="6" MayBeAliased="false" MayPointeeBeAliasedFurther="false" Name="curr_localImage" Size="8" Type="178" global_id="489"/>

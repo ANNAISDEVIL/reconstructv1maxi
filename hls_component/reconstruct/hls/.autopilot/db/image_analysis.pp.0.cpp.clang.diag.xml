@@ -461,7 +461,7 @@
       <key>column</key>
       <integer>9</integer>
       <key>message</key>
-      <string>HLS pragma dump _XLX_SEP_ PragmaIsValid=1_XLX_SEP_ PragmaType=interface_XLX_SEP_ PragmaContext=_XLX_SEP_ PragmaFunction=reconstruct_XLX_SEP_ PragmaOptions=port=fullImage mode=m_axi bundle=fullImage depth=256*256 num_read_outstanding=64 max_read_burst_length=64_XLX_SEP_</string>
+      <string>HLS pragma dump _XLX_SEP_ PragmaIsValid=1_XLX_SEP_ PragmaType=interface_XLX_SEP_ PragmaContext=_XLX_SEP_ PragmaFunction=reconstruct_XLX_SEP_ PragmaOptions=port=fullImage mode=m_axi bundle=fullImage depth=1024*1024 num_read_outstanding=64 max_read_burst_length=64_XLX_SEP_</string>
       <key>ID</key>
       <integer>5471</integer>
       <key>WarningOption</key>
