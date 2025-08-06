@@ -110,5 +110,152 @@
     <msg msg_groups="PRAGMA_VERBOSE_DUMP" msg_id="207-5471" msg_severity="WARNING" msg_loc="../image_analysis.cpp:256:9" msg_body="HLS pragma dump">
         <args ARG_PragmaFunction="reconstruct" ARG_PragmaIsValid="1" ARG_PragmaOptions="variable=curr_localImage type=complete" ARG_PragmaType="array_partition" ClangWarningOption="dump-hls-pragmas"/>
     </msg>
+    <msg msg_groups="PRAGMA_UNROLL" msg_id="214-291" msg_severity="INFO" msg_loc="../image_analysis.cpp:151:23" msg_body="Loop 'VITIS_LOOP_151_1' is marked as complete unroll implied by the pipeline pragma">
+        <args LoopName="VITIS_LOOP_151_1"/>
+    </msg>
+    <msg msg_groups="PRAGMA_UNROLL" msg_id="214-291" msg_severity="INFO" msg_loc="../image_analysis.cpp:140:23" msg_body="Loop 'VITIS_LOOP_140_4' is marked as complete unroll implied by the pipeline pragma">
+        <args LoopName="VITIS_LOOP_140_4"/>
+    </msg>
+    <msg msg_groups="PRAGMA_UNROLL" msg_id="214-291" msg_severity="INFO" msg_loc="../image_analysis.cpp:135:23" msg_body="Loop 'VITIS_LOOP_135_3' is marked as complete unroll implied by the pipeline pragma">
+        <args LoopName="VITIS_LOOP_135_3"/>
+    </msg>
+    <msg msg_groups="PRAGMA_UNROLL" msg_id="214-291" msg_severity="INFO" msg_loc="../image_analysis.cpp:130:23" msg_body="Loop 'VITIS_LOOP_130_2' is marked as complete unroll implied by the pipeline pragma">
+        <args LoopName="VITIS_LOOP_130_2"/>
+    </msg>
+    <msg msg_groups="PRAGMA_UNROLL" msg_id="214-291" msg_severity="INFO" msg_loc="../image_analysis.cpp:124:23" msg_body="Loop 'VITIS_LOOP_124_1' is marked as complete unroll implied by the pipeline pragma">
+        <args LoopName="VITIS_LOOP_124_1"/>
+    </msg>
+    <msg msg_groups="PRAGMA_UNROLL" msg_id="214-188" msg_severity="INFO" msg_loc="../image_analysis.cpp:183:0" msg_body="Unrolling loop 'VITIS_LOOP_191_1' (../image_analysis.cpp:191:23) in function 'matrix_sum_prod' partially with a factor of 16">
+        <args Factor="16" LoopLoc="../image_analysis.cpp:191:23" LoopName="VITIS_LOOP_191_1"/>
+    </msg>
+    <msg msg_groups="PRAGMA_UNROLL" msg_id="214-186" msg_severity="INFO" msg_loc="../image_analysis.cpp:148:0" msg_body="Unrolling loop 'VITIS_LOOP_151_1' (../image_analysis.cpp:151:23) in function 'vector_sum_prod' completely with a factor of 31">
+        <args Factor="31" LoopLoc="../image_analysis.cpp:151:23" LoopName="VITIS_LOOP_151_1"/>
+    </msg>
+    <msg msg_groups="PRAGMA_UNROLL" msg_id="214-186" msg_severity="INFO" msg_loc="../image_analysis.cpp:118:0" msg_body="Unrolling loop 'VITIS_LOOP_140_4' (../image_analysis.cpp:140:23) in function 'vector_sum' completely with a factor of 2">
+        <args Factor="2" LoopLoc="../image_analysis.cpp:140:23" LoopName="VITIS_LOOP_140_4"/>
+    </msg>
+    <msg msg_groups="PRAGMA_UNROLL" msg_id="214-186" msg_severity="INFO" msg_loc="../image_analysis.cpp:118:0" msg_body="Unrolling loop 'VITIS_LOOP_135_3' (../image_analysis.cpp:135:23) in function 'vector_sum' completely with a factor of 4">
+        <args Factor="4" LoopLoc="../image_analysis.cpp:135:23" LoopName="VITIS_LOOP_135_3"/>
+    </msg>
+    <msg msg_groups="PRAGMA_UNROLL" msg_id="214-186" msg_severity="INFO" msg_loc="../image_analysis.cpp:118:0" msg_body="Unrolling loop 'VITIS_LOOP_130_2' (../image_analysis.cpp:130:23) in function 'vector_sum' completely with a factor of 8">
+        <args Factor="8" LoopLoc="../image_analysis.cpp:130:23" LoopName="VITIS_LOOP_130_2"/>
+    </msg>
+    <msg msg_groups="PRAGMA_UNROLL" msg_id="214-186" msg_severity="INFO" msg_loc="../image_analysis.cpp:118:0" msg_body="Unrolling loop 'VITIS_LOOP_124_1' (../image_analysis.cpp:124:23) in function 'vector_sum' completely with a factor of 15">
+        <args Factor="15" LoopLoc="../image_analysis.cpp:124:23" LoopName="VITIS_LOOP_124_1"/>
+    </msg>
+    <msg msg_groups="PRAGMA_UNROLL" msg_id="214-186" msg_severity="INFO" msg_loc="../image_analysis.cpp:71:0" msg_body="Unrolling loop 'VITIS_LOOP_84_2' (../image_analysis.cpp:84:19) in function 'Image_extract' completely with a factor of 31">
+        <args Factor="31" LoopLoc="../image_analysis.cpp:84:19" LoopName="VITIS_LOOP_84_2"/>
+    </msg>
+    <msg msg_groups="PRAGMA_INTERFACE" msg_id="214-366" msg_severity="WARNING" msg_loc="../image_analysis.cpp:158:5" msg_body="Duplicating function 'vector_sum(float*, float&amp;)' as different function signatures were detected between this call site and other call site(s). This may impact the resources used in the design.">
+        <args Name="vector_sum(float*, float&amp;)"/>
+    </msg>
+    <msg msg_groups="PRAGMA_INTERFACE" msg_id="214-366" msg_severity="WARNING" msg_loc="../image_analysis.cpp:157:5" msg_body="Duplicating function 'vector_sum(float*, float&amp;)' as different function signatures were detected between this call site and other call site(s). This may impact the resources used in the design.">
+        <args Name="vector_sum(float*, float&amp;)"/>
+    </msg>
+    <msg msg_groups="PRAGMA_INLINE" msg_id="214-178" msg_severity="INFO" msg_loc="C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib/src/hls\utils/x_hls_utils.h:322:0" msg_body="Inlining function 'fp_struct&lt;float&gt;::data() const (.7.28.38.47.58)' into 'fp_struct&lt;float&gt;::to_float() const (.25.35.44.55)'">
+        <args Callee="fp_struct&lt;float&gt;::data() const (.7.28.38.47.58)" Callee-DebugLoc="File {C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib/src/hls\utils/x_hls_utils.h} Line 309 Column 0" Caller="fp_struct&lt;float&gt;::to_float() const (.25.35.44.55)" Caller-DebugLoc="File {C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib/src/hls\utils/x_hls_utils.h} Line 322 Column 0"/>
+    </msg>
+    <msg msg_groups="PRAGMA_INLINE" msg_id="214-178" msg_severity="INFO" msg_loc="C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib/src/hls\utils/x_hls_utils.h:346:0" msg_body="Inlining function 'fp_struct&lt;float&gt;::to_float() const (.25.35.44.55)' into 'fp_struct&lt;float&gt;::to_ieee() const'">
+        <args Callee="fp_struct&lt;float&gt;::to_float() const (.25.35.44.55)" Callee-DebugLoc="File {C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib/src/hls\utils/x_hls_utils.h} Line 322 Column 0" Caller="fp_struct&lt;float&gt;::to_ieee() const" Caller-DebugLoc="File {C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib/src/hls\utils/x_hls_utils.h} Line 346 Column 0"/>
+    </msg>
+    <msg msg_groups="PRAGMA_INLINE" msg_id="214-178" msg_severity="INFO" msg_loc="C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib/hlsmath/include/FloatingPoint/hls_copysign.h:10:0" msg_body="Inlining function 'fp_struct&lt;float&gt;::fp_struct(float)' into 'float generic_copysign&lt;float&gt;(float, float)'">
+        <args Callee="fp_struct&lt;float&gt;::fp_struct(float)" Callee-DebugLoc="File {C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib/src/hls\utils/x_hls_utils.h} Line 283 Column 0" Caller="float generic_copysign&lt;float&gt;(float, float)" Caller-DebugLoc="File {C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib/hlsmath/include/FloatingPoint/hls_copysign.h} Line 10 Column 0"/>
+    </msg>
+    <msg msg_groups="PRAGMA_INLINE" msg_id="214-178" msg_severity="INFO" msg_loc="C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib/hlsmath/include/FloatingPoint/hls_copysign.h:10:0" msg_body="Inlining function 'fp_struct&lt;float&gt;::to_ieee() const' into 'float generic_copysign&lt;float&gt;(float, float)'">
+        <args Callee="fp_struct&lt;float&gt;::to_ieee() const" Callee-DebugLoc="File {C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib/src/hls\utils/x_hls_utils.h} Line 346 Column 0" Caller="float generic_copysign&lt;float&gt;(float, float)" Caller-DebugLoc="File {C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib/hlsmath/include/FloatingPoint/hls_copysign.h} Line 10 Column 0"/>
+    </msg>
+    <msg msg_groups="PRAGMA_INLINE" msg_id="214-178" msg_severity="INFO" msg_loc="C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib/hlsmath/include/FloatingPoint\hls_round.h:160:0" msg_body="Inlining function 'fp_struct&lt;float&gt;::fp_struct(float)' into 'float generic_round&lt;float&gt;(float)'">
+        <args Callee="fp_struct&lt;float&gt;::fp_struct(float)" Callee-DebugLoc="File {C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib/src/hls\utils/x_hls_utils.h} Line 283 Column 0" Caller="float generic_round&lt;float&gt;(float)" Caller-DebugLoc="File {C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib/hlsmath/include/FloatingPoint\hls_round.h} Line 160 Column 0"/>
+    </msg>
+    <msg msg_groups="PRAGMA_INLINE" msg_id="214-178" msg_severity="INFO" msg_loc="C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib/hlsmath/include/FloatingPoint\hls_round.h:160:0" msg_body="Inlining function 'float generic_copysign&lt;float&gt;(float, float)' into 'float generic_round&lt;float&gt;(float)'">
+        <args Callee="float generic_copysign&lt;float&gt;(float, float)" Callee-DebugLoc="File {C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib/hlsmath/include/FloatingPoint/hls_copysign.h} Line 10 Column 0" Caller="float generic_round&lt;float&gt;(float)" Caller-DebugLoc="File {C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib/hlsmath/include/FloatingPoint\hls_round.h} Line 160 Column 0"/>
+    </msg>
+    <msg msg_groups="PRAGMA_INLINE" msg_id="214-178" msg_severity="INFO" msg_loc="C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib/hlsmath/include/FloatingPoint\hls_round.h:160:0" msg_body="Inlining function 'fp_struct&lt;float&gt;::data() const (.7.28.38.47.58)' into 'float generic_round&lt;float&gt;(float)'">
+        <args Callee="fp_struct&lt;float&gt;::data() const (.7.28.38.47.58)" Callee-DebugLoc="File {C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib/src/hls\utils/x_hls_utils.h} Line 309 Column 0" Caller="float generic_round&lt;float&gt;(float)" Caller-DebugLoc="File {C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib/hlsmath/include/FloatingPoint\hls_round.h} Line 160 Column 0"/>
+    </msg>
+    <msg msg_groups="PRAGMA_INLINE" msg_id="214-178" msg_severity="INFO" msg_loc="C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib/hlsmath/include/FloatingPoint\hls_round.h:160:0" msg_body="Inlining function 'fp_struct&lt;float&gt;::fp_struct(ap_uint&lt;32&gt;)' into 'float generic_round&lt;float&gt;(float)'">
+        <args Callee="fp_struct&lt;float&gt;::fp_struct(ap_uint&lt;32&gt;)" Callee-DebugLoc="File {C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib/src/hls\utils/x_hls_utils.h} Line 298 Column 0" Caller="float generic_round&lt;float&gt;(float)" Caller-DebugLoc="File {C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib/hlsmath/include/FloatingPoint\hls_round.h} Line 160 Column 0"/>
+    </msg>
+    <msg msg_groups="PRAGMA_INLINE" msg_id="214-178" msg_severity="INFO" msg_loc="C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib/hlsmath/include/FloatingPoint\hls_round.h:160:0" msg_body="Inlining function 'fp_struct&lt;float&gt;::to_ieee() const' into 'float generic_round&lt;float&gt;(float)'">
+        <args Callee="fp_struct&lt;float&gt;::to_ieee() const" Callee-DebugLoc="File {C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib/src/hls\utils/x_hls_utils.h} Line 346 Column 0" Caller="float generic_round&lt;float&gt;(float)" Caller-DebugLoc="File {C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib/hlsmath/include/FloatingPoint\hls_round.h} Line 160 Column 0"/>
+    </msg>
+    <msg msg_groups="PRAGMA_INLINE" msg_id="214-178" msg_severity="INFO" msg_loc="F:/Vitis/2024.2/tps/mingw/8.3.0/win64.o/nt\lib\gcc\x86_64-w64-mingw32\8.3.0\include\c++\cmath:1757:0" msg_body="Inlining function 'roundf' into 'std::round(float)'">
+        <args Callee="roundf" Callee-DebugLoc="File {C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib\hlsmath\src\c\roundfloat.cpp} Line 6 Column 0" Caller="std::round(float)" Caller-DebugLoc="File {F:/Vitis/2024.2/tps/mingw/8.3.0/win64.o/nt\lib\gcc\x86_64-w64-mingw32\8.3.0\include\c++\cmath} Line 1757 Column 0"/>
+    </msg>
+    <msg msg_groups="PRAGMA_INLINE" msg_id="214-178" msg_severity="INFO" msg_loc="C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib/hlsmath/include/FloatingPoint\hls_case_IEEE754.h:12:0" msg_body="Inlining function 'fp_struct&lt;float&gt;::fp_struct(float)' into 'int generic_cast_IEEE754&lt;int, (ap_q_mode)6, float&gt;(float, bool, hls::enable_if&lt;std::numeric_limits&lt;int&gt;::is_signed, bool&gt;::type)'">
+        <args Callee="fp_struct&lt;float&gt;::fp_struct(float)" Callee-DebugLoc="File {C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib/src/hls\utils/x_hls_utils.h} Line 283 Column 0" Caller="int generic_cast_IEEE754&lt;int, (ap_q_mode)6, float&gt;(float, bool, hls::enable_if&lt;std::numeric_limits&lt;int&gt;::is_signed, bool&gt;::type)" Caller-DebugLoc="File {C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib/hlsmath/include/FloatingPoint\hls_case_IEEE754.h} Line 12 Column 0"/>
+    </msg>
+    <msg msg_groups="PRAGMA_INLINE" msg_id="214-178" msg_severity="INFO" msg_loc="C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib/hlsmath/include/FloatingPoint\hls_case_IEEE754.h:12:0" msg_body="Inlining function 'fp_struct&lt;float&gt;::mantissa() const' into 'int generic_cast_IEEE754&lt;int, (ap_q_mode)6, float&gt;(float, bool, hls::enable_if&lt;std::numeric_limits&lt;int&gt;::is_signed, bool&gt;::type)'">
+        <args Callee="fp_struct&lt;float&gt;::mantissa() const" Callee-DebugLoc="File {C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib/src/hls\utils/x_hls_utils.h} Line 340 Column 0" Caller="int generic_cast_IEEE754&lt;int, (ap_q_mode)6, float&gt;(float, bool, hls::enable_if&lt;std::numeric_limits&lt;int&gt;::is_signed, bool&gt;::type)" Caller-DebugLoc="File {C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib/hlsmath/include/FloatingPoint\hls_case_IEEE754.h} Line 12 Column 0"/>
+    </msg>
+    <msg msg_groups="PRAGMA_INLINE" msg_id="214-178" msg_severity="INFO" msg_loc="C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib/hlsmath/include/FloatingPoint\hls_case_IEEE754.h:12:0" msg_body="Inlining function 'fp_struct&lt;float&gt;::expv() const' into 'int generic_cast_IEEE754&lt;int, (ap_q_mode)6, float&gt;(float, bool, hls::enable_if&lt;std::numeric_limits&lt;int&gt;::is_signed, bool&gt;::type)'">
+        <args Callee="fp_struct&lt;float&gt;::expv() const" Callee-DebugLoc="File {C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib/src/hls\utils/x_hls_utils.h} Line 316 Column 0" Caller="int generic_cast_IEEE754&lt;int, (ap_q_mode)6, float&gt;(float, bool, hls::enable_if&lt;std::numeric_limits&lt;int&gt;::is_signed, bool&gt;::type)" Caller-DebugLoc="File {C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib/hlsmath/include/FloatingPoint\hls_case_IEEE754.h} Line 12 Column 0"/>
+    </msg>
+    <msg msg_groups="PRAGMA_INLINE" msg_id="214-178" msg_severity="INFO" msg_loc="C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib/hlsmath/include/FloatingPoint\hls_case_IEEE754.h:12:0" msg_body="Inlining function 'fp_struct&lt;float&gt;::__signbit() const' into 'int generic_cast_IEEE754&lt;int, (ap_q_mode)6, float&gt;(float, bool, hls::enable_if&lt;std::numeric_limits&lt;int&gt;::is_signed, bool&gt;::type)'">
+        <args Callee="fp_struct&lt;float&gt;::__signbit() const" Callee-DebugLoc="File {C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib/src/hls\utils/x_hls_utils.h} Line 349 Column 0" Caller="int generic_cast_IEEE754&lt;int, (ap_q_mode)6, float&gt;(float, bool, hls::enable_if&lt;std::numeric_limits&lt;int&gt;::is_signed, bool&gt;::type)" Caller-DebugLoc="File {C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib/hlsmath/include/FloatingPoint\hls_case_IEEE754.h} Line 12 Column 0"/>
+    </msg>
+    <msg msg_groups="PRAGMA_INLINE" msg_id="214-178" msg_severity="INFO" msg_loc="C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib/hlsmath/include/FloatingPoint\hls_case_IEEE754.h:116:0" msg_body="Inlining function 'int generic_cast_IEEE754&lt;int, (ap_q_mode)6, float&gt;(float, bool, hls::enable_if&lt;std::numeric_limits&lt;int&gt;::is_signed, bool&gt;::type)' into 'int generic_cast_IEEE754&lt;int, float&gt;(float, bool)'">
+        <args Callee="int generic_cast_IEEE754&lt;int, (ap_q_mode)6, float&gt;(float, bool, hls::enable_if&lt;std::numeric_limits&lt;int&gt;::is_signed, bool&gt;::type)" Callee-DebugLoc="File {C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib/hlsmath/include/FloatingPoint\hls_case_IEEE754.h} Line 12 Column 0" Caller="int generic_cast_IEEE754&lt;int, float&gt;(float, bool)" Caller-DebugLoc="File {C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib/hlsmath/include/FloatingPoint\hls_case_IEEE754.h} Line 116 Column 0"/>
+    </msg>
+    <msg msg_groups="PRAGMA_INLINE" msg_id="214-178" msg_severity="INFO" msg_loc="C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib\hlsmath\src\lib_floatconversion.cpp:51:0" msg_body="Inlining function 'int generic_cast_IEEE754&lt;int, float&gt;(float, bool)' into '__hls_fptosi_float_i32'">
+        <args Callee="int generic_cast_IEEE754&lt;int, float&gt;(float, bool)" Callee-DebugLoc="File {C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib/hlsmath/include/FloatingPoint\hls_case_IEEE754.h} Line 116 Column 0" Caller="__hls_fptosi_float_i32" Caller-DebugLoc="File {C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib\hlsmath\src\lib_floatconversion.cpp} Line 51 Column 0"/>
+    </msg>
+    <msg msg_groups="PRAGMA_INLINE" msg_id="214-178" msg_severity="INFO" msg_loc="../image_analysis.cpp:7:0" msg_body="Inlining function 'std::round(float)' into 'getLocalImages_single(int, int, int, int, atom_location*, hls::stream&lt;local_image_info, 0&gt;&amp;)'">
+        <args Callee="std::round(float)" Callee-DebugLoc="File {F:/Vitis/2024.2/tps/mingw/8.3.0/win64.o/nt\lib\gcc\x86_64-w64-mingw32\8.3.0\include\c++\cmath} Line 1757 Column 0" Caller="getLocalImages_single(int, int, int, int, atom_location*, hls::stream&lt;local_image_info, 0&gt;&amp;)" Caller-DebugLoc="File ../image_analysis.cpp Line 7 Column 0"/>
+    </msg>
+    <msg msg_groups="PRAGMA_MISC" msg_id="214-248" msg_severity="INFO" msg_loc="../image_analysis.cpp:246:15" msg_body="Applying array_partition to 'curr_fullImage': Complete partitioning on dimension 1. Complete partitioning on dimension 2.">
+        <args Dim="islist 1 2" Mode="islist Complete Complete" UOName="curr_fullImage"/>
+    </msg>
+    <msg msg_groups="PRAGMA_MISC" msg_id="214-248" msg_severity="INFO" msg_loc="../image_analysis.cpp:247:15" msg_body="Applying array_partition to 'curr_localImage': Complete partitioning on dimension 1. Complete partitioning on dimension 2.">
+        <args Dim="islist 1 2" Mode="islist Complete Complete" UOName="curr_localImage"/>
+    </msg>
+    <msg msg_groups="PRAGMA_AGGREGATE" msg_id="214-241" msg_severity="INFO" msg_loc="../image_analysis.cpp:245:34" msg_body="Aggregating fifo (hls::stream) variable 'localImages' with compact=bit mode in 256-bits">
+        <args AggregateTypeName="compact=bit" Bitwidth="256" HwTyName="fifo (hls::stream)" Name="localImages"/>
+    </msg>
+    <msg msg_groups="AUTOMATION" msg_id="214-364" msg_severity="INFO" msg_loc="../image_analysis.cpp:195:2" msg_body="Automatically inlining function 'vector_sum_prod(float*, float*, float&amp;, float&amp;)' to improve effectiveness of pipeline pragma in function 'matrix_sum_prod(float (*) [31], float (*) [31], float&amp;, float&amp;)'">
+        <args Callee="vector_sum_prod(float*, float*, float&amp;, float&amp;)" Callee-DebugLoc="File ../image_analysis.cpp Line 148 Column 0" Caller="matrix_sum_prod(float (*) [31], float (*) [31], float&amp;, float&amp;)" Caller-DebugLoc="File ../image_analysis.cpp Line 183 Column 0"/>
+    </msg>
+    <msg msg_groups="AUTOMATION" msg_id="214-364" msg_severity="INFO" msg_loc="../image_analysis.cpp:157:5" msg_body="Automatically inlining function 'vector_sum(float*, float&amp;) (.101)' to improve effectiveness of pipeline pragma in function 'matrix_sum_prod(float (*) [31], float (*) [31], float&amp;, float&amp;)'">
+        <args Callee="vector_sum(float*, float&amp;) (.101)" Callee-DebugLoc="File ../image_analysis.cpp Line 118 Column 0" Caller="matrix_sum_prod(float (*) [31], float (*) [31], float&amp;, float&amp;)" Caller-DebugLoc="File ../image_analysis.cpp Line 183 Column 0"/>
+    </msg>
+    <msg msg_groups="AUTOMATION" msg_id="214-364" msg_severity="INFO" msg_loc="../image_analysis.cpp:158:5" msg_body="Automatically inlining function 'vector_sum(float*, float&amp;) (.101)' to improve effectiveness of pipeline pragma in function 'matrix_sum_prod(float (*) [31], float (*) [31], float&amp;, float&amp;)'">
+        <args Callee="vector_sum(float*, float&amp;) (.101)" Callee-DebugLoc="File ../image_analysis.cpp Line 118 Column 0" Caller="matrix_sum_prod(float (*) [31], float (*) [31], float&amp;, float&amp;)" Caller-DebugLoc="File ../image_analysis.cpp Line 183 Column 0"/>
+    </msg>
+    <msg msg_groups="AUTOMATION PRAGMA_MISC" msg_id="214-449" msg_severity="INFO" msg_loc="../image_analysis.cpp:149:11" msg_body="Automatically partitioning array 'res' dimension 1 completely based on constant index.">
+        <args Dim="1" Value="res"/>
+    </msg>
+    <msg msg_groups="AUTOMATION PRAGMA_MISC" msg_id="214-449" msg_severity="INFO" msg_loc="../image_analysis.cpp:150:11" msg_body="Automatically partitioning array 'res1' dimension 1 completely based on constant index.">
+        <args Dim="1" Value="res1"/>
+    </msg>
+    <msg msg_groups="AUTOMATION_VERBOSE_PASSED" msg_id="214-335" msg_severity="INFO" msg_loc="../image_analysis.cpp:149:11" msg_body="array_partition dim=1 type=complete  variable=res 1 vector_sum_prod ../image_analysis.cpp:149:11 res">
+        <args PragmaFunction="vector_sum_prod" PragmaIsAuto="1" PragmaOptions="dim=1 type=complete  variable=res" PragmaType="array_partition" VarName="res" varLoc="../image_analysis.cpp:149:11"/>
+    </msg>
+    <msg msg_groups="AUTOMATION PRAGMA_MISC" msg_id="214-270" msg_severity="INFO" msg_loc="../image_analysis.cpp:149:11" msg_body="Inferring pragma 'array_partition type=complete dim=1' for array 'res' due to pipeline pragma">
+        <args Dim="1" Mode="complete" Name="res" PragmaType="array_partition"/>
+    </msg>
+    <msg msg_groups="AUTOMATION_VERBOSE_PASSED" msg_id="214-335" msg_severity="INFO" msg_loc="../image_analysis.cpp:150:11" msg_body="array_partition dim=1 type=complete  variable=res1 1 vector_sum_prod ../image_analysis.cpp:150:11 res1">
+        <args PragmaFunction="vector_sum_prod" PragmaIsAuto="1" PragmaOptions="dim=1 type=complete  variable=res1" PragmaType="array_partition" VarName="res1" varLoc="../image_analysis.cpp:150:11"/>
+    </msg>
+    <msg msg_groups="AUTOMATION PRAGMA_MISC" msg_id="214-270" msg_severity="INFO" msg_loc="../image_analysis.cpp:150:11" msg_body="Inferring pragma 'array_partition type=complete dim=1' for array 'res1' due to pipeline pragma">
+        <args Dim="1" Mode="complete" Name="res1" PragmaType="array_partition"/>
+    </msg>
+    <msg msg_groups="AUTOMATION_VERBOSE_PASSED" msg_id="214-335" msg_severity="INFO" msg_loc="../image_analysis.cpp:187:8" msg_body="array_partition dim=1 type=complete  variable=sum_val 1 matrix_sum_prod ../image_analysis.cpp:187:8 ../image_analysis.cpp:192:9sum_val">
+        <args PragmaFunction="matrix_sum_prod" PragmaIsAuto="1" PragmaOptions="dim=1 type=complete  variable=sum_val" PragmaSrcLoc="../image_analysis.cpp:192:9" PragmaSrcLoc-DebugLoc="File ../image_analysis.cpp Line 192 Column 9" PragmaType="array_partition" VarName="sum_val" varLoc="../image_analysis.cpp:187:8"/>
+    </msg>
+    <msg msg_groups="AUTOMATION PRAGMA_MISC" msg_id="214-270" msg_severity="INFO" msg_loc="../image_analysis.cpp:192:9" msg_body="Inferring pragma 'array_partition type=complete dim=1' for array 'sum_val' due to pipeline pragma">
+        <args Dim="1" Mode="complete" Name="sum_val" PragmaType="array_partition"/>
+    </msg>
+    <msg msg_groups="AUTOMATION_VERBOSE_PASSED" msg_id="214-335" msg_severity="INFO" msg_loc="../image_analysis.cpp:188:11" msg_body="array_partition dim=1 type=complete  variable=prod_val 1 matrix_sum_prod ../image_analysis.cpp:188:11 ../image_analysis.cpp:192:9prod_val">
+        <args PragmaFunction="matrix_sum_prod" PragmaIsAuto="1" PragmaOptions="dim=1 type=complete  variable=prod_val" PragmaSrcLoc="../image_analysis.cpp:192:9" PragmaSrcLoc-DebugLoc="File ../image_analysis.cpp Line 192 Column 9" PragmaType="array_partition" VarName="prod_val" varLoc="../image_analysis.cpp:188:11"/>
+    </msg>
+    <msg msg_groups="AUTOMATION PRAGMA_MISC" msg_id="214-270" msg_severity="INFO" msg_loc="../image_analysis.cpp:192:9" msg_body="Inferring pragma 'array_partition type=complete dim=1' for array 'prod_val' due to pipeline pragma">
+        <args Dim="1" Mode="complete" Name="prod_val" PragmaType="array_partition"/>
+    </msg>
+    <msg msg_groups="PRAGMA_MISC" msg_id="214-248" msg_severity="INFO" msg_loc="../image_analysis.cpp:187:8" msg_body="Applying array_partition to 'sum_val': Complete partitioning on dimension 1.">
+        <args Dim="1" Mode="Complete" UOName="sum_val"/>
+    </msg>
+    <msg msg_groups="PRAGMA_MISC" msg_id="214-248" msg_severity="INFO" msg_loc="../image_analysis.cpp:188:11" msg_body="Applying array_partition to 'prod_val': Complete partitioning on dimension 1.">
+        <args Dim="1" Mode="Complete" UOName="prod_val"/>
+    </msg>
 </xilinx:hls_fe_msgs>
 

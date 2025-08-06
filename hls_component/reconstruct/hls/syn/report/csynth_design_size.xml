@@ -1,7 +1,4 @@
 <design_size title="Design Size Report">
-    <item name="C-Synthesis has not completed!">
-        <item name="HW Transforms"/>
-    </item>
     <item name="Total Instructions per Compilation Phase">
         <table>
             <keys size="4">Phase, Step, Instructions, Description</keys>
@@ -20,27 +17,33 @@
             <column name="">(4) array reshape, 25266, apply array reshape pragmas</column>
             <column name="">(5) access patterns, 25190, array access pattern optmizations</column>
             <column name="">, , </column>
-            <column name="Performance">, 25189, After transformations are applied to meet performance pragma targets</column>
+            <column name="Performance">, , After transformations are applied to meet performance pragma targets</column>
+            <column name="">(1) loop simplification, 25189, loop and instruction simplification</column>
+            <column name="">(2) parallelization, 21344, loops are unrolled or pipelined to meet performance targets</column>
+            <column name="">(3) array partition, 17584, arrays are partitioned to meet performance targets</column>
+            <column name="">(4) simplification, 17204, simplification of design after performance transformations</column>
             <column name="">, , </column>
-            <column name="HW Transforms">, pending, After hardware transfomations</column>
+            <column name="HW Transforms">, , After hardware transfomations</column>
+            <column name="">(1) lowering, 17415, initial conversion to HW specific instructions</column>
+            <column name="">(2) optimizations, 11726, high level synthesis optimizations</column>
         </table>
     </item>
     <item name="Instructions per Function for each Compilation Phase">
         <hiertable>
-            <header size="6" col0="Function" col1="Location" col2="Compile/Link" col3="Unroll/Inline" col4="Array/Struct" col5="Performance"/>
+            <header size="7" col0="Function" col1="Location" col2="Compile/Link" col3="Unroll/Inline" col4="Array/Struct" col5="Performance" col6="HW Transforms"/>
             <rows>
-                <row id="0" col0="reconstruct" col1="image_analysis.cpp:207" col2="19924" col3="8567" col4="25190" col5="25189">
-                    <row id="17" col0="getLocalImages_single" col1="image_analysis.cpp:7" col2="19093" col3="287" col4="318" col5="318">
-                        <row id="20" col0="generic_round&lt;float&gt;" col1="hls_round.h:159" col2="" col3="152" col3_disp=" 152 (4 calls)" col4="152" col4_disp="  152 (4 calls)" col5="152" col5_disp="  152 (4 calls)"/>
+                <row id="0" col0="reconstruct" col1="image_analysis.cpp:207" col2="19924" col3="8567" col4="25190" col5="17204" col6="11726">
+                    <row id="17" col0="getLocalImages_single" col1="image_analysis.cpp:7" col2="19093" col3="287" col4="318" col5="318" col6="">
+                        <row id="20" col0="generic_round&lt;float&gt;" col1="hls_round.h:159" col2="" col3="152" col3_disp=" 152 (4 calls)" col4="152" col4_disp="  152 (4 calls)" col5="152" col5_disp="  152 (4 calls)" col6=""/>
                     </row>
-                    <row id="16" col0="Image_extract" col1="image_analysis.cpp:68" col2="142" col3="419" col4="4124" col5="4121"/>
-                    <row id="5" col0="matrix_sum_prod" col1="image_analysis.cpp:183" col2="602" col3="7783" col4="12992" col5="11070">
-                        <row id="6" col0="vector_sum_prod" col1="image_analysis.cpp:148" col2="303" col3="7488" col3_disp="7,488 (16 calls)" col4="12710" col4_disp="12,710 (31 calls)" col5="10788" col5_disp="10,788 (31 calls)">
-                            <row id="13" col0="vector_sum" col1="image_analysis.cpp:118" col2="262" col2_disp="  262 (2 calls)" col3="2976" col3_disp="2,976 (32 calls)" col4="5828" col4_disp="5,828 (62 calls)" col5="5828" col5_disp="5,828 (62 calls)"/>
+                    <row id="16" col0="Image_extract" col1="image_analysis.cpp:68" col2="142" col3="419" col4="4124" col5="4121" col6=""/>
+                    <row id="5" col0="matrix_sum_prod" col1="image_analysis.cpp:183" col2="602" col3="7783" col4="12992" col5="3086" col6="">
+                        <row id="6" col0="vector_sum_prod" col1="image_analysis.cpp:148" col2="303" col3="7488" col3_disp="7,488 (16 calls)" col4="12710" col4_disp="12,710 (31 calls)" col5="" col6="">
+                            <row id="13" col0="vector_sum" col1="image_analysis.cpp:118" col2="262" col2_disp="  262 (2 calls)" col3="2976" col3_disp="2,976 (32 calls)" col4="5828" col4_disp="5,828 (62 calls)" col5="" col6=""/>
                         </row>
-                        <row id="13" col0="vector_sum" col1="image_analysis.cpp:118" col2="262" col2_disp="  262 (2 calls)" col3="186" col3_disp=" 186 (2 calls)" col4="188" col4_disp="  188 (2 calls)" col5="188" col5_disp="  188 (2 calls)"/>
+                        <row id="13" col0="vector_sum" col1="image_analysis.cpp:118" col2="262" col2_disp="  262 (2 calls)" col3="186" col3_disp=" 186 (2 calls)" col4="188" col4_disp="  188 (2 calls)" col5="126" col5_disp="  126 (2 calls)" col6=""/>
                     </row>
-                    <row id="2" col0="post_process" col1="image_analysis.cpp:202" col2="4" col3="4" col4="4" col5="4"/>
+                    <row id="2" col0="post_process" col1="image_analysis.cpp:202" col2="4" col3="4" col4="4" col5="4" col6=""/>
                 </row>
             </rows>
             <notes/>

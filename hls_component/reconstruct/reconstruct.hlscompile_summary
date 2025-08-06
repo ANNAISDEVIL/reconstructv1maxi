@@ -152,3 +152,95 @@
  }
 }
 </ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "08/06/25 23:13:37",
+ "timestampMillis": "1754514817920",
+ "report": {
+  "path": "F:/LMU\\quantumMA\\opimization\\reconstructv1maxi\\hls_component\\reconstruct\\hls",
+  "name": "",
+  "fileType": "DIR",
+  "reportType": "HLS_DATAFLOW",
+  "cmdId": ""
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "08/06/25 23:13:37",
+ "timestampMillis": "1754514817950",
+ "report": {
+  "path": "F:/LMU\\quantumMA\\opimization\\reconstructv1maxi\\hls_component\\reconstruct\\hls",
+  "name": "",
+  "fileType": "DIR",
+  "reportType": "HLS_FUNCTION_CALL_GRAPH",
+  "cmdId": ""
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "08/06/25 23:13:37",
+ "timestampMillis": "1754514817951",
+ "report": {
+  "path": "F:/LMU\\quantumMA\\opimization\\reconstructv1maxi\\hls_component\\reconstruct\\hls",
+  "name": "",
+  "fileType": "DIR",
+  "reportType": "HLS_SCHEDULE",
+  "cmdId": ""
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Status",
+ "dateTimestamp": "08/06/25 23:13:37",
+ "timestampMillis": "1754514817952",
+ "status": {
+  "cmdId": "80570848-f5c4-4d9e-b8d0-319ffad2e422",
+  "state": "CS_PASSED"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Status",
+ "dateTimestamp": "08/06/25 23:17:53",
+ "timestampMillis": "1754515073200",
+ "status": {
+  "cmdId": "71185875-e822-4d27-b3c0-96af821ebfe8",
+  "state": "CS_PASSED"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "08/06/25 23:17:53",
+ "timestampMillis": "1754515073338",
+ "report": {
+  "path": "F:/LMU\\quantumMA\\opimization\\reconstructv1maxi\\hls_component\\reconstruct\\reports\\v++_compile_reconstruct_guidance.html",
+  "name": "",
+  "fileType": "HTML",
+  "reportType": "GLOBAL_RULECHECK_GUIDANCE",
+  "cmdId": ""
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "08/06/25 23:17:53",
+ "timestampMillis": "1754515073339",
+ "report": {
+  "path": "F:/LMU\\quantumMA\\opimization\\reconstructv1maxi\\hls_component\\reconstruct\\reports\\.db\\v++_compile_reconstruct_guidance.pb3",
+  "name": "",
+  "fileType": "BINARY_PROTOBUF",
+  "reportType": "GLOBAL_RULECHECK_GUIDANCE",
+  "cmdId": ""
+ }
+}
+</ENTRY>

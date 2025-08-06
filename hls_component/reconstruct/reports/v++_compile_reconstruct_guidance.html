@@ -3407,7 +3407,7 @@ window.onload = function () { addSorting(); }
 <center><h1>Design Guidance Report</h1></center><center><table class="header" border="0">
 <tr><td><b>Copyright</b></td><td>Copyright 1986-2022 Xilinx, Inc. All Rights Reserved. Copyright 2022-2024 Advanced Micro Devices, Inc. All Rights Reserved.</td></tr>
 <tr><td><b>Tool Version</b></td><td>xcd v.2024.2 (win64) Build 0 </td></tr>
-<tr><td><b>Date</b></td><td>Sat Jul 26 18:48:31 2025</td></tr>
+<tr><td><b>Date</b></td><td>Wed Aug  6 23:17:53 2025</td></tr>
 <tr><td><b>Host</b></td><td>DESKTOP-F34142K running 64-bit major release  (build 9200)</td></tr>
 <tr><td><b>Command</b></td><td>F:/Vitis/2024.2/bin/unwrapped/win64.o/v++.exe  -c --mode hls --config F:\LMU\quantumMA\opimization\reconstructv1maxi\hls_component\hls_config.cfg --work_dir reconstruct </td></tr>
 </table></center><br>
@@ -3434,49 +3434,13 @@ window.onload = function () { addSorting(); }
 <th align="left" width="380">Resolution</th>
 </tr>
 <tr>
-<td align="left">14</td>
-<td align="left">Kernel</td>
-<td align="left">WARNING</td>
-<td align="left"><undefined></td>
-<td align="left">HLS Kernel Related</td>
-<td align="left">Accelerator.reconstruct.Kernel</td>
-<td align="left">The critical path in module 'dataflow_in_loop_VITIS_LOOP_241_1_1' consists of the following:
-	'call' operation 64 bit ('call_ret', <a href="file:///F:/LMU/quantumMA/opimization/reconstructv1maxi/hls_component\../image_analysis.cpp#line=262">image_analysis.cpp</a>) to 'matrix_sum_prod' [1964]  (6.437 ns)
-	'call' operation 0 bit ('_ln263', <a href="file:///F:/LMU/quantumMA/opimization/reconstructv1maxi/hls_component\../image_analysis.cpp#line=263">image_analysis.cpp</a>) to 'post_process' [1967]  (1.838 ns)
-
-</td>
-<td align="left"><a href="http:///docs.xilinx.com/access/sources/dita/map?Doc_Version=2024.2%20English&url=ug1399-vitis-hls">Vitis HLS User Guide (UG1399)</a></td>
-</tr>
-<tr>
-<td align="left">1</td>
-<td align="left">Interface</td>
-<td align="left">ADVISORY</td>
-<td align="left"><undefined></td>
-<td align="left">HLS Interface Related</td>
-<td align="left">Accelerator.reconstruct.Interface</td>
-<td align="left">Multiple burst reads of length 961 and bit width 32 in loop 'VITIS_LOOP_81_1'(<a href="file:///F:/LMU/quantumMA/opimization/reconstructv1maxi/hls_component\../image_analysis.cpp#line=81">image_analysis.cpp</a>) has been inferred on bundle 'imageProjs_local'. These burst requests might be further partitioned into multiple requests during RTL generation, based on max_read_burst_length or max_write_burst_length settings. (<a href="file:///F:/LMU/quantumMA/opimization/reconstructv1maxi/hls_component\../image_analysis.cpp#line=81">image_analysis.cpp</a>)
-</td>
-<td align="left"><a href="http:///docs.xilinx.com/access/sources/dita/map?Doc_Version=2024.2%20English&url=ug1399-vitis-hls">Vitis HLS User Guide (UG1399)</a></td>
-</tr>
-<tr>
-<td align="left">4</td>
+<td align="left">3</td>
 <td align="left">Throughput</td>
 <td align="left">WARNING</td>
 <td align="left"><undefined></td>
 <td align="left">HLS Throughput Related</td>
 <td align="left">Accelerator.reconstruct.Throughput</td>
-<td align="left">The II Violation in module 'Image_extract_Pipeline_VITIS_LOOP_81_1' (loop 'VITIS_LOOP_81_1'): Unable to enforce a carried dependence constraint (II = 3, distance = 1, offset = 1) between bus read operation ('imageProjs_local_addr_read_30', <a href="file:///F:/LMU/quantumMA/opimization/reconstructv1maxi/hls_component\../image_analysis.cpp#line=86">image_analysis.cpp</a>-><a href="file:///F:/LMU/quantumMA/opimization/reconstructv1maxi/hls_component\../image_analysis.cpp#line=259">image_analysis.cpp</a>) on port 'imageProjs_local' (<a href="file:///F:/LMU/quantumMA/opimization/reconstructv1maxi/hls_component\../image_analysis.cpp#line=86">image_analysis.cpp</a>-><a href="file:///F:/LMU/quantumMA/opimization/reconstructv1maxi/hls_component\../image_analysis.cpp#line=259">image_analysis.cpp</a>) and bus read operation ('imageProjs_local_addr_read', <a href="file:///F:/LMU/quantumMA/opimization/reconstructv1maxi/hls_component\../image_analysis.cpp#line=86">image_analysis.cpp</a>-><a href="file:///F:/LMU/quantumMA/opimization/reconstructv1maxi/hls_component\../image_analysis.cpp#line=259">image_analysis.cpp</a>) on port 'imageProjs_local' (<a href="file:///F:/LMU/quantumMA/opimization/reconstructv1maxi/hls_component\../image_analysis.cpp#line=86">image_analysis.cpp</a>-><a href="file:///F:/LMU/quantumMA/opimization/reconstructv1maxi/hls_component\../image_analysis.cpp#line=259">image_analysis.cpp</a>).
-</td>
-<td align="left"><a href="http:///docs.xilinx.com/access/sources/dita/map?Doc_Version=2024.2%20English&url=ug1399-vitis-hls">Vitis HLS User Guide (UG1399)</a></td>
-</tr>
-<tr>
-<td align="left">9</td>
-<td align="left">Throughput</td>
-<td align="left">WARNING</td>
-<td align="left"><undefined></td>
-<td align="left">HLS Throughput Related</td>
-<td align="left">Accelerator.reconstruct.Throughput</td>
-<td align="left">The II Violation in module 'Image_extract_Pipeline_VITIS_LOOP_81_1' (loop 'VITIS_LOOP_81_1'): Unable to enforce a carried dependence constraint (II = 30, distance = 1, offset = 1) between bus read operation ('imageProjs_local_addr_read_30', <a href="file:///F:/LMU/quantumMA/opimization/reconstructv1maxi/hls_component\../image_analysis.cpp#line=86">image_analysis.cpp</a>-><a href="file:///F:/LMU/quantumMA/opimization/reconstructv1maxi/hls_component\../image_analysis.cpp#line=259">image_analysis.cpp</a>) on port 'imageProjs_local' (<a href="file:///F:/LMU/quantumMA/opimization/reconstructv1maxi/hls_component\../image_analysis.cpp#line=86">image_analysis.cpp</a>-><a href="file:///F:/LMU/quantumMA/opimization/reconstructv1maxi/hls_component\../image_analysis.cpp#line=259">image_analysis.cpp</a>) and bus read operation ('imageProjs_local_addr_read', <a href="file:///F:/LMU/quantumMA/opimization/reconstructv1maxi/hls_component\../image_analysis.cpp#line=86">image_analysis.cpp</a>-><a href="file:///F:/LMU/quantumMA/opimization/reconstructv1maxi/hls_component\../image_analysis.cpp#line=259">image_analysis.cpp</a>) on port 'imageProjs_local' (<a href="file:///F:/LMU/quantumMA/opimization/reconstructv1maxi/hls_component\../image_analysis.cpp#line=86">image_analysis.cpp</a>-><a href="file:///F:/LMU/quantumMA/opimization/reconstructv1maxi/hls_component\../image_analysis.cpp#line=259">image_analysis.cpp</a>).
+<td align="left">The II Violation in module 'Image_extract_Pipeline_VITIS_LOOP_81_1' (loop 'VITIS_LOOP_81_1'): Unable to enforce a carried dependence constraint (II = 2, distance = 1, offset = 1) between bus read operation ('imageProjs_local_addr_read_30', <a href="file:///F:/LMU/quantumMA/opimization/reconstructv1maxi/hls_component\../image_analysis.cpp#line=86">image_analysis.cpp</a>-><a href="file:///F:/LMU/quantumMA/opimization/reconstructv1maxi/hls_component\../image_analysis.cpp#line=259">image_analysis.cpp</a>) on port 'imageProjs_local' (<a href="file:///F:/LMU/quantumMA/opimization/reconstructv1maxi/hls_component\../image_analysis.cpp#line=86">image_analysis.cpp</a>-><a href="file:///F:/LMU/quantumMA/opimization/reconstructv1maxi/hls_component\../image_analysis.cpp#line=259">image_analysis.cpp</a>) and bus read operation ('imageProjs_local_addr_read', <a href="file:///F:/LMU/quantumMA/opimization/reconstructv1maxi/hls_component\../image_analysis.cpp#line=86">image_analysis.cpp</a>-><a href="file:///F:/LMU/quantumMA/opimization/reconstructv1maxi/hls_component\../image_analysis.cpp#line=259">image_analysis.cpp</a>) on port 'imageProjs_local' (<a href="file:///F:/LMU/quantumMA/opimization/reconstructv1maxi/hls_component\../image_analysis.cpp#line=86">image_analysis.cpp</a>-><a href="file:///F:/LMU/quantumMA/opimization/reconstructv1maxi/hls_component\../image_analysis.cpp#line=259">image_analysis.cpp</a>).
 </td>
 <td align="left"><a href="http:///docs.xilinx.com/access/sources/dita/map?Doc_Version=2024.2%20English&url=ug1399-vitis-hls">Vitis HLS User Guide (UG1399)</a></td>
 </tr>
@@ -3492,46 +3456,24 @@ window.onload = function () { addSorting(); }
 <td align="left"><a href="http:///docs.xilinx.com/access/sources/dita/map?Doc_Version=2024.2%20English&url=ug1399-vitis-hls">Vitis HLS User Guide (UG1399)</a></td>
 </tr>
 <tr>
-<td align="left">17</td>
-<td align="left">Kernel</td>
+<td align="left">15</td>
+<td align="left">Interface</td>
 <td align="left">ADVISORY</td>
 <td align="left"><undefined></td>
-<td align="left">HLS Kernel Related</td>
-<td align="left">Accelerator.reconstruct.Kernel</td>
-<td align="left">**** Estimated Fmax: 120.85 MHz
+<td align="left">HLS Interface Related</td>
+<td align="left">Accelerator.reconstruct.Interface</td>
+<td align="left">Design has inferred MAXI bursts and missed bursts, see Vitis HLS GUI synthesis summary report for detailed information.
 </td>
 <td align="left"><a href="http:///docs.xilinx.com/access/sources/dita/map?Doc_Version=2024.2%20English&url=ug1399-vitis-hls">Vitis HLS User Guide (UG1399)</a></td>
 </tr>
 <tr>
-<td align="left">11</td>
-<td align="left">Throughput</td>
-<td align="left">ADVISORY</td>
-<td align="left"><undefined></td>
-<td align="left">HLS Throughput Related</td>
-<td align="left">Accelerator.reconstruct.Throughput</td>
-<td align="left">Pipelining result : Target II = 1, Final II = 1, Depth = 1, loop 'VITIS_LOOP_191_1'
-</td>
-<td align="left"><a href="http:///docs.xilinx.com/access/sources/dita/map?Doc_Version=2024.2%20English&url=ug1399-vitis-hls">Vitis HLS User Guide (UG1399)</a></td>
-</tr>
-<tr>
-<td align="left">13</td>
-<td align="left">Kernel</td>
-<td align="left">WARNING</td>
-<td align="left"><undefined></td>
-<td align="left">HLS Kernel Related</td>
-<td align="left">Accelerator.reconstruct.Kernel</td>
-<td align="left">Estimated clock period (8.275 ns) exceeds the target (target clock period: 10.000 ns, clock uncertainty: 2.700 ns, effective delay budget: 7.300 ns).
-</td>
-<td align="left"><a href="http:///docs.xilinx.com/access/sources/dita/map?Doc_Version=2024.2%20English&url=ug1399-vitis-hls">Vitis HLS User Guide (UG1399)</a></td>
-</tr>
-<tr>
-<td align="left">7</td>
+<td align="left">4</td>
 <td align="left">Throughput</td>
 <td align="left">WARNING</td>
 <td align="left"><undefined></td>
 <td align="left">HLS Throughput Related</td>
 <td align="left">Accelerator.reconstruct.Throughput</td>
-<td align="left">The II Violation in module 'Image_extract_Pipeline_VITIS_LOOP_81_1' (loop 'VITIS_LOOP_81_1'): Unable to enforce a carried dependence constraint (II = 27, distance = 1, offset = 1) between bus read operation ('imageProjs_local_addr_read_30', <a href="file:///F:/LMU/quantumMA/opimization/reconstructv1maxi/hls_component\../image_analysis.cpp#line=86">image_analysis.cpp</a>-><a href="file:///F:/LMU/quantumMA/opimization/reconstructv1maxi/hls_component\../image_analysis.cpp#line=259">image_analysis.cpp</a>) on port 'imageProjs_local' (<a href="file:///F:/LMU/quantumMA/opimization/reconstructv1maxi/hls_component\../image_analysis.cpp#line=86">image_analysis.cpp</a>-><a href="file:///F:/LMU/quantumMA/opimization/reconstructv1maxi/hls_component\../image_analysis.cpp#line=259">image_analysis.cpp</a>) and bus read operation ('imageProjs_local_addr_read', <a href="file:///F:/LMU/quantumMA/opimization/reconstructv1maxi/hls_component\../image_analysis.cpp#line=86">image_analysis.cpp</a>-><a href="file:///F:/LMU/quantumMA/opimization/reconstructv1maxi/hls_component\../image_analysis.cpp#line=259">image_analysis.cpp</a>) on port 'imageProjs_local' (<a href="file:///F:/LMU/quantumMA/opimization/reconstructv1maxi/hls_component\../image_analysis.cpp#line=86">image_analysis.cpp</a>-><a href="file:///F:/LMU/quantumMA/opimization/reconstructv1maxi/hls_component\../image_analysis.cpp#line=259">image_analysis.cpp</a>).
+<td align="left">The II Violation in module 'Image_extract_Pipeline_VITIS_LOOP_81_1' (loop 'VITIS_LOOP_81_1'): Unable to enforce a carried dependence constraint (II = 3, distance = 1, offset = 1) between bus read operation ('imageProjs_local_addr_read_30', <a href="file:///F:/LMU/quantumMA/opimization/reconstructv1maxi/hls_component\../image_analysis.cpp#line=86">image_analysis.cpp</a>-><a href="file:///F:/LMU/quantumMA/opimization/reconstructv1maxi/hls_component\../image_analysis.cpp#line=259">image_analysis.cpp</a>) on port 'imageProjs_local' (<a href="file:///F:/LMU/quantumMA/opimization/reconstructv1maxi/hls_component\../image_analysis.cpp#line=86">image_analysis.cpp</a>-><a href="file:///F:/LMU/quantumMA/opimization/reconstructv1maxi/hls_component\../image_analysis.cpp#line=259">image_analysis.cpp</a>) and bus read operation ('imageProjs_local_addr_read', <a href="file:///F:/LMU/quantumMA/opimization/reconstructv1maxi/hls_component\../image_analysis.cpp#line=86">image_analysis.cpp</a>-><a href="file:///F:/LMU/quantumMA/opimization/reconstructv1maxi/hls_component\../image_analysis.cpp#line=259">image_analysis.cpp</a>) on port 'imageProjs_local' (<a href="file:///F:/LMU/quantumMA/opimization/reconstructv1maxi/hls_component\../image_analysis.cpp#line=86">image_analysis.cpp</a>-><a href="file:///F:/LMU/quantumMA/opimization/reconstructv1maxi/hls_component\../image_analysis.cpp#line=259">image_analysis.cpp</a>).
 </td>
 <td align="left"><a href="http:///docs.xilinx.com/access/sources/dita/map?Doc_Version=2024.2%20English&url=ug1399-vitis-hls">Vitis HLS User Guide (UG1399)</a></td>
 </tr>
@@ -3547,17 +3489,6 @@ window.onload = function () { addSorting(); }
 <td align="left"><a href="http:///docs.xilinx.com/access/sources/dita/map?Doc_Version=2024.2%20English&url=ug1399-vitis-hls">Vitis HLS User Guide (UG1399)</a></td>
 </tr>
 <tr>
-<td align="left">3</td>
-<td align="left">Throughput</td>
-<td align="left">WARNING</td>
-<td align="left"><undefined></td>
-<td align="left">HLS Throughput Related</td>
-<td align="left">Accelerator.reconstruct.Throughput</td>
-<td align="left">The II Violation in module 'Image_extract_Pipeline_VITIS_LOOP_81_1' (loop 'VITIS_LOOP_81_1'): Unable to enforce a carried dependence constraint (II = 2, distance = 1, offset = 1) between bus read operation ('imageProjs_local_addr_read_30', <a href="file:///F:/LMU/quantumMA/opimization/reconstructv1maxi/hls_component\../image_analysis.cpp#line=86">image_analysis.cpp</a>-><a href="file:///F:/LMU/quantumMA/opimization/reconstructv1maxi/hls_component\../image_analysis.cpp#line=259">image_analysis.cpp</a>) on port 'imageProjs_local' (<a href="file:///F:/LMU/quantumMA/opimization/reconstructv1maxi/hls_component\../image_analysis.cpp#line=86">image_analysis.cpp</a>-><a href="file:///F:/LMU/quantumMA/opimization/reconstructv1maxi/hls_component\../image_analysis.cpp#line=259">image_analysis.cpp</a>) and bus read operation ('imageProjs_local_addr_read', <a href="file:///F:/LMU/quantumMA/opimization/reconstructv1maxi/hls_component\../image_analysis.cpp#line=86">image_analysis.cpp</a>-><a href="file:///F:/LMU/quantumMA/opimization/reconstructv1maxi/hls_component\../image_analysis.cpp#line=259">image_analysis.cpp</a>) on port 'imageProjs_local' (<a href="file:///F:/LMU/quantumMA/opimization/reconstructv1maxi/hls_component\../image_analysis.cpp#line=86">image_analysis.cpp</a>-><a href="file:///F:/LMU/quantumMA/opimization/reconstructv1maxi/hls_component\../image_analysis.cpp#line=259">image_analysis.cpp</a>).
-</td>
-<td align="left"><a href="http:///docs.xilinx.com/access/sources/dita/map?Doc_Version=2024.2%20English&url=ug1399-vitis-hls">Vitis HLS User Guide (UG1399)</a></td>
-</tr>
-<tr>
 <td align="left">16</td>
 <td align="left">Kernel</td>
 <td align="left">ADVISORY</td>
@@ -3569,13 +3500,13 @@ window.onload = function () { addSorting(); }
 <td align="left"><a href="http:///docs.xilinx.com/access/sources/dita/map?Doc_Version=2024.2%20English&url=ug1399-vitis-hls">Vitis HLS User Guide (UG1399)</a></td>
 </tr>
 <tr>
-<td align="left">10</td>
+<td align="left">8</td>
 <td align="left">Throughput</td>
-<td align="left">ADVISORY</td>
+<td align="left">WARNING</td>
 <td align="left"><undefined></td>
 <td align="left">HLS Throughput Related</td>
 <td align="left">Accelerator.reconstruct.Throughput</td>
-<td align="left">Pipelining result : Target II = NA, Final II = 31, Depth = 38, loop 'VITIS_LOOP_81_1'
+<td align="left">The II Violation in module 'Image_extract_Pipeline_VITIS_LOOP_81_1' (loop 'VITIS_LOOP_81_1'): Unable to enforce a carried dependence constraint (II = 29, distance = 1, offset = 1) between bus read operation ('imageProjs_local_addr_read_30', <a href="file:///F:/LMU/quantumMA/opimization/reconstructv1maxi/hls_component\../image_analysis.cpp#line=86">image_analysis.cpp</a>-><a href="file:///F:/LMU/quantumMA/opimization/reconstructv1maxi/hls_component\../image_analysis.cpp#line=259">image_analysis.cpp</a>) on port 'imageProjs_local' (<a href="file:///F:/LMU/quantumMA/opimization/reconstructv1maxi/hls_component\../image_analysis.cpp#line=86">image_analysis.cpp</a>-><a href="file:///F:/LMU/quantumMA/opimization/reconstructv1maxi/hls_component\../image_analysis.cpp#line=259">image_analysis.cpp</a>) and bus read operation ('imageProjs_local_addr_read', <a href="file:///F:/LMU/quantumMA/opimization/reconstructv1maxi/hls_component\../image_analysis.cpp#line=86">image_analysis.cpp</a>-><a href="file:///F:/LMU/quantumMA/opimization/reconstructv1maxi/hls_component\../image_analysis.cpp#line=259">image_analysis.cpp</a>) on port 'imageProjs_local' (<a href="file:///F:/LMU/quantumMA/opimization/reconstructv1maxi/hls_component\../image_analysis.cpp#line=86">image_analysis.cpp</a>-><a href="file:///F:/LMU/quantumMA/opimization/reconstructv1maxi/hls_component\../image_analysis.cpp#line=259">image_analysis.cpp</a>).
 </td>
 <td align="left"><a href="http:///docs.xilinx.com/access/sources/dita/map?Doc_Version=2024.2%20English&url=ug1399-vitis-hls">Vitis HLS User Guide (UG1399)</a></td>
 </tr>
@@ -3591,13 +3522,13 @@ window.onload = function () { addSorting(); }
 <td align="left"><a href="http:///docs.xilinx.com/access/sources/dita/map?Doc_Version=2024.2%20English&url=ug1399-vitis-hls">Vitis HLS User Guide (UG1399)</a></td>
 </tr>
 <tr>
-<td align="left">15</td>
-<td align="left">Interface</td>
+<td align="left">10</td>
+<td align="left">Throughput</td>
 <td align="left">ADVISORY</td>
 <td align="left"><undefined></td>
-<td align="left">HLS Interface Related</td>
-<td align="left">Accelerator.reconstruct.Interface</td>
-<td align="left">Design has inferred MAXI bursts and missed bursts, see Vitis HLS GUI synthesis summary report for detailed information.
+<td align="left">HLS Throughput Related</td>
+<td align="left">Accelerator.reconstruct.Throughput</td>
+<td align="left">Pipelining result : Target II = NA, Final II = 31, Depth = 38, loop 'VITIS_LOOP_81_1'
 </td>
 <td align="left"><a href="http:///docs.xilinx.com/access/sources/dita/map?Doc_Version=2024.2%20English&url=ug1399-vitis-hls">Vitis HLS User Guide (UG1399)</a></td>
 </tr>
@@ -3613,13 +3544,82 @@ window.onload = function () { addSorting(); }
 <td align="left"><a href="http:///docs.xilinx.com/access/sources/dita/map?Doc_Version=2024.2%20English&url=ug1399-vitis-hls">Vitis HLS User Guide (UG1399)</a></td>
 </tr>
 <tr>
-<td align="left">8</td>
+<td align="left">13</td>
+<td align="left">Kernel</td>
+<td align="left">WARNING</td>
+<td align="left"><undefined></td>
+<td align="left">HLS Kernel Related</td>
+<td align="left">Accelerator.reconstruct.Kernel</td>
+<td align="left">Estimated clock period (8.275 ns) exceeds the target (target clock period: 10.000 ns, clock uncertainty: 2.700 ns, effective delay budget: 7.300 ns).
+</td>
+<td align="left"><a href="http:///docs.xilinx.com/access/sources/dita/map?Doc_Version=2024.2%20English&url=ug1399-vitis-hls">Vitis HLS User Guide (UG1399)</a></td>
+</tr>
+<tr>
+<td align="left">1</td>
+<td align="left">Interface</td>
+<td align="left">ADVISORY</td>
+<td align="left"><undefined></td>
+<td align="left">HLS Interface Related</td>
+<td align="left">Accelerator.reconstruct.Interface</td>
+<td align="left">Multiple burst reads of length 961 and bit width 32 in loop 'VITIS_LOOP_81_1'(<a href="file:///F:/LMU/quantumMA/opimization/reconstructv1maxi/hls_component\../image_analysis.cpp#line=81">image_analysis.cpp</a>) has been inferred on bundle 'imageProjs_local'. These burst requests might be further partitioned into multiple requests during RTL generation, based on max_read_burst_length or max_write_burst_length settings. (<a href="file:///F:/LMU/quantumMA/opimization/reconstructv1maxi/hls_component\../image_analysis.cpp#line=81">image_analysis.cpp</a>)
+</td>
+<td align="left"><a href="http:///docs.xilinx.com/access/sources/dita/map?Doc_Version=2024.2%20English&url=ug1399-vitis-hls">Vitis HLS User Guide (UG1399)</a></td>
+</tr>
+<tr>
+<td align="left">7</td>
 <td align="left">Throughput</td>
 <td align="left">WARNING</td>
 <td align="left"><undefined></td>
 <td align="left">HLS Throughput Related</td>
 <td align="left">Accelerator.reconstruct.Throughput</td>
-<td align="left">The II Violation in module 'Image_extract_Pipeline_VITIS_LOOP_81_1' (loop 'VITIS_LOOP_81_1'): Unable to enforce a carried dependence constraint (II = 29, distance = 1, offset = 1) between bus read operation ('imageProjs_local_addr_read_30', <a href="file:///F:/LMU/quantumMA/opimization/reconstructv1maxi/hls_component\../image_analysis.cpp#line=86">image_analysis.cpp</a>-><a href="file:///F:/LMU/quantumMA/opimization/reconstructv1maxi/hls_component\../image_analysis.cpp#line=259">image_analysis.cpp</a>) on port 'imageProjs_local' (<a href="file:///F:/LMU/quantumMA/opimization/reconstructv1maxi/hls_component\../image_analysis.cpp#line=86">image_analysis.cpp</a>-><a href="file:///F:/LMU/quantumMA/opimization/reconstructv1maxi/hls_component\../image_analysis.cpp#line=259">image_analysis.cpp</a>) and bus read operation ('imageProjs_local_addr_read', <a href="file:///F:/LMU/quantumMA/opimization/reconstructv1maxi/hls_component\../image_analysis.cpp#line=86">image_analysis.cpp</a>-><a href="file:///F:/LMU/quantumMA/opimization/reconstructv1maxi/hls_component\../image_analysis.cpp#line=259">image_analysis.cpp</a>) on port 'imageProjs_local' (<a href="file:///F:/LMU/quantumMA/opimization/reconstructv1maxi/hls_component\../image_analysis.cpp#line=86">image_analysis.cpp</a>-><a href="file:///F:/LMU/quantumMA/opimization/reconstructv1maxi/hls_component\../image_analysis.cpp#line=259">image_analysis.cpp</a>).
+<td align="left">The II Violation in module 'Image_extract_Pipeline_VITIS_LOOP_81_1' (loop 'VITIS_LOOP_81_1'): Unable to enforce a carried dependence constraint (II = 27, distance = 1, offset = 1) between bus read operation ('imageProjs_local_addr_read_30', <a href="file:///F:/LMU/quantumMA/opimization/reconstructv1maxi/hls_component\../image_analysis.cpp#line=86">image_analysis.cpp</a>-><a href="file:///F:/LMU/quantumMA/opimization/reconstructv1maxi/hls_component\../image_analysis.cpp#line=259">image_analysis.cpp</a>) on port 'imageProjs_local' (<a href="file:///F:/LMU/quantumMA/opimization/reconstructv1maxi/hls_component\../image_analysis.cpp#line=86">image_analysis.cpp</a>-><a href="file:///F:/LMU/quantumMA/opimization/reconstructv1maxi/hls_component\../image_analysis.cpp#line=259">image_analysis.cpp</a>) and bus read operation ('imageProjs_local_addr_read', <a href="file:///F:/LMU/quantumMA/opimization/reconstructv1maxi/hls_component\../image_analysis.cpp#line=86">image_analysis.cpp</a>-><a href="file:///F:/LMU/quantumMA/opimization/reconstructv1maxi/hls_component\../image_analysis.cpp#line=259">image_analysis.cpp</a>) on port 'imageProjs_local' (<a href="file:///F:/LMU/quantumMA/opimization/reconstructv1maxi/hls_component\../image_analysis.cpp#line=86">image_analysis.cpp</a>-><a href="file:///F:/LMU/quantumMA/opimization/reconstructv1maxi/hls_component\../image_analysis.cpp#line=259">image_analysis.cpp</a>).
+</td>
+<td align="left"><a href="http:///docs.xilinx.com/access/sources/dita/map?Doc_Version=2024.2%20English&url=ug1399-vitis-hls">Vitis HLS User Guide (UG1399)</a></td>
+</tr>
+<tr>
+<td align="left">11</td>
+<td align="left">Throughput</td>
+<td align="left">ADVISORY</td>
+<td align="left"><undefined></td>
+<td align="left">HLS Throughput Related</td>
+<td align="left">Accelerator.reconstruct.Throughput</td>
+<td align="left">Pipelining result : Target II = 1, Final II = 1, Depth = 1, loop 'VITIS_LOOP_191_1'
+</td>
+<td align="left"><a href="http:///docs.xilinx.com/access/sources/dita/map?Doc_Version=2024.2%20English&url=ug1399-vitis-hls">Vitis HLS User Guide (UG1399)</a></td>
+</tr>
+<tr>
+<td align="left">17</td>
+<td align="left">Kernel</td>
+<td align="left">ADVISORY</td>
+<td align="left"><undefined></td>
+<td align="left">HLS Kernel Related</td>
+<td align="left">Accelerator.reconstruct.Kernel</td>
+<td align="left">**** Estimated Fmax: 120.85 MHz
+</td>
+<td align="left"><a href="http:///docs.xilinx.com/access/sources/dita/map?Doc_Version=2024.2%20English&url=ug1399-vitis-hls">Vitis HLS User Guide (UG1399)</a></td>
+</tr>
+<tr>
+<td align="left">14</td>
+<td align="left">Kernel</td>
+<td align="left">WARNING</td>
+<td align="left"><undefined></td>
+<td align="left">HLS Kernel Related</td>
+<td align="left">Accelerator.reconstruct.Kernel</td>
+<td align="left">The critical path in module 'dataflow_in_loop_VITIS_LOOP_241_1_1' consists of the following:
+	'call' operation 64 bit ('call_ret', <a href="file:///F:/LMU/quantumMA/opimization/reconstructv1maxi/hls_component\../image_analysis.cpp#line=262">image_analysis.cpp</a>) to 'matrix_sum_prod' [1964]  (6.437 ns)
+	'call' operation 0 bit ('_ln263', <a href="file:///F:/LMU/quantumMA/opimization/reconstructv1maxi/hls_component\../image_analysis.cpp#line=263">image_analysis.cpp</a>) to 'post_process' [1967]  (1.838 ns)
+
+</td>
+<td align="left"><a href="http:///docs.xilinx.com/access/sources/dita/map?Doc_Version=2024.2%20English&url=ug1399-vitis-hls">Vitis HLS User Guide (UG1399)</a></td>
+</tr>
+<tr>
+<td align="left">9</td>
+<td align="left">Throughput</td>
+<td align="left">WARNING</td>
+<td align="left"><undefined></td>
+<td align="left">HLS Throughput Related</td>
+<td align="left">Accelerator.reconstruct.Throughput</td>
+<td align="left">The II Violation in module 'Image_extract_Pipeline_VITIS_LOOP_81_1' (loop 'VITIS_LOOP_81_1'): Unable to enforce a carried dependence constraint (II = 30, distance = 1, offset = 1) between bus read operation ('imageProjs_local_addr_read_30', <a href="file:///F:/LMU/quantumMA/opimization/reconstructv1maxi/hls_component\../image_analysis.cpp#line=86">image_analysis.cpp</a>-><a href="file:///F:/LMU/quantumMA/opimization/reconstructv1maxi/hls_component\../image_analysis.cpp#line=259">image_analysis.cpp</a>) on port 'imageProjs_local' (<a href="file:///F:/LMU/quantumMA/opimization/reconstructv1maxi/hls_component\../image_analysis.cpp#line=86">image_analysis.cpp</a>-><a href="file:///F:/LMU/quantumMA/opimization/reconstructv1maxi/hls_component\../image_analysis.cpp#line=259">image_analysis.cpp</a>) and bus read operation ('imageProjs_local_addr_read', <a href="file:///F:/LMU/quantumMA/opimization/reconstructv1maxi/hls_component\../image_analysis.cpp#line=86">image_analysis.cpp</a>-><a href="file:///F:/LMU/quantumMA/opimization/reconstructv1maxi/hls_component\../image_analysis.cpp#line=259">image_analysis.cpp</a>) on port 'imageProjs_local' (<a href="file:///F:/LMU/quantumMA/opimization/reconstructv1maxi/hls_component\../image_analysis.cpp#line=86">image_analysis.cpp</a>-><a href="file:///F:/LMU/quantumMA/opimization/reconstructv1maxi/hls_component\../image_analysis.cpp#line=259">image_analysis.cpp</a>).
 </td>
 <td align="left"><a href="http:///docs.xilinx.com/access/sources/dita/map?Doc_Version=2024.2%20English&url=ug1399-vitis-hls">Vitis HLS User Guide (UG1399)</a></td>
 </tr>

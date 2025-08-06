@@ -1,0 +1,3904 @@
+--- !Missed
+Pass:            inline
+Name:            NeverInline
+DebugLoc:        { File: 'C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib/src/hls\utils/x_hls_utils.h', 
+                   Line: 326, Column: 17 }
+Function:        _ZNK9fp_structIfE8to_floatEv
+Args:            
+  - Callee:          'fp_struct<float>::data() const'
+    DebugLoc:        { File: 'C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib/src/hls\utils/x_hls_utils.h', 
+                       Line: 309, Column: 0 }
+  - String:          ' not inlined into '
+  - Caller:          'fp_struct<float>::to_float() const'
+    DebugLoc:        { File: 'C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib/src/hls\utils/x_hls_utils.h', 
+                       Line: 322, Column: 0 }
+  - String:          ' because it should never be inlined (cost=never)'
+...
+--- !Missed
+Pass:            inline
+Name:            NeverInline
+DebugLoc:        { File: 'C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib/src/hls\utils/x_hls_utils.h', 
+                   Line: 347, Column: 16 }
+Function:        _ZNK9fp_structIfE7to_ieeeEv
+Args:            
+  - Callee:          'fp_struct<float>::to_float() const'
+    DebugLoc:        { File: 'C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib/src/hls\utils/x_hls_utils.h', 
+                       Line: 322, Column: 0 }
+  - String:          ' not inlined into '
+  - Caller:          'fp_struct<float>::to_ieee() const'
+    DebugLoc:        { File: 'C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib/src/hls\utils/x_hls_utils.h', 
+                       Line: 346, Column: 0 }
+  - String:          ' because it should never be inlined (cost=never)'
+...
+--- !Missed
+Pass:            inline
+Name:            NeverInline
+DebugLoc:        { File: 'C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib/hlsmath/include/FloatingPoint/hls_copysign.h', 
+                   Line: 12, Column: 16 }
+Function:        _Z16generic_copysignIfET_S0_S0_
+Args:            
+  - Callee:          'fp_struct<float>::fp_struct(float)'
+    DebugLoc:        { File: 'C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib/src/hls\utils/x_hls_utils.h', 
+                       Line: 283, Column: 0 }
+  - String:          ' not inlined into '
+  - Caller:          'float generic_copysign<float>(float, float)'
+    DebugLoc:        { File: 'C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib/hlsmath/include/FloatingPoint/hls_copysign.h', 
+                       Line: 10, Column: 0 }
+  - String:          ' because it should never be inlined (cost=never)'
+...
+--- !Missed
+Pass:            inline
+Name:            NeverInline
+DebugLoc:        { File: 'C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib/hlsmath/include/FloatingPoint/hls_copysign.h', 
+                   Line: 14, Column: 13 }
+Function:        _Z16generic_copysignIfET_S0_S0_
+Args:            
+  - Callee:          'fp_struct<float>::to_ieee() const'
+    DebugLoc:        { File: 'C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib/src/hls\utils/x_hls_utils.h', 
+                       Line: 346, Column: 0 }
+  - String:          ' not inlined into '
+  - Caller:          'float generic_copysign<float>(float, float)'
+    DebugLoc:        { File: 'C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib/hlsmath/include/FloatingPoint/hls_copysign.h', 
+                       Line: 10, Column: 0 }
+  - String:          ' because it should never be inlined (cost=never)'
+...
+--- !Missed
+Pass:            inline
+Name:            NeverInline
+DebugLoc:        { File: 'C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib/hlsmath/include/FloatingPoint\hls_round.h', 
+                   Line: 162, Column: 3 }
+Function:        _Z13generic_roundIfET_S0_
+Args:            
+  - Callee:          'void init_mask_table<float>(fp_struct<float>::inttype*)'
+    DebugLoc:        { File: 'C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib/hlsmath/include/FloatingPoint/hls_round.h', 
+                       Line: 20, Column: 0 }
+  - String:          ' not inlined into '
+  - Caller:          'float generic_round<float>(float)'
+    DebugLoc:        { File: 'C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib/hlsmath/include/FloatingPoint\hls_round.h', 
+                       Line: 160, Column: 0 }
+  - String:          ' because it should never be inlined (cost=never)'
+...
+--- !Missed
+Pass:            inline
+Name:            NeverInline
+DebugLoc:        { File: 'C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib/hlsmath/include/FloatingPoint\hls_round.h', 
+                   Line: 164, Column: 3 }
+Function:        _Z13generic_roundIfET_S0_
+Args:            
+  - Callee:          'void init_one_half_table<float>(fp_struct<float>::inttype*)'
+    DebugLoc:        { File: 'C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib/hlsmath/include/FloatingPoint\hls_round.h', 
+                       Line: 32, Column: 0 }
+  - String:          ' not inlined into '
+  - Caller:          'float generic_round<float>(float)'
+    DebugLoc:        { File: 'C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib/hlsmath/include/FloatingPoint\hls_round.h', 
+                       Line: 160, Column: 0 }
+  - String:          ' because it should never be inlined (cost=never)'
+...
+--- !Missed
+Pass:            inline
+Name:            NeverInline
+DebugLoc:        { File: 'C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib/hlsmath/include/FloatingPoint\hls_round.h', 
+                   Line: 165, Column: 16 }
+Function:        _Z13generic_roundIfET_S0_
+Args:            
+  - Callee:          'fp_struct<float>::fp_struct(float)'
+    DebugLoc:        { File: 'C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib/src/hls\utils/x_hls_utils.h', 
+                       Line: 283, Column: 0 }
+  - String:          ' not inlined into '
+  - Caller:          'float generic_round<float>(float)'
+    DebugLoc:        { File: 'C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib/hlsmath/include/FloatingPoint\hls_round.h', 
+                       Line: 160, Column: 0 }
+  - String:          ' because it should never be inlined (cost=never)'
+...
+--- !Missed
+Pass:            inline
+Name:            NeverInline
+DebugLoc:        { File: 'C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib/hlsmath/include/FloatingPoint\hls_round.h', 
+                   Line: 185, Column: 15 }
+Function:        _Z13generic_roundIfET_S0_
+Args:            
+  - Callee:          'fp_struct<float>::to_ieee() const'
+    DebugLoc:        { File: 'C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib/src/hls\utils/x_hls_utils.h', 
+                       Line: 346, Column: 0 }
+  - String:          ' not inlined into '
+  - Caller:          'float generic_round<float>(float)'
+    DebugLoc:        { File: 'C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib/hlsmath/include/FloatingPoint\hls_round.h', 
+                       Line: 160, Column: 0 }
+  - String:          ' because it should never be inlined (cost=never)'
+...
+--- !Missed
+Pass:            inline
+Name:            NeverInline
+DebugLoc:        { File: 'C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib/hlsmath/include/FloatingPoint\hls_round.h', 
+                   Line: 169, Column: 12 }
+Function:        _Z13generic_roundIfET_S0_
+Args:            
+  - Callee:          'float generic_copysign<float>(float, float)'
+    DebugLoc:        { File: 'C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib/hlsmath/include/FloatingPoint/hls_copysign.h', 
+                       Line: 10, Column: 0 }
+  - String:          ' not inlined into '
+  - Caller:          'float generic_round<float>(float)'
+    DebugLoc:        { File: 'C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib/hlsmath/include/FloatingPoint\hls_round.h', 
+                       Line: 160, Column: 0 }
+  - String:          ' because it should never be inlined (cost=never)'
+...
+--- !Missed
+Pass:            inline
+Name:            NeverInline
+DebugLoc:        { File: 'C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib/hlsmath/include/FloatingPoint\hls_round.h', 
+                   Line: 182, Column: 10 }
+Function:        _Z13generic_roundIfET_S0_
+Args:            
+  - Callee:          'fp_struct<float>::fp_struct(ap_uint<32>)'
+    DebugLoc:        { File: 'C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib/src/hls\utils/x_hls_utils.h', 
+                       Line: 298, Column: 0 }
+  - String:          ' not inlined into '
+  - Caller:          'float generic_round<float>(float)'
+    DebugLoc:        { File: 'C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib/hlsmath/include/FloatingPoint\hls_round.h', 
+                       Line: 160, Column: 0 }
+  - String:          ' because it should never be inlined (cost=never)'
+...
+--- !Missed
+Pass:            inline
+Name:            NeverInline
+DebugLoc:        { File: 'C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib/hlsmath/include/FloatingPoint\hls_round.h', 
+                   Line: 182, Column: 46 }
+Function:        _Z13generic_roundIfET_S0_
+Args:            
+  - Callee:          'fp_struct<float>::data() const'
+    DebugLoc:        { File: 'C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib/src/hls\utils/x_hls_utils.h', 
+                       Line: 309, Column: 0 }
+  - String:          ' not inlined into '
+  - Caller:          'float generic_round<float>(float)'
+    DebugLoc:        { File: 'C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib/hlsmath/include/FloatingPoint\hls_round.h', 
+                       Line: 160, Column: 0 }
+  - String:          ' because it should never be inlined (cost=never)'
+...
+--- !Missed
+Pass:            inline
+Name:            NeverInline
+DebugLoc:        { File: 'C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib\hlsmath\src\c\roundfloat.cpp', 
+                   Line: 7, Column: 12 }
+Function:        roundf
+Args:            
+  - Callee:          'float generic_round<float>(float)'
+    DebugLoc:        { File: 'C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib/hlsmath/include/FloatingPoint\hls_round.h', 
+                       Line: 160, Column: 0 }
+  - String:          ' not inlined into '
+  - Caller:          roundf
+    DebugLoc:        { File: 'C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib\hlsmath\src\c\roundfloat.cpp', 
+                       Line: 6, Column: 0 }
+  - String:          ' because it should never be inlined (cost=never)'
+...
+--- !Missed
+Pass:            inline
+Name:            NeverInline
+DebugLoc:        { File: 'F:/Vitis/2024.2/tps/mingw/8.3.0/win64.o/nt\lib\gcc\x86_64-w64-mingw32\8.3.0\include\c++\cmath', 
+                   Line: 1757, Column: 12 }
+Function:        _ZSt5roundf
+Args:            
+  - Callee:          roundf
+    DebugLoc:        { File: 'C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib\hlsmath\src\c\roundfloat.cpp', 
+                       Line: 6, Column: 0 }
+  - String:          ' not inlined into '
+  - Caller:          'std::round(float)'
+    DebugLoc:        { File: 'F:/Vitis/2024.2/tps/mingw/8.3.0/win64.o/nt\lib\gcc\x86_64-w64-mingw32\8.3.0\include\c++\cmath', 
+                       Line: 1757, Column: 0 }
+  - String:          ' because it should never be inlined (cost=never)'
+...
+--- !Missed
+Pass:            inline
+Name:            NeverInline
+DebugLoc:        { File: 'C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib/hlsmath/include/FloatingPoint\hls_case_IEEE754.h', 
+                   Line: 13, Column: 17 }
+Function:        _Z20generic_cast_IEEE754IiL9ap_q_mode6EfET_T1_bN3hls9enable_ifIXsr3std14numeric_limitsIS1_EE9is_signedEbE4typeE
+Args:            
+  - Callee:          'fp_struct<float>::fp_struct(float)'
+    DebugLoc:        { File: 'C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib/src/hls\utils/x_hls_utils.h', 
+                       Line: 283, Column: 0 }
+  - String:          ' not inlined into '
+  - Caller:          'int generic_cast_IEEE754<int, (ap_q_mode)6, float>(float, bool, hls::enable_if<std::numeric_limits<int>::is_signed, bool>::type)'
+    DebugLoc:        { File: 'C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib/hlsmath/include/FloatingPoint\hls_case_IEEE754.h', 
+                       Line: 12, Column: 0 }
+  - String:          ' because it should never be inlined (cost=never)'
+...
+--- !Missed
+Pass:            inline
+Name:            NeverInline
+DebugLoc:        { File: 'C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib/hlsmath/include/FloatingPoint\hls_case_IEEE754.h', 
+                   Line: 15, Column: 57 }
+Function:        _Z20generic_cast_IEEE754IiL9ap_q_mode6EfET_T1_bN3hls9enable_ifIXsr3std14numeric_limitsIS1_EE9is_signedEbE4typeE
+Args:            
+  - Callee:          'fp_struct<float>::mantissa() const'
+    DebugLoc:        { File: 'C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib/src/hls\utils/x_hls_utils.h', 
+                       Line: 340, Column: 0 }
+  - String:          ' not inlined into '
+  - Caller:          'int generic_cast_IEEE754<int, (ap_q_mode)6, float>(float, bool, hls::enable_if<std::numeric_limits<int>::is_signed, bool>::type)'
+    DebugLoc:        { File: 'C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib/hlsmath/include/FloatingPoint\hls_case_IEEE754.h', 
+                       Line: 12, Column: 0 }
+  - String:          ' because it should never be inlined (cost=never)'
+...
+--- !Missed
+Pass:            inline
+Name:            NeverInline
+DebugLoc:        { File: 'C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib/hlsmath/include/FloatingPoint\hls_case_IEEE754.h', 
+                   Line: 59, Column: 8 }
+Function:        _Z20generic_cast_IEEE754IiL9ap_q_mode6EfET_T1_bN3hls9enable_ifIXsr3std14numeric_limitsIS1_EE9is_signedEbE4typeE
+Args:            
+  - Callee:          'fp_struct<float>::__signbit() const'
+    DebugLoc:        { File: 'C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib/src/hls\utils/x_hls_utils.h', 
+                       Line: 349, Column: 0 }
+  - String:          ' not inlined into '
+  - Caller:          'int generic_cast_IEEE754<int, (ap_q_mode)6, float>(float, bool, hls::enable_if<std::numeric_limits<int>::is_signed, bool>::type)'
+    DebugLoc:        { File: 'C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib/hlsmath/include/FloatingPoint\hls_case_IEEE754.h', 
+                       Line: 12, Column: 0 }
+  - String:          ' because it should never be inlined (cost=never)'
+...
+--- !Missed
+Pass:            inline
+Name:            NeverInline
+DebugLoc:        { File: 'C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib/hlsmath/include/FloatingPoint\hls_case_IEEE754.h', 
+                   Line: 18, Column: 79 }
+Function:        _Z20generic_cast_IEEE754IiL9ap_q_mode6EfET_T1_bN3hls9enable_ifIXsr3std14numeric_limitsIS1_EE9is_signedEbE4typeE
+Args:            
+  - Callee:          'fp_struct<float>::expv() const'
+    DebugLoc:        { File: 'C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib/src/hls\utils/x_hls_utils.h', 
+                       Line: 316, Column: 0 }
+  - String:          ' not inlined into '
+  - Caller:          'int generic_cast_IEEE754<int, (ap_q_mode)6, float>(float, bool, hls::enable_if<std::numeric_limits<int>::is_signed, bool>::type)'
+    DebugLoc:        { File: 'C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib/hlsmath/include/FloatingPoint\hls_case_IEEE754.h', 
+                       Line: 12, Column: 0 }
+  - String:          ' because it should never be inlined (cost=never)'
+...
+--- !Missed
+Pass:            inline
+Name:            NeverInline
+DebugLoc:        { File: 'C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib/hlsmath/include/FloatingPoint\hls_case_IEEE754.h', 
+                   Line: 117, Column: 10 }
+Function:        _Z20generic_cast_IEEE754IifET_T0_b
+Args:            
+  - Callee:          'int generic_cast_IEEE754<int, (ap_q_mode)6, float>(float, bool, hls::enable_if<std::numeric_limits<int>::is_signed, bool>::type)'
+    DebugLoc:        { File: 'C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib/hlsmath/include/FloatingPoint\hls_case_IEEE754.h', 
+                       Line: 12, Column: 0 }
+  - String:          ' not inlined into '
+  - Caller:          'int generic_cast_IEEE754<int, float>(float, bool)'
+    DebugLoc:        { File: 'C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib/hlsmath/include/FloatingPoint\hls_case_IEEE754.h', 
+                       Line: 116, Column: 0 }
+  - String:          ' because it should never be inlined (cost=never)'
+...
+--- !Missed
+Pass:            inline
+Name:            NeverInline
+DebugLoc:        { File: 'C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib\hlsmath\src\lib_floatconversion.cpp', 
+                   Line: 51, Column: 54 }
+Function:        __hls_fptosi_float_i32
+Args:            
+  - Callee:          'int generic_cast_IEEE754<int, float>(float, bool)'
+    DebugLoc:        { File: 'C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib/hlsmath/include/FloatingPoint\hls_case_IEEE754.h', 
+                       Line: 116, Column: 0 }
+  - String:          ' not inlined into '
+  - Caller:          __hls_fptosi_float_i32
+    DebugLoc:        { File: 'C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib\hlsmath\src\lib_floatconversion.cpp', 
+                       Line: 51, Column: 0 }
+  - String:          ' because it should never be inlined (cost=never)'
+...
+--- !Missed
+Pass:            inline
+Name:            NeverInline
+DebugLoc:        { File: ../image_analysis.cpp, Line: 11, Column: 20 }
+Function:        _Z21getLocalImages_singleiiiiP13atom_locationRN3hls6streamI16local_image_infoLi0EEE
+Args:            
+  - Callee:          'std::round(float)'
+    DebugLoc:        { File: 'F:/Vitis/2024.2/tps/mingw/8.3.0/win64.o/nt\lib\gcc\x86_64-w64-mingw32\8.3.0\include\c++\cmath', 
+                       Line: 1757, Column: 0 }
+  - String:          ' not inlined into '
+  - Caller:          'getLocalImages_single(int, int, int, int, atom_location*, hls::stream<local_image_info, 0>&)'
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 7, Column: 0 }
+  - String:          ' because it should never be inlined (cost=never)'
+...
+--- !Missed
+Pass:            inline
+Name:            NeverInline
+DebugLoc:        { File: ../image_analysis.cpp, Line: 11, Column: 20 }
+Function:        _Z21getLocalImages_singleiiiiP13atom_locationRN3hls6streamI16local_image_infoLi0EEE
+Args:            
+  - Callee:          __hls_fptosi_float_i32
+    DebugLoc:        { File: 'C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib\hlsmath\src\lib_floatconversion.cpp', 
+                       Line: 51, Column: 0 }
+  - String:          ' not inlined into '
+  - Caller:          'getLocalImages_single(int, int, int, int, atom_location*, hls::stream<local_image_info, 0>&)'
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 7, Column: 0 }
+  - String:          ' because it should never be inlined (cost=never)'
+...
+--- !Missed
+Pass:            inline
+Name:            NeverInline
+DebugLoc:        { File: ../image_analysis.cpp, Line: 157, Column: 5 }
+Function:        _Z15vector_sum_prodPfS_RfS0_
+Args:            
+  - Callee:          'vector_sum(float*, float&)'
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 118, Column: 0 }
+  - String:          ' not inlined into '
+  - Caller:          'vector_sum_prod(float*, float*, float&, float&)'
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 148, Column: 0 }
+  - String:          ' because it should never be inlined (cost=never)'
+...
+--- !Missed
+Pass:            inline
+Name:            NeverInline
+DebugLoc:        { File: ../image_analysis.cpp, Line: 195, Column: 2 }
+Function:        _Z15matrix_sum_prodPA31_fS0_RfS1_
+Args:            
+  - Callee:          'vector_sum_prod(float*, float*, float&, float&)'
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 148, Column: 0 }
+  - String:          ' not inlined into '
+  - Caller:          'matrix_sum_prod(float (*) [31], float (*) [31], float&, float&)'
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 183, Column: 0 }
+  - String:          ' because it should never be inlined (cost=never)'
+...
+--- !Missed
+Pass:            inline
+Name:            NeverInline
+DebugLoc:        { File: ../image_analysis.cpp, Line: 198, Column: 5 }
+Function:        _Z15matrix_sum_prodPA31_fS0_RfS1_
+Args:            
+  - Callee:          'vector_sum(float*, float&)'
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 118, Column: 0 }
+  - String:          ' not inlined into '
+  - Caller:          'matrix_sum_prod(float (*) [31], float (*) [31], float&, float&)'
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 183, Column: 0 }
+  - String:          ' because it should never be inlined (cost=never)'
+...
+--- !Missed
+Pass:            inline
+Name:            NeverInline
+DebugLoc:        { File: ../image_analysis.cpp, Line: 263, Column: 9 }
+Function:        _Z11reconstructiiiP13atom_locationiiPfS1_PiS1_iiS1_
+Args:            
+  - Callee:          'post_process(float, float, float, float&)'
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 202, Column: 0 }
+  - String:          ' not inlined into '
+  - Caller:          'reconstruct(int, int, int, atom_location*, int, int, float*, float*, int*, float*, int, int, float*)'
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 214, Column: 0 }
+  - String:          ' because it should never be inlined (cost=never)'
+...
+--- !Missed
+Pass:            inline
+Name:            NeverInline
+DebugLoc:        { File: ../image_analysis.cpp, Line: 258, Column: 2 }
+Function:        _Z11reconstructiiiP13atom_locationiiPfS1_PiS1_iiS1_
+Args:            
+  - Callee:          'getLocalImages_single(int, int, int, int, atom_location*, hls::stream<local_image_info, 0>&)'
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 7, Column: 0 }
+  - String:          ' not inlined into '
+  - Caller:          'reconstruct(int, int, int, atom_location*, int, int, float*, float*, int*, float*, int, int, float*)'
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 214, Column: 0 }
+  - String:          ' because it should never be inlined (cost=never)'
+...
+--- !Missed
+Pass:            inline
+Name:            NeverInline
+DebugLoc:        { File: ../image_analysis.cpp, Line: 259, Column: 9 }
+Function:        _Z11reconstructiiiP13atom_locationiiPfS1_PiS1_iiS1_
+Args:            
+  - Callee:          'Image_extract(int, hls::stream<local_image_info, 0>&, float*, float (*) [31], float*, float (*) [31], float*, float&)'
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 71, Column: 0 }
+  - String:          ' not inlined into '
+  - Caller:          'reconstruct(int, int, int, atom_location*, int, int, float*, float*, int*, float*, int, int, float*)'
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 214, Column: 0 }
+  - String:          ' because it should never be inlined (cost=never)'
+...
+--- !Missed
+Pass:            inline
+Name:            NeverInline
+DebugLoc:        { File: ../image_analysis.cpp, Line: 262, Column: 9 }
+Function:        _Z11reconstructiiiP13atom_locationiiPfS1_PiS1_iiS1_
+Args:            
+  - Callee:          'matrix_sum_prod(float (*) [31], float (*) [31], float&, float&)'
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 183, Column: 0 }
+  - String:          ' not inlined into '
+  - Caller:          'reconstruct(int, int, int, atom_location*, int, int, float*, float*, int*, float*, int, int, float*)'
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 214, Column: 0 }
+  - String:          ' because it should never be inlined (cost=never)'
+...
+--- !Passed
+Pass:            reflow-infer-unroll
+Name:            ImplicitUnroll
+DebugLoc:        { File: ../image_analysis.cpp, Line: 151, Column: 23 }
+Function:        _Z15vector_sum_prodPfS_RfS0_
+Args:            
+  - String:          'Loop '''
+  - LoopName:        VITIS_LOOP_151_1
+  - String:          ''' is marked as complete unroll implied by the pipeline pragma'
+...
+--- !Passed
+Pass:            reflow-infer-unroll
+Name:            ImplicitUnroll
+DebugLoc:        { File: ../image_analysis.cpp, Line: 140, Column: 23 }
+Function:        _Z10vector_sumPfRf
+Args:            
+  - String:          'Loop '''
+  - LoopName:        VITIS_LOOP_140_4
+  - String:          ''' is marked as complete unroll implied by the pipeline pragma'
+...
+--- !Passed
+Pass:            reflow-infer-unroll
+Name:            ImplicitUnroll
+DebugLoc:        { File: ../image_analysis.cpp, Line: 135, Column: 23 }
+Function:        _Z10vector_sumPfRf
+Args:            
+  - String:          'Loop '''
+  - LoopName:        VITIS_LOOP_135_3
+  - String:          ''' is marked as complete unroll implied by the pipeline pragma'
+...
+--- !Passed
+Pass:            reflow-infer-unroll
+Name:            ImplicitUnroll
+DebugLoc:        { File: ../image_analysis.cpp, Line: 130, Column: 23 }
+Function:        _Z10vector_sumPfRf
+Args:            
+  - String:          'Loop '''
+  - LoopName:        VITIS_LOOP_130_2
+  - String:          ''' is marked as complete unroll implied by the pipeline pragma'
+...
+--- !Passed
+Pass:            reflow-infer-unroll
+Name:            ImplicitUnroll
+DebugLoc:        { File: ../image_analysis.cpp, Line: 124, Column: 23 }
+Function:        _Z10vector_sumPfRf
+Args:            
+  - String:          'Loop '''
+  - LoopName:        VITIS_LOOP_124_1
+  - String:          ''' is marked as complete unroll implied by the pipeline pragma'
+...
+--- !Passed
+Pass:            reflow-pragma-loop-unroll
+Name:            PragmaPartiallyUnroll
+DebugLoc:        { File: ../image_analysis.cpp, Line: 183, Column: 0 }
+Function:        _Z15matrix_sum_prodPA31_fS0_RfS1_
+Args:            
+  - String:          'Unrolling loop '''
+  - LoopName:        VITIS_LOOP_191_1
+  - String:          ''' ('
+  - LoopLoc:         '../image_analysis.cpp:191:23'
+  - String:          ') '
+  - String:          'in function '''
+  - String:          matrix_sum_prod
+  - String:          ''' partially '
+  - String:          ''
+  - String:          'with a factor of '
+  - Factor:          '16'
+...
+--- !Passed
+Pass:            reflow-pragma-loop-unroll
+Name:            PragmaFullyUnroll
+DebugLoc:        { File: ../image_analysis.cpp, Line: 148, Column: 0 }
+Function:        _Z15vector_sum_prodPfS_RfS0_
+Args:            
+  - String:          'Unrolling loop '''
+  - LoopName:        VITIS_LOOP_151_1
+  - String:          ''' ('
+  - LoopLoc:         '../image_analysis.cpp:151:23'
+  - String:          ') '
+  - String:          'in function '''
+  - String:          vector_sum_prod
+  - String:          ''' completely with a factor of '
+  - Factor:          '31'
+...
+--- !Passed
+Pass:            reflow-pragma-loop-unroll
+Name:            PragmaFullyUnroll
+DebugLoc:        { File: ../image_analysis.cpp, Line: 118, Column: 0 }
+Function:        _Z10vector_sumPfRf
+Args:            
+  - String:          'Unrolling loop '''
+  - LoopName:        VITIS_LOOP_140_4
+  - String:          ''' ('
+  - LoopLoc:         '../image_analysis.cpp:140:23'
+  - String:          ') '
+  - String:          'in function '''
+  - String:          vector_sum
+  - String:          ''' completely with a factor of '
+  - Factor:          '2'
+...
+--- !Passed
+Pass:            reflow-pragma-loop-unroll
+Name:            PragmaFullyUnroll
+DebugLoc:        { File: ../image_analysis.cpp, Line: 118, Column: 0 }
+Function:        _Z10vector_sumPfRf
+Args:            
+  - String:          'Unrolling loop '''
+  - LoopName:        VITIS_LOOP_135_3
+  - String:          ''' ('
+  - LoopLoc:         '../image_analysis.cpp:135:23'
+  - String:          ') '
+  - String:          'in function '''
+  - String:          vector_sum
+  - String:          ''' completely with a factor of '
+  - Factor:          '4'
+...
+--- !Passed
+Pass:            reflow-pragma-loop-unroll
+Name:            PragmaFullyUnroll
+DebugLoc:        { File: ../image_analysis.cpp, Line: 118, Column: 0 }
+Function:        _Z10vector_sumPfRf
+Args:            
+  - String:          'Unrolling loop '''
+  - LoopName:        VITIS_LOOP_130_2
+  - String:          ''' ('
+  - LoopLoc:         '../image_analysis.cpp:130:23'
+  - String:          ') '
+  - String:          'in function '''
+  - String:          vector_sum
+  - String:          ''' completely with a factor of '
+  - Factor:          '8'
+...
+--- !Passed
+Pass:            reflow-pragma-loop-unroll
+Name:            PragmaFullyUnroll
+DebugLoc:        { File: ../image_analysis.cpp, Line: 118, Column: 0 }
+Function:        _Z10vector_sumPfRf
+Args:            
+  - String:          'Unrolling loop '''
+  - LoopName:        VITIS_LOOP_124_1
+  - String:          ''' ('
+  - LoopLoc:         '../image_analysis.cpp:124:23'
+  - String:          ') '
+  - String:          'in function '''
+  - String:          vector_sum
+  - String:          ''' completely with a factor of '
+  - Factor:          '15'
+...
+--- !Passed
+Pass:            reflow-pragma-loop-unroll
+Name:            PragmaFullyUnroll
+DebugLoc:        { File: ../image_analysis.cpp, Line: 71, Column: 0 }
+Function:        _Z13Image_extractiRN3hls6streamI16local_image_infoLi0EEEPfPA31_fS4_S6_S4_Rf
+Args:            
+  - String:          'Unrolling loop '''
+  - LoopName:        VITIS_LOOP_84_2
+  - String:          ''' ('
+  - LoopLoc:         '../image_analysis.cpp:84:19'
+  - String:          ') '
+  - String:          'in function '''
+  - String:          Image_extract
+  - String:          ''' completely with a factor of '
+  - Factor:          '31'
+...
+--- !Failure
+Pass:            reflow-function-uniquification
+Name:            FunctionUniquification
+DebugLoc:        { File: ../image_analysis.cpp, Line: 158, Column: 5 }
+Function:        _Z15vector_sum_prodPfS_RfS0_
+Args:            
+  - String:          'Duplicating function '''
+  - Name:            'vector_sum(float*, float&)'
+  - String:          ''' as different function signatures were detected between this call site and other call site(s). This may impact the resources used in the design.'
+...
+--- !Failure
+Pass:            reflow-function-uniquification
+Name:            FunctionUniquification
+DebugLoc:        { File: ../image_analysis.cpp, Line: 157, Column: 5 }
+Function:        _Z15vector_sum_prodPfS_RfS0_
+Args:            
+  - String:          'Duplicating function '''
+  - Name:            'vector_sum(float*, float&)'
+  - String:          ''' as different function signatures were detected between this call site and other call site(s). This may impact the resources used in the design.'
+...
+--- !Missed
+Pass:            inline
+Name:            NeverInline
+DebugLoc:        { File: 'C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib/src/hls\utils/x_hls_utils.h', 
+                   Line: 326, Column: 17 }
+Function:        _ZNK9fp_structIfE8to_floatEv.25.35.44.55
+Args:            
+  - Callee:          'fp_struct<float>::data() const (.7.28.38.47.58)'
+    DebugLoc:        { File: 'C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib/src/hls\utils/x_hls_utils.h', 
+                       Line: 309, Column: 0 }
+  - String:          ' not inlined into '
+  - Caller:          'fp_struct<float>::to_float() const (.25.35.44.55)'
+    DebugLoc:        { File: 'C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib/src/hls\utils/x_hls_utils.h', 
+                       Line: 322, Column: 0 }
+  - String:          ' because it should never be inlined (cost=never)'
+...
+--- !Missed
+Pass:            inline
+Name:            NeverInline
+DebugLoc:        { File: 'C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib/src/hls\utils/x_hls_utils.h', 
+                   Line: 347, Column: 16 }
+Function:        _ZNK9fp_structIfE7to_ieeeEv
+Args:            
+  - Callee:          'fp_struct<float>::to_float() const (.25.35.44.55)'
+    DebugLoc:        { File: 'C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib/src/hls\utils/x_hls_utils.h', 
+                       Line: 322, Column: 0 }
+  - String:          ' not inlined into '
+  - Caller:          'fp_struct<float>::to_ieee() const'
+    DebugLoc:        { File: 'C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib/src/hls\utils/x_hls_utils.h', 
+                       Line: 346, Column: 0 }
+  - String:          ' because it should never be inlined (cost=never)'
+...
+--- !Missed
+Pass:            inline
+Name:            NeverInline
+DebugLoc:        { File: 'C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib/hlsmath/include/FloatingPoint/hls_copysign.h', 
+                   Line: 12, Column: 16 }
+Function:        _Z16generic_copysignIfET_S0_S0_
+Args:            
+  - Callee:          'fp_struct<float>::fp_struct(float)'
+    DebugLoc:        { File: 'C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib/src/hls\utils/x_hls_utils.h', 
+                       Line: 283, Column: 0 }
+  - String:          ' not inlined into '
+  - Caller:          'float generic_copysign<float>(float, float)'
+    DebugLoc:        { File: 'C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib/hlsmath/include/FloatingPoint/hls_copysign.h', 
+                       Line: 10, Column: 0 }
+  - String:          ' because it should never be inlined (cost=never)'
+...
+--- !Missed
+Pass:            inline
+Name:            NeverInline
+DebugLoc:        { File: 'C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib/hlsmath/include/FloatingPoint/hls_copysign.h', 
+                   Line: 14, Column: 13 }
+Function:        _Z16generic_copysignIfET_S0_S0_
+Args:            
+  - Callee:          'fp_struct<float>::to_ieee() const'
+    DebugLoc:        { File: 'C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib/src/hls\utils/x_hls_utils.h', 
+                       Line: 346, Column: 0 }
+  - String:          ' not inlined into '
+  - Caller:          'float generic_copysign<float>(float, float)'
+    DebugLoc:        { File: 'C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib/hlsmath/include/FloatingPoint/hls_copysign.h', 
+                       Line: 10, Column: 0 }
+  - String:          ' because it should never be inlined (cost=never)'
+...
+--- !Missed
+Pass:            inline
+Name:            NeverInline
+DebugLoc:        { File: 'C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib/hlsmath/include/FloatingPoint\hls_round.h', 
+                   Line: 165, Column: 16 }
+Function:        _Z13generic_roundIfET_S0_
+Args:            
+  - Callee:          'fp_struct<float>::fp_struct(float)'
+    DebugLoc:        { File: 'C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib/src/hls\utils/x_hls_utils.h', 
+                       Line: 283, Column: 0 }
+  - String:          ' not inlined into '
+  - Caller:          'float generic_round<float>(float)'
+    DebugLoc:        { File: 'C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib/hlsmath/include/FloatingPoint\hls_round.h', 
+                       Line: 160, Column: 0 }
+  - String:          ' because it should never be inlined (cost=never)'
+...
+--- !Missed
+Pass:            inline
+Name:            NeverInline
+DebugLoc:        { File: 'C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib/hlsmath/include/FloatingPoint\hls_round.h', 
+                   Line: 169, Column: 12 }
+Function:        _Z13generic_roundIfET_S0_
+Args:            
+  - Callee:          'float generic_copysign<float>(float, float)'
+    DebugLoc:        { File: 'C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib/hlsmath/include/FloatingPoint/hls_copysign.h', 
+                       Line: 10, Column: 0 }
+  - String:          ' not inlined into '
+  - Caller:          'float generic_round<float>(float)'
+    DebugLoc:        { File: 'C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib/hlsmath/include/FloatingPoint\hls_round.h', 
+                       Line: 160, Column: 0 }
+  - String:          ' because it should never be inlined (cost=never)'
+...
+--- !Missed
+Pass:            inline
+Name:            NeverInline
+DebugLoc:        { File: 'C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib/hlsmath/include/FloatingPoint\hls_round.h', 
+                   Line: 182, Column: 46 }
+Function:        _Z13generic_roundIfET_S0_
+Args:            
+  - Callee:          'fp_struct<float>::data() const (.7.28.38.47.58)'
+    DebugLoc:        { File: 'C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib/src/hls\utils/x_hls_utils.h', 
+                       Line: 309, Column: 0 }
+  - String:          ' not inlined into '
+  - Caller:          'float generic_round<float>(float)'
+    DebugLoc:        { File: 'C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib/hlsmath/include/FloatingPoint\hls_round.h', 
+                       Line: 160, Column: 0 }
+  - String:          ' because it should never be inlined (cost=never)'
+...
+--- !Missed
+Pass:            inline
+Name:            NeverInline
+DebugLoc:        { File: 'C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib/hlsmath/include/FloatingPoint\hls_round.h', 
+                   Line: 182, Column: 10 }
+Function:        _Z13generic_roundIfET_S0_
+Args:            
+  - Callee:          'fp_struct<float>::fp_struct(ap_uint<32>)'
+    DebugLoc:        { File: 'C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib/src/hls\utils/x_hls_utils.h', 
+                       Line: 298, Column: 0 }
+  - String:          ' not inlined into '
+  - Caller:          'float generic_round<float>(float)'
+    DebugLoc:        { File: 'C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib/hlsmath/include/FloatingPoint\hls_round.h', 
+                       Line: 160, Column: 0 }
+  - String:          ' because it should never be inlined (cost=never)'
+...
+--- !Missed
+Pass:            inline
+Name:            NeverInline
+DebugLoc:        { File: 'C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib/hlsmath/include/FloatingPoint\hls_round.h', 
+                   Line: 185, Column: 15 }
+Function:        _Z13generic_roundIfET_S0_
+Args:            
+  - Callee:          'fp_struct<float>::to_ieee() const'
+    DebugLoc:        { File: 'C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib/src/hls\utils/x_hls_utils.h', 
+                       Line: 346, Column: 0 }
+  - String:          ' not inlined into '
+  - Caller:          'float generic_round<float>(float)'
+    DebugLoc:        { File: 'C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib/hlsmath/include/FloatingPoint\hls_round.h', 
+                       Line: 160, Column: 0 }
+  - String:          ' because it should never be inlined (cost=never)'
+...
+--- !Missed
+Pass:            inline
+Name:            NeverInline
+DebugLoc:        { File: 'C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib\hlsmath\src\c\roundfloat.cpp', 
+                   Line: 7, Column: 12 }
+Function:        roundf
+Args:            
+  - Callee:          'float generic_round<float>(float)'
+    DebugLoc:        { File: 'C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib/hlsmath/include/FloatingPoint\hls_round.h', 
+                       Line: 160, Column: 0 }
+  - String:          ' not inlined into '
+  - Caller:          roundf
+    DebugLoc:        { File: 'C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib\hlsmath\src\c\roundfloat.cpp', 
+                       Line: 6, Column: 0 }
+  - String:          ' because it should never be inlined (cost=never)'
+...
+--- !Missed
+Pass:            inline
+Name:            NeverInline
+DebugLoc:        { File: 'F:/Vitis/2024.2/tps/mingw/8.3.0/win64.o/nt\lib\gcc\x86_64-w64-mingw32\8.3.0\include\c++\cmath', 
+                   Line: 1757, Column: 12 }
+Function:        _ZSt5roundf
+Args:            
+  - Callee:          roundf
+    DebugLoc:        { File: 'C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib\hlsmath\src\c\roundfloat.cpp', 
+                       Line: 6, Column: 0 }
+  - String:          ' not inlined into '
+  - Caller:          'std::round(float)'
+    DebugLoc:        { File: 'F:/Vitis/2024.2/tps/mingw/8.3.0/win64.o/nt\lib\gcc\x86_64-w64-mingw32\8.3.0\include\c++\cmath', 
+                       Line: 1757, Column: 0 }
+  - String:          ' because it should never be inlined (cost=never)'
+...
+--- !Missed
+Pass:            inline
+Name:            NeverInline
+DebugLoc:        { File: 'C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib/hlsmath/include/FloatingPoint\hls_case_IEEE754.h', 
+                   Line: 13, Column: 17 }
+Function:        _Z20generic_cast_IEEE754IiL9ap_q_mode6EfET_T1_bN3hls9enable_ifIXsr3std14numeric_limitsIS1_EE9is_signedEbE4typeE
+Args:            
+  - Callee:          'fp_struct<float>::fp_struct(float)'
+    DebugLoc:        { File: 'C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib/src/hls\utils/x_hls_utils.h', 
+                       Line: 283, Column: 0 }
+  - String:          ' not inlined into '
+  - Caller:          'int generic_cast_IEEE754<int, (ap_q_mode)6, float>(float, bool, hls::enable_if<std::numeric_limits<int>::is_signed, bool>::type)'
+    DebugLoc:        { File: 'C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib/hlsmath/include/FloatingPoint\hls_case_IEEE754.h', 
+                       Line: 12, Column: 0 }
+  - String:          ' because it should never be inlined (cost=never)'
+...
+--- !Missed
+Pass:            inline
+Name:            NeverInline
+DebugLoc:        { File: 'C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib/hlsmath/include/FloatingPoint\hls_case_IEEE754.h', 
+                   Line: 15, Column: 57 }
+Function:        _Z20generic_cast_IEEE754IiL9ap_q_mode6EfET_T1_bN3hls9enable_ifIXsr3std14numeric_limitsIS1_EE9is_signedEbE4typeE
+Args:            
+  - Callee:          'fp_struct<float>::mantissa() const'
+    DebugLoc:        { File: 'C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib/src/hls\utils/x_hls_utils.h', 
+                       Line: 340, Column: 0 }
+  - String:          ' not inlined into '
+  - Caller:          'int generic_cast_IEEE754<int, (ap_q_mode)6, float>(float, bool, hls::enable_if<std::numeric_limits<int>::is_signed, bool>::type)'
+    DebugLoc:        { File: 'C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib/hlsmath/include/FloatingPoint\hls_case_IEEE754.h', 
+                       Line: 12, Column: 0 }
+  - String:          ' because it should never be inlined (cost=never)'
+...
+--- !Missed
+Pass:            inline
+Name:            NeverInline
+DebugLoc:        { File: 'C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib/hlsmath/include/FloatingPoint\hls_case_IEEE754.h', 
+                   Line: 18, Column: 79 }
+Function:        _Z20generic_cast_IEEE754IiL9ap_q_mode6EfET_T1_bN3hls9enable_ifIXsr3std14numeric_limitsIS1_EE9is_signedEbE4typeE
+Args:            
+  - Callee:          'fp_struct<float>::expv() const'
+    DebugLoc:        { File: 'C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib/src/hls\utils/x_hls_utils.h', 
+                       Line: 316, Column: 0 }
+  - String:          ' not inlined into '
+  - Caller:          'int generic_cast_IEEE754<int, (ap_q_mode)6, float>(float, bool, hls::enable_if<std::numeric_limits<int>::is_signed, bool>::type)'
+    DebugLoc:        { File: 'C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib/hlsmath/include/FloatingPoint\hls_case_IEEE754.h', 
+                       Line: 12, Column: 0 }
+  - String:          ' because it should never be inlined (cost=never)'
+...
+--- !Missed
+Pass:            inline
+Name:            NeverInline
+DebugLoc:        { File: 'C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib/hlsmath/include/FloatingPoint\hls_case_IEEE754.h', 
+                   Line: 59, Column: 8 }
+Function:        _Z20generic_cast_IEEE754IiL9ap_q_mode6EfET_T1_bN3hls9enable_ifIXsr3std14numeric_limitsIS1_EE9is_signedEbE4typeE
+Args:            
+  - Callee:          'fp_struct<float>::__signbit() const'
+    DebugLoc:        { File: 'C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib/src/hls\utils/x_hls_utils.h', 
+                       Line: 349, Column: 0 }
+  - String:          ' not inlined into '
+  - Caller:          'int generic_cast_IEEE754<int, (ap_q_mode)6, float>(float, bool, hls::enable_if<std::numeric_limits<int>::is_signed, bool>::type)'
+    DebugLoc:        { File: 'C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib/hlsmath/include/FloatingPoint\hls_case_IEEE754.h', 
+                       Line: 12, Column: 0 }
+  - String:          ' because it should never be inlined (cost=never)'
+...
+--- !Missed
+Pass:            inline
+Name:            NeverInline
+DebugLoc:        { File: 'C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib/hlsmath/include/FloatingPoint\hls_case_IEEE754.h', 
+                   Line: 117, Column: 10 }
+Function:        _Z20generic_cast_IEEE754IifET_T0_b
+Args:            
+  - Callee:          'int generic_cast_IEEE754<int, (ap_q_mode)6, float>(float, bool, hls::enable_if<std::numeric_limits<int>::is_signed, bool>::type)'
+    DebugLoc:        { File: 'C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib/hlsmath/include/FloatingPoint\hls_case_IEEE754.h', 
+                       Line: 12, Column: 0 }
+  - String:          ' not inlined into '
+  - Caller:          'int generic_cast_IEEE754<int, float>(float, bool)'
+    DebugLoc:        { File: 'C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib/hlsmath/include/FloatingPoint\hls_case_IEEE754.h', 
+                       Line: 116, Column: 0 }
+  - String:          ' because it should never be inlined (cost=never)'
+...
+--- !Missed
+Pass:            inline
+Name:            NeverInline
+DebugLoc:        { File: 'C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib\hlsmath\src\lib_floatconversion.cpp', 
+                   Line: 51, Column: 54 }
+Function:        __hls_fptosi_float_i32
+Args:            
+  - Callee:          'int generic_cast_IEEE754<int, float>(float, bool)'
+    DebugLoc:        { File: 'C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib/hlsmath/include/FloatingPoint\hls_case_IEEE754.h', 
+                       Line: 116, Column: 0 }
+  - String:          ' not inlined into '
+  - Caller:          __hls_fptosi_float_i32
+    DebugLoc:        { File: 'C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib\hlsmath\src\lib_floatconversion.cpp', 
+                       Line: 51, Column: 0 }
+  - String:          ' because it should never be inlined (cost=never)'
+...
+--- !Missed
+Pass:            inline
+Name:            NeverInline
+DebugLoc:        { File: ../image_analysis.cpp, Line: 11, Column: 20 }
+Function:        _Z21getLocalImages_singleiiiiP13atom_locationRN3hls6streamI16local_image_infoLi0EEE
+Args:            
+  - Callee:          'std::round(float)'
+    DebugLoc:        { File: 'F:/Vitis/2024.2/tps/mingw/8.3.0/win64.o/nt\lib\gcc\x86_64-w64-mingw32\8.3.0\include\c++\cmath', 
+                       Line: 1757, Column: 0 }
+  - String:          ' not inlined into '
+  - Caller:          'getLocalImages_single(int, int, int, int, atom_location*, hls::stream<local_image_info, 0>&)'
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 7, Column: 0 }
+  - String:          ' because it should never be inlined (cost=never)'
+...
+--- !Missed
+Pass:            inline
+Name:            NeverInline
+DebugLoc:        { File: ../image_analysis.cpp, Line: 11, Column: 20 }
+Function:        _Z21getLocalImages_singleiiiiP13atom_locationRN3hls6streamI16local_image_infoLi0EEE
+Args:            
+  - Callee:          __hls_fptosi_float_i32
+    DebugLoc:        { File: 'C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib\hlsmath\src\lib_floatconversion.cpp', 
+                       Line: 51, Column: 0 }
+  - String:          ' not inlined into '
+  - Caller:          'getLocalImages_single(int, int, int, int, atom_location*, hls::stream<local_image_info, 0>&)'
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 7, Column: 0 }
+  - String:          ' because it should never be inlined (cost=never)'
+...
+--- !Missed
+Pass:            inline
+Name:            NeverInline
+DebugLoc:        { File: ../image_analysis.cpp, Line: 157, Column: 5 }
+Function:        _Z15vector_sum_prodPfS_RfS0_
+Args:            
+  - Callee:          'vector_sum(float*, float&) (.101)'
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 118, Column: 0 }
+  - String:          ' not inlined into '
+  - Caller:          'vector_sum_prod(float*, float*, float&, float&)'
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 148, Column: 0 }
+  - String:          ' because it should never be inlined (cost=never)'
+...
+--- !Missed
+Pass:            inline
+Name:            NeverInline
+DebugLoc:        { File: ../image_analysis.cpp, Line: 195, Column: 2 }
+Function:        _Z15matrix_sum_prodPA31_fS0_RfS1_
+Args:            
+  - Callee:          'vector_sum_prod(float*, float*, float&, float&)'
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 148, Column: 0 }
+  - String:          ' not inlined into '
+  - Caller:          'matrix_sum_prod(float (*) [31], float (*) [31], float&, float&)'
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 183, Column: 0 }
+  - String:          ' because it should never be inlined (cost=never)'
+...
+--- !Missed
+Pass:            inline
+Name:            NeverInline
+DebugLoc:        { File: ../image_analysis.cpp, Line: 198, Column: 5 }
+Function:        _Z15matrix_sum_prodPA31_fS0_RfS1_
+Args:            
+  - Callee:          'vector_sum(float*, float&)'
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 118, Column: 0 }
+  - String:          ' not inlined into '
+  - Caller:          'matrix_sum_prod(float (*) [31], float (*) [31], float&, float&)'
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 183, Column: 0 }
+  - String:          ' because it should never be inlined (cost=never)'
+...
+--- !Missed
+Pass:            inline
+Name:            NeverInline
+DebugLoc:        { File: ../image_analysis.cpp, Line: 258, Column: 2 }
+Function:        _Z11reconstructiiiP13atom_locationiiPfS1_PiS1_iiS1_
+Args:            
+  - Callee:          'getLocalImages_single(int, int, int, int, atom_location*, hls::stream<local_image_info, 0>&)'
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 7, Column: 0 }
+  - String:          ' not inlined into '
+  - Caller:          'reconstruct(int, int, int, atom_location*, int, int, float*, float*, int*, float*, int, int, float*)'
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 214, Column: 0 }
+  - String:          ' because it should never be inlined (cost=never)'
+...
+--- !Missed
+Pass:            inline
+Name:            NeverInline
+DebugLoc:        { File: ../image_analysis.cpp, Line: 259, Column: 9 }
+Function:        _Z11reconstructiiiP13atom_locationiiPfS1_PiS1_iiS1_
+Args:            
+  - Callee:          'Image_extract(int, hls::stream<local_image_info, 0>&, float*, float (*) [31], float*, float (*) [31], float*, float&)'
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 71, Column: 0 }
+  - String:          ' not inlined into '
+  - Caller:          'reconstruct(int, int, int, atom_location*, int, int, float*, float*, int*, float*, int, int, float*)'
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 214, Column: 0 }
+  - String:          ' because it should never be inlined (cost=never)'
+...
+--- !Missed
+Pass:            inline
+Name:            NeverInline
+DebugLoc:        { File: ../image_analysis.cpp, Line: 262, Column: 9 }
+Function:        _Z11reconstructiiiP13atom_locationiiPfS1_PiS1_iiS1_
+Args:            
+  - Callee:          'matrix_sum_prod(float (*) [31], float (*) [31], float&, float&)'
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 183, Column: 0 }
+  - String:          ' not inlined into '
+  - Caller:          'reconstruct(int, int, int, atom_location*, int, int, float*, float*, int*, float*, int, int, float*)'
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 214, Column: 0 }
+  - String:          ' because it should never be inlined (cost=never)'
+...
+--- !Missed
+Pass:            inline
+Name:            NeverInline
+DebugLoc:        { File: ../image_analysis.cpp, Line: 263, Column: 9 }
+Function:        _Z11reconstructiiiP13atom_locationiiPfS1_PiS1_iiS1_
+Args:            
+  - Callee:          'post_process(float, float, float, float&)'
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 202, Column: 0 }
+  - String:          ' not inlined into '
+  - Caller:          'reconstruct(int, int, int, atom_location*, int, int, float*, float*, int*, float*, int, int, float*)'
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 214, Column: 0 }
+  - String:          ' because it should never be inlined (cost=never)'
+...
+--- !Missed
+Pass:            inline
+Name:            NeverInline
+Function:        apatb_reconstruct_ir
+Args:            
+  - Callee:          'reconstruct(int, int, int, atom_location*, int, int, float*, float*, int*, float*, int, int, float*)'
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 214, Column: 0 }
+  - String:          ' not inlined into '
+  - Caller:          apatb_reconstruct_ir
+  - String:          ' because it should never be inlined (cost=never)'
+...
+--- !Passed
+Pass:            reflow-inliner
+Name:            Inline
+DebugLoc:        { File: 'C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib/src/hls\utils/x_hls_utils.h', 
+                   Line: 322, Column: 0 }
+Function:        _ZNK9fp_structIfE8to_floatEv.25.35.44.55
+Args:            
+  - String:          'Inlining function '''
+  - Callee:          'fp_struct<float>::data() const (.7.28.38.47.58)'
+    DebugLoc:        { File: 'C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib/src/hls\utils/x_hls_utils.h', 
+                       Line: 309, Column: 0 }
+  - String:          ''' into '''
+  - Caller:          'fp_struct<float>::to_float() const (.25.35.44.55)'
+    DebugLoc:        { File: 'C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib/src/hls\utils/x_hls_utils.h', 
+                       Line: 322, Column: 0 }
+  - String:          ''''
+...
+--- !Passed
+Pass:            reflow-inliner
+Name:            Inline
+DebugLoc:        { File: 'C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib/src/hls\utils/x_hls_utils.h', 
+                   Line: 346, Column: 0 }
+Function:        _ZNK9fp_structIfE7to_ieeeEv
+Args:            
+  - String:          'Inlining function '''
+  - Callee:          'fp_struct<float>::to_float() const (.25.35.44.55)'
+    DebugLoc:        { File: 'C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib/src/hls\utils/x_hls_utils.h', 
+                       Line: 322, Column: 0 }
+  - String:          ''' into '''
+  - Caller:          'fp_struct<float>::to_ieee() const'
+    DebugLoc:        { File: 'C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib/src/hls\utils/x_hls_utils.h', 
+                       Line: 346, Column: 0 }
+  - String:          ''''
+...
+--- !Passed
+Pass:            reflow-inliner
+Name:            Inline
+DebugLoc:        { File: 'C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib/hlsmath/include/FloatingPoint/hls_copysign.h', 
+                   Line: 10, Column: 0 }
+Function:        _Z16generic_copysignIfET_S0_S0_
+Args:            
+  - String:          'Inlining function '''
+  - Callee:          'fp_struct<float>::fp_struct(float)'
+    DebugLoc:        { File: 'C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib/src/hls\utils/x_hls_utils.h', 
+                       Line: 283, Column: 0 }
+  - String:          ''' into '''
+  - Caller:          'float generic_copysign<float>(float, float)'
+    DebugLoc:        { File: 'C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib/hlsmath/include/FloatingPoint/hls_copysign.h', 
+                       Line: 10, Column: 0 }
+  - String:          ''''
+...
+--- !Passed
+Pass:            reflow-inliner
+Name:            Inline
+DebugLoc:        { File: 'C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib/hlsmath/include/FloatingPoint/hls_copysign.h', 
+                   Line: 10, Column: 0 }
+Function:        _Z16generic_copysignIfET_S0_S0_
+Args:            
+  - String:          'Inlining function '''
+  - Callee:          'fp_struct<float>::to_ieee() const'
+    DebugLoc:        { File: 'C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib/src/hls\utils/x_hls_utils.h', 
+                       Line: 346, Column: 0 }
+  - String:          ''' into '''
+  - Caller:          'float generic_copysign<float>(float, float)'
+    DebugLoc:        { File: 'C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib/hlsmath/include/FloatingPoint/hls_copysign.h', 
+                       Line: 10, Column: 0 }
+  - String:          ''''
+...
+--- !Passed
+Pass:            reflow-inliner
+Name:            Inline
+DebugLoc:        { File: 'C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib/hlsmath/include/FloatingPoint\hls_round.h', 
+                   Line: 160, Column: 0 }
+Function:        _Z13generic_roundIfET_S0_
+Args:            
+  - String:          'Inlining function '''
+  - Callee:          'fp_struct<float>::fp_struct(float)'
+    DebugLoc:        { File: 'C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib/src/hls\utils/x_hls_utils.h', 
+                       Line: 283, Column: 0 }
+  - String:          ''' into '''
+  - Caller:          'float generic_round<float>(float)'
+    DebugLoc:        { File: 'C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib/hlsmath/include/FloatingPoint\hls_round.h', 
+                       Line: 160, Column: 0 }
+  - String:          ''''
+...
+--- !Passed
+Pass:            reflow-inliner
+Name:            Inline
+DebugLoc:        { File: 'C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib/hlsmath/include/FloatingPoint\hls_round.h', 
+                   Line: 160, Column: 0 }
+Function:        _Z13generic_roundIfET_S0_
+Args:            
+  - String:          'Inlining function '''
+  - Callee:          'float generic_copysign<float>(float, float)'
+    DebugLoc:        { File: 'C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib/hlsmath/include/FloatingPoint/hls_copysign.h', 
+                       Line: 10, Column: 0 }
+  - String:          ''' into '''
+  - Caller:          'float generic_round<float>(float)'
+    DebugLoc:        { File: 'C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib/hlsmath/include/FloatingPoint\hls_round.h', 
+                       Line: 160, Column: 0 }
+  - String:          ''''
+...
+--- !Passed
+Pass:            reflow-inliner
+Name:            Inline
+DebugLoc:        { File: 'C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib/hlsmath/include/FloatingPoint\hls_round.h', 
+                   Line: 160, Column: 0 }
+Function:        _Z13generic_roundIfET_S0_
+Args:            
+  - String:          'Inlining function '''
+  - Callee:          'fp_struct<float>::data() const (.7.28.38.47.58)'
+    DebugLoc:        { File: 'C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib/src/hls\utils/x_hls_utils.h', 
+                       Line: 309, Column: 0 }
+  - String:          ''' into '''
+  - Caller:          'float generic_round<float>(float)'
+    DebugLoc:        { File: 'C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib/hlsmath/include/FloatingPoint\hls_round.h', 
+                       Line: 160, Column: 0 }
+  - String:          ''''
+...
+--- !Passed
+Pass:            reflow-inliner
+Name:            Inline
+DebugLoc:        { File: 'C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib/hlsmath/include/FloatingPoint\hls_round.h', 
+                   Line: 160, Column: 0 }
+Function:        _Z13generic_roundIfET_S0_
+Args:            
+  - String:          'Inlining function '''
+  - Callee:          'fp_struct<float>::fp_struct(ap_uint<32>)'
+    DebugLoc:        { File: 'C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib/src/hls\utils/x_hls_utils.h', 
+                       Line: 298, Column: 0 }
+  - String:          ''' into '''
+  - Caller:          'float generic_round<float>(float)'
+    DebugLoc:        { File: 'C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib/hlsmath/include/FloatingPoint\hls_round.h', 
+                       Line: 160, Column: 0 }
+  - String:          ''''
+...
+--- !Passed
+Pass:            reflow-inliner
+Name:            Inline
+DebugLoc:        { File: 'C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib/hlsmath/include/FloatingPoint\hls_round.h', 
+                   Line: 160, Column: 0 }
+Function:        _Z13generic_roundIfET_S0_
+Args:            
+  - String:          'Inlining function '''
+  - Callee:          'fp_struct<float>::to_ieee() const'
+    DebugLoc:        { File: 'C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib/src/hls\utils/x_hls_utils.h', 
+                       Line: 346, Column: 0 }
+  - String:          ''' into '''
+  - Caller:          'float generic_round<float>(float)'
+    DebugLoc:        { File: 'C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib/hlsmath/include/FloatingPoint\hls_round.h', 
+                       Line: 160, Column: 0 }
+  - String:          ''''
+...
+--- !Passed
+Pass:            reflow-inliner
+Name:            Inline
+DebugLoc:        { File: 'F:/Vitis/2024.2/tps/mingw/8.3.0/win64.o/nt\lib\gcc\x86_64-w64-mingw32\8.3.0\include\c++\cmath', 
+                   Line: 1757, Column: 0 }
+Function:        _ZSt5roundf
+Args:            
+  - String:          'Inlining function '''
+  - Callee:          roundf
+    DebugLoc:        { File: 'C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib\hlsmath\src\c\roundfloat.cpp', 
+                       Line: 6, Column: 0 }
+  - String:          ''' into '''
+  - Caller:          'std::round(float)'
+    DebugLoc:        { File: 'F:/Vitis/2024.2/tps/mingw/8.3.0/win64.o/nt\lib\gcc\x86_64-w64-mingw32\8.3.0\include\c++\cmath', 
+                       Line: 1757, Column: 0 }
+  - String:          ''''
+...
+--- !Passed
+Pass:            reflow-inliner
+Name:            Inline
+DebugLoc:        { File: 'C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib/hlsmath/include/FloatingPoint\hls_case_IEEE754.h', 
+                   Line: 12, Column: 0 }
+Function:        _Z20generic_cast_IEEE754IiL9ap_q_mode6EfET_T1_bN3hls9enable_ifIXsr3std14numeric_limitsIS1_EE9is_signedEbE4typeE
+Args:            
+  - String:          'Inlining function '''
+  - Callee:          'fp_struct<float>::fp_struct(float)'
+    DebugLoc:        { File: 'C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib/src/hls\utils/x_hls_utils.h', 
+                       Line: 283, Column: 0 }
+  - String:          ''' into '''
+  - Caller:          'int generic_cast_IEEE754<int, (ap_q_mode)6, float>(float, bool, hls::enable_if<std::numeric_limits<int>::is_signed, bool>::type)'
+    DebugLoc:        { File: 'C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib/hlsmath/include/FloatingPoint\hls_case_IEEE754.h', 
+                       Line: 12, Column: 0 }
+  - String:          ''''
+...
+--- !Passed
+Pass:            reflow-inliner
+Name:            Inline
+DebugLoc:        { File: 'C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib/hlsmath/include/FloatingPoint\hls_case_IEEE754.h', 
+                   Line: 12, Column: 0 }
+Function:        _Z20generic_cast_IEEE754IiL9ap_q_mode6EfET_T1_bN3hls9enable_ifIXsr3std14numeric_limitsIS1_EE9is_signedEbE4typeE
+Args:            
+  - String:          'Inlining function '''
+  - Callee:          'fp_struct<float>::mantissa() const'
+    DebugLoc:        { File: 'C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib/src/hls\utils/x_hls_utils.h', 
+                       Line: 340, Column: 0 }
+  - String:          ''' into '''
+  - Caller:          'int generic_cast_IEEE754<int, (ap_q_mode)6, float>(float, bool, hls::enable_if<std::numeric_limits<int>::is_signed, bool>::type)'
+    DebugLoc:        { File: 'C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib/hlsmath/include/FloatingPoint\hls_case_IEEE754.h', 
+                       Line: 12, Column: 0 }
+  - String:          ''''
+...
+--- !Passed
+Pass:            reflow-inliner
+Name:            Inline
+DebugLoc:        { File: 'C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib/hlsmath/include/FloatingPoint\hls_case_IEEE754.h', 
+                   Line: 12, Column: 0 }
+Function:        _Z20generic_cast_IEEE754IiL9ap_q_mode6EfET_T1_bN3hls9enable_ifIXsr3std14numeric_limitsIS1_EE9is_signedEbE4typeE
+Args:            
+  - String:          'Inlining function '''
+  - Callee:          'fp_struct<float>::expv() const'
+    DebugLoc:        { File: 'C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib/src/hls\utils/x_hls_utils.h', 
+                       Line: 316, Column: 0 }
+  - String:          ''' into '''
+  - Caller:          'int generic_cast_IEEE754<int, (ap_q_mode)6, float>(float, bool, hls::enable_if<std::numeric_limits<int>::is_signed, bool>::type)'
+    DebugLoc:        { File: 'C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib/hlsmath/include/FloatingPoint\hls_case_IEEE754.h', 
+                       Line: 12, Column: 0 }
+  - String:          ''''
+...
+--- !Passed
+Pass:            reflow-inliner
+Name:            Inline
+DebugLoc:        { File: 'C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib/hlsmath/include/FloatingPoint\hls_case_IEEE754.h', 
+                   Line: 12, Column: 0 }
+Function:        _Z20generic_cast_IEEE754IiL9ap_q_mode6EfET_T1_bN3hls9enable_ifIXsr3std14numeric_limitsIS1_EE9is_signedEbE4typeE
+Args:            
+  - String:          'Inlining function '''
+  - Callee:          'fp_struct<float>::__signbit() const'
+    DebugLoc:        { File: 'C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib/src/hls\utils/x_hls_utils.h', 
+                       Line: 349, Column: 0 }
+  - String:          ''' into '''
+  - Caller:          'int generic_cast_IEEE754<int, (ap_q_mode)6, float>(float, bool, hls::enable_if<std::numeric_limits<int>::is_signed, bool>::type)'
+    DebugLoc:        { File: 'C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib/hlsmath/include/FloatingPoint\hls_case_IEEE754.h', 
+                       Line: 12, Column: 0 }
+  - String:          ''''
+...
+--- !Passed
+Pass:            reflow-inliner
+Name:            Inline
+DebugLoc:        { File: 'C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib/hlsmath/include/FloatingPoint\hls_case_IEEE754.h', 
+                   Line: 116, Column: 0 }
+Function:        _Z20generic_cast_IEEE754IifET_T0_b
+Args:            
+  - String:          'Inlining function '''
+  - Callee:          'int generic_cast_IEEE754<int, (ap_q_mode)6, float>(float, bool, hls::enable_if<std::numeric_limits<int>::is_signed, bool>::type)'
+    DebugLoc:        { File: 'C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib/hlsmath/include/FloatingPoint\hls_case_IEEE754.h', 
+                       Line: 12, Column: 0 }
+  - String:          ''' into '''
+  - Caller:          'int generic_cast_IEEE754<int, float>(float, bool)'
+    DebugLoc:        { File: 'C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib/hlsmath/include/FloatingPoint\hls_case_IEEE754.h', 
+                       Line: 116, Column: 0 }
+  - String:          ''''
+...
+--- !Passed
+Pass:            reflow-inliner
+Name:            Inline
+DebugLoc:        { File: 'C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib\hlsmath\src\lib_floatconversion.cpp', 
+                   Line: 51, Column: 0 }
+Function:        __hls_fptosi_float_i32
+Args:            
+  - String:          'Inlining function '''
+  - Callee:          'int generic_cast_IEEE754<int, float>(float, bool)'
+    DebugLoc:        { File: 'C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib/hlsmath/include/FloatingPoint\hls_case_IEEE754.h', 
+                       Line: 116, Column: 0 }
+  - String:          ''' into '''
+  - Caller:          __hls_fptosi_float_i32
+    DebugLoc:        { File: 'C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib\hlsmath\src\lib_floatconversion.cpp', 
+                       Line: 51, Column: 0 }
+  - String:          ''''
+...
+--- !Passed
+Pass:            reflow-inliner
+Name:            Inline
+DebugLoc:        { File: ../image_analysis.cpp, Line: 7, Column: 0 }
+Function:        _Z21getLocalImages_singleiiiiP13atom_locationRN3hls6streamI16local_image_infoLi0EEE
+Args:            
+  - String:          'Inlining function '''
+  - Callee:          'std::round(float)'
+    DebugLoc:        { File: 'F:/Vitis/2024.2/tps/mingw/8.3.0/win64.o/nt\lib\gcc\x86_64-w64-mingw32\8.3.0\include\c++\cmath', 
+                       Line: 1757, Column: 0 }
+  - String:          ''' into '''
+  - Caller:          'getLocalImages_single(int, int, int, int, atom_location*, hls::stream<local_image_info, 0>&)'
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 7, Column: 0 }
+  - String:          ''''
+...
+--- !Passed
+Pass:            reflow-array-partition
+Name:            ArrayXform
+DebugLoc:        { File: ../image_analysis.cpp, Line: 246, Column: 15 }
+Function:        _Z11reconstructiiiP13atom_locationiiPfS1_PiS1_iiS1_
+Args:            
+  - String:          'Applying '
+  - String:          array_partition
+  - String:          ' to '''
+  - UOName:          curr_fullImage
+  - String:          ''':'
+  - String:          ' '
+  - Mode:            Complete
+  - String:          ' partitioning'
+  - String:          ' on dimension '
+  - Dim:             '1'
+  - String:          .
+  - String:          ' '
+  - Mode:            Complete
+  - String:          ' partitioning'
+  - String:          ' on dimension '
+  - Dim:             '2'
+  - String:          .
+...
+--- !Passed
+Pass:            reflow-array-partition
+Name:            ArrayXform
+DebugLoc:        { File: ../image_analysis.cpp, Line: 247, Column: 15 }
+Function:        _Z11reconstructiiiP13atom_locationiiPfS1_PiS1_iiS1_
+Args:            
+  - String:          'Applying '
+  - String:          array_partition
+  - String:          ' to '''
+  - UOName:          curr_localImage
+  - String:          ''':'
+  - String:          ' '
+  - Mode:            Complete
+  - String:          ' partitioning'
+  - String:          ' on dimension '
+  - Dim:             '1'
+  - String:          .
+  - String:          ' '
+  - Mode:            Complete
+  - String:          ' partitioning'
+  - String:          ' on dimension '
+  - Dim:             '2'
+  - String:          .
+...
+--- !Passed
+Pass:            reflow-aggr
+Name:            AggrSucc
+DebugLoc:        { File: ../image_analysis.cpp, Line: 245, Column: 34 }
+Function:        _Z11reconstructiiiP13atom_locationiiPfS1_PiS1_iiS1_
+Args:            
+  - String:          'Aggregating '
+  - HwTyName:        'fifo (hls::stream)'
+  - String:          ' variable '''
+  - Name:            localImages
+  - String:          ''' with '
+  - AggregateTypeName: 'compact=bit'
+  - String:          ' mode in '
+  - Bitwidth:        '256'
+  - String:          '-bits'
+...
+--- !Missed
+Pass:            reflow-burst-inference
+Name:            UnsupportedAccessType
+DebugLoc:        { File: ../image_analysis.cpp, Line: 8, Column: 25 }
+Function:        _Z21getLocalImages_singleiiiiP13atom_locationRN3hls6streamI16local_image_infoLi0EEE
+Args:            
+  - String:          'Unsupported access data type. Expected integer or floating point type but received '
+  - DataType:        '%struct.atom_location = type { float, float }'
+  - String:          ' _XLX_SEP_ '
+  - OrigAccess:      load
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 8, Column: 25 }
+  - OrigDirection:   read
+  - OrigID:          entry.load.7
+  - ArrayName:       atomLocations
+  - String:          ' '
+  - BundleName:      atomLocations
+  - String:          ' '
+  - Function:        'getLocalImages_single(int, int, int, int, atom_location*, hls::stream<local_image_info, 0>&)'
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 7, Column: 0 }
+  - String:          ' '
+...
+--- !Passed
+Pass:            reflow-burst-inference
+Name:            BurstInferred
+DebugLoc:        { File: ../image_analysis.cpp, Line: 81, Column: 22 }
+Function:        _Z13Image_extractiRN3hls6streamI16local_image_infoLi0EEEPfPA31_fS4_S6_S4_Rf
+Args:            
+  - String:          'Sequential '
+  - Direction:       read
+  - String:          ' of length '
+  - Length:          '961'
+  - String:          ' has been inferred'
+  - String:          ' _XLX_SEP_ '
+  - AccessID:        imageProjs_local3seq
+  - ArrayName:       imageProjs_local
+  - String:          ' '
+  - BundleName:      imageProjs_local
+  - String:          ' '
+  - LoopName:        VITIS_LOOP_81_1
+  - String:          ' '
+  - LoopLoc:         '../image_analysis.cpp:81:22'
+  - String:          ' '
+  - Function:        'Image_extract(int, hls::stream<local_image_info, 0>&, float*, float (*) [31], float*, float (*) [31], float*, float&)'
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 71, Column: 0 }
+  - String:          ' '
+  - String:          ' _XLX_SEP_ '
+  - OrigAccess:      load
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 86, Column: 26 }
+  - OrigDirection:   read
+  - OrigID:          VITIS_LOOP_84_2.load.1994
+  - OrigAccess:      load
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 86, Column: 26 }
+  - OrigDirection:   read
+  - OrigID:          VITIS_LOOP_84_2.load.2002
+  - OrigAccess:      load
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 86, Column: 26 }
+  - OrigDirection:   read
+  - OrigID:          VITIS_LOOP_84_2.load.2010
+  - OrigAccess:      load
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 86, Column: 26 }
+  - OrigDirection:   read
+  - OrigID:          VITIS_LOOP_84_2.load.2018
+  - OrigAccess:      load
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 86, Column: 26 }
+  - OrigDirection:   read
+  - OrigID:          VITIS_LOOP_84_2.load.2026
+  - OrigAccess:      load
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 86, Column: 26 }
+  - OrigDirection:   read
+  - OrigID:          VITIS_LOOP_84_2.load.2034
+  - OrigAccess:      load
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 86, Column: 26 }
+  - OrigDirection:   read
+  - OrigID:          VITIS_LOOP_84_2.load.2042
+  - OrigAccess:      load
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 86, Column: 26 }
+  - OrigDirection:   read
+  - OrigID:          VITIS_LOOP_84_2.load.2050
+  - OrigAccess:      load
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 86, Column: 26 }
+  - OrigDirection:   read
+  - OrigID:          VITIS_LOOP_84_2.load.2058
+  - OrigAccess:      load
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 86, Column: 26 }
+  - OrigDirection:   read
+  - OrigID:          VITIS_LOOP_84_2.load.2066
+  - OrigAccess:      load
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 86, Column: 26 }
+  - OrigDirection:   read
+  - OrigID:          VITIS_LOOP_84_2.load.2074
+  - OrigAccess:      load
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 86, Column: 26 }
+  - OrigDirection:   read
+  - OrigID:          VITIS_LOOP_84_2.load.2082
+  - OrigAccess:      load
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 86, Column: 26 }
+  - OrigDirection:   read
+  - OrigID:          VITIS_LOOP_84_2.load.2090
+  - OrigAccess:      load
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 86, Column: 26 }
+  - OrigDirection:   read
+  - OrigID:          VITIS_LOOP_84_2.load.2098
+  - OrigAccess:      load
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 86, Column: 26 }
+  - OrigDirection:   read
+  - OrigID:          VITIS_LOOP_84_2.load.2106
+  - OrigAccess:      load
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 86, Column: 26 }
+  - OrigDirection:   read
+  - OrigID:          VITIS_LOOP_84_2.load.2114
+  - OrigAccess:      load
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 86, Column: 26 }
+  - OrigDirection:   read
+  - OrigID:          VITIS_LOOP_84_2.load.2122
+  - OrigAccess:      load
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 86, Column: 26 }
+  - OrigDirection:   read
+  - OrigID:          VITIS_LOOP_84_2.load.2130
+  - OrigAccess:      load
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 86, Column: 26 }
+  - OrigDirection:   read
+  - OrigID:          VITIS_LOOP_84_2.load.2138
+  - OrigAccess:      load
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 86, Column: 26 }
+  - OrigDirection:   read
+  - OrigID:          VITIS_LOOP_84_2.load.2146
+  - OrigAccess:      load
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 86, Column: 26 }
+  - OrigDirection:   read
+  - OrigID:          VITIS_LOOP_84_2.load.2154
+  - OrigAccess:      load
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 86, Column: 26 }
+  - OrigDirection:   read
+  - OrigID:          VITIS_LOOP_84_2.load.2162
+  - OrigAccess:      load
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 86, Column: 26 }
+  - OrigDirection:   read
+  - OrigID:          VITIS_LOOP_84_2.load.2170
+  - OrigAccess:      load
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 86, Column: 26 }
+  - OrigDirection:   read
+  - OrigID:          VITIS_LOOP_84_2.load.2178
+  - OrigAccess:      load
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 86, Column: 26 }
+  - OrigDirection:   read
+  - OrigID:          VITIS_LOOP_84_2.load.2186
+  - OrigAccess:      load
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 86, Column: 26 }
+  - OrigDirection:   read
+  - OrigID:          VITIS_LOOP_84_2.load.2194
+  - OrigAccess:      load
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 86, Column: 26 }
+  - OrigDirection:   read
+  - OrigID:          VITIS_LOOP_84_2.load.2202
+  - OrigAccess:      load
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 86, Column: 26 }
+  - OrigDirection:   read
+  - OrigID:          VITIS_LOOP_84_2.load.2210
+  - OrigAccess:      load
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 86, Column: 26 }
+  - OrigDirection:   read
+  - OrigID:          VITIS_LOOP_84_2.load.2218
+  - OrigAccess:      load
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 86, Column: 26 }
+  - OrigDirection:   read
+  - OrigID:          VITIS_LOOP_84_2.load.2226
+  - OrigAccess:      load
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 86, Column: 26 }
+  - OrigDirection:   read
+  - OrigID:          VITIS_LOOP_84_2.load.2234
+...
+--- !Missed
+Pass:            reflow-burst-inference
+Name:            CacheUnderlyingObject
+DebugLoc:        { File: ../image_analysis.cpp, Line: 87, Column: 36 }
+Function:        _Z13Image_extractiRN3hls6streamI16local_image_infoLi0EEEPfPA31_fS4_S6_S4_Rf
+Args:            
+  - String:          Using a cache line to infer a burst is less efficient in terms of resources than writing the code to automatically infer the burst
+  - String:          ' _XLX_SEP_ '
+  - OrigAccess:      load
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 87, Column: 36 }
+  - OrigDirection:   read
+  - OrigID:          VITIS_LOOP_84_2.load.1998
+  - ArrayName:       fullImage
+  - String:          ' '
+  - BundleName:      fullImage
+  - String:          ' '
+  - Function:        'Image_extract(int, hls::stream<local_image_info, 0>&, float*, float (*) [31], float*, float (*) [31], float*, float&)'
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 71, Column: 0 }
+  - String:          ' '
+...
+--- !Missed
+Pass:            reflow-burst-inference
+Name:            CacheUnderlyingObject
+DebugLoc:        { File: ../image_analysis.cpp, Line: 87, Column: 36 }
+Function:        _Z13Image_extractiRN3hls6streamI16local_image_infoLi0EEEPfPA31_fS4_S6_S4_Rf
+Args:            
+  - String:          Using a cache line to infer a burst is less efficient in terms of resources than writing the code to automatically infer the burst
+  - String:          ' _XLX_SEP_ '
+  - OrigAccess:      load
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 87, Column: 36 }
+  - OrigDirection:   read
+  - OrigID:          VITIS_LOOP_84_2.load.2006
+  - ArrayName:       fullImage
+  - String:          ' '
+  - BundleName:      fullImage
+  - String:          ' '
+  - Function:        'Image_extract(int, hls::stream<local_image_info, 0>&, float*, float (*) [31], float*, float (*) [31], float*, float&)'
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 71, Column: 0 }
+  - String:          ' '
+...
+--- !Missed
+Pass:            reflow-burst-inference
+Name:            CacheUnderlyingObject
+DebugLoc:        { File: ../image_analysis.cpp, Line: 87, Column: 36 }
+Function:        _Z13Image_extractiRN3hls6streamI16local_image_infoLi0EEEPfPA31_fS4_S6_S4_Rf
+Args:            
+  - String:          Using a cache line to infer a burst is less efficient in terms of resources than writing the code to automatically infer the burst
+  - String:          ' _XLX_SEP_ '
+  - OrigAccess:      load
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 87, Column: 36 }
+  - OrigDirection:   read
+  - OrigID:          VITIS_LOOP_84_2.load.2014
+  - ArrayName:       fullImage
+  - String:          ' '
+  - BundleName:      fullImage
+  - String:          ' '
+  - Function:        'Image_extract(int, hls::stream<local_image_info, 0>&, float*, float (*) [31], float*, float (*) [31], float*, float&)'
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 71, Column: 0 }
+  - String:          ' '
+...
+--- !Missed
+Pass:            reflow-burst-inference
+Name:            CacheUnderlyingObject
+DebugLoc:        { File: ../image_analysis.cpp, Line: 87, Column: 36 }
+Function:        _Z13Image_extractiRN3hls6streamI16local_image_infoLi0EEEPfPA31_fS4_S6_S4_Rf
+Args:            
+  - String:          Using a cache line to infer a burst is less efficient in terms of resources than writing the code to automatically infer the burst
+  - String:          ' _XLX_SEP_ '
+  - OrigAccess:      load
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 87, Column: 36 }
+  - OrigDirection:   read
+  - OrigID:          VITIS_LOOP_84_2.load.2022
+  - ArrayName:       fullImage
+  - String:          ' '
+  - BundleName:      fullImage
+  - String:          ' '
+  - Function:        'Image_extract(int, hls::stream<local_image_info, 0>&, float*, float (*) [31], float*, float (*) [31], float*, float&)'
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 71, Column: 0 }
+  - String:          ' '
+...
+--- !Missed
+Pass:            reflow-burst-inference
+Name:            CacheUnderlyingObject
+DebugLoc:        { File: ../image_analysis.cpp, Line: 87, Column: 36 }
+Function:        _Z13Image_extractiRN3hls6streamI16local_image_infoLi0EEEPfPA31_fS4_S6_S4_Rf
+Args:            
+  - String:          Using a cache line to infer a burst is less efficient in terms of resources than writing the code to automatically infer the burst
+  - String:          ' _XLX_SEP_ '
+  - OrigAccess:      load
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 87, Column: 36 }
+  - OrigDirection:   read
+  - OrigID:          VITIS_LOOP_84_2.load.2030
+  - ArrayName:       fullImage
+  - String:          ' '
+  - BundleName:      fullImage
+  - String:          ' '
+  - Function:        'Image_extract(int, hls::stream<local_image_info, 0>&, float*, float (*) [31], float*, float (*) [31], float*, float&)'
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 71, Column: 0 }
+  - String:          ' '
+...
+--- !Missed
+Pass:            reflow-burst-inference
+Name:            CacheUnderlyingObject
+DebugLoc:        { File: ../image_analysis.cpp, Line: 87, Column: 36 }
+Function:        _Z13Image_extractiRN3hls6streamI16local_image_infoLi0EEEPfPA31_fS4_S6_S4_Rf
+Args:            
+  - String:          Using a cache line to infer a burst is less efficient in terms of resources than writing the code to automatically infer the burst
+  - String:          ' _XLX_SEP_ '
+  - OrigAccess:      load
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 87, Column: 36 }
+  - OrigDirection:   read
+  - OrigID:          VITIS_LOOP_84_2.load.2038
+  - ArrayName:       fullImage
+  - String:          ' '
+  - BundleName:      fullImage
+  - String:          ' '
+  - Function:        'Image_extract(int, hls::stream<local_image_info, 0>&, float*, float (*) [31], float*, float (*) [31], float*, float&)'
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 71, Column: 0 }
+  - String:          ' '
+...
+--- !Missed
+Pass:            reflow-burst-inference
+Name:            CacheUnderlyingObject
+DebugLoc:        { File: ../image_analysis.cpp, Line: 87, Column: 36 }
+Function:        _Z13Image_extractiRN3hls6streamI16local_image_infoLi0EEEPfPA31_fS4_S6_S4_Rf
+Args:            
+  - String:          Using a cache line to infer a burst is less efficient in terms of resources than writing the code to automatically infer the burst
+  - String:          ' _XLX_SEP_ '
+  - OrigAccess:      load
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 87, Column: 36 }
+  - OrigDirection:   read
+  - OrigID:          VITIS_LOOP_84_2.load.2046
+  - ArrayName:       fullImage
+  - String:          ' '
+  - BundleName:      fullImage
+  - String:          ' '
+  - Function:        'Image_extract(int, hls::stream<local_image_info, 0>&, float*, float (*) [31], float*, float (*) [31], float*, float&)'
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 71, Column: 0 }
+  - String:          ' '
+...
+--- !Missed
+Pass:            reflow-burst-inference
+Name:            CacheUnderlyingObject
+DebugLoc:        { File: ../image_analysis.cpp, Line: 87, Column: 36 }
+Function:        _Z13Image_extractiRN3hls6streamI16local_image_infoLi0EEEPfPA31_fS4_S6_S4_Rf
+Args:            
+  - String:          Using a cache line to infer a burst is less efficient in terms of resources than writing the code to automatically infer the burst
+  - String:          ' _XLX_SEP_ '
+  - OrigAccess:      load
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 87, Column: 36 }
+  - OrigDirection:   read
+  - OrigID:          VITIS_LOOP_84_2.load.2054
+  - ArrayName:       fullImage
+  - String:          ' '
+  - BundleName:      fullImage
+  - String:          ' '
+  - Function:        'Image_extract(int, hls::stream<local_image_info, 0>&, float*, float (*) [31], float*, float (*) [31], float*, float&)'
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 71, Column: 0 }
+  - String:          ' '
+...
+--- !Missed
+Pass:            reflow-burst-inference
+Name:            CacheUnderlyingObject
+DebugLoc:        { File: ../image_analysis.cpp, Line: 87, Column: 36 }
+Function:        _Z13Image_extractiRN3hls6streamI16local_image_infoLi0EEEPfPA31_fS4_S6_S4_Rf
+Args:            
+  - String:          Using a cache line to infer a burst is less efficient in terms of resources than writing the code to automatically infer the burst
+  - String:          ' _XLX_SEP_ '
+  - OrigAccess:      load
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 87, Column: 36 }
+  - OrigDirection:   read
+  - OrigID:          VITIS_LOOP_84_2.load.2062
+  - ArrayName:       fullImage
+  - String:          ' '
+  - BundleName:      fullImage
+  - String:          ' '
+  - Function:        'Image_extract(int, hls::stream<local_image_info, 0>&, float*, float (*) [31], float*, float (*) [31], float*, float&)'
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 71, Column: 0 }
+  - String:          ' '
+...
+--- !Missed
+Pass:            reflow-burst-inference
+Name:            CacheUnderlyingObject
+DebugLoc:        { File: ../image_analysis.cpp, Line: 87, Column: 36 }
+Function:        _Z13Image_extractiRN3hls6streamI16local_image_infoLi0EEEPfPA31_fS4_S6_S4_Rf
+Args:            
+  - String:          Using a cache line to infer a burst is less efficient in terms of resources than writing the code to automatically infer the burst
+  - String:          ' _XLX_SEP_ '
+  - OrigAccess:      load
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 87, Column: 36 }
+  - OrigDirection:   read
+  - OrigID:          VITIS_LOOP_84_2.load.2070
+  - ArrayName:       fullImage
+  - String:          ' '
+  - BundleName:      fullImage
+  - String:          ' '
+  - Function:        'Image_extract(int, hls::stream<local_image_info, 0>&, float*, float (*) [31], float*, float (*) [31], float*, float&)'
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 71, Column: 0 }
+  - String:          ' '
+...
+--- !Missed
+Pass:            reflow-burst-inference
+Name:            CacheUnderlyingObject
+DebugLoc:        { File: ../image_analysis.cpp, Line: 87, Column: 36 }
+Function:        _Z13Image_extractiRN3hls6streamI16local_image_infoLi0EEEPfPA31_fS4_S6_S4_Rf
+Args:            
+  - String:          Using a cache line to infer a burst is less efficient in terms of resources than writing the code to automatically infer the burst
+  - String:          ' _XLX_SEP_ '
+  - OrigAccess:      load
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 87, Column: 36 }
+  - OrigDirection:   read
+  - OrigID:          VITIS_LOOP_84_2.load.2078
+  - ArrayName:       fullImage
+  - String:          ' '
+  - BundleName:      fullImage
+  - String:          ' '
+  - Function:        'Image_extract(int, hls::stream<local_image_info, 0>&, float*, float (*) [31], float*, float (*) [31], float*, float&)'
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 71, Column: 0 }
+  - String:          ' '
+...
+--- !Missed
+Pass:            reflow-burst-inference
+Name:            CacheUnderlyingObject
+DebugLoc:        { File: ../image_analysis.cpp, Line: 87, Column: 36 }
+Function:        _Z13Image_extractiRN3hls6streamI16local_image_infoLi0EEEPfPA31_fS4_S6_S4_Rf
+Args:            
+  - String:          Using a cache line to infer a burst is less efficient in terms of resources than writing the code to automatically infer the burst
+  - String:          ' _XLX_SEP_ '
+  - OrigAccess:      load
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 87, Column: 36 }
+  - OrigDirection:   read
+  - OrigID:          VITIS_LOOP_84_2.load.2086
+  - ArrayName:       fullImage
+  - String:          ' '
+  - BundleName:      fullImage
+  - String:          ' '
+  - Function:        'Image_extract(int, hls::stream<local_image_info, 0>&, float*, float (*) [31], float*, float (*) [31], float*, float&)'
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 71, Column: 0 }
+  - String:          ' '
+...
+--- !Missed
+Pass:            reflow-burst-inference
+Name:            CacheUnderlyingObject
+DebugLoc:        { File: ../image_analysis.cpp, Line: 87, Column: 36 }
+Function:        _Z13Image_extractiRN3hls6streamI16local_image_infoLi0EEEPfPA31_fS4_S6_S4_Rf
+Args:            
+  - String:          Using a cache line to infer a burst is less efficient in terms of resources than writing the code to automatically infer the burst
+  - String:          ' _XLX_SEP_ '
+  - OrigAccess:      load
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 87, Column: 36 }
+  - OrigDirection:   read
+  - OrigID:          VITIS_LOOP_84_2.load.2094
+  - ArrayName:       fullImage
+  - String:          ' '
+  - BundleName:      fullImage
+  - String:          ' '
+  - Function:        'Image_extract(int, hls::stream<local_image_info, 0>&, float*, float (*) [31], float*, float (*) [31], float*, float&)'
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 71, Column: 0 }
+  - String:          ' '
+...
+--- !Missed
+Pass:            reflow-burst-inference
+Name:            CacheUnderlyingObject
+DebugLoc:        { File: ../image_analysis.cpp, Line: 87, Column: 36 }
+Function:        _Z13Image_extractiRN3hls6streamI16local_image_infoLi0EEEPfPA31_fS4_S6_S4_Rf
+Args:            
+  - String:          Using a cache line to infer a burst is less efficient in terms of resources than writing the code to automatically infer the burst
+  - String:          ' _XLX_SEP_ '
+  - OrigAccess:      load
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 87, Column: 36 }
+  - OrigDirection:   read
+  - OrigID:          VITIS_LOOP_84_2.load.2102
+  - ArrayName:       fullImage
+  - String:          ' '
+  - BundleName:      fullImage
+  - String:          ' '
+  - Function:        'Image_extract(int, hls::stream<local_image_info, 0>&, float*, float (*) [31], float*, float (*) [31], float*, float&)'
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 71, Column: 0 }
+  - String:          ' '
+...
+--- !Missed
+Pass:            reflow-burst-inference
+Name:            CacheUnderlyingObject
+DebugLoc:        { File: ../image_analysis.cpp, Line: 87, Column: 36 }
+Function:        _Z13Image_extractiRN3hls6streamI16local_image_infoLi0EEEPfPA31_fS4_S6_S4_Rf
+Args:            
+  - String:          Using a cache line to infer a burst is less efficient in terms of resources than writing the code to automatically infer the burst
+  - String:          ' _XLX_SEP_ '
+  - OrigAccess:      load
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 87, Column: 36 }
+  - OrigDirection:   read
+  - OrigID:          VITIS_LOOP_84_2.load.2110
+  - ArrayName:       fullImage
+  - String:          ' '
+  - BundleName:      fullImage
+  - String:          ' '
+  - Function:        'Image_extract(int, hls::stream<local_image_info, 0>&, float*, float (*) [31], float*, float (*) [31], float*, float&)'
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 71, Column: 0 }
+  - String:          ' '
+...
+--- !Missed
+Pass:            reflow-burst-inference
+Name:            CacheUnderlyingObject
+DebugLoc:        { File: ../image_analysis.cpp, Line: 87, Column: 36 }
+Function:        _Z13Image_extractiRN3hls6streamI16local_image_infoLi0EEEPfPA31_fS4_S6_S4_Rf
+Args:            
+  - String:          Using a cache line to infer a burst is less efficient in terms of resources than writing the code to automatically infer the burst
+  - String:          ' _XLX_SEP_ '
+  - OrigAccess:      load
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 87, Column: 36 }
+  - OrigDirection:   read
+  - OrigID:          VITIS_LOOP_84_2.load.2118
+  - ArrayName:       fullImage
+  - String:          ' '
+  - BundleName:      fullImage
+  - String:          ' '
+  - Function:        'Image_extract(int, hls::stream<local_image_info, 0>&, float*, float (*) [31], float*, float (*) [31], float*, float&)'
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 71, Column: 0 }
+  - String:          ' '
+...
+--- !Missed
+Pass:            reflow-burst-inference
+Name:            CacheUnderlyingObject
+DebugLoc:        { File: ../image_analysis.cpp, Line: 87, Column: 36 }
+Function:        _Z13Image_extractiRN3hls6streamI16local_image_infoLi0EEEPfPA31_fS4_S6_S4_Rf
+Args:            
+  - String:          Using a cache line to infer a burst is less efficient in terms of resources than writing the code to automatically infer the burst
+  - String:          ' _XLX_SEP_ '
+  - OrigAccess:      load
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 87, Column: 36 }
+  - OrigDirection:   read
+  - OrigID:          VITIS_LOOP_84_2.load.2126
+  - ArrayName:       fullImage
+  - String:          ' '
+  - BundleName:      fullImage
+  - String:          ' '
+  - Function:        'Image_extract(int, hls::stream<local_image_info, 0>&, float*, float (*) [31], float*, float (*) [31], float*, float&)'
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 71, Column: 0 }
+  - String:          ' '
+...
+--- !Missed
+Pass:            reflow-burst-inference
+Name:            CacheUnderlyingObject
+DebugLoc:        { File: ../image_analysis.cpp, Line: 87, Column: 36 }
+Function:        _Z13Image_extractiRN3hls6streamI16local_image_infoLi0EEEPfPA31_fS4_S6_S4_Rf
+Args:            
+  - String:          Using a cache line to infer a burst is less efficient in terms of resources than writing the code to automatically infer the burst
+  - String:          ' _XLX_SEP_ '
+  - OrigAccess:      load
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 87, Column: 36 }
+  - OrigDirection:   read
+  - OrigID:          VITIS_LOOP_84_2.load.2134
+  - ArrayName:       fullImage
+  - String:          ' '
+  - BundleName:      fullImage
+  - String:          ' '
+  - Function:        'Image_extract(int, hls::stream<local_image_info, 0>&, float*, float (*) [31], float*, float (*) [31], float*, float&)'
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 71, Column: 0 }
+  - String:          ' '
+...
+--- !Missed
+Pass:            reflow-burst-inference
+Name:            CacheUnderlyingObject
+DebugLoc:        { File: ../image_analysis.cpp, Line: 87, Column: 36 }
+Function:        _Z13Image_extractiRN3hls6streamI16local_image_infoLi0EEEPfPA31_fS4_S6_S4_Rf
+Args:            
+  - String:          Using a cache line to infer a burst is less efficient in terms of resources than writing the code to automatically infer the burst
+  - String:          ' _XLX_SEP_ '
+  - OrigAccess:      load
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 87, Column: 36 }
+  - OrigDirection:   read
+  - OrigID:          VITIS_LOOP_84_2.load.2142
+  - ArrayName:       fullImage
+  - String:          ' '
+  - BundleName:      fullImage
+  - String:          ' '
+  - Function:        'Image_extract(int, hls::stream<local_image_info, 0>&, float*, float (*) [31], float*, float (*) [31], float*, float&)'
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 71, Column: 0 }
+  - String:          ' '
+...
+--- !Missed
+Pass:            reflow-burst-inference
+Name:            CacheUnderlyingObject
+DebugLoc:        { File: ../image_analysis.cpp, Line: 87, Column: 36 }
+Function:        _Z13Image_extractiRN3hls6streamI16local_image_infoLi0EEEPfPA31_fS4_S6_S4_Rf
+Args:            
+  - String:          Using a cache line to infer a burst is less efficient in terms of resources than writing the code to automatically infer the burst
+  - String:          ' _XLX_SEP_ '
+  - OrigAccess:      load
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 87, Column: 36 }
+  - OrigDirection:   read
+  - OrigID:          VITIS_LOOP_84_2.load.2150
+  - ArrayName:       fullImage
+  - String:          ' '
+  - BundleName:      fullImage
+  - String:          ' '
+  - Function:        'Image_extract(int, hls::stream<local_image_info, 0>&, float*, float (*) [31], float*, float (*) [31], float*, float&)'
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 71, Column: 0 }
+  - String:          ' '
+...
+--- !Missed
+Pass:            reflow-burst-inference
+Name:            CacheUnderlyingObject
+DebugLoc:        { File: ../image_analysis.cpp, Line: 87, Column: 36 }
+Function:        _Z13Image_extractiRN3hls6streamI16local_image_infoLi0EEEPfPA31_fS4_S6_S4_Rf
+Args:            
+  - String:          Using a cache line to infer a burst is less efficient in terms of resources than writing the code to automatically infer the burst
+  - String:          ' _XLX_SEP_ '
+  - OrigAccess:      load
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 87, Column: 36 }
+  - OrigDirection:   read
+  - OrigID:          VITIS_LOOP_84_2.load.2158
+  - ArrayName:       fullImage
+  - String:          ' '
+  - BundleName:      fullImage
+  - String:          ' '
+  - Function:        'Image_extract(int, hls::stream<local_image_info, 0>&, float*, float (*) [31], float*, float (*) [31], float*, float&)'
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 71, Column: 0 }
+  - String:          ' '
+...
+--- !Missed
+Pass:            reflow-burst-inference
+Name:            CacheUnderlyingObject
+DebugLoc:        { File: ../image_analysis.cpp, Line: 87, Column: 36 }
+Function:        _Z13Image_extractiRN3hls6streamI16local_image_infoLi0EEEPfPA31_fS4_S6_S4_Rf
+Args:            
+  - String:          Using a cache line to infer a burst is less efficient in terms of resources than writing the code to automatically infer the burst
+  - String:          ' _XLX_SEP_ '
+  - OrigAccess:      load
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 87, Column: 36 }
+  - OrigDirection:   read
+  - OrigID:          VITIS_LOOP_84_2.load.2166
+  - ArrayName:       fullImage
+  - String:          ' '
+  - BundleName:      fullImage
+  - String:          ' '
+  - Function:        'Image_extract(int, hls::stream<local_image_info, 0>&, float*, float (*) [31], float*, float (*) [31], float*, float&)'
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 71, Column: 0 }
+  - String:          ' '
+...
+--- !Missed
+Pass:            reflow-burst-inference
+Name:            CacheUnderlyingObject
+DebugLoc:        { File: ../image_analysis.cpp, Line: 87, Column: 36 }
+Function:        _Z13Image_extractiRN3hls6streamI16local_image_infoLi0EEEPfPA31_fS4_S6_S4_Rf
+Args:            
+  - String:          Using a cache line to infer a burst is less efficient in terms of resources than writing the code to automatically infer the burst
+  - String:          ' _XLX_SEP_ '
+  - OrigAccess:      load
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 87, Column: 36 }
+  - OrigDirection:   read
+  - OrigID:          VITIS_LOOP_84_2.load.2174
+  - ArrayName:       fullImage
+  - String:          ' '
+  - BundleName:      fullImage
+  - String:          ' '
+  - Function:        'Image_extract(int, hls::stream<local_image_info, 0>&, float*, float (*) [31], float*, float (*) [31], float*, float&)'
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 71, Column: 0 }
+  - String:          ' '
+...
+--- !Missed
+Pass:            reflow-burst-inference
+Name:            CacheUnderlyingObject
+DebugLoc:        { File: ../image_analysis.cpp, Line: 87, Column: 36 }
+Function:        _Z13Image_extractiRN3hls6streamI16local_image_infoLi0EEEPfPA31_fS4_S6_S4_Rf
+Args:            
+  - String:          Using a cache line to infer a burst is less efficient in terms of resources than writing the code to automatically infer the burst
+  - String:          ' _XLX_SEP_ '
+  - OrigAccess:      load
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 87, Column: 36 }
+  - OrigDirection:   read
+  - OrigID:          VITIS_LOOP_84_2.load.2182
+  - ArrayName:       fullImage
+  - String:          ' '
+  - BundleName:      fullImage
+  - String:          ' '
+  - Function:        'Image_extract(int, hls::stream<local_image_info, 0>&, float*, float (*) [31], float*, float (*) [31], float*, float&)'
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 71, Column: 0 }
+  - String:          ' '
+...
+--- !Missed
+Pass:            reflow-burst-inference
+Name:            CacheUnderlyingObject
+DebugLoc:        { File: ../image_analysis.cpp, Line: 87, Column: 36 }
+Function:        _Z13Image_extractiRN3hls6streamI16local_image_infoLi0EEEPfPA31_fS4_S6_S4_Rf
+Args:            
+  - String:          Using a cache line to infer a burst is less efficient in terms of resources than writing the code to automatically infer the burst
+  - String:          ' _XLX_SEP_ '
+  - OrigAccess:      load
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 87, Column: 36 }
+  - OrigDirection:   read
+  - OrigID:          VITIS_LOOP_84_2.load.2190
+  - ArrayName:       fullImage
+  - String:          ' '
+  - BundleName:      fullImage
+  - String:          ' '
+  - Function:        'Image_extract(int, hls::stream<local_image_info, 0>&, float*, float (*) [31], float*, float (*) [31], float*, float&)'
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 71, Column: 0 }
+  - String:          ' '
+...
+--- !Missed
+Pass:            reflow-burst-inference
+Name:            CacheUnderlyingObject
+DebugLoc:        { File: ../image_analysis.cpp, Line: 87, Column: 36 }
+Function:        _Z13Image_extractiRN3hls6streamI16local_image_infoLi0EEEPfPA31_fS4_S6_S4_Rf
+Args:            
+  - String:          Using a cache line to infer a burst is less efficient in terms of resources than writing the code to automatically infer the burst
+  - String:          ' _XLX_SEP_ '
+  - OrigAccess:      load
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 87, Column: 36 }
+  - OrigDirection:   read
+  - OrigID:          VITIS_LOOP_84_2.load.2198
+  - ArrayName:       fullImage
+  - String:          ' '
+  - BundleName:      fullImage
+  - String:          ' '
+  - Function:        'Image_extract(int, hls::stream<local_image_info, 0>&, float*, float (*) [31], float*, float (*) [31], float*, float&)'
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 71, Column: 0 }
+  - String:          ' '
+...
+--- !Missed
+Pass:            reflow-burst-inference
+Name:            CacheUnderlyingObject
+DebugLoc:        { File: ../image_analysis.cpp, Line: 87, Column: 36 }
+Function:        _Z13Image_extractiRN3hls6streamI16local_image_infoLi0EEEPfPA31_fS4_S6_S4_Rf
+Args:            
+  - String:          Using a cache line to infer a burst is less efficient in terms of resources than writing the code to automatically infer the burst
+  - String:          ' _XLX_SEP_ '
+  - OrigAccess:      load
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 87, Column: 36 }
+  - OrigDirection:   read
+  - OrigID:          VITIS_LOOP_84_2.load.2206
+  - ArrayName:       fullImage
+  - String:          ' '
+  - BundleName:      fullImage
+  - String:          ' '
+  - Function:        'Image_extract(int, hls::stream<local_image_info, 0>&, float*, float (*) [31], float*, float (*) [31], float*, float&)'
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 71, Column: 0 }
+  - String:          ' '
+...
+--- !Missed
+Pass:            reflow-burst-inference
+Name:            CacheUnderlyingObject
+DebugLoc:        { File: ../image_analysis.cpp, Line: 87, Column: 36 }
+Function:        _Z13Image_extractiRN3hls6streamI16local_image_infoLi0EEEPfPA31_fS4_S6_S4_Rf
+Args:            
+  - String:          Using a cache line to infer a burst is less efficient in terms of resources than writing the code to automatically infer the burst
+  - String:          ' _XLX_SEP_ '
+  - OrigAccess:      load
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 87, Column: 36 }
+  - OrigDirection:   read
+  - OrigID:          VITIS_LOOP_84_2.load.2214
+  - ArrayName:       fullImage
+  - String:          ' '
+  - BundleName:      fullImage
+  - String:          ' '
+  - Function:        'Image_extract(int, hls::stream<local_image_info, 0>&, float*, float (*) [31], float*, float (*) [31], float*, float&)'
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 71, Column: 0 }
+  - String:          ' '
+...
+--- !Missed
+Pass:            reflow-burst-inference
+Name:            CacheUnderlyingObject
+DebugLoc:        { File: ../image_analysis.cpp, Line: 87, Column: 36 }
+Function:        _Z13Image_extractiRN3hls6streamI16local_image_infoLi0EEEPfPA31_fS4_S6_S4_Rf
+Args:            
+  - String:          Using a cache line to infer a burst is less efficient in terms of resources than writing the code to automatically infer the burst
+  - String:          ' _XLX_SEP_ '
+  - OrigAccess:      load
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 87, Column: 36 }
+  - OrigDirection:   read
+  - OrigID:          VITIS_LOOP_84_2.load.2222
+  - ArrayName:       fullImage
+  - String:          ' '
+  - BundleName:      fullImage
+  - String:          ' '
+  - Function:        'Image_extract(int, hls::stream<local_image_info, 0>&, float*, float (*) [31], float*, float (*) [31], float*, float&)'
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 71, Column: 0 }
+  - String:          ' '
+...
+--- !Missed
+Pass:            reflow-burst-inference
+Name:            CacheUnderlyingObject
+DebugLoc:        { File: ../image_analysis.cpp, Line: 87, Column: 36 }
+Function:        _Z13Image_extractiRN3hls6streamI16local_image_infoLi0EEEPfPA31_fS4_S6_S4_Rf
+Args:            
+  - String:          Using a cache line to infer a burst is less efficient in terms of resources than writing the code to automatically infer the burst
+  - String:          ' _XLX_SEP_ '
+  - OrigAccess:      load
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 87, Column: 36 }
+  - OrigDirection:   read
+  - OrigID:          VITIS_LOOP_84_2.load.2230
+  - ArrayName:       fullImage
+  - String:          ' '
+  - BundleName:      fullImage
+  - String:          ' '
+  - Function:        'Image_extract(int, hls::stream<local_image_info, 0>&, float*, float (*) [31], float*, float (*) [31], float*, float&)'
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 71, Column: 0 }
+  - String:          ' '
+...
+--- !Missed
+Pass:            reflow-burst-inference
+Name:            CacheUnderlyingObject
+DebugLoc:        { File: ../image_analysis.cpp, Line: 87, Column: 36 }
+Function:        _Z13Image_extractiRN3hls6streamI16local_image_infoLi0EEEPfPA31_fS4_S6_S4_Rf
+Args:            
+  - String:          Using a cache line to infer a burst is less efficient in terms of resources than writing the code to automatically infer the burst
+  - String:          ' _XLX_SEP_ '
+  - OrigAccess:      load
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 87, Column: 36 }
+  - OrigDirection:   read
+  - OrigID:          VITIS_LOOP_84_2.load.2238
+  - ArrayName:       fullImage
+  - String:          ' '
+  - BundleName:      fullImage
+  - String:          ' '
+  - Function:        'Image_extract(int, hls::stream<local_image_info, 0>&, float*, float (*) [31], float*, float (*) [31], float*, float&)'
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 71, Column: 0 }
+  - String:          ' '
+...
+--- !Missed
+Pass:            reflow-burst-inference
+Name:            CouldNotAnalyzeBoundsPattern
+DebugLoc:        { File: ../image_analysis.cpp, Line: 191, Column: 23 }
+Function:        _Z15matrix_sum_prodPA31_fS0_RfS1_
+Args:            
+  - String:          Could not analyze the loop bounds
+  - String:          ' _XLX_SEP_ '
+  - LoopName:        VITIS_LOOP_191_1
+  - String:          ' '
+  - LoopLoc:         '../image_analysis.cpp:191:23'
+  - String:          ' '
+  - Function:        'matrix_sum_prod(float (*) [31], float (*) [31], float&, float&)'
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 183, Column: 0 }
+  - String:          ' '
+...
+--- !Missed
+Pass:            reflow-burst-widen
+Name:            GreaterOrEqualThreshold
+DebugLoc:        { File: ../image_analysis.cpp, Line: 81, Column: 22 }
+Function:        _Z13Image_extractiRN3hls6streamI16local_image_infoLi0EEEPfPA31_fS4_S6_S4_Rf
+Args:            
+  - String:          'Could not widen since type '
+  - Type:            float
+  - String:          ' size is greater than or equal to the max_widen_bitwidth threshold of '
+  - Threshold:       '0'
+  - String:          ' _XLX_SEP_ '
+  - OrigAccess:      call
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 81, Column: 22 }
+  - OrigDirection:   read
+  - OrigID:          imageProjs_local3seq
+  - ArrayName:       imageProjs_local
+  - String:          ' '
+  - BundleName:      imageProjs_local
+  - String:          ' '
+  - LoopName:        VITIS_LOOP_81_1
+  - String:          ' '
+  - LoopLoc:         '../image_analysis.cpp:81:22'
+  - String:          ' '
+  - Function:        'Image_extract(int, hls::stream<local_image_info, 0>&, float*, float (*) [31], float*, float (*) [31], float*, float&)'
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 71, Column: 0 }
+  - String:          ' '
+...
+--- !Failure
+Pass:            reflow-occurrence-inference
+Name:            NonComputableLoopForm
+DebugLoc:        { File: ../image_analysis.cpp, Line: 191, Column: 23 }
+Function:        _Z15matrix_sum_prodPA31_fS0_RfS1_
+Args:            
+  - String:          'Could not analyze occurrence information within '''
+  - LoopName:        VITIS_LOOP_191_1
+  - String:          '''('
+  - LoopLoc:         '../image_analysis.cpp:191:23'
+  - String:          ') . Requires loop in simplify form and with single exit.'
+...
+--- !HLSReportInfo
+Pass:            auto-loop-pipeline
+Name:            AutoLoopPipeline
+Args:            
+  - String:          'automatically set the pipeline for Loop< '
+  - LoopName:        VITIS_LOOP_81_1
+  - String:          '> at '
+  - LoopLoc:         '../image_analysis.cpp:81:22'
+  - String:          ' '
+...
+--- !Passed
+Pass:            reflow-auto-inline-performance-driven
+Name:            AutoInlinePerf
+DebugLoc:        { File: ../image_analysis.cpp, Line: 195, Column: 2 }
+Function:        _Z15matrix_sum_prodPA31_fS0_RfS1_
+Args:            
+  - String:          'Automatically inlining function '''
+  - Callee:          'vector_sum_prod(float*, float*, float&, float&)'
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 148, Column: 0 }
+  - String:          ''' to improve effectiveness of pipeline pragma in function '''
+  - Caller:          'matrix_sum_prod(float (*) [31], float (*) [31], float&, float&)'
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 183, Column: 0 }
+  - String:          ''''
+...
+--- !Passed
+Pass:            reflow-auto-inline-performance-driven
+Name:            AutoInlinePerf
+DebugLoc:        { File: ../image_analysis.cpp, Line: 195, Column: 2 }
+Function:        _Z15matrix_sum_prodPA31_fS0_RfS1_
+Args:            
+  - String:          'Automatically inlining function '''
+  - Callee:          'vector_sum_prod(float*, float*, float&, float&)'
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 148, Column: 0 }
+  - String:          ''' to improve effectiveness of pipeline pragma in function '''
+  - Caller:          'matrix_sum_prod(float (*) [31], float (*) [31], float&, float&)'
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 183, Column: 0 }
+  - String:          ''''
+...
+--- !Passed
+Pass:            reflow-auto-inline-performance-driven
+Name:            AutoInlinePerf
+DebugLoc:        { File: ../image_analysis.cpp, Line: 195, Column: 2 }
+Function:        _Z15matrix_sum_prodPA31_fS0_RfS1_
+Args:            
+  - String:          'Automatically inlining function '''
+  - Callee:          'vector_sum_prod(float*, float*, float&, float&)'
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 148, Column: 0 }
+  - String:          ''' to improve effectiveness of pipeline pragma in function '''
+  - Caller:          'matrix_sum_prod(float (*) [31], float (*) [31], float&, float&)'
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 183, Column: 0 }
+  - String:          ''''
+...
+--- !Passed
+Pass:            reflow-auto-inline-performance-driven
+Name:            AutoInlinePerf
+DebugLoc:        { File: ../image_analysis.cpp, Line: 195, Column: 2 }
+Function:        _Z15matrix_sum_prodPA31_fS0_RfS1_
+Args:            
+  - String:          'Automatically inlining function '''
+  - Callee:          'vector_sum_prod(float*, float*, float&, float&)'
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 148, Column: 0 }
+  - String:          ''' to improve effectiveness of pipeline pragma in function '''
+  - Caller:          'matrix_sum_prod(float (*) [31], float (*) [31], float&, float&)'
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 183, Column: 0 }
+  - String:          ''''
+...
+--- !Passed
+Pass:            reflow-auto-inline-performance-driven
+Name:            AutoInlinePerf
+DebugLoc:        { File: ../image_analysis.cpp, Line: 195, Column: 2 }
+Function:        _Z15matrix_sum_prodPA31_fS0_RfS1_
+Args:            
+  - String:          'Automatically inlining function '''
+  - Callee:          'vector_sum_prod(float*, float*, float&, float&)'
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 148, Column: 0 }
+  - String:          ''' to improve effectiveness of pipeline pragma in function '''
+  - Caller:          'matrix_sum_prod(float (*) [31], float (*) [31], float&, float&)'
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 183, Column: 0 }
+  - String:          ''''
+...
+--- !Passed
+Pass:            reflow-auto-inline-performance-driven
+Name:            AutoInlinePerf
+DebugLoc:        { File: ../image_analysis.cpp, Line: 195, Column: 2 }
+Function:        _Z15matrix_sum_prodPA31_fS0_RfS1_
+Args:            
+  - String:          'Automatically inlining function '''
+  - Callee:          'vector_sum_prod(float*, float*, float&, float&)'
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 148, Column: 0 }
+  - String:          ''' to improve effectiveness of pipeline pragma in function '''
+  - Caller:          'matrix_sum_prod(float (*) [31], float (*) [31], float&, float&)'
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 183, Column: 0 }
+  - String:          ''''
+...
+--- !Passed
+Pass:            reflow-auto-inline-performance-driven
+Name:            AutoInlinePerf
+DebugLoc:        { File: ../image_analysis.cpp, Line: 195, Column: 2 }
+Function:        _Z15matrix_sum_prodPA31_fS0_RfS1_
+Args:            
+  - String:          'Automatically inlining function '''
+  - Callee:          'vector_sum_prod(float*, float*, float&, float&)'
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 148, Column: 0 }
+  - String:          ''' to improve effectiveness of pipeline pragma in function '''
+  - Caller:          'matrix_sum_prod(float (*) [31], float (*) [31], float&, float&)'
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 183, Column: 0 }
+  - String:          ''''
+...
+--- !Passed
+Pass:            reflow-auto-inline-performance-driven
+Name:            AutoInlinePerf
+DebugLoc:        { File: ../image_analysis.cpp, Line: 195, Column: 2 }
+Function:        _Z15matrix_sum_prodPA31_fS0_RfS1_
+Args:            
+  - String:          'Automatically inlining function '''
+  - Callee:          'vector_sum_prod(float*, float*, float&, float&)'
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 148, Column: 0 }
+  - String:          ''' to improve effectiveness of pipeline pragma in function '''
+  - Caller:          'matrix_sum_prod(float (*) [31], float (*) [31], float&, float&)'
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 183, Column: 0 }
+  - String:          ''''
+...
+--- !Passed
+Pass:            reflow-auto-inline-performance-driven
+Name:            AutoInlinePerf
+DebugLoc:        { File: ../image_analysis.cpp, Line: 195, Column: 2 }
+Function:        _Z15matrix_sum_prodPA31_fS0_RfS1_
+Args:            
+  - String:          'Automatically inlining function '''
+  - Callee:          'vector_sum_prod(float*, float*, float&, float&)'
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 148, Column: 0 }
+  - String:          ''' to improve effectiveness of pipeline pragma in function '''
+  - Caller:          'matrix_sum_prod(float (*) [31], float (*) [31], float&, float&)'
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 183, Column: 0 }
+  - String:          ''''
+...
+--- !Passed
+Pass:            reflow-auto-inline-performance-driven
+Name:            AutoInlinePerf
+DebugLoc:        { File: ../image_analysis.cpp, Line: 195, Column: 2 }
+Function:        _Z15matrix_sum_prodPA31_fS0_RfS1_
+Args:            
+  - String:          'Automatically inlining function '''
+  - Callee:          'vector_sum_prod(float*, float*, float&, float&)'
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 148, Column: 0 }
+  - String:          ''' to improve effectiveness of pipeline pragma in function '''
+  - Caller:          'matrix_sum_prod(float (*) [31], float (*) [31], float&, float&)'
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 183, Column: 0 }
+  - String:          ''''
+...
+--- !Passed
+Pass:            reflow-auto-inline-performance-driven
+Name:            AutoInlinePerf
+DebugLoc:        { File: ../image_analysis.cpp, Line: 195, Column: 2 }
+Function:        _Z15matrix_sum_prodPA31_fS0_RfS1_
+Args:            
+  - String:          'Automatically inlining function '''
+  - Callee:          'vector_sum_prod(float*, float*, float&, float&)'
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 148, Column: 0 }
+  - String:          ''' to improve effectiveness of pipeline pragma in function '''
+  - Caller:          'matrix_sum_prod(float (*) [31], float (*) [31], float&, float&)'
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 183, Column: 0 }
+  - String:          ''''
+...
+--- !Passed
+Pass:            reflow-auto-inline-performance-driven
+Name:            AutoInlinePerf
+DebugLoc:        { File: ../image_analysis.cpp, Line: 195, Column: 2 }
+Function:        _Z15matrix_sum_prodPA31_fS0_RfS1_
+Args:            
+  - String:          'Automatically inlining function '''
+  - Callee:          'vector_sum_prod(float*, float*, float&, float&)'
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 148, Column: 0 }
+  - String:          ''' to improve effectiveness of pipeline pragma in function '''
+  - Caller:          'matrix_sum_prod(float (*) [31], float (*) [31], float&, float&)'
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 183, Column: 0 }
+  - String:          ''''
+...
+--- !Passed
+Pass:            reflow-auto-inline-performance-driven
+Name:            AutoInlinePerf
+DebugLoc:        { File: ../image_analysis.cpp, Line: 195, Column: 2 }
+Function:        _Z15matrix_sum_prodPA31_fS0_RfS1_
+Args:            
+  - String:          'Automatically inlining function '''
+  - Callee:          'vector_sum_prod(float*, float*, float&, float&)'
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 148, Column: 0 }
+  - String:          ''' to improve effectiveness of pipeline pragma in function '''
+  - Caller:          'matrix_sum_prod(float (*) [31], float (*) [31], float&, float&)'
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 183, Column: 0 }
+  - String:          ''''
+...
+--- !Passed
+Pass:            reflow-auto-inline-performance-driven
+Name:            AutoInlinePerf
+DebugLoc:        { File: ../image_analysis.cpp, Line: 195, Column: 2 }
+Function:        _Z15matrix_sum_prodPA31_fS0_RfS1_
+Args:            
+  - String:          'Automatically inlining function '''
+  - Callee:          'vector_sum_prod(float*, float*, float&, float&)'
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 148, Column: 0 }
+  - String:          ''' to improve effectiveness of pipeline pragma in function '''
+  - Caller:          'matrix_sum_prod(float (*) [31], float (*) [31], float&, float&)'
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 183, Column: 0 }
+  - String:          ''''
+...
+--- !Passed
+Pass:            reflow-auto-inline-performance-driven
+Name:            AutoInlinePerf
+DebugLoc:        { File: ../image_analysis.cpp, Line: 195, Column: 2 }
+Function:        _Z15matrix_sum_prodPA31_fS0_RfS1_
+Args:            
+  - String:          'Automatically inlining function '''
+  - Callee:          'vector_sum_prod(float*, float*, float&, float&)'
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 148, Column: 0 }
+  - String:          ''' to improve effectiveness of pipeline pragma in function '''
+  - Caller:          'matrix_sum_prod(float (*) [31], float (*) [31], float&, float&)'
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 183, Column: 0 }
+  - String:          ''''
+...
+--- !Passed
+Pass:            reflow-auto-inline-performance-driven
+Name:            AutoInlinePerf
+DebugLoc:        { File: ../image_analysis.cpp, Line: 195, Column: 2 }
+Function:        _Z15matrix_sum_prodPA31_fS0_RfS1_
+Args:            
+  - String:          'Automatically inlining function '''
+  - Callee:          'vector_sum_prod(float*, float*, float&, float&)'
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 148, Column: 0 }
+  - String:          ''' to improve effectiveness of pipeline pragma in function '''
+  - Caller:          'matrix_sum_prod(float (*) [31], float (*) [31], float&, float&)'
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 183, Column: 0 }
+  - String:          ''''
+...
+--- !Passed
+Pass:            reflow-auto-inline-performance-driven
+Name:            AutoInlinePerf
+DebugLoc:        { File: ../image_analysis.cpp, Line: 195, Column: 2 }
+Function:        _Z15matrix_sum_prodPA31_fS0_RfS1_
+Args:            
+  - String:          'Automatically inlining function '''
+  - Callee:          'vector_sum_prod(float*, float*, float&, float&)'
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 148, Column: 0 }
+  - String:          ''' to improve effectiveness of pipeline pragma in function '''
+  - Caller:          'matrix_sum_prod(float (*) [31], float (*) [31], float&, float&)'
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 183, Column: 0 }
+  - String:          ''''
+...
+--- !Passed
+Pass:            reflow-auto-inline-performance-driven
+Name:            AutoInlinePerf
+DebugLoc:        { File: ../image_analysis.cpp, Line: 195, Column: 2 }
+Function:        _Z15matrix_sum_prodPA31_fS0_RfS1_
+Args:            
+  - String:          'Automatically inlining function '''
+  - Callee:          'vector_sum_prod(float*, float*, float&, float&)'
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 148, Column: 0 }
+  - String:          ''' to improve effectiveness of pipeline pragma in function '''
+  - Caller:          'matrix_sum_prod(float (*) [31], float (*) [31], float&, float&)'
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 183, Column: 0 }
+  - String:          ''''
+...
+--- !Passed
+Pass:            reflow-auto-inline-performance-driven
+Name:            AutoInlinePerf
+DebugLoc:        { File: ../image_analysis.cpp, Line: 195, Column: 2 }
+Function:        _Z15matrix_sum_prodPA31_fS0_RfS1_
+Args:            
+  - String:          'Automatically inlining function '''
+  - Callee:          'vector_sum_prod(float*, float*, float&, float&)'
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 148, Column: 0 }
+  - String:          ''' to improve effectiveness of pipeline pragma in function '''
+  - Caller:          'matrix_sum_prod(float (*) [31], float (*) [31], float&, float&)'
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 183, Column: 0 }
+  - String:          ''''
+...
+--- !Passed
+Pass:            reflow-auto-inline-performance-driven
+Name:            AutoInlinePerf
+DebugLoc:        { File: ../image_analysis.cpp, Line: 195, Column: 2 }
+Function:        _Z15matrix_sum_prodPA31_fS0_RfS1_
+Args:            
+  - String:          'Automatically inlining function '''
+  - Callee:          'vector_sum_prod(float*, float*, float&, float&)'
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 148, Column: 0 }
+  - String:          ''' to improve effectiveness of pipeline pragma in function '''
+  - Caller:          'matrix_sum_prod(float (*) [31], float (*) [31], float&, float&)'
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 183, Column: 0 }
+  - String:          ''''
+...
+--- !Passed
+Pass:            reflow-auto-inline-performance-driven
+Name:            AutoInlinePerf
+DebugLoc:        { File: ../image_analysis.cpp, Line: 195, Column: 2 }
+Function:        _Z15matrix_sum_prodPA31_fS0_RfS1_
+Args:            
+  - String:          'Automatically inlining function '''
+  - Callee:          'vector_sum_prod(float*, float*, float&, float&)'
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 148, Column: 0 }
+  - String:          ''' to improve effectiveness of pipeline pragma in function '''
+  - Caller:          'matrix_sum_prod(float (*) [31], float (*) [31], float&, float&)'
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 183, Column: 0 }
+  - String:          ''''
+...
+--- !Passed
+Pass:            reflow-auto-inline-performance-driven
+Name:            AutoInlinePerf
+DebugLoc:        { File: ../image_analysis.cpp, Line: 195, Column: 2 }
+Function:        _Z15matrix_sum_prodPA31_fS0_RfS1_
+Args:            
+  - String:          'Automatically inlining function '''
+  - Callee:          'vector_sum_prod(float*, float*, float&, float&)'
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 148, Column: 0 }
+  - String:          ''' to improve effectiveness of pipeline pragma in function '''
+  - Caller:          'matrix_sum_prod(float (*) [31], float (*) [31], float&, float&)'
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 183, Column: 0 }
+  - String:          ''''
+...
+--- !Passed
+Pass:            reflow-auto-inline-performance-driven
+Name:            AutoInlinePerf
+DebugLoc:        { File: ../image_analysis.cpp, Line: 195, Column: 2 }
+Function:        _Z15matrix_sum_prodPA31_fS0_RfS1_
+Args:            
+  - String:          'Automatically inlining function '''
+  - Callee:          'vector_sum_prod(float*, float*, float&, float&)'
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 148, Column: 0 }
+  - String:          ''' to improve effectiveness of pipeline pragma in function '''
+  - Caller:          'matrix_sum_prod(float (*) [31], float (*) [31], float&, float&)'
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 183, Column: 0 }
+  - String:          ''''
+...
+--- !Passed
+Pass:            reflow-auto-inline-performance-driven
+Name:            AutoInlinePerf
+DebugLoc:        { File: ../image_analysis.cpp, Line: 195, Column: 2 }
+Function:        _Z15matrix_sum_prodPA31_fS0_RfS1_
+Args:            
+  - String:          'Automatically inlining function '''
+  - Callee:          'vector_sum_prod(float*, float*, float&, float&)'
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 148, Column: 0 }
+  - String:          ''' to improve effectiveness of pipeline pragma in function '''
+  - Caller:          'matrix_sum_prod(float (*) [31], float (*) [31], float&, float&)'
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 183, Column: 0 }
+  - String:          ''''
+...
+--- !Passed
+Pass:            reflow-auto-inline-performance-driven
+Name:            AutoInlinePerf
+DebugLoc:        { File: ../image_analysis.cpp, Line: 195, Column: 2 }
+Function:        _Z15matrix_sum_prodPA31_fS0_RfS1_
+Args:            
+  - String:          'Automatically inlining function '''
+  - Callee:          'vector_sum_prod(float*, float*, float&, float&)'
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 148, Column: 0 }
+  - String:          ''' to improve effectiveness of pipeline pragma in function '''
+  - Caller:          'matrix_sum_prod(float (*) [31], float (*) [31], float&, float&)'
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 183, Column: 0 }
+  - String:          ''''
+...
+--- !Passed
+Pass:            reflow-auto-inline-performance-driven
+Name:            AutoInlinePerf
+DebugLoc:        { File: ../image_analysis.cpp, Line: 195, Column: 2 }
+Function:        _Z15matrix_sum_prodPA31_fS0_RfS1_
+Args:            
+  - String:          'Automatically inlining function '''
+  - Callee:          'vector_sum_prod(float*, float*, float&, float&)'
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 148, Column: 0 }
+  - String:          ''' to improve effectiveness of pipeline pragma in function '''
+  - Caller:          'matrix_sum_prod(float (*) [31], float (*) [31], float&, float&)'
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 183, Column: 0 }
+  - String:          ''''
+...
+--- !Passed
+Pass:            reflow-auto-inline-performance-driven
+Name:            AutoInlinePerf
+DebugLoc:        { File: ../image_analysis.cpp, Line: 195, Column: 2 }
+Function:        _Z15matrix_sum_prodPA31_fS0_RfS1_
+Args:            
+  - String:          'Automatically inlining function '''
+  - Callee:          'vector_sum_prod(float*, float*, float&, float&)'
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 148, Column: 0 }
+  - String:          ''' to improve effectiveness of pipeline pragma in function '''
+  - Caller:          'matrix_sum_prod(float (*) [31], float (*) [31], float&, float&)'
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 183, Column: 0 }
+  - String:          ''''
+...
+--- !Passed
+Pass:            reflow-auto-inline-performance-driven
+Name:            AutoInlinePerf
+DebugLoc:        { File: ../image_analysis.cpp, Line: 195, Column: 2 }
+Function:        _Z15matrix_sum_prodPA31_fS0_RfS1_
+Args:            
+  - String:          'Automatically inlining function '''
+  - Callee:          'vector_sum_prod(float*, float*, float&, float&)'
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 148, Column: 0 }
+  - String:          ''' to improve effectiveness of pipeline pragma in function '''
+  - Caller:          'matrix_sum_prod(float (*) [31], float (*) [31], float&, float&)'
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 183, Column: 0 }
+  - String:          ''''
+...
+--- !Passed
+Pass:            reflow-auto-inline-performance-driven
+Name:            AutoInlinePerf
+DebugLoc:        { File: ../image_analysis.cpp, Line: 195, Column: 2 }
+Function:        _Z15matrix_sum_prodPA31_fS0_RfS1_
+Args:            
+  - String:          'Automatically inlining function '''
+  - Callee:          'vector_sum_prod(float*, float*, float&, float&)'
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 148, Column: 0 }
+  - String:          ''' to improve effectiveness of pipeline pragma in function '''
+  - Caller:          'matrix_sum_prod(float (*) [31], float (*) [31], float&, float&)'
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 183, Column: 0 }
+  - String:          ''''
+...
+--- !Passed
+Pass:            reflow-auto-inline-performance-driven
+Name:            AutoInlinePerf
+DebugLoc:        { File: ../image_analysis.cpp, Line: 195, Column: 2 }
+Function:        _Z15matrix_sum_prodPA31_fS0_RfS1_
+Args:            
+  - String:          'Automatically inlining function '''
+  - Callee:          'vector_sum_prod(float*, float*, float&, float&)'
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 148, Column: 0 }
+  - String:          ''' to improve effectiveness of pipeline pragma in function '''
+  - Caller:          'matrix_sum_prod(float (*) [31], float (*) [31], float&, float&)'
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 183, Column: 0 }
+  - String:          ''''
+...
+--- !Passed
+Pass:            reflow-auto-inline-performance-driven
+Name:            AutoInlinePerf
+DebugLoc:        { File: ../image_analysis.cpp, Line: 195, Column: 2 }
+Function:        _Z15matrix_sum_prodPA31_fS0_RfS1_
+Args:            
+  - String:          'Automatically inlining function '''
+  - Callee:          'vector_sum_prod(float*, float*, float&, float&)'
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 148, Column: 0 }
+  - String:          ''' to improve effectiveness of pipeline pragma in function '''
+  - Caller:          'matrix_sum_prod(float (*) [31], float (*) [31], float&, float&)'
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 183, Column: 0 }
+  - String:          ''''
+...
+--- !Passed
+Pass:            reflow-auto-inline-performance-driven
+Name:            AutoInlinePerf
+DebugLoc:        { File: ../image_analysis.cpp, Line: 157, Column: 5 }
+Function:        _Z15matrix_sum_prodPA31_fS0_RfS1_
+Args:            
+  - String:          'Automatically inlining function '''
+  - Callee:          'vector_sum(float*, float&) (.101)'
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 118, Column: 0 }
+  - String:          ''' to improve effectiveness of pipeline pragma in function '''
+  - Caller:          'matrix_sum_prod(float (*) [31], float (*) [31], float&, float&)'
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 183, Column: 0 }
+  - String:          ''''
+...
+--- !Passed
+Pass:            reflow-auto-inline-performance-driven
+Name:            AutoInlinePerf
+DebugLoc:        { File: ../image_analysis.cpp, Line: 158, Column: 5 }
+Function:        _Z15matrix_sum_prodPA31_fS0_RfS1_
+Args:            
+  - String:          'Automatically inlining function '''
+  - Callee:          'vector_sum(float*, float&) (.101)'
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 118, Column: 0 }
+  - String:          ''' to improve effectiveness of pipeline pragma in function '''
+  - Caller:          'matrix_sum_prod(float (*) [31], float (*) [31], float&, float&)'
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 183, Column: 0 }
+  - String:          ''''
+...
+--- !Passed
+Pass:            reflow-auto-inline-performance-driven
+Name:            AutoInlinePerf
+DebugLoc:        { File: ../image_analysis.cpp, Line: 157, Column: 5 }
+Function:        _Z15matrix_sum_prodPA31_fS0_RfS1_
+Args:            
+  - String:          'Automatically inlining function '''
+  - Callee:          'vector_sum(float*, float&) (.101)'
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 118, Column: 0 }
+  - String:          ''' to improve effectiveness of pipeline pragma in function '''
+  - Caller:          'matrix_sum_prod(float (*) [31], float (*) [31], float&, float&)'
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 183, Column: 0 }
+  - String:          ''''
+...
+--- !Passed
+Pass:            reflow-auto-inline-performance-driven
+Name:            AutoInlinePerf
+DebugLoc:        { File: ../image_analysis.cpp, Line: 158, Column: 5 }
+Function:        _Z15matrix_sum_prodPA31_fS0_RfS1_
+Args:            
+  - String:          'Automatically inlining function '''
+  - Callee:          'vector_sum(float*, float&) (.101)'
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 118, Column: 0 }
+  - String:          ''' to improve effectiveness of pipeline pragma in function '''
+  - Caller:          'matrix_sum_prod(float (*) [31], float (*) [31], float&, float&)'
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 183, Column: 0 }
+  - String:          ''''
+...
+--- !Passed
+Pass:            reflow-auto-inline-performance-driven
+Name:            AutoInlinePerf
+DebugLoc:        { File: ../image_analysis.cpp, Line: 157, Column: 5 }
+Function:        _Z15matrix_sum_prodPA31_fS0_RfS1_
+Args:            
+  - String:          'Automatically inlining function '''
+  - Callee:          'vector_sum(float*, float&) (.101)'
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 118, Column: 0 }
+  - String:          ''' to improve effectiveness of pipeline pragma in function '''
+  - Caller:          'matrix_sum_prod(float (*) [31], float (*) [31], float&, float&)'
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 183, Column: 0 }
+  - String:          ''''
+...
+--- !Passed
+Pass:            reflow-auto-inline-performance-driven
+Name:            AutoInlinePerf
+DebugLoc:        { File: ../image_analysis.cpp, Line: 158, Column: 5 }
+Function:        _Z15matrix_sum_prodPA31_fS0_RfS1_
+Args:            
+  - String:          'Automatically inlining function '''
+  - Callee:          'vector_sum(float*, float&) (.101)'
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 118, Column: 0 }
+  - String:          ''' to improve effectiveness of pipeline pragma in function '''
+  - Caller:          'matrix_sum_prod(float (*) [31], float (*) [31], float&, float&)'
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 183, Column: 0 }
+  - String:          ''''
+...
+--- !Passed
+Pass:            reflow-auto-inline-performance-driven
+Name:            AutoInlinePerf
+DebugLoc:        { File: ../image_analysis.cpp, Line: 157, Column: 5 }
+Function:        _Z15matrix_sum_prodPA31_fS0_RfS1_
+Args:            
+  - String:          'Automatically inlining function '''
+  - Callee:          'vector_sum(float*, float&) (.101)'
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 118, Column: 0 }
+  - String:          ''' to improve effectiveness of pipeline pragma in function '''
+  - Caller:          'matrix_sum_prod(float (*) [31], float (*) [31], float&, float&)'
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 183, Column: 0 }
+  - String:          ''''
+...
+--- !Passed
+Pass:            reflow-auto-inline-performance-driven
+Name:            AutoInlinePerf
+DebugLoc:        { File: ../image_analysis.cpp, Line: 158, Column: 5 }
+Function:        _Z15matrix_sum_prodPA31_fS0_RfS1_
+Args:            
+  - String:          'Automatically inlining function '''
+  - Callee:          'vector_sum(float*, float&) (.101)'
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 118, Column: 0 }
+  - String:          ''' to improve effectiveness of pipeline pragma in function '''
+  - Caller:          'matrix_sum_prod(float (*) [31], float (*) [31], float&, float&)'
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 183, Column: 0 }
+  - String:          ''''
+...
+--- !Passed
+Pass:            reflow-auto-inline-performance-driven
+Name:            AutoInlinePerf
+DebugLoc:        { File: ../image_analysis.cpp, Line: 157, Column: 5 }
+Function:        _Z15matrix_sum_prodPA31_fS0_RfS1_
+Args:            
+  - String:          'Automatically inlining function '''
+  - Callee:          'vector_sum(float*, float&) (.101)'
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 118, Column: 0 }
+  - String:          ''' to improve effectiveness of pipeline pragma in function '''
+  - Caller:          'matrix_sum_prod(float (*) [31], float (*) [31], float&, float&)'
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 183, Column: 0 }
+  - String:          ''''
+...
+--- !Passed
+Pass:            reflow-auto-inline-performance-driven
+Name:            AutoInlinePerf
+DebugLoc:        { File: ../image_analysis.cpp, Line: 158, Column: 5 }
+Function:        _Z15matrix_sum_prodPA31_fS0_RfS1_
+Args:            
+  - String:          'Automatically inlining function '''
+  - Callee:          'vector_sum(float*, float&) (.101)'
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 118, Column: 0 }
+  - String:          ''' to improve effectiveness of pipeline pragma in function '''
+  - Caller:          'matrix_sum_prod(float (*) [31], float (*) [31], float&, float&)'
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 183, Column: 0 }
+  - String:          ''''
+...
+--- !Passed
+Pass:            reflow-auto-inline-performance-driven
+Name:            AutoInlinePerf
+DebugLoc:        { File: ../image_analysis.cpp, Line: 157, Column: 5 }
+Function:        _Z15matrix_sum_prodPA31_fS0_RfS1_
+Args:            
+  - String:          'Automatically inlining function '''
+  - Callee:          'vector_sum(float*, float&) (.101)'
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 118, Column: 0 }
+  - String:          ''' to improve effectiveness of pipeline pragma in function '''
+  - Caller:          'matrix_sum_prod(float (*) [31], float (*) [31], float&, float&)'
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 183, Column: 0 }
+  - String:          ''''
+...
+--- !Passed
+Pass:            reflow-auto-inline-performance-driven
+Name:            AutoInlinePerf
+DebugLoc:        { File: ../image_analysis.cpp, Line: 158, Column: 5 }
+Function:        _Z15matrix_sum_prodPA31_fS0_RfS1_
+Args:            
+  - String:          'Automatically inlining function '''
+  - Callee:          'vector_sum(float*, float&) (.101)'
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 118, Column: 0 }
+  - String:          ''' to improve effectiveness of pipeline pragma in function '''
+  - Caller:          'matrix_sum_prod(float (*) [31], float (*) [31], float&, float&)'
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 183, Column: 0 }
+  - String:          ''''
+...
+--- !Passed
+Pass:            reflow-auto-inline-performance-driven
+Name:            AutoInlinePerf
+DebugLoc:        { File: ../image_analysis.cpp, Line: 157, Column: 5 }
+Function:        _Z15matrix_sum_prodPA31_fS0_RfS1_
+Args:            
+  - String:          'Automatically inlining function '''
+  - Callee:          'vector_sum(float*, float&) (.101)'
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 118, Column: 0 }
+  - String:          ''' to improve effectiveness of pipeline pragma in function '''
+  - Caller:          'matrix_sum_prod(float (*) [31], float (*) [31], float&, float&)'
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 183, Column: 0 }
+  - String:          ''''
+...
+--- !Passed
+Pass:            reflow-auto-inline-performance-driven
+Name:            AutoInlinePerf
+DebugLoc:        { File: ../image_analysis.cpp, Line: 158, Column: 5 }
+Function:        _Z15matrix_sum_prodPA31_fS0_RfS1_
+Args:            
+  - String:          'Automatically inlining function '''
+  - Callee:          'vector_sum(float*, float&) (.101)'
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 118, Column: 0 }
+  - String:          ''' to improve effectiveness of pipeline pragma in function '''
+  - Caller:          'matrix_sum_prod(float (*) [31], float (*) [31], float&, float&)'
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 183, Column: 0 }
+  - String:          ''''
+...
+--- !Passed
+Pass:            reflow-auto-inline-performance-driven
+Name:            AutoInlinePerf
+DebugLoc:        { File: ../image_analysis.cpp, Line: 157, Column: 5 }
+Function:        _Z15matrix_sum_prodPA31_fS0_RfS1_
+Args:            
+  - String:          'Automatically inlining function '''
+  - Callee:          'vector_sum(float*, float&) (.101)'
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 118, Column: 0 }
+  - String:          ''' to improve effectiveness of pipeline pragma in function '''
+  - Caller:          'matrix_sum_prod(float (*) [31], float (*) [31], float&, float&)'
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 183, Column: 0 }
+  - String:          ''''
+...
+--- !Passed
+Pass:            reflow-auto-inline-performance-driven
+Name:            AutoInlinePerf
+DebugLoc:        { File: ../image_analysis.cpp, Line: 158, Column: 5 }
+Function:        _Z15matrix_sum_prodPA31_fS0_RfS1_
+Args:            
+  - String:          'Automatically inlining function '''
+  - Callee:          'vector_sum(float*, float&) (.101)'
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 118, Column: 0 }
+  - String:          ''' to improve effectiveness of pipeline pragma in function '''
+  - Caller:          'matrix_sum_prod(float (*) [31], float (*) [31], float&, float&)'
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 183, Column: 0 }
+  - String:          ''''
+...
+--- !Passed
+Pass:            reflow-auto-inline-performance-driven
+Name:            AutoInlinePerf
+DebugLoc:        { File: ../image_analysis.cpp, Line: 157, Column: 5 }
+Function:        _Z15matrix_sum_prodPA31_fS0_RfS1_
+Args:            
+  - String:          'Automatically inlining function '''
+  - Callee:          'vector_sum(float*, float&) (.101)'
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 118, Column: 0 }
+  - String:          ''' to improve effectiveness of pipeline pragma in function '''
+  - Caller:          'matrix_sum_prod(float (*) [31], float (*) [31], float&, float&)'
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 183, Column: 0 }
+  - String:          ''''
+...
+--- !Passed
+Pass:            reflow-auto-inline-performance-driven
+Name:            AutoInlinePerf
+DebugLoc:        { File: ../image_analysis.cpp, Line: 158, Column: 5 }
+Function:        _Z15matrix_sum_prodPA31_fS0_RfS1_
+Args:            
+  - String:          'Automatically inlining function '''
+  - Callee:          'vector_sum(float*, float&) (.101)'
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 118, Column: 0 }
+  - String:          ''' to improve effectiveness of pipeline pragma in function '''
+  - Caller:          'matrix_sum_prod(float (*) [31], float (*) [31], float&, float&)'
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 183, Column: 0 }
+  - String:          ''''
+...
+--- !Passed
+Pass:            reflow-auto-inline-performance-driven
+Name:            AutoInlinePerf
+DebugLoc:        { File: ../image_analysis.cpp, Line: 157, Column: 5 }
+Function:        _Z15matrix_sum_prodPA31_fS0_RfS1_
+Args:            
+  - String:          'Automatically inlining function '''
+  - Callee:          'vector_sum(float*, float&) (.101)'
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 118, Column: 0 }
+  - String:          ''' to improve effectiveness of pipeline pragma in function '''
+  - Caller:          'matrix_sum_prod(float (*) [31], float (*) [31], float&, float&)'
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 183, Column: 0 }
+  - String:          ''''
+...
+--- !Passed
+Pass:            reflow-auto-inline-performance-driven
+Name:            AutoInlinePerf
+DebugLoc:        { File: ../image_analysis.cpp, Line: 158, Column: 5 }
+Function:        _Z15matrix_sum_prodPA31_fS0_RfS1_
+Args:            
+  - String:          'Automatically inlining function '''
+  - Callee:          'vector_sum(float*, float&) (.101)'
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 118, Column: 0 }
+  - String:          ''' to improve effectiveness of pipeline pragma in function '''
+  - Caller:          'matrix_sum_prod(float (*) [31], float (*) [31], float&, float&)'
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 183, Column: 0 }
+  - String:          ''''
+...
+--- !Passed
+Pass:            reflow-auto-inline-performance-driven
+Name:            AutoInlinePerf
+DebugLoc:        { File: ../image_analysis.cpp, Line: 157, Column: 5 }
+Function:        _Z15matrix_sum_prodPA31_fS0_RfS1_
+Args:            
+  - String:          'Automatically inlining function '''
+  - Callee:          'vector_sum(float*, float&) (.101)'
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 118, Column: 0 }
+  - String:          ''' to improve effectiveness of pipeline pragma in function '''
+  - Caller:          'matrix_sum_prod(float (*) [31], float (*) [31], float&, float&)'
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 183, Column: 0 }
+  - String:          ''''
+...
+--- !Passed
+Pass:            reflow-auto-inline-performance-driven
+Name:            AutoInlinePerf
+DebugLoc:        { File: ../image_analysis.cpp, Line: 158, Column: 5 }
+Function:        _Z15matrix_sum_prodPA31_fS0_RfS1_
+Args:            
+  - String:          'Automatically inlining function '''
+  - Callee:          'vector_sum(float*, float&) (.101)'
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 118, Column: 0 }
+  - String:          ''' to improve effectiveness of pipeline pragma in function '''
+  - Caller:          'matrix_sum_prod(float (*) [31], float (*) [31], float&, float&)'
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 183, Column: 0 }
+  - String:          ''''
+...
+--- !Passed
+Pass:            reflow-auto-inline-performance-driven
+Name:            AutoInlinePerf
+DebugLoc:        { File: ../image_analysis.cpp, Line: 157, Column: 5 }
+Function:        _Z15matrix_sum_prodPA31_fS0_RfS1_
+Args:            
+  - String:          'Automatically inlining function '''
+  - Callee:          'vector_sum(float*, float&) (.101)'
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 118, Column: 0 }
+  - String:          ''' to improve effectiveness of pipeline pragma in function '''
+  - Caller:          'matrix_sum_prod(float (*) [31], float (*) [31], float&, float&)'
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 183, Column: 0 }
+  - String:          ''''
+...
+--- !Passed
+Pass:            reflow-auto-inline-performance-driven
+Name:            AutoInlinePerf
+DebugLoc:        { File: ../image_analysis.cpp, Line: 158, Column: 5 }
+Function:        _Z15matrix_sum_prodPA31_fS0_RfS1_
+Args:            
+  - String:          'Automatically inlining function '''
+  - Callee:          'vector_sum(float*, float&) (.101)'
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 118, Column: 0 }
+  - String:          ''' to improve effectiveness of pipeline pragma in function '''
+  - Caller:          'matrix_sum_prod(float (*) [31], float (*) [31], float&, float&)'
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 183, Column: 0 }
+  - String:          ''''
+...
+--- !Passed
+Pass:            reflow-auto-inline-performance-driven
+Name:            AutoInlinePerf
+DebugLoc:        { File: ../image_analysis.cpp, Line: 157, Column: 5 }
+Function:        _Z15matrix_sum_prodPA31_fS0_RfS1_
+Args:            
+  - String:          'Automatically inlining function '''
+  - Callee:          'vector_sum(float*, float&) (.101)'
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 118, Column: 0 }
+  - String:          ''' to improve effectiveness of pipeline pragma in function '''
+  - Caller:          'matrix_sum_prod(float (*) [31], float (*) [31], float&, float&)'
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 183, Column: 0 }
+  - String:          ''''
+...
+--- !Passed
+Pass:            reflow-auto-inline-performance-driven
+Name:            AutoInlinePerf
+DebugLoc:        { File: ../image_analysis.cpp, Line: 158, Column: 5 }
+Function:        _Z15matrix_sum_prodPA31_fS0_RfS1_
+Args:            
+  - String:          'Automatically inlining function '''
+  - Callee:          'vector_sum(float*, float&) (.101)'
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 118, Column: 0 }
+  - String:          ''' to improve effectiveness of pipeline pragma in function '''
+  - Caller:          'matrix_sum_prod(float (*) [31], float (*) [31], float&, float&)'
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 183, Column: 0 }
+  - String:          ''''
+...
+--- !Passed
+Pass:            reflow-auto-inline-performance-driven
+Name:            AutoInlinePerf
+DebugLoc:        { File: ../image_analysis.cpp, Line: 157, Column: 5 }
+Function:        _Z15matrix_sum_prodPA31_fS0_RfS1_
+Args:            
+  - String:          'Automatically inlining function '''
+  - Callee:          'vector_sum(float*, float&) (.101)'
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 118, Column: 0 }
+  - String:          ''' to improve effectiveness of pipeline pragma in function '''
+  - Caller:          'matrix_sum_prod(float (*) [31], float (*) [31], float&, float&)'
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 183, Column: 0 }
+  - String:          ''''
+...
+--- !Passed
+Pass:            reflow-auto-inline-performance-driven
+Name:            AutoInlinePerf
+DebugLoc:        { File: ../image_analysis.cpp, Line: 158, Column: 5 }
+Function:        _Z15matrix_sum_prodPA31_fS0_RfS1_
+Args:            
+  - String:          'Automatically inlining function '''
+  - Callee:          'vector_sum(float*, float&) (.101)'
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 118, Column: 0 }
+  - String:          ''' to improve effectiveness of pipeline pragma in function '''
+  - Caller:          'matrix_sum_prod(float (*) [31], float (*) [31], float&, float&)'
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 183, Column: 0 }
+  - String:          ''''
+...
+--- !Passed
+Pass:            reflow-auto-inline-performance-driven
+Name:            AutoInlinePerf
+DebugLoc:        { File: ../image_analysis.cpp, Line: 157, Column: 5 }
+Function:        _Z15matrix_sum_prodPA31_fS0_RfS1_
+Args:            
+  - String:          'Automatically inlining function '''
+  - Callee:          'vector_sum(float*, float&) (.101)'
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 118, Column: 0 }
+  - String:          ''' to improve effectiveness of pipeline pragma in function '''
+  - Caller:          'matrix_sum_prod(float (*) [31], float (*) [31], float&, float&)'
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 183, Column: 0 }
+  - String:          ''''
+...
+--- !Passed
+Pass:            reflow-auto-inline-performance-driven
+Name:            AutoInlinePerf
+DebugLoc:        { File: ../image_analysis.cpp, Line: 158, Column: 5 }
+Function:        _Z15matrix_sum_prodPA31_fS0_RfS1_
+Args:            
+  - String:          'Automatically inlining function '''
+  - Callee:          'vector_sum(float*, float&) (.101)'
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 118, Column: 0 }
+  - String:          ''' to improve effectiveness of pipeline pragma in function '''
+  - Caller:          'matrix_sum_prod(float (*) [31], float (*) [31], float&, float&)'
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 183, Column: 0 }
+  - String:          ''''
+...
+--- !Passed
+Pass:            reflow-auto-inline-performance-driven
+Name:            AutoInlinePerf
+DebugLoc:        { File: ../image_analysis.cpp, Line: 157, Column: 5 }
+Function:        _Z15matrix_sum_prodPA31_fS0_RfS1_
+Args:            
+  - String:          'Automatically inlining function '''
+  - Callee:          'vector_sum(float*, float&) (.101)'
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 118, Column: 0 }
+  - String:          ''' to improve effectiveness of pipeline pragma in function '''
+  - Caller:          'matrix_sum_prod(float (*) [31], float (*) [31], float&, float&)'
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 183, Column: 0 }
+  - String:          ''''
+...
+--- !Passed
+Pass:            reflow-auto-inline-performance-driven
+Name:            AutoInlinePerf
+DebugLoc:        { File: ../image_analysis.cpp, Line: 158, Column: 5 }
+Function:        _Z15matrix_sum_prodPA31_fS0_RfS1_
+Args:            
+  - String:          'Automatically inlining function '''
+  - Callee:          'vector_sum(float*, float&) (.101)'
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 118, Column: 0 }
+  - String:          ''' to improve effectiveness of pipeline pragma in function '''
+  - Caller:          'matrix_sum_prod(float (*) [31], float (*) [31], float&, float&)'
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 183, Column: 0 }
+  - String:          ''''
+...
+--- !Passed
+Pass:            reflow-auto-inline-performance-driven
+Name:            AutoInlinePerf
+DebugLoc:        { File: ../image_analysis.cpp, Line: 157, Column: 5 }
+Function:        _Z15matrix_sum_prodPA31_fS0_RfS1_
+Args:            
+  - String:          'Automatically inlining function '''
+  - Callee:          'vector_sum(float*, float&) (.101)'
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 118, Column: 0 }
+  - String:          ''' to improve effectiveness of pipeline pragma in function '''
+  - Caller:          'matrix_sum_prod(float (*) [31], float (*) [31], float&, float&)'
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 183, Column: 0 }
+  - String:          ''''
+...
+--- !Passed
+Pass:            reflow-auto-inline-performance-driven
+Name:            AutoInlinePerf
+DebugLoc:        { File: ../image_analysis.cpp, Line: 158, Column: 5 }
+Function:        _Z15matrix_sum_prodPA31_fS0_RfS1_
+Args:            
+  - String:          'Automatically inlining function '''
+  - Callee:          'vector_sum(float*, float&) (.101)'
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 118, Column: 0 }
+  - String:          ''' to improve effectiveness of pipeline pragma in function '''
+  - Caller:          'matrix_sum_prod(float (*) [31], float (*) [31], float&, float&)'
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 183, Column: 0 }
+  - String:          ''''
+...
+--- !Passed
+Pass:            reflow-auto-inline-performance-driven
+Name:            AutoInlinePerf
+DebugLoc:        { File: ../image_analysis.cpp, Line: 157, Column: 5 }
+Function:        _Z15matrix_sum_prodPA31_fS0_RfS1_
+Args:            
+  - String:          'Automatically inlining function '''
+  - Callee:          'vector_sum(float*, float&) (.101)'
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 118, Column: 0 }
+  - String:          ''' to improve effectiveness of pipeline pragma in function '''
+  - Caller:          'matrix_sum_prod(float (*) [31], float (*) [31], float&, float&)'
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 183, Column: 0 }
+  - String:          ''''
+...
+--- !Passed
+Pass:            reflow-auto-inline-performance-driven
+Name:            AutoInlinePerf
+DebugLoc:        { File: ../image_analysis.cpp, Line: 158, Column: 5 }
+Function:        _Z15matrix_sum_prodPA31_fS0_RfS1_
+Args:            
+  - String:          'Automatically inlining function '''
+  - Callee:          'vector_sum(float*, float&) (.101)'
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 118, Column: 0 }
+  - String:          ''' to improve effectiveness of pipeline pragma in function '''
+  - Caller:          'matrix_sum_prod(float (*) [31], float (*) [31], float&, float&)'
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 183, Column: 0 }
+  - String:          ''''
+...
+--- !Passed
+Pass:            reflow-auto-inline-performance-driven
+Name:            AutoInlinePerf
+DebugLoc:        { File: ../image_analysis.cpp, Line: 157, Column: 5 }
+Function:        _Z15matrix_sum_prodPA31_fS0_RfS1_
+Args:            
+  - String:          'Automatically inlining function '''
+  - Callee:          'vector_sum(float*, float&) (.101)'
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 118, Column: 0 }
+  - String:          ''' to improve effectiveness of pipeline pragma in function '''
+  - Caller:          'matrix_sum_prod(float (*) [31], float (*) [31], float&, float&)'
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 183, Column: 0 }
+  - String:          ''''
+...
+--- !Passed
+Pass:            reflow-auto-inline-performance-driven
+Name:            AutoInlinePerf
+DebugLoc:        { File: ../image_analysis.cpp, Line: 158, Column: 5 }
+Function:        _Z15matrix_sum_prodPA31_fS0_RfS1_
+Args:            
+  - String:          'Automatically inlining function '''
+  - Callee:          'vector_sum(float*, float&) (.101)'
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 118, Column: 0 }
+  - String:          ''' to improve effectiveness of pipeline pragma in function '''
+  - Caller:          'matrix_sum_prod(float (*) [31], float (*) [31], float&, float&)'
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 183, Column: 0 }
+  - String:          ''''
+...
+--- !Passed
+Pass:            reflow-auto-inline-performance-driven
+Name:            AutoInlinePerf
+DebugLoc:        { File: ../image_analysis.cpp, Line: 157, Column: 5 }
+Function:        _Z15matrix_sum_prodPA31_fS0_RfS1_
+Args:            
+  - String:          'Automatically inlining function '''
+  - Callee:          'vector_sum(float*, float&) (.101)'
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 118, Column: 0 }
+  - String:          ''' to improve effectiveness of pipeline pragma in function '''
+  - Caller:          'matrix_sum_prod(float (*) [31], float (*) [31], float&, float&)'
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 183, Column: 0 }
+  - String:          ''''
+...
+--- !Passed
+Pass:            reflow-auto-inline-performance-driven
+Name:            AutoInlinePerf
+DebugLoc:        { File: ../image_analysis.cpp, Line: 158, Column: 5 }
+Function:        _Z15matrix_sum_prodPA31_fS0_RfS1_
+Args:            
+  - String:          'Automatically inlining function '''
+  - Callee:          'vector_sum(float*, float&) (.101)'
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 118, Column: 0 }
+  - String:          ''' to improve effectiveness of pipeline pragma in function '''
+  - Caller:          'matrix_sum_prod(float (*) [31], float (*) [31], float&, float&)'
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 183, Column: 0 }
+  - String:          ''''
+...
+--- !Passed
+Pass:            reflow-auto-inline-performance-driven
+Name:            AutoInlinePerf
+DebugLoc:        { File: ../image_analysis.cpp, Line: 157, Column: 5 }
+Function:        _Z15matrix_sum_prodPA31_fS0_RfS1_
+Args:            
+  - String:          'Automatically inlining function '''
+  - Callee:          'vector_sum(float*, float&) (.101)'
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 118, Column: 0 }
+  - String:          ''' to improve effectiveness of pipeline pragma in function '''
+  - Caller:          'matrix_sum_prod(float (*) [31], float (*) [31], float&, float&)'
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 183, Column: 0 }
+  - String:          ''''
+...
+--- !Passed
+Pass:            reflow-auto-inline-performance-driven
+Name:            AutoInlinePerf
+DebugLoc:        { File: ../image_analysis.cpp, Line: 158, Column: 5 }
+Function:        _Z15matrix_sum_prodPA31_fS0_RfS1_
+Args:            
+  - String:          'Automatically inlining function '''
+  - Callee:          'vector_sum(float*, float&) (.101)'
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 118, Column: 0 }
+  - String:          ''' to improve effectiveness of pipeline pragma in function '''
+  - Caller:          'matrix_sum_prod(float (*) [31], float (*) [31], float&, float&)'
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 183, Column: 0 }
+  - String:          ''''
+...
+--- !Passed
+Pass:            reflow-auto-inline-performance-driven
+Name:            AutoInlinePerf
+DebugLoc:        { File: ../image_analysis.cpp, Line: 157, Column: 5 }
+Function:        _Z15matrix_sum_prodPA31_fS0_RfS1_
+Args:            
+  - String:          'Automatically inlining function '''
+  - Callee:          'vector_sum(float*, float&) (.101)'
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 118, Column: 0 }
+  - String:          ''' to improve effectiveness of pipeline pragma in function '''
+  - Caller:          'matrix_sum_prod(float (*) [31], float (*) [31], float&, float&)'
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 183, Column: 0 }
+  - String:          ''''
+...
+--- !Passed
+Pass:            reflow-auto-inline-performance-driven
+Name:            AutoInlinePerf
+DebugLoc:        { File: ../image_analysis.cpp, Line: 158, Column: 5 }
+Function:        _Z15matrix_sum_prodPA31_fS0_RfS1_
+Args:            
+  - String:          'Automatically inlining function '''
+  - Callee:          'vector_sum(float*, float&) (.101)'
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 118, Column: 0 }
+  - String:          ''' to improve effectiveness of pipeline pragma in function '''
+  - Caller:          'matrix_sum_prod(float (*) [31], float (*) [31], float&, float&)'
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 183, Column: 0 }
+  - String:          ''''
+...
+--- !Passed
+Pass:            reflow-auto-inline-performance-driven
+Name:            AutoInlinePerf
+DebugLoc:        { File: ../image_analysis.cpp, Line: 157, Column: 5 }
+Function:        _Z15matrix_sum_prodPA31_fS0_RfS1_
+Args:            
+  - String:          'Automatically inlining function '''
+  - Callee:          'vector_sum(float*, float&) (.101)'
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 118, Column: 0 }
+  - String:          ''' to improve effectiveness of pipeline pragma in function '''
+  - Caller:          'matrix_sum_prod(float (*) [31], float (*) [31], float&, float&)'
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 183, Column: 0 }
+  - String:          ''''
+...
+--- !Passed
+Pass:            reflow-auto-inline-performance-driven
+Name:            AutoInlinePerf
+DebugLoc:        { File: ../image_analysis.cpp, Line: 158, Column: 5 }
+Function:        _Z15matrix_sum_prodPA31_fS0_RfS1_
+Args:            
+  - String:          'Automatically inlining function '''
+  - Callee:          'vector_sum(float*, float&) (.101)'
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 118, Column: 0 }
+  - String:          ''' to improve effectiveness of pipeline pragma in function '''
+  - Caller:          'matrix_sum_prod(float (*) [31], float (*) [31], float&, float&)'
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 183, Column: 0 }
+  - String:          ''''
+...
+--- !Passed
+Pass:            reflow-auto-inline-performance-driven
+Name:            AutoInlinePerf
+DebugLoc:        { File: ../image_analysis.cpp, Line: 157, Column: 5 }
+Function:        _Z15matrix_sum_prodPA31_fS0_RfS1_
+Args:            
+  - String:          'Automatically inlining function '''
+  - Callee:          'vector_sum(float*, float&) (.101)'
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 118, Column: 0 }
+  - String:          ''' to improve effectiveness of pipeline pragma in function '''
+  - Caller:          'matrix_sum_prod(float (*) [31], float (*) [31], float&, float&)'
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 183, Column: 0 }
+  - String:          ''''
+...
+--- !Passed
+Pass:            reflow-auto-inline-performance-driven
+Name:            AutoInlinePerf
+DebugLoc:        { File: ../image_analysis.cpp, Line: 158, Column: 5 }
+Function:        _Z15matrix_sum_prodPA31_fS0_RfS1_
+Args:            
+  - String:          'Automatically inlining function '''
+  - Callee:          'vector_sum(float*, float&) (.101)'
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 118, Column: 0 }
+  - String:          ''' to improve effectiveness of pipeline pragma in function '''
+  - Caller:          'matrix_sum_prod(float (*) [31], float (*) [31], float&, float&)'
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 183, Column: 0 }
+  - String:          ''''
+...
+--- !Passed
+Pass:            reflow-auto-inline-performance-driven
+Name:            AutoInlinePerf
+DebugLoc:        { File: ../image_analysis.cpp, Line: 157, Column: 5 }
+Function:        _Z15matrix_sum_prodPA31_fS0_RfS1_
+Args:            
+  - String:          'Automatically inlining function '''
+  - Callee:          'vector_sum(float*, float&) (.101)'
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 118, Column: 0 }
+  - String:          ''' to improve effectiveness of pipeline pragma in function '''
+  - Caller:          'matrix_sum_prod(float (*) [31], float (*) [31], float&, float&)'
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 183, Column: 0 }
+  - String:          ''''
+...
+--- !Passed
+Pass:            reflow-auto-inline-performance-driven
+Name:            AutoInlinePerf
+DebugLoc:        { File: ../image_analysis.cpp, Line: 158, Column: 5 }
+Function:        _Z15matrix_sum_prodPA31_fS0_RfS1_
+Args:            
+  - String:          'Automatically inlining function '''
+  - Callee:          'vector_sum(float*, float&) (.101)'
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 118, Column: 0 }
+  - String:          ''' to improve effectiveness of pipeline pragma in function '''
+  - Caller:          'matrix_sum_prod(float (*) [31], float (*) [31], float&, float&)'
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 183, Column: 0 }
+  - String:          ''''
+...
+--- !Passed
+Pass:            reflow-auto-inline-performance-driven
+Name:            AutoInlinePerf
+DebugLoc:        { File: ../image_analysis.cpp, Line: 157, Column: 5 }
+Function:        _Z15matrix_sum_prodPA31_fS0_RfS1_
+Args:            
+  - String:          'Automatically inlining function '''
+  - Callee:          'vector_sum(float*, float&) (.101)'
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 118, Column: 0 }
+  - String:          ''' to improve effectiveness of pipeline pragma in function '''
+  - Caller:          'matrix_sum_prod(float (*) [31], float (*) [31], float&, float&)'
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 183, Column: 0 }
+  - String:          ''''
+...
+--- !Passed
+Pass:            reflow-auto-inline-performance-driven
+Name:            AutoInlinePerf
+DebugLoc:        { File: ../image_analysis.cpp, Line: 158, Column: 5 }
+Function:        _Z15matrix_sum_prodPA31_fS0_RfS1_
+Args:            
+  - String:          'Automatically inlining function '''
+  - Callee:          'vector_sum(float*, float&) (.101)'
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 118, Column: 0 }
+  - String:          ''' to improve effectiveness of pipeline pragma in function '''
+  - Caller:          'matrix_sum_prod(float (*) [31], float (*) [31], float&, float&)'
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 183, Column: 0 }
+  - String:          ''''
+...
+--- !Passed
+Pass:            reflow-auto-inline-performance-driven
+Name:            AutoInlinePerf
+DebugLoc:        { File: ../image_analysis.cpp, Line: 157, Column: 5 }
+Function:        _Z15matrix_sum_prodPA31_fS0_RfS1_
+Args:            
+  - String:          'Automatically inlining function '''
+  - Callee:          'vector_sum(float*, float&) (.101)'
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 118, Column: 0 }
+  - String:          ''' to improve effectiveness of pipeline pragma in function '''
+  - Caller:          'matrix_sum_prod(float (*) [31], float (*) [31], float&, float&)'
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 183, Column: 0 }
+  - String:          ''''
+...
+--- !Passed
+Pass:            reflow-auto-inline-performance-driven
+Name:            AutoInlinePerf
+DebugLoc:        { File: ../image_analysis.cpp, Line: 158, Column: 5 }
+Function:        _Z15matrix_sum_prodPA31_fS0_RfS1_
+Args:            
+  - String:          'Automatically inlining function '''
+  - Callee:          'vector_sum(float*, float&) (.101)'
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 118, Column: 0 }
+  - String:          ''' to improve effectiveness of pipeline pragma in function '''
+  - Caller:          'matrix_sum_prod(float (*) [31], float (*) [31], float&, float&)'
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 183, Column: 0 }
+  - String:          ''''
+...
+--- !Passed
+Pass:            reflow-auto-inline-performance-driven
+Name:            AutoInlinePerf
+DebugLoc:        { File: ../image_analysis.cpp, Line: 157, Column: 5 }
+Function:        _Z15matrix_sum_prodPA31_fS0_RfS1_
+Args:            
+  - String:          'Automatically inlining function '''
+  - Callee:          'vector_sum(float*, float&) (.101)'
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 118, Column: 0 }
+  - String:          ''' to improve effectiveness of pipeline pragma in function '''
+  - Caller:          'matrix_sum_prod(float (*) [31], float (*) [31], float&, float&)'
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 183, Column: 0 }
+  - String:          ''''
+...
+--- !Passed
+Pass:            reflow-auto-inline-performance-driven
+Name:            AutoInlinePerf
+DebugLoc:        { File: ../image_analysis.cpp, Line: 158, Column: 5 }
+Function:        _Z15matrix_sum_prodPA31_fS0_RfS1_
+Args:            
+  - String:          'Automatically inlining function '''
+  - Callee:          'vector_sum(float*, float&) (.101)'
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 118, Column: 0 }
+  - String:          ''' to improve effectiveness of pipeline pragma in function '''
+  - Caller:          'matrix_sum_prod(float (*) [31], float (*) [31], float&, float&)'
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 183, Column: 0 }
+  - String:          ''''
+...
+--- !Passed
+Pass:            reflow-auto-inline-performance-driven
+Name:            AutoInlinePerf
+DebugLoc:        { File: ../image_analysis.cpp, Line: 157, Column: 5 }
+Function:        _Z15matrix_sum_prodPA31_fS0_RfS1_
+Args:            
+  - String:          'Automatically inlining function '''
+  - Callee:          'vector_sum(float*, float&) (.101)'
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 118, Column: 0 }
+  - String:          ''' to improve effectiveness of pipeline pragma in function '''
+  - Caller:          'matrix_sum_prod(float (*) [31], float (*) [31], float&, float&)'
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 183, Column: 0 }
+  - String:          ''''
+...
+--- !Passed
+Pass:            reflow-auto-inline-performance-driven
+Name:            AutoInlinePerf
+DebugLoc:        { File: ../image_analysis.cpp, Line: 158, Column: 5 }
+Function:        _Z15matrix_sum_prodPA31_fS0_RfS1_
+Args:            
+  - String:          'Automatically inlining function '''
+  - Callee:          'vector_sum(float*, float&) (.101)'
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 118, Column: 0 }
+  - String:          ''' to improve effectiveness of pipeline pragma in function '''
+  - Caller:          'matrix_sum_prod(float (*) [31], float (*) [31], float&, float&)'
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 183, Column: 0 }
+  - String:          ''''
+...
+--- !Passed
+Pass:            reflow-auto-inline-performance-driven
+Name:            AutoInlinePerf
+DebugLoc:        { File: ../image_analysis.cpp, Line: 157, Column: 5 }
+Function:        _Z15matrix_sum_prodPA31_fS0_RfS1_
+Args:            
+  - String:          'Automatically inlining function '''
+  - Callee:          'vector_sum(float*, float&) (.101)'
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 118, Column: 0 }
+  - String:          ''' to improve effectiveness of pipeline pragma in function '''
+  - Caller:          'matrix_sum_prod(float (*) [31], float (*) [31], float&, float&)'
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 183, Column: 0 }
+  - String:          ''''
+...
+--- !Passed
+Pass:            reflow-auto-inline-performance-driven
+Name:            AutoInlinePerf
+DebugLoc:        { File: ../image_analysis.cpp, Line: 158, Column: 5 }
+Function:        _Z15matrix_sum_prodPA31_fS0_RfS1_
+Args:            
+  - String:          'Automatically inlining function '''
+  - Callee:          'vector_sum(float*, float&) (.101)'
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 118, Column: 0 }
+  - String:          ''' to improve effectiveness of pipeline pragma in function '''
+  - Caller:          'matrix_sum_prod(float (*) [31], float (*) [31], float&, float&)'
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 183, Column: 0 }
+  - String:          ''''
+...
+--- !Passed
+Pass:            reflow-auto-inline-performance-driven
+Name:            AutoInlinePerf
+DebugLoc:        { File: ../image_analysis.cpp, Line: 157, Column: 5 }
+Function:        _Z15matrix_sum_prodPA31_fS0_RfS1_
+Args:            
+  - String:          'Automatically inlining function '''
+  - Callee:          'vector_sum(float*, float&) (.101)'
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 118, Column: 0 }
+  - String:          ''' to improve effectiveness of pipeline pragma in function '''
+  - Caller:          'matrix_sum_prod(float (*) [31], float (*) [31], float&, float&)'
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 183, Column: 0 }
+  - String:          ''''
+...
+--- !Passed
+Pass:            reflow-auto-inline-performance-driven
+Name:            AutoInlinePerf
+DebugLoc:        { File: ../image_analysis.cpp, Line: 158, Column: 5 }
+Function:        _Z15matrix_sum_prodPA31_fS0_RfS1_
+Args:            
+  - String:          'Automatically inlining function '''
+  - Callee:          'vector_sum(float*, float&) (.101)'
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 118, Column: 0 }
+  - String:          ''' to improve effectiveness of pipeline pragma in function '''
+  - Caller:          'matrix_sum_prod(float (*) [31], float (*) [31], float&, float&)'
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 183, Column: 0 }
+  - String:          ''''
+...
+--- !Passed
+Pass:            reflow-auto-array-partition
+Name:            AutoArrayPromotion
+DebugLoc:        { File: ../image_analysis.cpp, Line: 149, Column: 11 }
+Function:        _Z15vector_sum_prodPfS_RfS0_
+Args:            
+  - String:          'Automatically partitioning array '''
+  - Value:           res
+  - String:          ''' dimension '
+  - Dim:             '1'
+  - String:          ' completely based on constant index.'
+...
+--- !Passed
+Pass:            reflow-auto-array-partition
+Name:            AutoArrayPromotion
+DebugLoc:        { File: ../image_analysis.cpp, Line: 150, Column: 11 }
+Function:        _Z15vector_sum_prodPfS_RfS0_
+Args:            
+  - String:          'Automatically partitioning array '''
+  - Value:           res1
+  - String:          ''' dimension '
+  - Dim:             '1'
+  - String:          ' completely based on constant index.'
+...
+--- !Passed
+Pass:            reflow-auto-array-partition
+Name:            AutoParallelPerformanceDrivenVerbosePassed
+DebugLoc:        { File: ../image_analysis.cpp, Line: 149, Column: 11 }
+Function:        _Z15vector_sum_prodPfS_RfS0_
+Args:            
+  - PragmaType:      array_partition
+  - String:          ' '
+  - PragmaOptions:   'dim=1 type=complete  variable=res'
+  - String:          ' '
+  - PragmaIsAuto:    '1'
+  - String:          ' '
+  - PragmaFunction:  vector_sum_prod
+  - String:          ' '
+  - varLoc:          '../image_analysis.cpp:149:11'
+  - String:          ' '
+  - VarName:         res
+  - String:          ' '
+...
+--- !Passed
+Pass:            reflow-auto-array-partition
+Name:            AutoArrayXform
+DebugLoc:        { File: ../image_analysis.cpp, Line: 149, Column: 11 }
+Function:        _Z15vector_sum_prodPfS_RfS0_
+Args:            
+  - String:          'Inferring pragma '''
+  - PragmaType:      array_partition
+  - String:          ' type='
+  - Mode:            complete
+  - String:          ' dim='
+  - Dim:             '1'
+  - String:          ''' for array '''
+  - Name:            res
+  - String:          ''''
+  - String:          ' due to '
+  - String:          pipeline
+  - String:          ' pragma'
+...
+--- !Passed
+Pass:            reflow-auto-array-partition
+Name:            AutoParallelPerformanceDrivenVerbosePassed
+DebugLoc:        { File: ../image_analysis.cpp, Line: 150, Column: 11 }
+Function:        _Z15vector_sum_prodPfS_RfS0_
+Args:            
+  - PragmaType:      array_partition
+  - String:          ' '
+  - PragmaOptions:   'dim=1 type=complete  variable=res1'
+  - String:          ' '
+  - PragmaIsAuto:    '1'
+  - String:          ' '
+  - PragmaFunction:  vector_sum_prod
+  - String:          ' '
+  - varLoc:          '../image_analysis.cpp:150:11'
+  - String:          ' '
+  - VarName:         res1
+  - String:          ' '
+...
+--- !Passed
+Pass:            reflow-auto-array-partition
+Name:            AutoArrayXform
+DebugLoc:        { File: ../image_analysis.cpp, Line: 150, Column: 11 }
+Function:        _Z15vector_sum_prodPfS_RfS0_
+Args:            
+  - String:          'Inferring pragma '''
+  - PragmaType:      array_partition
+  - String:          ' type='
+  - Mode:            complete
+  - String:          ' dim='
+  - Dim:             '1'
+  - String:          ''' for array '''
+  - Name:            res1
+  - String:          ''''
+  - String:          ' due to '
+  - String:          pipeline
+  - String:          ' pragma'
+...
+--- !Passed
+Pass:            reflow-auto-array-partition
+Name:            AutoParallelPerformanceDrivenVerbosePassed
+DebugLoc:        { File: ../image_analysis.cpp, Line: 187, Column: 8 }
+Function:        _Z15matrix_sum_prodPA31_fS0_RfS1_
+Args:            
+  - PragmaType:      array_partition
+  - String:          ' '
+  - PragmaOptions:   'dim=1 type=complete  variable=sum_val'
+  - String:          ' '
+  - PragmaIsAuto:    '1'
+  - String:          ' '
+  - PragmaFunction:  matrix_sum_prod
+  - String:          ' '
+  - varLoc:          '../image_analysis.cpp:187:8'
+  - String:          ' '
+  - PragmaSrcLoc:    '../image_analysis.cpp:192:9'
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 192, Column: 9 }
+  - VarName:         sum_val
+  - String:          ' '
+...
+--- !Passed
+Pass:            reflow-auto-array-partition
+Name:            AutoArrayXform
+DebugLoc:        { File: ../image_analysis.cpp, Line: 192, Column: 9 }
+Function:        _Z15matrix_sum_prodPA31_fS0_RfS1_
+Args:            
+  - String:          'Inferring pragma '''
+  - PragmaType:      array_partition
+  - String:          ' type='
+  - Mode:            complete
+  - String:          ' dim='
+  - Dim:             '1'
+  - String:          ''' for array '''
+  - Name:            sum_val
+  - String:          ''''
+  - String:          ' due to '
+  - String:          pipeline
+  - String:          ' pragma'
+...
+--- !Passed
+Pass:            reflow-auto-array-partition
+Name:            AutoParallelPerformanceDrivenVerbosePassed
+DebugLoc:        { File: ../image_analysis.cpp, Line: 188, Column: 11 }
+Function:        _Z15matrix_sum_prodPA31_fS0_RfS1_
+Args:            
+  - PragmaType:      array_partition
+  - String:          ' '
+  - PragmaOptions:   'dim=1 type=complete  variable=prod_val'
+  - String:          ' '
+  - PragmaIsAuto:    '1'
+  - String:          ' '
+  - PragmaFunction:  matrix_sum_prod
+  - String:          ' '
+  - varLoc:          '../image_analysis.cpp:188:11'
+  - String:          ' '
+  - PragmaSrcLoc:    '../image_analysis.cpp:192:9'
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 192, Column: 9 }
+  - VarName:         prod_val
+  - String:          ' '
+...
+--- !Passed
+Pass:            reflow-auto-array-partition
+Name:            AutoArrayXform
+DebugLoc:        { File: ../image_analysis.cpp, Line: 192, Column: 9 }
+Function:        _Z15matrix_sum_prodPA31_fS0_RfS1_
+Args:            
+  - String:          'Inferring pragma '''
+  - PragmaType:      array_partition
+  - String:          ' type='
+  - Mode:            complete
+  - String:          ' dim='
+  - Dim:             '1'
+  - String:          ''' for array '''
+  - Name:            prod_val
+  - String:          ''''
+  - String:          ' due to '
+  - String:          pipeline
+  - String:          ' pragma'
+...
+--- !Passed
+Pass:            reflow-array-partition
+Name:            ArrayXform
+DebugLoc:        { File: ../image_analysis.cpp, Line: 187, Column: 8 }
+Function:        _Z15matrix_sum_prodPA31_fS0_RfS1_
+Args:            
+  - String:          'Applying '
+  - String:          array_partition
+  - String:          ' to '''
+  - UOName:          sum_val
+  - String:          ''':'
+  - String:          ' '
+  - Mode:            Complete
+  - String:          ' partitioning'
+  - String:          ' on dimension '
+  - Dim:             '1'
+  - String:          .
+...
+--- !Passed
+Pass:            reflow-array-partition
+Name:            ArrayXform
+DebugLoc:        { File: ../image_analysis.cpp, Line: 188, Column: 11 }
+Function:        _Z15matrix_sum_prodPA31_fS0_RfS1_
+Args:            
+  - String:          'Applying '
+  - String:          array_partition
+  - String:          ' to '''
+  - UOName:          prod_val
+  - String:          ''':'
+  - String:          ' '
+  - Mode:            Complete
+  - String:          ' partitioning'
+  - String:          ' on dimension '
+  - Dim:             '1'
+  - String:          .
+...
+--- !Passed
+Pass:            reflow-burst-summary
+Name:            BurstInferredVerboseSummary
+DebugLoc:        { File: ../image_analysis.cpp, Line: 81, Column: 22 }
+Function:        _Z13Image_extractiRN3hls6streamI16local_image_infoLi0EEEPfPA31_fS4_S6_S4_Rf.1
+Args:            
+  - String:          'Multiple burst '
+  - Direction:       reads
+  - String:          ' of length '
+  - Length:          '961'
+  - String:          ' and bit width '
+  - Width:           '32'
+  - String:          ' has been inferred.'
+  - String:          ' These burst requests might be further partitioned into multiple requests during RTL generation, based on max_read_burst_length or max_write_burst_length settings.'
+  - String:          ' _XLX_SEP_ '
+  - AccessID:        seq
+  - ArrayName:       ''
+  - String:          ' '
+  - BundleName:      imageProjs_local
+  - String:          ' '
+  - LoopName:        VITIS_LOOP_81_1
+  - String:          ' '
+  - LoopLoc:         '../image_analysis.cpp:81:22'
+  - String:          ' '
+  - Function:        'Image_extract(int, hls::stream<local_image_info, 0>&, float*, float (*) [31], float*, float (*) [31], float*, float&) (.1)'
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 71, Column: 0 }
+  - String:          ' '
+...
+--- !Passed
+Pass:            reflow-burst-summary
+Name:            BurstInferredSummary
+DebugLoc:        { File: ../image_analysis.cpp, Line: 81, Column: 22 }
+Function:        _Z13Image_extractiRN3hls6streamI16local_image_infoLi0EEEPfPA31_fS4_S6_S4_Rf.1
+Args:            
+  - String:          'Multiple burst '
+  - Direction:       reads
+  - String:          ' of length '
+  - Length:          '961'
+  - String:          ' and bit width '
+  - Width:           '32'
+  - String:          ' in loop '''
+  - LoopName:        VITIS_LOOP_81_1
+  - String:          '''('
+  - LoopLoc:         '../image_analysis.cpp:81:22'
+  - String:          ')'
+  - String:          ' has been inferred on bundle '''
+  - BundleName:      imageProjs_local
+  - String:          '''.'
+  - String:          ' These burst requests might be further partitioned into multiple requests during RTL generation, based on max_read_burst_length or max_write_burst_length settings.'
+...
+--- !Missed
+Pass:            inline
+Name:            NeverInline
+DebugLoc:        { File: 'C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib\hlsmath\src\c\roundfloat.cpp', 
+                   Line: 7, Column: 12 }
+Function:        _Z21getLocalImages_singleiiiiP13atom_locationRN3hls6streamI16local_image_infoLi0EEE.1
+Args:            
+  - Callee:          'float generic_round<float>(float)'
+    DebugLoc:        { File: 'C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib/hlsmath/include/FloatingPoint\hls_round.h', 
+                       Line: 160, Column: 0 }
+  - String:          ' not inlined into '
+  - Caller:          'getLocalImages_single(int, int, int, int, atom_location*, hls::stream<local_image_info, 0>&) (.1)'
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 7, Column: 0 }
+  - String:          ' because it should never be inlined (cost=never)'
+...
+--- !Missed
+Pass:            inline
+Name:            NeverInline
+DebugLoc:        { File: ../image_analysis.cpp, Line: 11, Column: 20 }
+Function:        _Z21getLocalImages_singleiiiiP13atom_locationRN3hls6streamI16local_image_infoLi0EEE.1
+Args:            
+  - Callee:          __hls_fptosi_float_i32
+    DebugLoc:        { File: 'C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib\hlsmath\src\lib_floatconversion.cpp', 
+                       Line: 51, Column: 0 }
+  - String:          ' not inlined into '
+  - Caller:          'getLocalImages_single(int, int, int, int, atom_location*, hls::stream<local_image_info, 0>&) (.1)'
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 7, Column: 0 }
+  - String:          ' because it should never be inlined (cost=never)'
+...
+--- !Missed
+Pass:            inline
+Name:            NeverInline
+DebugLoc:        { File: ../image_analysis.cpp, Line: 198, Column: 5 }
+Function:        _Z15matrix_sum_prodPA31_fS0_RfS1_
+Args:            
+  - Callee:          'vector_sum(float*, float&)'
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 118, Column: 0 }
+  - String:          ' not inlined into '
+  - Caller:          'matrix_sum_prod(float (*) [31], float (*) [31], float&, float&)'
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 183, Column: 0 }
+  - String:          ' because it should never be inlined (cost=never)'
+...
+--- !Missed
+Pass:            inline
+Name:            NeverInline
+DebugLoc:        { File: ../image_analysis.cpp, Line: 263, Column: 57 }
+Function:        dataflow_in_loop_VITIS_LOOP_241_1.1
+Args:            
+  - Callee:          dataflow_in_loop_VITIS_LOOP_241_1.1_Block_newFuncRoot_proc
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 0, Column: 0 }
+  - String:          ' not inlined into '
+  - Caller:          dataflow_in_loop_VITIS_LOOP_241_1.1
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 0, Column: 0 }
+  - String:          ' because it should never be inlined (cost=never)'
+...
+--- !Missed
+Pass:            inline
+Name:            NeverInline
+DebugLoc:        { File: ../image_analysis.cpp, Line: 258, Column: 2 }
+Function:        dataflow_in_loop_VITIS_LOOP_241_1.1
+Args:            
+  - Callee:          'getLocalImages_single(int, int, int, int, atom_location*, hls::stream<local_image_info, 0>&) (.1)'
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 7, Column: 0 }
+  - String:          ' not inlined into '
+  - Caller:          dataflow_in_loop_VITIS_LOOP_241_1.1
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 0, Column: 0 }
+  - String:          ' because it should never be inlined (cost=never)'
+...
+--- !Missed
+Pass:            inline
+Name:            NeverInline
+DebugLoc:        { File: ../image_analysis.cpp, Line: 259, Column: 9 }
+Function:        dataflow_in_loop_VITIS_LOOP_241_1.1
+Args:            
+  - Callee:          'Image_extract(int, hls::stream<local_image_info, 0>&, float*, float (*) [31], float*, float (*) [31], float*, float&) (.1)'
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 71, Column: 0 }
+  - String:          ' not inlined into '
+  - Caller:          dataflow_in_loop_VITIS_LOOP_241_1.1
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 0, Column: 0 }
+  - String:          ' because it should never be inlined (cost=never)'
+...
+--- !Missed
+Pass:            inline
+Name:            NeverInline
+DebugLoc:        { File: ../image_analysis.cpp, Line: 262, Column: 9 }
+Function:        dataflow_in_loop_VITIS_LOOP_241_1.1
+Args:            
+  - Callee:          'matrix_sum_prod(float (*) [31], float (*) [31], float&, float&)'
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 183, Column: 0 }
+  - String:          ' not inlined into '
+  - Caller:          dataflow_in_loop_VITIS_LOOP_241_1.1
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 0, Column: 0 }
+  - String:          ' because it should never be inlined (cost=never)'
+...
+--- !Missed
+Pass:            inline
+Name:            NeverInline
+DebugLoc:        { File: ../image_analysis.cpp, Line: 263, Column: 9 }
+Function:        dataflow_in_loop_VITIS_LOOP_241_1.1
+Args:            
+  - Callee:          'post_process(float, float, float, float&) (.1)'
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 202, Column: 0 }
+  - String:          ' not inlined into '
+  - Caller:          dataflow_in_loop_VITIS_LOOP_241_1.1
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 0, Column: 0 }
+  - String:          ' because it should never be inlined (cost=never)'
+...
+--- !Missed
+Pass:            inline
+Name:            NeverInline
+DebugLoc:        { File: ../image_analysis.cpp, Line: 251, Column: 15 }
+Function:        _Z11reconstructiiiP13atom_locationiiPfS1_PiS1_iiS1_
+Args:            
+  - Callee:          dataflow_in_loop_VITIS_LOOP_241_1.1
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 0, Column: 0 }
+  - String:          ' not inlined into '
+  - Caller:          'reconstruct(int, int, int, atom_location*, int, int, float*, float*, int*, float*, int, int, float*)'
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 214, Column: 0 }
+  - String:          ' because it should never be inlined (cost=never)'
+...
