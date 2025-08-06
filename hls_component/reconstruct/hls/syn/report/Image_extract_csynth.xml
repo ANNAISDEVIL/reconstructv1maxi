@@ -34,14 +34,14 @@
 <SummaryOfViolations>
 <IssueType>-</IssueType>
 <ViolationType>-</ViolationType>
-<SourceLocation>../image_analysis.cpp:67~../image_analysis.cpp:166</SourceLocation>
+<SourceLocation>../image_analysis.cpp:26~../image_analysis.cpp:169</SourceLocation>
 </SummaryOfViolations>
 </PerformanceEstimates>
 
 <AreaEstimates>
 <Resources>
-<FF>581</FF>
-<LUT>683</LUT>
+<FF>589</FF>
+<LUT>755</LUT>
 <BRAM_18K>0</BRAM_18K>
 <DSP>0</DSP>
 <URAM>0</URAM>

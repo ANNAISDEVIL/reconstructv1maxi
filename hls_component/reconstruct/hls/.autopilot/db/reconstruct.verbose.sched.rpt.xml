@@ -1,7 +1,7 @@
 <profile>
 
 <section name = "Vitis HLS Report for 'reconstruct'" level="0">
-<item name = "Date">Mon Jun 30 08:25:41 2025
+<item name = "Date">Wed Aug  6 13:39:29 2025
 </item>
 <item name = "Version">2024.2 (Build 5238294 on Nov  8 2024)</item>
 <item name = "Project">reconstruct</item>
@@ -35,7 +35,7 @@
 </item>
 <item name = "Loop"><table name="" hasTotal="0">
 <keys size="8">Loop Name, min, max, Latency, achieved, target, Count, Pipelined</keys>
-<column name="- VITIS_LOOP_149_1">3961854, 3961854, 4891, -, -, 1024, no</column>
+<column name="- VITIS_LOOP_152_1">3961854, 3961854, 4891, -, -, 1024, no</column>
 </table>
 </item>
 </section>

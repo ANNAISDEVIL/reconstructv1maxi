@@ -400,10 +400,10 @@ entry:8 %trunc_ln = partselect i62 @_ssdm_op_PartSelect.i62.i64.i32.i32, i64 %do
 
 <Node id="15" bw="64" op_0_bw="62">
 <![CDATA[
-entry:9 %sext_ln113 = sext i62 %trunc_ln
+entry:9 %sext_ln116 = sext i62 %trunc_ln
 
 ]]></Node>
-<StgValue><ssdm name="sext_ln113"/></StgValue>
+<StgValue><ssdm name="sext_ln116"/></StgValue>
 </operation>
 
 <operation id="37" st_id="12" stage="1" lat="1">
@@ -415,7 +415,7 @@ entry:9 %sext_ln113 = sext i62 %trunc_ln
 
 <Node id="16" bw="32" op_0_bw="32" op_1_bw="64">
 <![CDATA[
-entry:10 %emissions_addr = getelementptr i32 %emissions, i64 %sext_ln113
+entry:10 %emissions_addr = getelementptr i32 %emissions, i64 %sext_ln116
 
 ]]></Node>
 <StgValue><ssdm name="emissions_addr"/></StgValue>
@@ -466,10 +466,10 @@ entry:11 %emissions_addr_req = writereq i1 @_ssdm_op_WriteReq.m_axi.i32P1A, i32 
 
 <Node id="13" bw="32" op_0_bw="32">
 <![CDATA[
-entry:7 %bitcast_ln113 = bitcast i32 %mul_i
+entry:7 %bitcast_ln116 = bitcast i32 %mul_i
 
 ]]></Node>
-<StgValue><ssdm name="bitcast_ln113"/></StgValue>
+<StgValue><ssdm name="bitcast_ln116"/></StgValue>
 </operation>
 
 <operation id="41" st_id="14" stage="1" lat="1">
@@ -481,10 +481,10 @@ entry:7 %bitcast_ln113 = bitcast i32 %mul_i
 
 <Node id="18" bw="0" op_0_bw="0" op_1_bw="32" op_2_bw="32" op_3_bw="4" op_4_bw="0">
 <![CDATA[
-entry:12 %write_ln113 = write void @_ssdm_op_Write.m_axi.i32P1A, i32 %emissions_addr, i32 %bitcast_ln113, i4 15
+entry:12 %write_ln116 = write void @_ssdm_op_Write.m_axi.i32P1A, i32 %emissions_addr, i32 %bitcast_ln116, i4 15
 
 ]]></Node>
-<StgValue><ssdm name="write_ln113"/></StgValue>
+<StgValue><ssdm name="write_ln116"/></StgValue>
 </operation>
 </state>
 
@@ -571,7 +571,7 @@ entry:13 %emissions_addr_resp = writeresp i1 @_ssdm_op_WriteResp.m_axi.i32P1A, i
 
 <Node id="6" bw="0" op_0_bw="0" op_1_bw="32" op_2_bw="0" op_3_bw="32" op_4_bw="32" op_5_bw="0" op_6_bw="32" op_7_bw="32" op_8_bw="0" op_9_bw="0" op_10_bw="0" op_11_bw="32" op_12_bw="32" op_13_bw="32" op_14_bw="32" op_15_bw="0" op_16_bw="0" op_17_bw="32" op_18_bw="32" op_19_bw="32">
 <![CDATA[
-entry:0 %specinterface_ln0 = specinterface void @_ssdm_op_SpecInterface, i32 %emissions, void @empty_16, i32 0, i32 0, void @empty_17, i32 0, i32 1024, void @empty_0, void @empty_19, void @empty_17, i32 16, i32 16, i32 16, i32 16, void @empty_17, void @empty_17, i32 4294967295, i32 0, i32 0
+entry:0 %specinterface_ln0 = specinterface void @_ssdm_op_SpecInterface, i32 %emissions, void @empty_16, i32 0, i32 0, void @empty_17, i32 0, i32 1600, void @empty_0, void @empty_19, void @empty_17, i32 16, i32 16, i32 16, i32 16, void @empty_17, void @empty_17, i32 4294967295, i32 0, i32 0
 
 ]]></Node>
 <StgValue><ssdm name="specinterface_ln0"/></StgValue>
@@ -601,10 +601,10 @@ entry:13 %emissions_addr_resp = writeresp i1 @_ssdm_op_WriteResp.m_axi.i32P1A, i
 
 <Node id="20" bw="0">
 <![CDATA[
-entry:14 %ret_ln169 = ret
+entry:14 %ret_ln172 = ret
 
 ]]></Node>
-<StgValue><ssdm name="ret_ln169"/></StgValue>
+<StgValue><ssdm name="ret_ln172"/></StgValue>
 </operation>
 </state>
 </state_list>
@@ -699,11 +699,11 @@ entry:14 %ret_ln169 = ret
 </dataflow>
 <dataflow id="110" from="StgValue_109" to="trunc_ln" fromId="109" toId="35">
 </dataflow>
-<dataflow id="111" from="trunc_ln" to="sext_ln113" fromId="35" toId="36">
+<dataflow id="111" from="trunc_ln" to="sext_ln116" fromId="35" toId="36">
 </dataflow>
 <dataflow id="112" from="emissions" to="emissions_addr" fromId="70" toId="37">
 </dataflow>
-<dataflow id="113" from="sext_ln113" to="emissions_addr" fromId="36" toId="37">
+<dataflow id="113" from="sext_ln116" to="emissions_addr" fromId="36" toId="37">
 </dataflow>
 <dataflow id="114" from="div_i" to="mul_i" fromId="31" toId="38">
 </dataflow>
@@ -715,15 +715,15 @@ entry:14 %ret_ln169 = ret
 </dataflow>
 <dataflow id="120" from="StgValue_119" to="emissions_addr_req" fromId="119" toId="39">
 </dataflow>
-<dataflow id="121" from="mul_i" to="bitcast_ln113" fromId="38" toId="40">
+<dataflow id="121" from="mul_i" to="bitcast_ln116" fromId="38" toId="40">
 </dataflow>
-<dataflow id="123" from="_ssdm_op_Write.m_axi.i32P1A" to="write_ln113" fromId="122" toId="41">
+<dataflow id="123" from="_ssdm_op_Write.m_axi.i32P1A" to="write_ln116" fromId="122" toId="41">
 </dataflow>
-<dataflow id="124" from="emissions_addr" to="write_ln113" fromId="37" toId="41">
+<dataflow id="124" from="emissions_addr" to="write_ln116" fromId="37" toId="41">
 </dataflow>
-<dataflow id="125" from="bitcast_ln113" to="write_ln113" fromId="40" toId="41">
+<dataflow id="125" from="bitcast_ln116" to="write_ln116" fromId="40" toId="41">
 </dataflow>
-<dataflow id="127" from="StgValue_126" to="write_ln113" fromId="126" toId="41">
+<dataflow id="127" from="StgValue_126" to="write_ln116" fromId="126" toId="41">
 </dataflow>
 <dataflow id="129" from="_ssdm_op_WriteResp.m_axi.i32P1A" to="emissions_addr_resp" fromId="128" toId="42">
 </dataflow>

@@ -284,7 +284,7 @@ class stream : public stream<__STREAM_T__, 0> {
 # 13 "F:/Vitis/2024.2/common/technology/autopilot\\hls_stream.h" 2
 # 2 "../image_analysis.cpp" 2
 # 1 "../image_analysis.hpp" 1
-# 11 "../image_analysis.hpp"
+# 18 "../image_analysis.hpp"
 typedef struct {
     float x;
     float y;
@@ -304,10 +304,10 @@ typedef struct {
 __attribute__((sdx_kernel("reconstruct", 0))) void reconstruct(int atomLocationsSize,int projShape0, int projShape1, atom_location atomLocations[1024],
     int psfSupersample,
     int imageProjectionSize,
-    float imageProjs_local[1024 * 1024],
-    float imageProjs[1024],
-    int imageProjs_local_size[1024],
-    float fullImage[768*768],
+    float imageProjs_local[1000 * 100],
+    float imageProjs[100],
+    int imageProjs_local_size[100],
+    float fullImage[400*400],
     int fullImage_rows, int fullImage_cols, float* emissions);
 # 3 "../image_analysis.cpp" 2
 # 1 "F:/Vitis/2024.2/tps/mingw/8.3.0/win64.o/nt\\lib\\gcc\\x86_64-w64-mingw32\\8.3.0\\include\\c++\\cmath" 1 3
@@ -27888,11 +27888,11 @@ void getLocalImages_single(int curr_idx,int psfSupersample, int projShape0, int 
     std::cout << "#1 x_int " << x_int << " x_min " << info.X_min << " x_max " << info.X_max << " y_int " << y_int << " y_min " << info.Y_min << " y_max " << info.Y_max << std::endl;
     localImages.write(info);
 }
-# 66 "../image_analysis.cpp"
+
 void Image_extract(int curr_idx, hls::stream<local_image_info>& localImages,
-    float fullImage[768*768], float curr_fullImage[31][31],
-    float imageProjs_local[1024 * 1024], float curr_localImage[31][31],
-    float imageProjs[1024], float& curr_imageProjs) {
+    float fullImage[400*400], float curr_fullImage[31][31],
+    float imageProjs_local[1000 * 100], float curr_localImage[31][31],
+    float imageProjs[100], float& curr_imageProjs) {
     local_image_info curr_info = localImages.read();
     unsigned int xmin = curr_info.X_min;
     unsigned int ymin = curr_info.Y_min;
@@ -27900,11 +27900,12 @@ void Image_extract(int curr_idx, hls::stream<local_image_info>& localImages,
     int yidx = (curr_info.dy + 1) % 1;
     std::cout << "  -- curr idx " << curr_idx << " xmin " << xmin << " ymin " << ymin << std::endl;
     unsigned int proj_offset = yidx * 1 + xidx;
-    VITIS_LOOP_77_1: for(unsigned char i = 0; i < 31; i++){
-        VITIS_LOOP_78_2: for(unsigned char j = 0; j < 31; j++){
+    VITIS_LOOP_36_1: for(unsigned char i = 0; i < 31; i++){
+        VITIS_LOOP_37_2: for(unsigned char j = 0; j < 31; j++){
 
-            curr_localImage[i][j] = imageProjs_local[proj_offset * 1024 + i*31+j];
-            curr_fullImage[i][j] = fullImage[xmin + j + (ymin+i) * 256];
+            curr_localImage[i][j] = imageProjs_local[proj_offset * 1000 + i*31+j];
+            curr_fullImage[i][j] = fullImage[xmin + j + (ymin+i) * 400];
+
 
             if(curr_idx <= 1 && i == 6)
                     std::cout << "  ---- proj_offset " << proj_offset << " idx " << i*31+j
@@ -27919,13 +27920,12 @@ void Image_extract(int curr_idx, hls::stream<local_image_info>& localImages,
     std::cout << "#2 idx " << curr_idx << " curr_localImage " << curr_localImage[0][0] << " curr_fullImage " << curr_fullImage[0][0] << std::endl;
     curr_imageProjs = imageProjs[proj_offset];
 }
-
-
+# 101 "../image_analysis.cpp"
 void conv_kernel(float curr_fullImage[31][31], float curr_localImage[31][31], float& projSumUsed, float& sum) {
 
 
-    VITIS_LOOP_101_1: for(unsigned char i = 0; i < 31; i++){
-        VITIS_LOOP_102_2: for(unsigned char j = 0; j < 31; j++){
+    VITIS_LOOP_104_1: for(unsigned char i = 0; i < 31; i++){
+        VITIS_LOOP_105_2: for(unsigned char j = 0; j < 31; j++){
 #pragma HLS UNROLL
  sum += curr_fullImage[i][j] * curr_localImage[i][j];
             projSumUsed += curr_localImage[i][j];
@@ -27942,14 +27942,14 @@ void post_process(float projSumUsed, float sum, float curr_imageProjs, float& do
 __attribute__((sdx_kernel("reconstruct", 0))) void reconstruct(int atomLocationsSize,int projShape0, int projShape1, atom_location atomLocations[1024],
     int psfSupersample,
     int imageProjectionSize,
-    float imageProjs_local[1024 * 1024],
-    float imageProjs[1024],
-    int imageProjs_local_size[1024],
-    float fullImage[768*768],
+    float imageProjs_local[1000 * 100],
+    float imageProjs[100],
+    int imageProjs_local_size[100],
+    float fullImage[400*400],
     int fullImage_rows, int fullImage_cols, float* emissions){
 #line 1 "directive"
 #pragma HLSDIRECTIVE TOP name=reconstruct
-# 123 "../image_analysis.cpp"
+# 126 "../image_analysis.cpp"
 
 
 
@@ -27959,7 +27959,7 @@ __attribute__((sdx_kernel("reconstruct", 0))) void reconstruct(int atomLocations
 #pragma HLS INTERFACE port=projShape0 mode=s_axilite bundle=scalar_data
 #pragma HLS INTERFACE port=projShape1 mode=s_axilite bundle=scalar_data
 
-#pragma HLS INTERFACE port=atomLocations mode=m_axi bundle=atomLocations depth=1024
+#pragma HLS INTERFACE port=atomLocations mode=m_axi bundle=atomLocations depth=1600
 
 #pragma HLS INTERFACE port=psfSupersample mode=s_axilite bundle=scalar_data
 #pragma HLS INTERFACE port=imageProjectionSize mode=s_axilite bundle=scalar_data
@@ -27968,15 +27968,15 @@ __attribute__((sdx_kernel("reconstruct", 0))) void reconstruct(int atomLocations
 #pragma HLS INTERFACE port=imageProjs mode=m_axi bundle=imageProjs
 #pragma HLS INTERFACE port=imageProjs_local_size mode=m_axi bundle=imageProjs_local_size
 
-#pragma HLS INTERFACE port=fullImage mode=m_axi bundle=fullImage depth=768*768
+#pragma HLS INTERFACE port=fullImage mode=m_axi bundle=fullImage depth=400*400
 
 #pragma HLS INTERFACE port=fullImage_rows mode=s_axilite bundle=scalar_data
 #pragma HLS INTERFACE port=fullImage_cols mode=s_axilite bundle=scalar_data
 
-#pragma HLS INTERFACE port=emissions mode=m_axi bundle=emissions depth=1024
+#pragma HLS INTERFACE port=emissions mode=m_axi bundle=emissions depth=1600
 
 
- VITIS_LOOP_149_1: for(unsigned short idx = 0; idx < atomLocationsSize; idx++){
+ VITIS_LOOP_152_1: for(unsigned short idx = 0; idx < atomLocationsSize; idx++){
 #pragma HLS DATAFLOW
 #pragma HLS LOOP_TRIPCOUNT max=1024 min=1024 avg=1024
  hls::stream<local_image_info,4> localImages;

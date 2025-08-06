@@ -1,9 +1,9 @@
 {
   "0": {
     "basicblocks": 4,
-    "calls": "3 2 5 4",
+    "calls": "3 2 6 4",
     "file": "image_analysis.cpp",
-    "fileloc": 116,
+    "fileloc": 119,
     "instructions": 373,
     "loads": {
       "L": 3
@@ -27,7 +27,7 @@
     "basicblocks": 69,
     "calls": "",
     "file": "image_analysis.cpp",
-    "fileloc": 66,
+    "fileloc": 25,
     "instructions": 348,
     "loads": {
       "L": 3
@@ -40,7 +40,7 @@
   },
   "3": {
     "basicblocks": 1,
-    "calls": "6 1 6 1 6 1 6 1",
+    "calls": "5 1 5 1 5 1 5 1",
     "file": "image_analysis.cpp",
     "fileloc": 7,
     "instructions": 39,
@@ -54,7 +54,7 @@
     "basicblocks": 1,
     "calls": "",
     "file": "image_analysis.cpp",
-    "fileloc": 112,
+    "fileloc": 115,
     "instructions": 4,
     "name": "post_process",
     "stores": {
@@ -63,21 +63,6 @@
     "total_instructions": 4
   },
   "5": {
-    "basicblocks": 3,
-    "calls": "",
-    "file": "image_analysis.cpp",
-    "fileloc": 98,
-    "instructions": 4011,
-    "loads": {
-      "L": 1924
-    },
-    "name": "conv_kernel",
-    "stores": {
-      "L": 2
-    },
-    "total_instructions": 4011
-  },
-  "6": {
     "basicblocks": 5,
     "calls": "",
     "file": "hls_round.h",
@@ -88,5 +73,20 @@
     },
     "name": "generic_round<float>",
     "total_instructions": 38
+  },
+  "6": {
+    "basicblocks": 3,
+    "calls": "",
+    "file": "image_analysis.cpp",
+    "fileloc": 101,
+    "instructions": 4011,
+    "loads": {
+      "L": 1924
+    },
+    "name": "conv_kernel",
+    "stores": {
+      "L": 2
+    },
+    "total_instructions": 4011
   }
 }

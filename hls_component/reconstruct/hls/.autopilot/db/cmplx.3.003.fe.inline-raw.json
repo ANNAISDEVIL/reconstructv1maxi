@@ -1,9 +1,9 @@
 {
   "0": {
     "basicblocks": 4,
-    "calls": "2 3 4 5",
+    "calls": "6 5 2 3",
     "file": "image_analysis.cpp",
-    "fileloc": 116,
+    "fileloc": 119,
     "instructions": 69,
     "loads": {
       "L": 3
@@ -30,37 +30,10 @@
     "total_instructions": 50
   },
   "2": {
-    "basicblocks": 1,
-    "calls": "6 1 6 1 6 1 6 1",
-    "file": "image_analysis.cpp",
-    "fileloc": 7,
-    "instructions": 39,
-    "loads": {
-      "L": 1
-    },
-    "name": "getLocalImages_single",
-    "total_instructions": 775
-  },
-  "3": {
-    "basicblocks": 5,
-    "calls": "",
-    "file": "image_analysis.cpp",
-    "fileloc": 66,
-    "instructions": 35,
-    "loads": {
-      "L": 3
-    },
-    "name": "Image_extract",
-    "stores": {
-      "L": 3
-    },
-    "total_instructions": 35
-  },
-  "4": {
     "basicblocks": 3,
     "calls": "",
     "file": "image_analysis.cpp",
-    "fileloc": 98,
+    "fileloc": 101,
     "instructions": 229,
     "loads": {
       "L": 64
@@ -71,11 +44,11 @@
     },
     "total_instructions": 229
   },
-  "5": {
+  "3": {
     "basicblocks": 1,
     "calls": "",
     "file": "image_analysis.cpp",
-    "fileloc": 112,
+    "fileloc": 115,
     "instructions": 4,
     "name": "post_process",
     "stores": {
@@ -83,7 +56,7 @@
     },
     "total_instructions": 4
   },
-  "6": {
+  "4": {
     "basicblocks": 5,
     "calls": "",
     "file": "hls_round.h",
@@ -98,5 +71,32 @@
       "L": 19
     },
     "total_instructions": 134
+  },
+  "5": {
+    "basicblocks": 5,
+    "calls": "",
+    "file": "image_analysis.cpp",
+    "fileloc": 25,
+    "instructions": 35,
+    "loads": {
+      "L": 3
+    },
+    "name": "Image_extract",
+    "stores": {
+      "L": 3
+    },
+    "total_instructions": 35
+  },
+  "6": {
+    "basicblocks": 1,
+    "calls": "4 1 4 1 4 1 4 1",
+    "file": "image_analysis.cpp",
+    "fileloc": 7,
+    "instructions": 39,
+    "loads": {
+      "L": 1
+    },
+    "name": "getLocalImages_single",
+    "total_instructions": 775
   }
 }

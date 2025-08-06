@@ -1,66 +1,66 @@
 <xilinx:hls_fe_msgs>
-    <msg msg_groups="PRAGMA_VERBOSE_DUMP" msg_id="207-5471" msg_severity="WARNING" msg_loc="../image_analysis.cpp:103:9" msg_body="HLS pragma dump">
+    <msg msg_groups="PRAGMA_VERBOSE_DUMP" msg_id="207-5471" msg_severity="WARNING" msg_loc="../image_analysis.cpp:106:9" msg_body="HLS pragma dump">
         <args ARG_PragmaFunction="conv_kernel" ARG_PragmaIsValid="1" ARG_PragmaType="unroll" ClangWarningOption="dump-hls-pragmas"/>
     </msg>
     <msg msg_groups="PRAGMA_VERBOSE_DUMP" msg_id="207-5471" msg_severity="WARNING" msg_loc="directive:1:9" msg_body="HLS pragma dump">
         <args ARG_PragmaContext="directive" ARG_PragmaFunction="reconstruct" ARG_PragmaIsValid="1" ARG_PragmaOptions="name=reconstruct" ARG_PragmaType="top" ClangWarningOption="dump-hls-pragmas"/>
     </msg>
-    <msg msg_groups="PRAGMA_VERBOSE_DUMP" msg_id="207-5471" msg_severity="WARNING" msg_loc="../image_analysis.cpp:126:9" msg_body="HLS pragma dump">
+    <msg msg_groups="PRAGMA_VERBOSE_DUMP" msg_id="207-5471" msg_severity="WARNING" msg_loc="../image_analysis.cpp:129:9" msg_body="HLS pragma dump">
         <args ARG_PragmaFunction="reconstruct" ARG_PragmaIsValid="1" ARG_PragmaOptions="port=return mode=s_axilite bundle=control" ARG_PragmaType="interface" ClangWarningOption="dump-hls-pragmas"/>
     </msg>
-    <msg msg_groups="PRAGMA_VERBOSE_DUMP" msg_id="207-5471" msg_severity="WARNING" msg_loc="../image_analysis.cpp:128:9" msg_body="HLS pragma dump">
+    <msg msg_groups="PRAGMA_VERBOSE_DUMP" msg_id="207-5471" msg_severity="WARNING" msg_loc="../image_analysis.cpp:131:9" msg_body="HLS pragma dump">
         <args ARG_PragmaFunction="reconstruct" ARG_PragmaIsValid="1" ARG_PragmaOptions="port=atomLocationsSize mode=s_axilite bundle=scalar_data" ARG_PragmaType="interface" ClangWarningOption="dump-hls-pragmas"/>
     </msg>
-    <msg msg_groups="PRAGMA_VERBOSE_DUMP" msg_id="207-5471" msg_severity="WARNING" msg_loc="../image_analysis.cpp:129:9" msg_body="HLS pragma dump">
+    <msg msg_groups="PRAGMA_VERBOSE_DUMP" msg_id="207-5471" msg_severity="WARNING" msg_loc="../image_analysis.cpp:132:9" msg_body="HLS pragma dump">
         <args ARG_PragmaFunction="reconstruct" ARG_PragmaIsValid="1" ARG_PragmaOptions="port=projShape0 mode=s_axilite bundle=scalar_data" ARG_PragmaType="interface" ClangWarningOption="dump-hls-pragmas"/>
     </msg>
-    <msg msg_groups="PRAGMA_VERBOSE_DUMP" msg_id="207-5471" msg_severity="WARNING" msg_loc="../image_analysis.cpp:130:9" msg_body="HLS pragma dump">
+    <msg msg_groups="PRAGMA_VERBOSE_DUMP" msg_id="207-5471" msg_severity="WARNING" msg_loc="../image_analysis.cpp:133:9" msg_body="HLS pragma dump">
         <args ARG_PragmaFunction="reconstruct" ARG_PragmaIsValid="1" ARG_PragmaOptions="port=projShape1 mode=s_axilite bundle=scalar_data" ARG_PragmaType="interface" ClangWarningOption="dump-hls-pragmas"/>
     </msg>
-    <msg msg_groups="PRAGMA_VERBOSE_DUMP" msg_id="207-5471" msg_severity="WARNING" msg_loc="../image_analysis.cpp:132:9" msg_body="HLS pragma dump">
-        <args ARG_PragmaFunction="reconstruct" ARG_PragmaIsValid="1" ARG_PragmaOptions="port=atomLocations mode=m_axi bundle=atomLocations depth=1024" ARG_PragmaType="interface" ClangWarningOption="dump-hls-pragmas"/>
-    </msg>
-    <msg msg_groups="PRAGMA_VERBOSE_DUMP" msg_id="207-5471" msg_severity="WARNING" msg_loc="../image_analysis.cpp:134:9" msg_body="HLS pragma dump">
-        <args ARG_PragmaFunction="reconstruct" ARG_PragmaIsValid="1" ARG_PragmaOptions="port=psfSupersample mode=s_axilite bundle=scalar_data" ARG_PragmaType="interface" ClangWarningOption="dump-hls-pragmas"/>
-    </msg>
     <msg msg_groups="PRAGMA_VERBOSE_DUMP" msg_id="207-5471" msg_severity="WARNING" msg_loc="../image_analysis.cpp:135:9" msg_body="HLS pragma dump">
-        <args ARG_PragmaFunction="reconstruct" ARG_PragmaIsValid="1" ARG_PragmaOptions="port=imageProjectionSize mode=s_axilite bundle=scalar_data" ARG_PragmaType="interface" ClangWarningOption="dump-hls-pragmas"/>
+        <args ARG_PragmaFunction="reconstruct" ARG_PragmaIsValid="1" ARG_PragmaOptions="port=atomLocations mode=m_axi bundle=atomLocations depth=1600" ARG_PragmaType="interface" ClangWarningOption="dump-hls-pragmas"/>
     </msg>
     <msg msg_groups="PRAGMA_VERBOSE_DUMP" msg_id="207-5471" msg_severity="WARNING" msg_loc="../image_analysis.cpp:137:9" msg_body="HLS pragma dump">
-        <args ARG_PragmaFunction="reconstruct" ARG_PragmaIsValid="1" ARG_PragmaOptions="port=imageProjs_local mode=m_axi bundle=imageProjs_local" ARG_PragmaType="interface" ClangWarningOption="dump-hls-pragmas"/>
+        <args ARG_PragmaFunction="reconstruct" ARG_PragmaIsValid="1" ARG_PragmaOptions="port=psfSupersample mode=s_axilite bundle=scalar_data" ARG_PragmaType="interface" ClangWarningOption="dump-hls-pragmas"/>
     </msg>
     <msg msg_groups="PRAGMA_VERBOSE_DUMP" msg_id="207-5471" msg_severity="WARNING" msg_loc="../image_analysis.cpp:138:9" msg_body="HLS pragma dump">
-        <args ARG_PragmaFunction="reconstruct" ARG_PragmaIsValid="1" ARG_PragmaOptions="port=imageProjs mode=m_axi bundle=imageProjs" ARG_PragmaType="interface" ClangWarningOption="dump-hls-pragmas"/>
+        <args ARG_PragmaFunction="reconstruct" ARG_PragmaIsValid="1" ARG_PragmaOptions="port=imageProjectionSize mode=s_axilite bundle=scalar_data" ARG_PragmaType="interface" ClangWarningOption="dump-hls-pragmas"/>
     </msg>
-    <msg msg_groups="PRAGMA_VERBOSE_DUMP" msg_id="207-5471" msg_severity="WARNING" msg_loc="../image_analysis.cpp:139:9" msg_body="HLS pragma dump">
-        <args ARG_PragmaFunction="reconstruct" ARG_PragmaIsValid="1" ARG_PragmaOptions="port=imageProjs_local_size mode=m_axi bundle=imageProjs_local_size" ARG_PragmaType="interface" ClangWarningOption="dump-hls-pragmas"/>
+    <msg msg_groups="PRAGMA_VERBOSE_DUMP" msg_id="207-5471" msg_severity="WARNING" msg_loc="../image_analysis.cpp:140:9" msg_body="HLS pragma dump">
+        <args ARG_PragmaFunction="reconstruct" ARG_PragmaIsValid="1" ARG_PragmaOptions="port=imageProjs_local mode=m_axi bundle=imageProjs_local" ARG_PragmaType="interface" ClangWarningOption="dump-hls-pragmas"/>
     </msg>
     <msg msg_groups="PRAGMA_VERBOSE_DUMP" msg_id="207-5471" msg_severity="WARNING" msg_loc="../image_analysis.cpp:141:9" msg_body="HLS pragma dump">
-        <args ARG_PragmaFunction="reconstruct" ARG_PragmaIsValid="1" ARG_PragmaOptions="port=fullImage mode=m_axi bundle=fullImage depth=768*768" ARG_PragmaType="interface" ClangWarningOption="dump-hls-pragmas"/>
+        <args ARG_PragmaFunction="reconstruct" ARG_PragmaIsValid="1" ARG_PragmaOptions="port=imageProjs mode=m_axi bundle=imageProjs" ARG_PragmaType="interface" ClangWarningOption="dump-hls-pragmas"/>
     </msg>
-    <msg msg_groups="PRAGMA_VERBOSE_DUMP" msg_id="207-5471" msg_severity="WARNING" msg_loc="../image_analysis.cpp:143:9" msg_body="HLS pragma dump">
-        <args ARG_PragmaFunction="reconstruct" ARG_PragmaIsValid="1" ARG_PragmaOptions="port=fullImage_rows mode=s_axilite bundle=scalar_data" ARG_PragmaType="interface" ClangWarningOption="dump-hls-pragmas"/>
+    <msg msg_groups="PRAGMA_VERBOSE_DUMP" msg_id="207-5471" msg_severity="WARNING" msg_loc="../image_analysis.cpp:142:9" msg_body="HLS pragma dump">
+        <args ARG_PragmaFunction="reconstruct" ARG_PragmaIsValid="1" ARG_PragmaOptions="port=imageProjs_local_size mode=m_axi bundle=imageProjs_local_size" ARG_PragmaType="interface" ClangWarningOption="dump-hls-pragmas"/>
     </msg>
     <msg msg_groups="PRAGMA_VERBOSE_DUMP" msg_id="207-5471" msg_severity="WARNING" msg_loc="../image_analysis.cpp:144:9" msg_body="HLS pragma dump">
-        <args ARG_PragmaFunction="reconstruct" ARG_PragmaIsValid="1" ARG_PragmaOptions="port=fullImage_cols mode=s_axilite bundle=scalar_data" ARG_PragmaType="interface" ClangWarningOption="dump-hls-pragmas"/>
+        <args ARG_PragmaFunction="reconstruct" ARG_PragmaIsValid="1" ARG_PragmaOptions="port=fullImage mode=m_axi bundle=fullImage depth=400*400" ARG_PragmaType="interface" ClangWarningOption="dump-hls-pragmas"/>
     </msg>
     <msg msg_groups="PRAGMA_VERBOSE_DUMP" msg_id="207-5471" msg_severity="WARNING" msg_loc="../image_analysis.cpp:146:9" msg_body="HLS pragma dump">
-        <args ARG_PragmaFunction="reconstruct" ARG_PragmaIsValid="1" ARG_PragmaOptions="port=emissions mode=m_axi bundle=emissions depth=1024" ARG_PragmaType="interface" ClangWarningOption="dump-hls-pragmas"/>
+        <args ARG_PragmaFunction="reconstruct" ARG_PragmaIsValid="1" ARG_PragmaOptions="port=fullImage_rows mode=s_axilite bundle=scalar_data" ARG_PragmaType="interface" ClangWarningOption="dump-hls-pragmas"/>
     </msg>
-    <msg msg_groups="PRAGMA_VERBOSE_DUMP" msg_id="207-5471" msg_severity="WARNING" msg_loc="../image_analysis.cpp:150:9" msg_body="HLS pragma dump">
+    <msg msg_groups="PRAGMA_VERBOSE_DUMP" msg_id="207-5471" msg_severity="WARNING" msg_loc="../image_analysis.cpp:147:9" msg_body="HLS pragma dump">
+        <args ARG_PragmaFunction="reconstruct" ARG_PragmaIsValid="1" ARG_PragmaOptions="port=fullImage_cols mode=s_axilite bundle=scalar_data" ARG_PragmaType="interface" ClangWarningOption="dump-hls-pragmas"/>
+    </msg>
+    <msg msg_groups="PRAGMA_VERBOSE_DUMP" msg_id="207-5471" msg_severity="WARNING" msg_loc="../image_analysis.cpp:149:9" msg_body="HLS pragma dump">
+        <args ARG_PragmaFunction="reconstruct" ARG_PragmaIsValid="1" ARG_PragmaOptions="port=emissions mode=m_axi bundle=emissions depth=1600" ARG_PragmaType="interface" ClangWarningOption="dump-hls-pragmas"/>
+    </msg>
+    <msg msg_groups="PRAGMA_VERBOSE_DUMP" msg_id="207-5471" msg_severity="WARNING" msg_loc="../image_analysis.cpp:153:9" msg_body="HLS pragma dump">
         <args ARG_PragmaFunction="reconstruct" ARG_PragmaIsValid="1" ARG_PragmaType="dataflow" ClangWarningOption="dump-hls-pragmas"/>
     </msg>
-    <msg msg_groups="PRAGMA_VERBOSE_DUMP" msg_id="207-5471" msg_severity="WARNING" msg_loc="../image_analysis.cpp:151:9" msg_body="HLS pragma dump">
+    <msg msg_groups="PRAGMA_VERBOSE_DUMP" msg_id="207-5471" msg_severity="WARNING" msg_loc="../image_analysis.cpp:154:9" msg_body="HLS pragma dump">
         <args ARG_PragmaFunction="reconstruct" ARG_PragmaIsValid="1" ARG_PragmaOptions="max=1024 min=1024 avg=1024" ARG_PragmaType="loop_tripcount" ClangWarningOption="dump-hls-pragmas"/>
     </msg>
-    <msg msg_groups="PRAGMA_VERBOSE_DUMP" msg_id="207-5471" msg_severity="WARNING" msg_loc="../image_analysis.cpp:162:9" msg_body="HLS pragma dump">
+    <msg msg_groups="PRAGMA_VERBOSE_DUMP" msg_id="207-5471" msg_severity="WARNING" msg_loc="../image_analysis.cpp:165:9" msg_body="HLS pragma dump">
         <args ARG_PragmaFunction="reconstruct" ARG_PragmaIsValid="1" ARG_PragmaOptions="variable=curr_fullImage type=complete" ARG_PragmaType="array_partition" ClangWarningOption="dump-hls-pragmas"/>
     </msg>
-    <msg msg_groups="PRAGMA_VERBOSE_DUMP" msg_id="207-5471" msg_severity="WARNING" msg_loc="../image_analysis.cpp:163:9" msg_body="HLS pragma dump">
+    <msg msg_groups="PRAGMA_VERBOSE_DUMP" msg_id="207-5471" msg_severity="WARNING" msg_loc="../image_analysis.cpp:166:9" msg_body="HLS pragma dump">
         <args ARG_PragmaFunction="reconstruct" ARG_PragmaIsValid="1" ARG_PragmaOptions="variable=curr_localImage type=complete" ARG_PragmaType="array_partition" ClangWarningOption="dump-hls-pragmas"/>
     </msg>
-    <msg msg_groups="PRAGMA_UNROLL" msg_id="214-186" msg_severity="INFO" msg_loc="../image_analysis.cpp:98:0" msg_body="Unrolling loop 'VITIS_LOOP_102_2' (../image_analysis.cpp:102:27) in function 'conv_kernel' completely with a factor of 31">
-        <args Factor="31" LoopLoc="../image_analysis.cpp:102:27" LoopName="VITIS_LOOP_102_2"/>
+    <msg msg_groups="PRAGMA_UNROLL" msg_id="214-186" msg_severity="INFO" msg_loc="../image_analysis.cpp:101:0" msg_body="Unrolling loop 'VITIS_LOOP_105_2' (../image_analysis.cpp:105:27) in function 'conv_kernel' completely with a factor of 31">
+        <args Factor="31" LoopLoc="../image_analysis.cpp:105:27" LoopName="VITIS_LOOP_105_2"/>
     </msg>
     <msg msg_groups="PRAGMA_INLINE" msg_id="214-178" msg_severity="INFO" msg_loc="C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib/src/hls\utils/x_hls_utils.h:322:0" msg_body="Inlining function 'fp_struct&lt;float&gt;::data() const (.7.28.38.47.58)' into 'fp_struct&lt;float&gt;::to_float() const (.25.35.44.55)'">
         <args Callee="fp_struct&lt;float&gt;::data() const (.7.28.38.47.58)" Callee-DebugLoc="File {C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib/src/hls\utils/x_hls_utils.h} Line 309 Column 0" Caller="fp_struct&lt;float&gt;::to_float() const (.25.35.44.55)" Caller-DebugLoc="File {C:\scratch\2024.2\hls_product\495\2024.2\src\shared\hls\clib/src/hls\utils/x_hls_utils.h} Line 322 Column 0"/>
@@ -113,13 +113,13 @@
     <msg msg_groups="PRAGMA_INLINE" msg_id="214-178" msg_severity="INFO" msg_loc="../image_analysis.cpp:7:0" msg_body="Inlining function 'std::round(float)' into 'getLocalImages_single(int, int, int, int, atom_location*, hls::stream&lt;local_image_info, 0&gt;&amp;)'">
         <args Callee="std::round(float)" Callee-DebugLoc="File {F:/Vitis/2024.2/tps/mingw/8.3.0/win64.o/nt\lib\gcc\x86_64-w64-mingw32\8.3.0\include\c++\cmath} Line 1757 Column 0" Caller="getLocalImages_single(int, int, int, int, atom_location*, hls::stream&lt;local_image_info, 0&gt;&amp;)" Caller-DebugLoc="File ../image_analysis.cpp Line 7 Column 0"/>
     </msg>
-    <msg msg_groups="PRAGMA_MISC" msg_id="214-248" msg_severity="INFO" msg_loc="../image_analysis.cpp:153:15" msg_body="Applying array_partition to 'curr_fullImage': Complete partitioning on dimension 1.">
+    <msg msg_groups="PRAGMA_MISC" msg_id="214-248" msg_severity="INFO" msg_loc="../image_analysis.cpp:156:15" msg_body="Applying array_partition to 'curr_fullImage': Complete partitioning on dimension 1.">
         <args Dim="1" Mode="Complete" UOName="curr_fullImage"/>
     </msg>
-    <msg msg_groups="PRAGMA_MISC" msg_id="214-248" msg_severity="INFO" msg_loc="../image_analysis.cpp:154:15" msg_body="Applying array_partition to 'curr_localImage': Complete partitioning on dimension 1.">
+    <msg msg_groups="PRAGMA_MISC" msg_id="214-248" msg_severity="INFO" msg_loc="../image_analysis.cpp:157:15" msg_body="Applying array_partition to 'curr_localImage': Complete partitioning on dimension 1.">
         <args Dim="1" Mode="Complete" UOName="curr_localImage"/>
     </msg>
-    <msg msg_groups="PRAGMA_AGGREGATE" msg_id="214-241" msg_severity="INFO" msg_loc="../image_analysis.cpp:152:34" msg_body="Aggregating fifo (hls::stream) variable 'localImages' with compact=bit mode in 256-bits">
+    <msg msg_groups="PRAGMA_AGGREGATE" msg_id="214-241" msg_severity="INFO" msg_loc="../image_analysis.cpp:155:34" msg_body="Aggregating fifo (hls::stream) variable 'localImages' with compact=bit mode in 256-bits">
         <args AggregateTypeName="compact=bit" Bitwidth="256" HwTyName="fifo (hls::stream)" Name="localImages"/>
     </msg>
 </xilinx:hls_fe_msgs>

@@ -1,17 +1,41 @@
 {
     "1": {
-        "name": "conv_kernel",
+        "name": "Image_extract_Pipeline_VITIS_LOOP_36_1_VITIS_LOOP_37_2",
         "file": "..\/image_analysis.cpp",
-        "fileloc": "98",
-        "instructions": "3852",
-        "total_instructions": "5951",
-        "calls": "3",
-        "basicblocks": "1",
+        "fileloc": "169",
+        "instructions": "217",
+        "total_instructions": "217",
+        "calls": "",
+        "basicblocks": "37",
         "loads": {
-            "L": "1924"
+            "L": "4"
+        },
+        "stores": {
+            "L": "70"
+        },
+        "loops": {
+            "L": "1"
         }
     },
     "2": {
+        "name": "_Z11reconstructiiiP13atom_locationiiPfS1_PiS1_iiS1__for.inc",
+        "file": "image_analysis.cpp",
+        "fileloc": "0",
+        "instructions": "89",
+        "total_instructions": "6543",
+        "calls": "6 4 7 8 3",
+        "basicblocks": "1"
+    },
+    "3": {
+        "name": "post_process",
+        "file": "..\/image_analysis.cpp",
+        "fileloc": "172",
+        "instructions": "15",
+        "total_instructions": "15",
+        "calls": "",
+        "basicblocks": "1"
+    },
+    "4": {
         "name": "getLocalImages_single",
         "file": "image_analysis.cpp",
         "fileloc": "7",
@@ -23,22 +47,10 @@
             "G": "8"
         }
     },
-    "0": {
-        "name": "reconstruct",
-        "file": "image_analysis.cpp",
-        "fileloc": "116",
-        "instructions": "68",
-        "total_instructions": "6607",
-        "calls": "8",
-        "basicblocks": "4",
-        "loops": {
-            "L": "1"
-        }
-    },
-    "3": {
-        "name": "conv_kernel_Pipeline_VITIS_LOOP_101_1",
+    "5": {
+        "name": "conv_kernel_Pipeline_VITIS_LOOP_104_1",
         "file": "..\/image_analysis.cpp",
-        "fileloc": "101",
+        "fileloc": "104",
         "instructions": "2099",
         "total_instructions": "2099",
         "calls": "",
@@ -53,37 +65,22 @@
             "L": "1"
         }
     },
-    "4": {
-        "name": "Image_extract_Pipeline_VITIS_LOOP_77_1_VITIS_LOOP_78_2",
-        "file": "..\/image_analysis.cpp",
-        "fileloc": "166",
-        "instructions": "213",
-        "total_instructions": "213",
-        "calls": "",
-        "basicblocks": "37",
-        "loads": {
-            "L": "4"
-        },
-        "stores": {
-            "L": "70"
-        },
+    "0": {
+        "name": "reconstruct",
+        "file": "image_analysis.cpp",
+        "fileloc": "119",
+        "instructions": "68",
+        "total_instructions": "6611",
+        "calls": "2",
+        "basicblocks": "4",
         "loops": {
             "L": "1"
         }
     },
-    "5": {
-        "name": "post_process",
-        "file": "..\/image_analysis.cpp",
-        "fileloc": "169",
-        "instructions": "15",
-        "total_instructions": "15",
-        "calls": "",
-        "basicblocks": "1"
-    },
     "6": {
-        "name": "dataflow_in_loop_VITIS_LOOP_149_1.1_Block_newFuncRoot_proc",
+        "name": "dataflow_in_loop_VITIS_LOOP_152_1.1_Block_newFuncRoot_proc",
         "file": "..\/image_analysis.cpp",
-        "fileloc": "169",
+        "fileloc": "172",
         "instructions": "6",
         "total_instructions": "6",
         "calls": "",
@@ -92,19 +89,22 @@
     "7": {
         "name": "Image_extract",
         "file": "..\/image_analysis.cpp",
-        "fileloc": "166",
+        "fileloc": "169",
         "instructions": "22",
-        "total_instructions": "235",
-        "calls": "4",
+        "total_instructions": "239",
+        "calls": "1",
         "basicblocks": "1"
     },
     "8": {
-        "name": "_Z11reconstructiiiP13atom_locationiiPfS1_PiS1_iiS1__for.inc",
-        "file": "image_analysis.cpp",
-        "fileloc": "0",
-        "instructions": "89",
-        "total_instructions": "6539",
-        "calls": "6 2 7 1 5",
-        "basicblocks": "1"
+        "name": "conv_kernel",
+        "file": "..\/image_analysis.cpp",
+        "fileloc": "101",
+        "instructions": "3852",
+        "total_instructions": "5951",
+        "calls": "5",
+        "basicblocks": "1",
+        "loads": {
+            "L": "1924"
+        }
     }
 }

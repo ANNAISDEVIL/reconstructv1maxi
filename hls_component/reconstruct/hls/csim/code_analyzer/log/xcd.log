@@ -1,2 +1,2 @@
 XILINX_VITIS='F:\Vitis\2024.2'
-cmdline: 'F:\Vitis\2024.2\bin\xcd.bat' -p 52911 -t c00610d5-557a-11f0-b20a-60f262b6a6ba
+cmdline: 'F:\Vitis\2024.2\bin\xcd.bat' -p 60462 -t 00e9bf38-72b5-11f0-81d2-60f262b6a6b7

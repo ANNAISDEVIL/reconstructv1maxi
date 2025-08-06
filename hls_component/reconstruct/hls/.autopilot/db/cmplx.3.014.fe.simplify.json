@@ -1,9 +1,9 @@
 {
   "0": {
     "basicblocks": 4,
-    "calls": "4",
+    "calls": "2",
     "file": "image_analysis.cpp",
-    "fileloc": 116,
+    "fileloc": 119,
     "instructions": 35,
     "name": "reconstruct",
     "total_instructions": 5030
@@ -19,31 +19,7 @@
   },
   "2": {
     "basicblocks": 1,
-    "calls": "7 1 7 1 7 1 7 1",
-    "file": "image_analysis.cpp",
-    "fileloc": 7,
-    "instructions": 39,
-    "loads": {
-      "L": 1
-    },
-    "name": "getLocalImages_single",
-    "total_instructions": 318
-  },
-  "3": {
-    "basicblocks": 37,
-    "calls": "",
-    "file": "image_analysis.cpp",
-    "fileloc": 66,
-    "instructions": 314,
-    "name": "Image_extract",
-    "stores": {
-      "L": 63
-    },
-    "total_instructions": 321
-  },
-  "4": {
-    "basicblocks": 1,
-    "calls": "2 3 6 5",
+    "calls": "3 7 6 4",
     "file": "image_analysis.cpp",
     "fileloc": 0,
     "instructions": 341,
@@ -56,11 +32,23 @@
     },
     "total_instructions": 4995
   },
-  "5": {
+  "3": {
+    "basicblocks": 1,
+    "calls": "5 1 5 1 5 1 5 1",
+    "file": "image_analysis.cpp",
+    "fileloc": 7,
+    "instructions": 39,
+    "loads": {
+      "L": 1
+    },
+    "name": "getLocalImages_single",
+    "total_instructions": 318
+  },
+  "4": {
     "basicblocks": 1,
     "calls": "",
     "file": "image_analysis.cpp",
-    "fileloc": 112,
+    "fileloc": 115,
     "instructions": 4,
     "name": "post_process",
     "stores": {
@@ -68,11 +56,23 @@
     },
     "total_instructions": 4
   },
+  "5": {
+    "basicblocks": 5,
+    "calls": "",
+    "file": "hls_round.h",
+    "fileloc": 159,
+    "instructions": 38,
+    "loads": {
+      "G": 2
+    },
+    "name": "generic_round<float>",
+    "total_instructions": 38
+  },
   "6": {
     "basicblocks": 3,
     "calls": "",
     "file": "image_analysis.cpp",
-    "fileloc": 98,
+    "fileloc": 101,
     "instructions": 4011,
     "loads": {
       "L": 1924
@@ -84,15 +84,15 @@
     "total_instructions": 4011
   },
   "7": {
-    "basicblocks": 5,
+    "basicblocks": 37,
     "calls": "",
-    "file": "hls_round.h",
-    "fileloc": 159,
-    "instructions": 38,
-    "loads": {
-      "G": 2
+    "file": "image_analysis.cpp",
+    "fileloc": 25,
+    "instructions": 314,
+    "name": "Image_extract",
+    "stores": {
+      "L": 63
     },
-    "name": "generic_round<float>",
-    "total_instructions": 38
+    "total_instructions": 321
   }
 }

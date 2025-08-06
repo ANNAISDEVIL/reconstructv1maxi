@@ -1,7 +1,7 @@
 <profile>
 
 <section name = "Vitis HLS Report for 'conv_kernel'" level="0">
-<item name = "Date">Mon Jun 30 08:25:40 2025
+<item name = "Date">Wed Aug  6 13:39:27 2025
 </item>
 <item name = "Version">2024.2 (Build 5238294 on Nov  8 2024)</item>
 <item name = "Project">reconstruct</item>
@@ -31,7 +31,7 @@
 <section name = "" level="1">
 <item name = "Instance"><table name="" hasTotal="0">
 <keys size="9">Instance, Module, min, max, min, max, min, max, Type</keys>
-<column name="grp_conv_kernel_Pipeline_VITIS_LOOP_101_1_fu_18054">conv_kernel_Pipeline_VITIS_LOOP_101_1, 3849, 3849, 38.490 us, 38.490 us, 3844, 3844, loop auto-rewind stp (delay=0 clock cycles(s))</column>
+<column name="grp_conv_kernel_Pipeline_VITIS_LOOP_104_1_fu_18054">conv_kernel_Pipeline_VITIS_LOOP_104_1, 3849, 3849, 38.490 us, 38.490 us, 3844, 3844, loop auto-rewind stp (delay=0 clock cycles(s))</column>
 </table>
 </item>
 <item name = "Loop"><table name="" hasTotal="0">

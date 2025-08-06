@@ -4,7 +4,7 @@
 == Synthesis Summary Report of 'reconstruct'
 ================================================================
 + General Information: 
-    * Date:           Mon Jun 30 08:26:18 2025
+    * Date:           Wed Aug  6 13:40:13 2025
     * Version:        2024.2 (Build 5238294 on Nov  8 2024)
     * Project:        reconstruct
     * Solution:       hls (Vivado IP Flow Target)
@@ -19,17 +19,17 @@
     |                             Modules                             |  Issue |       | Latency |  Latency  | Iteration|         | Trip |          |          |          |            |            |     |
     |                             & Loops                             |  Type  | Slack | (cycles)|    (ns)   |  Latency | Interval| Count| Pipelined|   BRAM   |    DSP   |     FF     |     LUT    | URAM|
     +-----------------------------------------------------------------+--------+-------+---------+-----------+----------+---------+------+----------+----------+----------+------------+------------+-----+
-    |+ reconstruct                                                    |  Timing|  -0.41|  3961855|  3.962e+07|         -|  3961856|     -|        no|  12 (~0%)|  18 (~0%)|  80247 (9%)|  32993 (7%)|    -|
-    | o VITIS_LOOP_149_1                                              |       -|   7.30|  3961854|  3.962e+07|      4891|        -|  1024|        no|         -|         -|           -|           -|    -|
-    |  + dataflow_in_loop_VITIS_LOOP_149_1_1*                         |  Timing|  -0.41|     4888|  4.888e+04|         -|     3868|     -|  dataflow|         -|  18 (~0%)|  76027 (8%)|  28151 (6%)|    -|
+    |+ reconstruct                                                    |  Timing|  -0.41|  3961855|  3.962e+07|         -|  3961856|     -|        no|  12 (~0%)|  18 (~0%)|  80255 (9%)|  33065 (7%)|    -|
+    | o VITIS_LOOP_152_1                                              |       -|   7.30|  3961854|  3.962e+07|      4891|        -|  1024|        no|         -|         -|           -|           -|    -|
+    |  + dataflow_in_loop_VITIS_LOOP_152_1_1*                         |  Timing|  -0.41|     4888|  4.888e+04|         -|     3868|     -|  dataflow|         -|  18 (~0%)|  76035 (8%)|  28223 (6%)|    -|
     |   + getLocalImages_single                                       |       -|   0.00|       26|    260.000|         -|       26|     -|        no|         -|  10 (~0%)|  1639 (~0%)|   4874 (1%)|    -|
-    |   + Image_extract                                               |       -|   0.00|      982|  9.820e+03|         -|      982|     -|        no|         -|         -|   581 (~0%)|   685 (~0%)|    -|
-    |    + Image_extract_Pipeline_VITIS_LOOP_77_1_VITIS_LOOP_78_2     |       -|   0.00|      972|  9.720e+03|         -|      972|     -|        no|         -|         -|   354 (~0%)|   437 (~0%)|    -|
-    |     o VITIS_LOOP_77_1_VITIS_LOOP_78_2                           |       -|   7.30|      970|  9.700e+03|        11|        1|   961|       yes|         -|         -|           -|           -|    -|
+    |   + Image_extract                                               |       -|   0.00|      982|  9.820e+03|         -|      982|     -|        no|         -|         -|   589 (~0%)|   757 (~0%)|    -|
+    |    + Image_extract_Pipeline_VITIS_LOOP_36_1_VITIS_LOOP_37_2     |       -|   0.00|      972|  9.720e+03|         -|      972|     -|        no|         -|         -|   354 (~0%)|   509 (~0%)|    -|
+    |     o VITIS_LOOP_36_1_VITIS_LOOP_37_2                           |       -|   7.30|      970|  9.700e+03|        11|        1|   961|       yes|         -|         -|           -|           -|    -|
     |   + conv_kernel                                                 |  Timing|  -0.41|     3867|  3.867e+04|         -|     3867|     -|        no|         -|   5 (~0%)|  64932 (7%)|  19822 (4%)|    -|
-    |    + conv_kernel_Pipeline_VITIS_LOOP_101_1                      |  Timing|  -0.41|     3849|  3.849e+04|         -|     3849|     -|        no|         -|   5 (~0%)|  3375 (~0%)|  10658 (2%)|    -|
-    |     o VITIS_LOOP_101_1                                          |      II|   7.30|     3847|  3.847e+04|       128|      124|    31|       yes|         -|         -|           -|           -|    -|
-    |   + dataflow_in_loop_VITIS_LOOP_149_1_1_Block_newFuncRoot_proc  |       -|   6.21|        0|      0.000|         -|        0|     -|        no|         -|         -|    66 (~0%)|    91 (~0%)|    -|
+    |    + conv_kernel_Pipeline_VITIS_LOOP_104_1                      |  Timing|  -0.41|     3849|  3.849e+04|         -|     3849|     -|        no|         -|   5 (~0%)|  3375 (~0%)|  10658 (2%)|    -|
+    |     o VITIS_LOOP_104_1                                          |      II|   7.30|     3847|  3.847e+04|       128|      124|    31|       yes|         -|         -|           -|           -|    -|
+    |   + dataflow_in_loop_VITIS_LOOP_152_1_1_Block_newFuncRoot_proc  |       -|   6.21|        0|      0.000|         -|        0|     -|        no|         -|         -|    66 (~0%)|    91 (~0%)|    -|
     |   + post_process                                                |       -|   0.00|       18|    180.000|         -|       18|     -|        no|         -|   3 (~0%)|   372 (~0%)|   274 (~0%)|    -|
     +-----------------------------------------------------------------+--------+-------+---------+-----------+----------+---------+------+----------+----------+----------+------------+------------+-----+
 
@@ -154,8 +154,8 @@
 +------------------------+-----------+--------+-------+-----------------+-----------------------------+
 | HW Interface           | Direction | Length | Width | Loop            | Loop Location               |
 +------------------------+-----------+--------+-------+-----------------+-----------------------------+
-| m_axi_fullImage        | read      | 31     | 32    | VITIS_LOOP_78_2 | ../image_analysis.cpp:78:26 |
-| m_axi_imageProjs_local | read      | 961    | 32    | VITIS_LOOP_77_1 | ../image_analysis.cpp:77:22 |
+| m_axi_fullImage        | read      | 31     | 32    | VITIS_LOOP_37_2 | ../image_analysis.cpp:37:26 |
+| m_axi_imageProjs_local | read      | 961    | 32    | VITIS_LOOP_36_1 | ../image_analysis.cpp:36:22 |
 +------------------------+-----------+--------+-------+-----------------+-----------------------------+
 
 * All M_AXI Variable Accesses
@@ -163,11 +163,11 @@
 | HW Interface           | Variable         | Access Location             | Direction | Burst Status | Length | Loop            | Loop Location               | Resolution | Problem                                                                                                                          |
 +------------------------+------------------+-----------------------------+-----------+--------------+--------+-----------------+-----------------------------+------------+----------------------------------------------------------------------------------------------------------------------------------+
 | m_axi_atomLocations    | atomLocations    | ../image_analysis.cpp:8:17  | read      | Fail         |        |                 |                             | 214-378    | Unsupported access data type. Expected integer or floating point type but received %struct.atom_location = type { float, float } |
-| m_axi_fullImage        | fullImage        | ../image_analysis.cpp:81:36 | read      | Widen Fail   |        | VITIS_LOOP_78_2 | ../image_analysis.cpp:78:26 | 214-353    | Could not widen since type float size is greater than or equal to the max_widen_bitwidth threshold of 0                          |
-| m_axi_fullImage        | fullImage        | ../image_analysis.cpp:81:36 | read      | Fail         |        | VITIS_LOOP_77_1 | ../image_analysis.cpp:77:22 | 214-230    | Stride is incompatible                                                                                                           |
-| m_axi_fullImage        | fullImage        | ../image_analysis.cpp:81:36 | read      | Inferred     | 31     | VITIS_LOOP_78_2 | ../image_analysis.cpp:78:26 |            |                                                                                                                                  |
-| m_axi_imageProjs_local | imageProjs_local | ../image_analysis.cpp:80:37 | read      | Widen Fail   |        | VITIS_LOOP_78_2 | ../image_analysis.cpp:78:26 | 214-353    | Could not widen since type float size is greater than or equal to the max_widen_bitwidth threshold of 0                          |
-| m_axi_imageProjs_local | imageProjs_local | ../image_analysis.cpp:80:37 | read      | Inferred     | 961    | VITIS_LOOP_77_1 | ../image_analysis.cpp:77:22 |            |                                                                                                                                  |
+| m_axi_fullImage        | fullImage        | ../image_analysis.cpp:40:36 | read      | Widen Fail   |        | VITIS_LOOP_37_2 | ../image_analysis.cpp:37:26 | 214-353    | Could not widen since type float size is greater than or equal to the max_widen_bitwidth threshold of 0                          |
+| m_axi_fullImage        | fullImage        | ../image_analysis.cpp:40:36 | read      | Fail         |        | VITIS_LOOP_36_1 | ../image_analysis.cpp:36:22 | 214-230    | Stride is incompatible                                                                                                           |
+| m_axi_fullImage        | fullImage        | ../image_analysis.cpp:40:36 | read      | Inferred     | 31     | VITIS_LOOP_37_2 | ../image_analysis.cpp:37:26 |            |                                                                                                                                  |
+| m_axi_imageProjs_local | imageProjs_local | ../image_analysis.cpp:39:37 | read      | Widen Fail   |        | VITIS_LOOP_37_2 | ../image_analysis.cpp:37:26 | 214-353    | Could not widen since type float size is greater than or equal to the max_widen_bitwidth threshold of 0                          |
+| m_axi_imageProjs_local | imageProjs_local | ../image_analysis.cpp:39:37 | read      | Inferred     | 961    | VITIS_LOOP_36_1 | ../image_analysis.cpp:36:22 |            |                                                                                                                                  |
 +------------------------+------------------+-----------------------------+-----------+--------------+--------+-----------------+-----------------------------+------------+----------------------------------------------------------------------------------------------------------------------------------+
 
     * Resolution URL: docs.xilinx.com/access/sources/dita/topic?Doc_Version=2024.2%20English&url=ug1448-hls-guidance&resourceid=XXX-YYY.html (replace XXX-YYY with column value)
@@ -179,7 +179,7 @@
 | Name                                                           | DSP | Pragma | Variable      | Op        | Impl                     | Latency |
 +----------------------------------------------------------------+-----+--------+---------------+-----------+--------------------------+---------+
 | + reconstruct                                                  | 18  |        |               |           |                          |         |
-|  + dataflow_in_loop_VITIS_LOOP_149_1_1                         | 18  |        |               |           |                          |         |
+|  + dataflow_in_loop_VITIS_LOOP_152_1_1                         | 18  |        |               |           |                          |         |
 |   + getLocalImages_single                                      | 10  |        |               |           |                          |         |
 |     add_ln8_fu_334_p2                                          |     |        | add_ln8       | add       | fabric                   | 0       |
 |     icmp_ln8_fu_344_p2                                         |     |        | icmp_ln8      | setne     | auto                     | 0       |
@@ -265,20 +265,20 @@
 |     result_10_fu_1648_p2                                       |     |        | result_10     | sub       | fabric                   | 0       |
 |     result_fu_1654_p3                                          |     |        | result        | select    | auto_sel                 | 0       |
 |   + Image_extract                                              | 0   |        |               |           |                          |         |
-|    + Image_extract_Pipeline_VITIS_LOOP_77_1_VITIS_LOOP_78_2    | 0   |        |               |           |                          |         |
-|      select_ln77_fu_1184_p3                                    |     |        | select_ln77   | select    | auto_sel                 | 0       |
+|    + Image_extract_Pipeline_VITIS_LOOP_36_1_VITIS_LOOP_37_2    | 0   |        |               |           |                          |         |
+|      select_ln36_fu_1184_p3                                    |     |        | select_ln36   | select    | auto_sel                 | 0       |
 |      i_fu_1192_p3                                              |     |        | i             | select    | auto_sel                 | 0       |
 |      first_iter_0_fu_1200_p2                                   |     |        | first_iter_0  | seteq     | auto                     | 0       |
-|      tmp2_i_fu_1210_p2                                         |     |        | tmp2_i        | add       | fabric                   | 0       |
-|      add_ln77_fu_1224_p2                                       |     |        | add_ln77      | add       | fabric                   | 0       |
-|      add_ln77_1_fu_1242_p2                                     |     |        | add_ln77_1    | add       | fabric                   | 0       |
-|      add_ln77_3_fu_1268_p2                                     |     |        | add_ln77_3    | add       | fabric                   | 0       |
-|      j_fu_1278_p2                                              |     |        | j             | add       | fabric                   | 0       |
-|      icmp_ln78_fu_1284_p2                                      |     |        | icmp_ln78     | seteq     | auto                     | 0       |
-|      add_ln77_2_fu_1290_p2                                     |     |        | add_ln77_2    | add       | fabric                   | 0       |
-|      icmp_ln77_fu_1296_p2                                      |     |        | icmp_ln77     | seteq     | auto                     | 0       |
+|      tmp_i_fu_1210_p2                                          |     |        | tmp_i         | add       | fabric                   | 0       |
+|      p_sub_fu_1228_p2                                          |     |        | p_sub         | sub       | fabric                   | 0       |
+|      add_ln36_1_fu_1264_p2                                     |     |        | add_ln36_1    | add       | fabric                   | 0       |
+|      add_ln36_3_fu_1290_p2                                     |     |        | add_ln36_3    | add       | fabric                   | 0       |
+|      j_fu_1300_p2                                              |     |        | j             | add       | fabric                   | 0       |
+|      icmp_ln37_fu_1306_p2                                      |     |        | icmp_ln37     | seteq     | auto                     | 0       |
+|      add_ln36_2_fu_1312_p2                                     |     |        | add_ln36_2    | add       | fabric                   | 0       |
+|      icmp_ln36_fu_1318_p2                                      |     |        | icmp_ln36     | seteq     | auto                     | 0       |
 |   + conv_kernel                                                | 5   |        |               |           |                          |         |
-|    + conv_kernel_Pipeline_VITIS_LOOP_101_1                     | 5   |        |               |           |                          |         |
+|    + conv_kernel_Pipeline_VITIS_LOOP_104_1                     | 5   |        |               |           |                          |         |
 |      sparsemux_63_5_32_1_1_U165                                |     |        | tmp           | sparsemux | compactencoding_dontcare | 0       |
 |      sparsemux_63_5_32_1_1_U166                                |     |        | tmp_s         | sparsemux | compactencoding_dontcare | 0       |
 |      fmul_32ns_32ns_32_3_max_dsp_1_U164                        | 3   |        | mul           | fmul      | maxdsp                   | 2       |
@@ -435,9 +435,9 @@
 |      fadd_32ns_32ns_32_4_full_dsp_1_U163                       | 2   |        | add_29        | fadd      | fulldsp                  | 3       |
 |      fadd_32ns_32ns_32_4_full_dsp_1_U163                       | 2   |        | add16_29      | fadd      | fulldsp                  | 3       |
 |      i_fu_23762_p2                                             |     |        | i             | add       | fabric                   | 0       |
-|      icmp_ln101_fu_23748_p2                                    |     |        | icmp_ln101    | seteq     | auto                     | 0       |
-|   + dataflow_in_loop_VITIS_LOOP_149_1_1_Block_newFuncRoot_proc | 0   |        |               |           |                          |         |
-|     add_ln169_fu_36_p2                                         |     |        | add_ln169     | add       | fabric                   | 0       |
+|      icmp_ln104_fu_23748_p2                                    |     |        | icmp_ln104    | seteq     | auto                     | 0       |
+|   + dataflow_in_loop_VITIS_LOOP_152_1_1_Block_newFuncRoot_proc | 0   |        |               |           |                          |         |
+|     add_ln172_fu_36_p2                                         |     |        | add_ln172     | add       | fabric                   | 0       |
 |   + post_process                                               | 3   |        |               |           |                          |         |
 |     fdiv_32ns_32ns_32_9_no_dsp_1_U2216                         |     |        | div_i         | fdiv      | fabric                   | 8       |
 |     fmul_32ns_32ns_32_3_max_dsp_1_U2215                        | 3   |        | mul_i         | fmul      | maxdsp                   | 2       |
@@ -459,7 +459,7 @@
 |   fullImage_m_axi_U                    | interface      | m_axi      | 2    |      |        |                        |      |         |                  |
 |   imageProjs_m_axi_U                   | interface      | m_axi      | 2    |      |        |                        |      |         |                  |
 |   imageProjs_local_m_axi_U             | interface      | m_axi      | 2    |      |        |                        |      |         |                  |
-|  + dataflow_in_loop_VITIS_LOOP_149_1_1 |                |            | 0    | 0    |        |                        |      |         |                  |
+|  + dataflow_in_loop_VITIS_LOOP_152_1_1 |                |            | 0    | 0    |        |                        |      |         |                  |
 |    call_ret_U                          | fifo channel   | task level |      |      |        | call_ret               | srl  | 0       | 64, 4, 1         |
 |    localImages_U                       | fifo channel   | stream     |      |      |        | localImages            | srl  | 0       | 256, 4, 1        |
 |    curr_fullImage_16_U                 | ram_2p channel | pipo       | 2    |      |        | curr_fullImage_16      | auto | 1       | 32, 31, 2        |
@@ -540,25 +540,25 @@
 +-----------------+--------------------------------------------------------------------+-----------------------------------------------------------------+
 | Type            | Options                                                            | Location                                                        |
 +-----------------+--------------------------------------------------------------------+-----------------------------------------------------------------+
-| unroll          |                                                                    | ../image_analysis.cpp:103 in conv_kernel                        |
-| interface       | port=return mode=s_axilite bundle=control                          | ../image_analysis.cpp:126 in reconstruct, return                |
-| interface       | port=atomLocationsSize mode=s_axilite bundle=scalar_data           | ../image_analysis.cpp:128 in reconstruct, atomLocationsSize     |
-| interface       | port=projShape0 mode=s_axilite bundle=scalar_data                  | ../image_analysis.cpp:129 in reconstruct, projShape0            |
-| interface       | port=projShape1 mode=s_axilite bundle=scalar_data                  | ../image_analysis.cpp:130 in reconstruct, projShape1            |
-| interface       | port=atomLocations mode=m_axi bundle=atomLocations depth=1024      | ../image_analysis.cpp:132 in reconstruct, atomLocations         |
-| interface       | port=psfSupersample mode=s_axilite bundle=scalar_data              | ../image_analysis.cpp:134 in reconstruct, psfSupersample        |
-| interface       | port=imageProjectionSize mode=s_axilite bundle=scalar_data         | ../image_analysis.cpp:135 in reconstruct, imageProjectionSize   |
-| interface       | port=imageProjs_local mode=m_axi bundle=imageProjs_local           | ../image_analysis.cpp:137 in reconstruct, imageProjs_local      |
-| interface       | port=imageProjs mode=m_axi bundle=imageProjs                       | ../image_analysis.cpp:138 in reconstruct, imageProjs            |
-| interface       | port=imageProjs_local_size mode=m_axi bundle=imageProjs_local_size | ../image_analysis.cpp:139 in reconstruct, imageProjs_local_size |
-| interface       | port=fullImage mode=m_axi bundle=fullImage depth=768*768           | ../image_analysis.cpp:141 in reconstruct, fullImage             |
-| interface       | port=fullImage_rows mode=s_axilite bundle=scalar_data              | ../image_analysis.cpp:143 in reconstruct, fullImage_rows        |
-| interface       | port=fullImage_cols mode=s_axilite bundle=scalar_data              | ../image_analysis.cpp:144 in reconstruct, fullImage_cols        |
-| interface       | port=emissions mode=m_axi bundle=emissions depth=1024              | ../image_analysis.cpp:146 in reconstruct, emissions             |
-| dataflow        |                                                                    | ../image_analysis.cpp:150 in reconstruct                        |
-| loop_tripcount  | max=1024 min=1024 avg=1024                                         | ../image_analysis.cpp:151 in reconstruct                        |
-| array_partition | variable=curr_fullImage type=complete                              | ../image_analysis.cpp:162 in reconstruct, curr_fullImage        |
-| array_partition | variable=curr_localImage type=complete                             | ../image_analysis.cpp:163 in reconstruct, curr_localImage       |
+| unroll          |                                                                    | ../image_analysis.cpp:106 in conv_kernel                        |
+| interface       | port=return mode=s_axilite bundle=control                          | ../image_analysis.cpp:129 in reconstruct, return                |
+| interface       | port=atomLocationsSize mode=s_axilite bundle=scalar_data           | ../image_analysis.cpp:131 in reconstruct, atomLocationsSize     |
+| interface       | port=projShape0 mode=s_axilite bundle=scalar_data                  | ../image_analysis.cpp:132 in reconstruct, projShape0            |
+| interface       | port=projShape1 mode=s_axilite bundle=scalar_data                  | ../image_analysis.cpp:133 in reconstruct, projShape1            |
+| interface       | port=atomLocations mode=m_axi bundle=atomLocations depth=1600      | ../image_analysis.cpp:135 in reconstruct, atomLocations         |
+| interface       | port=psfSupersample mode=s_axilite bundle=scalar_data              | ../image_analysis.cpp:137 in reconstruct, psfSupersample        |
+| interface       | port=imageProjectionSize mode=s_axilite bundle=scalar_data         | ../image_analysis.cpp:138 in reconstruct, imageProjectionSize   |
+| interface       | port=imageProjs_local mode=m_axi bundle=imageProjs_local           | ../image_analysis.cpp:140 in reconstruct, imageProjs_local      |
+| interface       | port=imageProjs mode=m_axi bundle=imageProjs                       | ../image_analysis.cpp:141 in reconstruct, imageProjs            |
+| interface       | port=imageProjs_local_size mode=m_axi bundle=imageProjs_local_size | ../image_analysis.cpp:142 in reconstruct, imageProjs_local_size |
+| interface       | port=fullImage mode=m_axi bundle=fullImage depth=400*400           | ../image_analysis.cpp:144 in reconstruct, fullImage             |
+| interface       | port=fullImage_rows mode=s_axilite bundle=scalar_data              | ../image_analysis.cpp:146 in reconstruct, fullImage_rows        |
+| interface       | port=fullImage_cols mode=s_axilite bundle=scalar_data              | ../image_analysis.cpp:147 in reconstruct, fullImage_cols        |
+| interface       | port=emissions mode=m_axi bundle=emissions depth=1600              | ../image_analysis.cpp:149 in reconstruct, emissions             |
+| dataflow        |                                                                    | ../image_analysis.cpp:153 in reconstruct                        |
+| loop_tripcount  | max=1024 min=1024 avg=1024                                         | ../image_analysis.cpp:154 in reconstruct                        |
+| array_partition | variable=curr_fullImage type=complete                              | ../image_analysis.cpp:165 in reconstruct, curr_fullImage        |
+| array_partition | variable=curr_localImage type=complete                             | ../image_analysis.cpp:166 in reconstruct, curr_localImage       |
 +-----------------+--------------------------------------------------------------------+-----------------------------------------------------------------+
 
 

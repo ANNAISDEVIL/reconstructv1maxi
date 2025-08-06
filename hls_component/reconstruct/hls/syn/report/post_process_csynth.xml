@@ -34,7 +34,7 @@
 <SummaryOfViolations>
 <IssueType>-</IssueType>
 <ViolationType>-</ViolationType>
-<SourceLocation>../image_analysis.cpp:112~../image_analysis.cpp:169</SourceLocation>
+<SourceLocation>../image_analysis.cpp:115~../image_analysis.cpp:172</SourceLocation>
 </SummaryOfViolations>
 </PerformanceEstimates>
 

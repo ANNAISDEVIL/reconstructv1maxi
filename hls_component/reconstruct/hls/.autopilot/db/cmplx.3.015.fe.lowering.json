@@ -1,33 +1,27 @@
 {
   "0": {
     "basicblocks": 4,
-    "calls": "1",
+    "calls": "5",
     "file": "image_analysis.cpp",
-    "fileloc": 116,
+    "fileloc": 119,
     "instructions": 55,
     "name": "reconstruct",
     "total_instructions": 5088
   },
   "1": {
-    "basicblocks": 1,
-    "calls": "7 6 2 5",
+    "basicblocks": 3,
+    "calls": "6 3 6 3 6 3 6 3",
     "file": "image_analysis.cpp",
-    "fileloc": 0,
-    "instructions": 346,
-    "loads": {
-      "L": 3
-    },
-    "name": "_Z11reconstructiiiP13atom_locationiiPfS1_PiS1_iiS1__for.inc",
-    "stores": {
-      "L": 2
-    },
-    "total_instructions": 5033
+    "fileloc": 7,
+    "instructions": 62,
+    "name": "getLocalImages_single",
+    "total_instructions": 341
   },
   "2": {
     "basicblocks": 3,
     "calls": "",
     "file": "image_analysis.cpp",
-    "fileloc": 98,
+    "fileloc": 101,
     "instructions": 4011,
     "loads": {
       "L": 1924
@@ -48,6 +42,33 @@
     "total_instructions": 24
   },
   "4": {
+    "basicblocks": 37,
+    "calls": "",
+    "file": "image_analysis.cpp",
+    "fileloc": 25,
+    "instructions": 320,
+    "name": "Image_extract",
+    "stores": {
+      "L": 63
+    },
+    "total_instructions": 328
+  },
+  "5": {
+    "basicblocks": 1,
+    "calls": "1 4 2 7",
+    "file": "image_analysis.cpp",
+    "fileloc": 0,
+    "instructions": 346,
+    "loads": {
+      "L": 3
+    },
+    "name": "_Z11reconstructiiiP13atom_locationiiPfS1_PiS1_iiS1__for.inc",
+    "stores": {
+      "L": 2
+    },
+    "total_instructions": 5033
+  },
+  "6": {
     "basicblocks": 5,
     "calls": "",
     "file": "hls_round.h",
@@ -59,34 +80,13 @@
     "name": "generic_round<float>",
     "total_instructions": 38
   },
-  "5": {
+  "7": {
     "basicblocks": 1,
     "calls": "",
     "file": "image_analysis.cpp",
-    "fileloc": 112,
+    "fileloc": 115,
     "instructions": 7,
     "name": "post_process",
     "total_instructions": 7
-  },
-  "6": {
-    "basicblocks": 37,
-    "calls": "",
-    "file": "image_analysis.cpp",
-    "fileloc": 66,
-    "instructions": 320,
-    "name": "Image_extract",
-    "stores": {
-      "L": 63
-    },
-    "total_instructions": 328
-  },
-  "7": {
-    "basicblocks": 3,
-    "calls": "4 3 4 3 4 3 4 3",
-    "file": "image_analysis.cpp",
-    "fileloc": 7,
-    "instructions": 62,
-    "name": "getLocalImages_single",
-    "total_instructions": 341
   }
 }

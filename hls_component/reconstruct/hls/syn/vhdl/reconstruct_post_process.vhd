@@ -141,7 +141,7 @@ attribute shreg_extract : string;
     attribute fsm_encoding of ap_CS_fsm_state12 : signal is "none";
     signal grp_fu_88_p2 : STD_LOGIC_VECTOR (31 downto 0);
     signal mul_i_reg_146 : STD_LOGIC_VECTOR (31 downto 0);
-    signal sext_ln113_fu_106_p1 : STD_LOGIC_VECTOR (63 downto 0);
+    signal sext_ln116_fu_106_p1 : STD_LOGIC_VECTOR (63 downto 0);
     signal ap_CS_fsm_state11 : STD_LOGIC;
     attribute fsm_encoding of ap_CS_fsm_state11 : signal is "none";
     signal ap_CS_fsm_state2 : STD_LOGIC;
@@ -289,7 +289,7 @@ begin
     begin
         if (ap_clk'event and ap_clk = '1') then
             if ((ap_const_logic_1 = ap_CS_fsm_state12)) then
-                emissions_addr_reg_140 <= sext_ln113_fu_106_p1;
+                emissions_addr_reg_140 <= sext_ln116_fu_106_p1;
             end if;
         end if;
     end process;
@@ -561,7 +561,7 @@ begin
         end if; 
     end process;
 
-        sext_ln113_fu_106_p1 <= std_logic_vector(IEEE.numeric_std.resize(signed(trunc_ln_fu_96_p4),64));
+        sext_ln116_fu_106_p1 <= std_logic_vector(IEEE.numeric_std.resize(signed(trunc_ln_fu_96_p4),64));
 
     trunc_ln_fu_96_p4 <= dout(63 downto 2);
 end behav;

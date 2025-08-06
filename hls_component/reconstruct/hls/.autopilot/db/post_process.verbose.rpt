@@ -3,7 +3,7 @@
 ================================================================
 == Vitis HLS Report for 'post_process'
 ================================================================
-* Date:           Mon Jun 30 08:26:05 2025
+* Date:           Wed Aug  6 13:39:59 2025
 
 * Version:        2024.2 (Build 5238294 on Nov  8 2024)
 * Project:        reconstruct
@@ -243,71 +243,71 @@ IsGatedGlobalClock: 0
 * FSM state operations: 
 
 State 1 <SV = 0> <Delay = 1.83>
-ST_1 : Operation 20 [1/1] (1.83ns)   --->   "%curr_imageProjs_read = read i32 @_ssdm_op_Read.ap_auto.float, i32 %curr_imageProjs" [../image_analysis.cpp:112->../image_analysis.cpp:169]   --->   Operation 20 'read' 'curr_imageProjs_read' <Predicate = true> <Delay = 1.83> <CoreInst = "FIFO_SRL">   --->   Core 80 'FIFO_SRL' <Latency = 0> <II = 1> <Delay = 1.83> <Storage> <Opcode : 'read' 'write' 'nbread' 'nbwrite'> <Ports = 0> <Width = -1> <Depth = -1> <FIFO>
-ST_1 : Operation 21 [1/1] (1.83ns)   --->   "%projSumUsed_read = read i32 @_ssdm_op_Read.ap_auto.float, i32 %projSumUsed" [../image_analysis.cpp:112->../image_analysis.cpp:169]   --->   Operation 21 'read' 'projSumUsed_read' <Predicate = true> <Delay = 1.83> <CoreInst = "FIFO_SRL">   --->   Core 80 'FIFO_SRL' <Latency = 0> <II = 1> <Delay = 1.83> <Storage> <Opcode : 'read' 'write' 'nbread' 'nbwrite'> <Ports = 0> <Width = -1> <Depth = -1> <FIFO>
+ST_1 : Operation 20 [1/1] (1.83ns)   --->   "%curr_imageProjs_read = read i32 @_ssdm_op_Read.ap_auto.float, i32 %curr_imageProjs" [../image_analysis.cpp:115->../image_analysis.cpp:172]   --->   Operation 20 'read' 'curr_imageProjs_read' <Predicate = true> <Delay = 1.83> <CoreInst = "FIFO_SRL">   --->   Core 80 'FIFO_SRL' <Latency = 0> <II = 1> <Delay = 1.83> <Storage> <Opcode : 'read' 'write' 'nbread' 'nbwrite'> <Ports = 0> <Width = -1> <Depth = -1> <FIFO>
+ST_1 : Operation 21 [1/1] (1.83ns)   --->   "%projSumUsed_read = read i32 @_ssdm_op_Read.ap_auto.float, i32 %projSumUsed" [../image_analysis.cpp:115->../image_analysis.cpp:172]   --->   Operation 21 'read' 'projSumUsed_read' <Predicate = true> <Delay = 1.83> <CoreInst = "FIFO_SRL">   --->   Core 80 'FIFO_SRL' <Latency = 0> <II = 1> <Delay = 1.83> <Storage> <Opcode : 'read' 'write' 'nbread' 'nbwrite'> <Ports = 0> <Width = -1> <Depth = -1> <FIFO>
 
 State 2 <SV = 1> <Delay = 7.05>
-ST_2 : Operation 22 [9/9] (7.05ns)   --->   "%div_i = fdiv i32 %curr_imageProjs_read, i32 %projSumUsed_read" [../image_analysis.cpp:113->../image_analysis.cpp:169]   --->   Operation 22 'fdiv' 'div_i' <Predicate = true> <Delay = 7.05> <CoreInst = "FDiv">   --->   Core 20 'FDiv' <Latency = 8> <II = 1> <Delay = 7.05> <FuncUnit> <Opcode : 'fdiv' 'frem'> <InPorts = 2> <OutPorts = 1>
+ST_2 : Operation 22 [9/9] (7.05ns)   --->   "%div_i = fdiv i32 %curr_imageProjs_read, i32 %projSumUsed_read" [../image_analysis.cpp:116->../image_analysis.cpp:172]   --->   Operation 22 'fdiv' 'div_i' <Predicate = true> <Delay = 7.05> <CoreInst = "FDiv">   --->   Core 20 'FDiv' <Latency = 8> <II = 1> <Delay = 7.05> <FuncUnit> <Opcode : 'fdiv' 'frem'> <InPorts = 2> <OutPorts = 1>
 
 State 3 <SV = 2> <Delay = 7.05>
-ST_3 : Operation 23 [8/9] (7.05ns)   --->   "%div_i = fdiv i32 %curr_imageProjs_read, i32 %projSumUsed_read" [../image_analysis.cpp:113->../image_analysis.cpp:169]   --->   Operation 23 'fdiv' 'div_i' <Predicate = true> <Delay = 7.05> <CoreInst = "FDiv">   --->   Core 20 'FDiv' <Latency = 8> <II = 1> <Delay = 7.05> <FuncUnit> <Opcode : 'fdiv' 'frem'> <InPorts = 2> <OutPorts = 1>
+ST_3 : Operation 23 [8/9] (7.05ns)   --->   "%div_i = fdiv i32 %curr_imageProjs_read, i32 %projSumUsed_read" [../image_analysis.cpp:116->../image_analysis.cpp:172]   --->   Operation 23 'fdiv' 'div_i' <Predicate = true> <Delay = 7.05> <CoreInst = "FDiv">   --->   Core 20 'FDiv' <Latency = 8> <II = 1> <Delay = 7.05> <FuncUnit> <Opcode : 'fdiv' 'frem'> <InPorts = 2> <OutPorts = 1>
 
 State 4 <SV = 3> <Delay = 7.05>
-ST_4 : Operation 24 [7/9] (7.05ns)   --->   "%div_i = fdiv i32 %curr_imageProjs_read, i32 %projSumUsed_read" [../image_analysis.cpp:113->../image_analysis.cpp:169]   --->   Operation 24 'fdiv' 'div_i' <Predicate = true> <Delay = 7.05> <CoreInst = "FDiv">   --->   Core 20 'FDiv' <Latency = 8> <II = 1> <Delay = 7.05> <FuncUnit> <Opcode : 'fdiv' 'frem'> <InPorts = 2> <OutPorts = 1>
+ST_4 : Operation 24 [7/9] (7.05ns)   --->   "%div_i = fdiv i32 %curr_imageProjs_read, i32 %projSumUsed_read" [../image_analysis.cpp:116->../image_analysis.cpp:172]   --->   Operation 24 'fdiv' 'div_i' <Predicate = true> <Delay = 7.05> <CoreInst = "FDiv">   --->   Core 20 'FDiv' <Latency = 8> <II = 1> <Delay = 7.05> <FuncUnit> <Opcode : 'fdiv' 'frem'> <InPorts = 2> <OutPorts = 1>
 
 State 5 <SV = 4> <Delay = 7.05>
-ST_5 : Operation 25 [6/9] (7.05ns)   --->   "%div_i = fdiv i32 %curr_imageProjs_read, i32 %projSumUsed_read" [../image_analysis.cpp:113->../image_analysis.cpp:169]   --->   Operation 25 'fdiv' 'div_i' <Predicate = true> <Delay = 7.05> <CoreInst = "FDiv">   --->   Core 20 'FDiv' <Latency = 8> <II = 1> <Delay = 7.05> <FuncUnit> <Opcode : 'fdiv' 'frem'> <InPorts = 2> <OutPorts = 1>
+ST_5 : Operation 25 [6/9] (7.05ns)   --->   "%div_i = fdiv i32 %curr_imageProjs_read, i32 %projSumUsed_read" [../image_analysis.cpp:116->../image_analysis.cpp:172]   --->   Operation 25 'fdiv' 'div_i' <Predicate = true> <Delay = 7.05> <CoreInst = "FDiv">   --->   Core 20 'FDiv' <Latency = 8> <II = 1> <Delay = 7.05> <FuncUnit> <Opcode : 'fdiv' 'frem'> <InPorts = 2> <OutPorts = 1>
 
 State 6 <SV = 5> <Delay = 7.05>
-ST_6 : Operation 26 [5/9] (7.05ns)   --->   "%div_i = fdiv i32 %curr_imageProjs_read, i32 %projSumUsed_read" [../image_analysis.cpp:113->../image_analysis.cpp:169]   --->   Operation 26 'fdiv' 'div_i' <Predicate = true> <Delay = 7.05> <CoreInst = "FDiv">   --->   Core 20 'FDiv' <Latency = 8> <II = 1> <Delay = 7.05> <FuncUnit> <Opcode : 'fdiv' 'frem'> <InPorts = 2> <OutPorts = 1>
+ST_6 : Operation 26 [5/9] (7.05ns)   --->   "%div_i = fdiv i32 %curr_imageProjs_read, i32 %projSumUsed_read" [../image_analysis.cpp:116->../image_analysis.cpp:172]   --->   Operation 26 'fdiv' 'div_i' <Predicate = true> <Delay = 7.05> <CoreInst = "FDiv">   --->   Core 20 'FDiv' <Latency = 8> <II = 1> <Delay = 7.05> <FuncUnit> <Opcode : 'fdiv' 'frem'> <InPorts = 2> <OutPorts = 1>
 
 State 7 <SV = 6> <Delay = 7.05>
-ST_7 : Operation 27 [4/9] (7.05ns)   --->   "%div_i = fdiv i32 %curr_imageProjs_read, i32 %projSumUsed_read" [../image_analysis.cpp:113->../image_analysis.cpp:169]   --->   Operation 27 'fdiv' 'div_i' <Predicate = true> <Delay = 7.05> <CoreInst = "FDiv">   --->   Core 20 'FDiv' <Latency = 8> <II = 1> <Delay = 7.05> <FuncUnit> <Opcode : 'fdiv' 'frem'> <InPorts = 2> <OutPorts = 1>
+ST_7 : Operation 27 [4/9] (7.05ns)   --->   "%div_i = fdiv i32 %curr_imageProjs_read, i32 %projSumUsed_read" [../image_analysis.cpp:116->../image_analysis.cpp:172]   --->   Operation 27 'fdiv' 'div_i' <Predicate = true> <Delay = 7.05> <CoreInst = "FDiv">   --->   Core 20 'FDiv' <Latency = 8> <II = 1> <Delay = 7.05> <FuncUnit> <Opcode : 'fdiv' 'frem'> <InPorts = 2> <OutPorts = 1>
 
 State 8 <SV = 7> <Delay = 7.05>
-ST_8 : Operation 28 [3/9] (7.05ns)   --->   "%div_i = fdiv i32 %curr_imageProjs_read, i32 %projSumUsed_read" [../image_analysis.cpp:113->../image_analysis.cpp:169]   --->   Operation 28 'fdiv' 'div_i' <Predicate = true> <Delay = 7.05> <CoreInst = "FDiv">   --->   Core 20 'FDiv' <Latency = 8> <II = 1> <Delay = 7.05> <FuncUnit> <Opcode : 'fdiv' 'frem'> <InPorts = 2> <OutPorts = 1>
+ST_8 : Operation 28 [3/9] (7.05ns)   --->   "%div_i = fdiv i32 %curr_imageProjs_read, i32 %projSumUsed_read" [../image_analysis.cpp:116->../image_analysis.cpp:172]   --->   Operation 28 'fdiv' 'div_i' <Predicate = true> <Delay = 7.05> <CoreInst = "FDiv">   --->   Core 20 'FDiv' <Latency = 8> <II = 1> <Delay = 7.05> <FuncUnit> <Opcode : 'fdiv' 'frem'> <InPorts = 2> <OutPorts = 1>
 
 State 9 <SV = 8> <Delay = 7.05>
-ST_9 : Operation 29 [2/9] (7.05ns)   --->   "%div_i = fdiv i32 %curr_imageProjs_read, i32 %projSumUsed_read" [../image_analysis.cpp:113->../image_analysis.cpp:169]   --->   Operation 29 'fdiv' 'div_i' <Predicate = true> <Delay = 7.05> <CoreInst = "FDiv">   --->   Core 20 'FDiv' <Latency = 8> <II = 1> <Delay = 7.05> <FuncUnit> <Opcode : 'fdiv' 'frem'> <InPorts = 2> <OutPorts = 1>
+ST_9 : Operation 29 [2/9] (7.05ns)   --->   "%div_i = fdiv i32 %curr_imageProjs_read, i32 %projSumUsed_read" [../image_analysis.cpp:116->../image_analysis.cpp:172]   --->   Operation 29 'fdiv' 'div_i' <Predicate = true> <Delay = 7.05> <CoreInst = "FDiv">   --->   Core 20 'FDiv' <Latency = 8> <II = 1> <Delay = 7.05> <FuncUnit> <Opcode : 'fdiv' 'frem'> <InPorts = 2> <OutPorts = 1>
 
 State 10 <SV = 9> <Delay = 7.05>
-ST_10 : Operation 30 [1/1] (1.83ns)   --->   "%sum_read = read i32 @_ssdm_op_Read.ap_auto.float, i32 %sum" [../image_analysis.cpp:112->../image_analysis.cpp:169]   --->   Operation 30 'read' 'sum_read' <Predicate = true> <Delay = 1.83> <CoreInst = "FIFO_SRL">   --->   Core 80 'FIFO_SRL' <Latency = 0> <II = 1> <Delay = 1.83> <Storage> <Opcode : 'read' 'write' 'nbread' 'nbwrite'> <Ports = 0> <Width = -1> <Depth = -1> <FIFO>
-ST_10 : Operation 31 [1/9] (7.05ns)   --->   "%div_i = fdiv i32 %curr_imageProjs_read, i32 %projSumUsed_read" [../image_analysis.cpp:113->../image_analysis.cpp:169]   --->   Operation 31 'fdiv' 'div_i' <Predicate = true> <Delay = 7.05> <CoreInst = "FDiv">   --->   Core 20 'FDiv' <Latency = 8> <II = 1> <Delay = 7.05> <FuncUnit> <Opcode : 'fdiv' 'frem'> <InPorts = 2> <OutPorts = 1>
+ST_10 : Operation 30 [1/1] (1.83ns)   --->   "%sum_read = read i32 @_ssdm_op_Read.ap_auto.float, i32 %sum" [../image_analysis.cpp:115->../image_analysis.cpp:172]   --->   Operation 30 'read' 'sum_read' <Predicate = true> <Delay = 1.83> <CoreInst = "FIFO_SRL">   --->   Core 80 'FIFO_SRL' <Latency = 0> <II = 1> <Delay = 1.83> <Storage> <Opcode : 'read' 'write' 'nbread' 'nbwrite'> <Ports = 0> <Width = -1> <Depth = -1> <FIFO>
+ST_10 : Operation 31 [1/9] (7.05ns)   --->   "%div_i = fdiv i32 %curr_imageProjs_read, i32 %projSumUsed_read" [../image_analysis.cpp:116->../image_analysis.cpp:172]   --->   Operation 31 'fdiv' 'div_i' <Predicate = true> <Delay = 7.05> <CoreInst = "FDiv">   --->   Core 20 'FDiv' <Latency = 8> <II = 1> <Delay = 7.05> <FuncUnit> <Opcode : 'fdiv' 'frem'> <InPorts = 2> <OutPorts = 1>
 
 State 11 <SV = 10> <Delay = 7.01>
-ST_11 : Operation 32 [3/3] (7.01ns)   --->   "%mul_i = fmul i32 %div_i, i32 %sum_read" [../image_analysis.cpp:113->../image_analysis.cpp:169]   --->   Operation 32 'fmul' 'mul_i' <Predicate = true> <Delay = 7.01> <CoreInst = "FMul_maxdsp">   --->   Core 30 'FMul_maxdsp' <Latency = 2> <II = 1> <Delay = 7.01> <FuncUnit> <Opcode : 'fmul'> <InPorts = 2> <OutPorts = 1>
+ST_11 : Operation 32 [3/3] (7.01ns)   --->   "%mul_i = fmul i32 %div_i, i32 %sum_read" [../image_analysis.cpp:116->../image_analysis.cpp:172]   --->   Operation 32 'fmul' 'mul_i' <Predicate = true> <Delay = 7.01> <CoreInst = "FMul_maxdsp">   --->   Core 30 'FMul_maxdsp' <Latency = 2> <II = 1> <Delay = 7.01> <FuncUnit> <Opcode : 'fmul'> <InPorts = 2> <OutPorts = 1>
 
 State 12 <SV = 11> <Delay = 7.01>
-ST_12 : Operation 33 [1/1] (1.83ns)   --->   "%dout_read = read i64 @_ssdm_op_Read.ap_auto.i64, i64 %dout" [../image_analysis.cpp:112->../image_analysis.cpp:169]   --->   Operation 33 'read' 'dout_read' <Predicate = true> <Delay = 1.83> <CoreInst = "FIFO_SRL">   --->   Core 80 'FIFO_SRL' <Latency = 0> <II = 1> <Delay = 1.83> <Storage> <Opcode : 'read' 'write' 'nbread' 'nbwrite'> <Ports = 0> <Width = -1> <Depth = -1> <FIFO>
-ST_12 : Operation 34 [2/3] (7.01ns)   --->   "%mul_i = fmul i32 %div_i, i32 %sum_read" [../image_analysis.cpp:113->../image_analysis.cpp:169]   --->   Operation 34 'fmul' 'mul_i' <Predicate = true> <Delay = 7.01> <CoreInst = "FMul_maxdsp">   --->   Core 30 'FMul_maxdsp' <Latency = 2> <II = 1> <Delay = 7.01> <FuncUnit> <Opcode : 'fmul'> <InPorts = 2> <OutPorts = 1>
-ST_12 : Operation 35 [1/1] (0.00ns)   --->   "%trunc_ln = partselect i62 @_ssdm_op_PartSelect.i62.i64.i32.i32, i64 %dout_read, i32 2, i32 63" [../image_analysis.cpp:113->../image_analysis.cpp:169]   --->   Operation 35 'partselect' 'trunc_ln' <Predicate = true> <Delay = 0.00>
-ST_12 : Operation 36 [1/1] (0.00ns)   --->   "%sext_ln113 = sext i62 %trunc_ln" [../image_analysis.cpp:113->../image_analysis.cpp:169]   --->   Operation 36 'sext' 'sext_ln113' <Predicate = true> <Delay = 0.00>
-ST_12 : Operation 37 [1/1] (0.00ns)   --->   "%emissions_addr = getelementptr i32 %emissions, i64 %sext_ln113" [../image_analysis.cpp:113->../image_analysis.cpp:169]   --->   Operation 37 'getelementptr' 'emissions_addr' <Predicate = true> <Delay = 0.00>
+ST_12 : Operation 33 [1/1] (1.83ns)   --->   "%dout_read = read i64 @_ssdm_op_Read.ap_auto.i64, i64 %dout" [../image_analysis.cpp:115->../image_analysis.cpp:172]   --->   Operation 33 'read' 'dout_read' <Predicate = true> <Delay = 1.83> <CoreInst = "FIFO_SRL">   --->   Core 80 'FIFO_SRL' <Latency = 0> <II = 1> <Delay = 1.83> <Storage> <Opcode : 'read' 'write' 'nbread' 'nbwrite'> <Ports = 0> <Width = -1> <Depth = -1> <FIFO>
+ST_12 : Operation 34 [2/3] (7.01ns)   --->   "%mul_i = fmul i32 %div_i, i32 %sum_read" [../image_analysis.cpp:116->../image_analysis.cpp:172]   --->   Operation 34 'fmul' 'mul_i' <Predicate = true> <Delay = 7.01> <CoreInst = "FMul_maxdsp">   --->   Core 30 'FMul_maxdsp' <Latency = 2> <II = 1> <Delay = 7.01> <FuncUnit> <Opcode : 'fmul'> <InPorts = 2> <OutPorts = 1>
+ST_12 : Operation 35 [1/1] (0.00ns)   --->   "%trunc_ln = partselect i62 @_ssdm_op_PartSelect.i62.i64.i32.i32, i64 %dout_read, i32 2, i32 63" [../image_analysis.cpp:116->../image_analysis.cpp:172]   --->   Operation 35 'partselect' 'trunc_ln' <Predicate = true> <Delay = 0.00>
+ST_12 : Operation 36 [1/1] (0.00ns)   --->   "%sext_ln116 = sext i62 %trunc_ln" [../image_analysis.cpp:116->../image_analysis.cpp:172]   --->   Operation 36 'sext' 'sext_ln116' <Predicate = true> <Delay = 0.00>
+ST_12 : Operation 37 [1/1] (0.00ns)   --->   "%emissions_addr = getelementptr i32 %emissions, i64 %sext_ln116" [../image_analysis.cpp:116->../image_analysis.cpp:172]   --->   Operation 37 'getelementptr' 'emissions_addr' <Predicate = true> <Delay = 0.00>
 
 State 13 <SV = 12> <Delay = 7.30>
-ST_13 : Operation 38 [1/3] (7.01ns)   --->   "%mul_i = fmul i32 %div_i, i32 %sum_read" [../image_analysis.cpp:113->../image_analysis.cpp:169]   --->   Operation 38 'fmul' 'mul_i' <Predicate = true> <Delay = 7.01> <CoreInst = "FMul_maxdsp">   --->   Core 30 'FMul_maxdsp' <Latency = 2> <II = 1> <Delay = 7.01> <FuncUnit> <Opcode : 'fmul'> <InPorts = 2> <OutPorts = 1>
-ST_13 : Operation 39 [1/1] (7.30ns)   --->   "%emissions_addr_req = writereq i1 @_ssdm_op_WriteReq.m_axi.i32P1A, i64 %emissions_addr, i64 1" [../image_analysis.cpp:113->../image_analysis.cpp:169]   --->   Operation 39 'writereq' 'emissions_addr_req' <Predicate = true> <Delay = 7.30> <CoreInst = "m_axi">   --->   Core 119 'm_axi' <Latency = 9> <II = 1> <Delay = 1.00> <Adapter> <Opcode : 'read' 'write' 'readreq' 'writereq' 'writeresp'>
+ST_13 : Operation 38 [1/3] (7.01ns)   --->   "%mul_i = fmul i32 %div_i, i32 %sum_read" [../image_analysis.cpp:116->../image_analysis.cpp:172]   --->   Operation 38 'fmul' 'mul_i' <Predicate = true> <Delay = 7.01> <CoreInst = "FMul_maxdsp">   --->   Core 30 'FMul_maxdsp' <Latency = 2> <II = 1> <Delay = 7.01> <FuncUnit> <Opcode : 'fmul'> <InPorts = 2> <OutPorts = 1>
+ST_13 : Operation 39 [1/1] (7.30ns)   --->   "%emissions_addr_req = writereq i1 @_ssdm_op_WriteReq.m_axi.i32P1A, i64 %emissions_addr, i64 1" [../image_analysis.cpp:116->../image_analysis.cpp:172]   --->   Operation 39 'writereq' 'emissions_addr_req' <Predicate = true> <Delay = 7.30> <CoreInst = "m_axi">   --->   Core 119 'm_axi' <Latency = 9> <II = 1> <Delay = 1.00> <Adapter> <Opcode : 'read' 'write' 'readreq' 'writereq' 'writeresp'>
 
 State 14 <SV = 13> <Delay = 7.30>
-ST_14 : Operation 40 [1/1] (0.00ns)   --->   "%bitcast_ln113 = bitcast i32 %mul_i" [../image_analysis.cpp:113->../image_analysis.cpp:169]   --->   Operation 40 'bitcast' 'bitcast_ln113' <Predicate = true> <Delay = 0.00>
-ST_14 : Operation 41 [1/1] (7.30ns)   --->   "%write_ln113 = write void @_ssdm_op_Write.m_axi.i32P1A, i64 %emissions_addr, i32 %bitcast_ln113, i4 15" [../image_analysis.cpp:113->../image_analysis.cpp:169]   --->   Operation 41 'write' 'write_ln113' <Predicate = true> <Delay = 7.30> <CoreInst = "m_axi">   --->   Core 119 'm_axi' <Latency = 5> <II = 1> <Delay = 1.00> <Adapter> <Opcode : 'read' 'write' 'readreq' 'writereq' 'writeresp'>
+ST_14 : Operation 40 [1/1] (0.00ns)   --->   "%bitcast_ln116 = bitcast i32 %mul_i" [../image_analysis.cpp:116->../image_analysis.cpp:172]   --->   Operation 40 'bitcast' 'bitcast_ln116' <Predicate = true> <Delay = 0.00>
+ST_14 : Operation 41 [1/1] (7.30ns)   --->   "%write_ln116 = write void @_ssdm_op_Write.m_axi.i32P1A, i64 %emissions_addr, i32 %bitcast_ln116, i4 15" [../image_analysis.cpp:116->../image_analysis.cpp:172]   --->   Operation 41 'write' 'write_ln116' <Predicate = true> <Delay = 7.30> <CoreInst = "m_axi">   --->   Core 119 'm_axi' <Latency = 5> <II = 1> <Delay = 1.00> <Adapter> <Opcode : 'read' 'write' 'readreq' 'writereq' 'writeresp'>
 
 State 15 <SV = 14> <Delay = 7.30>
-ST_15 : Operation 42 [5/5] (7.30ns)   --->   "%emissions_addr_resp = writeresp i1 @_ssdm_op_WriteResp.m_axi.i32P1A, i64 %emissions_addr" [../image_analysis.cpp:113->../image_analysis.cpp:169]   --->   Operation 42 'writeresp' 'emissions_addr_resp' <Predicate = true> <Delay = 7.30> <CoreInst = "m_axi">   --->   Core 119 'm_axi' <Latency = 3> <II = 1> <Delay = 1.00> <Adapter> <Opcode : 'read' 'write' 'readreq' 'writereq' 'writeresp'>
+ST_15 : Operation 42 [5/5] (7.30ns)   --->   "%emissions_addr_resp = writeresp i1 @_ssdm_op_WriteResp.m_axi.i32P1A, i64 %emissions_addr" [../image_analysis.cpp:116->../image_analysis.cpp:172]   --->   Operation 42 'writeresp' 'emissions_addr_resp' <Predicate = true> <Delay = 7.30> <CoreInst = "m_axi">   --->   Core 119 'm_axi' <Latency = 3> <II = 1> <Delay = 1.00> <Adapter> <Opcode : 'read' 'write' 'readreq' 'writereq' 'writeresp'>
 
 State 16 <SV = 15> <Delay = 7.30>
-ST_16 : Operation 43 [4/5] (7.30ns)   --->   "%emissions_addr_resp = writeresp i1 @_ssdm_op_WriteResp.m_axi.i32P1A, i64 %emissions_addr" [../image_analysis.cpp:113->../image_analysis.cpp:169]   --->   Operation 43 'writeresp' 'emissions_addr_resp' <Predicate = true> <Delay = 7.30> <CoreInst = "m_axi">   --->   Core 119 'm_axi' <Latency = 3> <II = 1> <Delay = 1.00> <Adapter> <Opcode : 'read' 'write' 'readreq' 'writereq' 'writeresp'>
+ST_16 : Operation 43 [4/5] (7.30ns)   --->   "%emissions_addr_resp = writeresp i1 @_ssdm_op_WriteResp.m_axi.i32P1A, i64 %emissions_addr" [../image_analysis.cpp:116->../image_analysis.cpp:172]   --->   Operation 43 'writeresp' 'emissions_addr_resp' <Predicate = true> <Delay = 7.30> <CoreInst = "m_axi">   --->   Core 119 'm_axi' <Latency = 3> <II = 1> <Delay = 1.00> <Adapter> <Opcode : 'read' 'write' 'readreq' 'writereq' 'writeresp'>
 
 State 17 <SV = 16> <Delay = 7.30>
-ST_17 : Operation 44 [3/5] (7.30ns)   --->   "%emissions_addr_resp = writeresp i1 @_ssdm_op_WriteResp.m_axi.i32P1A, i64 %emissions_addr" [../image_analysis.cpp:113->../image_analysis.cpp:169]   --->   Operation 44 'writeresp' 'emissions_addr_resp' <Predicate = true> <Delay = 7.30> <CoreInst = "m_axi">   --->   Core 119 'm_axi' <Latency = 3> <II = 1> <Delay = 1.00> <Adapter> <Opcode : 'read' 'write' 'readreq' 'writereq' 'writeresp'>
+ST_17 : Operation 44 [3/5] (7.30ns)   --->   "%emissions_addr_resp = writeresp i1 @_ssdm_op_WriteResp.m_axi.i32P1A, i64 %emissions_addr" [../image_analysis.cpp:116->../image_analysis.cpp:172]   --->   Operation 44 'writeresp' 'emissions_addr_resp' <Predicate = true> <Delay = 7.30> <CoreInst = "m_axi">   --->   Core 119 'm_axi' <Latency = 3> <II = 1> <Delay = 1.00> <Adapter> <Opcode : 'read' 'write' 'readreq' 'writereq' 'writeresp'>
 
 State 18 <SV = 17> <Delay = 7.30>
-ST_18 : Operation 45 [2/5] (7.30ns)   --->   "%emissions_addr_resp = writeresp i1 @_ssdm_op_WriteResp.m_axi.i32P1A, i64 %emissions_addr" [../image_analysis.cpp:113->../image_analysis.cpp:169]   --->   Operation 45 'writeresp' 'emissions_addr_resp' <Predicate = true> <Delay = 7.30> <CoreInst = "m_axi">   --->   Core 119 'm_axi' <Latency = 3> <II = 1> <Delay = 1.00> <Adapter> <Opcode : 'read' 'write' 'readreq' 'writereq' 'writeresp'>
+ST_18 : Operation 45 [2/5] (7.30ns)   --->   "%emissions_addr_resp = writeresp i1 @_ssdm_op_WriteResp.m_axi.i32P1A, i64 %emissions_addr" [../image_analysis.cpp:116->../image_analysis.cpp:172]   --->   Operation 45 'writeresp' 'emissions_addr_resp' <Predicate = true> <Delay = 7.30> <CoreInst = "m_axi">   --->   Core 119 'm_axi' <Latency = 3> <II = 1> <Delay = 1.00> <Adapter> <Opcode : 'read' 'write' 'readreq' 'writereq' 'writeresp'>
 
 State 19 <SV = 18> <Delay = 7.30>
-ST_19 : Operation 46 [1/1] (0.00ns)   --->   "%specinterface_ln0 = specinterface void @_ssdm_op_SpecInterface, i32 %emissions, void @empty_16, i32 0, i32 0, void @empty_17, i32 0, i32 1024, void @empty_0, void @empty_19, void @empty_17, i32 16, i32 16, i32 16, i32 16, void @empty_17, void @empty_17, i32 4294967295, i32 0, i32 0"   --->   Operation 46 'specinterface' 'specinterface_ln0' <Predicate = true> <Delay = 0.00>
-ST_19 : Operation 47 [1/5] (7.30ns)   --->   "%emissions_addr_resp = writeresp i1 @_ssdm_op_WriteResp.m_axi.i32P1A, i64 %emissions_addr" [../image_analysis.cpp:113->../image_analysis.cpp:169]   --->   Operation 47 'writeresp' 'emissions_addr_resp' <Predicate = true> <Delay = 7.30> <CoreInst = "m_axi">   --->   Core 119 'm_axi' <Latency = 3> <II = 1> <Delay = 1.00> <Adapter> <Opcode : 'read' 'write' 'readreq' 'writereq' 'writeresp'>
-ST_19 : Operation 48 [1/1] (0.00ns)   --->   "%ret_ln169 = ret" [../image_analysis.cpp:169]   --->   Operation 48 'ret' 'ret_ln169' <Predicate = true> <Delay = 0.00>
+ST_19 : Operation 46 [1/1] (0.00ns)   --->   "%specinterface_ln0 = specinterface void @_ssdm_op_SpecInterface, i32 %emissions, void @empty_16, i32 0, i32 0, void @empty_17, i32 0, i32 1600, void @empty_0, void @empty_19, void @empty_17, i32 16, i32 16, i32 16, i32 16, void @empty_17, void @empty_17, i32 4294967295, i32 0, i32 0"   --->   Operation 46 'specinterface' 'specinterface_ln0' <Predicate = true> <Delay = 0.00>
+ST_19 : Operation 47 [1/5] (7.30ns)   --->   "%emissions_addr_resp = writeresp i1 @_ssdm_op_WriteResp.m_axi.i32P1A, i64 %emissions_addr" [../image_analysis.cpp:116->../image_analysis.cpp:172]   --->   Operation 47 'writeresp' 'emissions_addr_resp' <Predicate = true> <Delay = 7.30> <CoreInst = "m_axi">   --->   Core 119 'm_axi' <Latency = 3> <II = 1> <Delay = 1.00> <Adapter> <Opcode : 'read' 'write' 'readreq' 'writereq' 'writeresp'>
+ST_19 : Operation 48 [1/1] (0.00ns)   --->   "%ret_ln172 = ret" [../image_analysis.cpp:172]   --->   Operation 48 'ret' 'ret_ln172' <Predicate = true> <Delay = 0.00>
 
 
 ============================================================
@@ -338,15 +338,15 @@ sum_read             (read         ) [ 00000000000111000000]
 div_i                (fdiv         ) [ 00000000000111000000]
 dout_read            (read         ) [ 00000000000000000000]
 trunc_ln             (partselect   ) [ 00000000000000000000]
-sext_ln113           (sext         ) [ 00000000000000000000]
+sext_ln116           (sext         ) [ 00000000000000000000]
 emissions_addr       (getelementptr) [ 00000000000001111111]
 mul_i                (fmul         ) [ 00000000000000100000]
 emissions_addr_req   (writereq     ) [ 00000000000000000000]
-bitcast_ln113        (bitcast      ) [ 00000000000000000000]
-write_ln113          (write        ) [ 00000000000000000000]
+bitcast_ln116        (bitcast      ) [ 00000000000000000000]
+write_ln116          (write        ) [ 00000000000000000000]
 specinterface_ln0    (specinterface) [ 00000000000000000000]
 emissions_addr_resp  (writeresp    ) [ 00000000000000000000]
-ret_ln169            (ret          ) [ 00000000000000000000]
+ret_ln172            (ret          ) [ 00000000000000000000]
 </LifeTime>
 
 <model>
@@ -630,7 +630,7 @@ ret_ln169            (ret          ) [ 00000000000000000000]
 </bind>
 </comp>
 
-<comp id="79" class="1004" name="write_ln113_write_fu_79">
+<comp id="79" class="1004" name="write_ln116_write_fu_79">
 <pin_list>
 <pin id="80" dir="0" index="0" bw="0" slack="0"/>
 <pin id="81" dir="0" index="1" bw="32" slack="2"/>
@@ -640,7 +640,7 @@ ret_ln169            (ret          ) [ 00000000000000000000]
 </pin_list>
 <bind>
 <opcode="write(1151) " fcode="write"/>
-<opset="write_ln113/14 "/>
+<opset="write_ln116/14 "/>
 </bind>
 </comp>
 
@@ -682,14 +682,14 @@ ret_ln169            (ret          ) [ 00000000000000000000]
 </bind>
 </comp>
 
-<comp id="106" class="1004" name="sext_ln113_fu_106">
+<comp id="106" class="1004" name="sext_ln116_fu_106">
 <pin_list>
 <pin id="107" dir="0" index="0" bw="62" slack="0"/>
 <pin id="108" dir="1" index="1" bw="64" slack="0"/>
 </pin_list>
 <bind>
 <opcode="sext(35) " fcode="sext"/>
-<opset="sext_ln113/12 "/>
+<opset="sext_ln116/12 "/>
 </bind>
 </comp>
 
@@ -705,14 +705,14 @@ ret_ln169            (ret          ) [ 00000000000000000000]
 </bind>
 </comp>
 
-<comp id="116" class="1004" name="bitcast_ln113_fu_116">
+<comp id="116" class="1004" name="bitcast_ln116_fu_116">
 <pin_list>
 <pin id="117" dir="0" index="0" bw="32" slack="1"/>
 <pin id="118" dir="1" index="1" bw="32" slack="0"/>
 </pin_list>
 <bind>
 <opcode="bitcast(44) " fcode="bitcast"/>
-<opset="bitcast_ln113/14 "/>
+<opset="bitcast_ln116/14 "/>
 </bind>
 </comp>
 
@@ -874,11 +874,11 @@ ret_ln169            (ret          ) [ 00000000000000000000]
 	State 10
 	State 11
 	State 12
-		sext_ln113 : 1
+		sext_ln116 : 1
 		emissions_addr : 2
 	State 13
 	State 14
-		write_ln113 : 1
+		write_ln116 : 1
 	State 15
 	State 16
 	State 17
@@ -903,13 +903,13 @@ ret_ln169            (ret          ) [ 00000000000000000000]
 |----------|---------------------------------|---------|---------|---------|
 | writeresp|       grp_writeresp_fu_72       |    0    |    0    |    0    |
 |----------|---------------------------------|---------|---------|---------|
-|   write  |     write_ln113_write_fu_79     |    0    |    0    |    0    |
+|   write  |     write_ln116_write_fu_79     |    0    |    0    |    0    |
 |----------|---------------------------------|---------|---------|---------|
 |   fdiv   |            grp_fu_92            |    0    |    0    |    0    |
 |----------|---------------------------------|---------|---------|---------|
 |partselect|          trunc_ln_fu_96         |    0    |    0    |    0    |
 |----------|---------------------------------|---------|---------|---------|
-|   sext   |        sext_ln113_fu_106        |    0    |    0    |    0    |
+|   sext   |        sext_ln116_fu_106        |    0    |    0    |    0    |
 |----------|---------------------------------|---------|---------|---------|
 |   Total  |                                 |    3    |   128   |   135   |
 |----------|---------------------------------|---------|---------|---------|

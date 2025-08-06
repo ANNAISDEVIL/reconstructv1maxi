@@ -1,61 +1,61 @@
-../image_analysis.cpp:103:9: warning: HLS pragma dump _XLX_SEP_ PragmaIsValid=1_XLX_SEP_ PragmaType=unroll_XLX_SEP_ PragmaContext=_XLX_SEP_ PragmaFunction=conv_kernel_XLX_SEP_ PragmaOptions=_XLX_SEP_ [-Wdump-hls-pragmas]
+../image_analysis.cpp:106:9: warning: HLS pragma dump _XLX_SEP_ PragmaIsValid=1_XLX_SEP_ PragmaType=unroll_XLX_SEP_ PragmaContext=_XLX_SEP_ PragmaFunction=conv_kernel_XLX_SEP_ PragmaOptions=_XLX_SEP_ [-Wdump-hls-pragmas]
 #pragma HLS UNROLL
         ^
 directive:1:9: warning: HLS pragma dump _XLX_SEP_ PragmaIsValid=1_XLX_SEP_ PragmaType=top_XLX_SEP_ PragmaContext=directive_XLX_SEP_ PragmaFunction=reconstruct_XLX_SEP_ PragmaOptions=name=reconstruct_XLX_SEP_ [-Wdump-hls-pragmas]
 #pragma HLSDIRECTIVE TOP name=reconstruct
         ^
-../image_analysis.cpp:126:9: warning: HLS pragma dump _XLX_SEP_ PragmaIsValid=1_XLX_SEP_ PragmaType=interface_XLX_SEP_ PragmaContext=_XLX_SEP_ PragmaFunction=reconstruct_XLX_SEP_ PragmaOptions=port=return mode=s_axilite bundle=control_XLX_SEP_ [-Wdump-hls-pragmas]
+../image_analysis.cpp:129:9: warning: HLS pragma dump _XLX_SEP_ PragmaIsValid=1_XLX_SEP_ PragmaType=interface_XLX_SEP_ PragmaContext=_XLX_SEP_ PragmaFunction=reconstruct_XLX_SEP_ PragmaOptions=port=return mode=s_axilite bundle=control_XLX_SEP_ [-Wdump-hls-pragmas]
 #pragma HLS INTERFACE port=return mode=s_axilite bundle=control
         ^
-../image_analysis.cpp:128:9: warning: HLS pragma dump _XLX_SEP_ PragmaIsValid=1_XLX_SEP_ PragmaType=interface_XLX_SEP_ PragmaContext=_XLX_SEP_ PragmaFunction=reconstruct_XLX_SEP_ PragmaOptions=port=atomLocationsSize mode=s_axilite bundle=scalar_data_XLX_SEP_ [-Wdump-hls-pragmas]
+../image_analysis.cpp:131:9: warning: HLS pragma dump _XLX_SEP_ PragmaIsValid=1_XLX_SEP_ PragmaType=interface_XLX_SEP_ PragmaContext=_XLX_SEP_ PragmaFunction=reconstruct_XLX_SEP_ PragmaOptions=port=atomLocationsSize mode=s_axilite bundle=scalar_data_XLX_SEP_ [-Wdump-hls-pragmas]
 #pragma HLS INTERFACE port=atomLocationsSize mode=s_axilite bundle=scalar_data
         ^
-../image_analysis.cpp:129:9: warning: HLS pragma dump _XLX_SEP_ PragmaIsValid=1_XLX_SEP_ PragmaType=interface_XLX_SEP_ PragmaContext=_XLX_SEP_ PragmaFunction=reconstruct_XLX_SEP_ PragmaOptions=port=projShape0 mode=s_axilite bundle=scalar_data_XLX_SEP_ [-Wdump-hls-pragmas]
+../image_analysis.cpp:132:9: warning: HLS pragma dump _XLX_SEP_ PragmaIsValid=1_XLX_SEP_ PragmaType=interface_XLX_SEP_ PragmaContext=_XLX_SEP_ PragmaFunction=reconstruct_XLX_SEP_ PragmaOptions=port=projShape0 mode=s_axilite bundle=scalar_data_XLX_SEP_ [-Wdump-hls-pragmas]
 #pragma HLS INTERFACE port=projShape0 mode=s_axilite bundle=scalar_data
         ^
-../image_analysis.cpp:130:9: warning: HLS pragma dump _XLX_SEP_ PragmaIsValid=1_XLX_SEP_ PragmaType=interface_XLX_SEP_ PragmaContext=_XLX_SEP_ PragmaFunction=reconstruct_XLX_SEP_ PragmaOptions=port=projShape1 mode=s_axilite bundle=scalar_data_XLX_SEP_ [-Wdump-hls-pragmas]
+../image_analysis.cpp:133:9: warning: HLS pragma dump _XLX_SEP_ PragmaIsValid=1_XLX_SEP_ PragmaType=interface_XLX_SEP_ PragmaContext=_XLX_SEP_ PragmaFunction=reconstruct_XLX_SEP_ PragmaOptions=port=projShape1 mode=s_axilite bundle=scalar_data_XLX_SEP_ [-Wdump-hls-pragmas]
 #pragma HLS INTERFACE port=projShape1 mode=s_axilite bundle=scalar_data
         ^
-../image_analysis.cpp:132:9: warning: HLS pragma dump _XLX_SEP_ PragmaIsValid=1_XLX_SEP_ PragmaType=interface_XLX_SEP_ PragmaContext=_XLX_SEP_ PragmaFunction=reconstruct_XLX_SEP_ PragmaOptions=port=atomLocations mode=m_axi bundle=atomLocations depth=1024_XLX_SEP_ [-Wdump-hls-pragmas]
-#pragma HLS INTERFACE port=atomLocations mode=m_axi bundle=atomLocations depth=1024
+../image_analysis.cpp:135:9: warning: HLS pragma dump _XLX_SEP_ PragmaIsValid=1_XLX_SEP_ PragmaType=interface_XLX_SEP_ PragmaContext=_XLX_SEP_ PragmaFunction=reconstruct_XLX_SEP_ PragmaOptions=port=atomLocations mode=m_axi bundle=atomLocations depth=1600_XLX_SEP_ [-Wdump-hls-pragmas]
+#pragma HLS INTERFACE port=atomLocations mode=m_axi bundle=atomLocations depth=1600
         ^
-../image_analysis.cpp:134:9: warning: HLS pragma dump _XLX_SEP_ PragmaIsValid=1_XLX_SEP_ PragmaType=interface_XLX_SEP_ PragmaContext=_XLX_SEP_ PragmaFunction=reconstruct_XLX_SEP_ PragmaOptions=port=psfSupersample mode=s_axilite bundle=scalar_data_XLX_SEP_ [-Wdump-hls-pragmas]
+../image_analysis.cpp:137:9: warning: HLS pragma dump _XLX_SEP_ PragmaIsValid=1_XLX_SEP_ PragmaType=interface_XLX_SEP_ PragmaContext=_XLX_SEP_ PragmaFunction=reconstruct_XLX_SEP_ PragmaOptions=port=psfSupersample mode=s_axilite bundle=scalar_data_XLX_SEP_ [-Wdump-hls-pragmas]
 #pragma HLS INTERFACE port=psfSupersample mode=s_axilite bundle=scalar_data
         ^
-../image_analysis.cpp:135:9: warning: HLS pragma dump _XLX_SEP_ PragmaIsValid=1_XLX_SEP_ PragmaType=interface_XLX_SEP_ PragmaContext=_XLX_SEP_ PragmaFunction=reconstruct_XLX_SEP_ PragmaOptions=port=imageProjectionSize mode=s_axilite bundle=scalar_data_XLX_SEP_ [-Wdump-hls-pragmas]
+../image_analysis.cpp:138:9: warning: HLS pragma dump _XLX_SEP_ PragmaIsValid=1_XLX_SEP_ PragmaType=interface_XLX_SEP_ PragmaContext=_XLX_SEP_ PragmaFunction=reconstruct_XLX_SEP_ PragmaOptions=port=imageProjectionSize mode=s_axilite bundle=scalar_data_XLX_SEP_ [-Wdump-hls-pragmas]
 #pragma HLS INTERFACE port=imageProjectionSize mode=s_axilite bundle=scalar_data
         ^
-../image_analysis.cpp:137:9: warning: HLS pragma dump _XLX_SEP_ PragmaIsValid=1_XLX_SEP_ PragmaType=interface_XLX_SEP_ PragmaContext=_XLX_SEP_ PragmaFunction=reconstruct_XLX_SEP_ PragmaOptions=port=imageProjs_local mode=m_axi bundle=imageProjs_local_XLX_SEP_ [-Wdump-hls-pragmas]
+../image_analysis.cpp:140:9: warning: HLS pragma dump _XLX_SEP_ PragmaIsValid=1_XLX_SEP_ PragmaType=interface_XLX_SEP_ PragmaContext=_XLX_SEP_ PragmaFunction=reconstruct_XLX_SEP_ PragmaOptions=port=imageProjs_local mode=m_axi bundle=imageProjs_local_XLX_SEP_ [-Wdump-hls-pragmas]
 #pragma HLS INTERFACE port=imageProjs_local mode=m_axi bundle=imageProjs_local
         ^
-../image_analysis.cpp:138:9: warning: HLS pragma dump _XLX_SEP_ PragmaIsValid=1_XLX_SEP_ PragmaType=interface_XLX_SEP_ PragmaContext=_XLX_SEP_ PragmaFunction=reconstruct_XLX_SEP_ PragmaOptions=port=imageProjs mode=m_axi bundle=imageProjs_XLX_SEP_ [-Wdump-hls-pragmas]
+../image_analysis.cpp:141:9: warning: HLS pragma dump _XLX_SEP_ PragmaIsValid=1_XLX_SEP_ PragmaType=interface_XLX_SEP_ PragmaContext=_XLX_SEP_ PragmaFunction=reconstruct_XLX_SEP_ PragmaOptions=port=imageProjs mode=m_axi bundle=imageProjs_XLX_SEP_ [-Wdump-hls-pragmas]
 #pragma HLS INTERFACE port=imageProjs mode=m_axi bundle=imageProjs
         ^
-../image_analysis.cpp:139:9: warning: HLS pragma dump _XLX_SEP_ PragmaIsValid=1_XLX_SEP_ PragmaType=interface_XLX_SEP_ PragmaContext=_XLX_SEP_ PragmaFunction=reconstruct_XLX_SEP_ PragmaOptions=port=imageProjs_local_size mode=m_axi bundle=imageProjs_local_size_XLX_SEP_ [-Wdump-hls-pragmas]
+../image_analysis.cpp:142:9: warning: HLS pragma dump _XLX_SEP_ PragmaIsValid=1_XLX_SEP_ PragmaType=interface_XLX_SEP_ PragmaContext=_XLX_SEP_ PragmaFunction=reconstruct_XLX_SEP_ PragmaOptions=port=imageProjs_local_size mode=m_axi bundle=imageProjs_local_size_XLX_SEP_ [-Wdump-hls-pragmas]
 #pragma HLS INTERFACE port=imageProjs_local_size mode=m_axi bundle=imageProjs_local_size
         ^
-../image_analysis.cpp:141:9: warning: HLS pragma dump _XLX_SEP_ PragmaIsValid=1_XLX_SEP_ PragmaType=interface_XLX_SEP_ PragmaContext=_XLX_SEP_ PragmaFunction=reconstruct_XLX_SEP_ PragmaOptions=port=fullImage mode=m_axi bundle=fullImage depth=768*768_XLX_SEP_ [-Wdump-hls-pragmas]
-#pragma HLS INTERFACE port=fullImage mode=m_axi bundle=fullImage depth=768*768
+../image_analysis.cpp:144:9: warning: HLS pragma dump _XLX_SEP_ PragmaIsValid=1_XLX_SEP_ PragmaType=interface_XLX_SEP_ PragmaContext=_XLX_SEP_ PragmaFunction=reconstruct_XLX_SEP_ PragmaOptions=port=fullImage mode=m_axi bundle=fullImage depth=400*400_XLX_SEP_ [-Wdump-hls-pragmas]
+#pragma HLS INTERFACE port=fullImage mode=m_axi bundle=fullImage depth=400*400
         ^
-../image_analysis.cpp:143:9: warning: HLS pragma dump _XLX_SEP_ PragmaIsValid=1_XLX_SEP_ PragmaType=interface_XLX_SEP_ PragmaContext=_XLX_SEP_ PragmaFunction=reconstruct_XLX_SEP_ PragmaOptions=port=fullImage_rows mode=s_axilite bundle=scalar_data_XLX_SEP_ [-Wdump-hls-pragmas]
+../image_analysis.cpp:146:9: warning: HLS pragma dump _XLX_SEP_ PragmaIsValid=1_XLX_SEP_ PragmaType=interface_XLX_SEP_ PragmaContext=_XLX_SEP_ PragmaFunction=reconstruct_XLX_SEP_ PragmaOptions=port=fullImage_rows mode=s_axilite bundle=scalar_data_XLX_SEP_ [-Wdump-hls-pragmas]
 #pragma HLS INTERFACE port=fullImage_rows mode=s_axilite bundle=scalar_data
         ^
-../image_analysis.cpp:144:9: warning: HLS pragma dump _XLX_SEP_ PragmaIsValid=1_XLX_SEP_ PragmaType=interface_XLX_SEP_ PragmaContext=_XLX_SEP_ PragmaFunction=reconstruct_XLX_SEP_ PragmaOptions=port=fullImage_cols mode=s_axilite bundle=scalar_data_XLX_SEP_ [-Wdump-hls-pragmas]
+../image_analysis.cpp:147:9: warning: HLS pragma dump _XLX_SEP_ PragmaIsValid=1_XLX_SEP_ PragmaType=interface_XLX_SEP_ PragmaContext=_XLX_SEP_ PragmaFunction=reconstruct_XLX_SEP_ PragmaOptions=port=fullImage_cols mode=s_axilite bundle=scalar_data_XLX_SEP_ [-Wdump-hls-pragmas]
 #pragma HLS INTERFACE port=fullImage_cols mode=s_axilite bundle=scalar_data
         ^
-../image_analysis.cpp:146:9: warning: HLS pragma dump _XLX_SEP_ PragmaIsValid=1_XLX_SEP_ PragmaType=interface_XLX_SEP_ PragmaContext=_XLX_SEP_ PragmaFunction=reconstruct_XLX_SEP_ PragmaOptions=port=emissions mode=m_axi bundle=emissions depth=1024_XLX_SEP_ [-Wdump-hls-pragmas]
-#pragma HLS INTERFACE port=emissions mode=m_axi bundle=emissions depth=1024
+../image_analysis.cpp:149:9: warning: HLS pragma dump _XLX_SEP_ PragmaIsValid=1_XLX_SEP_ PragmaType=interface_XLX_SEP_ PragmaContext=_XLX_SEP_ PragmaFunction=reconstruct_XLX_SEP_ PragmaOptions=port=emissions mode=m_axi bundle=emissions depth=1600_XLX_SEP_ [-Wdump-hls-pragmas]
+#pragma HLS INTERFACE port=emissions mode=m_axi bundle=emissions depth=1600
         ^
-../image_analysis.cpp:150:9: warning: HLS pragma dump _XLX_SEP_ PragmaIsValid=1_XLX_SEP_ PragmaType=dataflow_XLX_SEP_ PragmaContext=_XLX_SEP_ PragmaFunction=reconstruct_XLX_SEP_ PragmaOptions=_XLX_SEP_ [-Wdump-hls-pragmas]
+../image_analysis.cpp:153:9: warning: HLS pragma dump _XLX_SEP_ PragmaIsValid=1_XLX_SEP_ PragmaType=dataflow_XLX_SEP_ PragmaContext=_XLX_SEP_ PragmaFunction=reconstruct_XLX_SEP_ PragmaOptions=_XLX_SEP_ [-Wdump-hls-pragmas]
 #pragma HLS DATAFLOW
         ^
-../image_analysis.cpp:151:9: warning: HLS pragma dump _XLX_SEP_ PragmaIsValid=1_XLX_SEP_ PragmaType=loop_tripcount_XLX_SEP_ PragmaContext=_XLX_SEP_ PragmaFunction=reconstruct_XLX_SEP_ PragmaOptions=max=1024 min=1024 avg=1024_XLX_SEP_ [-Wdump-hls-pragmas]
+../image_analysis.cpp:154:9: warning: HLS pragma dump _XLX_SEP_ PragmaIsValid=1_XLX_SEP_ PragmaType=loop_tripcount_XLX_SEP_ PragmaContext=_XLX_SEP_ PragmaFunction=reconstruct_XLX_SEP_ PragmaOptions=max=1024 min=1024 avg=1024_XLX_SEP_ [-Wdump-hls-pragmas]
 #pragma HLS LOOP_TRIPCOUNT max=1024 min=1024 avg=1024
         ^
-../image_analysis.cpp:162:9: warning: HLS pragma dump _XLX_SEP_ PragmaIsValid=1_XLX_SEP_ PragmaType=array_partition_XLX_SEP_ PragmaContext=_XLX_SEP_ PragmaFunction=reconstruct_XLX_SEP_ PragmaOptions=variable=curr_fullImage type=complete_XLX_SEP_ [-Wdump-hls-pragmas]
+../image_analysis.cpp:165:9: warning: HLS pragma dump _XLX_SEP_ PragmaIsValid=1_XLX_SEP_ PragmaType=array_partition_XLX_SEP_ PragmaContext=_XLX_SEP_ PragmaFunction=reconstruct_XLX_SEP_ PragmaOptions=variable=curr_fullImage type=complete_XLX_SEP_ [-Wdump-hls-pragmas]
 #pragma HLS ARRAY_PARTITION variable=curr_fullImage type=complete
         ^
-../image_analysis.cpp:163:9: warning: HLS pragma dump _XLX_SEP_ PragmaIsValid=1_XLX_SEP_ PragmaType=array_partition_XLX_SEP_ PragmaContext=_XLX_SEP_ PragmaFunction=reconstruct_XLX_SEP_ PragmaOptions=variable=curr_localImage type=complete_XLX_SEP_ [-Wdump-hls-pragmas]
+../image_analysis.cpp:166:9: warning: HLS pragma dump _XLX_SEP_ PragmaIsValid=1_XLX_SEP_ PragmaType=array_partition_XLX_SEP_ PragmaContext=_XLX_SEP_ PragmaFunction=reconstruct_XLX_SEP_ PragmaOptions=variable=curr_localImage type=complete_XLX_SEP_ [-Wdump-hls-pragmas]
 #pragma HLS ARRAY_PARTITION variable=curr_localImage type=complete
         ^
 20 warnings generated.

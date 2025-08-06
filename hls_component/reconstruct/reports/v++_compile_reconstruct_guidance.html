@@ -3407,7 +3407,7 @@ window.onload = function () { addSorting(); }
 <center><h1>Design Guidance Report</h1></center><center><table class="header" border="0">
 <tr><td><b>Copyright</b></td><td>Copyright 1986-2022 Xilinx, Inc. All Rights Reserved. Copyright 2022-2024 Advanced Micro Devices, Inc. All Rights Reserved.</td></tr>
 <tr><td><b>Tool Version</b></td><td>xcd v.2024.2 (win64) Build 0 </td></tr>
-<tr><td><b>Date</b></td><td>Mon Jun 30 08:26:24 2025</td></tr>
+<tr><td><b>Date</b></td><td>Wed Aug  6 13:40:19 2025</td></tr>
 <tr><td><b>Host</b></td><td>DESKTOP-F34142K running 64-bit major release  (build 9200)</td></tr>
 <tr><td><b>Command</b></td><td>F:/Vitis/2024.2/bin/unwrapped/win64.o/v++.exe  -c --mode hls --config F:\LMU\quantumMA\opimization\reconstructv1maxi\hls_component\hls_config.cfg --work_dir reconstruct </td></tr>
 </table></center><br>
@@ -3434,57 +3434,35 @@ window.onload = function () { addSorting(); }
 <th align="left" width="380">Resolution</th>
 </tr>
 <tr>
-<td align="left">12</td>
-<td align="left">Throughput</td>
-<td align="left">WARNING</td>
-<td align="left"><undefined></td>
-<td align="left">HLS Throughput Related</td>
-<td align="left">Accelerator.reconstruct.Throughput</td>
-<td align="left">The II Violation in module 'conv_kernel_Pipeline_VITIS_LOOP_101_1' (loop 'VITIS_LOOP_101_1'): Unable to enforce a carried dependence constraint (II = 123, distance = 1, offset = 1) between 'fadd' operation 32 bit ('add16_29', <a href="file:///F:/LMU/quantumMA/opimization/reconstructv1maxi/hls_component\../image_analysis.cpp#line=105">image_analysis.cpp</a>) and 'fadd' operation 32 bit ('add1', <a href="file:///F:/LMU/quantumMA/opimization/reconstructv1maxi/hls_component\../image_analysis.cpp#line=105">image_analysis.cpp</a>).
-</td>
-<td align="left"><a href="http:///docs.xilinx.com/access/sources/dita/map?Doc_Version=2024.2%20English&url=ug1399-vitis-hls">Vitis HLS User Guide (UG1399)</a></td>
-</tr>
-<tr>
-<td align="left">16</td>
-<td align="left">Kernel</td>
-<td align="left">ADVISORY</td>
-<td align="left"><undefined></td>
-<td align="left">HLS Kernel Related</td>
-<td align="left">Accelerator.reconstruct.Kernel</td>
-<td align="left">**** Estimated Fmax: 129.79 MHz
-</td>
-<td align="left"><a href="http:///docs.xilinx.com/access/sources/dita/map?Doc_Version=2024.2%20English&url=ug1399-vitis-hls">Vitis HLS User Guide (UG1399)</a></td>
-</tr>
-<tr>
 <td align="left">8</td>
 <td align="left">Throughput</td>
 <td align="left">WARNING</td>
 <td align="left"><undefined></td>
 <td align="left">HLS Throughput Related</td>
 <td align="left">Accelerator.reconstruct.Throughput</td>
-<td align="left">The II Violation in module 'conv_kernel_Pipeline_VITIS_LOOP_101_1' (loop 'VITIS_LOOP_101_1'): Unable to enforce a carried dependence constraint (II = 67, distance = 1, offset = 1) between 'fadd' operation 32 bit ('add16_29', <a href="file:///F:/LMU/quantumMA/opimization/reconstructv1maxi/hls_component\../image_analysis.cpp#line=105">image_analysis.cpp</a>) and 'fadd' operation 32 bit ('add1', <a href="file:///F:/LMU/quantumMA/opimization/reconstructv1maxi/hls_component\../image_analysis.cpp#line=105">image_analysis.cpp</a>).
+<td align="left">The II Violation in module 'conv_kernel_Pipeline_VITIS_LOOP_104_1' (loop 'VITIS_LOOP_104_1'): Unable to enforce a carried dependence constraint (II = 67, distance = 1, offset = 1) between 'fadd' operation 32 bit ('add16_29', <a href="file:///F:/LMU/quantumMA/opimization/reconstructv1maxi/hls_component\../image_analysis.cpp#line=108">image_analysis.cpp</a>) and 'fadd' operation 32 bit ('add1', <a href="file:///F:/LMU/quantumMA/opimization/reconstructv1maxi/hls_component\../image_analysis.cpp#line=108">image_analysis.cpp</a>).
 </td>
 <td align="left"><a href="http:///docs.xilinx.com/access/sources/dita/map?Doc_Version=2024.2%20English&url=ug1399-vitis-hls">Vitis HLS User Guide (UG1399)</a></td>
 </tr>
 <tr>
-<td align="left">9</td>
+<td align="left">2</td>
+<td align="left">Interface</td>
+<td align="left">ADVISORY</td>
+<td align="left"><undefined></td>
+<td align="left">HLS Interface Related</td>
+<td align="left">Accelerator.reconstruct.Interface</td>
+<td align="left">Multiple burst reads of length 31 and bit width 32 in loop 'VITIS_LOOP_37_2'(<a href="file:///F:/LMU/quantumMA/opimization/reconstructv1maxi/hls_component\../image_analysis.cpp#line=37">image_analysis.cpp</a>) has been inferred on bundle 'fullImage'. These burst requests might be further partitioned into multiple requests during RTL generation, based on max_read_burst_length or max_write_burst_length settings. (<a href="file:///F:/LMU/quantumMA/opimization/reconstructv1maxi/hls_component\../image_analysis.cpp#line=37">image_analysis.cpp</a>)
+</td>
+<td align="left"><a href="http:///docs.xilinx.com/access/sources/dita/map?Doc_Version=2024.2%20English&url=ug1399-vitis-hls">Vitis HLS User Guide (UG1399)</a></td>
+</tr>
+<tr>
+<td align="left">11</td>
 <td align="left">Throughput</td>
 <td align="left">WARNING</td>
 <td align="left"><undefined></td>
 <td align="left">HLS Throughput Related</td>
 <td align="left">Accelerator.reconstruct.Throughput</td>
-<td align="left">The II Violation in module 'conv_kernel_Pipeline_VITIS_LOOP_101_1' (loop 'VITIS_LOOP_101_1'): Unable to enforce a carried dependence constraint (II = 98, distance = 1, offset = 1) between 'fadd' operation 32 bit ('add16_29', <a href="file:///F:/LMU/quantumMA/opimization/reconstructv1maxi/hls_component\../image_analysis.cpp#line=105">image_analysis.cpp</a>) and 'fadd' operation 32 bit ('add1', <a href="file:///F:/LMU/quantumMA/opimization/reconstructv1maxi/hls_component\../image_analysis.cpp#line=105">image_analysis.cpp</a>).
-</td>
-<td align="left"><a href="http:///docs.xilinx.com/access/sources/dita/map?Doc_Version=2024.2%20English&url=ug1399-vitis-hls">Vitis HLS User Guide (UG1399)</a></td>
-</tr>
-<tr>
-<td align="left">7</td>
-<td align="left">Throughput</td>
-<td align="left">WARNING</td>
-<td align="left"><undefined></td>
-<td align="left">HLS Throughput Related</td>
-<td align="left">Accelerator.reconstruct.Throughput</td>
-<td align="left">The II Violation in module 'conv_kernel_Pipeline_VITIS_LOOP_101_1' (loop 'VITIS_LOOP_101_1'): Unable to enforce a carried dependence constraint (II = 4, distance = 1, offset = 1) between 'fadd' operation 32 bit ('add16_29', <a href="file:///F:/LMU/quantumMA/opimization/reconstructv1maxi/hls_component\../image_analysis.cpp#line=105">image_analysis.cpp</a>) and 'fadd' operation 32 bit ('add1', <a href="file:///F:/LMU/quantumMA/opimization/reconstructv1maxi/hls_component\../image_analysis.cpp#line=105">image_analysis.cpp</a>).
+<td align="left">The II Violation in module 'conv_kernel_Pipeline_VITIS_LOOP_104_1' (loop 'VITIS_LOOP_104_1'): Unable to enforce a carried dependence constraint (II = 122, distance = 1, offset = 1) between 'fadd' operation 32 bit ('add16_29', <a href="file:///F:/LMU/quantumMA/opimization/reconstructv1maxi/hls_component\../image_analysis.cpp#line=108">image_analysis.cpp</a>) and 'fadd' operation 32 bit ('add1', <a href="file:///F:/LMU/quantumMA/opimization/reconstructv1maxi/hls_component\../image_analysis.cpp#line=108">image_analysis.cpp</a>).
 </td>
 <td align="left"><a href="http:///docs.xilinx.com/access/sources/dita/map?Doc_Version=2024.2%20English&url=ug1399-vitis-hls">Vitis HLS User Guide (UG1399)</a></td>
 </tr>
@@ -3500,57 +3478,13 @@ window.onload = function () { addSorting(); }
 <td align="left"><a href="http:///docs.xilinx.com/access/sources/dita/map?Doc_Version=2024.2%20English&url=ug1399-vitis-hls">Vitis HLS User Guide (UG1399)</a></td>
 </tr>
 <tr>
-<td align="left">6</td>
+<td align="left">3</td>
 <td align="left">Throughput</td>
-<td align="left">WARNING</td>
-<td align="left"><undefined></td>
-<td align="left">HLS Throughput Related</td>
-<td align="left">Accelerator.reconstruct.Throughput</td>
-<td align="left">The II Violation in module 'conv_kernel_Pipeline_VITIS_LOOP_101_1' (loop 'VITIS_LOOP_101_1'): Unable to enforce a carried dependence constraint (II = 3, distance = 1, offset = 1) between 'fadd' operation 32 bit ('add16_29', <a href="file:///F:/LMU/quantumMA/opimization/reconstructv1maxi/hls_component\../image_analysis.cpp#line=105">image_analysis.cpp</a>) and 'fadd' operation 32 bit ('add1', <a href="file:///F:/LMU/quantumMA/opimization/reconstructv1maxi/hls_component\../image_analysis.cpp#line=105">image_analysis.cpp</a>).
-</td>
-<td align="left"><a href="http:///docs.xilinx.com/access/sources/dita/map?Doc_Version=2024.2%20English&url=ug1399-vitis-hls">Vitis HLS User Guide (UG1399)</a></td>
-</tr>
-<tr>
-<td align="left">10</td>
-<td align="left">Throughput</td>
-<td align="left">WARNING</td>
-<td align="left"><undefined></td>
-<td align="left">HLS Throughput Related</td>
-<td align="left">Accelerator.reconstruct.Throughput</td>
-<td align="left">The II Violation in module 'conv_kernel_Pipeline_VITIS_LOOP_101_1' (loop 'VITIS_LOOP_101_1'): Unable to enforce a carried dependence constraint (II = 114, distance = 1, offset = 1) between 'fadd' operation 32 bit ('add16_29', <a href="file:///F:/LMU/quantumMA/opimization/reconstructv1maxi/hls_component\../image_analysis.cpp#line=105">image_analysis.cpp</a>) and 'fadd' operation 32 bit ('add1', <a href="file:///F:/LMU/quantumMA/opimization/reconstructv1maxi/hls_component\../image_analysis.cpp#line=105">image_analysis.cpp</a>).
-</td>
-<td align="left"><a href="http:///docs.xilinx.com/access/sources/dita/map?Doc_Version=2024.2%20English&url=ug1399-vitis-hls">Vitis HLS User Guide (UG1399)</a></td>
-</tr>
-<tr>
-<td align="left">5</td>
-<td align="left">Throughput</td>
-<td align="left">WARNING</td>
-<td align="left"><undefined></td>
-<td align="left">HLS Throughput Related</td>
-<td align="left">Accelerator.reconstruct.Throughput</td>
-<td align="left">The II Violation in module 'conv_kernel_Pipeline_VITIS_LOOP_101_1' (loop 'VITIS_LOOP_101_1'): Unable to enforce a carried dependence constraint (II = 2, distance = 1, offset = 1) between 'fadd' operation 32 bit ('add16_29', <a href="file:///F:/LMU/quantumMA/opimization/reconstructv1maxi/hls_component\../image_analysis.cpp#line=105">image_analysis.cpp</a>) and 'fadd' operation 32 bit ('add1', <a href="file:///F:/LMU/quantumMA/opimization/reconstructv1maxi/hls_component\../image_analysis.cpp#line=105">image_analysis.cpp</a>).
-</td>
-<td align="left"><a href="http:///docs.xilinx.com/access/sources/dita/map?Doc_Version=2024.2%20English&url=ug1399-vitis-hls">Vitis HLS User Guide (UG1399)</a></td>
-</tr>
-<tr>
-<td align="left">4</td>
-<td align="left">Throughput</td>
-<td align="left">WARNING</td>
-<td align="left"><undefined></td>
-<td align="left">HLS Throughput Related</td>
-<td align="left">Accelerator.reconstruct.Throughput</td>
-<td align="left">The II Violation in module 'conv_kernel_Pipeline_VITIS_LOOP_101_1' (loop 'VITIS_LOOP_101_1'): Unable to enforce a carried dependence constraint (II = 1, distance = 1, offset = 1) between 'fadd' operation 32 bit ('add16_29', <a href="file:///F:/LMU/quantumMA/opimization/reconstructv1maxi/hls_component\../image_analysis.cpp#line=105">image_analysis.cpp</a>) and 'fadd' operation 32 bit ('add1', <a href="file:///F:/LMU/quantumMA/opimization/reconstructv1maxi/hls_component\../image_analysis.cpp#line=105">image_analysis.cpp</a>).
-</td>
-<td align="left"><a href="http:///docs.xilinx.com/access/sources/dita/map?Doc_Version=2024.2%20English&url=ug1399-vitis-hls">Vitis HLS User Guide (UG1399)</a></td>
-</tr>
-<tr>
-<td align="left">2</td>
-<td align="left">Interface</td>
 <td align="left">ADVISORY</td>
 <td align="left"><undefined></td>
-<td align="left">HLS Interface Related</td>
-<td align="left">Accelerator.reconstruct.Interface</td>
-<td align="left">Multiple burst reads of length 31 and bit width 32 in loop 'VITIS_LOOP_78_2'(<a href="file:///F:/LMU/quantumMA/opimization/reconstructv1maxi/hls_component\../image_analysis.cpp#line=78">image_analysis.cpp</a>) has been inferred on bundle 'fullImage'. These burst requests might be further partitioned into multiple requests during RTL generation, based on max_read_burst_length or max_write_burst_length settings. (<a href="file:///F:/LMU/quantumMA/opimization/reconstructv1maxi/hls_component\../image_analysis.cpp#line=78">image_analysis.cpp</a>)
+<td align="left">HLS Throughput Related</td>
+<td align="left">Accelerator.reconstruct.Throughput</td>
+<td align="left">Pipelining result : Target II = NA, Final II = 1, Depth = 11, loop 'VITIS_LOOP_36_1_VITIS_LOOP_37_2'
 </td>
 <td align="left"><a href="http:///docs.xilinx.com/access/sources/dita/map?Doc_Version=2024.2%20English&url=ug1399-vitis-hls">Vitis HLS User Guide (UG1399)</a></td>
 </tr>
@@ -3561,29 +3495,51 @@ window.onload = function () { addSorting(); }
 <td align="left"><undefined></td>
 <td align="left">HLS Interface Related</td>
 <td align="left">Accelerator.reconstruct.Interface</td>
-<td align="left">Multiple burst reads of length 961 and bit width 32 in loop 'VITIS_LOOP_77_1'(<a href="file:///F:/LMU/quantumMA/opimization/reconstructv1maxi/hls_component\../image_analysis.cpp#line=77">image_analysis.cpp</a>) has been inferred on bundle 'imageProjs_local'. These burst requests might be further partitioned into multiple requests during RTL generation, based on max_read_burst_length or max_write_burst_length settings. (<a href="file:///F:/LMU/quantumMA/opimization/reconstructv1maxi/hls_component\../image_analysis.cpp#line=77">image_analysis.cpp</a>)
+<td align="left">Multiple burst reads of length 961 and bit width 32 in loop 'VITIS_LOOP_36_1'(<a href="file:///F:/LMU/quantumMA/opimization/reconstructv1maxi/hls_component\../image_analysis.cpp#line=36">image_analysis.cpp</a>) has been inferred on bundle 'imageProjs_local'. These burst requests might be further partitioned into multiple requests during RTL generation, based on max_read_burst_length or max_write_burst_length settings. (<a href="file:///F:/LMU/quantumMA/opimization/reconstructv1maxi/hls_component\../image_analysis.cpp#line=36">image_analysis.cpp</a>)
 </td>
 <td align="left"><a href="http:///docs.xilinx.com/access/sources/dita/map?Doc_Version=2024.2%20English&url=ug1399-vitis-hls">Vitis HLS User Guide (UG1399)</a></td>
 </tr>
 <tr>
-<td align="left">3</td>
-<td align="left">Throughput</td>
-<td align="left">ADVISORY</td>
-<td align="left"><undefined></td>
-<td align="left">HLS Throughput Related</td>
-<td align="left">Accelerator.reconstruct.Throughput</td>
-<td align="left">Pipelining result : Target II = NA, Final II = 1, Depth = 11, loop 'VITIS_LOOP_77_1_VITIS_LOOP_78_2'
-</td>
-<td align="left"><a href="http:///docs.xilinx.com/access/sources/dita/map?Doc_Version=2024.2%20English&url=ug1399-vitis-hls">Vitis HLS User Guide (UG1399)</a></td>
-</tr>
-<tr>
-<td align="left">11</td>
+<td align="left">6</td>
 <td align="left">Throughput</td>
 <td align="left">WARNING</td>
 <td align="left"><undefined></td>
 <td align="left">HLS Throughput Related</td>
 <td align="left">Accelerator.reconstruct.Throughput</td>
-<td align="left">The II Violation in module 'conv_kernel_Pipeline_VITIS_LOOP_101_1' (loop 'VITIS_LOOP_101_1'): Unable to enforce a carried dependence constraint (II = 122, distance = 1, offset = 1) between 'fadd' operation 32 bit ('add16_29', <a href="file:///F:/LMU/quantumMA/opimization/reconstructv1maxi/hls_component\../image_analysis.cpp#line=105">image_analysis.cpp</a>) and 'fadd' operation 32 bit ('add1', <a href="file:///F:/LMU/quantumMA/opimization/reconstructv1maxi/hls_component\../image_analysis.cpp#line=105">image_analysis.cpp</a>).
+<td align="left">The II Violation in module 'conv_kernel_Pipeline_VITIS_LOOP_104_1' (loop 'VITIS_LOOP_104_1'): Unable to enforce a carried dependence constraint (II = 3, distance = 1, offset = 1) between 'fadd' operation 32 bit ('add16_29', <a href="file:///F:/LMU/quantumMA/opimization/reconstructv1maxi/hls_component\../image_analysis.cpp#line=108">image_analysis.cpp</a>) and 'fadd' operation 32 bit ('add1', <a href="file:///F:/LMU/quantumMA/opimization/reconstructv1maxi/hls_component\../image_analysis.cpp#line=108">image_analysis.cpp</a>).
+</td>
+<td align="left"><a href="http:///docs.xilinx.com/access/sources/dita/map?Doc_Version=2024.2%20English&url=ug1399-vitis-hls">Vitis HLS User Guide (UG1399)</a></td>
+</tr>
+<tr>
+<td align="left">16</td>
+<td align="left">Kernel</td>
+<td align="left">ADVISORY</td>
+<td align="left"><undefined></td>
+<td align="left">HLS Kernel Related</td>
+<td align="left">Accelerator.reconstruct.Kernel</td>
+<td align="left">**** Estimated Fmax: 129.79 MHz
+</td>
+<td align="left"><a href="http:///docs.xilinx.com/access/sources/dita/map?Doc_Version=2024.2%20English&url=ug1399-vitis-hls">Vitis HLS User Guide (UG1399)</a></td>
+</tr>
+<tr>
+<td align="left">9</td>
+<td align="left">Throughput</td>
+<td align="left">WARNING</td>
+<td align="left"><undefined></td>
+<td align="left">HLS Throughput Related</td>
+<td align="left">Accelerator.reconstruct.Throughput</td>
+<td align="left">The II Violation in module 'conv_kernel_Pipeline_VITIS_LOOP_104_1' (loop 'VITIS_LOOP_104_1'): Unable to enforce a carried dependence constraint (II = 98, distance = 1, offset = 1) between 'fadd' operation 32 bit ('add16_29', <a href="file:///F:/LMU/quantumMA/opimization/reconstructv1maxi/hls_component\../image_analysis.cpp#line=108">image_analysis.cpp</a>) and 'fadd' operation 32 bit ('add1', <a href="file:///F:/LMU/quantumMA/opimization/reconstructv1maxi/hls_component\../image_analysis.cpp#line=108">image_analysis.cpp</a>).
+</td>
+<td align="left"><a href="http:///docs.xilinx.com/access/sources/dita/map?Doc_Version=2024.2%20English&url=ug1399-vitis-hls">Vitis HLS User Guide (UG1399)</a></td>
+</tr>
+<tr>
+<td align="left">7</td>
+<td align="left">Throughput</td>
+<td align="left">WARNING</td>
+<td align="left"><undefined></td>
+<td align="left">HLS Throughput Related</td>
+<td align="left">Accelerator.reconstruct.Throughput</td>
+<td align="left">The II Violation in module 'conv_kernel_Pipeline_VITIS_LOOP_104_1' (loop 'VITIS_LOOP_104_1'): Unable to enforce a carried dependence constraint (II = 4, distance = 1, offset = 1) between 'fadd' operation 32 bit ('add16_29', <a href="file:///F:/LMU/quantumMA/opimization/reconstructv1maxi/hls_component\../image_analysis.cpp#line=108">image_analysis.cpp</a>) and 'fadd' operation 32 bit ('add1', <a href="file:///F:/LMU/quantumMA/opimization/reconstructv1maxi/hls_component\../image_analysis.cpp#line=108">image_analysis.cpp</a>).
 </td>
 <td align="left"><a href="http:///docs.xilinx.com/access/sources/dita/map?Doc_Version=2024.2%20English&url=ug1399-vitis-hls">Vitis HLS User Guide (UG1399)</a></td>
 </tr>
@@ -3605,7 +3561,51 @@ window.onload = function () { addSorting(); }
 <td align="left"><undefined></td>
 <td align="left">HLS Throughput Related</td>
 <td align="left">Accelerator.reconstruct.Throughput</td>
-<td align="left">Pipelining result : Target II = NA, Final II = 124, Depth = 128, loop 'VITIS_LOOP_101_1'
+<td align="left">Pipelining result : Target II = NA, Final II = 124, Depth = 128, loop 'VITIS_LOOP_104_1'
+</td>
+<td align="left"><a href="http:///docs.xilinx.com/access/sources/dita/map?Doc_Version=2024.2%20English&url=ug1399-vitis-hls">Vitis HLS User Guide (UG1399)</a></td>
+</tr>
+<tr>
+<td align="left">10</td>
+<td align="left">Throughput</td>
+<td align="left">WARNING</td>
+<td align="left"><undefined></td>
+<td align="left">HLS Throughput Related</td>
+<td align="left">Accelerator.reconstruct.Throughput</td>
+<td align="left">The II Violation in module 'conv_kernel_Pipeline_VITIS_LOOP_104_1' (loop 'VITIS_LOOP_104_1'): Unable to enforce a carried dependence constraint (II = 114, distance = 1, offset = 1) between 'fadd' operation 32 bit ('add16_29', <a href="file:///F:/LMU/quantumMA/opimization/reconstructv1maxi/hls_component\../image_analysis.cpp#line=108">image_analysis.cpp</a>) and 'fadd' operation 32 bit ('add1', <a href="file:///F:/LMU/quantumMA/opimization/reconstructv1maxi/hls_component\../image_analysis.cpp#line=108">image_analysis.cpp</a>).
+</td>
+<td align="left"><a href="http:///docs.xilinx.com/access/sources/dita/map?Doc_Version=2024.2%20English&url=ug1399-vitis-hls">Vitis HLS User Guide (UG1399)</a></td>
+</tr>
+<tr>
+<td align="left">4</td>
+<td align="left">Throughput</td>
+<td align="left">WARNING</td>
+<td align="left"><undefined></td>
+<td align="left">HLS Throughput Related</td>
+<td align="left">Accelerator.reconstruct.Throughput</td>
+<td align="left">The II Violation in module 'conv_kernel_Pipeline_VITIS_LOOP_104_1' (loop 'VITIS_LOOP_104_1'): Unable to enforce a carried dependence constraint (II = 1, distance = 1, offset = 1) between 'fadd' operation 32 bit ('add16_29', <a href="file:///F:/LMU/quantumMA/opimization/reconstructv1maxi/hls_component\../image_analysis.cpp#line=108">image_analysis.cpp</a>) and 'fadd' operation 32 bit ('add1', <a href="file:///F:/LMU/quantumMA/opimization/reconstructv1maxi/hls_component\../image_analysis.cpp#line=108">image_analysis.cpp</a>).
+</td>
+<td align="left"><a href="http:///docs.xilinx.com/access/sources/dita/map?Doc_Version=2024.2%20English&url=ug1399-vitis-hls">Vitis HLS User Guide (UG1399)</a></td>
+</tr>
+<tr>
+<td align="left">12</td>
+<td align="left">Throughput</td>
+<td align="left">WARNING</td>
+<td align="left"><undefined></td>
+<td align="left">HLS Throughput Related</td>
+<td align="left">Accelerator.reconstruct.Throughput</td>
+<td align="left">The II Violation in module 'conv_kernel_Pipeline_VITIS_LOOP_104_1' (loop 'VITIS_LOOP_104_1'): Unable to enforce a carried dependence constraint (II = 123, distance = 1, offset = 1) between 'fadd' operation 32 bit ('add16_29', <a href="file:///F:/LMU/quantumMA/opimization/reconstructv1maxi/hls_component\../image_analysis.cpp#line=108">image_analysis.cpp</a>) and 'fadd' operation 32 bit ('add1', <a href="file:///F:/LMU/quantumMA/opimization/reconstructv1maxi/hls_component\../image_analysis.cpp#line=108">image_analysis.cpp</a>).
+</td>
+<td align="left"><a href="http:///docs.xilinx.com/access/sources/dita/map?Doc_Version=2024.2%20English&url=ug1399-vitis-hls">Vitis HLS User Guide (UG1399)</a></td>
+</tr>
+<tr>
+<td align="left">5</td>
+<td align="left">Throughput</td>
+<td align="left">WARNING</td>
+<td align="left"><undefined></td>
+<td align="left">HLS Throughput Related</td>
+<td align="left">Accelerator.reconstruct.Throughput</td>
+<td align="left">The II Violation in module 'conv_kernel_Pipeline_VITIS_LOOP_104_1' (loop 'VITIS_LOOP_104_1'): Unable to enforce a carried dependence constraint (II = 2, distance = 1, offset = 1) between 'fadd' operation 32 bit ('add16_29', <a href="file:///F:/LMU/quantumMA/opimization/reconstructv1maxi/hls_component\../image_analysis.cpp#line=108">image_analysis.cpp</a>) and 'fadd' operation 32 bit ('add1', <a href="file:///F:/LMU/quantumMA/opimization/reconstructv1maxi/hls_component\../image_analysis.cpp#line=108">image_analysis.cpp</a>).
 </td>
 <td align="left"><a href="http:///docs.xilinx.com/access/sources/dita/map?Doc_Version=2024.2%20English&url=ug1399-vitis-hls">Vitis HLS User Guide (UG1399)</a></td>
 </tr>

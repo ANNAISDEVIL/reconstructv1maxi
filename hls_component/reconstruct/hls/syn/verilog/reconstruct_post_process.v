@@ -171,7 +171,7 @@ reg   [63:0] emissions_addr_reg_140;
 wire    ap_CS_fsm_state12;
 wire   [31:0] grp_fu_88_p2;
 reg   [31:0] mul_i_reg_146;
-wire  signed [63:0] sext_ln113_fu_106_p1;
+wire  signed [63:0] sext_ln116_fu_106_p1;
 wire    ap_CS_fsm_state11;
 wire    ap_CS_fsm_state2;
 wire   [61:0] trunc_ln_fu_96_p4;
@@ -270,7 +270,7 @@ end
 
 always @ (posedge ap_clk) begin
     if ((1'b1 == ap_CS_fsm_state12)) begin
-        emissions_addr_reg_140 <= sext_ln113_fu_106_p1;
+        emissions_addr_reg_140 <= sext_ln116_fu_106_p1;
     end
 end
 
@@ -581,7 +581,7 @@ assign m_axi_emissions_0_WSTRB = 4'd15;
 
 assign m_axi_emissions_0_WUSER = 1'd0;
 
-assign sext_ln113_fu_106_p1 = $signed(trunc_ln_fu_96_p4);
+assign sext_ln116_fu_106_p1 = $signed(trunc_ln_fu_96_p4);
 
 assign trunc_ln_fu_96_p4 = {{dout[63:2]}};
 

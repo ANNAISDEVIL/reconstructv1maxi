@@ -1,17 +1,8 @@
-# 2025-06-29T01:04:09.726724700
+# 2025-08-06T14:39:44.917846
 import vitis
 
 client = vitis.create_client()
 client.set_workspace(path="reconstructv1maxi")
 
-comp = client.get_component(name="hls_component")
-comp.run(operation="SYNTHESIS")
-
-comp.run(operation="C_SIMULATION")
-
-comp.run(operation="SYNTHESIS")
-
-comp.run(operation="C_SIMULATION")
-
-comp.run(operation="SYNTHESIS")
+vitis.dispose()
 

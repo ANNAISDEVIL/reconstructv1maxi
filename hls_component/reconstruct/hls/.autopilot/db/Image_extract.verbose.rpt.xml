@@ -1,7 +1,7 @@
 <profile>
 
 <section name = "Vitis HLS Report for 'Image_extract'" level="0">
-<item name = "Date">Mon Jun 30 08:25:44 2025
+<item name = "Date">Wed Aug  6 13:39:33 2025
 </item>
 <item name = "Version">2024.2 (Build 5238294 on Nov  8 2024)</item>
 <item name = "Project">reconstruct</item>
@@ -31,7 +31,7 @@
 <section name = "" level="1">
 <item name = "Instance"><table name="" hasTotal="0">
 <keys size="9">Instance, Module, min, max, min, max, min, max, Type</keys>
-<column name="grp_Image_extract_Pipeline_VITIS_LOOP_77_1_VITIS_LOOP_78_2_fu_239">Image_extract_Pipeline_VITIS_LOOP_77_1_VITIS_LOOP_78_2, 972, 972, 9.720 us, 9.720 us, 961, 961, loop auto-rewind stp (delay=0 clock cycles(s))</column>
+<column name="grp_Image_extract_Pipeline_VITIS_LOOP_36_1_VITIS_LOOP_37_2_fu_237">Image_extract_Pipeline_VITIS_LOOP_36_1_VITIS_LOOP_37_2, 972, 972, 9.720 us, 9.720 us, 961, 961, loop auto-rewind stp (delay=0 clock cycles(s))</column>
 </table>
 </item>
 <item name = "Loop"><table name="" hasTotal="0">
@@ -50,10 +50,10 @@
 <column name="DSP">-, -, -, -, -</column>
 <column name="Expression">-, -, 0, 6, -</column>
 <column name="FIFO">-, -, -, -, -</column>
-<column name="Instance">-, -, 354, 435, -</column>
+<column name="Instance">-, -, 354, 507, -</column>
 <column name="Memory">-, -, -, -, -</column>
 <column name="Multiplexer">-, -, 0, 242, -</column>
-<column name="Register">-, -, 227, -, -</column>
+<column name="Register">-, -, 235, -, -</column>
 <specialColumn name="Available">2160, 4272, 850560, 425280, 80</specialColumn>
 <specialColumn name="Utilization (%)">0, 0, ~0, ~0, 0</specialColumn>
 </table>
@@ -62,7 +62,7 @@
 <section name = "" level="1">
 <item name = "Instance"><table name="" hasTotal="1">
 <keys size="7">Instance, Module, BRAM_18K, DSP, FF, LUT, URAM</keys>
-<column name="grp_Image_extract_Pipeline_VITIS_LOOP_77_1_VITIS_LOOP_78_2_fu_239">Image_extract_Pipeline_VITIS_LOOP_77_1_VITIS_LOOP_78_2, 0, 0, 354, 435, 0</column>
+<column name="grp_Image_extract_Pipeline_VITIS_LOOP_36_1_VITIS_LOOP_37_2_fu_237">Image_extract_Pipeline_VITIS_LOOP_36_1_VITIS_LOOP_37_2, 0, 0, 354, 507, 0</column>
 </table>
 </item>
 <item name = "DSP"><table name="" hasTotal="0">
@@ -111,12 +111,12 @@
 <keys size="5">Name, FF, LUT, Bits, Const Bits</keys>
 <column name="ap_CS_fsm">11, 0, 11, 0</column>
 <column name="ap_done_reg">1, 0, 1, 0</column>
-<column name="curr_info_X_min_reg_462">32, 0, 32, 0</column>
-<column name="fullImage2_read_reg_472">64, 0, 64, 0</column>
-<column name="grp_Image_extract_Pipeline_VITIS_LOOP_77_1_VITIS_LOOP_78_2_fu_239_ap_start_reg">1, 0, 1, 0</column>
-<column name="imageProjs_addr_read_reg_457">32, 0, 32, 0</column>
-<column name="lshr_ln70_1_cast_i_reg_467">24, 0, 24, 0</column>
-<column name="trunc_ln_reg_447">62, 0, 62, 0</column>
+<column name="curr_info_X_min_reg_460">32, 0, 32, 0</column>
+<column name="curr_info_Y_min_reg_465">32, 0, 32, 0</column>
+<column name="fullImage2_read_reg_470">64, 0, 64, 0</column>
+<column name="grp_Image_extract_Pipeline_VITIS_LOOP_36_1_VITIS_LOOP_37_2_fu_237_ap_start_reg">1, 0, 1, 0</column>
+<column name="imageProjs_addr_read_reg_455">32, 0, 32, 0</column>
+<column name="trunc_ln_reg_445">62, 0, 62, 0</column>
 </table>
 </item>
 </section>

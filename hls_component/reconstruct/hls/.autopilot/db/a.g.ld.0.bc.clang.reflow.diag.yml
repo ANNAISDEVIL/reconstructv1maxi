@@ -333,65 +333,65 @@ Args:
 --- !Missed
 Pass:            inline
 Name:            NeverInline
-DebugLoc:        { File: ../image_analysis.cpp, Line: 169, Column: 9 }
+DebugLoc:        { File: ../image_analysis.cpp, Line: 172, Column: 9 }
 Function:        _Z11reconstructiiiP13atom_locationiiPfS1_PiS1_iiS1_
 Args:            
   - Callee:          'post_process(float, float, float, float&)'
-    DebugLoc:        { File: ../image_analysis.cpp, Line: 112, Column: 0 }
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 115, Column: 0 }
   - String:          ' not inlined into '
   - Caller:          'reconstruct(int, int, int, atom_location*, int, int, float*, float*, int*, float*, int, int, float*)'
-    DebugLoc:        { File: ../image_analysis.cpp, Line: 123, Column: 0 }
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 126, Column: 0 }
   - String:          ' because it should never be inlined (cost=never)'
 ...
 --- !Missed
 Pass:            inline
 Name:            NeverInline
-DebugLoc:        { File: ../image_analysis.cpp, Line: 165, Column: 2 }
+DebugLoc:        { File: ../image_analysis.cpp, Line: 168, Column: 2 }
 Function:        _Z11reconstructiiiP13atom_locationiiPfS1_PiS1_iiS1_
 Args:            
   - Callee:          'getLocalImages_single(int, int, int, int, atom_location*, hls::stream<local_image_info, 0>&)'
     DebugLoc:        { File: ../image_analysis.cpp, Line: 7, Column: 0 }
   - String:          ' not inlined into '
   - Caller:          'reconstruct(int, int, int, atom_location*, int, int, float*, float*, int*, float*, int, int, float*)'
-    DebugLoc:        { File: ../image_analysis.cpp, Line: 123, Column: 0 }
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 126, Column: 0 }
   - String:          ' because it should never be inlined (cost=never)'
 ...
 --- !Missed
 Pass:            inline
 Name:            NeverInline
-DebugLoc:        { File: ../image_analysis.cpp, Line: 166, Column: 9 }
+DebugLoc:        { File: ../image_analysis.cpp, Line: 169, Column: 9 }
 Function:        _Z11reconstructiiiP13atom_locationiiPfS1_PiS1_iiS1_
 Args:            
   - Callee:          'Image_extract(int, hls::stream<local_image_info, 0>&, float*, float (*) [31], float*, float (*) [31], float*, float&)'
-    DebugLoc:        { File: ../image_analysis.cpp, Line: 69, Column: 0 }
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 28, Column: 0 }
   - String:          ' not inlined into '
   - Caller:          'reconstruct(int, int, int, atom_location*, int, int, float*, float*, int*, float*, int, int, float*)'
-    DebugLoc:        { File: ../image_analysis.cpp, Line: 123, Column: 0 }
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 126, Column: 0 }
   - String:          ' because it should never be inlined (cost=never)'
 ...
 --- !Missed
 Pass:            inline
 Name:            NeverInline
-DebugLoc:        { File: ../image_analysis.cpp, Line: 168, Column: 9 }
+DebugLoc:        { File: ../image_analysis.cpp, Line: 171, Column: 9 }
 Function:        _Z11reconstructiiiP13atom_locationiiPfS1_PiS1_iiS1_
 Args:            
   - Callee:          'conv_kernel(float (*) [31], float (*) [31], float&, float&)'
-    DebugLoc:        { File: ../image_analysis.cpp, Line: 98, Column: 0 }
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 101, Column: 0 }
   - String:          ' not inlined into '
   - Caller:          'reconstruct(int, int, int, atom_location*, int, int, float*, float*, int*, float*, int, int, float*)'
-    DebugLoc:        { File: ../image_analysis.cpp, Line: 123, Column: 0 }
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 126, Column: 0 }
   - String:          ' because it should never be inlined (cost=never)'
 ...
 --- !Passed
 Pass:            reflow-pragma-loop-unroll
 Name:            PragmaFullyUnroll
-DebugLoc:        { File: ../image_analysis.cpp, Line: 98, Column: 0 }
+DebugLoc:        { File: ../image_analysis.cpp, Line: 101, Column: 0 }
 Function:        _Z11conv_kernelPA31_fS0_RfS1_
 Args:            
   - String:          'Unrolling loop '''
-  - LoopName:        VITIS_LOOP_102_2
+  - LoopName:        VITIS_LOOP_105_2
   - String:          ''' ('
-  - LoopLoc:         '../image_analysis.cpp:102:27'
+  - LoopLoc:         '../image_analysis.cpp:105:27'
   - String:          ') '
   - String:          'in function '''
   - String:          conv_kernel
@@ -701,40 +701,14 @@ Args:
 --- !Missed
 Pass:            inline
 Name:            NeverInline
-DebugLoc:        { File: ../image_analysis.cpp, Line: 165, Column: 2 }
+DebugLoc:        { File: ../image_analysis.cpp, Line: 168, Column: 2 }
 Function:        _Z11reconstructiiiP13atom_locationiiPfS1_PiS1_iiS1_
 Args:            
   - Callee:          'getLocalImages_single(int, int, int, int, atom_location*, hls::stream<local_image_info, 0>&)'
     DebugLoc:        { File: ../image_analysis.cpp, Line: 7, Column: 0 }
   - String:          ' not inlined into '
   - Caller:          'reconstruct(int, int, int, atom_location*, int, int, float*, float*, int*, float*, int, int, float*)'
-    DebugLoc:        { File: ../image_analysis.cpp, Line: 123, Column: 0 }
-  - String:          ' because it should never be inlined (cost=never)'
-...
---- !Missed
-Pass:            inline
-Name:            NeverInline
-DebugLoc:        { File: ../image_analysis.cpp, Line: 166, Column: 9 }
-Function:        _Z11reconstructiiiP13atom_locationiiPfS1_PiS1_iiS1_
-Args:            
-  - Callee:          'Image_extract(int, hls::stream<local_image_info, 0>&, float*, float (*) [31], float*, float (*) [31], float*, float&)'
-    DebugLoc:        { File: ../image_analysis.cpp, Line: 69, Column: 0 }
-  - String:          ' not inlined into '
-  - Caller:          'reconstruct(int, int, int, atom_location*, int, int, float*, float*, int*, float*, int, int, float*)'
-    DebugLoc:        { File: ../image_analysis.cpp, Line: 123, Column: 0 }
-  - String:          ' because it should never be inlined (cost=never)'
-...
---- !Missed
-Pass:            inline
-Name:            NeverInline
-DebugLoc:        { File: ../image_analysis.cpp, Line: 168, Column: 9 }
-Function:        _Z11reconstructiiiP13atom_locationiiPfS1_PiS1_iiS1_
-Args:            
-  - Callee:          'conv_kernel(float (*) [31], float (*) [31], float&, float&)'
-    DebugLoc:        { File: ../image_analysis.cpp, Line: 98, Column: 0 }
-  - String:          ' not inlined into '
-  - Caller:          'reconstruct(int, int, int, atom_location*, int, int, float*, float*, int*, float*, int, int, float*)'
-    DebugLoc:        { File: ../image_analysis.cpp, Line: 123, Column: 0 }
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 126, Column: 0 }
   - String:          ' because it should never be inlined (cost=never)'
 ...
 --- !Missed
@@ -743,11 +717,37 @@ Name:            NeverInline
 DebugLoc:        { File: ../image_analysis.cpp, Line: 169, Column: 9 }
 Function:        _Z11reconstructiiiP13atom_locationiiPfS1_PiS1_iiS1_
 Args:            
-  - Callee:          'post_process(float, float, float, float&)'
-    DebugLoc:        { File: ../image_analysis.cpp, Line: 112, Column: 0 }
+  - Callee:          'Image_extract(int, hls::stream<local_image_info, 0>&, float*, float (*) [31], float*, float (*) [31], float*, float&)'
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 28, Column: 0 }
   - String:          ' not inlined into '
   - Caller:          'reconstruct(int, int, int, atom_location*, int, int, float*, float*, int*, float*, int, int, float*)'
-    DebugLoc:        { File: ../image_analysis.cpp, Line: 123, Column: 0 }
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 126, Column: 0 }
+  - String:          ' because it should never be inlined (cost=never)'
+...
+--- !Missed
+Pass:            inline
+Name:            NeverInline
+DebugLoc:        { File: ../image_analysis.cpp, Line: 171, Column: 9 }
+Function:        _Z11reconstructiiiP13atom_locationiiPfS1_PiS1_iiS1_
+Args:            
+  - Callee:          'conv_kernel(float (*) [31], float (*) [31], float&, float&)'
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 101, Column: 0 }
+  - String:          ' not inlined into '
+  - Caller:          'reconstruct(int, int, int, atom_location*, int, int, float*, float*, int*, float*, int, int, float*)'
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 126, Column: 0 }
+  - String:          ' because it should never be inlined (cost=never)'
+...
+--- !Missed
+Pass:            inline
+Name:            NeverInline
+DebugLoc:        { File: ../image_analysis.cpp, Line: 172, Column: 9 }
+Function:        _Z11reconstructiiiP13atom_locationiiPfS1_PiS1_iiS1_
+Args:            
+  - Callee:          'post_process(float, float, float, float&)'
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 115, Column: 0 }
+  - String:          ' not inlined into '
+  - Caller:          'reconstruct(int, int, int, atom_location*, int, int, float*, float*, int*, float*, int, int, float*)'
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 126, Column: 0 }
   - String:          ' because it should never be inlined (cost=never)'
 ...
 --- !Missed
@@ -756,7 +756,7 @@ Name:            NeverInline
 Function:        apatb_reconstruct_ir
 Args:            
   - Callee:          'reconstruct(int, int, int, atom_location*, int, int, float*, float*, int*, float*, int, int, float*)'
-    DebugLoc:        { File: ../image_analysis.cpp, Line: 123, Column: 0 }
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 126, Column: 0 }
   - String:          ' not inlined into '
   - Caller:          apatb_reconstruct_ir
   - String:          ' because it should never be inlined (cost=never)'
@@ -1051,7 +1051,7 @@ Args:
 --- !Passed
 Pass:            reflow-array-partition
 Name:            ArrayXform
-DebugLoc:        { File: ../image_analysis.cpp, Line: 153, Column: 15 }
+DebugLoc:        { File: ../image_analysis.cpp, Line: 156, Column: 15 }
 Function:        _Z11reconstructiiiP13atom_locationiiPfS1_PiS1_iiS1_
 Args:            
   - String:          'Applying '
@@ -1069,7 +1069,7 @@ Args:
 --- !Passed
 Pass:            reflow-array-partition
 Name:            ArrayXform
-DebugLoc:        { File: ../image_analysis.cpp, Line: 154, Column: 15 }
+DebugLoc:        { File: ../image_analysis.cpp, Line: 157, Column: 15 }
 Function:        _Z11reconstructiiiP13atom_locationiiPfS1_PiS1_iiS1_
 Args:            
   - String:          'Applying '
@@ -1087,7 +1087,7 @@ Args:
 --- !Passed
 Pass:            reflow-aggr
 Name:            AggrSucc
-DebugLoc:        { File: ../image_analysis.cpp, Line: 152, Column: 34 }
+DebugLoc:        { File: ../image_analysis.cpp, Line: 155, Column: 34 }
 Function:        _Z11reconstructiiiP13atom_locationiiPfS1_PiS1_iiS1_
 Args:            
   - String:          'Aggregating '
@@ -1124,7 +1124,7 @@ Args:
 --- !Passed
 Pass:            reflow-burst-inference
 Name:            BurstInferred
-DebugLoc:        { File: ../image_analysis.cpp, Line: 77, Column: 22 }
+DebugLoc:        { File: ../image_analysis.cpp, Line: 36, Column: 22 }
 Function:        _Z13Image_extractiRN3hls6streamI16local_image_infoLi0EEEPfPA31_fS4_S6_S4_Rf
 Args:            
   - String:          'Sequential '
@@ -1138,23 +1138,23 @@ Args:
   - String:          ' '
   - BundleName:      imageProjs_local
   - String:          ' '
-  - LoopName:        VITIS_LOOP_77_1
+  - LoopName:        VITIS_LOOP_36_1
   - String:          ' '
-  - LoopLoc:         '../image_analysis.cpp:77:22'
+  - LoopLoc:         '../image_analysis.cpp:36:22'
   - String:          ' '
   - Function:        'Image_extract(int, hls::stream<local_image_info, 0>&, float*, float (*) [31], float*, float (*) [31], float*, float&)'
-    DebugLoc:        { File: ../image_analysis.cpp, Line: 69, Column: 0 }
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 28, Column: 0 }
   - String:          ' '
   - String:          ' _XLX_SEP_ '
   - OrigAccess:      load
-    DebugLoc:        { File: ../image_analysis.cpp, Line: 80, Column: 37 }
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 39, Column: 37 }
   - OrigDirection:   read
   - OrigID:          for.body14.load.70
 ...
 --- !Passed
 Pass:            reflow-burst-inference
 Name:            BurstInferred
-DebugLoc:        { File: ../image_analysis.cpp, Line: 78, Column: 26 }
+DebugLoc:        { File: ../image_analysis.cpp, Line: 37, Column: 26 }
 Function:        _Z13Image_extractiRN3hls6streamI16local_image_infoLi0EEEPfPA31_fS4_S6_S4_Rf
 Args:            
   - String:          'Sequential '
@@ -1168,47 +1168,47 @@ Args:
   - String:          ' '
   - BundleName:      fullImage
   - String:          ' '
-  - LoopName:        VITIS_LOOP_78_2
+  - LoopName:        VITIS_LOOP_37_2
   - String:          ' '
-  - LoopLoc:         '../image_analysis.cpp:78:26'
+  - LoopLoc:         '../image_analysis.cpp:37:26'
   - String:          ' '
   - Function:        'Image_extract(int, hls::stream<local_image_info, 0>&, float*, float (*) [31], float*, float (*) [31], float*, float&)'
-    DebugLoc:        { File: ../image_analysis.cpp, Line: 69, Column: 0 }
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 28, Column: 0 }
   - String:          ' '
   - String:          ' _XLX_SEP_ '
   - OrigAccess:      load
-    DebugLoc:        { File: ../image_analysis.cpp, Line: 81, Column: 36 }
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 40, Column: 36 }
   - OrigDirection:   read
   - OrigID:          for.body14.load.107
 ...
 --- !Missed
 Pass:            reflow-burst-inference
 Name:            IncompatibleStride
-DebugLoc:        { File: ../image_analysis.cpp, Line: 78, Column: 26 }
+DebugLoc:        { File: ../image_analysis.cpp, Line: 37, Column: 26 }
 Function:        _Z13Image_extractiRN3hls6streamI16local_image_infoLi0EEEPfPA31_fS4_S6_S4_Rf
 Args:            
   - String:          Stride is incompatible
   - String:          ' _XLX_SEP_ '
   - OrigAccess:      call
-    DebugLoc:        { File: ../image_analysis.cpp, Line: 78, Column: 26 }
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 37, Column: 26 }
   - OrigDirection:   read
   - OrigID:          scevgepseq
   - ArrayName:       fullImage
   - String:          ' '
   - BundleName:      fullImage
   - String:          ' '
-  - LoopName:        VITIS_LOOP_77_1
+  - LoopName:        VITIS_LOOP_36_1
   - String:          ' '
-  - LoopLoc:         '../image_analysis.cpp:77:22'
+  - LoopLoc:         '../image_analysis.cpp:36:22'
   - String:          ' '
   - Function:        'Image_extract(int, hls::stream<local_image_info, 0>&, float*, float (*) [31], float*, float (*) [31], float*, float&)'
-    DebugLoc:        { File: ../image_analysis.cpp, Line: 69, Column: 0 }
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 28, Column: 0 }
   - String:          ' '
 ...
 --- !Missed
 Pass:            reflow-burst-widen
 Name:            GreaterOrEqualThreshold
-DebugLoc:        { File: ../image_analysis.cpp, Line: 77, Column: 22 }
+DebugLoc:        { File: ../image_analysis.cpp, Line: 36, Column: 22 }
 Function:        _Z13Image_extractiRN3hls6streamI16local_image_infoLi0EEEPfPA31_fS4_S6_S4_Rf
 Args:            
   - String:          'Could not widen since type '
@@ -1217,25 +1217,25 @@ Args:
   - Threshold:       '0'
   - String:          ' _XLX_SEP_ '
   - OrigAccess:      call
-    DebugLoc:        { File: ../image_analysis.cpp, Line: 77, Column: 22 }
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 36, Column: 22 }
   - OrigDirection:   read
   - OrigID:          imageProjs_local3seq
   - ArrayName:       imageProjs_local
   - String:          ' '
   - BundleName:      imageProjs_local
   - String:          ' '
-  - LoopName:        VITIS_LOOP_78_2
+  - LoopName:        VITIS_LOOP_37_2
   - String:          ' '
-  - LoopLoc:         '../image_analysis.cpp:78:26'
+  - LoopLoc:         '../image_analysis.cpp:37:26'
   - String:          ' '
   - Function:        'Image_extract(int, hls::stream<local_image_info, 0>&, float*, float (*) [31], float*, float (*) [31], float*, float&)'
-    DebugLoc:        { File: ../image_analysis.cpp, Line: 69, Column: 0 }
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 28, Column: 0 }
   - String:          ' '
 ...
 --- !Missed
 Pass:            reflow-burst-widen
 Name:            GreaterOrEqualThreshold
-DebugLoc:        { File: ../image_analysis.cpp, Line: 78, Column: 26 }
+DebugLoc:        { File: ../image_analysis.cpp, Line: 37, Column: 26 }
 Function:        _Z13Image_extractiRN3hls6streamI16local_image_infoLi0EEEPfPA31_fS4_S6_S4_Rf
 Args:            
   - String:          'Could not widen since type '
@@ -1244,19 +1244,19 @@ Args:
   - Threshold:       '0'
   - String:          ' _XLX_SEP_ '
   - OrigAccess:      call
-    DebugLoc:        { File: ../image_analysis.cpp, Line: 78, Column: 26 }
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 37, Column: 26 }
   - OrigDirection:   read
   - OrigID:          scevgepseq
   - ArrayName:       fullImage
   - String:          ' '
   - BundleName:      fullImage
   - String:          ' '
-  - LoopName:        VITIS_LOOP_78_2
+  - LoopName:        VITIS_LOOP_37_2
   - String:          ' '
-  - LoopLoc:         '../image_analysis.cpp:78:26'
+  - LoopLoc:         '../image_analysis.cpp:37:26'
   - String:          ' '
   - Function:        'Image_extract(int, hls::stream<local_image_info, 0>&, float*, float (*) [31], float*, float (*) [31], float*, float&)'
-    DebugLoc:        { File: ../image_analysis.cpp, Line: 69, Column: 0 }
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 28, Column: 0 }
   - String:          ' '
 ...
 --- !HLSReportInfo
@@ -1264,9 +1264,9 @@ Pass:            auto-loop-pipeline
 Name:            AutoLoopPipeline
 Args:            
   - String:          'automatically set the pipeline for Loop< '
-  - LoopName:        VITIS_LOOP_101_1
+  - LoopName:        VITIS_LOOP_104_1
   - String:          '> at '
-  - LoopLoc:         '../image_analysis.cpp:101:23'
+  - LoopLoc:         '../image_analysis.cpp:104:23'
   - String:          ' '
 ...
 --- !HLSReportInfo
@@ -1274,15 +1274,15 @@ Pass:            auto-loop-pipeline
 Name:            AutoLoopPipeline
 Args:            
   - String:          'automatically set the pipeline for Loop< '
-  - LoopName:        VITIS_LOOP_78_2
+  - LoopName:        VITIS_LOOP_37_2
   - String:          '> at '
-  - LoopLoc:         '../image_analysis.cpp:78:26'
+  - LoopLoc:         '../image_analysis.cpp:37:26'
   - String:          ' '
 ...
 --- !Passed
 Pass:            reflow-burst-summary
 Name:            BurstInferredVerboseSummary
-DebugLoc:        { File: ../image_analysis.cpp, Line: 77, Column: 22 }
+DebugLoc:        { File: ../image_analysis.cpp, Line: 36, Column: 22 }
 Function:        _Z13Image_extractiRN3hls6streamI16local_image_infoLi0EEEPfPA31_fS4_S6_S4_Rf.1
 Args:            
   - String:          'Multiple burst '
@@ -1299,18 +1299,18 @@ Args:
   - String:          ' '
   - BundleName:      imageProjs_local
   - String:          ' '
-  - LoopName:        VITIS_LOOP_77_1
+  - LoopName:        VITIS_LOOP_36_1
   - String:          ' '
-  - LoopLoc:         '../image_analysis.cpp:77:22'
+  - LoopLoc:         '../image_analysis.cpp:36:22'
   - String:          ' '
   - Function:        'Image_extract(int, hls::stream<local_image_info, 0>&, float*, float (*) [31], float*, float (*) [31], float*, float&) (.1)'
-    DebugLoc:        { File: ../image_analysis.cpp, Line: 69, Column: 0 }
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 28, Column: 0 }
   - String:          ' '
 ...
 --- !Passed
 Pass:            reflow-burst-summary
 Name:            BurstInferredSummary
-DebugLoc:        { File: ../image_analysis.cpp, Line: 77, Column: 22 }
+DebugLoc:        { File: ../image_analysis.cpp, Line: 36, Column: 22 }
 Function:        _Z13Image_extractiRN3hls6streamI16local_image_infoLi0EEEPfPA31_fS4_S6_S4_Rf.1
 Args:            
   - String:          'Multiple burst '
@@ -1320,9 +1320,9 @@ Args:
   - String:          ' and bit width '
   - Width:           '32'
   - String:          ' in loop '''
-  - LoopName:        VITIS_LOOP_77_1
+  - LoopName:        VITIS_LOOP_36_1
   - String:          '''('
-  - LoopLoc:         '../image_analysis.cpp:77:22'
+  - LoopLoc:         '../image_analysis.cpp:36:22'
   - String:          ')'
   - String:          ' has been inferred on bundle '''
   - BundleName:      imageProjs_local
@@ -1332,7 +1332,7 @@ Args:
 --- !Passed
 Pass:            reflow-burst-summary
 Name:            BurstInferredVerboseSummary
-DebugLoc:        { File: ../image_analysis.cpp, Line: 78, Column: 26 }
+DebugLoc:        { File: ../image_analysis.cpp, Line: 37, Column: 26 }
 Function:        _Z13Image_extractiRN3hls6streamI16local_image_infoLi0EEEPfPA31_fS4_S6_S4_Rf.1
 Args:            
   - String:          'Multiple burst '
@@ -1349,18 +1349,18 @@ Args:
   - String:          ' '
   - BundleName:      fullImage
   - String:          ' '
-  - LoopName:        VITIS_LOOP_78_2
+  - LoopName:        VITIS_LOOP_37_2
   - String:          ' '
-  - LoopLoc:         '../image_analysis.cpp:78:26'
+  - LoopLoc:         '../image_analysis.cpp:37:26'
   - String:          ' '
   - Function:        'Image_extract(int, hls::stream<local_image_info, 0>&, float*, float (*) [31], float*, float (*) [31], float*, float&) (.1)'
-    DebugLoc:        { File: ../image_analysis.cpp, Line: 69, Column: 0 }
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 28, Column: 0 }
   - String:          ' '
 ...
 --- !Passed
 Pass:            reflow-burst-summary
 Name:            BurstInferredSummary
-DebugLoc:        { File: ../image_analysis.cpp, Line: 78, Column: 26 }
+DebugLoc:        { File: ../image_analysis.cpp, Line: 37, Column: 26 }
 Function:        _Z13Image_extractiRN3hls6streamI16local_image_infoLi0EEEPfPA31_fS4_S6_S4_Rf.1
 Args:            
   - String:          'Multiple burst '
@@ -1370,9 +1370,9 @@ Args:
   - String:          ' and bit width '
   - Width:           '32'
   - String:          ' in loop '''
-  - LoopName:        VITIS_LOOP_78_2
+  - LoopName:        VITIS_LOOP_37_2
   - String:          '''('
-  - LoopLoc:         '../image_analysis.cpp:78:26'
+  - LoopLoc:         '../image_analysis.cpp:37:26'
   - String:          ')'
   - String:          ' has been inferred on bundle '''
   - BundleName:      fullImage
@@ -1411,52 +1411,26 @@ Args:
 --- !Missed
 Pass:            inline
 Name:            NeverInline
-DebugLoc:        { File: ../image_analysis.cpp, Line: 169, Column: 57 }
-Function:        dataflow_in_loop_VITIS_LOOP_149_1.1
+DebugLoc:        { File: ../image_analysis.cpp, Line: 172, Column: 57 }
+Function:        dataflow_in_loop_VITIS_LOOP_152_1.1
 Args:            
-  - Callee:          dataflow_in_loop_VITIS_LOOP_149_1.1_Block_newFuncRoot_proc
+  - Callee:          dataflow_in_loop_VITIS_LOOP_152_1.1_Block_newFuncRoot_proc
     DebugLoc:        { File: ../image_analysis.cpp, Line: 0, Column: 0 }
   - String:          ' not inlined into '
-  - Caller:          dataflow_in_loop_VITIS_LOOP_149_1.1
+  - Caller:          dataflow_in_loop_VITIS_LOOP_152_1.1
     DebugLoc:        { File: ../image_analysis.cpp, Line: 0, Column: 0 }
   - String:          ' because it should never be inlined (cost=never)'
 ...
 --- !Missed
 Pass:            inline
 Name:            NeverInline
-DebugLoc:        { File: ../image_analysis.cpp, Line: 165, Column: 2 }
-Function:        dataflow_in_loop_VITIS_LOOP_149_1.1
+DebugLoc:        { File: ../image_analysis.cpp, Line: 168, Column: 2 }
+Function:        dataflow_in_loop_VITIS_LOOP_152_1.1
 Args:            
   - Callee:          'getLocalImages_single(int, int, int, int, atom_location*, hls::stream<local_image_info, 0>&) (.1)'
     DebugLoc:        { File: ../image_analysis.cpp, Line: 7, Column: 0 }
   - String:          ' not inlined into '
-  - Caller:          dataflow_in_loop_VITIS_LOOP_149_1.1
-    DebugLoc:        { File: ../image_analysis.cpp, Line: 0, Column: 0 }
-  - String:          ' because it should never be inlined (cost=never)'
-...
---- !Missed
-Pass:            inline
-Name:            NeverInline
-DebugLoc:        { File: ../image_analysis.cpp, Line: 166, Column: 9 }
-Function:        dataflow_in_loop_VITIS_LOOP_149_1.1
-Args:            
-  - Callee:          'Image_extract(int, hls::stream<local_image_info, 0>&, float*, float (*) [31], float*, float (*) [31], float*, float&) (.1)'
-    DebugLoc:        { File: ../image_analysis.cpp, Line: 69, Column: 0 }
-  - String:          ' not inlined into '
-  - Caller:          dataflow_in_loop_VITIS_LOOP_149_1.1
-    DebugLoc:        { File: ../image_analysis.cpp, Line: 0, Column: 0 }
-  - String:          ' because it should never be inlined (cost=never)'
-...
---- !Missed
-Pass:            inline
-Name:            NeverInline
-DebugLoc:        { File: ../image_analysis.cpp, Line: 168, Column: 9 }
-Function:        dataflow_in_loop_VITIS_LOOP_149_1.1
-Args:            
-  - Callee:          'conv_kernel(float (*) [31], float (*) [31], float&, float&)'
-    DebugLoc:        { File: ../image_analysis.cpp, Line: 98, Column: 0 }
-  - String:          ' not inlined into '
-  - Caller:          dataflow_in_loop_VITIS_LOOP_149_1.1
+  - Caller:          dataflow_in_loop_VITIS_LOOP_152_1.1
     DebugLoc:        { File: ../image_analysis.cpp, Line: 0, Column: 0 }
   - String:          ' because it should never be inlined (cost=never)'
 ...
@@ -1464,25 +1438,51 @@ Args:
 Pass:            inline
 Name:            NeverInline
 DebugLoc:        { File: ../image_analysis.cpp, Line: 169, Column: 9 }
-Function:        dataflow_in_loop_VITIS_LOOP_149_1.1
+Function:        dataflow_in_loop_VITIS_LOOP_152_1.1
 Args:            
-  - Callee:          'post_process(float, float, float, float&) (.1)'
-    DebugLoc:        { File: ../image_analysis.cpp, Line: 112, Column: 0 }
+  - Callee:          'Image_extract(int, hls::stream<local_image_info, 0>&, float*, float (*) [31], float*, float (*) [31], float*, float&) (.1)'
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 28, Column: 0 }
   - String:          ' not inlined into '
-  - Caller:          dataflow_in_loop_VITIS_LOOP_149_1.1
+  - Caller:          dataflow_in_loop_VITIS_LOOP_152_1.1
     DebugLoc:        { File: ../image_analysis.cpp, Line: 0, Column: 0 }
   - String:          ' because it should never be inlined (cost=never)'
 ...
 --- !Missed
 Pass:            inline
 Name:            NeverInline
-DebugLoc:        { File: ../image_analysis.cpp, Line: 158, Column: 15 }
+DebugLoc:        { File: ../image_analysis.cpp, Line: 171, Column: 9 }
+Function:        dataflow_in_loop_VITIS_LOOP_152_1.1
+Args:            
+  - Callee:          'conv_kernel(float (*) [31], float (*) [31], float&, float&)'
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 101, Column: 0 }
+  - String:          ' not inlined into '
+  - Caller:          dataflow_in_loop_VITIS_LOOP_152_1.1
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 0, Column: 0 }
+  - String:          ' because it should never be inlined (cost=never)'
+...
+--- !Missed
+Pass:            inline
+Name:            NeverInline
+DebugLoc:        { File: ../image_analysis.cpp, Line: 172, Column: 9 }
+Function:        dataflow_in_loop_VITIS_LOOP_152_1.1
+Args:            
+  - Callee:          'post_process(float, float, float, float&) (.1)'
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 115, Column: 0 }
+  - String:          ' not inlined into '
+  - Caller:          dataflow_in_loop_VITIS_LOOP_152_1.1
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 0, Column: 0 }
+  - String:          ' because it should never be inlined (cost=never)'
+...
+--- !Missed
+Pass:            inline
+Name:            NeverInline
+DebugLoc:        { File: ../image_analysis.cpp, Line: 161, Column: 15 }
 Function:        _Z11reconstructiiiP13atom_locationiiPfS1_PiS1_iiS1_
 Args:            
-  - Callee:          dataflow_in_loop_VITIS_LOOP_149_1.1
+  - Callee:          dataflow_in_loop_VITIS_LOOP_152_1.1
     DebugLoc:        { File: ../image_analysis.cpp, Line: 0, Column: 0 }
   - String:          ' not inlined into '
   - Caller:          'reconstruct(int, int, int, atom_location*, int, int, float*, float*, int*, float*, int, int, float*)'
-    DebugLoc:        { File: ../image_analysis.cpp, Line: 123, Column: 0 }
+    DebugLoc:        { File: ../image_analysis.cpp, Line: 126, Column: 0 }
   - String:          ' because it should never be inlined (cost=never)'
 ...
