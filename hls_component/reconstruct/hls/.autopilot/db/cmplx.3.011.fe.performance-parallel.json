@@ -1,37 +1,52 @@
 {
   "0": {
     "basicblocks": 4,
-    "calls": "7 5 1 8",
+    "calls": "9 1 4 7",
     "file": "image_analysis.cpp",
-    "fileloc": 207,
-    "instructions": 9675,
+    "fileloc": 203,
+    "instructions": 70,
     "loads": {
-      "L": 1925,
+      "L": 3,
       "T": 1
     },
     "name": "reconstruct",
     "stores": {
       "L": 2
     },
-    "total_instructions": 21344
+    "total_instructions": 15675
   },
   "1": {
-    "basicblocks": 6,
-    "calls": "2 2",
+    "basicblocks": 5,
+    "calls": "",
     "file": "image_analysis.cpp",
-    "fileloc": 183,
-    "instructions": 7038,
-    "name": "matrix_sum_prod",
+    "fileloc": 59,
+    "instructions": 296,
+    "name": "Image_extract_next",
     "stores": {
-      "L": 1984
+      "L": 63
     },
-    "total_instructions": 7226
+    "total_instructions": 303
   },
   "2": {
     "basicblocks": 1,
+    "calls": "3 3",
+    "file": "image_analysis.cpp",
+    "fileloc": 165,
+    "instructions": 284,
+    "loads": {
+      "L": 62
+    },
+    "name": "vector_sum_prod",
+    "stores": {
+      "L": 62
+    },
+    "total_instructions": 472
+  },
+  "3": {
+    "basicblocks": 1,
     "calls": "",
     "file": "image_analysis.cpp",
-    "fileloc": 118,
+    "fileloc": 135,
     "instructions": 94,
     "loads": {
       "L": 31
@@ -42,7 +57,31 @@
     },
     "total_instructions": 94
   },
-  "3": {
+  "4": {
+    "basicblocks": 1,
+    "calls": "2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 5 5",
+    "file": "image_analysis.cpp",
+    "fileloc": 178,
+    "instructions": 160,
+    "name": "matrix_sum_prod",
+    "total_instructions": 14980
+  },
+  "5": {
+    "basicblocks": 1,
+    "calls": "",
+    "file": "image_analysis.cpp",
+    "fileloc": 135,
+    "instructions": 94,
+    "loads": {
+      "L": 31
+    },
+    "name": "vector_sum",
+    "stores": {
+      "L": 1
+    },
+    "total_instructions": 94
+  },
+  "6": {
     "basicblocks": 5,
     "calls": "",
     "file": "hls_round.h",
@@ -54,37 +93,19 @@
     "name": "generic_round<float>",
     "total_instructions": 38
   },
-  "4": {
+  "7": {
     "basicblocks": 1,
     "calls": "",
     "file": "image_analysis.cpp",
-    "fileloc": 118,
-    "instructions": 94,
-    "loads": {
-      "L": 31
-    },
-    "name": "vector_sum",
+    "fileloc": 198,
+    "instructions": 4,
+    "name": "post_process",
     "stores": {
       "L": 1
     },
-    "total_instructions": 94
+    "total_instructions": 4
   },
-  "5": {
-    "basicblocks": 35,
-    "calls": "",
-    "file": "image_analysis.cpp",
-    "fileloc": 68,
-    "instructions": 4114,
-    "loads": {
-      "L": 31
-    },
-    "name": "Image_extract",
-    "stores": {
-      "L": 1923
-    },
-    "total_instructions": 4121
-  },
-  "6": {
+  "8": {
     "basicblocks": 1,
     "calls": "",
     "file": "lib_floatconversion.cpp",
@@ -93,40 +114,16 @@
     "name": "__hls_fptosi_float_i32",
     "total_instructions": 24
   },
-  "7": {
+  "9": {
     "basicblocks": 1,
-    "calls": "3 6 3 6 3 6 3 6",
+    "calls": "6 8 6 8 6 8 6 8",
     "file": "image_analysis.cpp",
-    "fileloc": 7,
+    "fileloc": 9,
     "instructions": 39,
     "loads": {
       "L": 1
     },
     "name": "getLocalImages_single",
     "total_instructions": 318
-  },
-  "8": {
-    "basicblocks": 1,
-    "calls": "",
-    "file": "image_analysis.cpp",
-    "fileloc": 202,
-    "instructions": 4,
-    "name": "post_process",
-    "stores": {
-      "L": 1
-    },
-    "total_instructions": 4
-  },
-  "9": {
-    "basicblocks": 1,
-    "calls": "4 4",
-    "file": "image_analysis.cpp",
-    "fileloc": 148,
-    "instructions": 160,
-    "name": "vector_sum_prod",
-    "stores": {
-      "L": 62
-    },
-    "total_instructions": 348
   }
 }

@@ -87,9 +87,21 @@ bool parse_input_file(const std::string& filename,
         }
         else if (key == "imageProjs_local") {
             std::vector<std::string> elements = split(value, "|");            
+            /*
             for (size_t i = 0; i < IMAGE_PROJECTION_LOCAL; ++i) {
                 if (i < elements.size() && !elements[i].empty()) {
                     imageProjs_local[localProjection_cnt*IMAGE_PROJECTION_LOCAL+i] = std::stod(elements[i]);
+                } else {
+                    imageProjs_local[localProjection_cnt*IMAGE_PROJECTION_LOCAL+i] = 0.0;
+                    if(imageProjs_local_size[localProjection_cnt] == 0)
+                        imageProjs_local_size[localProjection_cnt] = i;
+                }                
+            }   */
+            unsigned int elements_idx = 0;
+            for (size_t i = 0; i < IMAGE_PROJECTION_LOCAL; ++i) {
+                if (i < elements.size() && !elements[elements_idx].empty() && i % 32 != 31) {
+                    imageProjs_local[localProjection_cnt*IMAGE_PROJECTION_LOCAL+i] = std::stod(elements[elements_idx]);
+                    elements_idx ++;
                 } else {
                     imageProjs_local[localProjection_cnt*IMAGE_PROJECTION_LOCAL+i] = 0.0;
                     if(imageProjs_local_size[localProjection_cnt] == 0)
@@ -191,7 +203,7 @@ int main(int argc, char** argv){
     int atomLocationsSize;
     int projShape0;
     int projShape1;
-    atom_location atomLocations[2000];
+    atom_location atomLocations[2000]; //1024
     int psfSupersample;
     int imageProjectionSize;
     IMAGE_DTYPE imageProjs_local[IMAGE_PROJECTION_LOCAL * IMAGE_PROJECTION_SIZE];
@@ -200,7 +212,7 @@ int main(int argc, char** argv){
     IMAGE_DTYPE fullImage[FULL_IMAGE_SIZE];
     int fullImage_rows;
     int fullImage_cols; 
-    IMAGE_DTYPE emissions[2000];
+    IMAGE_DTYPE emissions[2000]; //1024
     unsigned emission_cnt;
 
     bool success = parse_input_file("restoutput.txt",
@@ -222,13 +234,38 @@ int main(int argc, char** argv){
     if(!success)
         return 1;
 
+    ap_uint<512> imageProjs_local_new[IMAGE_PROJECTION_LOCAL * IMAGE_PROJECTION_SIZE * 32 / 512];
+    ap_uint<512> fullImage_new[FULL_IMAGE_SIZE * 32 / 512];
+    
+    union {
+        uint32_t u;
+        float f;
+    } converter1, converter2;
+
+    
+    for(int i = 0; i < IMAGE_PROJECTION_LOCAL * IMAGE_PROJECTION_SIZE * 32 / 512; i++){
+        for(int j = 0; j < 512 / 32; j++){
+            converter1.f = imageProjs_local[i*512/32+j];
+            imageProjs_local_new[i].range(j*32+31, j*32) = converter1.u;
+        }
+    }
+    for(int i = 0; i < FULL_IMAGE_SIZE * 32 / 512; i++){
+        for(int j = 0; j < 512/32; j++){
+            converter2.f = fullImage[i*512/32+j];
+            fullImage_new[i].range(j*32+31, j*32) = converter2.u;
+        }
+    }
+
+
     reconstruct(atomLocationsSize, projShape0, projShape1,atomLocations,
      psfSupersample, 
      imageProjectionSize, 
-     imageProjs_local, 
+     //imageProjs_local, 
+     imageProjs_local_new,
      imageProjs,
      imageProjs_local_size,
-     fullImage,
+     //fullImage,
+     fullImage_new,
      fullImage_rows,  fullImage_cols,  emissions);
 
     std::cout << "emissions: ";

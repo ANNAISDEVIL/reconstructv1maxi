@@ -60,7 +60,6 @@ module reconstruct_post_process (
         m_axi_emissions_0_BRESP,
         m_axi_emissions_0_BID,
         m_axi_emissions_0_BUSER,
-        ap_ce,
         projSumUsed,
         sum,
         curr_imageProjs,
@@ -122,7 +121,6 @@ output   m_axi_emissions_0_BREADY;
 input  [1:0] m_axi_emissions_0_BRESP;
 input  [0:0] m_axi_emissions_0_BID;
 input  [0:0] m_axi_emissions_0_BUSER;
-input   ap_ce;
 input  [31:0] projSumUsed;
 input  [31:0] sum;
 input  [31:0] curr_imageProjs;
@@ -193,7 +191,7 @@ wire   [31:0] grp_fu_96_p2;
 reg   [31:0] div_i_reg_145;
 wire   [31:0] grp_fu_92_p2;
 reg   [31:0] mul_i_reg_150;
-wire  signed [63:0] sext_ln204_fu_110_p1;
+wire  signed [63:0] sext_ln200_fu_110_p1;
 reg    ap_block_pp0_stage0_01001_grp1;
 wire   [61:0] trunc_ln_fu_100_p4;
 reg    grp_fu_92_ce;
@@ -235,7 +233,7 @@ reconstruct_fmul_32ns_32ns_32_3_max_dsp_1 #(
     .din0_WIDTH( 32 ),
     .din1_WIDTH( 32 ),
     .dout_WIDTH( 32 ))
-fmul_32ns_32ns_32_3_max_dsp_1_U4740(
+fmul_32ns_32ns_32_3_max_dsp_1_U385(
     .clk(ap_clk),
     .reset(ap_rst),
     .din0(div_i_reg_145),
@@ -250,7 +248,7 @@ reconstruct_fdiv_32ns_32ns_32_9_no_dsp_1 #(
     .din0_WIDTH( 32 ),
     .din1_WIDTH( 32 ),
     .dout_WIDTH( 32 ))
-fdiv_32ns_32ns_32_9_no_dsp_1_U4741(
+fdiv_32ns_32ns_32_9_no_dsp_1_U386(
     .clk(ap_clk),
     .reset(ap_rst),
     .din0(curr_imageProjs_read_reg_124),
@@ -460,9 +458,9 @@ always @ (posedge ap_clk) begin
 end
 
 always @ (posedge ap_clk) begin
-    if (((1'b1 == ap_ce) & (1'b1 == ap_CS_fsm_pp0_stage0) & (1'b0 == ap_block_pp0_stage0_11001_grp1))) begin
+    if (((1'b1 == ap_CS_fsm_pp0_stage0) & (1'b0 == ap_block_pp0_stage0_11001_grp1))) begin
         curr_imageProjs_read_reg_124 <= curr_imageProjs;
-        emissions_addr_reg_139 <= sext_ln204_fu_110_p1;
+        emissions_addr_reg_139 <= sext_ln200_fu_110_p1;
         emissions_addr_reg_139_pp0_iter1_reg <= emissions_addr_reg_139;
         projSumUsed_read_reg_134 <= projSumUsed;
         sum_read_reg_129 <= sum;
@@ -471,7 +469,7 @@ always @ (posedge ap_clk) begin
 end
 
 always @ (posedge ap_clk) begin
-    if (((1'b1 == ap_ce) & (1'b0 == ap_block_pp0_stage0_11001_grp1))) begin
+    if ((1'b0 == ap_block_pp0_stage0_11001_grp1)) begin
         div_i_reg_145 <= grp_fu_96_p2;
         emissions_addr_reg_139_pp0_iter10_reg <= emissions_addr_reg_139_pp0_iter9_reg;
         emissions_addr_reg_139_pp0_iter11_reg <= emissions_addr_reg_139_pp0_iter10_reg;
@@ -568,7 +566,7 @@ always @ (*) begin
 end
 
 always @ (*) begin
-    if (((1'b1 == ap_ce) & (1'b0 == ap_block_pp0_stage0_11001_grp1))) begin
+    if ((1'b0 == ap_block_pp0_stage0_11001_grp1)) begin
         grp_fu_92_ce = 1'b1;
     end else begin
         grp_fu_92_ce = 1'b0;
@@ -576,7 +574,7 @@ always @ (*) begin
 end
 
 always @ (*) begin
-    if (((1'b1 == ap_ce) & (1'b1 == ap_CS_fsm_pp0_stage0) & (1'b0 == ap_block_pp0_stage0_11001_grp1))) begin
+    if (((1'b1 == ap_CS_fsm_pp0_stage0) & (1'b0 == ap_block_pp0_stage0_11001_grp1))) begin
         grp_fu_96_ce = 1'b1;
     end else begin
         grp_fu_96_ce = 1'b0;
@@ -584,7 +582,7 @@ always @ (*) begin
 end
 
 always @ (*) begin
-    if (((ap_enable_reg_pp0_iter12 == 1'b1) & (1'b1 == ap_ce) & (1'b0 == ap_block_pp0_stage0_11001_grp1))) begin
+    if (((ap_enable_reg_pp0_iter12 == 1'b1) & (1'b0 == ap_block_pp0_stage0_11001_grp1))) begin
         m_axi_emissions_0_AWVALID = 1'b1;
     end else begin
         m_axi_emissions_0_AWVALID = 1'b0;
@@ -592,7 +590,7 @@ always @ (*) begin
 end
 
 always @ (*) begin
-    if (((ap_enable_reg_pp0_iter18 == 1'b1) & (1'b1 == ap_ce) & (1'b0 == ap_block_pp0_stage0_11001_grp1))) begin
+    if (((ap_enable_reg_pp0_iter18 == 1'b1) & (1'b0 == ap_block_pp0_stage0_11001_grp1))) begin
         m_axi_emissions_0_BREADY = 1'b1;
     end else begin
         m_axi_emissions_0_BREADY = 1'b0;
@@ -600,7 +598,7 @@ always @ (*) begin
 end
 
 always @ (*) begin
-    if (((ap_enable_reg_pp0_iter13 == 1'b1) & (1'b1 == ap_ce) & (1'b0 == ap_block_pp0_stage0_11001_grp1))) begin
+    if (((ap_enable_reg_pp0_iter13 == 1'b1) & (1'b0 == ap_block_pp0_stage0_11001_grp1))) begin
         m_axi_emissions_0_WVALID = 1'b1;
     end else begin
         m_axi_emissions_0_WVALID = 1'b0;
@@ -635,7 +633,7 @@ end
 assign ap_block_pp0_stage0_grp1 = ~(1'b1 == 1'b1);
 
 always @ (*) begin
-    ap_block_pp0_stage0_subdone = ((1'b0 == ap_ce) | (ap_done_reg == 1'b1) | ((ap_enable_reg_pp0_iter18 == 1'b1) & (m_axi_emissions_0_BVALID == 1'b0)) | ((m_axi_emissions_0_WREADY == 1'b0) & (ap_enable_reg_pp0_iter13 == 1'b1)) | ((m_axi_emissions_0_AWREADY == 1'b0) & (ap_enable_reg_pp0_iter12 == 1'b1)) | ((ap_start == 1'b1) & (1'b1 == ap_block_state1_pp0_stage0_iter0)));
+    ap_block_pp0_stage0_subdone = ((ap_done_reg == 1'b1) | ((ap_enable_reg_pp0_iter18 == 1'b1) & (m_axi_emissions_0_BVALID == 1'b0)) | ((m_axi_emissions_0_WREADY == 1'b0) & (ap_enable_reg_pp0_iter13 == 1'b1)) | ((m_axi_emissions_0_AWREADY == 1'b0) & (ap_enable_reg_pp0_iter12 == 1'b1)) | ((ap_start == 1'b1) & (1'b1 == ap_block_state1_pp0_stage0_iter0)));
 end
 
 always @ (*) begin
@@ -704,7 +702,7 @@ assign m_axi_emissions_0_WSTRB = 4'd15;
 
 assign m_axi_emissions_0_WUSER = 1'd0;
 
-assign sext_ln204_fu_110_p1 = $signed(trunc_ln_fu_100_p4);
+assign sext_ln200_fu_110_p1 = $signed(trunc_ln_fu_100_p4);
 
 assign trunc_ln_fu_100_p4 = {{dout[63:2]}};
 

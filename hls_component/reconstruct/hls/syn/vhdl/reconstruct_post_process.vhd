@@ -63,7 +63,6 @@ port (
     m_axi_emissions_0_BRESP : IN STD_LOGIC_VECTOR (1 downto 0);
     m_axi_emissions_0_BID : IN STD_LOGIC_VECTOR (0 downto 0);
     m_axi_emissions_0_BUSER : IN STD_LOGIC_VECTOR (0 downto 0);
-    ap_ce : IN STD_LOGIC;
     projSumUsed : IN STD_LOGIC_VECTOR (31 downto 0);
     sum : IN STD_LOGIC_VECTOR (31 downto 0);
     curr_imageProjs : IN STD_LOGIC_VECTOR (31 downto 0);
@@ -150,7 +149,7 @@ attribute shreg_extract : string;
     signal div_i_reg_145 : STD_LOGIC_VECTOR (31 downto 0);
     signal grp_fu_92_p2 : STD_LOGIC_VECTOR (31 downto 0);
     signal mul_i_reg_150 : STD_LOGIC_VECTOR (31 downto 0);
-    signal sext_ln204_fu_110_p1 : STD_LOGIC_VECTOR (63 downto 0);
+    signal sext_ln200_fu_110_p1 : STD_LOGIC_VECTOR (63 downto 0);
     signal ap_block_pp0_stage0_01001_grp1 : BOOLEAN;
     signal trunc_ln_fu_100_p4 : STD_LOGIC_VECTOR (61 downto 0);
     signal grp_fu_92_ce : STD_LOGIC;
@@ -198,7 +197,7 @@ attribute shreg_extract : string;
 
 
 begin
-    fmul_32ns_32ns_32_3_max_dsp_1_U4740 : component reconstruct_fmul_32ns_32ns_32_3_max_dsp_1
+    fmul_32ns_32ns_32_3_max_dsp_1_U385 : component reconstruct_fmul_32ns_32ns_32_3_max_dsp_1
     generic map (
         ID => 1,
         NUM_STAGE => 3,
@@ -213,7 +212,7 @@ begin
         ce => grp_fu_92_ce,
         dout => grp_fu_92_p2);
 
-    fdiv_32ns_32ns_32_9_no_dsp_1_U4741 : component reconstruct_fdiv_32ns_32ns_32_9_no_dsp_1
+    fdiv_32ns_32ns_32_9_no_dsp_1_U386 : component reconstruct_fdiv_32ns_32ns_32_9_no_dsp_1
     generic map (
         ID => 1,
         NUM_STAGE => 9,
@@ -514,9 +513,9 @@ begin
     process (ap_clk)
     begin
         if (ap_clk'event and ap_clk = '1') then
-            if (((ap_const_logic_1 = ap_ce) and (ap_const_logic_1 = ap_CS_fsm_pp0_stage0) and (ap_const_boolean_0 = ap_block_pp0_stage0_11001_grp1))) then
+            if (((ap_const_logic_1 = ap_CS_fsm_pp0_stage0) and (ap_const_boolean_0 = ap_block_pp0_stage0_11001_grp1))) then
                 curr_imageProjs_read_reg_124 <= curr_imageProjs;
-                emissions_addr_reg_139 <= sext_ln204_fu_110_p1;
+                emissions_addr_reg_139 <= sext_ln200_fu_110_p1;
                 emissions_addr_reg_139_pp0_iter1_reg <= emissions_addr_reg_139;
                 projSumUsed_read_reg_134 <= projSumUsed;
                 sum_read_reg_129 <= sum;
@@ -527,7 +526,7 @@ begin
     process (ap_clk)
     begin
         if (ap_clk'event and ap_clk = '1') then
-            if (((ap_const_logic_1 = ap_ce) and (ap_const_boolean_0 = ap_block_pp0_stage0_11001_grp1))) then
+            if ((ap_const_boolean_0 = ap_block_pp0_stage0_11001_grp1)) then
                 div_i_reg_145 <= grp_fu_96_p2;
                 emissions_addr_reg_139_pp0_iter10_reg <= emissions_addr_reg_139_pp0_iter9_reg;
                 emissions_addr_reg_139_pp0_iter11_reg <= emissions_addr_reg_139_pp0_iter10_reg;
@@ -582,9 +581,9 @@ begin
 
         ap_block_pp0_stage0_grp1 <= not((ap_const_boolean_1 = ap_const_boolean_1));
 
-    ap_block_pp0_stage0_subdone_assign_proc : process(ap_start, ap_enable_reg_pp0_iter12, ap_enable_reg_pp0_iter13, ap_enable_reg_pp0_iter18, m_axi_emissions_0_AWREADY, m_axi_emissions_0_WREADY, m_axi_emissions_0_BVALID, ap_done_reg, ap_block_state1_pp0_stage0_iter0, ap_ce)
+    ap_block_pp0_stage0_subdone_assign_proc : process(ap_start, ap_enable_reg_pp0_iter12, ap_enable_reg_pp0_iter13, ap_enable_reg_pp0_iter18, m_axi_emissions_0_AWREADY, m_axi_emissions_0_WREADY, m_axi_emissions_0_BVALID, ap_done_reg, ap_block_state1_pp0_stage0_iter0)
     begin
-                ap_block_pp0_stage0_subdone <= ((ap_const_logic_0 = ap_ce) or (ap_done_reg = ap_const_logic_1) or ((ap_enable_reg_pp0_iter18 = ap_const_logic_1) and (m_axi_emissions_0_BVALID = ap_const_logic_0)) or ((m_axi_emissions_0_WREADY = ap_const_logic_0) and (ap_enable_reg_pp0_iter13 = ap_const_logic_1)) or ((m_axi_emissions_0_AWREADY = ap_const_logic_0) and (ap_enable_reg_pp0_iter12 = ap_const_logic_1)) or ((ap_start = ap_const_logic_1) and (ap_const_boolean_1 = ap_block_state1_pp0_stage0_iter0)));
+                ap_block_pp0_stage0_subdone <= ((ap_done_reg = ap_const_logic_1) or ((ap_enable_reg_pp0_iter18 = ap_const_logic_1) and (m_axi_emissions_0_BVALID = ap_const_logic_0)) or ((m_axi_emissions_0_WREADY = ap_const_logic_0) and (ap_enable_reg_pp0_iter13 = ap_const_logic_1)) or ((m_axi_emissions_0_AWREADY = ap_const_logic_0) and (ap_enable_reg_pp0_iter12 = ap_const_logic_1)) or ((ap_start = ap_const_logic_1) and (ap_const_boolean_1 = ap_block_state1_pp0_stage0_iter0)));
     end process;
 
 
@@ -686,9 +685,9 @@ begin
     end process;
 
 
-    grp_fu_92_ce_assign_proc : process(ap_ce, ap_block_pp0_stage0_11001_grp1)
+    grp_fu_92_ce_assign_proc : process(ap_block_pp0_stage0_11001_grp1)
     begin
-        if (((ap_const_logic_1 = ap_ce) and (ap_const_boolean_0 = ap_block_pp0_stage0_11001_grp1))) then 
+        if ((ap_const_boolean_0 = ap_block_pp0_stage0_11001_grp1)) then 
             grp_fu_92_ce <= ap_const_logic_1;
         else 
             grp_fu_92_ce <= ap_const_logic_0;
@@ -696,9 +695,9 @@ begin
     end process;
 
 
-    grp_fu_96_ce_assign_proc : process(ap_CS_fsm_pp0_stage0, ap_ce, ap_block_pp0_stage0_11001_grp1)
+    grp_fu_96_ce_assign_proc : process(ap_CS_fsm_pp0_stage0, ap_block_pp0_stage0_11001_grp1)
     begin
-        if (((ap_const_logic_1 = ap_ce) and (ap_const_logic_1 = ap_CS_fsm_pp0_stage0) and (ap_const_boolean_0 = ap_block_pp0_stage0_11001_grp1))) then 
+        if (((ap_const_logic_1 = ap_CS_fsm_pp0_stage0) and (ap_const_boolean_0 = ap_block_pp0_stage0_11001_grp1))) then 
             grp_fu_96_ce <= ap_const_logic_1;
         else 
             grp_fu_96_ce <= ap_const_logic_0;
@@ -729,9 +728,9 @@ begin
     m_axi_emissions_0_AWSIZE <= ap_const_lv3_0;
     m_axi_emissions_0_AWUSER <= ap_const_lv1_0;
 
-    m_axi_emissions_0_AWVALID_assign_proc : process(ap_enable_reg_pp0_iter12, ap_ce, ap_block_pp0_stage0_11001_grp1)
+    m_axi_emissions_0_AWVALID_assign_proc : process(ap_enable_reg_pp0_iter12, ap_block_pp0_stage0_11001_grp1)
     begin
-        if (((ap_enable_reg_pp0_iter12 = ap_const_logic_1) and (ap_const_logic_1 = ap_ce) and (ap_const_boolean_0 = ap_block_pp0_stage0_11001_grp1))) then 
+        if (((ap_enable_reg_pp0_iter12 = ap_const_logic_1) and (ap_const_boolean_0 = ap_block_pp0_stage0_11001_grp1))) then 
             m_axi_emissions_0_AWVALID <= ap_const_logic_1;
         else 
             m_axi_emissions_0_AWVALID <= ap_const_logic_0;
@@ -739,9 +738,9 @@ begin
     end process;
 
 
-    m_axi_emissions_0_BREADY_assign_proc : process(ap_enable_reg_pp0_iter18, ap_ce, ap_block_pp0_stage0_11001_grp1)
+    m_axi_emissions_0_BREADY_assign_proc : process(ap_enable_reg_pp0_iter18, ap_block_pp0_stage0_11001_grp1)
     begin
-        if (((ap_enable_reg_pp0_iter18 = ap_const_logic_1) and (ap_const_logic_1 = ap_ce) and (ap_const_boolean_0 = ap_block_pp0_stage0_11001_grp1))) then 
+        if (((ap_enable_reg_pp0_iter18 = ap_const_logic_1) and (ap_const_boolean_0 = ap_block_pp0_stage0_11001_grp1))) then 
             m_axi_emissions_0_BREADY <= ap_const_logic_1;
         else 
             m_axi_emissions_0_BREADY <= ap_const_logic_0;
@@ -755,16 +754,16 @@ begin
     m_axi_emissions_0_WSTRB <= ap_const_lv4_F;
     m_axi_emissions_0_WUSER <= ap_const_lv1_0;
 
-    m_axi_emissions_0_WVALID_assign_proc : process(ap_enable_reg_pp0_iter13, ap_ce, ap_block_pp0_stage0_11001_grp1)
+    m_axi_emissions_0_WVALID_assign_proc : process(ap_enable_reg_pp0_iter13, ap_block_pp0_stage0_11001_grp1)
     begin
-        if (((ap_enable_reg_pp0_iter13 = ap_const_logic_1) and (ap_const_logic_1 = ap_ce) and (ap_const_boolean_0 = ap_block_pp0_stage0_11001_grp1))) then 
+        if (((ap_enable_reg_pp0_iter13 = ap_const_logic_1) and (ap_const_boolean_0 = ap_block_pp0_stage0_11001_grp1))) then 
             m_axi_emissions_0_WVALID <= ap_const_logic_1;
         else 
             m_axi_emissions_0_WVALID <= ap_const_logic_0;
         end if; 
     end process;
 
-        sext_ln204_fu_110_p1 <= std_logic_vector(IEEE.numeric_std.resize(signed(trunc_ln_fu_100_p4),64));
+        sext_ln200_fu_110_p1 <= std_logic_vector(IEEE.numeric_std.resize(signed(trunc_ln_fu_100_p4),64));
 
     trunc_ln_fu_100_p4 <= dout(63 downto 2);
 end behav;

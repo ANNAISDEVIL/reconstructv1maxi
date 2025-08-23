@@ -1,71 +1,152 @@
 {
   "0": {
     "basicblocks": 7,
-    "calls": "5 4 14 11",
+    "calls": "6 11 1 20",
     "file": "image_analysis.cpp",
-    "fileloc": 207,
-    "instructions": 78,
+    "fileloc": 203,
+    "instructions": 85,
     "loads": {
       "L": 3
     },
     "name": "reconstruct",
     "stores": {
-      "L": 2
+      "L": 4
     },
-    "total_instructions": 19924
+    "total_instructions": 20477
   },
   "1": {
-    "basicblocks": 1,
-    "calls": "13 13 19",
-    "file": "hls_copysign.h",
-    "fileloc": 10,
-    "instructions": 18,
-    "loads": {
-      "L": 1
-    },
-    "name": "generic_copysign<float>",
-    "stores": {
-      "L": 1
-    },
-    "total_instructions": 957
+    "basicblocks": 7,
+    "calls": "21 16 16",
+    "file": "image_analysis.cpp",
+    "fileloc": 178,
+    "instructions": 35,
+    "name": "matrix_sum_prod",
+    "total_instructions": 600
   },
   "10": {
-    "basicblocks": 1,
-    "calls": "20",
-    "file": "lib_floatconversion.cpp",
-    "fileloc": 51,
-    "instructions": 2,
-    "name": "__hls_fptosi_float_i32",
-    "total_instructions": 2130
-  },
-  "11": {
-    "basicblocks": 1,
+    "basicblocks": 4,
     "calls": "",
     "file": "image_analysis.cpp",
-    "fileloc": 202,
-    "instructions": 4,
-    "name": "post_process",
-    "stores": {
-      "L": 1
-    },
-    "total_instructions": 4
-  },
-  "12": {
-    "basicblocks": 1,
-    "calls": "7",
-    "file": "x_hls_utils.h",
-    "fileloc": 322,
-    "instructions": 18,
+    "fileloc": 29,
+    "instructions": 21,
     "loads": {
       "L": 1
     },
-    "name": "to_float",
+    "name": "convert_address",
+    "stores": {
+      "L": 4
+    },
+    "total_instructions": 21
+  },
+  "11": {
+    "basicblocks": 15,
+    "calls": "10",
+    "file": "image_analysis.cpp",
+    "fileloc": 59,
+    "instructions": 254,
+    "loads": {
+      "L": 14
+    },
+    "name": "Image_extract_next",
+    "stores": {
+      "L": 7
+    },
+    "total_instructions": 680
+  },
+  "12": {
+    "basicblocks": 6,
+    "calls": "18 3 2 9 8 22 19",
+    "file": "hls_round.h",
+    "fileloc": 159,
+    "instructions": 98,
+    "loads": {
+      "L": 4
+    },
+    "name": "generic_round<float>",
+    "stores": {
+      "L": 2
+    },
+    "total_instructions": 2616
+  },
+  "13": {
+    "basicblocks": 1,
+    "calls": "12",
+    "file": "roundfloat.cpp",
+    "fileloc": 6,
+    "instructions": 2,
+    "name": "roundf",
+    "total_instructions": 2618
+  },
+  "14": {
+    "basicblocks": 1,
+    "calls": "",
+    "file": "x_hls_utils.h",
+    "fileloc": 349,
+    "instructions": 4,
+    "name": "__signbit",
+    "total_instructions": 9
+  },
+  "15": {
+    "basicblocks": 1,
+    "calls": "",
+    "file": "x_hls_utils.h",
+    "fileloc": 340,
+    "instructions": 24,
+    "name": "mantissa",
+    "total_instructions": 178
+  },
+  "16": {
+    "basicblocks": 25,
+    "calls": "",
+    "file": "image_analysis.cpp",
+    "fileloc": 135,
+    "instructions": 131,
+    "loads": {
+      "L": 11
+    },
+    "name": "vector_sum",
+    "stores": {
+      "L": 6
+    },
+    "total_instructions": 131
+  },
+  "17": {
+    "basicblocks": 16,
+    "calls": "2 15 7 7 14 14",
+    "file": "hls_case_IEEE754.h",
+    "fileloc": 12,
+    "instructions": 133,
+    "loads": {
+      "L": 1
+    },
+    "name": "generic_cast_IEEE754<int, AP_TRN_ZERO, float>",
     "stores": {
       "L": 1
     },
-    "total_instructions": 301
+    "total_instructions": 2126
   },
-  "13": {
+  "18": {
+    "basicblocks": 6,
+    "calls": "",
+    "file": "hls_round.h",
+    "fileloc": 20,
+    "instructions": 18,
+    "name": "init_mask_table<float>",
+    "stores": {
+      "L": 3
+    },
+    "total_instructions": 18
+  },
+  "19": {
+    "basicblocks": 1,
+    "calls": "23",
+    "file": "x_hls_utils.h",
+    "fileloc": 346,
+    "instructions": 2,
+    "name": "to_ieee",
+    "total_instructions": 303
+  },
+  "2": {
     "basicblocks": 1,
     "calls": "",
     "file": "x_hls_utils.h",
@@ -80,20 +161,23 @@
     },
     "total_instructions": 318
   },
-  "14": {
-    "basicblocks": 7,
-    "calls": "15 21 21",
+  "20": {
+    "basicblocks": 1,
+    "calls": "",
     "file": "image_analysis.cpp",
-    "fileloc": 183,
-    "instructions": 37,
-    "name": "matrix_sum_prod",
-    "total_instructions": 602
+    "fileloc": 198,
+    "instructions": 4,
+    "name": "post_process",
+    "stores": {
+      "L": 1
+    },
+    "total_instructions": 4
   },
-  "15": {
+  "21": {
     "basicblocks": 7,
-    "calls": "21 21",
+    "calls": "16 16",
     "file": "image_analysis.cpp",
-    "fileloc": 148,
+    "fileloc": 165,
     "instructions": 41,
     "loads": {
       "L": 3
@@ -104,7 +188,7 @@
     },
     "total_instructions": 303
   },
-  "16": {
+  "22": {
     "basicblocks": 1,
     "calls": "",
     "file": "x_hls_utils.h",
@@ -113,157 +197,22 @@
     "name": "fp_struct",
     "total_instructions": 288
   },
-  "17": {
-    "basicblocks": 6,
-    "calls": "",
-    "file": "hls_round.h",
-    "fileloc": 20,
-    "instructions": 18,
-    "name": "init_mask_table<float>",
-    "stores": {
-      "L": 3
-    },
-    "total_instructions": 18
-  },
-  "18": {
-    "basicblocks": 1,
-    "calls": "",
-    "file": "x_hls_utils.h",
-    "fileloc": 316,
-    "instructions": 8,
-    "name": "expv",
-    "total_instructions": 109
-  },
-  "19": {
-    "basicblocks": 1,
-    "calls": "12",
-    "file": "x_hls_utils.h",
-    "fileloc": 346,
-    "instructions": 2,
-    "name": "to_ieee",
-    "total_instructions": 303
-  },
-  "2": {
-    "basicblocks": 1,
-    "calls": "",
-    "file": "x_hls_utils.h",
-    "fileloc": 340,
-    "instructions": 24,
-    "name": "mantissa",
-    "total_instructions": 178
-  },
-  "20": {
-    "basicblocks": 1,
-    "calls": "6",
-    "file": "hls_case_IEEE754.h",
-    "fileloc": 116,
-    "instructions": 2,
-    "name": "generic_cast_IEEE754<int, float>",
-    "total_instructions": 2128
-  },
-  "21": {
-    "basicblocks": 25,
-    "calls": "",
-    "file": "image_analysis.cpp",
-    "fileloc": 118,
-    "instructions": 131,
-    "loads": {
-      "L": 11
-    },
-    "name": "vector_sum",
-    "stores": {
-      "L": 6
-    },
-    "total_instructions": 131
-  },
-  "22": {
-    "basicblocks": 1,
-    "calls": "",
-    "file": "x_hls_utils.h",
-    "fileloc": 349,
-    "instructions": 4,
-    "name": "__signbit",
-    "total_instructions": 9
-  },
-  "3": {
+  "23": {
     "basicblocks": 1,
     "calls": "8",
-    "file": "roundfloat.cpp",
-    "fileloc": 6,
-    "instructions": 2,
-    "name": "roundf",
-    "total_instructions": 2618
-  },
-  "4": {
-    "basicblocks": 16,
-    "calls": "",
-    "file": "image_analysis.cpp",
-    "fileloc": 68,
-    "instructions": 136,
-    "loads": {
-      "L": 11
-    },
-    "name": "Image_extract",
-    "stores": {
-      "L": 3
-    },
-    "total_instructions": 142
-  },
-  "5": {
-    "basicblocks": 1,
-    "calls": "10 10 10 10",
-    "file": "image_analysis.cpp",
-    "fileloc": 7,
-    "instructions": 89,
-    "loads": {
-      "L": 11
-    },
-    "name": "getLocalImages_single",
-    "stores": {
-      "L": 9
-    },
-    "total_instructions": 19093
-  },
-  "6": {
-    "basicblocks": 16,
-    "calls": "13 2 18 18 22 22",
-    "file": "hls_case_IEEE754.h",
-    "fileloc": 12,
-    "instructions": 133,
-    "loads": {
-      "L": 1
-    },
-    "name": "generic_cast_IEEE754<int, AP_TRN_ZERO, float>",
-    "stores": {
-      "L": 1
-    },
-    "total_instructions": 2126
-  },
-  "7": {
-    "basicblocks": 1,
-    "calls": "",
     "file": "x_hls_utils.h",
-    "fileloc": 309,
-    "instructions": 32,
-    "name": "data",
-    "total_instructions": 279
-  },
-  "8": {
-    "basicblocks": 6,
-    "calls": "17 9 13 1 7 16 19",
-    "file": "hls_round.h",
-    "fileloc": 159,
-    "instructions": 98,
+    "fileloc": 322,
+    "instructions": 18,
     "loads": {
-      "L": 4
+      "L": 1
     },
-    "name": "generic_round<float>",
+    "name": "to_float",
     "stores": {
-      "L": 2
+      "L": 1
     },
-    "total_instructions": 2616
+    "total_instructions": 301
   },
-  "9": {
+  "3": {
     "basicblocks": 6,
     "calls": "",
     "file": "hls_round.h",
@@ -274,5 +223,71 @@
       "L": 3
     },
     "total_instructions": 18
+  },
+  "4": {
+    "basicblocks": 1,
+    "calls": "5",
+    "file": "lib_floatconversion.cpp",
+    "fileloc": 51,
+    "instructions": 2,
+    "name": "__hls_fptosi_float_i32",
+    "total_instructions": 2130
+  },
+  "5": {
+    "basicblocks": 1,
+    "calls": "17",
+    "file": "hls_case_IEEE754.h",
+    "fileloc": 116,
+    "instructions": 2,
+    "name": "generic_cast_IEEE754<int, float>",
+    "total_instructions": 2128
+  },
+  "6": {
+    "basicblocks": 1,
+    "calls": "4 4 4 4",
+    "file": "image_analysis.cpp",
+    "fileloc": 9,
+    "instructions": 89,
+    "loads": {
+      "L": 11
+    },
+    "name": "getLocalImages_single",
+    "stores": {
+      "L": 9
+    },
+    "total_instructions": 19093
+  },
+  "7": {
+    "basicblocks": 1,
+    "calls": "",
+    "file": "x_hls_utils.h",
+    "fileloc": 316,
+    "instructions": 8,
+    "name": "expv",
+    "total_instructions": 109
+  },
+  "8": {
+    "basicblocks": 1,
+    "calls": "",
+    "file": "x_hls_utils.h",
+    "fileloc": 309,
+    "instructions": 32,
+    "name": "data",
+    "total_instructions": 279
+  },
+  "9": {
+    "basicblocks": 1,
+    "calls": "2 2 19",
+    "file": "hls_copysign.h",
+    "fileloc": 10,
+    "instructions": 18,
+    "loads": {
+      "L": 1
+    },
+    "name": "generic_copysign<float>",
+    "stores": {
+      "L": 1
+    },
+    "total_instructions": 957
   }
 }

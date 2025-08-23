@@ -1,5 +1,0 @@
-interfaceModel::INFOR: interfaceModel:0:0: note: Applying interface constraints on the variable atomLocations which has the interface type axi
-interfaceModel::INFOR: interfaceModel:0:0: note: Applying interface constraints on the variable imageProjs_local which has the interface type axi
-interfaceModel::INFOR: interfaceModel:0:0: note: Applying interface constraints on the variable imageProjs which has the interface type axi
-interfaceModel::INFOR: interfaceModel:0:0: note: Applying interface constraints on the variable imageProjs_local_size which has the interface type axi
-interfaceModel::INFOR: interfaceModel:0:0: note: Applying interface constraints on the variable fullImage which has the interface type axi
